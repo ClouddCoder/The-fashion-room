@@ -22,13 +22,9 @@ export const NavegacionPrincipal = () => {
 export const NavegacionHome = () => {
   return (
     <nav>
-      <ul>
-        <li>
-          <Link className="btn btn-primary" to="/">
-            Home
-          </Link>
-        </li>
-      </ul>
+      <Link className="btn btn-primary" to="/">
+        Home
+      </Link>
     </nav>
   );
 };
