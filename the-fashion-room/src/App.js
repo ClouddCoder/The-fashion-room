@@ -1,5 +1,5 @@
 import "./App.css";
-import MenuPrincipal from "./componentes/MenuPrincipal";
+import HomepageNav from "./components/HomepageNav";
 
 function App() {
   return (
@@ -8,7 +8,7 @@ function App() {
         <h1 id="titulo">The fashion room</h1>
       </header>
       <body>
-        <MenuPrincipal />
+        <HomepageNav />
       </body>
     </div>
   );

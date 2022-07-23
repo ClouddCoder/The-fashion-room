@@ -1,6 +1,6 @@
 import {Link} from "react-router-dom";
 
-export const NavegacionPrincipal = () => {
+export const LogRegButtons = () => {
   return (
     <nav>
       <ul>
@@ -19,7 +19,7 @@ export const NavegacionPrincipal = () => {
   );
 };
 
-export const NavegacionHome = () => {
+export const ReturnHome = () => {
   return (
     <nav>
       <Link className="btn btn-primary" to="/">

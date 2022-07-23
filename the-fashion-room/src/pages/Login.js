@@ -1,4 +1,4 @@
-import {NavegacionHome} from "../componentes/Navegacion";
+import {ReturnHome} from "../components/Navigation";
 import React, {useEffect, useState} from "react";
 
 const Ingresar = () => {
@@ -32,7 +32,7 @@ const Ingresar = () => {
         <button>Login</button>
       </form>
       <br />
-      <NavegacionHome />
+      <ReturnHome />
     </div>
   );
 };

@@ -1,11 +1,12 @@
-import {NavegacionHome} from "../componentes/Navegacion";
+import {ReturnHome} from "../components/Navigation";
 import React, {useEffect, useState} from "react";
-import Axios from "axios";
+//import Axios from "axios";
 
 const Registrar = () => {
   const [usernameReg, setUsernameReg] = useState("");
   const [passwordReg, setPasswordReg] = useState("");
 
+  /*
   const register = () => {
     Axios.post("http://localhost:3000/registrar", {
       username: usernameReg,
@@ -14,6 +15,7 @@ const Registrar = () => {
       console.log(res);
     });
   };
+  */
 
   return (
     <div>
@@ -38,9 +40,9 @@ const Registrar = () => {
         }}
       />
       <br />
-      <button onClick={register}>Registrar</button>
+      <button>Registrar</button>
       <br />
-      <NavegacionHome />
+      <ReturnHome />
     </div>
   );
 };
