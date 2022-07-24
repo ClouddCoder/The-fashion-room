@@ -1,5 +1,5 @@
-import {ReturnHome} from "../components/Navigation";
-import React, {useEffect, useState} from "react";
+import { ReturnHome } from "../components/Navigation";
+import React, { useEffect, useState } from "react";
 
 const Ingresar = () => {
   const [usernameLog, setUsernameLog] = useState("");

@@ -7,9 +7,9 @@ function App() {
       <header className="App-header">
         <h1 id="titulo">The fashion room</h1>
       </header>
-      <body>
+      <div>
         <HomepageNav />
-      </body>
+      </div>
     </div>
   );
 }

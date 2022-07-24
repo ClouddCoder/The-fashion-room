@@ -1,47 +1,54 @@
-import {ReturnHome} from "../components/Navigation";
-import React, {useEffect, useState} from "react";
-//import Axios from "axios";
+import { ReturnHome } from "../components/Navigation";
+import { useState } from "react";
+import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const Registrar = () => {
-  const [usernameReg, setUsernameReg] = useState("");
-  const [passwordReg, setPasswordReg] = useState("");
+  const [username, setUsernameReg] = useState({"username": ""});
+  const [password, setPasswordReg] = useState({"password": ""});
 
-  /*
-  const register = () => {
-    Axios.post("http://localhost:3000/registrar", {
-      username: usernameReg,
-      password: passwordReg,
-    }).then(res => {
-      console.log(res);
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const res = await fetch("http://localhost:3001/insert", {
+      method: "POST",
+      body: JSON.stringify(username, password),
+      headers: { "Content-Type": "application/json" }
     });
+    navigate("/");
+    //const data = await res.json();
+    //console.log(data);
+    //avigate("/");
   };
-  */
+
+  const handleChange = (e) => {
+    setUsernameReg({...username, [e.target.name]: e.target.value});
+    setPasswordReg({...password, [e.target.name]: e.target.value});
+  };
 
   return (
     <div>
       <h2>Registrarse</h2>
-      <label htmlFor="">Usuario</label>
-      <input
-        type="text"
-        name="usuario"
-        id="usuario"
-        onChange={e => {
-          setUsernameReg(e.target.value);
-        }}
-      />
-      <br />
-      <label htmlFor="">Contraseña</label>
-      <input
-        type="password"
-        name="contraseña"
-        id="contraseña"
-        onChange={e => {
-          setPasswordReg(e.target.value);
-        }}
-      />
-      <br />
-      <button>Registrar</button>
-      <br />
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="">Usuario</label>
+        <input
+          type="text"
+          name="username"
+          id="usuario"
+          onChange={handleChange}
+        />
+        <br />
+        <label htmlFor="">Contraseña</label>
+        <input
+          type="password"
+          name="password"
+          id="contraseña"
+          onChange={handleChange}
+        />
+        <br />
+        <Button variant="contained" color="secondary" type="submit">Registrar</Button>
+      </form>
       <ReturnHome />
     </div>
   );

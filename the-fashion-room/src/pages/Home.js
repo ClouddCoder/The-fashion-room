@@ -1,4 +1,4 @@
-import {LogRegButtons} from "../components/Navigation";
+import { LogRegButtons } from "../components/Navigation";
 
 const Home = () => {
   return (

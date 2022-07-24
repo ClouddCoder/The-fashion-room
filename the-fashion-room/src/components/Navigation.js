@@ -1,18 +1,15 @@
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import { Button } from "@mui/material";
 
 export const LogRegButtons = () => {
   return (
     <nav>
       <ul>
         <li>
-          <Link className="btn btn-primary" to="/ingresar">
-            Ingresar
-          </Link>
+          <Button component={Link} variant="contained" to="/login" color="primary">Ingresar</Button>
         </li>
         <li>
-          <Link className="btn btn-primary" to="/registrar">
-            Registrar
-          </Link>
+          <Button component={Link} variant="contained" to="/register" color="primary">Registrar</Button>
         </li>
       </ul>
     </nav>
@@ -22,9 +19,9 @@ export const LogRegButtons = () => {
 export const ReturnHome = () => {
   return (
     <nav>
-      <Link className="btn btn-primary" to="/">
-        Home
-      </Link>
+      <li>
+        <Button component={Link} variant="contained" to="/" color="primary">Home</Button>
+      </li>
     </nav>
   );
 };
