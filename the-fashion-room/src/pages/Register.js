@@ -16,10 +16,13 @@ const Registrar = () => {
       body: JSON.stringify(username, password),
       headers: { "Content-Type": "application/json" }
     });
-    navigate("/");
-    //const data = await res.json();
-    //console.log(data);
-    //avigate("/");
+    const data = await res.json();
+
+    if (data.length > 0) {
+      navigate("/");
+    } else {
+      console.log("No se pudo registrar");
+    }
   };
 
   const handleChange = (e) => {

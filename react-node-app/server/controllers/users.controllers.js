@@ -1,15 +1,15 @@
 const pool = require('../db');
 
 const getUser = async (req, res, next) => {
-    const {id} = req.params;
-    const query = "SELECT * FROM login WHERE user_id = $1";
-    const values = [id];
+    const {username, password} = req.body;
+    const query = "SELECT * FROM login WHERE username = $1 AND password = $2";
+    const values = [username, password];
 
     try {
         const result = await pool.query(query, values);
         if (result.rows.length === 0) {
             return res.status(404).json({
-                message: 'User not found'
+                message: 'Wrong username/password combination'
             });
         }
 

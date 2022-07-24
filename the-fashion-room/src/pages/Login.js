@@ -1,35 +1,57 @@
 import { ReturnHome } from "../components/Navigation";
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
+import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const Ingresar = () => {
-  const [usernameLog, setUsernameLog] = useState("");
-  const [passwordLog, setPasswordLog] = useState("");
+  const [username, setUsernameLog] = useState({"username": ""});
+  const [password, setPasswordLog] = useState({"password": ""});
+
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const res = await fetch("http://localhost:3001/users", {
+      method: "POST",
+      body: JSON.stringify(username, password),
+      headers: { "Content-Type": "application/json" }
+      });
+    const data = await res.json();
+
+    if (data.length > 0) {
+      navigate("/");
+    } else {
+      console.log("Wrong username or password");
+    }
+  };
+
+  const handleChange = (e) => {
+    setUsernameLog({...username, [e.target.name]: e.target.value});
+    setPasswordLog({...password, [e.target.name]: e.target.value});
+  };
 
   return (
     <div>
-      <form action="">
-        <h2>Iniciar sesion</h2>
+      <h2>Iniciar sesion</h2>
+      <form onSubmit={handleSubmit}>
         <label htmlFor="">Usuario</label>
         <input
           type="text"
-          name="usuario"
+          name="username"
           id="usuario"
-          onChange={(e) => {
-            setUsernameLog(e.target.value);
-          }}
+          onChange={handleChange}
         />
         <br />
         <label htmlFor="">Contraseña</label>
         <input
           type="password"
-          name="contraseña"
+          name="password"
           id="contraseña"
-          onChange={(e) => {
-            setPasswordLog(e.target.value);
-          }}
+          onChange={handleChange}
         />
         <br />
-        <button>Login</button>
+        <Button variant="contained" color="secondary" type="submit">Login</Button>
       </form>
       <br />
       <ReturnHome />
