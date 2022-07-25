@@ -16,7 +16,7 @@ const Registrar = () => {
       method: "POST",
       body: JSON.stringify(username, password),
       headers: { "Content-Type": "application/json" }
-      });
+    });
     const data = await res.json();
 
     if (res.status === 200) {

@@ -68,9 +68,42 @@ const updateUser = async (req, res, next) => {
     }
 }
 
+const getProducts = async (req, res, next) => {
+    const query = "SELECT * FROM products";
+
+    try {
+        const result = await pool.query(query);
+        res.json(result.rows);
+    } catch(error) {
+        next(error);
+    }
+}
+
+const buyProduct = async (req, res, next) => {
+    //const {id} = req.params;
+    const {quantity, product_id} = req.body;
+    const query = "UPDATE products SET quantity = quantity - $1 WHERE product_id = $2";
+    const values = [quantity, product_id];
+
+    try {
+        const result = await pool.query(query, values);
+        if (result.rowCount === 0) {
+            return res.status(404).json({
+                message: 'Product not found'
+            });
+        }
+        return res.json({message: "success"});
+    } catch(error) {
+        next(error);
+    }
+
+}
+
 module.exports = {
     getUser,
     insertUser,
     deleteUser,
-    updateUser
+    updateUser,
+    getProducts,
+    buyProduct
 }
