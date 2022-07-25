@@ -12,9 +12,7 @@ const getUser = async (req, res, next) => {
                 message: 'Wrong username/password combination'
             });
         }
-
-        console.log(result.rows);
-        return res.json(result.rows);
+        return res.json({message: "success"});
     } catch (error) {
         next(error);
     }
@@ -27,8 +25,7 @@ const insertUser = async (req, res, next) => {
 
     try {
         const result = await pool.query(query, values);
-        res.json(result.rows);
-        console.log(result.rows);
+        return res.json({message: "success"});
     } catch(error) {
         next(error);
     }

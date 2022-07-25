@@ -15,14 +15,13 @@ const Registrar = () => {
       method: "POST",
       body: JSON.stringify(username, password),
       headers: { "Content-Type": "application/json" }
-    });
+      });
     const data = await res.json();
 
-    if (data.length > 0) {
+    if (res.status === 200) {
       navigate("/");
-    } else {
-      console.log("No se pudo registrar");
     }
+    console.log(data);
   };
 
   const handleChange = (e) => {

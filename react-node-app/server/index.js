@@ -11,7 +11,21 @@ app.use(cors());
 
 app.use(userRoutes);
 app.use((err, req, res, next) => {
-  res.send({ message: err.message });
+  if (err.code === "23505") {
+    return res.status(409).json({
+      message: "User already exists"
+    });
+  } else {
+    if (err.code === "23502") {
+      return res.status(404).json({
+        message: "Invalid data"
+      });
+    } else {
+      return res.status(400).json({
+        message: "Something went wrong"
+      })
+    }
+  }
 });
 
 app.listen(3001, () => {

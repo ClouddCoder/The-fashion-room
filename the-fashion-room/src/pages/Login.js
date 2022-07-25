@@ -11,7 +11,6 @@ const Ingresar = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const res = await fetch("http://localhost:3001/users", {
       method: "POST",
       body: JSON.stringify(username, password),
@@ -19,11 +18,10 @@ const Ingresar = () => {
       });
     const data = await res.json();
 
-    if (data.length > 0) {
+    if (res.status === 200) {
       navigate("/");
-    } else {
-      console.log("Wrong username or password");
     }
+    console.log(data);
   };
 
   const handleChange = (e) => {
