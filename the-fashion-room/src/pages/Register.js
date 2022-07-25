@@ -1,6 +1,7 @@
 import { ReturnHome } from "../components/Navigation";
+import { Link } from "react-router-dom";
 import { useState } from "react";
-import { Button } from "@mui/material";
+import { Button, Grid, Card, Typography, CardContent, TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 const Registrar = () => {
@@ -30,6 +31,7 @@ const Registrar = () => {
   };
 
   return (
+    /*
     <div>
       <h2>Registrarse</h2>
       <form onSubmit={handleSubmit}>
@@ -53,6 +55,24 @@ const Registrar = () => {
       </form>
       <ReturnHome />
     </div>
+    */
+    <Grid container spacing={3} alignItems="center" direction="column">
+      <Grid item xs={12}>
+        <Card sx={{mt:5}}>
+          <Typography variant="h5" component="h2">
+            Registrarse
+          </Typography>
+          <CardContent>
+            <form onSubmit={handleSubmit}>
+              <TextField onChange={handleChange} name="username" variant="filled" label="username" sx={{ display: "block", margin: ".5rem 0"}}/>
+              <TextField onChange={handleChange} name="password" variant="filled" label="password" sx={{ display: "block", margin: ".5rem 0"}}/>
+              <Button variant="contained" color="secondary" type="submit">Registrar</Button>
+            </form>
+          </CardContent>
+        </Card>
+        <Button component={Link} variant="contained" to="/" color="primary">Regresar</Button>
+      </Grid>
+    </Grid>
   );
 };
 
