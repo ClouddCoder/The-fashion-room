@@ -8,11 +8,11 @@ import {
   Paper,
   styled,
   ButtonBase,
+  requirePropFactory,
 } from "@mui/material";
 import { Box } from "@mui/system";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import imagen from "../images/camisa.png";
 
 const Catalogue = () => {
   const [products, setProducts] = useState([]);
@@ -20,6 +20,7 @@ const Catalogue = () => {
   const loadProducts = async () => {
     const response = await fetch("http://localhost:3001/catalogue");
     const data = await response.json();
+    console.log(data);
     setProducts(data);
   };
 
@@ -81,8 +82,12 @@ const Catalogue = () => {
             >
               <Grid container spacing={2}>
                 <Grid item>
-                  <ButtonBase sx={{ width: 128, height: 128 }}>
-                    <Img alt="complex" src={imagen} />
+                  <ButtonBase
+                    sx={{ width: 128, height: 128 }}
+                    component={Link}
+                    to={`/product/${product.product_id}`}
+                  >
+                    <Img alt="complex" src={require(`../images/${product.product_name}.png`)} />
                   </ButtonBase>
                 </Grid>
                 <Grid item xs={12} sm container>
