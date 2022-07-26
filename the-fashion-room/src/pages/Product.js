@@ -1,22 +1,20 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { Button } from "@mui/material";
+import { Button, Grid, Container } from "@mui/material";
 import List from "@mui/material/List";
-import ListSubheader from "@mui/material/ListSubheader";
 import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import Collapse from "@mui/material/Collapse";
-import StarBorder from "@mui/icons-material/StarBorder";
+import { Box } from "@mui/system";
 
 const Product = () => {
   const productId = useParams();
   const [product, setProduct] = useState({ product_name: "", quantity: 0 });
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
+  const cantidades = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   const handleClick = () => {
     setOpen(!open);
@@ -35,44 +33,37 @@ const Product = () => {
   }, [productId]);
 
   return (
-    <div>
-      {product.product_name}
-      <div>
-        <List
-          sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
-          component="nav"
-          aria-labelledby="nested-list-subheader"
-          subheader={
-            <ListSubheader component="div" id="nested-list-subheader">
-              Nested List Items
-            </ListSubheader>
-          }
-        >
-          <ListItemButton onClick={handleClick}>
-            <ListItemIcon>
-              <InboxIcon />
-            </ListItemIcon>
-            <ListItemText primary="Cantidad" />
-            {open ? <ExpandLess /> : <ExpandMore />}
-          </ListItemButton>
-          <Collapse in={open} timeout="auto" unmountOnExit>
-            <List component="div" disablePadding>
-              <ListItemButton sx={{ pl: 4 }}>
-                <ListItemIcon>
-                  <StarBorder />
-                </ListItemIcon>
-                <ListItemText primary="Starred" />
-              </ListItemButton>
-            </List>
-          </Collapse>
-        </List>
-      </div>
-      <div>
-        <Button component={Link} variant="contained" to="/catalogue" color="primary">
-          Regresar
-        </Button>
-      </div>
-    </div>
+    <Grid container sx={{ justifyContent: "center" }}>
+      <Grid item>{product.product_name}</Grid>
+      <Grid container sx={{ justifyContent: "center", alignItems: "center" }}>
+        <Grid item>
+          <List
+            sx={{ width: "100%", bgcolor: "background.paper", borderRadius: "15px" }}
+            component="nav"
+            aria-labelledby="nested-list-subheader"
+          >
+            <ListItemButton onClick={handleClick} sx={{ width: 150, height: 10 }}>
+              <ListItemText primary="Cantidad" />
+              {open ? <ExpandLess /> : <ExpandMore />}
+            </ListItemButton>
+            <Collapse in={open} timeout="auto" unmountOnExit>
+              <List component="div">
+                {cantidades.map(cantidad => (
+                  <ListItemButton sx={{ pl: 4, pb: 0, pt: 0 }}>
+                    <ListItemText primary={cantidad} />
+                  </ListItemButton>
+                ))}
+              </List>
+            </Collapse>
+          </List>
+        </Grid>
+        <Grid item>
+          <Button component={Link} variant="contained" to="/catalogue" color="primary">
+            Regresar
+          </Button>
+        </Grid>
+      </Grid>
+    </Grid>
   );
 };
 
