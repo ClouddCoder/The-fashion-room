@@ -74,7 +74,6 @@ const Catalogue = () => {
               sx={{
                 p: 2,
                 margin: "auto",
-
                 flexGrow: 1,
                 backgroundColor: theme => (theme.palette.mode === "dark" ? "#1A2027" : "#fff"),
               }}
@@ -116,6 +115,9 @@ const Catalogue = () => {
           </Box>
         ))}
       </Grid>
+      <Button component={Link} variant="contained" to="/" color="primary">
+        Regresar
+      </Button>
     </Container>
   );
 };
