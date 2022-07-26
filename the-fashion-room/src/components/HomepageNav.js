@@ -3,6 +3,7 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Home from "../pages/Home";
 import Catalogue from "../pages/Catalogue";
+import Product from "../pages/Product";
 import { Container } from "@mui/material";
 
 const HomepageNav = () => {
@@ -14,6 +15,7 @@ const HomepageNav = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/catalogue" element={<Catalogue />} />
+            <Route path="/product/:id" element={<Product />} />
             <Route path="/" element={<Home />} />
           </Routes>
         </Container>

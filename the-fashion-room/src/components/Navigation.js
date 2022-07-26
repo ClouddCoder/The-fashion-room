@@ -6,10 +6,14 @@ export const LogRegButtons = () => {
     <nav>
       <ul>
         <li>
-          <Button component={Link} variant="contained" to="/login" color="primary">Ingresar</Button>
+          <Button component={Link} variant="contained" to="/login" color="primary">
+            Ingresar
+          </Button>
         </li>
         <li>
-          <Button component={Link} variant="contained" to="/register" color="primary">Registrar</Button>
+          <Button component={Link} variant="contained" to="/register" color="primary">
+            Registrar
+          </Button>
         </li>
       </ul>
     </nav>
@@ -20,7 +24,9 @@ export const ReturnHome = () => {
   return (
     <nav>
       <li>
-        <Button component={Link} variant="contained" to="/" color="primary">Home</Button>
+        <Button component={Link} variant="contained" to="/" color="primary">
+          Home
+        </Button>
       </li>
     </nav>
   );
