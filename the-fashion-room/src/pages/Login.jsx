@@ -1,18 +1,17 @@
-import { ReturnHome } from "../components/Navigation";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Button, Grid, Card, Typography, CardContent, TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-const Registrar = () => {
-  const [username, setUsernameReg] = useState({ username: "" });
-  const [password, setPasswordReg] = useState({ password: "" });
+const Ingresar = () => {
+  const [username, setUsernameLog] = useState({ username: "" });
+  const [password, setPasswordLog] = useState({ password: "" });
 
   const navigate = useNavigate();
 
   const handleSubmit = async e => {
     e.preventDefault();
-    const res = await fetch("http://localhost:3001/insert", {
+    const res = await fetch("http://localhost:3001/users", {
       method: "POST",
       body: JSON.stringify(username, password),
       headers: { "Content-Type": "application/json" },
@@ -20,47 +19,22 @@ const Registrar = () => {
     const data = await res.json();
 
     if (res.status === 200) {
-      navigate("/");
+      navigate("/catalogue");
     }
     console.log(data);
   };
 
   const handleChange = e => {
-    setUsernameReg({ ...username, [e.target.name]: e.target.value });
-    setPasswordReg({ ...password, [e.target.name]: e.target.value });
+    setUsernameLog({ ...username, [e.target.name]: e.target.value });
+    setPasswordLog({ ...password, [e.target.name]: e.target.value });
   };
 
   return (
-    /*
-    <div>
-      <h2>Registrarse</h2>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="">Usuario</label>
-        <input
-          type="text"
-          name="username"
-          id="usuario"
-          onChange={handleChange}
-        />
-        <br />
-        <label htmlFor="">Contraseña</label>
-        <input
-          type="password"
-          name="password"
-          id="contraseña"
-          onChange={handleChange}
-        />
-        <br />
-        <Button variant="contained" color="secondary" type="submit">Registrar</Button>
-      </form>
-      <ReturnHome />
-    </div>
-    */
     <Grid container spacing={3} alignItems="center" direction="column">
       <Grid item xs={12}>
         <Card sx={{ mt: 5 }}>
           <Typography variant="h5" component="h2">
-            Registrarse
+            Inicar sesion
           </Typography>
           <CardContent>
             <form onSubmit={handleSubmit}>
@@ -79,7 +53,7 @@ const Registrar = () => {
                 sx={{ display: "block", margin: ".5rem 0" }}
               />
               <Button variant="contained" color="secondary" type="submit">
-                Registrar
+                Login
               </Button>
             </form>
           </CardContent>
@@ -92,4 +66,4 @@ const Registrar = () => {
   );
 };
 
-export default Registrar;
+export default Ingresar;

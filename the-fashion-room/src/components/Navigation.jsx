@@ -19,15 +19,3 @@ export const LogRegButtons = () => {
     </nav>
   );
 };
-
-export const ReturnHome = () => {
-  return (
-    <nav>
-      <li>
-        <Button component={Link} variant="contained" to="/" color="primary">
-          Home
-        </Button>
-      </li>
-    </nav>
-  );
-};
