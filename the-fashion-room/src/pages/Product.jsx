@@ -49,7 +49,7 @@ const Product = () => {
             <Collapse in={open} timeout="auto" unmountOnExit>
               <List component="div">
                 {cantidades.map(cantidad => (
-                  <ListItemButton sx={{ pl: 4, pb: 0, pt: 0 }}>
+                  <ListItemButton sx={{ pl: 4, pb: 0, pt: 0 }} key={cantidad}>
                     <ListItemText primary={cantidad} />
                   </ListItemButton>
                 ))}

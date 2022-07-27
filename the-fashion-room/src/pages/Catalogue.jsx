@@ -1,10 +1,11 @@
 import { Button, Grid, Typography, Container, Paper, styled, ButtonBase } from "@mui/material";
 import { Box } from "@mui/system";
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Catalogue = () => {
   const [products, setProducts] = useState([]);
+  const [shoppingCart, setShoppingCart] = useState([]);
 
   const loadProducts = async () => {
     const response = await fetch("http://localhost:3001/catalogue");
@@ -24,6 +25,16 @@ const Catalogue = () => {
     loadProducts();
   }, []);
 
+  useEffect(() => {
+    const addToCart = product => {
+      setShoppingCart(shoppingCart.push(product));
+      console.log(shoppingCart.length);
+    }
+
+    addToCart();
+    console.log(shoppingCart.length);
+  }, [shoppingCart]);
+
   return (
     <Container>
       <Grid container alignItems="center" justifyContent="center">
@@ -41,6 +52,7 @@ const Catalogue = () => {
               <Grid container spacing={2}>
                 <Grid item>
                   <ButtonBase
+                    onClick={() => setShoppingCart}
                     sx={{ width: 128, height: 128 }}
                     component={Link}
                     to={`/product/${product.product_id}`}
