@@ -16,15 +16,11 @@ function Catalogue() {
     loadProducts();
   }, []);
 
-  const addOnCart = (id) => {
-    console.log(id);
-  };
-
   return (
     <Container>
       <Grid container alignItems="center" justifyContent="center">
         {products.map((product) => (
-          <ProductItem key={product.product_id} product={product} addOnCart={addOnCart} />
+          <ProductItem key={product.product_id} product={product} />
         ))}
       </Grid>
       <Button component={Link} variant="contained" to="/" color="primary">

@@ -1,15 +1,23 @@
-import React from "react";
-import { Grid, Typography, Paper, ButtonBase, styled } from "@mui/material";
+import React, { useState } from "react";
+import { Grid, Typography, Paper, ButtonBase, styled, Button } from "@mui/material";
 import { Box } from "@mui/system";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
-function ProductItem({ product, addOnCart }) {
+function ProductItem({ product }) {
   const Img = styled("img")({
     margin: "auto",
     display: "block",
     maxWidth: "140px",
     maxHeight: "140px",
   });
+
+  const [number, setNumber] = useState(0);
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    console.log(products);
+  }, [products]);
 
   return (
     <Box m={1}>
@@ -24,12 +32,7 @@ function ProductItem({ product, addOnCart }) {
       >
         <Grid container spacing={2}>
           <Grid item>
-            <ButtonBase
-              onClick={() => addOnCart(product)}
-              sx={{ width: 128, height: 128 }}
-              component={Link}
-              to={`/product/${product.product_id}`}
-            >
+            <ButtonBase sx={{ width: 128, height: 128 }} component={Link} to="/shoppingcart">
               <Img alt="complex" src={require(`../images/${product.product_name}.png`)} />
             </ButtonBase>
           </Grid>
@@ -47,9 +50,9 @@ function ProductItem({ product, addOnCart }) {
                 </Typography>
               </Grid>
               <Grid item>
-                <Typography sx={{ cursor: "pointer" }} variant="body2">
-                  Remove
-                </Typography>
+                <Button onClick={() => setProducts([...products, product])} variant="outlined">
+                  Agregar al carrito
+                </Button>
               </Grid>
             </Grid>
             <Grid item>
