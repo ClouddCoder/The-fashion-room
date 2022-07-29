@@ -1,7 +1,8 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
 
-export const LogRegButtons = () => {
+function LogRegButtons() {
   return (
     <nav>
       <ul>
@@ -18,4 +19,6 @@ export const LogRegButtons = () => {
       </ul>
     </nav>
   );
-};
+}
+
+export default LogRegButtons;

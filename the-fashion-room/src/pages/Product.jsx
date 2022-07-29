@@ -1,16 +1,14 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
-import { Button, Grid, Container } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { Button, Grid } from "@mui/material";
 import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import Collapse from "@mui/material/Collapse";
-import { Box } from "@mui/system";
 
-const Product = () => {
+function Product() {
   const productId = useParams();
   const [product, setProduct] = useState({ product_name: "", quantity: 0 });
   const [open, setOpen] = useState(false);
@@ -20,7 +18,7 @@ const Product = () => {
     setOpen(!open);
   };
 
-  const loadProduct = async id => {
+  const loadProduct = async (id) => {
     const res = await fetch(`http://localhost:3001/product/${id}`);
     const data = await res.json();
     setProduct({ product_name: data.product_name, quantity: data.quantity });
@@ -48,7 +46,7 @@ const Product = () => {
             </ListItemButton>
             <Collapse in={open} timeout="auto" unmountOnExit>
               <List component="div">
-                {cantidades.map(cantidad => (
+                {cantidades.map((cantidad) => (
                   <ListItemButton sx={{ pl: 4, pb: 0, pt: 0 }} key={cantidad}>
                     <ListItemText primary={cantidad} />
                   </ListItemButton>
@@ -65,6 +63,6 @@ const Product = () => {
       </Grid>
     </Grid>
   );
-};
+}
 
 export default Product;

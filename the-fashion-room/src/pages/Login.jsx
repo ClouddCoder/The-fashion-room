@@ -1,15 +1,16 @@
-import { Link } from "react-router-dom";
-import { useState } from "react";
-import { Button, Grid, Card, Typography, CardContent, TextField } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  Button, Grid, Card, Typography, CardContent, TextField,
+} from "@mui/material";
 
-const Ingresar = () => {
+function Ingresar() {
   const [username, setUsernameLog] = useState({ username: "" });
   const [password, setPasswordLog] = useState({ password: "" });
 
   const navigate = useNavigate();
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const res = await fetch("http://localhost:3001/users", {
       method: "POST",
@@ -24,7 +25,7 @@ const Ingresar = () => {
     console.log(data);
   };
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     setUsernameLog({ ...username, [e.target.name]: e.target.value });
     setPasswordLog({ ...password, [e.target.name]: e.target.value });
   };
@@ -64,6 +65,6 @@ const Ingresar = () => {
       </Grid>
     </Grid>
   );
-};
+}
 
 export default Ingresar;

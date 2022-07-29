@@ -1,11 +1,12 @@
-import { LogRegButtons } from "../components/Navigation";
+import React from "react";
+import LogRegButtons from "../components/Navigation";
 
-const Home = () => {
+function Home() {
   return (
     <div>
       <LogRegButtons />
     </div>
   );
-};
+}
 
 export default Home;

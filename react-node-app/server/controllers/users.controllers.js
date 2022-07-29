@@ -14,7 +14,7 @@ const getUser = async (req, res, next) => {
     }
     return res.json({ message: "success" });
   } catch (error) {
-    next(error);
+    return next(error);
   }
 };
 
@@ -24,10 +24,10 @@ const insertUser = async (req, res, next) => {
   const values = [username, password];
 
   try {
-    const result = await pool.query(query, values);
+    await pool.query(query, values);
     return res.json({ message: "success" });
   } catch (error) {
-    next(error);
+    return next(error);
   }
 };
 
@@ -45,7 +45,7 @@ const deleteUser = async (req, res, next) => {
     }
     return res.sendStatus(204);
   } catch (error) {
-    next(error);
+    return next(error);
   }
 };
 
@@ -64,7 +64,7 @@ const updateUser = async (req, res, next) => {
     }
     return res.json(result.rows);
   } catch (error) {
-    next(error);
+    return next(error);
   }
 };
 
@@ -92,14 +92,14 @@ const getProduct = async (req, res, next) => {
     }
     return res.json(result.rows[0]);
   } catch (error) {
-    next(error);
+    return next(error);
   }
 };
 
 const buyProduct = async (req, res, next) => {
-  const { quantity, product_id } = req.body;
+  const { quantity, productId } = req.body;
   const query = "UPDATE products SET quantity = quantity - $1 WHERE product_id = $2";
-  const values = [quantity, product_id];
+  const values = [quantity, productId];
 
   try {
     const result = await pool.query(query, values);
@@ -110,7 +110,7 @@ const buyProduct = async (req, res, next) => {
     }
     return res.json({ message: "success" });
   } catch (error) {
-    next(error);
+    return next(error);
   }
 };
 

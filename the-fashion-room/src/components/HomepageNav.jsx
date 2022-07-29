@@ -1,10 +1,11 @@
+import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Container } from "@mui/material";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Home from "../pages/Home";
 import Catalogue from "../pages/Catalogue";
 import Product from "../pages/Product";
-import { Container } from "@mui/material";
 
 function HomepageNav() {
   return (
@@ -22,6 +23,6 @@ function HomepageNav() {
       </Router>
     </div>
   );
-};
+}
 
 export default HomepageNav;
