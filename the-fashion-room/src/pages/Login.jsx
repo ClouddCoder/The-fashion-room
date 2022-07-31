@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  Button, Grid, Card, Typography, CardContent, TextField,
-} from "@mui/material";
+import { Button, Grid, Card, Typography, CardContent, TextField } from "@mui/material";
 
 function Ingresar() {
   const [username, setUsernameLog] = useState({ username: "" });

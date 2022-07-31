@@ -1,25 +1,11 @@
-import React, { useEffect, useReducer } from "react";
+import React, { useEffect, useContext } from "react";
 import { Button, Grid, Container } from "@mui/material";
 import { Link } from "react-router-dom";
 import ProductItem from "../components/ProductItem";
-import { shoppingCartinitialState, shoppingCartReducer } from "../reducers/shoppingCartReducer";
-import { TYPES } from "../actions/shoppingCartActions";
+import ProductContext from "../context/ProductContext";
 
 function Catalogue() {
-  const [state, dispatch] = useReducer(shoppingCartReducer, shoppingCartinitialState);
-
-  const loadProducts = async () => {
-    const response = await fetch("http://localhost:3001/catalogue");
-    const data = await response.json();
-    dispatch({ type: "success", payload: data, response: "Productos cargados" });
-  };
-
-  const addToCart = (id) => {
-    console.log(id);
-    dispatch({ type: TYPES.ADD_TO_CART, payload: id });
-  };
-
-  const clearCart = () => {};
+  const { addToCart, loadProducts, products } = useContext(ProductContext);
 
   useEffect(() => {
     loadProducts();
@@ -28,7 +14,7 @@ function Catalogue() {
   return (
     <Container>
       <Grid container alignItems="center" justifyContent="center">
-        {state.products.map((product) => (
+        {products.map((product) => (
           <ProductItem key={product.product_id} product={product} addToCart={addToCart} />
         ))}
       </Grid>
