@@ -1,23 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { Grid, Typography, Paper, ButtonBase, styled, Button } from "@mui/material";
 import { Box } from "@mui/system";
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
 
-function ProductItem({ product }) {
+function ProductItem({ product, addToCart }) {
   const Img = styled("img")({
     margin: "auto",
     display: "block",
     maxWidth: "140px",
     maxHeight: "140px",
   });
-
-  const [number, setNumber] = useState(0);
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    console.log(products);
-  }, [products]);
 
   return (
     <Box m={1}>
@@ -50,7 +42,7 @@ function ProductItem({ product }) {
                 </Typography>
               </Grid>
               <Grid item>
-                <Button onClick={() => setProducts([...products, product])} variant="outlined">
+                <Button onClick={() => addToCart(product.product_id)} variant="outlined">
                   Agregar al carrito
                 </Button>
               </Grid>
