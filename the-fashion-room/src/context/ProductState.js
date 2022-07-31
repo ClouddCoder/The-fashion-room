@@ -15,7 +15,7 @@ const ProductState = (props) => {
   const loadProducts = async () => {
     const response = await axios.get("http://localhost:3001/catalogue");
     const data = await response.data;
-    dispatch({ type: "success", payload: data, response: "Productos cargados" });
+    dispatch({ type: TYPES.LOAD_PRODUCTS, payload: data });
   };
 
   const addToCart = (id) => {
@@ -23,7 +23,18 @@ const ProductState = (props) => {
     dispatch({ type: TYPES.ADD_TO_CART, payload: id });
   };
 
-  const clearCart = () => {};
+  const removeFromCart = (id, all = false) => {
+    console.log(id);
+    if (all) {
+      dispatch({ type: TYPES.REMOVE_ALL_FROM_CART, payload: id });
+    } else {
+      dispatch({ type: TYPES.REMOVE_ONE_FROM_CART, payload: id });
+    }
+  };
+
+  const clearCart = () => {
+    dispatch({ type: TYPES.CLEAR_CART });
+  };
 
   return (
     <ProductContext.Provider
@@ -32,6 +43,7 @@ const ProductState = (props) => {
         cart: state.cart,
         loadProducts,
         addToCart,
+        removeFromCart,
         clearCart,
       }}
     >
