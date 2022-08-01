@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
-import { Grid, Container } from "@mui/material";
+import { Grid, Container, Button } from "@mui/material";
+import { Link } from "react-router-dom";
 import CartItem from "../components/CartItem";
 import ProductContext from "../context/ProductContext";
 
@@ -9,8 +10,15 @@ function ShoppingCart() {
   return (
     <Container>
       <Grid container direction="column">
-        <button onClick={() => clearCart()}>Limpiar carrito</button>
-        {cart.map((product) => (
+        <Grid item container justifyContent="center">
+          <Button sx={{ width: 200, mr: 1 }} onClick={() => clearCart()} variant="outlined">
+            Vaciar carrito
+          </Button>
+          <Button sx={{ width: 200, ml: 1 }} component={Link} to="/catalogue" variant="outlined">
+            Regresar
+          </Button>
+        </Grid>
+        {cart.map(product => (
           <CartItem key={product.product_id} product={product} removeFromCart={removeFromCart} />
         ))}
       </Grid>
