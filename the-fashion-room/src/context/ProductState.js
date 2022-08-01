@@ -4,7 +4,7 @@ import { ProductReducer } from "./ProductReducer";
 import axios from "axios";
 import { TYPES } from "../actions/productActions";
 
-const ProductState = (props) => {
+const ProductState = props => {
   const productInitialState = {
     products: [],
     cart: [],
@@ -13,18 +13,16 @@ const ProductState = (props) => {
   const [state, dispatch] = useReducer(ProductReducer, productInitialState);
 
   const loadProducts = async () => {
-    const response = await axios.get("http://localhost:3001/catalogue");
+    const response = await axios.get("http://localhost:3001/catalogue", { crossDomain: true });
     const data = await response.data;
     dispatch({ type: TYPES.LOAD_PRODUCTS, payload: data });
   };
 
-  const addToCart = (id) => {
-    console.log(id);
+  const addToCart = id => {
     dispatch({ type: TYPES.ADD_TO_CART, payload: id });
   };
 
   const removeFromCart = (id, all = false) => {
-    console.log(id);
     if (all) {
       dispatch({ type: TYPES.REMOVE_ALL_FROM_CART, payload: id });
     } else {

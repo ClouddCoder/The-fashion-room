@@ -4,7 +4,6 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Home from "../pages/Home";
 import Catalogue from "../pages/Catalogue";
-import Product from "../pages/Product";
 import ShoppingCart from "../pages/ShoppingCart";
 import ProductState from "../context/ProductState";
 
@@ -23,7 +22,6 @@ function HomepageNav() {
               </ProductState>
             }
           />
-          <Route path="/product/:id" element={<Product />} />
           <Route
             path="/cart/"
             element={

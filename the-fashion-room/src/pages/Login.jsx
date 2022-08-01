@@ -3,16 +3,16 @@ import { Link, useNavigate } from "react-router-dom";
 import { Button, Grid, Card, Typography, CardContent, TextField } from "@mui/material";
 
 function Ingresar() {
-  const [username, setUsernameLog] = useState({ username: "" });
+  const [email, setEmail] = useState({ email: "" });
   const [password, setPasswordLog] = useState({ password: "" });
 
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    const res = await fetch("http://localhost:3001/users", {
+    const res = await fetch("http://localhost:3001/login", {
       method: "POST",
-      body: JSON.stringify(username, password),
+      body: JSON.stringify(email, password),
       headers: { "Content-Type": "application/json" },
     });
     const data = await res.json();
@@ -23,8 +23,8 @@ function Ingresar() {
     console.log(data);
   };
 
-  const handleChange = (e) => {
-    setUsernameLog({ ...username, [e.target.name]: e.target.value });
+  const handleChange = e => {
+    setEmail({ ...email, [e.target.name]: e.target.value });
     setPasswordLog({ ...password, [e.target.name]: e.target.value });
   };
 
@@ -39,16 +39,16 @@ function Ingresar() {
             <form onSubmit={handleSubmit}>
               <TextField
                 onChange={handleChange}
-                name="username"
+                name="email"
                 variant="filled"
-                label="username"
+                label="Email"
                 sx={{ display: "block", margin: ".5rem 0" }}
               />
               <TextField
                 onChange={handleChange}
                 name="password"
                 variant="filled"
-                label="password"
+                label="Password"
                 sx={{ display: "block", margin: ".5rem 0" }}
               />
               <Button variant="contained" color="secondary" type="submit">

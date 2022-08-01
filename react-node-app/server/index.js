@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use(userRoutes);
-app.use((err, req, res) => {
+app.use((err, req, res, next) => {
   if (err.code === "23505") {
     return res.status(409).json({
       message: "User already exists",

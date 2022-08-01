@@ -6,7 +6,6 @@ export function ProductReducer(state, action) {
       return { ...state, products: action.payload };
     case TYPES.ADD_TO_CART: {
       let newItem = state.products.find(item => item.product_id === action.payload);
-      console.log(newItem);
 
       let itemInCart = state.cart.find(item => item.product_id === newItem.product_id);
 

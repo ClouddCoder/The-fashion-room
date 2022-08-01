@@ -11,11 +11,11 @@ function ShoppingCart() {
     <Container>
       <Grid container direction="column">
         <Grid item container justifyContent="center">
-          <Button sx={{ width: 200, mr: 1 }} onClick={() => clearCart()} variant="outlined">
-            Vaciar carrito
-          </Button>
-          <Button sx={{ width: 200, ml: 1 }} component={Link} to="/catalogue" variant="outlined">
+          <Button sx={{ width: 200, mr: 1 }} component={Link} to="/catalogue" variant="outlined">
             Regresar
+          </Button>
+          <Button sx={{ width: 200, ml: 1 }} onClick={() => clearCart()} variant="outlined">
+            Vaciar carrito
           </Button>
         </Grid>
         {cart.map(product => (

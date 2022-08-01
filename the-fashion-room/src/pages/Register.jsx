@@ -3,17 +3,19 @@ import { Link, useNavigate } from "react-router-dom";
 import { Button, Grid, Card, Typography, CardContent, TextField } from "@mui/material";
 
 function Registrar() {
-  const [username, setUsernameReg] = useState({ username: "" });
+  const [name, setName] = useState({ name: "" });
+  const [lastname, setLastname] = useState({ lastname: "" });
+  const [email, setEmail] = useState({ email: "" });
   const [password, setPasswordReg] = useState({ password: "" });
 
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    const res = await fetch("http://localhost:3001/insert", {
+    const res = await fetch("http://localhost:3001/register", {
       method: "POST",
-      body: JSON.stringify(username, password),
-      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(name, lastname, email, password),
+      headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
     });
     const data = await res.json();
 
@@ -23,8 +25,10 @@ function Registrar() {
     console.log(data);
   };
 
-  const handleChange = (e) => {
-    setUsernameReg({ ...username, [e.target.name]: e.target.value });
+  const handleChange = e => {
+    setName({ ...name, [e.target.name]: e.target.value });
+    setLastname({ ...lastname, [e.target.name]: e.target.value });
+    setEmail({ ...email, [e.target.name]: e.target.value });
     setPasswordReg({ ...password, [e.target.name]: e.target.value });
   };
 
@@ -39,16 +43,30 @@ function Registrar() {
             <form onSubmit={handleSubmit}>
               <TextField
                 onChange={handleChange}
-                name="username"
+                name="name"
                 variant="filled"
-                label="username"
+                label="Name"
+                sx={{ display: "block", margin: ".5rem 0" }}
+              />
+              <TextField
+                onChange={handleChange}
+                name="lastname"
+                variant="filled"
+                label="Lastname"
+                sx={{ display: "block", margin: ".5rem 0" }}
+              />
+              <TextField
+                onChange={handleChange}
+                name="email"
+                variant="filled"
+                label="Email"
                 sx={{ display: "block", margin: ".5rem 0" }}
               />
               <TextField
                 onChange={handleChange}
                 name="password"
                 variant="filled"
-                label="password"
+                label="Password"
                 sx={{ display: "block", margin: ".5rem 0" }}
               />
               <Button variant="contained" color="secondary" type="submit">

@@ -13,22 +13,21 @@ function Catalogue() {
 
   return (
     <Container>
+      <Grid container justifyContent="center">
+        <Grid item>
+          <Button sx={{ mr: 1 }} component={Link} to="/" variant="outlined" color="primary">
+            Regresar
+          </Button>
+          <Button sx={{ ml: 1 }} component={Link} to="/cart" variant="outlined" color="primary">
+            Ir al carrito
+          </Button>
+        </Grid>
+      </Grid>
       <Grid container alignItems="center" justifyContent="center">
-        {products.map((product) => (
+        {products.map(product => (
           <ProductItem key={product.product_id} product={product} addToCart={addToCart} />
         ))}
       </Grid>
-      <Button component={Link} to="/" variant="contained" color="primary">
-        Regresar
-      </Button>
-      <br />
-      <Button variant="contained" color="primary">
-        Limpiar carrito
-      </Button>
-      <br />
-      <Button component={Link} to="/cart" variant="contained" color="primary">
-        Ir al carrito
-      </Button>
     </Container>
   );
 }
