@@ -37,13 +37,13 @@ function CartItem({ product, removeFromCart }) {
                   Cantidad a comprar x{product.quantityInCart}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  Total =
+                  Total = ${product.price * product.quantityInCart}
                 </Typography>
               </Grid>
             </Grid>
             <Grid item>
               <Typography variant="subtitle1" component="div">
-                $19.00
+                ${product.price}
               </Typography>
               <Grid item container justifyContent="center" direction="column">
                 <Grid item>

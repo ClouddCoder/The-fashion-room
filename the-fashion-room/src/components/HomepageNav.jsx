@@ -6,12 +6,15 @@ import Home from "../pages/Home";
 import Catalogue from "../pages/Catalogue";
 import ShoppingCart from "../pages/ShoppingCart";
 import ProductState from "../context/ProductState";
+import About from "../pages/About";
 
 function HomepageNav() {
   return (
     <>
       <Router>
         <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route
@@ -30,7 +33,6 @@ function HomepageNav() {
               </ProductState>
             }
           />
-          <Route path="/" element={<Home />} />
         </Routes>
       </Router>
     </>

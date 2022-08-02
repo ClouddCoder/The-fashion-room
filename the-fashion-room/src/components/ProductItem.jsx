@@ -23,10 +23,8 @@ function ProductItem({ product, addToCart }) {
         elevation={1}
       >
         <Grid container spacing={2}>
-          <Grid item>
-            <ButtonBase sx={{ width: 128, height: 128 }} component={Link} to="/shoppingcart">
-              <Img alt="complex" src={require(`../images/${product.product_name}.png`)} />
-            </ButtonBase>
+          <Grid item sx={{ width: 160, height: 160 }}>
+            <Img alt="complex" src={require(`../images/${product.product_name}.png`)} />
           </Grid>
           <Grid item xs={12} sm container>
             <Grid item xs container direction="column" spacing={2}>
@@ -38,7 +36,7 @@ function ProductItem({ product, addToCart }) {
                   Full resolution 1920x1080 • JPEG
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  ID: 1030114
+                  Cantidad disponible {product.stock}
                 </Typography>
               </Grid>
               <Grid item>
@@ -49,7 +47,7 @@ function ProductItem({ product, addToCart }) {
             </Grid>
             <Grid item>
               <Typography variant="subtitle1" component="div">
-                $19.00
+                ${product.price}
               </Typography>
             </Grid>
           </Grid>

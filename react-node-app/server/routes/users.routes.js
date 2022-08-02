@@ -5,6 +5,7 @@ const {
   deleteUser,
   getProducts,
   buyProduct,
+  getStores,
 } = require("../controllers/users.controllers");
 
 const router = Router();
@@ -18,5 +19,7 @@ router.delete("/delete/:id", deleteUser);
 router.put("/catalogue", buyProduct);
 
 router.get("/catalogue", getProducts);
+
+router.get("/stores", getStores);
 
 module.exports = router;
