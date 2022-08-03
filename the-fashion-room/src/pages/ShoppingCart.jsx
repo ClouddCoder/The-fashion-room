@@ -3,6 +3,7 @@ import { Grid, Container, Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import CartItem from "../components/CartItem";
 import ProductContext from "../context/ProductContext";
+import Invoice from "../components/Invoice";
 
 function ShoppingCart() {
   const { cart, removeFromCart, clearCart } = useContext(ProductContext);
@@ -19,8 +20,8 @@ function ShoppingCart() {
   };
 
   return (
-    <Container>
-      <Grid container direction="column">
+    <Grid container sx={{ mt: 20 }}>
+      <Grid container direction="column" xs={6}>
         <Grid item container justifyContent="center">
           <Button sx={{ width: 200, mr: 1 }} component={Link} to="/catalogue" variant="outlined">
             Regresar
@@ -33,10 +34,13 @@ function ShoppingCart() {
           <CartItem key={product.product_id} product={product} removeFromCart={removeFromCart} />
         ))}
       </Grid>
+      <Grid item container justifyContent="center" xs={6}>
+        <Invoice cart={cart} />
+      </Grid>
       <Button variant="contained" color="secondary" onClick={() => buyProducts()}>
         Comprar
       </Button>
-    </Container>
+    </Grid>
   );
 }
 
