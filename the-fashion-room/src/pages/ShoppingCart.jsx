@@ -13,12 +13,9 @@ function ShoppingCart() {
       body: JSON.stringify(cart),
       headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
     });
-
-    /*
-    if (res.status === 200) {
-      console.log(data);
-    }
-    */
+    const data = await res.json();
+    console.log(data);
+    clearCart();
   };
 
   return (
@@ -36,7 +33,7 @@ function ShoppingCart() {
           <CartItem key={product.product_id} product={product} removeFromCart={removeFromCart} />
         ))}
       </Grid>
-      <Button variant="contained" color="secondary" onClick={buyProducts}>
+      <Button variant="contained" color="secondary" onClick={() => buyProducts()}>
         Comprar
       </Button>
     </Container>

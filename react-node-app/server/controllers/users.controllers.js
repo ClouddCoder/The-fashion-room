@@ -78,10 +78,9 @@ const getProduct = async (req, res, next) => {
 };
 
 const buyProduct = async (req, res, next) => {
-  const { cart } = req.body;
+  const cart = req.body;
   const query = "UPDATE product SET stock = stock - $1 WHERE product_id = $2";
-  res.json(cart);
-  /*
+
   try {
     for (const item of cart) {
       const result = await pool.query(query, [item.quantityInCart, item.product_id]);
@@ -96,7 +95,6 @@ const buyProduct = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-  */
 };
 
 const getStores = async (req, res, next) => {

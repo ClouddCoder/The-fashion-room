@@ -49,9 +49,6 @@ export function ProductReducer(state, action) {
     case TYPES.CLEAR_CART: {
       return { products: [], cart: [] };
     }
-    case TYPES.BUY_CART: {
-      return { products: [], cart: [] };
-    }
     default:
       return state;
   }
