@@ -7,6 +7,20 @@ import ProductContext from "../context/ProductContext";
 function ShoppingCart() {
   const { cart, removeFromCart, clearCart } = useContext(ProductContext);
 
+  const buyProducts = async () => {
+    const res = await fetch("http://localhost:3001/cart", {
+      method: "PUT",
+      body: JSON.stringify(cart),
+      headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
+    });
+
+    /*
+    if (res.status === 200) {
+      console.log(data);
+    }
+    */
+  };
+
   return (
     <Container>
       <Grid container direction="column">
@@ -18,10 +32,13 @@ function ShoppingCart() {
             Vaciar carrito
           </Button>
         </Grid>
-        {cart.map(product => (
+        {cart.map((product) => (
           <CartItem key={product.product_id} product={product} removeFromCart={removeFromCart} />
         ))}
       </Grid>
+      <Button variant="contained" color="secondary" onClick={buyProducts}>
+        Comprar
+      </Button>
     </Container>
   );
 }

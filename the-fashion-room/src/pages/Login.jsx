@@ -8,7 +8,7 @@ function Ingresar() {
 
   const navigate = useNavigate();
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const res = await fetch("http://localhost:3001/login", {
       method: "POST",
@@ -23,7 +23,7 @@ function Ingresar() {
     console.log(data);
   };
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     setEmail({ ...email, [e.target.name]: e.target.value });
     setPasswordLog({ ...password, [e.target.name]: e.target.value });
   };
@@ -31,7 +31,7 @@ function Ingresar() {
   return (
     <Grid container spacing={3} alignItems="center" direction="column">
       <Grid item xs={12}>
-        <Card sx={{ mt: 5 }}>
+        <Card sx={{ mt: 5 }} align="center">
           <Typography variant="h5" component="h2">
             Inicar sesion
           </Typography>

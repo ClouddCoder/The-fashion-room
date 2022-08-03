@@ -5,17 +5,17 @@ export function ProductReducer(state, action) {
     case TYPES.LOAD_PRODUCTS:
       return { ...state, products: action.payload };
     case TYPES.ADD_TO_CART: {
-      let newItem = state.products.find(item => item.product_id === action.payload);
+      let newItem = state.products.find((item) => item.product_id === action.payload);
 
-      let itemInCart = state.cart.find(item => item.product_id === newItem.product_id);
+      let itemInCart = state.cart.find((item) => item.product_id === newItem.product_id);
 
       return itemInCart
         ? {
             ...state,
-            cart: state.cart.map(item =>
+            cart: state.cart.map((item) =>
               item.product_id === newItem.product_id
                 ? { ...item, quantityInCart: item.quantityInCart + 1 }
-                : item
+                : item,
             ),
           }
         : {
@@ -24,29 +24,32 @@ export function ProductReducer(state, action) {
           };
     }
     case TYPES.REMOVE_ONE_FROM_CART: {
-      let itemToDelete = state.cart.find(item => item.product_id === action.payload);
+      let itemToDelete = state.cart.find((item) => item.product_id === action.payload);
 
       return itemToDelete.quantityInCart > 1
         ? {
             ...state,
-            cart: state.cart.map(item =>
+            cart: state.cart.map((item) =>
               item.product_id === action.payload
                 ? { ...item, quantityInCart: item.quantityInCart - 1 }
-                : item
+                : item,
             ),
           }
         : {
             ...state,
-            cart: state.cart.filter(item => item.product_id !== action.payload),
+            cart: state.cart.filter((item) => item.product_id !== action.payload),
           };
     }
     case TYPES.REMOVE_ALL_FROM_CART: {
       return {
         ...state,
-        cart: state.cart.filter(item => item.product_id !== action.payload),
+        cart: state.cart.filter((item) => item.product_id !== action.payload),
       };
     }
     case TYPES.CLEAR_CART: {
+      return { products: [], cart: [] };
+    }
+    case TYPES.BUY_CART: {
       return { products: [], cart: [] };
     }
     default:

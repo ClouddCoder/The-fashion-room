@@ -1,7 +1,6 @@
 import React from "react";
-import { Grid, Typography, Paper, ButtonBase, styled, Button } from "@mui/material";
+import { Grid, Typography, Paper, styled, Button } from "@mui/material";
 import { Box } from "@mui/system";
-import { Link } from "react-router-dom";
 
 function ProductItem({ product, addToCart }) {
   const Img = styled("img")({
@@ -18,7 +17,7 @@ function ProductItem({ product, addToCart }) {
           p: 2,
           margin: "auto",
           flexGrow: 1,
-          backgroundColor: theme => (theme.palette.mode === "dark" ? "#1A2027" : "#fff"),
+          backgroundColor: (theme) => (theme.palette.mode === "dark" ? "#1A2027" : "#fff"),
         }}
         elevation={1}
       >

@@ -16,7 +16,7 @@ router.post("/register", registerUser);
 
 router.delete("/delete/:id", deleteUser);
 
-router.put("/catalogue", buyProduct);
+router.put("/cart", buyProduct);
 
 router.get("/catalogue", getProducts);
 

@@ -78,21 +78,25 @@ const getProduct = async (req, res, next) => {
 };
 
 const buyProduct = async (req, res, next) => {
-  const { quantity, productId } = req.body;
-  const query = "UPDATE product SET quantity = quantity - $1 WHERE product_id = $2";
-  const values = [quantity, productId];
-
+  const { cart } = req.body;
+  const query = "UPDATE product SET stock = stock - $1 WHERE product_id = $2";
+  res.json(cart);
+  /*
   try {
-    const result = await pool.query(query, values);
-    if (result.rowCount === 0) {
-      return res.status(404).json({
-        message: "Product not found",
-      });
+    for (const item of cart) {
+      const result = await pool.query(query, [item.quantityInCart, item.product_id]);
+
+      if (result.rowCount === 0) {
+        return res.status(404).json({
+          message: "Product not found",
+        });
+      }
     }
     return res.json({ message: "success" });
   } catch (error) {
-    return next(error);
+    next(error);
   }
+  */
 };
 
 const getStores = async (req, res, next) => {
