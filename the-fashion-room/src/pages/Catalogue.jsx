@@ -13,7 +13,7 @@ function Catalogue() {
 
   return (
     <Container>
-      <Grid container justifyContent="center">
+      <Grid container justifyContent="center" mt={20}>
         <Grid item>
           <Button sx={{ mr: 1 }} component={Link} to="/" variant="outlined" color="primary">
             Regresar

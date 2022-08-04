@@ -1,17 +1,11 @@
 import React from "react";
-import { styled } from "@mui/material/styles";
 import { Button } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import { palette } from "@mui/system";
 
-function Invoice({ cart, buyProducts }) {
-  let totalProducts = cart.map(product => product.quantityInCart).reduce((a, b) => a + b, 0);
-  let totalPrice = cart
-    .map(product => product.price * product.quantityInCart)
-    .reduce((a, b) => a + b, 0);
-
+function OrderResume({ buyProducts, orderTotalProducts, orderTotalPrice }) {
   const ColorWhiteLine = ({ color }) => (
     <hr
       style={{
@@ -54,7 +48,7 @@ function Invoice({ cart, buyProducts }) {
             Productos
           </Typography>
           <Typography variant="h6" component="div">
-            {totalProducts}
+            {orderTotalProducts}
           </Typography>
         </Grid>
         <Grid
@@ -70,7 +64,7 @@ function Invoice({ cart, buyProducts }) {
             Total
           </Typography>
           <Typography variant="h6" component="div">
-            ${totalPrice}
+            {orderTotalPrice}
           </Typography>
         </Grid>
         <Grid item container justifyContent="center">
@@ -86,4 +80,4 @@ function Invoice({ cart, buyProducts }) {
   );
 }
 
-export default Invoice;
+export default OrderResume;

@@ -7,6 +7,7 @@ import Catalogue from "../pages/Catalogue";
 import ShoppingCart from "../pages/ShoppingCart";
 import ProductState from "../context/ProductState";
 import About from "../pages/About";
+import Invoice from "../pages/Invoice";
 
 function HomepageNav() {
   return (
@@ -26,10 +27,18 @@ function HomepageNav() {
             }
           />
           <Route
-            path="/cart/"
+            path="/cart"
             element={
               <ProductState>
                 <ShoppingCart />
+              </ProductState>
+            }
+          />
+          <Route
+            path="/invoice"
+            element={
+              <ProductState>
+                <Invoice />
               </ProductState>
             }
           />

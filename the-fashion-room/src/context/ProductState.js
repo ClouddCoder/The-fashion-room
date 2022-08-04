@@ -4,10 +4,12 @@ import { ProductReducer } from "./ProductReducer";
 import axios from "axios";
 import { TYPES } from "../actions/productActions";
 
-const ProductState = (props) => {
+const ProductState = props => {
   const productInitialState = {
     products: [],
     cart: [],
+    totalProducts: 0,
+    totalPrice: 0,
   };
 
   const [state, dispatch] = useReducer(ProductReducer, productInitialState);
@@ -18,7 +20,7 @@ const ProductState = (props) => {
     dispatch({ type: TYPES.LOAD_PRODUCTS, payload: data });
   };
 
-  const addToCart = (id) => {
+  const addToCart = id => {
     dispatch({ type: TYPES.ADD_TO_CART, payload: id });
   };
 
@@ -34,15 +36,27 @@ const ProductState = (props) => {
     dispatch({ type: TYPES.CLEAR_CART });
   };
 
+  const getTotalProducts = () => {
+    dispatch({ type: TYPES.GET_TOTAL_PRODUCTS });
+  };
+
+  const getTotalPrice = () => {
+    dispatch({ type: TYPES.GET_TOTAL_PRICE });
+  };
+
   return (
     <ProductContext.Provider
       value={{
         products: state.products,
         cart: state.cart,
+        totalProducts: state.totalProducts,
+        totalPrice: state.totalPrice,
         loadProducts,
         addToCart,
         removeFromCart,
         clearCart,
+        getTotalProducts,
+        getTotalPrice,
       }}
     >
       {props.children}

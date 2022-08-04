@@ -1,12 +1,27 @@
 import React, { useContext } from "react";
 import { Grid, Button } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CartItem from "../components/CartItem";
 import ProductContext from "../context/ProductContext";
-import Invoice from "../components/Invoice";
+import OrderResume from "../components/OrderResume";
+import { useEffect } from "react";
 
 function ShoppingCart() {
-  const { cart, removeFromCart, clearCart } = useContext(ProductContext);
+  const {
+    cart,
+    removeFromCart,
+    clearCart,
+    getTotalProducts,
+    getTotalPrice,
+    totalProducts,
+    totalPrice,
+  } = useContext(ProductContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    getTotalProducts();
+    getTotalPrice();
+  }, []);
 
   const buyProducts = async () => {
     const res = await fetch("http://localhost:3001/cart", {
@@ -16,7 +31,8 @@ function ShoppingCart() {
     });
     const data = await res.json();
     console.log(data);
-    clearCart();
+    navigate("/invoice");
+    //clearCart();
   };
 
   return (
@@ -35,7 +51,11 @@ function ShoppingCart() {
         ))}
       </Grid>
       <Grid item={true} container justifyContent="center" xs={6}>
-        <Invoice cart={cart} buyProducts={buyProducts} />
+        <OrderResume
+          buyProducts={buyProducts}
+          orderTotalProducts={totalProducts}
+          orderTotalPrice={totalPrice}
+        />
       </Grid>
     </Grid>
   );
