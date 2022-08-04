@@ -27,9 +27,9 @@ function CartItem({ product, removeFromCart }) {
           <Grid item>
             <Img alt="complex" src={require(`../images/${product.product_name}.png`)} />
           </Grid>
-          <Grid item xs={12} sm container>
-            <Grid item xs container direction="column" spacing={2}>
-              <Grid item xs mt={3}>
+          <Grid item={true} xs={12} sm container>
+            <Grid item={true} xs container direction="column" spacing={2}>
+              <Grid item={true} xs mt={3}>
                 <Typography gutterBottom variant="subtitle1" component="div">
                   {product.product_name}
                 </Typography>

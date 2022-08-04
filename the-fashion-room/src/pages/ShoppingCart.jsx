@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Grid, Container, Button } from "@mui/material";
+import { Grid, Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import CartItem from "../components/CartItem";
 import ProductContext from "../context/ProductContext";
@@ -21,7 +21,7 @@ function ShoppingCart() {
 
   return (
     <Grid container sx={{ mt: 20 }}>
-      <Grid container direction="column" xs={6}>
+      <Grid item={true} container direction="column" xs={6}>
         <Grid item container justifyContent="center">
           <Button sx={{ width: 200, mr: 1 }} component={Link} to="/catalogue" variant="outlined">
             Regresar
@@ -30,16 +30,13 @@ function ShoppingCart() {
             Vaciar carrito
           </Button>
         </Grid>
-        {cart.map((product) => (
+        {cart.map(product => (
           <CartItem key={product.product_id} product={product} removeFromCart={removeFromCart} />
         ))}
       </Grid>
-      <Grid item container justifyContent="center" xs={6}>
-        <Invoice cart={cart} />
+      <Grid item={true} container justifyContent="center" xs={6}>
+        <Invoice cart={cart} buyProducts={buyProducts} />
       </Grid>
-      <Button variant="contained" color="secondary" onClick={() => buyProducts()}>
-        Comprar
-      </Button>
     </Grid>
   );
 }

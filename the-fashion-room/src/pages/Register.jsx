@@ -10,7 +10,7 @@ function Registrar() {
 
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
     const res = await fetch("http://localhost:3001/register", {
       method: "POST",
@@ -25,7 +25,7 @@ function Registrar() {
     console.log(data);
   };
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     setName({ ...name, [e.target.name]: e.target.value });
     setLastname({ ...lastname, [e.target.name]: e.target.value });
     setEmail({ ...email, [e.target.name]: e.target.value });
@@ -34,7 +34,7 @@ function Registrar() {
 
   return (
     <Grid container spacing={3} alignItems="center" direction="column">
-      <Grid item xs={12}>
+      <Grid item={true} xs={12}>
         <Card sx={{ mt: 5 }} align="center">
           <Typography variant="h5" component="h2">
             Registrarse
