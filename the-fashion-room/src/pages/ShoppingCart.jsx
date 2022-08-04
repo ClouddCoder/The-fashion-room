@@ -32,7 +32,6 @@ function ShoppingCart() {
     const data = await res.json();
     console.log(data);
     navigate("/invoice");
-    //clearCart();
   };
 
   return (

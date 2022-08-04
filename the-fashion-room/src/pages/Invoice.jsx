@@ -8,8 +8,18 @@ import { palette } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 
 function Invoice() {
-  const { totalProducts, totalPrice } = useContext(ProductContext);
+  const { cart, totalProducts, totalPrice, clearCart } = useContext(ProductContext);
   const navigate = useNavigate();
+  const ColorWhiteLine = ({ color }) => (
+    <hr
+      style={{
+        color: color,
+        backgroundColor: color,
+        height: 1,
+        width: "100%",
+      }}
+    />
+  );
 
   return (
     <Paper
@@ -17,7 +27,7 @@ function Invoice() {
         p: 2,
         bgcolor: "info.main",
         margin: "auto",
-        height: "200px",
+        height: "auto",
         width: "500px",
         mt: 20,
       }}
@@ -25,9 +35,12 @@ function Invoice() {
     >
       <Grid container direction="column">
         <Grid item container justifyContent="center" mt={2} mb={2}>
-          <Typography variant="h5" component="div">
+          <Typography variant="h3" component="div">
             Detalles de la compra
           </Typography>
+          <Typography variant="h6" component="div">
+            Num factura
+          </Typography>
         </Grid>
         <Grid
           item
@@ -38,12 +51,29 @@ function Invoice() {
             alignItems: "center",
           }}
         >
-          <Typography variant="h6" component="div">
+          <Typography variant="h4" component="div">
             Productos
           </Typography>
-          <Typography variant="h6" component="div">
-            {totalProducts}
-          </Typography>
+          <Grid item container direction="column">
+            {cart.map(product => (
+              <Grid
+                item
+                container
+                key={product.product_id}
+                sx={{ display: "flex", justifyContent: "space-between" }}
+              >
+                <Typography variant="h6" component="div">
+                  {product.product_name} x{product.quantityInCart}
+                </Typography>
+                <Typography variant="h6" component="div">
+                  {product.price}
+                </Typography>
+              </Grid>
+            ))}
+          </Grid>
+        </Grid>
+        <Grid item container justifyContent="center">
+          <ColorWhiteLine color="white" />
         </Grid>
         <Grid
           item
@@ -54,15 +84,22 @@ function Invoice() {
             alignItems: "center",
           }}
         >
-          <Typography variant="h6" component="div">
+          <Typography variant="h4" component="div">
             Total
           </Typography>
-          <Typography variant="h6" component="div">
+          <Typography variant="h5" component="div">
             {totalPrice}
           </Typography>
         </Grid>
         <Grid item align="center">
-          <Button variant="contained" color="secondary" onClick={() => navigate("/catalogue")}>
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={() => {
+              navigate("/catalogue");
+              clearCart();
+            }}
+          >
             Seguir comprando
           </Button>
         </Grid>
