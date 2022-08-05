@@ -108,6 +108,17 @@ const getStores = async (req, res, next) => {
   }
 };
 
+const getStoresPhones = async (req, res, next) => {
+  const query = "SELECT * FROM store_phone";
+
+  try {
+    const result = await pool.query(query);
+    res.json(result.rows);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   loginUser,
   registerUser,
@@ -116,4 +127,5 @@ module.exports = {
   getProduct,
   buyProduct,
   getStores,
+  getStoresPhones,
 };

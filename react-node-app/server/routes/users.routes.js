@@ -6,6 +6,7 @@ const {
   getProducts,
   buyProduct,
   getStores,
+  getStoresPhones,
 } = require("../controllers/users.controllers");
 
 const router = Router();
@@ -21,5 +22,7 @@ router.put("/cart", buyProduct);
 router.get("/catalogue", getProducts);
 
 router.get("/stores", getStores);
+
+router.get("/stores/phones", getStoresPhones);
 
 module.exports = router;
