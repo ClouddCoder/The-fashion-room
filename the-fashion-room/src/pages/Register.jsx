@@ -67,6 +67,7 @@ function Registrar() {
                 name="password"
                 variant="filled"
                 label="Password"
+                type="password"
                 sx={{ display: "block", margin: ".5rem 0" }}
               />
               <Button variant="contained" color="secondary" type="submit">
