@@ -109,7 +109,7 @@ const getStores = async (req, res, next) => {
 };
 
 const getStoresPhones = async (req, res, next) => {
-  const query = "SELECT * FROM store_phone";
+  const query = "SELECT phone FROM store_phone INNER JOIN store ON store.nit = store_phone.nit";
 
   try {
     const result = await pool.query(query);

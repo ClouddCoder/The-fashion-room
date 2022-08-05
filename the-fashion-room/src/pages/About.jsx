@@ -29,12 +29,12 @@ function About() {
     <Container>
       <Box>
         <Grid container justifyContent="center" spacing={2}>
-          {stores.map(store => (
+          {stores.map((store, i) => (
             <StoreInfo
               key={store.nit}
               store_name={store.name}
               store_address={store.address}
-              store_phone={storesPhones.phone}
+              store_phone={storesPhones[i].phone}
             ></StoreInfo>
           ))}
         </Grid>
