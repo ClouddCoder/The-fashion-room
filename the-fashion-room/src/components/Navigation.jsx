@@ -1,24 +1,51 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { Button } from "@mui/material";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Login from "../pages/Login";
+import Register from "../pages/Register";
+import Home from "../pages/Home";
+import Catalogue from "../pages/Catalogue";
+import ShoppingCart from "../pages/ShoppingCart";
+import ProductState from "../context/ProductState";
+import Contact from "../pages/Contact";
+import Invoice from "../pages/Invoice";
 
-function LogRegButtons() {
+function Navigation() {
   return (
-    <nav>
-      <ul>
-        <li>
-          <Button component={Link} variant="contained" to="/login" color="primary">
-            Ingresar
-          </Button>
-        </li>
-        <li>
-          <Button component={Link} variant="contained" to="/register" color="primary">
-            Registrar
-          </Button>
-        </li>
-      </ul>
-    </nav>
+    <>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route
+            path="/catalogue"
+            element={
+              <ProductState>
+                <Catalogue />
+              </ProductState>
+            }
+          />
+          <Route
+            path="/cart"
+            element={
+              <ProductState>
+                <ShoppingCart />
+              </ProductState>
+            }
+          />
+          <Route
+            path="/invoice"
+            element={
+              <ProductState>
+                <Invoice />
+              </ProductState>
+            }
+          />
+        </Routes>
+      </Router>
+    </>
   );
 }
 
-export default LogRegButtons;
+export default Navigation;

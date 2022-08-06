@@ -5,7 +5,7 @@ import { Box } from "@mui/system";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-function About() {
+function Contact() {
   const [stores, getStores] = useState();
   const [storesPhones, getStoresPhones] = useState();
 
@@ -50,4 +50,4 @@ function About() {
   );
 }
 
-export default About;
+export default Contact;

@@ -1,11 +1,11 @@
 import React from "react";
 import "./App.css";
-import HomepageNav from "./components/HomepageNav";
+import Navigation from "./components/Navigation";
 
 function App() {
   return (
     <div className="app">
-      <HomepageNav />
+      <Navigation />
     </div>
   );
 }
