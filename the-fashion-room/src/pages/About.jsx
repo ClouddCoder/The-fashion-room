@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import StoreInfo from "../components/StoreInfo";
-import { Grid, Typography, Paper, Button, Container } from "@mui/material";
+import { Grid, Container, Button } from "@mui/material";
 import { Box } from "@mui/system";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 function About() {
-  const [stores, getStores] = useState([]);
-  const [storesPhones, getStoresPhones] = useState([]);
+  const [stores, getStores] = useState();
+  const [storesPhones, getStoresPhones] = useState();
 
   const loadStores = async () => {
     const response = await axios.get("http://localhost:3001/stores");
@@ -29,15 +30,21 @@ function About() {
     <Container>
       <Box>
         <Grid container justifyContent="center" spacing={2}>
-          {stores.map((store, i) => (
-            <StoreInfo
-              key={store.nit}
-              store_name={store.name}
-              store_address={store.address}
-              store_phone={storesPhones[i].phone}
-            ></StoreInfo>
-          ))}
+          {storesPhones &&
+            stores?.map((store, index) => {
+              return (
+                <StoreInfo
+                  key={index}
+                  store_name={store.name}
+                  store_address={store.address}
+                  store_phone={storesPhones[index].phone}
+                />
+              );
+            })}
         </Grid>
+        <Button component={Link} to="/" variant="contained">
+          Regresar
+        </Button>
       </Box>
     </Container>
   );
