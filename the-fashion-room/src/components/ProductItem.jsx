@@ -1,8 +1,29 @@
-import React from "react";
+import React, { useContext } from "react";
+import AuthContext from "../context/auth-context/AuthContext";
 import { Grid, Typography, Paper, styled, Button } from "@mui/material";
 import { Box } from "@mui/system";
+import { useNavigate } from "react-router-dom";
 
 function ProductItem({ product, addToCart }) {
+  const { auth } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const customButton = () => {
+    if (auth) {
+      return (
+        <Button variant="outlined" onClick={() => addToCart(product.product_id)}>
+          Agregar al carrito
+        </Button>
+      );
+    } else {
+      return (
+        <Button variant="outlined" onClick={() => navigate("/login")}>
+          Agregar al carrito
+        </Button>
+      );
+    }
+  };
+
   const Img = styled("img")({
     margin: "auto",
     display: "block",
@@ -17,7 +38,7 @@ function ProductItem({ product, addToCart }) {
           p: 2,
           margin: "auto",
           flexGrow: 1,
-          backgroundColor: theme => (theme.palette.mode === "dark" ? "#1A2027" : "#fff"),
+          backgroundColor: (theme) => (theme.palette.mode === "dark" ? "#1A2027" : "#fff"),
         }}
         elevation={1}
       >
@@ -38,11 +59,7 @@ function ProductItem({ product, addToCart }) {
                   Cantidad disponible {product.stock}
                 </Typography>
               </Grid>
-              <Grid item>
-                <Button onClick={() => addToCart(product.product_id)} variant="outlined">
-                  Agregar al carrito
-                </Button>
-              </Grid>
+              <Grid item>{customButton()}</Grid>
             </Grid>
             <Grid item>
               <Typography variant="subtitle1" component="div">

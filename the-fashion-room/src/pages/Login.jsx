@@ -7,6 +7,7 @@ function Ingresar() {
   const [email, setEmail] = useState({ email: "" });
   const [password, setPasswordLog] = useState({ password: "" });
   const { setAuth, setUserName } = useContext(AuthContext);
+  const [error, setError] = useState({ error: false, errorMessage: "" });
 
   const navigate = useNavigate();
 
@@ -23,6 +24,8 @@ function Ingresar() {
       setAuth(true);
       setUserName(data.name);
       navigate("/catalogue");
+    } else {
+      setError({ error: true, errorMessage: data.message });
     }
     console.log(data);
   };
@@ -37,11 +40,13 @@ function Ingresar() {
       <Grid item={true} xs={12}>
         <Card sx={{ mt: 5 }} align="center">
           <Typography variant="h5" component="h2">
-            Inicar sesion
+            Inicia sesion
           </Typography>
           <CardContent>
             <form onSubmit={handleSubmit}>
               <TextField
+                error={error.error}
+                helperText={error.errorMessage}
                 onChange={handleChange}
                 name="email"
                 variant="filled"
@@ -49,6 +54,8 @@ function Ingresar() {
                 sx={{ display: "block", margin: ".5rem 0" }}
               />
               <TextField
+                error={error.error}
+                helperText={error.errorMessage}
                 onChange={handleChange}
                 name="password"
                 variant="filled"

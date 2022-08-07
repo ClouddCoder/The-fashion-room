@@ -7,10 +7,10 @@ function Registrar() {
   const [lastname, setLastname] = useState({ lastname: "" });
   const [email, setEmail] = useState({ email: "" });
   const [password, setPasswordReg] = useState({ password: "" });
-
+  const [error, setError] = useState({ error: false, errorMessage: "" });
   const navigate = useNavigate();
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const res = await fetch("http://localhost:3001/register", {
       method: "POST",
@@ -21,11 +21,13 @@ function Registrar() {
 
     if (res.status === 200) {
       navigate("/");
+    } else {
+      setError({ error: true, errorMessage: data.message });
     }
     console.log(data);
   };
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     setName({ ...name, [e.target.name]: e.target.value });
     setLastname({ ...lastname, [e.target.name]: e.target.value });
     setEmail({ ...email, [e.target.name]: e.target.value });
@@ -37,7 +39,7 @@ function Registrar() {
       <Grid item={true} xs={12}>
         <Card sx={{ mt: 5 }} align="center">
           <Typography variant="h5" component="h2">
-            Registrarse
+            Registrate
           </Typography>
           <CardContent>
             <form onSubmit={handleSubmit}>
@@ -56,6 +58,8 @@ function Registrar() {
                 sx={{ display: "block", margin: ".5rem 0" }}
               />
               <TextField
+                error={error.error}
+                helperText={error.errorMessage}
                 onChange={handleChange}
                 name="email"
                 variant="filled"
@@ -63,6 +67,8 @@ function Registrar() {
                 sx={{ display: "block", margin: ".5rem 0" }}
               />
               <TextField
+                error={error.error}
+                helperText={error.errorMessage}
                 onChange={handleChange}
                 name="password"
                 variant="filled"
