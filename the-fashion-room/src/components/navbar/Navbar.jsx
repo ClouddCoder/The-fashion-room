@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
+import AuthContext from "../../context/auth-context/AuthContext";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 
 function Navbar() {
+  const { auth } = useContext(AuthContext);
+
   return (
     <header>
       <nav className="navbar">
@@ -18,11 +21,16 @@ function Navbar() {
             <Link to="/contact">Contacto</Link>
           </li>
         </ul>
-        <div className="navbarLogin">
-          <Link to="/login">Login</Link>
-          <div />
-          <Link to="/register">Register</Link>
-        </div>
+
+        {auth ? (
+          "Logueado"
+        ) : (
+          <div className="navbarLogin">
+            <Link to="/login">Login</Link>
+            <div />
+            <Link to="/register">Register</Link>
+          </div>
+        )}
       </nav>
     </header>
   );

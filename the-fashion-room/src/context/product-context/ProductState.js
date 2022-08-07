@@ -4,7 +4,7 @@ import { ProductReducer } from "./ProductReducer";
 import axios from "axios";
 import { TYPES } from "../../actions/productActions";
 
-const ProductState = (props) => {
+function ProductState(props) {
   const productInitialState = {
     products: [],
     cart: [],
@@ -64,6 +64,6 @@ const ProductState = (props) => {
       {props.children}
     </ProductContext.Provider>
   );
-};
+}
 
 export default ProductState;
