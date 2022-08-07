@@ -2,9 +2,9 @@ import React, { useReducer } from "react";
 import ProductContext from "./ProductContext";
 import { ProductReducer } from "./ProductReducer";
 import axios from "axios";
-import { TYPES } from "../actions/productActions";
+import { TYPES } from "../../actions/productActions";
 
-const ProductState = props => {
+const ProductState = (props) => {
   const productInitialState = {
     products: [],
     cart: [],
@@ -20,7 +20,7 @@ const ProductState = props => {
     dispatch({ type: TYPES.LOAD_PRODUCTS, payload: data });
   };
 
-  const addToCart = id => {
+  const addToCart = (id) => {
     dispatch({ type: TYPES.ADD_TO_CART, payload: id });
   };
 
@@ -30,6 +30,8 @@ const ProductState = props => {
     } else {
       dispatch({ type: TYPES.REMOVE_ONE_FROM_CART, payload: id });
     }
+    getTotalProducts();
+    getTotalPrice();
   };
 
   const clearCart = () => {

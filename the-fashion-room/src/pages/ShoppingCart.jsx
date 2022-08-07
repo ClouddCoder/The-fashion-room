@@ -1,10 +1,9 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Grid, Button, Container } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import CartItem from "../components/CartItem";
-import ProductContext from "../context/ProductContext";
+import ProductContext from "../context/product-context/ProductContext";
 import OrderResume from "../components/OrderResume";
-import { useEffect } from "react";
 import Navbar from "../components/navbar/Navbar";
 import Footer from "../components/footer/Footer";
 
@@ -39,10 +38,7 @@ function ShoppingCart() {
   return (
     <div>
       <Navbar />
-      <Container
-        component="div"
-        sx={{ height: "auto", width: "auto", mt: 5, mb: 5, backgroundColor: "red" }}
-      >
+      <Container component="div" sx={{ height: "auto", width: "auto", mt: 5, mb: 5 }}>
         <Grid container spacing={2}>
           <Grid item={true} container xs={6}>
             <Grid item container justifyContent="center">
@@ -68,12 +64,8 @@ function ShoppingCart() {
             </Grid>
             <Grid item container justifyContent="center" direction="column">
               {cart.map((product) => (
-                <Grid item>
-                  <CartItem
-                    key={product.product_id}
-                    product={product}
-                    removeFromCart={removeFromCart}
-                  />
+                <Grid item key={product.product_id}>
+                  <CartItem product={product} removeFromCart={removeFromCart} />
                 </Grid>
               ))}
             </Grid>

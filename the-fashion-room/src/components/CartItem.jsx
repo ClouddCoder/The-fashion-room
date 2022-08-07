@@ -11,6 +11,7 @@ function CartItem({ product, removeFromCart }) {
     width: 128,
     height: 128,
   });
+
   return (
     <Box m={1}>
       <Paper

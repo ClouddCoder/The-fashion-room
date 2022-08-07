@@ -2,7 +2,7 @@ import React, { useEffect, useContext } from "react";
 import { Button, Grid, Container } from "@mui/material";
 import { Link } from "react-router-dom";
 import ProductItem from "../components/ProductItem";
-import ProductContext from "../context/ProductContext";
+import ProductContext from "../context/product-context/ProductContext";
 import Navbar from "../components/navbar/Navbar";
 import Footer from "../components/footer/Footer";
 

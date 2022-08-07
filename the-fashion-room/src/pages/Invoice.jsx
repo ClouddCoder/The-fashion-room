@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import ProductContext from "../context/ProductContext";
+import ProductContext from "../context/product-context/ProductContext";
 import { Button, Container } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";

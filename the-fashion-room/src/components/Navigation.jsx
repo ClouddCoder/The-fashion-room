@@ -5,7 +5,7 @@ import Register from "../pages/Register";
 import Home from "../pages/Home";
 import Catalogue from "../pages/Catalogue";
 import ShoppingCart from "../pages/ShoppingCart";
-import ProductState from "../context/ProductState";
+import ProductState from "../context/product-context/ProductState";
 import Contact from "../pages/Contact";
 import Invoice from "../pages/Invoice";
 
