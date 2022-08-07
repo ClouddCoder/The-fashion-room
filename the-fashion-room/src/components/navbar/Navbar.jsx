@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import "./Navbar.css";
 
 function Navbar() {
-  const { auth } = useContext(AuthContext);
+  const { auth, userName } = useContext(AuthContext);
 
   return (
     <header>
@@ -23,7 +23,7 @@ function Navbar() {
         </ul>
 
         {auth ? (
-          "Logueado"
+          userName
         ) : (
           <div className="navbarLogin">
             <Link to="/login">Login</Link>

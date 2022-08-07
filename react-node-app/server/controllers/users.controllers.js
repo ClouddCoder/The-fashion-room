@@ -2,7 +2,7 @@ const pool = require("../db");
 
 const loginUser = async (req, res, next) => {
   const { email, password } = req.body;
-  const query = "SELECT * FROM customer WHERE email = $1 AND password = $2";
+  const query = "SELECT name FROM customer WHERE email = $1 AND password = $2";
   const values = [email, password];
 
   try {
@@ -12,7 +12,7 @@ const loginUser = async (req, res, next) => {
         message: "Wrong email/password combination",
       });
     }
-    return res.json({ message: "success" });
+    return res.json({ message: "success", name: result.rows[0].name });
   } catch (error) {
     return next(error);
   }
