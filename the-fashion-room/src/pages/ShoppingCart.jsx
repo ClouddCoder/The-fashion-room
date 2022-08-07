@@ -1,10 +1,12 @@
 import React, { useContext } from "react";
-import { Grid, Button } from "@mui/material";
+import { Grid, Button, Container } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import CartItem from "../components/CartItem";
 import ProductContext from "../context/ProductContext";
 import OrderResume from "../components/OrderResume";
 import { useEffect } from "react";
+import Navbar from "../components/navbar/Navbar";
+import Footer from "../components/footer/Footer";
 
 function ShoppingCart() {
   const {
@@ -35,28 +37,58 @@ function ShoppingCart() {
   };
 
   return (
-    <Grid container sx={{ mt: 20 }}>
-      <Grid item={true} container direction="column" xs={6}>
-        <Grid item container justifyContent="center">
-          <Button sx={{ width: 200, mr: 1 }} component={Link} to="/catalogue" variant="outlined">
-            Regresar
-          </Button>
-          <Button sx={{ width: 200, ml: 1 }} onClick={() => clearCart()} variant="outlined">
-            Vaciar carrito
-          </Button>
+    <div>
+      <Navbar />
+      <Container
+        component="div"
+        sx={{ height: "auto", width: "auto", mt: 5, mb: 5, backgroundColor: "red" }}
+      >
+        <Grid container spacing={2}>
+          <Grid item={true} container xs={6}>
+            <Grid item container justifyContent="center">
+              <Grid item>
+                <Button
+                  sx={{ width: 200, mr: 1 }}
+                  component={Link}
+                  to="/catalogue"
+                  variant="outlined"
+                >
+                  Regresar
+                </Button>
+              </Grid>
+              <Grid item>
+                <Button
+                  sx={{ width: 200, ml: 1 }}
+                  onClick={() => clearCart()}
+                  variant="outlined"
+                >
+                  Vaciar carrito
+                </Button>
+              </Grid>
+            </Grid>
+            <Grid item container justifyContent="center" direction="column">
+              {cart.map((product) => (
+                <Grid item>
+                  <CartItem
+                    key={product.product_id}
+                    product={product}
+                    removeFromCart={removeFromCart}
+                  />
+                </Grid>
+              ))}
+            </Grid>
+          </Grid>
+          <Grid item={true} justifyContent="center" xs={6}>
+            <OrderResume
+              buyProducts={buyProducts}
+              orderTotalProducts={totalProducts}
+              orderTotalPrice={totalPrice}
+            />
+          </Grid>
         </Grid>
-        {cart.map(product => (
-          <CartItem key={product.product_id} product={product} removeFromCart={removeFromCart} />
-        ))}
-      </Grid>
-      <Grid item={true} container justifyContent="center" xs={6}>
-        <OrderResume
-          buyProducts={buyProducts}
-          orderTotalProducts={totalProducts}
-          orderTotalPrice={totalPrice}
-        />
-      </Grid>
-    </Grid>
+      </Container>
+      <Footer />
+    </div>
   );
 }
 

@@ -25,7 +25,6 @@ function OrderResume({ buyProducts, orderTotalProducts, orderTotalPrice }) {
         margin: "auto",
         height: "200px",
         width: "500px",
-        position: "fixed",
       }}
       elevation={1}
     >
@@ -64,7 +63,7 @@ function OrderResume({ buyProducts, orderTotalProducts, orderTotalPrice }) {
             Total
           </Typography>
           <Typography variant="h6" component="div">
-            {orderTotalPrice}
+            ${orderTotalPrice}
           </Typography>
         </Grid>
         <Grid item container justifyContent="center">
