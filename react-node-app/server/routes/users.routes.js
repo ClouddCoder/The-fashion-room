@@ -5,6 +5,7 @@ const {
   deleteUser,
   getProducts,
   buyProduct,
+  createInvoice,
   getStores,
   getStoresPhones,
 } = require("../controllers/users.controllers");
@@ -20,6 +21,8 @@ router.delete("/delete/:id", deleteUser);
 router.put("/cart", buyProduct);
 
 router.get("/catalogue", getProducts);
+
+router.post("/invoice", createInvoice);
 
 router.get("/stores", getStores);
 

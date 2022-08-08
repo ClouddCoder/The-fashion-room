@@ -2,7 +2,7 @@ const pool = require("../db");
 
 const loginUser = async (req, res, next) => {
   const { email, password } = req.body;
-  const query = "SELECT name FROM customer WHERE email = $1 AND password = $2";
+  const query = "SELECT customer_id, name FROM customer WHERE email = $1 AND password = $2";
   const values = [email, password];
 
   try {
@@ -12,7 +12,7 @@ const loginUser = async (req, res, next) => {
         message: "Wrong email/password combination",
       });
     }
-    return res.json({ message: "success", name: result.rows[0].name });
+    return res.json({ message: "success", id: result.rows[0].customer_id, name: result.rows[0].name });
   } catch (error) {
     return next(error);
   }
@@ -97,6 +97,27 @@ const buyProduct = async (req, res, next) => {
   }
 };
 
+const createInvoice = async (req, res, next) => {
+  const lola = req.body;
+  const query = "SELECT invoice_data($1, $2, $3)";
+  //const values = [customer_id, quantityInCart, total_price];
+
+  try {
+    return res.json(req.body);
+    /*
+    const result = await pool.query(query, values);
+    if (result.rowCount === 0) {
+      return res.status(404).json({
+        message: "Invoice not found",
+      });
+    }
+    return res.json({ message: "success" });
+    */
+  } catch (error) {
+    next(error);
+  }
+}
+
 const getStores = async (req, res, next) => {
   const query = "SELECT * FROM store";
 
@@ -126,6 +147,7 @@ module.exports = {
   getProducts,
   getProduct,
   buyProduct,
+  createInvoice,
   getStores,
   getStoresPhones,
 };

@@ -6,7 +6,7 @@ import { Button, Grid, Card, Typography, CardContent, TextField } from "@mui/mat
 function Ingresar() {
   const [email, setEmail] = useState({ email: "" });
   const [password, setPasswordLog] = useState({ password: "" });
-  const { setAuth, setUserName } = useContext(AuthContext);
+  const { setAuth, setUserName, setUserId } = useContext(AuthContext);
   const [error, setError] = useState({ error: false, errorMessage: "" });
 
   const navigate = useNavigate();
@@ -22,6 +22,7 @@ function Ingresar() {
 
     if (res.status === 200) {
       setAuth(true);
+      setUserId(data.id);
       setUserName(data.name);
       navigate("/catalogue");
     } else {

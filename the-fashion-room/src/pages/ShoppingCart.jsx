@@ -3,6 +3,7 @@ import { Grid, Button, Container } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import CartItem from "../components/CartItem";
 import ProductContext from "../context/product-context/ProductContext";
+import AuthContext from "../context/auth-context/AuthContext";
 import OrderResume from "../components/OrderResume";
 import Navbar from "../components/navbar/Navbar";
 import Footer from "../components/footer/Footer";
@@ -17,6 +18,9 @@ function ShoppingCart() {
     totalProducts,
     totalPrice,
   } = useContext(ProductContext);
+
+  const { userId } = useContext(AuthContext);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -34,6 +38,17 @@ function ShoppingCart() {
     console.log(data);
     navigate("/invoice");
   };
+
+  const createInvoice = async () => {
+    const res = await fetch("http://localhost:3001/invoice", {
+      mode: 'no-cors',
+      method: "POST",
+      body: JSON.stringify("hola"),
+      headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
+    });
+    const data = await res.json();
+    console.log(data);
+  }
 
   return (
     <div>
@@ -73,6 +88,7 @@ function ShoppingCart() {
           <Grid item={true} justifyContent="center" xs={6}>
             <OrderResume
               buyProducts={buyProducts}
+              createInvoice={createInvoice}
               orderTotalProducts={totalProducts}
               orderTotalPrice={totalPrice}
             />

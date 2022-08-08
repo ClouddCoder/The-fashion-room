@@ -44,7 +44,7 @@ function ProductItem({ product, addToCart }) {
       >
         <Grid container spacing={2}>
           <Grid item={true} sx={{ width: 160, height: 160 }}>
-            <Img alt="complex" src={require(`../images/${product.product_name}.png`)} />
+            <Img alt="complex" src={require(`../assets/products/${product.product_name}.png`)} />
           </Grid>
           <Grid item xs={12} sm container>
             <Grid item={true} xs container direction="column" spacing={2}>

@@ -2,10 +2,10 @@ import React from "react";
 import OfferItem from "../OfferItem";
 import { Grid } from "@mui/material";
 import { Box } from "@mui/system";
-import calzado from "../../images/Calzado.png";
-import camisetas from "../../images/Camisetas.png";
-import deportiva from "../../images/Deportiva.png";
-import bolsos from "../../images/Bolsos.png";
+import calzado from "../../assets/offers/Calzado.png";
+import camisetas from "../../assets/offers/Camisetas.png";
+import deportiva from "../../assets/offers/Deportiva.png";
+import bolsos from "../../assets/offers/Bolsos.png";
 import "./Offers.css";
 
 function Offers() {
