@@ -12,7 +12,11 @@ const loginUser = async (req, res, next) => {
         message: "Wrong email/password combination",
       });
     }
-    return res.json({ message: "success", id: result.rows[0].customer_id, name: result.rows[0].name });
+    return res.json({
+      message: "success",
+      id: result.rows[0].customer_id,
+      name: result.rows[0].name,
+    });
   } catch (error) {
     return next(error);
   }
@@ -98,25 +102,35 @@ const buyProduct = async (req, res, next) => {
 };
 
 const createInvoice = async (req, res, next) => {
-  const lola = req.body;
-  const query = "SELECT invoice_data($1, $2, $3)";
-  //const values = [customer_id, quantityInCart, total_price];
+  const { userId, cart } = req.body;
+  const queryCreateInvoiceId = "SELECT create_invoice_id()";
+  const queryInsertInvoice = "SELECT create_invoice($1, $2)";
+  const queryInsertInvoiceDetails = "SELECT invoice_data($1, $2, $3, $4)";
 
   try {
-    return res.json(req.body);
-    /*
-    const result = await pool.query(query, values);
-    if (result.rowCount === 0) {
-      return res.status(404).json({
-        message: "Invoice not found",
-      });
+    const getInvoiceId = await pool.query(queryCreateInvoiceId);
+    const invoiceId = getInvoiceId.rows[0].create_invoice_id;
+    const getInvoice = await pool.query(queryInsertInvoice, [invoiceId, userId]);
+
+    for (const item of cart) {
+      const getInvoiceDetails = await pool.query(queryInsertInvoiceDetails, [
+        invoiceId,
+        item.product_id,
+        item.quantityInCart,
+        item.price * item.quantityInCart,
+      ]);
+
+      if (getInvoiceDetails.rowCount === 0) {
+        return res.status(404).json({
+          message: "Product not found",
+        });
+      }
     }
     return res.json({ message: "success" });
-    */
   } catch (error) {
     next(error);
   }
-}
+};
 
 const getStores = async (req, res, next) => {
   const query = "SELECT * FROM store";

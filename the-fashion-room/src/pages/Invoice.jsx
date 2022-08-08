@@ -61,7 +61,7 @@ function Invoice() {
                   Productos
                 </Typography>
                 <Grid item container direction="column">
-                  {cart.map((product) => (
+                  {cart.map(product => (
                     <Grid
                       item
                       container
@@ -72,7 +72,7 @@ function Invoice() {
                         {product.product_name} x{product.quantityInCart}
                       </Typography>
                       <Typography variant="h6" component="div">
-                        ${product.price}
+                        ${product.price * product.quantityInCart}
                       </Typography>
                     </Grid>
                   ))}

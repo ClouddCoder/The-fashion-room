@@ -72,31 +72,55 @@ CREATE TABLE product (
     CONSTRAINT pk_product PRIMARY KEY (product_id)
 )
 
-INSERT INTO product (product_id, product_type, price, stock) VALUES (nextval('product_product_id_seq'), 'Blusa', 45000, 100);
-INSERT INTO product (product_id, product_type, price, stock) VALUES (nextval('product_product_id_seq'), 'Camisa', 40000, 100);
-INSERT INTO product (product_id, product_type, price, stock) VALUES (nextval('product_product_id_seq'), 'Corbata', 20000, 100);
-INSERT INTO product (product_id, product_type, price, stock) VALUES (nextval('product_product_id_seq'), 'Pantalon', 65000, 100);
-INSERT INTO product (product_id, product_type, price, stock) VALUES (nextval('product_product_id_seq'), 'Pantaloneta', 30000, 100);
-INSERT INTO product (product_id, product_type, price, stock) VALUES (nextval('product_product_id_seq'), 'Zapatos', 90000, 100);
+INSERT INTO product (product_id, product_name, price, stock) VALUES (nextval('product_product_id_seq'), 'Blusa', 45000, 100);
+INSERT INTO product (product_id, product_name, price, stock) VALUES (nextval('product_product_id_seq'), 'Camisa', 40000, 100);
+INSERT INTO product (product_id, product_name, price, stock) VALUES (nextval('product_product_id_seq'), 'Corbata', 20000, 100);
+INSERT INTO product (product_id, product_name, price, stock) VALUES (nextval('product_product_id_seq'), 'Pantalon', 65000, 100);
+INSERT INTO product (product_id, product_name, price, stock) VALUES (nextval('product_product_id_seq'), 'Pantaloneta', 30000, 100);
+INSERT INTO product (product_id, product_name, price, stock) VALUES (nextval('product_product_id_seq'), 'Zapatos', 90000, 100);
 
 CREATE SEQUENCE product_product_id_seq
     START WITH 656589
     INCREMENT BY 215
     OWNED BY product.product_id;
 
-CREATE OR REPLACE FUNCTION invoice_data(cust_id INTEGER, quant INTEGER, amount INTEGER)
+CREATE OR REPLACE FUNCTION create_invoice_id()
+	RETURNS INTEGER AS
+	$BODY$
+	DECLARE
+		inv_id INTEGER;
+	BEGIN
+		PERFORM nextval('invoice_id_seq');
+		SELECT invoice_id_seq.last_value INTO inv_id FROM invoice_id_seq;
+	RETURN inv_id;
+	END;
+	$BODY$
+	LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION create_invoice(inv_id INTEGER, cust_id INTEGER)
+	RETURNS void AS
+	$BODY$
+	DECLARE
+		pur_date DATE;
+	BEGIN
+		pur_date := NOW()::DATE;
+		INSERT INTO invoice (invoice_id, customer_id, purchase_date) VALUES (inv_id, cust_id, pur_date);
+	END;
+	$BODY$
+	LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION invoice_data(inv_id INTEGER, prod_id INTEGER, quant INTEGER, amount INTEGER)
     RETURNS void AS
     $BODY$
-    DECLARE
-        inv_id INTEGER;
-        pur_date DATE;
     BEGIN
-        inv_id := nextval('invoice_id_seq');
-        pur_date := NOW()::DATE;
-        INSERT INTO invoice (invoice_id, customer_id, purchase_date) VALUES (inv_id, cust_id, pur_date);
-        INSERT INTO invoice_detail (invoice_id, product_id, quantity, total_amount) VALUES (inv_id, quant, amount);
+        INSERT INTO invoice_detail (invoice_id, product_id, quantity, total_amount) VALUES (inv_id, prod_id, quant, amount);
     END;
     $BODY$
     LANGUAGE plpgsql;
 
-SELECT invoice_data();
+ALTER SEQUENCE invoice_id_seq RESTART;
+
+DELETE FROM invoice_detail WHERE invoice_id > 900;
+DELETE FROM invoice WHERE invoice_id > 900;
+SELECT * FROM invoice;
+SELECT * FROM invoice_detail;

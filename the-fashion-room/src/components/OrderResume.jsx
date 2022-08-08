@@ -5,7 +5,7 @@ import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import { palette } from "@mui/system";
 
-function OrderResume({ buyProducts, createInvoice, orderTotalProducts, orderTotalPrice }) {
+function OrderResume({ buyProducts, invoice, orderTotalProducts, orderTotalPrice }) {
   const ColorWhiteLine = ({ color }) => (
     <hr
       style={{
@@ -70,10 +70,14 @@ function OrderResume({ buyProducts, createInvoice, orderTotalProducts, orderTota
           <ColorWhiteLine color="white" />
         </Grid>
         <Grid item align="center">
-          <Button variant="contained" color="secondary" onClick={() => {
-            //buyProducts();
-            createInvoice();
-          }}>
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={() => {
+              buyProducts();
+              invoice();
+            }}
+          >
             Comprar
           </Button>
         </Grid>

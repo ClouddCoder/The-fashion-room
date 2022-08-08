@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Grid, Button, Container } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import CartItem from "../components/CartItem";
@@ -18,6 +18,8 @@ function ShoppingCart() {
     totalProducts,
     totalPrice,
   } = useContext(ProductContext);
+
+  const [stores, getStores] = useState();
 
   const { userId } = useContext(AuthContext);
 
@@ -41,14 +43,13 @@ function ShoppingCart() {
 
   const createInvoice = async () => {
     const res = await fetch("http://localhost:3001/invoice", {
-      mode: 'no-cors',
       method: "POST",
-      body: JSON.stringify("hola"),
+      body: JSON.stringify({ userId, cart }),
       headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
     });
     const data = await res.json();
     console.log(data);
-  }
+  };
 
   return (
     <div>
@@ -78,7 +79,7 @@ function ShoppingCart() {
               </Grid>
             </Grid>
             <Grid item container justifyContent="center" direction="column">
-              {cart.map((product) => (
+              {cart.map(product => (
                 <Grid item key={product.product_id}>
                   <CartItem product={product} removeFromCart={removeFromCart} />
                 </Grid>
@@ -88,7 +89,7 @@ function ShoppingCart() {
           <Grid item={true} justifyContent="center" xs={6}>
             <OrderResume
               buyProducts={buyProducts}
-              createInvoice={createInvoice}
+              invoice={createInvoice}
               orderTotalProducts={totalProducts}
               orderTotalPrice={totalPrice}
             />
