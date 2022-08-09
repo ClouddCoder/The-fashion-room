@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import StoreInfo from "../components/StoreInfo";
+import Navbar from "../components/navbar/Navbar";
+import Footer from "../components/footer/Footer";
 import { Grid, Container, Button } from "@mui/material";
 import { Box } from "@mui/system";
 import { Link } from "react-router-dom";
@@ -27,26 +29,30 @@ function Contact() {
   }, []);
 
   return (
-    <Container>
-      <Box>
-        <Grid container justifyContent="center" spacing={2}>
-          {storesPhones &&
-            stores?.map((store, index) => {
-              return (
-                <StoreInfo
-                  key={index}
-                  store_name={store.name}
-                  store_address={store.address}
-                  store_phone={storesPhones[index].phone}
-                />
-              );
-            })}
-        </Grid>
-        <Button component={Link} to="/" variant="contained">
-          Regresar
-        </Button>
-      </Box>
-    </Container>
+    <div>
+      <Navbar />
+      <Container component="div" sx={{ height: "auto", mt: 5, mb: 5 }}>
+        <Box>
+          <Grid container justifyContent="center" spacing={2}>
+            {storesPhones &&
+              stores?.map((store, index) => {
+                return (
+                  <StoreInfo
+                    key={index}
+                    store_name={store.name}
+                    store_address={store.address}
+                    store_phone={storesPhones[index].phone}
+                  />
+                );
+              })}
+          </Grid>
+          <Button component={Link} to="/" variant="contained">
+            Regresar
+          </Button>
+        </Box>
+      </Container>
+      <Footer />
+    </div>
   );
 }
 

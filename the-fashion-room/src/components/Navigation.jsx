@@ -9,6 +9,7 @@ import ProductState from "../context/product-context/ProductState";
 import AuthState from "../context/auth-context/AuthState";
 import Contact from "../pages/Contact";
 import Invoice from "../pages/Invoice";
+import Orders from "../pages/Orders";
 
 function Navigation() {
   return (
@@ -20,6 +21,7 @@ function Navigation() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/orders" element={<Orders />} />
             <Route
               path="/catalogue"
               element={

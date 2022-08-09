@@ -20,6 +20,11 @@ function Navbar() {
           <li className="link">
             <Link to="/contact">Contacto</Link>
           </li>
+          {auth ? (
+            <li className="orders">
+              <Link to="/orders">Mis compras</Link>
+            </li>
+          ) : null}
         </ul>
 
         {auth ? (
