@@ -17,10 +17,10 @@ function CartItem({ product, removeFromCart }) {
       <Paper
         sx={{
           p: 2,
-          width: 500,
+          width: 600,
           margin: "auto",
           flexGrow: 1,
-          backgroundColor: (theme) => (theme.palette.mode === "dark" ? "#1A2027" : "#fff"),
+          backgroundColor: theme => (theme.palette.mode === "dark" ? "#1A2027" : "#fff"),
         }}
         elevation={1}
       >

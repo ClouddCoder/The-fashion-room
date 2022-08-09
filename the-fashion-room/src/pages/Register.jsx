@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Button, Grid, Card, Typography, CardContent, TextField } from "@mui/material";
+import Navbar from "../components/navbar/Navbar";
+import Footer from "../components/footer/Footer";
+import { Button, Grid, TextField } from "@mui/material";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
 
 function Registrar() {
   const [name, setName] = useState({ name: "" });
@@ -10,7 +15,7 @@ function Registrar() {
   const [error, setError] = useState({ error: false, errorMessage: "" });
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
     const res = await fetch("http://localhost:3001/register", {
       method: "POST",
@@ -27,7 +32,7 @@ function Registrar() {
     console.log(data);
   };
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     setName({ ...name, [e.target.name]: e.target.value });
     setLastname({ ...lastname, [e.target.name]: e.target.value });
     setEmail({ ...email, [e.target.name]: e.target.value });
@@ -35,56 +40,68 @@ function Registrar() {
   };
 
   return (
-    <Grid container spacing={3} alignItems="center" direction="column">
-      <Grid item={true} xs={12}>
-        <Card sx={{ mt: 5 }} align="center">
-          <Typography variant="h5" component="h2">
-            Registrate
-          </Typography>
-          <CardContent>
-            <form onSubmit={handleSubmit}>
-              <TextField
-                onChange={handleChange}
-                name="name"
-                variant="filled"
-                label="Name"
-                sx={{ display: "block", margin: ".5rem 0" }}
-              />
-              <TextField
-                onChange={handleChange}
-                name="lastname"
-                variant="filled"
-                label="Lastname"
-                sx={{ display: "block", margin: ".5rem 0" }}
-              />
-              <TextField
-                error={error.error}
-                helperText={error.errorMessage}
-                onChange={handleChange}
-                name="email"
-                variant="filled"
-                label="Email"
-                sx={{ display: "block", margin: ".5rem 0" }}
-              />
-              <TextField
-                error={error.error}
-                helperText={error.errorMessage}
-                onChange={handleChange}
-                name="password"
-                variant="filled"
-                label="Password"
-                type="password"
-                sx={{ display: "block", margin: ".5rem 0" }}
-              />
-              <Button variant="contained" color="secondary" type="submit">
-                Registrar
-              </Button>
-            </form>
-          </CardContent>
-        </Card>
-        <Button component={Link} variant="contained" to="/" color="primary">
-          Regresar
-        </Button>
+    <Grid container direction="column" align="center">
+      <Grid item>
+        <Navbar />
+      </Grid>
+      <Grid item={true} container direction="column" pt={15} pb={10}>
+        <Grid item>
+          <Card sx={{ maxWidth: 300 }}>
+            <Typography variant="h5" component="h2">
+              Registrate
+            </Typography>
+            <CardContent>
+              <form onSubmit={handleSubmit}>
+                <TextField
+                  onChange={handleChange}
+                  name="name"
+                  variant="filled"
+                  label="Name"
+                  sx={{ margin: ".5rem 0" }}
+                />
+                <TextField
+                  onChange={handleChange}
+                  name="lastname"
+                  variant="filled"
+                  label="Lastname"
+                  sx={{ margin: ".5rem 0" }}
+                />
+                <TextField
+                  error={error.error}
+                  helperText={error.errorMessage}
+                  onChange={handleChange}
+                  name="email"
+                  variant="filled"
+                  label="Email"
+                  sx={{ margin: ".5rem 0" }}
+                />
+                <TextField
+                  error={error.error}
+                  helperText={error.errorMessage}
+                  onChange={handleChange}
+                  name="password"
+                  variant="filled"
+                  label="Password"
+                  type="password"
+                  sx={{ margin: ".5rem 0" }}
+                />
+                <CardContent>
+                  <Button variant="contained" color="secondary" type="submit">
+                    Registrar
+                  </Button>
+                </CardContent>
+              </form>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item>
+          <Button component={Link} variant="contained" to="/" color="primary">
+            Regresar
+          </Button>
+        </Grid>
+      </Grid>
+      <Grid item>
+        <Footer />
       </Grid>
     </Grid>
   );

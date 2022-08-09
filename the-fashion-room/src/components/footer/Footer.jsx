@@ -8,108 +8,106 @@ import { Box } from "@mui/system";
 
 function Footer() {
   return (
-    <Box className="app_footer">
-      <Container>
-        <Grid container spacing={3}>
-          <Grid item container xs={3}>
-            <Grid item xs={12}>
-              <Typography component="div" className="title_footer">
-                Conócenos
+    <Box component="div" className="app_footer">
+      <Grid container alignItems="center" xs={12} sx={{ pl: 10, pr: 10 }}>
+        <Grid item={true} container xs={3}>
+          <Grid item={true} xs={12}>
+            <Typography component="div" className="title_footer">
+              Conócenos
+            </Typography>
+          </Grid>
+          <Grid item container direction="column">
+            <Grid item>
+              <Typography component="div" className="link_footer">
+                Trabaja en The Fashion Room
               </Typography>
             </Grid>
-            <Grid item container direction="column">
-              <Grid item>
-                <Typography component="div" className="link_footer">
-                  Trabaja en The Fashion Room
-                </Typography>
-              </Grid>
-              <Grid item>
-                <Typography component="div" className="link_footer">
-                  Blog
-                </Typography>
-              </Grid>
-              <Grid item>
-                <Typography component="div" className="link_footer">
-                  Acerca de The Fashion Room
-                </Typography>
-              </Grid>
+            <Grid item>
+              <Typography component="div" className="link_footer">
+                Blog
+              </Typography>
+            </Grid>
+            <Grid item>
+              <Typography component="div" className="link_footer">
+                Acerca de The Fashion Room
+              </Typography>
             </Grid>
           </Grid>
-          <Grid item container xs={3}>
-            <Grid item xs={12}>
-              <Typography component="div" className="title_footer">
-                Gana dinero con nosotros
+        </Grid>
+        <Grid item={true} container xs={3}>
+          <Grid item={true} xs={12}>
+            <Typography component="div" className="title_footer">
+              Gana dinero con nosotros
+            </Typography>
+          </Grid>
+          <Grid item container direction="column">
+            <Grid item>
+              <Typography component="div" className="link_footer">
+                Vender productos en The Fashion Room
               </Typography>
             </Grid>
-            <Grid item container direction="column">
-              <Grid item>
-                <Typography component="div" className="link_footer">
-                  Vender productos en The Fashion Room
-                </Typography>
-              </Grid>
-              <Grid item>
-                <Typography component="div" className="link_footer">
-                  Vender en The Fashion Room business
-                </Typography>
-              </Grid>
-              <Grid item>
-                <Typography component="div" className="link_footer">
-                  Programa de afiliados
-                </Typography>
-              </Grid>
+            <Grid item>
+              <Typography component="div" className="link_footer">
+                Vender en The Fashion Room business
+              </Typography>
+            </Grid>
+            <Grid item>
+              <Typography component="div" className="link_footer">
+                Programa de afiliados
+              </Typography>
             </Grid>
           </Grid>
-          <Grid item container xs={3}>
-            <Grid item xs={12}>
-              <Typography component="div" className="title_footer">
-                Productos de pago
+        </Grid>
+        <Grid item={true} container xs={3}>
+          <Grid item={true} xs={12}>
+            <Typography component="div" className="title_footer">
+              Productos de pago
+            </Typography>
+          </Grid>
+          <Grid item container direction="column">
+            <Grid item>
+              <Typography component="div" className="link_footer">
+                Compra con puntos
               </Typography>
             </Grid>
-            <Grid item container direction="column">
-              <Grid item>
-                <Typography component="div" className="link_footer">
-                  Compra con puntos
-                </Typography>
-              </Grid>
-              <Grid item>
-                <Typography component="div" className="link_footer">
-                  Recarga tu saldo
-                </Typography>
-              </Grid>
-              <Grid item>
-                <Typography component="div" className="link_footer">
-                  Conversor de divisas de The Fashion Room
-                </Typography>
-              </Grid>
+            <Grid item>
+              <Typography component="div" className="link_footer">
+                Recarga tu saldo
+              </Typography>
+            </Grid>
+            <Grid item>
+              <Typography component="div" className="link_footer">
+                Conversor de divisas de The Fashion Room
+              </Typography>
             </Grid>
           </Grid>
-          <Grid item container xs={3}>
-            <Grid item xs={12}>
-              <Typography component="div" className="title_footer">
-                Redes sociales
+        </Grid>
+        <Grid item={true} container xs={3}>
+          <Grid item={true} xs={12}>
+            <Typography component="div" className="title_footer">
+              Redes sociales
+            </Typography>
+          </Grid>
+          <Grid item container direction="column">
+            <Grid item>
+              <Typography component="div" className="link_footer">
+                Síguenos en
               </Typography>
             </Grid>
-            <Grid item container direction="column">
+            <Grid item container spacing={2} justifyContent="center" pt={2}>
               <Grid item>
-                <Typography component="div" className="link_footer">
-                  Síguenos en
-                </Typography>
+                <FacebookIcon />
               </Grid>
-              <Grid item container spacing={2}>
-                <Grid item>
-                  <FacebookIcon />
-                </Grid>
-                <Grid item>
-                  <InstagramIcon />
-                </Grid>
-                <Grid item>
-                  <TwitterIcon />
-                </Grid>
+              <Grid item>
+                <InstagramIcon />
+              </Grid>
+              <Grid item>
+                <TwitterIcon />
               </Grid>
             </Grid>
           </Grid>
         </Grid>
-      </Container>
+      </Grid>
     </Box>
   );
 }

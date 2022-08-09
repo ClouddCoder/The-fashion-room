@@ -52,9 +52,11 @@ function ShoppingCart() {
   };
 
   return (
-    <div>
-      <Navbar />
-      <Container component="div" sx={{ height: "auto", width: "auto", mt: 5, mb: 5 }}>
+    <Grid container direction="column">
+      <Grid item>
+        <Navbar />
+      </Grid>
+      <Grid item sx={{ height: "auto", width: "auto", pt: 10, pb: 50 }}>
         <Grid container spacing={2}>
           <Grid item={true} container xs={6}>
             <Grid item container justifyContent="center">
@@ -95,9 +97,9 @@ function ShoppingCart() {
             />
           </Grid>
         </Grid>
-      </Container>
+      </Grid>
       <Footer />
-    </div>
+    </Grid>
   );
 }
 

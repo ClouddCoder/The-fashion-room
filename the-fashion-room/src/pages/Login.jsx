@@ -1,7 +1,12 @@
 import React, { useState, useContext } from "react";
 import AuthContext from "../context/auth-context/AuthContext";
+import Navbar from "../components/navbar/Navbar";
+import Footer from "../components/footer/Footer";
 import { Link, useNavigate } from "react-router-dom";
-import { Button, Grid, Card, Typography, CardContent, TextField } from "@mui/material";
+import { Button, Grid, TextField } from "@mui/material";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
 
 function Ingresar() {
   const [email, setEmail] = useState({ email: "" });
@@ -37,42 +42,56 @@ function Ingresar() {
   };
 
   return (
-    <Grid container spacing={3} alignItems="center" direction="column">
-      <Grid item={true} xs={12}>
-        <Card sx={{ mt: 5 }} align="center">
-          <Typography variant="h5" component="h2">
-            Inicia sesion
-          </Typography>
-          <CardContent>
-            <form onSubmit={handleSubmit}>
-              <TextField
-                error={error.error}
-                helperText={error.errorMessage}
-                onChange={handleChange}
-                name="email"
-                variant="filled"
-                label="Email"
-                sx={{ display: "block", margin: ".5rem 0" }}
-              />
-              <TextField
-                error={error.error}
-                helperText={error.errorMessage}
-                onChange={handleChange}
-                name="password"
-                variant="filled"
-                label="Password"
-                type="password"
-                sx={{ display: "block", margin: ".5rem 0" }}
-              />
-              <Button variant="contained" color="secondary" type="submit">
-                Login
-              </Button>
-            </form>
-          </CardContent>
-        </Card>
-        <Button component={Link} variant="contained" to="/" color="primary">
-          Regresar
-        </Button>
+    <Grid container direction="column" align="center">
+      <Grid item>
+        <Navbar />
+      </Grid>
+      <Grid item={true} container direction="column" pt={15} pb={25}>
+        <Grid item>
+          <Card sx={{ maxWidth: 300 }}>
+            <CardContent>
+              <Typography variant="h5" component="h2">
+                Inicia sesion
+              </Typography>
+            </CardContent>
+            <CardContent>
+              <form onSubmit={handleSubmit}>
+                <TextField
+                  error={error.error}
+                  helperText={error.errorMessage}
+                  onChange={handleChange}
+                  name="email"
+                  variant="filled"
+                  label="Email"
+                  sx={{ margin: ".5rem 0" }}
+                />
+                <TextField
+                  error={error.error}
+                  helperText={error.errorMessage}
+                  onChange={handleChange}
+                  name="password"
+                  variant="filled"
+                  label="Password"
+                  type="password"
+                  sx={{ margin: ".5rem 0" }}
+                />
+                <CardContent>
+                  <Button variant="contained" color="secondary" type="submit">
+                    Login
+                  </Button>
+                </CardContent>
+              </form>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid>
+          <Button component={Link} variant="contained" to="/" color="primary">
+            Regresar
+          </Button>
+        </Grid>
+      </Grid>
+      <Grid item>
+        <Footer />
       </Grid>
     </Grid>
   );

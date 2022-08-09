@@ -7,7 +7,7 @@ function Navbar() {
   const { auth, setAuth, userName } = useContext(AuthContext);
 
   return (
-    <header>
+    <div className="header">
       <nav className="navbar">
         <div className="navbarTitle">The fashion room</div>
         <ul className="navbarLinks">
@@ -43,7 +43,7 @@ function Navbar() {
           </div>
         )}
       </nav>
-    </header>
+    </div>
   );
 }
 

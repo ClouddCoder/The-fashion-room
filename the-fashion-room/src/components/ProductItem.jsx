@@ -38,7 +38,7 @@ function ProductItem({ product, addToCart }) {
           p: 2,
           margin: "auto",
           flexGrow: 1,
-          backgroundColor: (theme) => (theme.palette.mode === "dark" ? "#1A2027" : "#fff"),
+          backgroundColor: theme => (theme.palette.mode === "dark" ? "#1A2027" : "#fff"),
         }}
         elevation={1}
       >
@@ -46,7 +46,7 @@ function ProductItem({ product, addToCart }) {
           <Grid item={true} sx={{ width: 160, height: 160 }}>
             <Img alt="complex" src={require(`../assets/products/${product.product_name}.png`)} />
           </Grid>
-          <Grid item xs={12} sm container>
+          <Grid item={true} xs={12} sm container>
             <Grid item={true} xs container direction="column" spacing={2}>
               <Grid item={true} xs>
                 <Typography gutterBottom variant="subtitle1" component="div">

@@ -12,7 +12,7 @@ function Offers() {
   return (
     <Box className="offer_container" mb={3}>
       <Grid container align="center">
-        <Grid item xs={3}>
+        <Grid item={true} xs={3}>
           <OfferItem
             alt={"calzado"}
             image={calzado}
@@ -20,7 +20,7 @@ function Offers() {
             description={"Calzado de todo tipo"}
           />
         </Grid>
-        <Grid item xs={3}>
+        <Grid item={true} xs={3}>
           <OfferItem
             alt={"camisetas"}
             image={camisetas}
@@ -28,7 +28,7 @@ function Offers() {
             description={"Camisetas de todo tipo"}
           />
         </Grid>
-        <Grid item xs={3}>
+        <Grid item={true} xs={3}>
           <OfferItem
             alt={"deportiva"}
             image={deportiva}
@@ -36,7 +36,7 @@ function Offers() {
             description={"Ropa deportiva de todo tipo"}
           />
         </Grid>
-        <Grid item xs={3}>
+        <Grid item={true} xs={3}>
           <OfferItem
             alt={"bolsos"}
             image={bolsos}

@@ -5,7 +5,7 @@ import Divider from "@mui/material/Divider";
 function StoreInfo({ store_name, store_address, store_phone }) {
   return (
     <Grid item container>
-      <Grid item xs={12}>
+      <Grid item={true} xs={12}>
         <Typography variant="h4" gutterBottom component="div">
           {store_name}
         </Typography>
@@ -14,17 +14,12 @@ function StoreInfo({ store_name, store_address, store_phone }) {
       <Grid item container direction="column">
         <Grid item>
           <Typography variant="h6" gutterBottom component="div">
-            {store_address}
+            Dirección: {store_address}
           </Typography>
         </Grid>
         <Grid item>
           <Typography variant="h6" gutterBottom component="div">
-            {store_phone}
-          </Typography>
-        </Grid>
-        <Grid item>
-          <Typography variant="h6" gutterBottom component="div">
-            Email
+            Teléfono 1: {store_phone}
           </Typography>
         </Grid>
       </Grid>
