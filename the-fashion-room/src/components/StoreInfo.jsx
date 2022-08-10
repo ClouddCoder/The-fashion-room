@@ -1,5 +1,6 @@
 import React from "react";
-import { Grid, Typography } from "@mui/material";
+import Typography from "@mui/material/Typography";
+import Grid from "@mui/material/Grid";
 import Divider from "@mui/material/Divider";
 
 function StoreInfo({ store_name, store_address, store_phone }) {

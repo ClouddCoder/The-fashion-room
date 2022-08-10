@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import AuthContext from "../context/auth-context/AuthContext";
-import { Grid, Typography, Paper, styled, Button } from "@mui/material";
+import { Paper, styled, Button } from "@mui/material";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
 import { Box } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 

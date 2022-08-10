@@ -1,14 +1,13 @@
 import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import ProductContext from "../context/product-context/ProductContext";
-import { Button, Container } from "@mui/material";
+import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import { palette } from "@mui/system";
-import { useNavigate } from "react-router-dom";
 import Navbar from "../components/navbar/Navbar";
 import Footer from "../components/footer/Footer";
-import { Box } from "@mui/system";
 
 function Invoice() {
   const { cart, totalPrice, clearCart } = useContext(ProductContext);
@@ -25,14 +24,14 @@ function Invoice() {
   );
 
   return (
-    <Grid container direction="column" sx={{ height: "auto", pt: 5, pb: 5 }}>
+    <Grid container direction="column">
       <Grid item>
         <Navbar />
       </Grid>
-      <Grid item>
+      <Grid item sx={{ height: "auto", pt: 15, pb: 27 }}>
         <Paper
           sx={{
-            p: 2,
+            p: 4,
             bgcolor: "info.main",
             margin: "auto",
             height: "auto",
@@ -40,8 +39,8 @@ function Invoice() {
           }}
           elevation={1}
         >
-          <Grid container direction="column" sx={{ height: "auto", pt: 5, pb: 5 }}>
-            <Grid item container justifyContent="center" mt={2} mb={2}>
+          <Grid container direction="column" sx={{ height: "auto" }}>
+            <Grid item container justifyContent="center">
               <Typography variant="h3" component="div">
                 Detalles de la compra
               </Typography>
@@ -113,8 +112,9 @@ function Invoice() {
           </Grid>
         </Paper>
       </Grid>
-      <Box component="div" sx={{ height: 400, mt: 5, mb: 5 }}></Box>
-      <Footer />
+      <Grid item>
+        <Footer />
+      </Grid>
     </Grid>
   );
 }

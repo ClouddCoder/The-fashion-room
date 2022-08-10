@@ -1,6 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Grid, Button } from "@mui/material";
+import React, { useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Grid from "@mui/material/Grid";
+import Button from "@mui/material/Button";
 import CartItem from "../components/CartItem";
 import ProductContext from "../context/product-context/ProductContext";
 import AuthContext from "../context/auth-context/AuthContext";

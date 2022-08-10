@@ -4,6 +4,8 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import AuthContext from "../context/auth-context/AuthContext";
 import OrderDetail from "../components/OrderDetail";
+import Navbar from "../components/navbar/Navbar";
+import Footer from "../components/footer/Footer";
 import axios from "axios";
 
 function Orders() {
@@ -34,29 +36,37 @@ function Orders() {
   }, []);
 
   return (
-    <Container>
-      <Grid container direction="column" sx={{ height: "auto", pt: 5, pb: 5 }}>
-        <Grid item>
-          <Typography variant="h3">Mis ordenes</Typography>
-        </Grid>
-        <Grid item container direction="column">
-          {orderDetail?.map((group, i) => {
-            return (
-              <Grid container item direction="column" key={i}>
-                <Grid item>
-                  <Typography variant="h4">Factura #{group[0].invoice_id}</Typography>
-                </Grid>
-                <Grid item>
-                  {group.map((item, index) => {
-                    return <OrderDetail orderDetail={item} key={index} />;
-                  })}
-                </Grid>
-              </Grid>
-            );
-          })}
-        </Grid>
+    <Grid container direction="column">
+      <Grid item>
+        <Navbar />
       </Grid>
-    </Container>
+      <Container>
+        <Grid container direction="column" sx={{ height: "auto", pt: 5, pb: 5 }}>
+          <Grid item>
+            <Typography variant="h3">Mis ordenes</Typography>
+          </Grid>
+          <Grid item container direction="column">
+            {orderDetail?.map((group, i) => {
+              return (
+                <Grid container item direction="column" key={i}>
+                  <Grid item>
+                    <Typography variant="h4">Factura #{group[0].invoice_id}</Typography>
+                  </Grid>
+                  <Grid item>
+                    {group.map((item, index) => {
+                      return <OrderDetail orderDetail={item} key={index} />;
+                    })}
+                  </Grid>
+                </Grid>
+              );
+            })}
+          </Grid>
+        </Grid>
+      </Container>
+      <Grid item>
+        <Footer />
+      </Grid>
+    </Grid>
   );
 }
 

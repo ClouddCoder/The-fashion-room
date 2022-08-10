@@ -1,5 +1,6 @@
 import React, { useEffect, useContext } from "react";
-import { Button, Grid, Container } from "@mui/material";
+import Grid from "@mui/material/Grid";
+import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import ProductItem from "../components/ProductItem";
 import ProductContext from "../context/product-context/ProductContext";
