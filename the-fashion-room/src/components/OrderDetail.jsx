@@ -8,7 +8,12 @@ function OrderDetail({ orderDetail }) {
     <Card>
       <CardContent>
         <Typography variant="h5" component="h2">
-          {orderDetail.product_id}
+          {orderDetail.invoice_id}
+        </Typography>
+      </CardContent>
+      <CardContent>
+        <Typography variant="h5" component="h2">
+          {orderDetail.product_name}
         </Typography>
       </CardContent>
       <CardContent>

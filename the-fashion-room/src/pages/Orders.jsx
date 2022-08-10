@@ -13,8 +13,8 @@ function Orders() {
   const loadOrder = async () => {
     axios
       .post("http://localhost:3001/orders", { userId })
-      .then((res) => setOrder(res.data))
-      .catch((err) => console.log(err));
+      .then(res => setOrder(res.data))
+      .catch(err => console.log(err));
   };
 
   useEffect(() => {

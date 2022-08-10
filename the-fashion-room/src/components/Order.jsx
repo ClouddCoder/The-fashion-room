@@ -12,8 +12,19 @@ function Order({ order }) {
   const loadOrderDetail = async () => {
     axios
       .post("http://localhost:3001/order-detail", { userId })
-      .then((response) => setOrderDetail(response.data))
-      .catch((err) => console.log(err));
+      .then(response => {
+        const groupsOrderDetail = Object.values(
+          response.data.reduce(
+            (acc, item) => ({
+              ...acc,
+              [item.invoice_id]: (acc[item.invoice_id] || []).concat(item),
+            }),
+            {}
+          )
+        );
+        return setOrderDetail(groupsOrderDetail);
+      })
+      .catch(err => console.log(err));
     console.log(orderDetail);
   };
 
@@ -32,10 +43,12 @@ function Order({ order }) {
         </Typography>
       </Grid>
       <Grid item container>
-        {orderDetail?.map((item, index) => {
+        {orderDetail?.map(group => {
           return (
-            <Grid item key={index}>
-              <OrderDetail orderDetail={item} />
+            <Grid item>
+              {group.map((item, index) => {
+                return <OrderDetail orderDetail={item} key={index} />;
+              })}
             </Grid>
           );
         })}
