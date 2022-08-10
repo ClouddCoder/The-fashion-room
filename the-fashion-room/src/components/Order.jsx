@@ -27,6 +27,9 @@ function Order({ order }) {
         <Typography variant="h5" component="h2">
           {order.invoice_id}
         </Typography>
+        <Typography variant="h5" component="h2">
+          {order.purchase_date}
+        </Typography>
       </Grid>
       <Grid item container>
         {orderDetail?.map((item, index) => {
