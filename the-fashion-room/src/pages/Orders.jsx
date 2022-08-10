@@ -3,22 +3,34 @@ import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import AuthContext from "../context/auth-context/AuthContext";
-import Order from "../components/Order";
+import OrderDetail from "../components/OrderDetail";
 import axios from "axios";
 
 function Orders() {
   const { userId } = useContext(AuthContext);
-  const [order, setOrder] = useState();
+  const [orderDetail, setOrderDetail] = useState();
 
-  const loadOrder = async () => {
+  const loadOrderDetail = async () => {
     axios
-      .post("http://localhost:3001/orders", { userId })
-      .then(res => setOrder(res.data))
+      .post("http://localhost:3001/order-detail", { userId })
+      .then(response => {
+        const groupsOrderDetail = Object.values(
+          response.data.reduce(
+            (acc, item) => ({
+              ...acc,
+              [item.invoice_id]: (acc[item.invoice_id] || []).concat(item),
+            }),
+            {}
+          )
+        );
+        return setOrderDetail(groupsOrderDetail);
+      })
       .catch(err => console.log(err));
+    console.log(orderDetail);
   };
 
   useEffect(() => {
-    loadOrder();
+    loadOrderDetail();
   }, []);
 
   return (
@@ -28,10 +40,17 @@ function Orders() {
           <Typography variant="h3">Mis ordenes</Typography>
         </Grid>
         <Grid item container direction="column">
-          {order?.map((order, index) => {
+          {orderDetail?.map((group, i) => {
             return (
-              <Grid item key={index}>
-                <Order order={order}></Order>
+              <Grid container item direction="column" key={i}>
+                <Grid item>
+                  <Typography variant="h4">Factura #{group[0].invoice_id}</Typography>
+                </Grid>
+                <Grid item>
+                  {group.map((item, index) => {
+                    return <OrderDetail orderDetail={item} key={index} />;
+                  })}
+                </Grid>
               </Grid>
             );
           })}

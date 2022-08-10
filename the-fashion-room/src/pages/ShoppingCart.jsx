@@ -54,7 +54,7 @@ function ShoppingCart() {
       <Grid item>
         <Navbar />
       </Grid>
-      <Grid item sx={{ height: "auto", width: "auto", pt: 10, pb: 50 }}>
+      <Grid item={true} sx={{ height: "auto", width: "auto", pt: 10, pb: 50 }}>
         <Grid container spacing={2}>
           <Grid item={true} container xs={6}>
             <Grid item container justifyContent="center">
@@ -79,7 +79,7 @@ function ShoppingCart() {
               </Grid>
             </Grid>
             <Grid item container justifyContent="center" direction="column">
-              {cart.map((product) => (
+              {cart.map(product => (
                 <Grid item key={product.product_id}>
                   <CartItem product={product} removeFromCart={removeFromCart} />
                 </Grid>

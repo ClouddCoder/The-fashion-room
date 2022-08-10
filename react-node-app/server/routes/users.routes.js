@@ -7,7 +7,6 @@ const {
   createInvoice,
   getStores,
   getStoresPhones,
-  getOrders,
   getOrderDetail,
 } = require("../controllers/users.controllers");
 
@@ -26,8 +25,6 @@ router.post("/invoice", createInvoice);
 router.get("/stores", getStores);
 
 router.get("/stores/phones", getStoresPhones);
-
-router.post("/orders", getOrders);
 
 router.post("/order-detail", getOrderDetail);
 

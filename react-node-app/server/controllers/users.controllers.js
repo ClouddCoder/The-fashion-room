@@ -119,18 +119,6 @@ const getStoresPhones = async (req, res, next) => {
   }
 };
 
-const getOrders = async (req, res, next) => {
-  const { userId } = req.body;
-  const query = "SELECT invoice_id, purchase_date FROM invoice WHERE customer_id = $1";
-
-  try {
-    const result = await pool.query(query, [userId]);
-    return res.json(result.rows);
-  } catch (error) {
-    next(error);
-  }
-};
-
 const getOrderDetail = async (req, res, next) => {
   const { userId } = req.body;
   const query =
@@ -152,6 +140,5 @@ module.exports = {
   createInvoice,
   getStores,
   getStoresPhones,
-  getOrders,
   getOrderDetail,
 };

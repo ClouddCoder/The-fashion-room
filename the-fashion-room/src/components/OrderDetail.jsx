@@ -8,11 +8,6 @@ function OrderDetail({ orderDetail }) {
     <Card>
       <CardContent>
         <Typography variant="h5" component="h2">
-          {orderDetail.invoice_id}
-        </Typography>
-      </CardContent>
-      <CardContent>
-        <Typography variant="h5" component="h2">
           {orderDetail.product_name}
         </Typography>
       </CardContent>
