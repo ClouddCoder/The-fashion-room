@@ -8,6 +8,7 @@ const {
   getStores,
   getStoresPhones,
   getOrders,
+  getOrderDetail,
 } = require("../controllers/users.controllers");
 
 const router = Router();
@@ -27,5 +28,7 @@ router.get("/stores", getStores);
 router.get("/stores/phones", getStoresPhones);
 
 router.post("/orders", getOrders);
+
+router.post("/order-detail", getOrderDetail);
 
 module.exports = router;

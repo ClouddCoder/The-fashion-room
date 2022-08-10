@@ -121,6 +121,18 @@ const getStoresPhones = async (req, res, next) => {
 
 const getOrders = async (req, res, next) => {
   const { userId } = req.body;
+  const query = "SELECT invoice_id, purchase_date FROM invoice WHERE customer_id = $1";
+
+  try {
+    const result = await pool.query(query, [userId]);
+    return res.json(result.rows);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const getOrderDetail = async (req, res, next) => {
+  const { userId } = req.body;
   const query =
     "SELECT invoice_detail.invoice_id, purchase_date, product_name, quantity, total_amount FROM invoice_detail INNER JOIN invoice ON invoice.invoice_id = invoice_detail.invoice_id INNER JOIN product ON product.product_id = invoice_detail.product_id WHERE customer_id = $1";
 
@@ -141,4 +153,5 @@ module.exports = {
   getStores,
   getStoresPhones,
   getOrders,
+  getOrderDetail,
 };

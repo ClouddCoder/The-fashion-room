@@ -8,20 +8,17 @@ import axios from "axios";
 
 function Orders() {
   const { userId } = useContext(AuthContext);
-  const [orders, setOrders] = useState();
-  const [invoiceId, setInvoiceId] = useState(null);
+  const [order, setOrder] = useState();
 
-  const loadOrders = async () => {
-    const res = axios.post("http://localhost:3001/orders", { userId }).then(response => {
-      console.log(response.data);
-    });
-    const data = await res.data;
-    setOrders(data);
-    console.log(data);
+  const loadOrder = async () => {
+    axios
+      .post("http://localhost:3001/orders", { userId })
+      .then((res) => setOrder(res.data))
+      .catch((err) => console.log(err));
   };
 
   useEffect(() => {
-    loadOrders();
+    loadOrder();
   }, []);
 
   return (
@@ -30,7 +27,15 @@ function Orders() {
         <Grid item>
           <Typography variant="h3">Mis ordenes</Typography>
         </Grid>
-        <Grid item></Grid>
+        <Grid item container direction="column">
+          {order?.map((order, index) => {
+            return (
+              <Grid item key={index}>
+                <Order order={order}></Order>
+              </Grid>
+            );
+          })}
+        </Grid>
       </Grid>
     </Container>
   );
