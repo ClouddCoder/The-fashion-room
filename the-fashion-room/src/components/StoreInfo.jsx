@@ -20,7 +20,7 @@ function StoreInfo({ store_name, store_address, store_phone }) {
         </Grid>
         <Grid item>
           <Typography variant="h6" gutterBottom component="div">
-            Teléfono 1: {store_phone}
+            Teléfono: {store_phone}
           </Typography>
         </Grid>
       </Grid>

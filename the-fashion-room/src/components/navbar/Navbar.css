@@ -41,6 +41,11 @@
   color: rgb(179, 174, 174);
 }
 
+.navbarTitle {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.5rem;
+}
+
 .navbarLogin {
   display: flex;
   justify-content: flex-end;

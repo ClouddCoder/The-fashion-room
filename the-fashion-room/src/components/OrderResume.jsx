@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
@@ -13,6 +14,29 @@ function OrderResume({
   orderTotalProducts,
   orderTotalPrice,
 }) {
+  const checkCartLength = () => {
+    if (getCart.length > 0) {
+      return (
+        <Button
+          variant="contained"
+          color="secondary"
+          onClick={() => {
+            buyProducts();
+            invoice(getUserId, getCart);
+          }}
+        >
+          Comprar
+        </Button>
+      );
+    } else {
+      return (
+        <Typography variant="h6" component="div">
+          Carrito vacío
+        </Typography>
+      );
+    }
+  };
+
   const ColorWhiteLine = ({ color }) => (
     <hr
       style={{
@@ -77,16 +101,7 @@ function OrderResume({
           <ColorWhiteLine color="white" />
         </Grid>
         <Grid item align="center">
-          <Button
-            variant="contained"
-            color="secondary"
-            onClick={() => {
-              buyProducts();
-              invoice(getUserId, getCart);
-            }}
-          >
-            Comprar
-          </Button>
+          {checkCartLength()}
         </Grid>
       </Grid>
     </Paper>
