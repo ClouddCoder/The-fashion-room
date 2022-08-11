@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
 import AuthContext from "../context/auth-context/AuthContext";
-import { Paper, styled, Button } from "@mui/material";
+import Button from "@mui/material/Button";
+import { styled } from "@mui/material/styles";
+import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import { Box } from "@mui/system";
+import Box from "@mui/material/Box";
 import { useNavigate } from "react-router-dom";
 
 function ProductItem({ product, addToCart }) {
@@ -40,7 +42,7 @@ function ProductItem({ product, addToCart }) {
           p: 2,
           margin: "auto",
           flexGrow: 1,
-          backgroundColor: theme => (theme.palette.mode === "dark" ? "#1A2027" : "#fff"),
+          backgroundColor: (theme) => (theme.palette.mode === "dark" ? "#1A2027" : "#fff"),
         }}
         elevation={1}
       >

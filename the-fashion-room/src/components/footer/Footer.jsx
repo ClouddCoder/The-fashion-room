@@ -4,7 +4,7 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import "./Footer.css";
 import { Container, Grid, Typography } from "@mui/material";
-import { Box } from "@mui/system";
+import Box from "@mui/material/Box";
 
 function Footer() {
   return (

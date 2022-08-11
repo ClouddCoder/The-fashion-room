@@ -3,10 +3,10 @@ import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import AuthContext from "../context/auth-context/AuthContext";
-import OrderDetail from "../components/OrderDetail";
 import Navbar from "../components/navbar/Navbar";
 import Footer from "../components/footer/Footer";
 import axios from "axios";
+import InvoiceDetail from "../components/InvoiceDetail";
 
 function Orders() {
   const { userId } = useContext(AuthContext);
@@ -15,19 +15,19 @@ function Orders() {
   const loadOrderDetail = async () => {
     axios
       .post("http://localhost:3001/order-detail", { userId })
-      .then(response => {
+      .then((response) => {
         const groupsOrderDetail = Object.values(
           response.data.reduce(
             (acc, item) => ({
               ...acc,
               [item.invoice_id]: (acc[item.invoice_id] || []).concat(item),
             }),
-            {}
-          )
+            {},
+          ),
         );
         return setOrderDetail(groupsOrderDetail);
       })
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
     console.log(orderDetail);
   };
 
@@ -41,24 +41,13 @@ function Orders() {
         <Navbar />
       </Grid>
       <Container>
-        <Grid container direction="column" sx={{ height: "auto", pt: 5, pb: 5 }}>
+        <Grid container direction="column" sx={{ height: "auto", pt: 5, pb: 55 }}>
           <Grid item>
             <Typography variant="h3">Mis ordenes</Typography>
           </Grid>
           <Grid item container direction="column">
             {orderDetail?.map((group, i) => {
-              return (
-                <Grid container item direction="column" key={i}>
-                  <Grid item>
-                    <Typography variant="h4">Factura #{group[0].invoice_id}</Typography>
-                  </Grid>
-                  <Grid item>
-                    {group.map((item, index) => {
-                      return <OrderDetail orderDetail={item} key={index} />;
-                    })}
-                  </Grid>
-                </Grid>
-              );
+              return <InvoiceDetail groupItems={group} key={i} />;
             })}
           </Grid>
         </Grid>

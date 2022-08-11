@@ -1,7 +1,7 @@
 import React from "react";
 import OfferItem from "../OfferItem";
-import { Grid } from "@mui/material";
-import { Box } from "@mui/system";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
 import calzado from "../../assets/offers/Calzado.png";
 import camisetas from "../../assets/offers/Camisetas.png";
 import deportiva from "../../assets/offers/Deportiva.png";

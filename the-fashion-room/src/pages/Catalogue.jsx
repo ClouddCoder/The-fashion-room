@@ -19,7 +19,7 @@ function Catalogue() {
       <Grid item>
         <Navbar />
       </Grid>
-      <Grid item={true} sx={{ height: "auto", pt: 20, pb: 20 }}>
+      <Grid item={true} sx={{ height: "auto", pt: 10, pb: 20 }}>
         <Grid container component="div">
           <Grid item container justifyContent="center">
             <Button sx={{ mr: 1 }} component={Link} to="/" variant="outlined" color="primary">
@@ -36,7 +36,7 @@ function Catalogue() {
             </Button>
           </Grid>
           <Grid container alignItems="center" justifyContent="center">
-            {products.map(product => (
+            {products.map((product) => (
               <ProductItem key={product.product_id} product={product} addToCart={addToCart} />
             ))}
           </Grid>

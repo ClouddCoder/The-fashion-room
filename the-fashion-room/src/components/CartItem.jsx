@@ -1,6 +1,10 @@
 import React from "react";
-import { Grid, Button, Paper, styled, Typography } from "@mui/material";
-import { Box } from "@mui/system";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import Button from "@mui/material/Button";
+import Paper from "@mui/material/Paper";
+import { styled } from "@mui/material/styles";
 
 function CartItem({ product, removeFromCart }) {
   const Img = styled("img")({
@@ -20,7 +24,7 @@ function CartItem({ product, removeFromCart }) {
           width: 600,
           margin: "auto",
           flexGrow: 1,
-          backgroundColor: theme => (theme.palette.mode === "dark" ? "#1A2027" : "#fff"),
+          backgroundColor: (theme) => (theme.palette.mode === "dark" ? "#1A2027" : "#fff"),
         }}
         elevation={1}
       >

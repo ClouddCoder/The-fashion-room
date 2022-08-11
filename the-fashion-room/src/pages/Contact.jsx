@@ -5,7 +5,7 @@ import Footer from "../components/footer/Footer";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
-import { Box } from "@mui/system";
+import Box from "@mui/material/Box";
 import { Link } from "react-router-dom";
 import axios from "axios";
 

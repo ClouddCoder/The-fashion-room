@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "@mui/material";
+import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";

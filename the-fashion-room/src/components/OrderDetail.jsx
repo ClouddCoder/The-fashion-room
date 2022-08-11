@@ -1,27 +1,29 @@
 import React from "react";
-import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 
 function OrderDetail({ orderDetail }) {
   return (
-    <Card>
-      <CardContent>
-        <Typography variant="h5" component="h2">
+    <>
+      <CardContent
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          height: 25,
+        }}
+        align="center"
+      >
+        <Typography variant="h6" component="div" sx={{ width: 150 }}>
           {orderDetail.product_name}
         </Typography>
-      </CardContent>
-      <CardContent>
-        <Typography variant="h5" component="h2">
-          {orderDetail.quantity}
+        <Typography variant="h6" component="div" sx={{ width: 150 }}>
+          {"x" + orderDetail.quantity}
+        </Typography>
+        <Typography variant="h6" component="div" sx={{ width: 150 }}>
+          {"$" + orderDetail.total_amount}
         </Typography>
       </CardContent>
-      <CardContent>
-        <Typography variant="h5" component="h2">
-          {orderDetail.total_amount}
-        </Typography>
-      </CardContent>
-    </Card>
+    </>
   );
 }
 
