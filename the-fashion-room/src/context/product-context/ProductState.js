@@ -54,7 +54,6 @@ function ProductState(props) {
       headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
     });
     const data = await res.json();
-    console.log(data);
     dispatch({ type: TYPES.CREATE_INVOICE, payload: data.invoiceId });
   };
 
