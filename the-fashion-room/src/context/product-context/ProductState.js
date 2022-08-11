@@ -10,6 +10,7 @@ function ProductState(props) {
     cart: [],
     totalProducts: 0,
     totalPrice: 0,
+    invoiceId: 0,
   };
 
   const [state, dispatch] = useReducer(ProductReducer, productInitialState);
@@ -46,6 +47,17 @@ function ProductState(props) {
     dispatch({ type: TYPES.GET_TOTAL_PRICE });
   };
 
+  const createInvoice = async (userId, cart) => {
+    const res = await fetch("http://localhost:3001/invoice", {
+      method: "POST",
+      body: JSON.stringify({ userId, cart }),
+      headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
+    });
+    const data = await res.json();
+    console.log(data);
+    dispatch({ type: TYPES.CREATE_INVOICE, payload: data.invoiceId });
+  };
+
   return (
     <ProductContext.Provider
       value={{
@@ -53,12 +65,14 @@ function ProductState(props) {
         cart: state.cart,
         totalProducts: state.totalProducts,
         totalPrice: state.totalPrice,
+        invoiceId: state.invoiceId,
         loadProducts,
         addToCart,
         removeFromCart,
         clearCart,
         getTotalProducts,
         getTotalPrice,
+        createInvoice,
       }}
     >
       {props.children}

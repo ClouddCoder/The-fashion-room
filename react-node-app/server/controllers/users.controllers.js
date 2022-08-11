@@ -75,7 +75,7 @@ const createInvoice = async (req, res, next) => {
   try {
     const getInvoiceId = await pool.query(queryCreateInvoiceId);
     const invoiceId = getInvoiceId.rows[0].create_invoice_id;
-    const getInvoice = await pool.query(queryInsertInvoice, [invoiceId, userId]);
+    await pool.query(queryInsertInvoice, [invoiceId, userId]);
 
     for (const item of cart) {
       const getInvoiceDetails = await pool.query(queryInsertInvoiceDetails, [
@@ -91,7 +91,7 @@ const createInvoice = async (req, res, next) => {
         });
       }
     }
-    return res.json({ message: "success" });
+    return res.json({ message: "success", invoiceId });
   } catch (error) {
     next(error);
   }

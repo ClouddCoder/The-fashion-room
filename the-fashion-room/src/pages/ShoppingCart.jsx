@@ -18,6 +18,7 @@ function ShoppingCart() {
     getTotalPrice,
     totalProducts,
     totalPrice,
+    createInvoice,
   } = useContext(ProductContext);
 
   const { userId } = useContext(AuthContext);
@@ -36,18 +37,7 @@ function ShoppingCart() {
       headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
     });
     const data = await res.json();
-    console.log(data);
     navigate("/invoice");
-  };
-
-  const createInvoice = async () => {
-    const res = await fetch("http://localhost:3001/invoice", {
-      method: "POST",
-      body: JSON.stringify({ userId, cart }),
-      headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
-    });
-    const data = await res.json();
-    console.log(data);
   };
 
   return (
@@ -80,7 +70,7 @@ function ShoppingCart() {
               </Grid>
             </Grid>
             <Grid item container justifyContent="center" direction="column">
-              {cart.map(product => (
+              {cart.map((product) => (
                 <Grid item key={product.product_id}>
                   <CartItem product={product} removeFromCart={removeFromCart} />
                 </Grid>
@@ -90,6 +80,8 @@ function ShoppingCart() {
           <Grid item={true} justifyContent="center" xs={6}>
             <OrderResume
               buyProducts={buyProducts}
+              getUserId={userId}
+              getCart={cart}
               invoice={createInvoice}
               orderTotalProducts={totalProducts}
               orderTotalPrice={totalPrice}

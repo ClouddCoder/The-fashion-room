@@ -63,6 +63,9 @@ export function ProductReducer(state, action) {
 
       return { ...state, totalPrice };
     }
+    case TYPES.CREATE_INVOICE: {
+      return { ...state, invoiceId: action.payload };
+    }
     default:
       return state;
   }

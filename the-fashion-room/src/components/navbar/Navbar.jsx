@@ -12,10 +12,7 @@ function Navbar() {
         <div className="navbarTitle">The fashion room</div>
         <ul className="navbarLinks">
           <li className="link">
-            <Link to="#">Ayuda</Link>
-          </li>
-          <li className="link">
-            <Link to="#">Acerca</Link>
+            <Link to="/">Home</Link>
           </li>
           <li className="link">
             <Link to="/contact">Contacto</Link>

@@ -5,7 +5,14 @@ import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import { palette } from "@mui/system";
 
-function OrderResume({ buyProducts, invoice, orderTotalProducts, orderTotalPrice }) {
+function OrderResume({
+  buyProducts,
+  getUserId,
+  getCart,
+  invoice,
+  orderTotalProducts,
+  orderTotalPrice,
+}) {
   const ColorWhiteLine = ({ color }) => (
     <hr
       style={{
@@ -75,7 +82,7 @@ function OrderResume({ buyProducts, invoice, orderTotalProducts, orderTotalPrice
             color="secondary"
             onClick={() => {
               buyProducts();
-              invoice();
+              invoice(getUserId, getCart);
             }}
           >
             Comprar

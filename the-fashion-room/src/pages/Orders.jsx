@@ -28,7 +28,6 @@ function Orders() {
         return setOrderDetail(groupsOrderDetail);
       })
       .catch((err) => console.log(err));
-    console.log(orderDetail);
   };
 
   useEffect(() => {

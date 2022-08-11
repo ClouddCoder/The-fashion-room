@@ -10,7 +10,7 @@ import Navbar from "../components/navbar/Navbar";
 import Footer from "../components/footer/Footer";
 
 function Invoice() {
-  const { cart, totalPrice, clearCart } = useContext(ProductContext);
+  const { cart, totalPrice, clearCart, invoiceId } = useContext(ProductContext);
   const navigate = useNavigate();
   const ColorWhiteLine = ({ color }) => (
     <hr
@@ -45,7 +45,7 @@ function Invoice() {
                 Detalles de la compra
               </Typography>
               <Typography variant="h6" component="div">
-                Num factura
+                {"#" + invoiceId}
               </Typography>
             </Grid>
             <Grid
@@ -61,7 +61,7 @@ function Invoice() {
                 Productos
               </Typography>
               <Grid item container direction="column">
-                {cart.map(product => (
+                {cart.map((product) => (
                   <Grid
                     item
                     container

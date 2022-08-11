@@ -18,7 +18,7 @@ function Ingresar() {
 
   const navigate = useNavigate();
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const res = await fetch("http://localhost:3001/login", {
       method: "POST",
@@ -35,10 +35,9 @@ function Ingresar() {
     } else {
       setError({ error: true, errorMessage: data.message });
     }
-    console.log(data);
   };
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     setEmail({ ...email, [e.target.name]: e.target.value });
     setPasswordLog({ ...password, [e.target.name]: e.target.value });
   };

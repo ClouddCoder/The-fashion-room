@@ -17,7 +17,7 @@ function Registrar() {
   const [error, setError] = useState({ error: false, errorMessage: "" });
   const navigate = useNavigate();
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const res = await fetch("http://localhost:3001/register", {
       method: "POST",
@@ -31,10 +31,9 @@ function Registrar() {
     } else {
       setError({ error: true, errorMessage: data.message });
     }
-    console.log(data);
   };
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     setName({ ...name, [e.target.name]: e.target.value });
     setLastname({ ...lastname, [e.target.name]: e.target.value });
     setEmail({ ...email, [e.target.name]: e.target.value });
