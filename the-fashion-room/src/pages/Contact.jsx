@@ -12,13 +12,13 @@ function Contact() {
   const [storesPhones, getStoresPhones] = useState();
 
   const loadStores = async () => {
-    const response = await axios.get("http://api-server:3001/stores");
+    const response = await axios.get("http://localhost:3001/stores");
     const data = await response.data;
     getStores(data);
   };
 
   const loadStoresPhones = async () => {
-    const response = await axios.get("http://api-server:3001/stores/phones");
+    const response = await axios.get("http://localhost:3001/stores/phones");
     const data = await response.data;
     getStoresPhones(data);
   };

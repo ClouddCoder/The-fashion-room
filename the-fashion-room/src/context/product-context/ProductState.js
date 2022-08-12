@@ -16,7 +16,7 @@ function ProductState(props) {
   const [state, dispatch] = useReducer(ProductReducer, productInitialState);
 
   const loadProducts = async () => {
-    const response = await axios.get("http://api-server:3001/catalogue", { crossDomain: true });
+    const response = await axios.get("http://localhost:3001/catalogue", { crossDomain: true });
     const data = await response.data;
     dispatch({ type: TYPES.LOAD_PRODUCTS, payload: data });
   };
@@ -48,7 +48,7 @@ function ProductState(props) {
   };
 
   const createInvoice = async (userId, cart) => {
-    const res = await fetch("http://api-server:3001/invoice", {
+    const res = await fetch("http://localhost:3001/invoice", {
       method: "POST",
       body: JSON.stringify({ userId, cart }),
       headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
