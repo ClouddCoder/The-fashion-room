@@ -6,6 +6,9 @@ import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 
+/**
+ * Componente que muestra el producto que esta en el carrito de compras
+ */
 function CartItem({ product, removeFromCart }) {
   const Img = styled("img")({
     margin: "auto",

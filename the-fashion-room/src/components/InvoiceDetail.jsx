@@ -11,6 +11,9 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
 
+/**
+ * Componente que muestra la informacion de la orden
+ */
 function InvoiceDetail({ groupItems }) {
   const [expanded, setExpanded] = useState(false);
 

@@ -12,6 +12,9 @@ const {
 
 const router = Router();
 
+/**
+ * Rutas del backend para cada peticion
+ */
 router.post("/login", loginUser);
 
 router.post("/register", registerUser);

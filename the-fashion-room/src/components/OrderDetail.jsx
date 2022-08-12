@@ -2,6 +2,9 @@ import React from "react";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 
+/**
+ * Componente que muestra el contenido de una orden
+ */
 function OrderDetail({ orderDetail }) {
   return (
     <>

@@ -9,6 +9,9 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 
+/**
+ * Componente que muestra el register
+ */
 function Registrar() {
   const [name, setName] = useState({ name: "" });
   const [lastname, setLastname] = useState({ lastname: "" });
@@ -17,6 +20,9 @@ function Registrar() {
   const [error, setError] = useState({ error: false, errorMessage: "" });
   const navigate = useNavigate();
 
+  /**
+   * Peticion a la API para validar el usuario y crearlo
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
     const res = await fetch("http://localhost:3001/register", {
@@ -33,6 +39,9 @@ function Registrar() {
     }
   };
 
+  /**
+   * Guarda la informacion del nombre, apellido, email y contraseña cuando el usuario escribe en los inputs
+   */
   const handleChange = (e) => {
     setName({ ...name, [e.target.name]: e.target.value });
     setLastname({ ...lastname, [e.target.name]: e.target.value });

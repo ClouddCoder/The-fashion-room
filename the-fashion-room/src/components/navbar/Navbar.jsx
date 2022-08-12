@@ -3,6 +3,9 @@ import AuthContext from "../../context/auth-context/AuthContext";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 
+/**
+ * Componente que muestra el navbar
+ */
 function Navbar() {
   const { auth, setAuth, userName } = useContext(AuthContext);
 

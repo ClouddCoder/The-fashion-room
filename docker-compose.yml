@@ -16,7 +16,7 @@ services:
   react-app:
     build:
       context: ./the-fashion-room
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     stdin_open: true
     ports:
       - "3000:3000"
@@ -26,7 +26,7 @@ services:
   api-server:
     build:
       context: ./react-node-app
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     ports:
       - "3001:3001"
     networks:
@@ -59,7 +59,6 @@ services:
       - pern-network
     depends_on:
       - postgres-tfr
-
 
 networks:
   pern-network:

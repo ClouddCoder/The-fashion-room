@@ -6,6 +6,9 @@ import "./Footer.css";
 import { Container, Grid, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 
+/**
+ * Componente que muestra el footer de la tienda
+ */
 function Footer() {
   return (
     <Box component="div" className="app_footer">

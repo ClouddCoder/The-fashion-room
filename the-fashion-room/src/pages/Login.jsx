@@ -10,6 +10,9 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 
+/**
+ * Componente que muestra el login
+ */
 function Ingresar() {
   const [email, setEmail] = useState({ email: "" });
   const [password, setPasswordLog] = useState({ password: "" });
@@ -18,6 +21,9 @@ function Ingresar() {
 
   const navigate = useNavigate();
 
+  /**
+   * Peticion a la API para validar el usuario
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
     const res = await fetch("http://localhost:3001/login", {
@@ -37,6 +43,9 @@ function Ingresar() {
     }
   };
 
+  /**
+   * Guarda la informacion del email y contraseña cuando el usuario escribe en los inputs
+   */
   const handleChange = (e) => {
     setEmail({ ...email, [e.target.name]: e.target.value });
     setPasswordLog({ ...password, [e.target.name]: e.target.value });

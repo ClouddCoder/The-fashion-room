@@ -8,10 +8,16 @@ import Footer from "../components/footer/Footer";
 import axios from "axios";
 import InvoiceDetail from "../components/InvoiceDetail";
 
+/**
+ * Componente que muestra las compras realizadas por el usuario
+ */
 function Orders() {
   const { userId } = useContext(AuthContext);
   const [orderDetail, setOrderDetail] = useState();
 
+  /**
+   * Peticion a la API para obtener la informacion de las compras realizadas por el usuario
+   */
   const loadOrderDetail = async () => {
     axios
       .post("http://localhost:3001/order-detail", { userId })
@@ -30,6 +36,9 @@ function Orders() {
       .catch((err) => console.log(err));
   };
 
+  /**
+   * Ejecuta la funcion loadOrderDetail()
+   */
   useEffect(() => {
     loadOrderDetail();
   }, []);
