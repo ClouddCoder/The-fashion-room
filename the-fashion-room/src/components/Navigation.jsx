@@ -11,6 +11,9 @@ import Contact from "../pages/Contact";
 import Invoice from "../pages/Invoice";
 import Orders from "../pages/Orders";
 
+/**
+ * Componente que establece las rutas de la aplicacion
+ */
 function Navigation() {
   return (
     <>

@@ -8,10 +8,16 @@ import ProductContext from "../context/product-context/ProductContext";
 import Navbar from "../components/navbar/Navbar";
 import Footer from "../components/footer/Footer";
 
+/**
+ * Componente que muestra el catalogo de productos
+ */
 function Catalogue() {
   const { addToCart, loadProducts, products } = useContext(ProductContext);
   const { auth } = useContext(AuthContext);
 
+  /**
+   * Boton personalizado para agregar productos al carrito dependiendo del estado de la autenticacion global del usuario
+   */
   const customButton = () => {
     if (auth) {
       return (
@@ -28,6 +34,9 @@ function Catalogue() {
     }
   };
 
+  /**
+   * Ejecuta la funcion loadProducts() del contexto ProductContext
+   */
   useEffect(() => {
     loadProducts();
   }, []);

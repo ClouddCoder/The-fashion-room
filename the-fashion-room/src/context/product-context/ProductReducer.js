@@ -1,5 +1,8 @@
 import { TYPES } from "../../actions/productActions";
 
+/**
+ * Funcion reductora que determina las acciones a realizar dependiendo del tipo de accion
+ */
 export function ProductReducer(state, action) {
   switch (action.type) {
     case TYPES.LOAD_PRODUCTS:

@@ -9,6 +9,9 @@ import { palette } from "@mui/system";
 import Navbar from "../components/navbar/Navbar";
 import Footer from "../components/footer/Footer";
 
+/**
+ * Componente que muestra la factura de la compra
+ */
 function Invoice() {
   const { cart, totalPrice, clearCart, invoiceId } = useContext(ProductContext);
   const navigate = useNavigate();

@@ -9,6 +9,9 @@ import OrderResume from "../components/OrderResume";
 import Navbar from "../components/navbar/Navbar";
 import Footer from "../components/footer/Footer";
 
+/**
+ * Componente que muestra el carrito de compras
+ */
 function ShoppingCart() {
   const {
     cart,
@@ -30,6 +33,9 @@ function ShoppingCart() {
     getTotalPrice();
   }, []);
 
+  /**
+   * Peticion a la API para actualizar un producto despues de una compra
+   */
   const buyProducts = async () => {
     const res = await fetch("http://localhost:3001/cart", {
       method: "PUT",

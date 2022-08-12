@@ -7,22 +7,34 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import axios from "axios";
 
+/**
+ * Componente que muestra la informacion de la tienda
+ */
 function Contact() {
   const [stores, getStores] = useState();
   const [storesPhones, getStoresPhones] = useState();
 
+  /**
+   * Peticion a la API para obtener la informacion de las tiendas
+   */
   const loadStores = async () => {
     const response = await axios.get("http://localhost:3001/stores");
     const data = await response.data;
     getStores(data);
   };
 
+  /**
+   * Peticion a la API para obtener la informacion de los telefonos de las tiendas
+   */
   const loadStoresPhones = async () => {
     const response = await axios.get("http://localhost:3001/stores/phones");
     const data = await response.data;
     getStoresPhones(data);
   };
 
+  /**
+   * Ejecuta la funcion loadStores() y loadStoresPhones()
+   */
   useEffect(() => {
     loadStores();
     loadStoresPhones();

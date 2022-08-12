@@ -1,5 +1,8 @@
 const pool = require("../db");
 
+/**
+ * Obtiene el usuario según el email y contraseña ingresados
+ */
 const loginUser = async (req, res, next) => {
   const { email, password } = req.body;
   const query = "SELECT customer_id, name FROM customer WHERE email = $1 AND password = $2";
@@ -22,6 +25,9 @@ const loginUser = async (req, res, next) => {
   }
 };
 
+/**
+ * Registra un usuario nuevo a la base de datos
+ */
 const registerUser = async (req, res, next) => {
   const { name, lastname, email, password } = req.body;
   const query = "INSERT INTO customer (name, lastname, email, password) VALUES ($1, $2, $3, $4)";
@@ -35,6 +41,9 @@ const registerUser = async (req, res, next) => {
   }
 };
 
+/**
+ * Obtiene todos los productos de la base de datos
+ */
 const getProducts = async (req, res, next) => {
   const query = "SELECT * FROM product";
 
@@ -46,6 +55,9 @@ const getProducts = async (req, res, next) => {
   }
 };
 
+/**
+ * Actualiza la informacion de un producto despues de realizar una compra
+ */
 const buyProduct = async (req, res, next) => {
   const cart = req.body;
   const query = "UPDATE product SET stock = stock - $1 WHERE product_id = $2";
@@ -66,6 +78,9 @@ const buyProduct = async (req, res, next) => {
   }
 };
 
+/**
+ * Crea una nueva factura despues de cada compra
+ */
 const createInvoice = async (req, res, next) => {
   const { userId, cart } = req.body;
   const queryCreateInvoiceId = "SELECT create_invoice_id()";
@@ -97,6 +112,9 @@ const createInvoice = async (req, res, next) => {
   }
 };
 
+/**
+ * Obtiene la informacion de las tiendas de la base de datos
+ */
 const getStores = async (req, res, next) => {
   const query = "SELECT * FROM store";
 
@@ -108,6 +126,9 @@ const getStores = async (req, res, next) => {
   }
 };
 
+/**
+ * Obtiene los telefonos de las tiendas de la base de datos
+ */
 const getStoresPhones = async (req, res, next) => {
   const query = "SELECT phone FROM store_phone INNER JOIN store ON store.nit = store_phone.nit";
 
@@ -119,6 +140,9 @@ const getStoresPhones = async (req, res, next) => {
   }
 };
 
+/**
+ * Obtiene la informacion detallada de cada factura
+ */
 const getOrderDetail = async (req, res, next) => {
   const { userId } = req.body;
   const query =

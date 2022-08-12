@@ -6,6 +6,9 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
 
+/**
+ * Componente que muestra la categoria en el inicio de la pagina
+ */
 function OfferItem({ alt, image, title, description }) {
   return (
     <Card sx={{ maxWidth: 345, m: 3 }}>

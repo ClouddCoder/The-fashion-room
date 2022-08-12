@@ -6,6 +6,9 @@ import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import { palette } from "@mui/system";
 
+/**
+ * Componente que muestra el resumen de la compra que se va a realizar
+ */
 function OrderResume({
   buyProducts,
   getUserId,

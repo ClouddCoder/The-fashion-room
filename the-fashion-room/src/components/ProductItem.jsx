@@ -8,6 +8,9 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { useNavigate } from "react-router-dom";
 
+/**
+ * Componente que muestra el producto en el catalogo
+ */
 function ProductItem({ product, addToCart }) {
   const { auth } = useContext(AuthContext);
   const navigate = useNavigate();

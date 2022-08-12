@@ -8,6 +8,9 @@ import deportiva from "../../assets/offers/Deportiva.png";
 import bolsos from "../../assets/offers/Bolsos.png";
 import "./Offers.css";
 
+/**
+ * Componente que muestra las diferentes categorias de la tienda en el inicio
+ */
 function Offers() {
   return (
     <Box className="offer_container" mb={3}>

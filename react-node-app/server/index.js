@@ -9,8 +9,11 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(cors());
-
 app.use(userRoutes);
+
+/**
+ * Determina las peticiones, respuestas y errores personalizados en cada consulta
+ */
 app.use((err, req, res, next) => {
   if (err.code === "23505") {
     return res.status(409).json({
@@ -29,6 +32,9 @@ app.use((err, req, res, next) => {
   });
 });
 
+/**
+ * Inicia el servidor en el puerto 3001
+ */
 app.listen(3001, "0.0.0.0", () => {
   console.log("Server running on port 3001");
 });

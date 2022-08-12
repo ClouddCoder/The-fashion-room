@@ -3,6 +3,9 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Divider from "@mui/material/Divider";
 
+/**
+ * Componente que muestra la informacion de la tienda
+ */
 function StoreInfo({ store_name, store_address, store_phone }) {
   return (
     <Grid item container>
