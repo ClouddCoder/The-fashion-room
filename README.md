@@ -16,9 +16,9 @@ https://github.com/ClouddCoder/The-fashion-room.git
 3. Dentro de **react-node-app** se debe crear un archivo ***.env*** para establecer las variables de entorno que conectarán con la base de datos Postgres
 (Depende de cada usuario).
 
-4. Abrir una terminal dentro de la carpeta **the-fashion-room* y ejecutar el comando `npm install`.
+4. Abrir una terminal dentro de la carpeta **the-fashion-room** y ejecutar el comando `npm install`.
 
-5. Crear una imagen y contenedor de Postgres en Docker con sus respectivas variables de entorno que coincidan con el archivo ***.env*** de la carpeta **react-node-app***
+5. Crear una imagen y contenedor de Postgres en Docker con sus respectivas variables de entorno que coincidan con el archivo ***.env*** de la carpeta **react-node-app**
 ```
 docker run --name <nombre> -p <puertos> -e POSTGRES_USER=<usuario> -e POSTGRES_PASSWORD=<contraseña> -e POSTGRES_DB=<nombre_bd> -d postgres
 ```
@@ -27,7 +27,7 @@ docker run --name <nombre> -p <puertos> -e POSTGRES_USER=<usuario> -e POSTGRES_P
 docker run --name <nombre> -p <puertos> -e 'PGADMIN_DEFAULT_EMAIL=<email> -e 'PGADMIN_DEFAULT_PASSWORD=<contraseña> -d dpage/pgadmin4
 ```
 7. Abrir un ***localhost:<puerto>*** en el navegador con el puerto expuesto establecido al crear el contenedor de pgAdmin, se debe crear una base de datos que concidan
-con las variables de entorno establecidas en el archivo ***.env*** de la carpeta **react-node-pp***.
+con las variables de entorno establecidas en el archivo ***.env*** de la carpeta **react-node-pp**.
 
 8. Copiar el contenido del archivo ***queries.sql*** que se encuentra en la carpeta **react-node-app** y pegarlo dentro de la sección de ***Query tools*** de pgAdmin para crear las tablas, 
 funciones e inserciones para el correcto funcionamiento de la tienda.
