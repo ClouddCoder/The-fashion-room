@@ -1,22 +1,70 @@
 version: "3.8"
-
 services:
-  postgres:
+  nginx:
+    depends_on:
+      - api-server
+      - react-app
+    restart: always
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    ports:
+      - "3050:80"
+    networks:
+      - pern-network
+
+  react-app:
+    build:
+      context: ./the-fashion-room
+      dockerfile: Dockerfile
+    stdin_open: true
+    ports:
+      - "3000:3000"
+    networks:
+      - pern-network
+
+  api-server:
+    build:
+      context: ./react-node-app
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    networks:
+      - pern-network
+    depends_on:
+      - postgres-tfr
+
+  postgres-tfr:
     image: postgres
     restart: always
     ports:
       - "5432:5432"
+    networks:
+      - pern-network
     environment:
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=admin
       - POSTGRES_DB=tfr
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
 
-  pgadmin:
+  pgadmin-tfr:
     image: dpage/pgadmin4
     environment:
       PGADMIN_DEFAULT_EMAIL: "admin@admin.com"
       PGADMIN_DEFAULT_PASSWORD: "admin"
     ports:
       - "81:80"
+    networks:
+      - pern-network
     depends_on:
-      - postgres
+      - postgres-tfr
+
+
+networks:
+  pern-network:
+    driver: bridge
+
+volumes:
+  postgres-data:
+    driver: local
