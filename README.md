@@ -1,9 +1,9 @@
-The Fashion Room
+# The Fashion Room
 
 Este proyecto tiene como objetivo demostrar las habilidades adquiridas durante el semestre en la materia Bases de datos, cuya arquitectura consiste en una tienda online
 que contiene el cliente (Frontend), api-server (Backend) y una base de datos en Postgres.
 
-Instalación
+## Instalación
 
 Para poner en prueba el proyecto se deben seguir los siguientes pasos:
 
@@ -37,9 +37,15 @@ funciones e inserciones para el correcto funcionamiento de la tienda.
 10. Ejecutar el comando `npm start` para ejecutar el frontend de la aplicación y empezar a interactuar desde el navegador. Por defecto se abrirá un ***localhost:3000*** en
 el navegador.
 
-Desplegar proyecto con Docker compose
+## Desplegar proyecto con Docker compose
 
 Dentro del proyecto se encuentra una carpeta **nginx** con dos archivos para crear un contenedor del mismo en docker, esto es para poder desplegar la aplicación
-completa con un docker compose, por ende en las carpetas **react-node-app** y **the-fashion-room** se encuentran sus respectivos archivos Dockerfile.
+completa con un docker compose, por ende en las carpetas **react-node-app** y **the-fashion-room** se encuentran sus respectivos archivos Dockerfile y en el directorio raíz del proyecto se encuentra el archivo ***docker-compose-yml*** para su respectiva configuración.
 
 Esta funcionalidad aún está en prueba, sin embargo el usuario lo puede modificar y desplegar a su gusto.
+
+## Equipo de trabajo
+- Brayan Sánchez [@ClouddCoder](https://github.com/ClouddCoder)
+- Diana Cadena [@DianaCadenaMoreno](https://github.com/DianaCadenaMoreno)
+- Juan Majin [@JuanMajin](https://github.com/JuanMajin)
+- Mayra Sánchez [@mayra-Sanchez](https://github.com/mayra-Sanchez)
