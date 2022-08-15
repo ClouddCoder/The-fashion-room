@@ -13,8 +13,14 @@ https://github.com/ClouddCoder/The-fashion-room.git
 ```
 2. Abrir una terminal dentro de la carpeta **react-node-app** y ejecutar el comando `npm install`.
 
-3. Dentro de **react-node-app** se debe crear un archivo ***.env*** para establecer las variables de entorno que conectarán con la base de datos Postgres
-(Depende de cada usuario).
+3. Dentro de **react-node-app** se debe crear un archivo ***.env*** para establecer las variables de entorno que conectarán con la base de datos Postgres.
+
+Las variables son:
+- DB_USER = <user>
+- DB_PASSWORD = <password>
+- DB_HOST = <host>
+- DB_DATABASE = <database>
+- DB_PORT = <port>
 
 4. Abrir una terminal dentro de la carpeta **the-fashion-room** y ejecutar el comando `npm install`.
 
@@ -22,19 +28,20 @@ https://github.com/ClouddCoder/The-fashion-room.git
 ```
 docker run --name <nombre> -p <puertos> -e POSTGRES_USER=<usuario> -e POSTGRES_PASSWORD=<contraseña> -e POSTGRES_DB=<nombre_bd> -d postgres
 ```
-6. Crear una imagen y contenedor de pgAdmin en Docker con las variables de entorno
+6. Crear una imagen y contenedor de pgAdmin en Docker
 ```
 docker run --name <nombre> -p <puertos> -e 'PGADMIN_DEFAULT_EMAIL=<email> -e 'PGADMIN_DEFAULT_PASSWORD=<contraseña> -d dpage/pgadmin4
 ```
-7. Abrir un ***localhost:<puerto>*** en el navegador con el puerto expuesto establecido al crear el contenedor de pgAdmin, se debe crear una base de datos que concidan
-con las variables de entorno establecidas en el archivo ***.env*** de la carpeta **react-node-pp**.
+7. Abrir un ***localhost:<puerto>*** en el navegador con el fin de acceder a pgAdmin para conectar la base de datos, este último debe coincidir con las variables de entorno establecidas en el archivo ***.env*** de la carpeta **react-node-pp**.
 
-8. Copiar el contenido del archivo ***queries.sql*** que se encuentra en la carpeta **react-node-app** y pegarlo dentro de la sección de ***Query tools*** de pgAdmin para crear las tablas, 
+Cabe resaltar que al momento de conectar la base de datos, en ***Host name/address*** de la sección ***Connection*** se debe colocar la IP del contenedor de Postgres. Para ello es necesario ejecutar `docker inspect <contenedor_postgres>` en una terminal y copiar la IP de "IPAddress".
+
+8. Copiar el contenido del archivo ***queries.sql*** que se encuentra en la carpeta **react-node-app** y pegarlo dentro de la sección de ***Query tools*** de pgAdmin para crear las tablas,
 funciones e inserciones para el correcto funcionamiento de la tienda.
 
 9. Ejecutar el comando `npm run dev`en una terminal dentro de la carpeta **react-node-app** para desplegar el backend de la aplicación, no se debe cerrar la terminal.
 
-10. Ejecutar el comando `npm start` para ejecutar el frontend de la aplicación y empezar a interactuar desde el navegador. Por defecto se abrirá un ***localhost:3000*** en
+10. En otra terminal se debe ejecutar el comando `npm start` dentro de la carpeta **the-fashion-room** para mostrar el frontend de la aplicación y empezar a interactuar desde el navegador. Por defecto se abrirá un ***localhost:3000*** en
 el navegador.
 
 ## Desplegar proyecto con Docker compose
