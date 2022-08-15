@@ -1,89 +1,3 @@
-CREATE TABLE store (
-    nit INTEGER,
-    name VARCHAR(30) NOT NULL,
-    address VARCHAR(30) NOT NULL,
-    CONSTRAINT pk_store PRIMARY KEY (nit)
-)
-
-CREATE SEQUENCE nit_seq
-    START WITH 2020
-    INCREMENT BY 1
-    OWNED BY store.nit;
-
-INSERT INTO store (nit, name, address) VALUES (nextval('nit_seq'), 'THE FASHION ROOM SUR', 'CR 29B N 325-4');
-INSERT INTO store (nit, name, address) VALUES (nextval('nit_seq'), 'THE FASHION ROOM NORTE', 'CR 100 N110-2');
-INSERT INTO store (nit, name, address) VALUES (nextval('nit_seq'), 'THE FASHION ROOM ORIENTE', 'CR 5 N20-12');
-INSERT INTO store (nit, name, address) VALUES (nextval('nit_seq'), 'THE FASHION ROOM OCCIDENTE', 'CR 5 N1-2');
-INSERT INTO store (nit, name, address) VALUES (nextval('nit_seq'), 'THE FASHION ROOM SUROCCIDENTE', 'CR 7 N56-32');
-
-CREATE TABLE store_phone (
-    nit INTEGER,
-    phone BIGINT NOT NULL,
-    CONSTRAINT pk_store_phone PRIMARY KEY (nit),
-    CONSTRAINT fk_store_phone FOREIGN KEY (nit) REFERENCES store(nit)
-)
-
-INSERT INTO store_phone (nit, phone) VALUES (2020, 4225136);
-INSERT INTO store_phone (nit, phone) VALUES (2021, 4225136);
-INSERT INTO store_phone (nit, phone) VALUES (2022, 4218755);
-INSERT INTO store_phone (nit, phone) VALUES (2023, 4856923);
-INSERT INTO store_phone (nit, phone) VALUES (2024, 4128745);
-
-CREATE TABLE customer (
-    customer_id SERIAL,
-    name VARCHAR(25) NOT NULL,
-    lastname VARCHAR(25),
-    email VARCHAR(40) UNIQUE NOT NULL,
-    password VARCHAR(30) NOT NULL,
-    CONSTRAINT pk_customer PRIMARY KEY (customer_id)
-)
-
-SELECT * FROM customer;
-DELETE FROM customer WHERE customer_id > 0;
-ALTER SEQUENCE customer_customer_id_seq RESTART WITH 1;
-
-CREATE TABLE invoice (
-    invoice_id INTEGER,
-    customer_id INTEGER NOT NULL,
-    purchase_date DATE NOT NULL,
-    CONSTRAINT pk_invoice PRIMARY KEY (invoice_id),
-    CONSTRAINT fk_invoice_customer_id FOREIGN KEY (customer_id) REFERENCES customer(customer_id)
-)
-
-CREATE SEQUENCE invoice_id_seq
-    START WITH 1000
-    INCREMENT BY 1
-    OWNED BY invoice.invoice_id;
-
-CREATE TABLE invoice_detail (
-    invoice_id INTEGER NOT NULL,
-    product_id INTEGER NOT NULL,
-    quantity INTEGER NOT NULL,
-    total_amount INTEGER NOT NULL,
-    CONSTRAINT fk_invoice_detail_invoice_id FOREIGN KEY (invoice_id) REFERENCES invoice(invoice_id),
-    CONSTRAINT fk_invoice_detail_product_id FOREIGN KEY (product_id) REFERENCES product(product_id)
-)
-
-CREATE TABLE product (
-    product_id INTEGER,
-    product_name VARCHAR(25) NOT NULL,
-    price INTEGER NOT NULL,
-    stock INTEGER NOT NULL,
-    CONSTRAINT pk_product PRIMARY KEY (product_id)
-)
-
-INSERT INTO product (product_id, product_name, price, stock) VALUES (nextval('product_product_id_seq'), 'Blusa', 45000, 100);
-INSERT INTO product (product_id, product_name, price, stock) VALUES (nextval('product_product_id_seq'), 'Camisa', 40000, 100);
-INSERT INTO product (product_id, product_name, price, stock) VALUES (nextval('product_product_id_seq'), 'Corbata', 20000, 100);
-INSERT INTO product (product_id, product_name, price, stock) VALUES (nextval('product_product_id_seq'), 'Pantalon', 65000, 100);
-INSERT INTO product (product_id, product_name, price, stock) VALUES (nextval('product_product_id_seq'), 'Pantaloneta', 30000, 100);
-INSERT INTO product (product_id, product_name, price, stock) VALUES (nextval('product_product_id_seq'), 'Zapatos', 90000, 100);
-
-CREATE SEQUENCE product_product_id_seq
-    START WITH 656589
-    INCREMENT BY 215
-    OWNED BY product.product_id;
-
 CREATE OR REPLACE FUNCTION create_invoice_id()
 	RETURNS INTEGER AS
 	$BODY$
@@ -118,9 +32,84 @@ CREATE OR REPLACE FUNCTION invoice_data(inv_id INTEGER, prod_id INTEGER, quant I
     $BODY$
     LANGUAGE plpgsql;
 
-ALTER SEQUENCE invoice_id_seq RESTART;
+CREATE TABLE product (
+    product_id INTEGER,
+    product_name VARCHAR(25) NOT NULL,
+    price INTEGER NOT NULL,
+    stock INTEGER NOT NULL,
+    CONSTRAINT pk_product PRIMARY KEY (product_id)
+);
 
-DELETE FROM invoice_detail WHERE invoice_id > 900;
-DELETE FROM invoice WHERE invoice_id > 900;
-SELECT * FROM invoice;
-SELECT * FROM invoice_detail;
+CREATE SEQUENCE product_product_id_seq
+    START WITH 656589
+    INCREMENT BY 215
+    OWNED BY product.product_id;
+
+INSERT INTO product (product_id, product_name, price, stock) VALUES (nextval('product_product_id_seq'), 'Blusa', 45000, 100);
+INSERT INTO product (product_id, product_name, price, stock) VALUES (nextval('product_product_id_seq'), 'Camisa', 40000, 100);
+INSERT INTO product (product_id, product_name, price, stock) VALUES (nextval('product_product_id_seq'), 'Corbata', 20000, 100);
+INSERT INTO product (product_id, product_name, price, stock) VALUES (nextval('product_product_id_seq'), 'Pantalon', 65000, 100);
+INSERT INTO product (product_id, product_name, price, stock) VALUES (nextval('product_product_id_seq'), 'Pantaloneta', 30000, 100);
+INSERT INTO product (product_id, product_name, price, stock) VALUES (nextval('product_product_id_seq'), 'Zapatos', 90000, 100);
+
+CREATE TABLE customer (
+    customer_id SERIAL,
+    name VARCHAR(25) NOT NULL,
+    lastname VARCHAR(25),
+    email VARCHAR(40) UNIQUE NOT NULL,
+    password VARCHAR(30) NOT NULL,
+    CONSTRAINT pk_customer PRIMARY KEY (customer_id)
+);
+
+CREATE TABLE invoice (
+    invoice_id INTEGER,
+    customer_id INTEGER NOT NULL,
+    purchase_date DATE NOT NULL,
+    CONSTRAINT pk_invoice PRIMARY KEY (invoice_id),
+    CONSTRAINT fk_invoice_customer_id FOREIGN KEY (customer_id) REFERENCES customer(customer_id)
+);
+
+CREATE SEQUENCE invoice_id_seq
+    START WITH 1000
+    INCREMENT BY 1
+    OWNED BY invoice.invoice_id;
+
+CREATE TABLE invoice_detail (
+    invoice_id INTEGER NOT NULL,
+    product_id INTEGER NOT NULL,
+    quantity INTEGER NOT NULL,
+    total_amount INTEGER NOT NULL,
+    CONSTRAINT fk_invoice_detail_invoice_id FOREIGN KEY (invoice_id) REFERENCES invoice(invoice_id),
+    CONSTRAINT fk_invoice_detail_product_id FOREIGN KEY (product_id) REFERENCES product(product_id)
+);
+
+CREATE TABLE store (
+    nit INTEGER,
+    name VARCHAR(30) NOT NULL,
+    address VARCHAR(30) NOT NULL,
+    CONSTRAINT pk_store PRIMARY KEY (nit)
+);
+
+CREATE SEQUENCE nit_seq
+    START WITH 2020
+    INCREMENT BY 1
+    OWNED BY store.nit;
+
+INSERT INTO store (nit, name, address) VALUES (nextval('nit_seq'), 'THE FASHION ROOM SUR', 'CR 29B N 325-4');
+INSERT INTO store (nit, name, address) VALUES (nextval('nit_seq'), 'THE FASHION ROOM NORTE', 'CR 100 N110-2');
+INSERT INTO store (nit, name, address) VALUES (nextval('nit_seq'), 'THE FASHION ROOM ORIENTE', 'CR 5 N20-12');
+INSERT INTO store (nit, name, address) VALUES (nextval('nit_seq'), 'THE FASHION ROOM OCCIDENTE', 'CR 5 N1-2');
+INSERT INTO store (nit, name, address) VALUES (nextval('nit_seq'), 'THE FASHION ROOM SUROCCIDENTE', 'CR 7 N56-32');
+
+CREATE TABLE store_phone (
+    nit INTEGER,
+    phone BIGINT NOT NULL,
+    CONSTRAINT pk_store_phone PRIMARY KEY (nit),
+    CONSTRAINT fk_store_phone FOREIGN KEY (nit) REFERENCES store(nit)
+);
+
+INSERT INTO store_phone (nit, phone) VALUES (2020, 4225136);
+INSERT INTO store_phone (nit, phone) VALUES (2021, 4225136);
+INSERT INTO store_phone (nit, phone) VALUES (2022, 4218755);
+INSERT INTO store_phone (nit, phone) VALUES (2023, 4856923);
+INSERT INTO store_phone (nit, phone) VALUES (2024, 4128745);
