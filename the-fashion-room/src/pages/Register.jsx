@@ -25,7 +25,7 @@ function Registrar() {
    */
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await fetch("http://localhost:3001/register", {
+    const res = await fetch("http://localhost:3050/api-server/register", {
       method: "POST",
       body: JSON.stringify(name, lastname, email, password),
       headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },

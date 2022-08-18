@@ -20,7 +20,7 @@ function Orders() {
    */
   const loadOrderDetail = async () => {
     axios
-      .post("http://localhost:3001/order-detail", { userId })
+      .post("http://localhost:3050/api-server/order-detail", { userId })
       .then((response) => {
         const groupsOrderDetail = Object.values(
           response.data.reduce(

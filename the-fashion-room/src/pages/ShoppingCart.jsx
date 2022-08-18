@@ -37,7 +37,7 @@ function ShoppingCart() {
    * Peticion a la API para actualizar un producto despues de una compra
    */
   const buyProducts = async () => {
-    const res = await fetch("http://localhost:3001/cart", {
+    const res = await fetch("http://localhost:3050/api-server/cart", {
       method: "PUT",
       body: JSON.stringify(cart),
       headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },

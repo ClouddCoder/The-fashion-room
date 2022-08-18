@@ -18,7 +18,7 @@ function Contact() {
    * Peticion a la API para obtener la informacion de las tiendas
    */
   const loadStores = async () => {
-    const response = await axios.get("http://localhost:3001/stores");
+    const response = await axios.get("http://localhost:3050/api-server/stores");
     const data = await response.data;
     getStores(data);
   };
@@ -27,7 +27,7 @@ function Contact() {
    * Peticion a la API para obtener la informacion de los telefonos de las tiendas
    */
   const loadStoresPhones = async () => {
-    const response = await axios.get("http://localhost:3001/stores/phones");
+    const response = await axios.get("http://localhost:3050/api-server/stores/phones");
     const data = await response.data;
     getStoresPhones(data);
   };

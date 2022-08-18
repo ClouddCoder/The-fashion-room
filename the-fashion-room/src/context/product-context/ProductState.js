@@ -22,7 +22,9 @@ function ProductState(props) {
    * Obtiene los productos de la API
    */
   const loadProducts = async () => {
-    const response = await axios.get("http://localhost:3001/catalogue", { crossDomain: true });
+    const response = await axios.get("http://localhost:3050/api-server/catalogue", {
+      crossDomain: true,
+    });
     const data = await response.data;
     dispatch({ type: TYPES.LOAD_PRODUCTS, payload: data });
   };
@@ -72,7 +74,7 @@ function ProductState(props) {
    * Crea una factura nueva en la API
    */
   const createInvoice = async (userId, cart) => {
-    const res = await fetch("http://localhost:3001/invoice", {
+    const res = await fetch("http://localhost:3050/api-server/invoice", {
       method: "POST",
       body: JSON.stringify({ userId, cart }),
       headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },

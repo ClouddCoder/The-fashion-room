@@ -1,6 +1,7 @@
 version: "3.8"
 services:
   nginx:
+    container_name: nginx
     depends_on:
       - api-server
       - react-app
@@ -14,6 +15,7 @@ services:
       - pern-network
 
   react-app:
+    container_name: react-app
     build:
       context: ./the-fashion-room
       dockerfile: Dockerfile.dev
@@ -24,6 +26,7 @@ services:
       - pern-network
 
   api-server:
+    container_name: api-server
     build:
       context: ./react-node-app
       dockerfile: Dockerfile.dev
@@ -35,6 +38,7 @@ services:
       - postgres-tfr
 
   postgres-tfr:
+    container_name: postgres-tfr
     image: postgres
     restart: always
     ports:
@@ -49,6 +53,7 @@ services:
       - postgres-data:/var/lib/postgresql/data
 
   pgadmin-tfr:
+    container_name: pgadmin-tfr
     image: dpage/pgadmin4
     environment:
       PGADMIN_DEFAULT_EMAIL: "admin@admin.com"
