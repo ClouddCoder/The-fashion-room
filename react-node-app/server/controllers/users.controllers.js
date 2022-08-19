@@ -29,6 +29,7 @@ const loginUser = async (req, res, next) => {
  * Registra un usuario nuevo a la base de datos
  */
 const registerUser = async (req, res, next) => {
+  // eslint-disable-next-line object-curly-newline
   const { name, lastname, email, password } = req.body;
   const query = "INSERT INTO customer (name, lastname, email, password) VALUES ($1, $2, $3, $4)";
   const values = [name, lastname, email, password];
@@ -37,7 +38,7 @@ const registerUser = async (req, res, next) => {
     await pool.query(query, values);
     return res.json({ message: "success" });
   } catch (error) {
-    next(error);
+    return next(error);
   }
 };
 
@@ -63,6 +64,8 @@ const buyProduct = async (req, res, next) => {
   const query = "UPDATE product SET stock = stock - $1 WHERE product_id = $2";
 
   try {
+    /* eslint-disable no-await-in-loop */
+    // eslint-disable-next-line no-restricted-syntax
     for (const item of cart) {
       const result = await pool.query(query, [item.quantityInCart, item.product_id]);
 
@@ -72,9 +75,10 @@ const buyProduct = async (req, res, next) => {
         });
       }
     }
+    /* eslint-enable no-await-in-loop */
     return res.json({ message: "success" });
   } catch (error) {
-    next(error);
+    return next(error);
   }
 };
 
@@ -92,6 +96,8 @@ const createInvoice = async (req, res, next) => {
     const invoiceId = getInvoiceId.rows[0].create_invoice_id;
     await pool.query(queryInsertInvoice, [invoiceId, userId]);
 
+    /* eslint-disable no-await-in-loop */
+    // eslint-disable-next-line no-restricted-syntax
     for (const item of cart) {
       const getInvoiceDetails = await pool.query(queryInsertInvoiceDetails, [
         invoiceId,
@@ -106,9 +112,11 @@ const createInvoice = async (req, res, next) => {
         });
       }
     }
+    /* eslint-enable no-await-in-loop */
+
     return res.json({ message: "success", invoiceId });
   } catch (error) {
-    next(error);
+    return next(error);
   }
 };
 
@@ -145,14 +153,17 @@ const getStoresPhones = async (req, res, next) => {
  */
 const getOrderDetail = async (req, res, next) => {
   const { userId } = req.body;
-  const query =
-    "SELECT invoice_detail.invoice_id, purchase_date, product_name, quantity, total_amount FROM invoice_detail INNER JOIN invoice ON invoice.invoice_id = invoice_detail.invoice_id INNER JOIN product ON product.product_id = invoice_detail.product_id WHERE customer_id = $1";
+  let query = "SELECT invoice_detail.invoice_id, purchase_date, ";
+  query += "product_name, quantity, total_amount FROM invoice_detail ";
+  query += "INNER JOIN invoice ON invoice.invoice_id = invoice_detail.invoice_id ";
+  query += "INNER JOIN product ON product.product_id = invoice_detail.product_id ";
+  query += "WHERE customer_id = $1";
 
   try {
     const result = await pool.query(query, [userId]);
     return res.json(result.rows);
   } catch (error) {
-    next(error);
+    return next(error);
   }
 };
 
