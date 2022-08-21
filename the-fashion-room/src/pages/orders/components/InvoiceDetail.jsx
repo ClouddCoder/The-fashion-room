@@ -6,10 +6,10 @@ import Collapse from "@mui/material/Collapse";
 import CardActions from "@mui/material/CardActions";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import IconButton from "@mui/material/IconButton";
-import OrderDetail from "../components/OrderDetail";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
+import OrderDetail from "./sub-components/OrderDetail";
 
 /**
  * Componente que muestra la informacion de la orden

@@ -1,11 +1,11 @@
 import React from "react";
-import OfferItem from "../OfferItem";
+import OfferItem from "../sub-components/OfferItem";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import calzado from "../../assets/offers/Calzado.png";
-import camisetas from "../../assets/offers/Camisetas.png";
-import deportiva from "../../assets/offers/Deportiva.png";
-import bolsos from "../../assets/offers/Bolsos.png";
+import calzado from "../../../../assets/offers/Calzado.png";
+import camisetas from "../../../../assets/offers/Camisetas.png";
+import deportiva from "../../../../assets/offers/Deportiva.png";
+import bolsos from "../../../../assets/offers/Bolsos.png";
 import "./Offers.css";
 
 /**

@@ -1,15 +1,15 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Login from "../pages/Login";
-import Register from "../pages/Register";
-import Home from "../pages/Home";
-import Catalogue from "../pages/Catalogue";
-import ShoppingCart from "../pages/ShoppingCart";
 import ProductState from "../context/product-context/ProductState";
 import AuthState from "../context/auth-context/AuthState";
-import Contact from "../pages/Contact";
-import Invoice from "../pages/Invoice";
-import Orders from "../pages/Orders";
+import Login from "../pages/login/Login";
+import Register from "../pages/register/Register";
+import Home from "../pages/home/Home";
+import Catalogue from "../pages/catalogue/Catalogue";
+import ShoppingCart from "../pages/shopping-cart/ShoppingCart";
+import Contact from "../pages/contact/Contact";
+import Invoice from "../pages/invoice/Invoice";
+import Orders from "../pages/orders/Orders";
 
 /**
  * Componente que establece las rutas de la aplicacion

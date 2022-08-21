@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import ProductContext from "../context/product-context/ProductContext";
+import ProductContext from "../../context/product-context/ProductContext";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import { palette } from "@mui/system";
-import Navbar from "../components/navbar/Navbar";
-import Footer from "../components/footer/Footer";
+import Navbar from "../../commons/navbar/Navbar";
+import Footer from "../../commons/footer/Footer";
 
 /**
  * Componente que muestra la factura de la compra

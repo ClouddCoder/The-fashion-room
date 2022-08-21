@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import StoreInfo from "../components/StoreInfo";
-import Navbar from "../components/navbar/Navbar";
-import Footer from "../components/footer/Footer";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
+import StoreInfo from "./components/StoreInfo";
+import Navbar from "../../commons/navbar/Navbar";
+import Footer from "../../commons/footer/Footer";
 import axios from "axios";
 
 /**

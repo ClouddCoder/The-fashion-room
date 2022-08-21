@@ -2,11 +2,11 @@ import React, { useEffect, useContext } from "react";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
-import ProductItem from "../components/ProductItem";
-import AuthContext from "../context/auth-context/AuthContext";
-import ProductContext from "../context/product-context/ProductContext";
-import Navbar from "../components/navbar/Navbar";
-import Footer from "../components/footer/Footer";
+import ProductItem from "./components/ProductItem";
+import AuthContext from "../../context/auth-context/AuthContext";
+import ProductContext from "../../context/product-context/ProductContext";
+import Navbar from "../../commons/navbar/Navbar";
+import Footer from "../../commons/footer/Footer";
 
 /**
  * Componente que muestra el catalogo de productos

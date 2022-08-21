@@ -2,12 +2,12 @@ import React, { useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
-import CartItem from "../components/CartItem";
-import ProductContext from "../context/product-context/ProductContext";
-import AuthContext from "../context/auth-context/AuthContext";
-import OrderResume from "../components/OrderResume";
-import Navbar from "../components/navbar/Navbar";
-import Footer from "../components/footer/Footer";
+import ProductContext from "../../context/product-context/ProductContext";
+import AuthContext from "../../context/auth-context/AuthContext";
+import OrderResume from "./components/OrderResume";
+import CartItem from "./components/CartItem";
+import Navbar from "../../commons/navbar/Navbar";
+import Footer from "../../commons/footer/Footer";
 
 /**
  * Componente que muestra el carrito de compras

@@ -2,11 +2,11 @@ import React, { useState, useEffect, useContext } from "react";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-import AuthContext from "../context/auth-context/AuthContext";
-import Navbar from "../components/navbar/Navbar";
-import Footer from "../components/footer/Footer";
+import AuthContext from "../../context/auth-context/AuthContext";
+import InvoiceDetail from "./components/InvoiceDetail";
+import Navbar from "../../commons/navbar/Navbar";
+import Footer from "../../commons/footer/Footer";
 import axios from "axios";
-import InvoiceDetail from "../components/InvoiceDetail";
 
 /**
  * Componente que muestra las compras realizadas por el usuario

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import AuthContext from "../context/auth-context/AuthContext";
+import AuthContext from "../../../context/auth-context/AuthContext";
 import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
@@ -51,7 +51,7 @@ function ProductItem({ product, addToCart }) {
       >
         <Grid container spacing={2}>
           <Grid item={true} sx={{ width: 160, height: 160 }}>
-            <Img alt="complex" src={require(`../assets/products/${product.product_name}.png`)} />
+            <Img alt="complex" src={require(`../../../assets/products/${product.product_name}.png`)} />
           </Grid>
           <Grid item={true} xs={12} sm container>
             <Grid item={true} xs container direction="column" spacing={2}>
