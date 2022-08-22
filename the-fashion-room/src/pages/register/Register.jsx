@@ -15,9 +15,10 @@ import Footer from "../../commons/footer/Footer";
 function Registrar() {
   const [name, setName] = useState({ name: "" });
   const [lastname, setLastname] = useState({ lastname: "" });
-  const [email, setEmail] = useState({ email: "" });
+  const [email, setEmail] = useState({ email: null });
   const [password, setPasswordReg] = useState({ password: "" });
   const [error, setError] = useState({ error: false, errorMessage: "" });
+  const [errorPassword, setErrorPassword] = useState({ errorPassword: false, errorMessage: "" })
   const navigate = useNavigate();
 
   /**
@@ -32,6 +33,7 @@ function Registrar() {
     });
     const data = await res.json();
 
+    console.log(res.status);
     if (res.status === 200) {
       navigate("/");
     } else {
@@ -43,10 +45,17 @@ function Registrar() {
    * Guarda la informacion del nombre, apellido, email y contraseña cuando el usuario escribe en los inputs
    */
   const handleChange = (e) => {
+    if (e.target.name === "password" && e.target.value.length < 4) {
+      setErrorPassword({ errorPassword: true, errorMessage: "La contraseña debe tener más de 4 caracteres" });
+    } else {
+      setErrorPassword({ errorPassword: false, errorMessage: "" })
+      setPasswordReg({ ...password, [e.target.name]: e.target.value });
+    }
+
     setName({ ...name, [e.target.name]: e.target.value });
     setLastname({ ...lastname, [e.target.name]: e.target.value });
     setEmail({ ...email, [e.target.name]: e.target.value });
-    setPasswordReg({ ...password, [e.target.name]: e.target.value });
+    setError({ error: false, errorMessage: "" });
   };
 
   return (
@@ -86,8 +95,8 @@ function Registrar() {
                   sx={{ margin: ".5rem 0" }}
                 />
                 <TextField
-                  error={error.error}
-                  helperText={error.errorMessage}
+                  error={(error.error || errorPassword.errorPassword) ? true : false}
+                  helperText={(error.error) ? error.errorMessage : (errorPassword.errorPassword) ? errorPassword.errorMessage : ""}
                   onChange={handleChange}
                   name="password"
                   variant="filled"

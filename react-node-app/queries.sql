@@ -34,7 +34,7 @@ CREATE OR REPLACE FUNCTION invoice_data(inv_id INTEGER, prod_id INTEGER, quant I
 
 CREATE TABLE product (
     product_id INTEGER,
-    product_name VARCHAR(25) NOT NULL,
+    product_name VARCHAR(25) NOT NULL CHECK (product_name <> ''),
     price INTEGER NOT NULL,
     stock INTEGER NOT NULL,
     CONSTRAINT pk_product PRIMARY KEY (product_id)
@@ -54,10 +54,10 @@ INSERT INTO product (product_id, product_name, price, stock) VALUES (nextval('pr
 
 CREATE TABLE customer (
     customer_id SERIAL,
-    name VARCHAR(25) NOT NULL,
+    name VARCHAR(25) NOT NULL CHECK (name <> ''),
     lastname VARCHAR(25),
-    email VARCHAR(40) UNIQUE NOT NULL,
-    password VARCHAR(30) NOT NULL,
+    email VARCHAR(40) UNIQUE NOT NULL CHECK (email <> ''),
+    password VARCHAR(30) NOT NULL CHECK (password <> ''),
     CONSTRAINT pk_customer PRIMARY KEY (customer_id)
 );
 
@@ -85,8 +85,8 @@ CREATE TABLE invoice_detail (
 
 CREATE TABLE store (
     nit INTEGER,
-    name VARCHAR(30) NOT NULL,
-    address VARCHAR(30) NOT NULL,
+    name VARCHAR(30) NOT NULL CHECK (name <> ''),
+    address VARCHAR(30) NOT NULL CHECK (address <> ''),
     CONSTRAINT pk_store PRIMARY KEY (nit)
 );
 

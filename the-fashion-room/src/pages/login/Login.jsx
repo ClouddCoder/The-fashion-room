@@ -16,8 +16,8 @@ import Footer from "../../commons/footer/Footer";
 function Ingresar() {
   const [email, setEmail] = useState({ email: "" });
   const [password, setPasswordLog] = useState({ password: "" });
-  const { setAuth, setUserName, setUserId } = useContext(AuthContext);
   const [error, setError] = useState({ error: false, errorMessage: "" });
+  const { setAuth, setUserName, setUserId } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -49,6 +49,7 @@ function Ingresar() {
   const handleChange = (e) => {
     setEmail({ ...email, [e.target.name]: e.target.value });
     setPasswordLog({ ...password, [e.target.name]: e.target.value });
+    setError({ error: false, errorMessage: "" });
   };
 
   return (
