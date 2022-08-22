@@ -18,7 +18,7 @@ function Registrar() {
   const [email, setEmail] = useState({ email: null });
   const [password, setPasswordReg] = useState({ password: "" });
   const [error, setError] = useState({ error: false, errorMessage: "" });
-  const [errorPassword, setErrorPassword] = useState({ errorPassword: false, errorMessage: "" })
+  const [errorPassword, setErrorPassword] = useState({ errorPassword: false, errorMessage: "" });
   const navigate = useNavigate();
 
   /**
@@ -26,18 +26,23 @@ function Registrar() {
    */
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await fetch("http://localhost:3050/api-server/register", {
-      method: "POST",
-      body: JSON.stringify(name, lastname, email, password),
-      headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
-    });
-    const data = await res.json();
+    if (!errorPassword.errorPassword) {
+      setErrorPassword({ errorPassword: false, errorMessage: "" });
+      const res = await fetch("http://localhost:3050/api-server/register", {
+        method: "POST",
+        body: JSON.stringify(name, lastname, email, password),
+        headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
+      });
+      const data = await res.json();
 
-    console.log(res.status);
-    if (res.status === 200) {
-      navigate("/");
+      console.log(res.status);
+      if (res.status === 200) {
+        navigate("/");
+      } else {
+        setError({ error: true, errorMessage: data.message });
+      }
     } else {
-      setError({ error: true, errorMessage: data.message });
+      setErrorPassword({ errorPassword: true, errorMessage: "Invalid password" });
     }
   };
 
@@ -46,9 +51,12 @@ function Registrar() {
    */
   const handleChange = (e) => {
     if (e.target.name === "password" && e.target.value.length < 4) {
-      setErrorPassword({ errorPassword: true, errorMessage: "La contraseña debe tener más de 4 caracteres" });
+      setErrorPassword({
+        errorPassword: true,
+        errorMessage: "La contraseña debe tener más de 4 caracteres",
+      });
     } else {
-      setErrorPassword({ errorPassword: false, errorMessage: "" })
+      setErrorPassword({ errorPassword: false, errorMessage: "" });
       setPasswordReg({ ...password, [e.target.name]: e.target.value });
     }
 
@@ -95,8 +103,14 @@ function Registrar() {
                   sx={{ margin: ".5rem 0" }}
                 />
                 <TextField
-                  error={(error.error || errorPassword.errorPassword) ? true : false}
-                  helperText={(error.error) ? error.errorMessage : (errorPassword.errorPassword) ? errorPassword.errorMessage : ""}
+                  error={error.error || errorPassword.errorPassword ? true : false}
+                  helperText={
+                    error.error
+                      ? error.errorMessage
+                      : errorPassword.errorPassword
+                      ? errorPassword.errorMessage
+                      : ""
+                  }
                   onChange={handleChange}
                   name="password"
                   variant="filled"

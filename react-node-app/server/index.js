@@ -1,8 +1,9 @@
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
-const userRoutes = require("./routes/users.routes");
 const bodyParser = require("body-parser");
+const userRoutes = require("./routes/users.routes");
+
 const app = express();
 
 app.use(morgan("dev"));
@@ -14,6 +15,7 @@ app.use(userRoutes);
 /**
  * Determina las peticiones, respuestas y errores personalizados en cada consulta
  */
+// eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
   if (err.code === "23505") {
     return res.status(409).json({
