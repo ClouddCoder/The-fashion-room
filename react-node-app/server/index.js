@@ -1,6 +1,7 @@
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
+// eslint-disable-next-line import/no-extraneous-dependencies
 const bodyParser = require("body-parser");
 const userRoutes = require("./routes/users.routes");
 
@@ -37,6 +38,8 @@ app.use((err, req, res, next) => {
 /**
  * Inicia el servidor en el puerto 3001
  */
-app.listen(3001, "0.0.0.0", () => {
+const server = app.listen(3001, "0.0.0.0", () => {
   console.log("Server running on port 3001");
 });
+
+module.exports = { app, server };
