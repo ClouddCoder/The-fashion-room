@@ -1,3 +1,4 @@
+const bcrypt = require("bcrypt");
 const pool = require("../db");
 
 /**
@@ -32,7 +33,8 @@ const registerUser = async (req, res, next) => {
   // eslint-disable-next-line object-curly-newline
   const { name, lastname, email, password } = req.body;
   const query = "INSERT INTO customer (name, lastname, email, password) VALUES ($1, $2, $3, $4)";
-  const values = [name, lastname, email, password];
+  const passwordHash = await bcrypt.hash(password, 10);
+  const values = [name, lastname, email, passwordHash];
 
   try {
     await pool.query(query, values);

@@ -57,7 +57,7 @@ CREATE TABLE customer (
     name VARCHAR(25) NOT NULL CHECK (name <> ''),
     lastname VARCHAR(25),
     email VARCHAR(40) UNIQUE NOT NULL CHECK (email <> ''),
-    password VARCHAR(30) NOT NULL CHECK (password <> ''),
+    password VARCHAR(100) NOT NULL CHECK (password <> ''),
     CONSTRAINT pk_customer PRIMARY KEY (customer_id)
 );
 

@@ -25,7 +25,6 @@ function ProductState(props) {
     const response = await axios.get("http://localhost:3050/api-server/catalogue", {
       crossDomain: true,
     });
-    console.log(response);
     const data = await response.data;
     dispatch({ type: TYPES.LOAD_PRODUCTS, payload: data });
   };
