@@ -1,4 +1,5 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useContext } from "react";
+import AuthContext from "../auth-context/AuthContext";
 import ProductContext from "./ProductContext";
 import { ProductReducer } from "./ProductReducer";
 import axios from "axios";
@@ -17,6 +18,7 @@ function ProductState(props) {
   };
 
   const [state, dispatch] = useReducer(ProductReducer, productInitialState);
+  const { token } = useContext(AuthContext);
 
   /**
    * Obtiene los productos de la API
@@ -73,11 +75,15 @@ function ProductState(props) {
   /**
    * Crea una factura nueva en la API
    */
-  const createInvoice = async (userId, cart) => {
+  const createInvoice = async (cart) => {
     const res = await fetch("http://localhost:3050/api-server/invoice", {
       method: "POST",
-      body: JSON.stringify({ userId, cart }),
-      headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
+      body: JSON.stringify(cart),
+      headers: new Headers({
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      }),
     });
     const data = await res.json();
     dispatch({ type: TYPES.CREATE_INVOICE, payload: data.invoiceId });

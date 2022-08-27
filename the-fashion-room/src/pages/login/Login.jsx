@@ -17,7 +17,7 @@ function Ingresar() {
   const [email, setEmail] = useState({ email: "" });
   const [password, setPasswordLog] = useState({ password: "" });
   const [error, setError] = useState({ error: false, errorMessage: "" });
-  const { setAuth, setUserName, setUserId } = useContext(AuthContext);
+  const { setAuth, setUserName, setUserId, setToken } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -35,6 +35,7 @@ function Ingresar() {
 
     if (res.status === 200) {
       setAuth(true);
+      setToken(data.token);
       setUserId(data.id);
       setUserName(data.name);
       navigate("/catalogue");

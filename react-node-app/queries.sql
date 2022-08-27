@@ -32,6 +32,7 @@ CREATE OR REPLACE FUNCTION invoice_data(inv_id INTEGER, prod_id INTEGER, quant I
     $BODY$
     LANGUAGE plpgsql;
 
+
 CREATE TABLE product (
     product_id INTEGER,
     product_name VARCHAR(25) NOT NULL CHECK (product_name <> ''),

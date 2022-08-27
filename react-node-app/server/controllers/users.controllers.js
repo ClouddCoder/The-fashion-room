@@ -1,25 +1,51 @@
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const { config } = require("dotenv");
 const pool = require("../db");
+
+config();
+const jwtPassword = process.env.JWT_PASSWORD;
 
 /**
  * Obtiene el usuario según el email y contraseña ingresados
  */
 const loginUser = async (req, res, next) => {
   const { email, password } = req.body;
-  const query = "SELECT customer_id, name FROM customer WHERE email = $1 AND password = $2";
-  const values = [email, password];
+  const query = "SELECT customer_id, name, email, password FROM customer WHERE email = $1";
+  const values = [email];
 
   try {
     const result = await pool.query(query, values);
     if (result.rows.length === 0) {
       return res.status(404).json({
-        message: "Wrong email/password combination",
+        message: "User not found",
       });
     }
+
+    // eslint-disable-next-line operator-linebreak
+    const checkPassword =
+      email !== result.rows[0].email
+        ? false
+        : await bcrypt.compare(password, result.rows[0].password);
+
+    if (!checkPassword) {
+      return res.status(401).json({
+        message: "User/Password incorrect",
+      });
+    }
+
+    const payload = {
+      userId: result.rows[0].customer_id,
+      email,
+    };
+
+    const token = await jwt.sign(payload, jwtPassword);
+
     return res.json({
       message: "success",
       id: result.rows[0].customer_id,
       name: result.rows[0].name,
+      token,
     });
   } catch (error) {
     return next(error);
@@ -64,6 +90,17 @@ const getProducts = async (req, res, next) => {
 const buyProduct = async (req, res, next) => {
   const cart = req.body;
   const query = "UPDATE product SET stock = stock - $1 WHERE product_id = $2";
+  const { authorization } = req.headers;
+  let token = "";
+
+  if (authorization && authorization.toLowerCase().startsWith("bearer")) {
+    // eslint-disable-next-line prefer-destructuring
+    token = authorization.split(" ")[1];
+  } else {
+    return res.status(401).json({
+      message: "Unauthorized",
+    });
+  }
 
   try {
     /* eslint-disable no-await-in-loop */
@@ -88,15 +125,34 @@ const buyProduct = async (req, res, next) => {
  * Crea una nueva factura despues de cada compra
  */
 const createInvoice = async (req, res, next) => {
-  const { userId, cart } = req.body;
+  const cart = req.body;
   const queryCreateInvoiceId = "SELECT create_invoice_id()";
   const queryInsertInvoice = "SELECT create_invoice($1, $2)";
   const queryInsertInvoiceDetails = "SELECT invoice_data($1, $2, $3, $4)";
+  const { authorization } = req.headers;
+  let token = "";
+
+  if (authorization && authorization.toLowerCase().startsWith("bearer")) {
+    // eslint-disable-next-line prefer-destructuring
+    token = authorization.split(" ")[1];
+  } else {
+    return res.status(401).json({
+      message: "Unauthorized",
+    });
+  }
+
+  const decodeToken = await jwt.verify(token, jwtPassword);
+
+  if (!token || !decodeToken.userId) {
+    return res.status(401).json({
+      message: "Token missing or invalid",
+    });
+  }
 
   try {
     const getInvoiceId = await pool.query(queryCreateInvoiceId);
     const invoiceId = getInvoiceId.rows[0].create_invoice_id;
-    await pool.query(queryInsertInvoice, [invoiceId, userId]);
+    await pool.query(queryInsertInvoice, [invoiceId, decodeToken.userId]);
 
     /* eslint-disable no-await-in-loop */
     // eslint-disable-next-line no-restricted-syntax
@@ -154,15 +210,33 @@ const getStoresPhones = async (req, res, next) => {
  * Obtiene la informacion detallada de cada factura
  */
 const getOrderDetail = async (req, res, next) => {
-  const { userId } = req.body;
   let query = "SELECT invoice_detail.invoice_id, purchase_date, ";
   query += "product_name, quantity, total_amount FROM invoice_detail ";
   query += "INNER JOIN invoice ON invoice.invoice_id = invoice_detail.invoice_id ";
   query += "INNER JOIN product ON product.product_id = invoice_detail.product_id ";
   query += "WHERE customer_id = $1";
+  const { authorization } = req.headers;
+  let token = "";
+
+  if (authorization || authorization.toLowerCase().startsWith("bearer")) {
+    // eslint-disable-next-line prefer-destructuring
+    token = authorization.split(" ")[1];
+  } else {
+    return res.status(401).json({
+      message: "Unauthorized",
+    });
+  }
+
+  const decodeToken = await jwt.verify(token, jwtPassword);
+
+  if (!token || !decodeToken.userId) {
+    return res.status(401).json({
+      message: "Token missing or invalid",
+    });
+  }
 
   try {
-    const result = await pool.query(query, [userId]);
+    const result = await pool.query(query, [decodeToken.userId]);
     return res.json(result.rows);
   } catch (error) {
     return next(error);

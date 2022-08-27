@@ -3,8 +3,10 @@ const morgan = require("morgan");
 const cors = require("cors");
 // eslint-disable-next-line import/no-extraneous-dependencies
 const bodyParser = require("body-parser");
+const { config } = require("dotenv");
 const userRoutes = require("./routes/users.routes");
 
+config();
 const app = express();
 
 app.use(morgan("dev"));
@@ -38,8 +40,9 @@ app.use((err, req, res, next) => {
 /**
  * Inicia el servidor en el puerto 3001
  */
-const server = app.listen(3001, "0.0.0.0", () => {
-  console.log("Server running on port 3001");
+const PORT = parseInt(process.env.PORT, 10) || 3001;
+const server = app.listen(PORT, "0.0.0.0", () => {
+  console.log(`Server running on port ${PORT}`);
 });
 
 module.exports = { app, server };

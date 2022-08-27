@@ -12,15 +12,20 @@ import axios from "axios";
  * Componente que muestra las compras realizadas por el usuario
  */
 function Orders() {
-  const { userId } = useContext(AuthContext);
+  const { token } = useContext(AuthContext);
   const [orderDetail, setOrderDetail] = useState();
 
   /**
    * Peticion a la API para obtener la informacion de las compras realizadas por el usuario
    */
   const loadOrderDetail = async () => {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
     axios
-      .post("http://localhost:3050/api-server/order-detail", { userId })
+      .get("http://localhost:3050/api-server/order-detail", config)
       .then((response) => {
         const groupsOrderDetail = Object.values(
           response.data.reduce(

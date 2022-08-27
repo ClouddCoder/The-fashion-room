@@ -24,7 +24,7 @@ function ShoppingCart() {
     createInvoice,
   } = useContext(ProductContext);
 
-  const { userId } = useContext(AuthContext);
+  const { userId, token } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -40,10 +40,19 @@ function ShoppingCart() {
     const res = await fetch("http://localhost:3050/api-server/cart", {
       method: "PUT",
       body: JSON.stringify(cart),
-      headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
+      headers: new Headers({
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      }),
     });
     const data = await res.json();
-    navigate("/invoice");
+
+    if (res.status === 200) {
+      navigate("/invoice");
+    } else {
+      return data.message;
+    }
   };
 
   return (

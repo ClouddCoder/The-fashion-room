@@ -15,8 +15,8 @@ import Footer from "../../commons/footer/Footer";
 function Registrar() {
   const [name, setName] = useState({ name: "" });
   const [lastname, setLastname] = useState({ lastname: "" });
-  const [email, setEmail] = useState({ email: null });
-  const [password, setPasswordReg] = useState({ password: "" });
+  const [email, setEmail] = useState({ email: "" });
+  const [password, setPassword] = useState({ password: "" });
   const [error, setError] = useState({ error: false, errorMessage: "" });
   const [errorPassword, setErrorPassword] = useState({ errorPassword: false, errorMessage: "" });
   const navigate = useNavigate();
@@ -30,7 +30,12 @@ function Registrar() {
       setErrorPassword({ errorPassword: false, errorMessage: "" });
       const res = await fetch("http://localhost:3050/api-server/register", {
         method: "POST",
-        body: JSON.stringify(name, lastname, email, password),
+        body: JSON.stringify({
+          name: name.name,
+          lastname: lastname.lastname,
+          email: email.email,
+          password: password.password,
+        }),
         headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
       });
       const data = await res.json();
@@ -39,10 +44,14 @@ function Registrar() {
       if (res.status === 200) {
         navigate("/");
       } else {
-        setError({ error: true, errorMessage: data.message });
+        setError({ ...error, error: true, errorMessage: data.message });
       }
     } else {
-      setErrorPassword({ errorPassword: true, errorMessage: "Invalid password" });
+      setErrorPassword({
+        ...errorPassword,
+        errorPassword: true,
+        errorMessage: "Invalid password",
+      });
     }
   };
 
@@ -50,20 +59,23 @@ function Registrar() {
    * Guarda la informacion del nombre, apellido, email y contraseña cuando el usuario escribe en los inputs
    */
   const handleChange = (e) => {
-    if (e.target.name === "password" && e.target.value.length < 4) {
-      setErrorPassword({
-        errorPassword: true,
-        errorMessage: "La contraseña debe tener más de 4 caracteres",
-      });
-    } else {
-      setErrorPassword({ errorPassword: false, errorMessage: "" });
-      setPasswordReg({ ...password, [e.target.name]: e.target.value });
+    if (e.target.name === "password") {
+      if (e.target.value.length < 4) {
+        setErrorPassword({
+          ...errorPassword,
+          errorPassword: true,
+          errorMessage: "La contraseña debe tener más de 4 caracteres",
+        });
+      } else {
+        setErrorPassword({ ...errorPassword, errorPassword: false, errorMessage: "" });
+      }
     }
 
     setName({ ...name, [e.target.name]: e.target.value });
     setLastname({ ...lastname, [e.target.name]: e.target.value });
     setEmail({ ...email, [e.target.name]: e.target.value });
-    setError({ error: false, errorMessage: "" });
+    setPassword({ ...password, [e.target.name]: e.target.value });
+    setError({ ...error, error: false, errorMessage: "" });
   };
 
   return (
@@ -84,6 +96,7 @@ function Registrar() {
                   name="name"
                   variant="filled"
                   label="Name"
+                  value={name.name}
                   sx={{ margin: ".5rem 0" }}
                 />
                 <TextField
@@ -91,6 +104,7 @@ function Registrar() {
                   name="lastname"
                   variant="filled"
                   label="Lastname"
+                  value={lastname.lastname}
                   sx={{ margin: ".5rem 0" }}
                 />
                 <TextField
@@ -100,6 +114,7 @@ function Registrar() {
                   name="email"
                   variant="filled"
                   label="Email"
+                  value={email.email}
                   sx={{ margin: ".5rem 0" }}
                 />
                 <TextField
@@ -116,6 +131,7 @@ function Registrar() {
                   variant="filled"
                   label="Password"
                   type="password"
+                  value={password.password}
                   sx={{ margin: ".5rem 0" }}
                 />
                 <CardContent>

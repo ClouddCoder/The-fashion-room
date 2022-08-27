@@ -8,14 +8,10 @@ import { palette } from "@mui/system";
 /**
  * Componente que muestra el resumen de la compra que se va a realizar
  */
-function OrderResume({
-  buyProducts,
-  getUserId,
-  getCart,
-  invoice,
-  orderTotalProducts,
-  orderTotalPrice,
-}) {
+function OrderResume({ buyProducts, getCart, invoice, orderTotalProducts, orderTotalPrice }) {
+  /**
+   * Revisa si hay productos en el carrito para habilitar el boton de compra
+   */
   const checkCartLength = () => {
     if (getCart.length > 0) {
       return (
@@ -24,7 +20,7 @@ function OrderResume({
           color="secondary"
           onClick={() => {
             buyProducts();
-            invoice(getUserId, getCart);
+            invoice(getCart);
           }}
         >
           Comprar

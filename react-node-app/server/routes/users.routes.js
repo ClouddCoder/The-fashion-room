@@ -29,6 +29,6 @@ router.get("/stores", getStores);
 
 router.get("/stores/phones", getStoresPhones);
 
-router.post("/order-detail", getOrderDetail);
+router.get("/order-detail", getOrderDetail);
 
 module.exports = router;
