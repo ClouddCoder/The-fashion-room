@@ -15,7 +15,7 @@ import Footer from "../../commons/footer/Footer";
  */
 function Ingresar() {
   const [email, setEmail] = useState({ email: "" });
-  const [password, setPasswordLog] = useState({ password: "" });
+  const [password, setPassword] = useState({ password: "" });
   const [error, setError] = useState({ error: false, errorMessage: "" });
   const { setAuth, setUserName, setUserId, setToken } = useContext(AuthContext);
 
@@ -34,11 +34,14 @@ function Ingresar() {
     const data = await res.json();
 
     if (res.status === 200) {
-      setAuth(true);
+      setAuth(data.auth);
       setToken(data.token);
       setUserId(data.id);
       setUserName(data.name);
       navigate("/catalogue");
+
+      // Save token to localStorage
+      window.localStorage.setItem("logged", JSON.stringify(data));
     } else {
       setError({ error: true, errorMessage: data.message });
     }
@@ -49,7 +52,7 @@ function Ingresar() {
    */
   const handleChange = (e) => {
     setEmail({ ...email, [e.target.name]: e.target.value });
-    setPasswordLog({ ...password, [e.target.name]: e.target.value });
+    setPassword({ ...password, [e.target.name]: e.target.value });
     setError({ error: false, errorMessage: "" });
   };
 

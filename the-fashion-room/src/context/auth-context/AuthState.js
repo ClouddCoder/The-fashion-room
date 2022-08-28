@@ -6,9 +6,9 @@ import AuthContext from "./AuthContext";
  */
 function AuthState(props) {
   const [auth, setAuth] = useState(false);
-  const [userName, setUserName] = useState(null);
-  const [userId, setUserId] = useState(null);
-  const [token, setToken] = useState(null);
+  const [userName, setUserName] = useState("");
+  const [userId, setUserId] = useState("");
+  const [token, setToken] = useState("");
 
   return (
     <AuthContext.Provider

@@ -11,7 +11,8 @@ const jwtPassword = process.env.JWT_PASSWORD;
  */
 const loginUser = async (req, res, next) => {
   const { email, password } = req.body;
-  const query = "SELECT customer_id, name, email, password FROM customer WHERE email = $1";
+  let query = "SELECT customer_id, name, lastname, email, password ";
+  query += "FROM customer WHERE email = $1";
   const values = [email];
 
   try {
@@ -36,15 +37,17 @@ const loginUser = async (req, res, next) => {
 
     const payload = {
       userId: result.rows[0].customer_id,
+      name: result.rows[0].name,
       email,
     };
 
     const token = await jwt.sign(payload, jwtPassword);
 
     return res.json({
-      message: "success",
       id: result.rows[0].customer_id,
       name: result.rows[0].name,
+      email,
+      auth: true,
       token,
     });
   } catch (error) {

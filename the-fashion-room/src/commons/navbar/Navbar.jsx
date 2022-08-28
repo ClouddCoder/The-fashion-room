@@ -4,10 +4,11 @@ import { Link } from "react-router-dom";
 import "./Navbar.css";
 
 /**
- * Componente que muestra el navbar
+ * Componente que muestra la barra de navegacion
  */
 function Navbar() {
   const { auth, setAuth, userName } = useContext(AuthContext);
+  console.log(auth);
 
   return (
     <div className="header">
