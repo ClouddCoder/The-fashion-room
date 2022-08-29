@@ -65,7 +65,6 @@ services:
       - pern-network
     depends_on:
       - postgres-tfr
-      - postgres-tfr-test
 
 networks:
   pern-network:
