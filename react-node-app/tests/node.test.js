@@ -3,9 +3,11 @@ const { app, server } = require("../server/index");
 
 const api = supertest(app);
 
-test("Retorna json", async () => {
+test("Retorna los productos", async () => {
   const response = await api.get("/catalogue");
-  expect(response.body).toHaveLength(6);
+  const products = response.body.map((product) => product.product_name);
+
+  expect(products).toContain("Camisa");
 });
 
 /*

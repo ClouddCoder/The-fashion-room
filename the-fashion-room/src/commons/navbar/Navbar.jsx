@@ -7,8 +7,7 @@ import "./Navbar.css";
  * Componente que muestra la barra de navegacion
  */
 function Navbar() {
-  const { auth, setAuth, userName } = useContext(AuthContext);
-  console.log(auth);
+  const { auth, setAuth, userName, setUserName, setToken, setUserId } = useContext(AuthContext);
 
   return (
     <div className="header">
@@ -32,7 +31,17 @@ function Navbar() {
           <div className="navbarLogin">
             <p className="navbarUserName">{userName}</p>
             <div />
-            <Link to="/" component="button" onClick={() => setAuth(false)}>
+            <Link
+              to="/"
+              component="button"
+              onClick={() => {
+                setAuth(false);
+                setToken("");
+                setUserId("");
+                setUserName("");
+                window.localStorage.removeItem("logged");
+              }}
+            >
               Logout
             </Link>
           </div>
