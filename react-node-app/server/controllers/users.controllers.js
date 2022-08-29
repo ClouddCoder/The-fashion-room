@@ -62,6 +62,13 @@ const registerUser = async (req, res, next) => {
   // eslint-disable-next-line object-curly-newline
   const { name, lastname, email, password } = req.body;
   const query = "INSERT INTO customer (name, lastname, email, password) VALUES ($1, $2, $3, $4)";
+
+  if (password.length <= 4) {
+    return res.status(406).json({
+      message: "Password must be at least 4 characters long",
+    });
+  }
+
   const passwordHash = await bcrypt.hash(password, 10);
   const values = [name, lastname, email, passwordHash];
 

@@ -50,7 +50,7 @@ function Registrar() {
       setErrorPassword({
         ...errorPassword,
         errorPassword: true,
-        errorMessage: "Invalid password",
+        errorMessage: "Debe tener más de 4 caracteres",
       });
     }
   };
@@ -60,11 +60,11 @@ function Registrar() {
    */
   const handleChange = (e) => {
     if (e.target.name === "password") {
-      if (e.target.value.length < 4) {
+      if (e.target.value.length <= 4) {
         setErrorPassword({
           ...errorPassword,
           errorPassword: true,
-          errorMessage: "La contraseña debe tener más de 4 caracteres",
+          errorMessage: "Debe tener más de 4 caracteres",
         });
       } else {
         setErrorPassword({ ...errorPassword, errorPassword: false, errorMessage: "" });
