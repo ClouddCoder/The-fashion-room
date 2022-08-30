@@ -10,10 +10,10 @@ const jwtPassword = process.env.JWT_PASSWORD;
  * Obtiene el usuario según el email y contraseña ingresados
  */
 const loginUser = async (req, res, next) => {
-  const { email, password } = req.body;
+  const { userEmail, userPassword } = req.body;
   let query = "SELECT customer_id, name, lastname, email, password ";
   query += "FROM customer WHERE email = $1";
-  const values = [email];
+  const values = [userEmail];
 
   try {
     const result = await pool.query(query, values);
@@ -25,9 +25,9 @@ const loginUser = async (req, res, next) => {
 
     // eslint-disable-next-line operator-linebreak
     const checkPassword =
-      email !== result.rows[0].email
+      userEmail !== result.rows[0].email
         ? false
-        : await bcrypt.compare(password, result.rows[0].password);
+        : await bcrypt.compare(userPassword, result.rows[0].password);
 
     if (!checkPassword) {
       return res.status(401).json({
@@ -38,7 +38,7 @@ const loginUser = async (req, res, next) => {
     const payload = {
       userId: result.rows[0].customer_id,
       name: result.rows[0].name,
-      email,
+      userEmail,
     };
 
     const token = await jwt.sign(payload, jwtPassword);
@@ -46,7 +46,7 @@ const loginUser = async (req, res, next) => {
     return res.json({
       id: result.rows[0].customer_id,
       name: result.rows[0].name,
-      email,
+      userEmail,
       auth: true,
       token,
     });

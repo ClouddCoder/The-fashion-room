@@ -49,6 +49,7 @@ function AuthState(props) {
         setUserLastname,
         userEmail: state.userEmail,
         setUserEmail,
+        userPassword: state.userPassword,
         setUserPassword,
         token: state.token,
         setToken,

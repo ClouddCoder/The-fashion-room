@@ -35,7 +35,7 @@ function Ingresar() {
     e.preventDefault();
     const res = await fetch("http://localhost:3050/api-server/login", {
       method: "POST",
-      body: JSON.stringify(userEmail, userPassword),
+      body: JSON.stringify({ userEmail, userPassword }),
       headers: { "Content-Type": "application/json" },
     });
     const data = await res.json();
@@ -63,6 +63,9 @@ function Ingresar() {
     setError({ error: false, errorMessage: "" });
   };
 
+  console.log(userEmail);
+  console.log(userPassword);
+
   return (
     <Grid container direction="column" align="center">
       <Grid item>
@@ -82,7 +85,7 @@ function Ingresar() {
                   error={error.error}
                   helperText={error.errorMessage}
                   onChange={handleChange}
-                  name="email"
+                  name="userEmail"
                   variant="filled"
                   label="Email"
                   sx={{ margin: ".5rem 0" }}
@@ -91,7 +94,7 @@ function Ingresar() {
                   error={error.error}
                   helperText={error.errorMessage}
                   onChange={handleChange}
-                  name="password"
+                  name="userPassword"
                   variant="filled"
                   label="Password"
                   type="password"
