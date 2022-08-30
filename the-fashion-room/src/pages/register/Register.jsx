@@ -83,7 +83,7 @@ function Registrar() {
       <Grid item>
         <Navbar />
       </Grid>
-      <Grid item={true} container direction="column" pt={15} pb={10}>
+      <Grid item={true} container direction="column" pt={15} pb={25}>
         <Grid item>
           <Card sx={{ maxWidth: 300 }}>
             <Typography variant="h5" component="h2">

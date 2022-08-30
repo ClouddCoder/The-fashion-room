@@ -1,5 +1,5 @@
 /**
- * Constantes que determina el tipo de accion en el useReducer
+ * Constantes que determina el tipo de accion en el ProductReducer
  */
 export const TYPES = {
   LOAD_PRODUCTS: "LOAD_PRODUCTS",
