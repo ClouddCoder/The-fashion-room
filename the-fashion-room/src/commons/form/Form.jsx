@@ -1,7 +1,5 @@
 import React from "react";
-import AuthContext from "../../context/auth-context/AuthContext";
 import { Link } from "react-router-dom";
-import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
@@ -10,10 +8,8 @@ import Typography from "@mui/material/Typography";
 import Navbar from "../navbar/Navbar";
 import Footer from "../footer/Footer";
 
-function Form() {
+function Form({ children, title, submit }) {
   return (
-    <> </>
-    /*
     <Grid container direction="column" align="center">
       <Grid item>
         <Navbar />
@@ -23,37 +19,10 @@ function Form() {
           <Card sx={{ maxWidth: 300 }}>
             <CardContent>
               <Typography variant="h5" component="h2">
-                Inicia sesion
+                {title}
               </Typography>
             </CardContent>
-            <CardContent>
-              <form onSubmit={handleSubmit}>
-                <TextField
-                  error={error.error}
-                  helperText={error.errorMessage}
-                  onChange={handleChange}
-                  name="email"
-                  variant="filled"
-                  label="Email"
-                  sx={{ margin: ".5rem 0" }}
-                />
-                <TextField
-                  error={error.error}
-                  helperText={error.errorMessage}
-                  onChange={handleChange}
-                  name="password"
-                  variant="filled"
-                  label="Password"
-                  type="password"
-                  sx={{ margin: ".5rem 0" }}
-                />
-                <CardContent>
-                  <Button variant="contained" color="secondary" type="submit">
-                    Login
-                  </Button>
-                </CardContent>
-              </form>
-            </CardContent>
+            <CardContent>{children}</CardContent>
           </Card>
         </Grid>
         <Grid>
@@ -66,7 +35,6 @@ function Form() {
         <Footer />
       </Grid>
     </Grid>
-    */
   );
 }
 

@@ -1,13 +1,9 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
-import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
-import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
-import Navbar from "../../commons/navbar/Navbar";
-import Footer from "../../commons/footer/Footer";
+import Form from "../../commons/form/Form";
 
 /**
  * Componente que muestra el register
@@ -79,80 +75,58 @@ function Registrar() {
   };
 
   return (
-    <Grid container direction="column" align="center">
-      <Grid item>
-        <Navbar />
-      </Grid>
-      <Grid item={true} container direction="column" pt={15} pb={25}>
-        <Grid item>
-          <Card sx={{ maxWidth: 300 }}>
-            <Typography variant="h5" component="h2">
-              Registrate
-            </Typography>
-            <CardContent>
-              <form onSubmit={handleSubmit}>
-                <TextField
-                  onChange={handleChange}
-                  name="name"
-                  variant="filled"
-                  label="Name"
-                  value={name.name}
-                  sx={{ margin: ".5rem 0" }}
-                />
-                <TextField
-                  onChange={handleChange}
-                  name="lastname"
-                  variant="filled"
-                  label="Lastname"
-                  value={lastname.lastname}
-                  sx={{ margin: ".5rem 0" }}
-                />
-                <TextField
-                  error={error.error}
-                  helperText={error.errorMessage}
-                  onChange={handleChange}
-                  name="email"
-                  variant="filled"
-                  label="Email"
-                  value={email.email}
-                  sx={{ margin: ".5rem 0" }}
-                />
-                <TextField
-                  error={error.error || errorPassword.errorPassword ? true : false}
-                  helperText={
-                    error.error
-                      ? error.errorMessage
-                      : errorPassword.errorPassword
-                      ? errorPassword.errorMessage
-                      : ""
-                  }
-                  onChange={handleChange}
-                  name="password"
-                  variant="filled"
-                  label="Password"
-                  type="password"
-                  value={password.password}
-                  sx={{ margin: ".5rem 0" }}
-                />
-                <CardContent>
-                  <Button variant="contained" color="secondary" type="submit">
-                    Registrar
-                  </Button>
-                </CardContent>
-              </form>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item>
-          <Button component={Link} variant="contained" to="/" color="primary">
-            Regresar
+    <Form title="Registrarse">
+      <form onSubmit={handleSubmit}>
+        <TextField
+          onChange={handleChange}
+          name="name"
+          variant="filled"
+          label="Name"
+          value={name.name}
+          sx={{ margin: ".5rem 0" }}
+        />
+        <TextField
+          onChange={handleChange}
+          name="lastname"
+          variant="filled"
+          label="Lastname"
+          value={lastname.lastname}
+          sx={{ margin: ".5rem 0" }}
+        />
+        <TextField
+          error={error.error}
+          helperText={error.errorMessage}
+          onChange={handleChange}
+          name="email"
+          variant="filled"
+          label="Email"
+          value={email.email}
+          sx={{ margin: ".5rem 0" }}
+        />
+        <TextField
+          error={error.error || errorPassword.errorPassword ? true : false}
+          helperText={
+            error.error
+              ? error.errorMessage
+              : errorPassword.errorPassword
+              ? errorPassword.errorMessage
+              : ""
+          }
+          onChange={handleChange}
+          name="password"
+          variant="filled"
+          label="Password"
+          type="password"
+          value={password.password}
+          sx={{ margin: ".5rem 0" }}
+        />
+        <CardContent>
+          <Button variant="contained" color="secondary" type="submit">
+            Registrar
           </Button>
-        </Grid>
-      </Grid>
-      <Grid item>
-        <Footer />
-      </Grid>
-    </Grid>
+        </CardContent>
+      </form>
+    </Form>
   );
 }
 
