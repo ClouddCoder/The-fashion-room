@@ -36,7 +36,6 @@ function Registrar() {
       });
       const data = await res.json();
 
-      console.log(res.status);
       if (res.status === 200) {
         navigate("/");
       } else {

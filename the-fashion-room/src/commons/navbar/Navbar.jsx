@@ -11,7 +11,6 @@ function Navbar() {
 
   return (
     <div className="header">
-      {console.log(auth)}
       <nav className="navbar">
         <div className="navbarTitle">The fashion room</div>
         <ul className="navbarLinks">
