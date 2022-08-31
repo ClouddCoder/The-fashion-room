@@ -47,7 +47,6 @@ const loginUser = async (req, res, next) => {
       id: result.rows[0].customer_id,
       name: result.rows[0].name,
       userEmail,
-      auth: true,
       token,
     });
   } catch (error) {

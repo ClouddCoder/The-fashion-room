@@ -21,7 +21,7 @@ function Navigation() {
     const loggedJSON = window.localStorage.getItem("logged");
     if (loggedJSON) {
       const user = JSON.parse(loggedJSON);
-      setAuth(user.auth);
+      setAuth(true);
       setToken(user.token);
       setUserId(user.id);
       setUserName(user.name);

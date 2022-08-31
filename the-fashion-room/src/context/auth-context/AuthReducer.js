@@ -24,6 +24,8 @@ export function authReducer(state, action) {
       return { ...state, [action.payload.target.name]: action.payload.target.value };
     case authActions.SET_PASSWORD:
       return { ...state, [action.payload.target.name]: action.payload.target.value };
+    case authActions.SET_TOKEN:
+      return { ...state, token: action.payload };
     default:
       return state;
   }

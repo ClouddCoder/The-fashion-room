@@ -9,8 +9,8 @@ import { authActions } from "../../actions/authActions";
 function AuthState(props) {
   const [state, dispatch] = useReducer(authReducer, authInitialState);
 
-  const setAuth = () => {
-    return dispatch({ type: authActions.SET_AUTH, payload: true });
+  const setAuth = (boolean) => {
+    return dispatch({ type: authActions.SET_AUTH, payload: boolean });
   };
 
   const setUserId = (id) => {
