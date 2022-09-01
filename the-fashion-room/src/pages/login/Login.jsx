@@ -37,7 +37,7 @@ function Ingresar() {
     const data = await res.json();
 
     if (res.status === 200) {
-      setAuth(true);
+      setAuth(data.auth);
       setToken(data.token);
       setUserId(data.id);
       setUserName(data.name);
@@ -69,6 +69,7 @@ function Ingresar() {
           name="userEmail"
           variant="filled"
           label="Email"
+          value={userEmail}
           sx={{ margin: ".5rem 0" }}
         />
         <TextField
@@ -79,6 +80,7 @@ function Ingresar() {
           variant="filled"
           label="Password"
           type="password"
+          value={userPassword}
           sx={{ margin: ".5rem 0" }}
         />
         <CardContent>

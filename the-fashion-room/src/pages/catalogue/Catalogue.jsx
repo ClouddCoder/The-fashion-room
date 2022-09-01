@@ -55,7 +55,7 @@ function Catalogue() {
             {customButton()}
           </Grid>
           <Grid container alignItems="center" justifyContent="center">
-            {products.map((product) => (
+            {products?.map((product) => (
               <ProductItem key={product.product_id} product={product} addToCart={addToCart} />
             ))}
           </Grid>

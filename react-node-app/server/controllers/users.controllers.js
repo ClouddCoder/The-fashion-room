@@ -44,6 +44,7 @@ const loginUser = async (req, res, next) => {
     const token = await jwt.sign(payload, jwtPassword);
 
     return res.json({
+      auth: true,
       id: result.rows[0].customer_id,
       name: result.rows[0].name,
       userEmail,

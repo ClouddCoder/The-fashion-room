@@ -1,13 +1,16 @@
 import { authActions } from "../../actions/authActions";
 
+const loggedJSON = window.localStorage.getItem("logged");
+const user = JSON.parse(loggedJSON);
+
 export const authInitialState = {
-  auth: false,
-  userId: "",
-  userName: "",
+  auth: user?.auth || false,
+  userId: user?.id || "",
+  userName: user?.name || "",
   userLastname: "",
-  userEmail: "",
+  userEmail: user?.userEmail || "",
   userPassword: "",
-  token: "",
+  token: user?.token || "",
 };
 
 export function authReducer(state, action) {

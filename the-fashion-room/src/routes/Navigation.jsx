@@ -17,6 +17,7 @@ import Orders from "../pages/orders/Orders";
 function Navigation() {
   const { setAuth, setUserName, setUserId, setToken } = useContext(AuthContext);
 
+  /*
   useEffect(() => {
     const loggedJSON = window.localStorage.getItem("logged");
     if (loggedJSON) {
@@ -27,6 +28,7 @@ function Navigation() {
       setUserName(user.name);
     }
   }, []);
+  */
 
   return (
     <>
