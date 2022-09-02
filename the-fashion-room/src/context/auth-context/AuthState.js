@@ -17,12 +17,12 @@ function AuthState(props) {
     return dispatch({ type: authActions.SET_USER_ID, payload: id });
   };
 
-  const setUserName = (username) => {
-    return dispatch({ type: authActions.SET_USERNAME, payload: username });
+  const setUserName = (e) => {
+    return dispatch({ type: authActions.SET_USERNAME, payload: e });
   };
 
-  const setUserLastname = (lastname) => {
-    return dispatch({ type: authActions.SET_LASTNAME, payload: lastname });
+  const setUserLastname = (e) => {
+    return dispatch({ type: authActions.SET_LASTNAME, payload: e });
   };
 
   const setUserEmail = (e) => {
@@ -46,6 +46,7 @@ function AuthState(props) {
         setUserId,
         userName: state.userName,
         setUserName,
+        userLastname: state.userLastname,
         setUserLastname,
         userEmail: state.userEmail,
         setUserEmail,

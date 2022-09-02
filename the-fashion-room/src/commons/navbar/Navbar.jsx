@@ -36,9 +36,8 @@ function Navbar() {
               component="button"
               onClick={() => {
                 setAuth(false);
-                setToken("");
                 setUserId("");
-                setUserName("");
+                setToken("");
                 window.localStorage.removeItem("logged");
               }}
             >

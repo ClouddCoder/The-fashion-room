@@ -37,11 +37,10 @@ function Ingresar() {
     const data = await res.json();
 
     if (res.status === 200) {
-      setAuth(data.auth);
+      setAuth(data.userAuth);
+      setUserId(data.userId);
       setToken(data.token);
-      setUserId(data.id);
-      setUserName(data.name);
-      navigate("/catalogue");
+      navigate("/");
 
       // Save token to localStorage
       window.localStorage.setItem("logged", JSON.stringify(data));

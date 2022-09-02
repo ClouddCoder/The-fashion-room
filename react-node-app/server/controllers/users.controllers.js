@@ -11,8 +11,9 @@ const jwtPassword = process.env.JWT_PASSWORD;
  */
 const loginUser = async (req, res, next) => {
   const { userEmail, userPassword } = req.body;
-  let query = "SELECT customer_id, name, lastname, email, password ";
-  query += "FROM customer WHERE email = $1";
+  let query = "SELECT customer_id, customer_name, customer_lastname, ";
+  query += "customer_email, customer_password ";
+  query += "FROM customer WHERE customer_email = $1";
   const values = [userEmail];
 
   try {
@@ -25,9 +26,9 @@ const loginUser = async (req, res, next) => {
 
     // eslint-disable-next-line operator-linebreak
     const checkPassword =
-      userEmail !== result.rows[0].email
+      userEmail !== result.rows[0].customer_email
         ? false
-        : await bcrypt.compare(userPassword, result.rows[0].password);
+        : await bcrypt.compare(userPassword, result.rows[0].customer_password);
 
     if (!checkPassword) {
       return res.status(401).json({
@@ -37,17 +38,15 @@ const loginUser = async (req, res, next) => {
 
     const payload = {
       userId: result.rows[0].customer_id,
-      name: result.rows[0].name,
+      userName: result.rows[0].customer_name,
       userEmail,
     };
 
     const token = await jwt.sign(payload, jwtPassword);
 
     return res.json({
-      auth: true,
-      id: result.rows[0].customer_id,
-      name: result.rows[0].name,
-      userEmail,
+      userAuth: true,
+      userId: result.rows[0].customer_id,
       token,
     });
   } catch (error) {
@@ -60,21 +59,38 @@ const loginUser = async (req, res, next) => {
  */
 const registerUser = async (req, res, next) => {
   // eslint-disable-next-line object-curly-newline
-  const { name, lastname, email, password } = req.body;
-  const query = "INSERT INTO customer (name, lastname, email, password) VALUES ($1, $2, $3, $4)";
+  const { userName, userLastname, userEmail, userPassword } = req.body;
+  let query = "INSERT INTO customer ";
+  query += "(customer_name, customer_lastname, customer_email, customer_password) ";
+  query += "VALUES ($1, $2, $3, $4)";
+  const userIdquery = "SELECT get_new_customer_id()";
 
-  if (password.length <= 4) {
+  if (userPassword.length <= 4) {
     return res.status(406).json({
       message: "Password must be at least 4 characters long",
     });
   }
 
-  const passwordHash = await bcrypt.hash(password, 10);
-  const values = [name, lastname, email, passwordHash];
+  const passwordHash = await bcrypt.hash(userPassword, 10);
+  const values = [userName, userLastname, userEmail, passwordHash];
 
   try {
     await pool.query(query, values);
-    return res.json({ message: "success" });
+    const getuserId = await pool.query(userIdquery);
+    const userId = getuserId.rows[0].get_new_customer_id;
+
+    const payload = {
+      userId,
+      userName,
+      userEmail,
+    };
+
+    const token = jwt.sign(payload, jwtPassword);
+    return res.json({
+      userAuth: true,
+      userId,
+      token,
+    });
   } catch (error) {
     return next(error);
   }

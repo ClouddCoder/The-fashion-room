@@ -1,5 +1,4 @@
-import React, { useContext, useEffect } from "react";
-import AuthContext from "../context/auth-context/AuthContext";
+import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import ProductState from "../context/product-context/ProductState";
 import Login from "../pages/login/Login";
@@ -15,21 +14,6 @@ import Orders from "../pages/orders/Orders";
  * Componente que establece las rutas de la aplicacion
  */
 function Navigation() {
-  const { setAuth, setUserName, setUserId, setToken } = useContext(AuthContext);
-
-  /*
-  useEffect(() => {
-    const loggedJSON = window.localStorage.getItem("logged");
-    if (loggedJSON) {
-      const user = JSON.parse(loggedJSON);
-      setAuth(true);
-      setToken(user.token);
-      setUserId(user.id);
-      setUserName(user.name);
-    }
-  }, []);
-  */
-
   return (
     <>
       <Router>

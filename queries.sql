@@ -1,3 +1,19 @@
+CREATE OR REPLACE FUNCTION get_new_customer_id()
+    RETURNS INTEGER AS
+    $$
+    DECLARE
+        cust_id INTEGER;
+    BEGIN
+        SELECT customer.customer_id INTO cust_id FROM customer ORDER BY customer.customer_id DESC LIMIT 1;
+        IF FOUND THEN
+			RETURN cust_id;
+        ELSE
+			RAISE EXCEPTION 'Customer not found';
+        END IF;
+    END
+    $$
+    LANGUAGE plpgsql;
+
 CREATE OR REPLACE FUNCTION create_invoice_id()
 	RETURNS INTEGER AS
 	$BODY$
@@ -55,10 +71,10 @@ INSERT INTO product (product_id, product_name, price, stock) VALUES (nextval('pr
 
 CREATE TABLE customer (
     customer_id SERIAL,
-    name VARCHAR(25) NOT NULL CHECK (name <> ''),
-    lastname VARCHAR(25),
-    email VARCHAR(40) UNIQUE NOT NULL CHECK (email <> ''),
-    password VARCHAR(100) NOT NULL CHECK (password <> ''),
+    customer_name VARCHAR(25) NOT NULL CHECK (customer_name <> ''),
+    customer_lastname VARCHAR(25),
+    customer_email VARCHAR(40) UNIQUE NOT NULL CHECK (customer_email <> ''),
+    customer_password VARCHAR(100) NOT NULL CHECK (customer_password <> ''),
     CONSTRAINT pk_customer PRIMARY KEY (customer_id)
 );
 

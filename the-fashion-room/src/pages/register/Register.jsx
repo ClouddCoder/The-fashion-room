@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import AuthContext from "../../context/auth-context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -9,10 +10,19 @@ import Form from "../../commons/form/Form";
  * Componente que muestra el register
  */
 function Registrar() {
-  const [name, setName] = useState({ name: "" });
-  const [lastname, setLastname] = useState({ lastname: "" });
-  const [email, setEmail] = useState({ email: "" });
-  const [password, setPassword] = useState({ password: "" });
+  const {
+    setAuth,
+    setUserId,
+    userName,
+    setUserName,
+    userLastname,
+    setUserLastname,
+    userEmail,
+    setUserEmail,
+    userPassword,
+    setUserPassword,
+    setToken,
+  } = useContext(AuthContext);
   const [error, setError] = useState({ error: false, errorMessage: "" });
   const [errorPassword, setErrorPassword] = useState({ errorPassword: false, errorMessage: "" });
   const navigate = useNavigate();
@@ -27,16 +37,21 @@ function Registrar() {
       const res = await fetch("http://localhost:3050/api-server/register", {
         method: "POST",
         body: JSON.stringify({
-          name: name.name,
-          lastname: lastname.lastname,
-          email: email.email,
-          password: password.password,
+          userName,
+          userLastname,
+          userEmail,
+          userPassword,
         }),
         headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
       });
       const data = await res.json();
+      console.log(data);
+      window.localStorage.setItem("logged", JSON.stringify(data));
 
       if (res.status === 200) {
+        setAuth(data.userAuth);
+        setUserId(data.userId);
+        setToken(data.token);
         navigate("/");
       } else {
         setError({ ...error, error: true, errorMessage: data.message });
@@ -54,7 +69,7 @@ function Registrar() {
    * Guarda la informacion del nombre, apellido, email y contraseña cuando el usuario escribe en los inputs
    */
   const handleChange = (e) => {
-    if (e.target.name === "password") {
+    if (e.target.name === "userPassword") {
       if (e.target.value.length <= 4) {
         setErrorPassword({
           ...errorPassword,
@@ -66,10 +81,10 @@ function Registrar() {
       }
     }
 
-    setName({ ...name, [e.target.name]: e.target.value });
-    setLastname({ ...lastname, [e.target.name]: e.target.value });
-    setEmail({ ...email, [e.target.name]: e.target.value });
-    setPassword({ ...password, [e.target.name]: e.target.value });
+    setUserName(e);
+    setUserLastname(e);
+    setUserEmail(e);
+    setUserPassword(e);
     setError({ ...error, error: false, errorMessage: "" });
   };
 
@@ -78,28 +93,28 @@ function Registrar() {
       <form onSubmit={handleSubmit}>
         <TextField
           onChange={handleChange}
-          name="name"
+          name="userName"
           variant="filled"
           label="Name"
-          value={name.name}
+          value={userName}
           sx={{ margin: ".5rem 0" }}
         />
         <TextField
           onChange={handleChange}
-          name="lastname"
+          name="userLastname"
           variant="filled"
           label="Lastname"
-          value={lastname.lastname}
+          value={userLastname}
           sx={{ margin: ".5rem 0" }}
         />
         <TextField
           error={error.error}
           helperText={error.errorMessage}
           onChange={handleChange}
-          name="email"
+          name="userEmail"
           variant="filled"
           label="Email"
-          value={email.email}
+          value={userEmail}
           sx={{ margin: ".5rem 0" }}
         />
         <TextField
@@ -112,11 +127,11 @@ function Registrar() {
               : ""
           }
           onChange={handleChange}
-          name="password"
+          name="userPassword"
           variant="filled"
           label="Password"
           type="password"
-          value={password.password}
+          value={userPassword}
           sx={{ margin: ".5rem 0" }}
         />
         <CardContent>

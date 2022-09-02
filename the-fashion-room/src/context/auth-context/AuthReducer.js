@@ -4,11 +4,11 @@ const loggedJSON = window.localStorage.getItem("logged");
 const user = JSON.parse(loggedJSON);
 
 export const authInitialState = {
-  auth: user?.auth || false,
-  userId: user?.id || "",
-  userName: user?.name || "",
+  auth: user?.userAuth || false,
+  userId: user?.userId || "",
+  userName: user?.userName || "",
   userLastname: "",
-  userEmail: user?.userEmail || "",
+  userEmail: "",
   userPassword: "",
   token: user?.token || "",
 };
@@ -20,9 +20,9 @@ export function authReducer(state, action) {
     case authActions.SET_USER_ID:
       return { ...state, userId: action.payload };
     case authActions.SET_USERNAME:
-      return { ...state, userName: action.payload };
+      return { ...state, [action.payload.target.name]: action.payload.target.value };
     case authActions.SET_LASTNAME:
-      return { ...state, userLastname: action.payload };
+      return { ...state, [action.payload.target.name]: action.payload.target.value };
     case authActions.SET_EMAIL:
       return { ...state, [action.payload.target.name]: action.payload.target.value };
     case authActions.SET_PASSWORD:
