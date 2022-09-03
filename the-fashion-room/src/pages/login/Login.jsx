@@ -14,7 +14,7 @@ function Ingresar() {
   const {
     setAuth,
     setUserId,
-    setUserName,
+    setUser,
     userEmail,
     setUserEmail,
     userPassword,
@@ -37,8 +37,12 @@ function Ingresar() {
     const data = await res.json();
 
     if (res.status === 200) {
+      // Establece el estado de autenticacion y borra los campos de login
       setAuth(data.userAuth);
       setUserId(data.userId);
+      setUser(data.userName);
+      setUserEmail("");
+      setUserPassword("");
       setToken(data.token);
       navigate("/");
 
@@ -53,9 +57,14 @@ function Ingresar() {
    * Guarda la informacion del email y contraseña cuando el usuario escribe en los inputs
    */
   const handleChange = (e) => {
-    setUserEmail(e);
-    setUserPassword(e);
-    setError({ error: false, errorMessage: "" });
+    switch (e.target.name) {
+      case "userEmail":
+        return setUserEmail(e.target.value);
+      case "userPassword":
+        return setUserPassword(e.target.value);
+      default:
+        return;
+    }
   };
 
   return (

@@ -7,7 +7,7 @@ import "./Navbar.css";
  * Componente que muestra la barra de navegacion
  */
 function Navbar() {
-  const { auth, setAuth, userName, setUserName, setToken, setUserId } = useContext(AuthContext);
+  const { auth, setAuth, user, setUser, setToken, setUserId } = useContext(AuthContext);
 
   return (
     <div className="header">
@@ -29,7 +29,7 @@ function Navbar() {
 
         {auth ? (
           <div className="navbarLogin">
-            <p className="navbarUserName">{userName}</p>
+            <p className="navbarUserName">{user}</p>
             <div />
             <Link
               to="/"
@@ -37,6 +37,7 @@ function Navbar() {
               onClick={() => {
                 setAuth(false);
                 setUserId("");
+                setUser("");
                 setToken("");
                 window.localStorage.removeItem("logged");
               }}

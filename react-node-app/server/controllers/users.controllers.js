@@ -47,6 +47,7 @@ const loginUser = async (req, res, next) => {
     return res.json({
       userAuth: true,
       userId: result.rows[0].customer_id,
+      userName: result.rows[0].customer_name,
       token,
     });
   } catch (error) {
@@ -89,6 +90,7 @@ const registerUser = async (req, res, next) => {
     return res.json({
       userAuth: true,
       userId,
+      userName,
       token,
     });
   } catch (error) {
@@ -152,9 +154,9 @@ const buyProduct = async (req, res, next) => {
  */
 const createInvoice = async (req, res, next) => {
   const cart = req.body;
-  const queryCreateInvoiceId = "SELECT create_invoice_id()";
-  const queryInsertInvoice = "SELECT create_invoice($1, $2)";
-  const queryInsertInvoiceDetails = "SELECT invoice_data($1, $2, $3, $4)";
+  const createInvoiceIdQuery = "SELECT create_invoice_id()";
+  const createInvoiceQuery = "SELECT create_invoice($1, $2)";
+  const insertInvoiceDetailsQuery = "SELECT invoice_data($1, $2, $3, $4)";
   const { authorization } = req.headers;
   let token = "";
 
@@ -176,14 +178,18 @@ const createInvoice = async (req, res, next) => {
   }
 
   try {
-    const getInvoiceId = await pool.query(queryCreateInvoiceId);
+    const getInvoiceId = await pool.query(createInvoiceIdQuery);
     const invoiceId = getInvoiceId.rows[0].create_invoice_id;
-    await pool.query(queryInsertInvoice, [invoiceId, decodeToken.userId]);
+    await pool.query(createInvoiceQuery, [invoiceId, decodeToken.userId]);
 
+    /**
+     * Recorre el carrito de compras y agrega cada producto a la tabla
+     * que contiene los productos comprados de una factura.
+     */
     /* eslint-disable no-await-in-loop */
     // eslint-disable-next-line no-restricted-syntax
     for (const item of cart) {
-      const getInvoiceDetails = await pool.query(queryInsertInvoiceDetails, [
+      const getInvoiceDetails = await pool.query(insertInvoiceDetailsQuery, [
         invoiceId,
         item.product_id,
         item.quantityInCart,

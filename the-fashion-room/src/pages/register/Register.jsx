@@ -13,6 +13,7 @@ function Registrar() {
   const {
     setAuth,
     setUserId,
+    setUser,
     userName,
     setUserName,
     userLastname,
@@ -49,8 +50,14 @@ function Registrar() {
       window.localStorage.setItem("logged", JSON.stringify(data));
 
       if (res.status === 200) {
+        // Establece el estado de autenticacion y borra los campos de registro
         setAuth(data.userAuth);
         setUserId(data.userId);
+        setUser(data.userName);
+        setUserName("");
+        setUserLastname("");
+        setUserEmail("");
+        setUserPassword("");
         setToken(data.token);
         navigate("/");
       } else {
@@ -69,23 +76,35 @@ function Registrar() {
    * Guarda la informacion del nombre, apellido, email y contraseña cuando el usuario escribe en los inputs
    */
   const handleChange = (e) => {
-    if (e.target.name === "userPassword") {
-      if (e.target.value.length <= 4) {
-        setErrorPassword({
-          ...errorPassword,
-          errorPassword: true,
-          errorMessage: "Debe tener más de 4 caracteres",
-        });
-      } else {
-        setErrorPassword({ ...errorPassword, errorPassword: false, errorMessage: "" });
-      }
+    switch (e.target.name) {
+      case "userName":
+        setError({ ...error, error: false, errorMessage: "" });
+        setUserName(e.target.value);
+        break;
+      case "userLastname":
+        setError({ ...error, error: false, errorMessage: "" });
+        setUserLastname(e.target.value);
+        break;
+      case "userEmail":
+        setError({ ...error, error: false, errorMessage: "" });
+        setUserEmail(e.target.value);
+        break;
+      case "userPassword":
+        setError({ ...error, error: false, errorMessage: "" });
+        if (e.target.value.length <= 4) {
+          setErrorPassword({
+            ...errorPassword,
+            errorPassword: true,
+            errorMessage: "Debe tener más de 4 caracteres",
+          });
+        } else {
+          setErrorPassword({ ...errorPassword, errorPassword: false, errorMessage: "" });
+        }
+        setUserPassword(e.target.value);
+        break;
+      default:
+        return;
     }
-
-    setUserName(e);
-    setUserLastname(e);
-    setUserEmail(e);
-    setUserPassword(e);
-    setError({ ...error, error: false, errorMessage: "" });
   };
 
   return (

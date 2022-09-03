@@ -17,20 +17,24 @@ function AuthState(props) {
     return dispatch({ type: authActions.SET_USER_ID, payload: id });
   };
 
-  const setUserName = (e) => {
-    return dispatch({ type: authActions.SET_USERNAME, payload: e });
+  const setUser = (user) => {
+    return dispatch({ type: authActions.SET_USER, payload: user });
   };
 
-  const setUserLastname = (e) => {
-    return dispatch({ type: authActions.SET_LASTNAME, payload: e });
+  const setUserName = (name) => {
+    return dispatch({ type: authActions.SET_USERNAME, payload: name });
   };
 
-  const setUserEmail = (e) => {
-    return dispatch({ type: authActions.SET_EMAIL, payload: e });
+  const setUserLastname = (lastname) => {
+    return dispatch({ type: authActions.SET_LASTNAME, payload: lastname });
   };
 
-  const setUserPassword = (e) => {
-    return dispatch({ type: authActions.SET_PASSWORD, payload: e });
+  const setUserEmail = (email) => {
+    return dispatch({ type: authActions.SET_EMAIL, payload: email });
+  };
+
+  const setUserPassword = (password) => {
+    return dispatch({ type: authActions.SET_PASSWORD, payload: password });
   };
 
   const setToken = (token) => {
@@ -44,6 +48,8 @@ function AuthState(props) {
         setAuth,
         userId: state.userId,
         setUserId,
+        user: state.user,
+        setUser,
         userName: state.userName,
         setUserName,
         userLastname: state.userLastname,
