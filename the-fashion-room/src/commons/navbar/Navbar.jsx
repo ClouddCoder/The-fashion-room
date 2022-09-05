@@ -7,7 +7,38 @@ import "./Navbar.css";
  * Componente que muestra la barra de navegacion
  */
 function Navbar() {
-  const { auth, setAuth, user, setUser, setToken, setUserId } = useContext(AuthContext);
+  const {
+    auth,
+    setAuth,
+    user,
+    setUser,
+    setToken,
+    setUserId,
+    setUserName,
+    setUserLastname,
+    setUserEmail,
+    setUserPassword,
+  } = useContext(AuthContext);
+
+  /**
+   * Borra los datos del usuario al salir de la sesion
+   */
+  const resetSession = () => {
+    setAuth(false);
+    setUser("");
+    setToken("");
+    setUserId("");
+  };
+
+  /**
+   * Borra los campos del login y register cuando se redirige a uno de los dos
+   */
+  const resetForm = () => {
+    setUserName("");
+    setUserLastname("");
+    setUserEmail("");
+    setUserPassword("");
+  };
 
   return (
     <div className="header">
@@ -35,10 +66,7 @@ function Navbar() {
               to="/"
               component="button"
               onClick={() => {
-                setAuth(false);
-                setUserId("");
-                setUser("");
-                setToken("");
+                resetSession();
                 window.localStorage.removeItem("logged");
               }}
             >
@@ -47,9 +75,13 @@ function Navbar() {
           </div>
         ) : (
           <div className="navbarLogin">
-            <Link to="/login">Login</Link>
+            <Link to="/login" component="button" onClick={resetForm}>
+              Login
+            </Link>
             <div />
-            <Link to="/register">Register</Link>
+            <Link to="/register" component="button" onClick={resetForm}>
+              Register
+            </Link>
           </div>
         )}
       </nav>
