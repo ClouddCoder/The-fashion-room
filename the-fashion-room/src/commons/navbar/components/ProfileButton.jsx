@@ -1,14 +1,13 @@
 import React, { useState } from "react";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { Link } from "react-router-dom";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import IconButton from "@mui/material/IconButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import Tooltip from "@mui/material/Tooltip";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Divider from "@mui/material/Divider";
 
-function ProfileButton() {
+function ProfileButton({ resetSession }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
@@ -20,12 +19,31 @@ function ProfileButton() {
     setAnchorEl(null);
   };
 
+  /**
+   * Link personalizado que se renderiza como boton.
+   * Usa un ref para pasar el elemento a los demas hijos.
+   * https://reactjs.org/docs/forwarding-refs.html
+   */
+  const customLink = React.forwardRef((props, ref) => (
+    <Link
+      ref={ref}
+      {...props}
+      to="/"
+      component="button"
+      onClick={() => {
+        resetSession();
+        window.localStorage.removeItem("logged");
+      }}
+    />
+  ));
+
+  //const ref = React.createRef();
+
   return (
     <>
       <Tooltip title="Account settings">
         <IconButton
           onClick={handleClick}
-          size="small"
           sx={{ color: "white" }}
           aria-controls={open ? "account-menu" : undefined}
           aria-haspopup="true"
@@ -70,12 +88,14 @@ function ProfileButton() {
           transformOrigin={{ horizontal: "right", vertical: "top" }}
           anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
         >
-          <MenuItem>Profile</MenuItem>
-          <MenuItem>y account</MenuItem>
+          <MenuItem component={Link} to="/profile">
+            Mi perfil
+          </MenuItem>
+          <MenuItem component={Link} to="/orders">
+            Mis compras
+          </MenuItem>
           <Divider />
-          <MenuItem>Add another account</MenuItem>
-          <MenuItem>Settings</MenuItem>
-          <MenuItem>Logout</MenuItem>
+          <MenuItem component={customLink}>Logout</MenuItem>
         </Menu>
       </div>
     </>

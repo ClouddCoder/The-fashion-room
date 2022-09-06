@@ -78,7 +78,7 @@ function Navbar() {
               </Link>
             </div>
             <div className="navbarCartIcon">
-              <ProfileButton />
+              <ProfileButton resetSession={resetSession} />
             </div>
           </div>
         ) : (
