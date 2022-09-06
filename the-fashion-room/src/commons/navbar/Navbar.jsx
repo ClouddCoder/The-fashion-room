@@ -3,6 +3,7 @@ import AuthContext from "../../context/auth-context/AuthContext";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 import ProfileButton from "./components/ProfileButton";
+import CartButton from "./components/CartButton";
 
 /**
  * Componente que muestra la barra de navegacion
@@ -65,19 +66,10 @@ function Navbar() {
               <p>{user}</p>
             </div>
             <div className="horizontal-line" />
-            <div className="navbarLogout">
-              <Link
-                to="/"
-                component="button"
-                onClick={() => {
-                  resetSession();
-                  window.localStorage.removeItem("logged");
-                }}
-              >
-                Logout
-              </Link>
+            <div className="navbarCartButton">
+              <CartButton />
             </div>
-            <div className="navbarCartIcon">
+            <div className="navbarProfileButton">
               <ProfileButton resetSession={resetSession} />
             </div>
           </div>

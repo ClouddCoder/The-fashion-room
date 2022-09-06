@@ -5,7 +5,6 @@ import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
-import { palette } from "@mui/system";
 import Navbar from "../../commons/navbar/Navbar";
 import Footer from "../../commons/footer/Footer";
 
