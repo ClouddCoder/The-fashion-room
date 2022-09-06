@@ -1,5 +1,13 @@
 import { TYPES } from "../../actions/productActions";
 
+export const productInitialState = {
+  products: [],
+  cart: [],
+  totalProducts: 0,
+  totalPrice: 0,
+  invoiceId: 0,
+};
+
 /**
  * Funcion reductora que determina las acciones a realizar dependiendo del tipo de accion
  */
@@ -50,7 +58,7 @@ export function ProductReducer(state, action) {
       };
     }
     case TYPES.CLEAR_CART: {
-      return { products: [], cart: [] };
+      return { ...state, products: [], cart: [], totalProducts: 0, totalPrice: 0 };
     }
     case TYPES.GET_TOTAL_PRODUCTS: {
       let totalProducts = state.cart

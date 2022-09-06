@@ -1,7 +1,7 @@
 import React, { useReducer, useContext } from "react";
 import AuthContext from "../auth-context/AuthContext";
 import ProductContext from "./ProductContext";
-import { ProductReducer } from "./ProductReducer";
+import { productInitialState, ProductReducer } from "./productReducer";
 import axios from "axios";
 import { TYPES } from "../../actions/productActions";
 
@@ -9,14 +9,6 @@ import { TYPES } from "../../actions/productActions";
  * Estado inicial de los productos
  */
 function ProductState(props) {
-  const productInitialState = {
-    products: [],
-    cart: [],
-    totalProducts: 0,
-    totalPrice: 0,
-    invoiceId: 0,
-  };
-
   const [state, dispatch] = useReducer(ProductReducer, productInitialState);
   const { token } = useContext(AuthContext);
 

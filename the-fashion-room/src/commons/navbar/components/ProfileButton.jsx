@@ -37,8 +37,6 @@ function ProfileButton({ resetSession }) {
     />
   ));
 
-  //const ref = React.createRef();
-
   return (
     <>
       <Tooltip title="Account settings">

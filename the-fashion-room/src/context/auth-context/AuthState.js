@@ -1,6 +1,6 @@
 import React, { useReducer } from "react";
 import AuthContext from "./AuthContext";
-import { authInitialState, authReducer } from "./AuthReducer";
+import { authInitialState, authReducer } from "./authReducer";
 import { authActions } from "../../actions/authActions";
 
 /**
