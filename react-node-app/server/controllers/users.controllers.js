@@ -130,6 +130,14 @@ const buyProduct = async (req, res, next) => {
     });
   }
 
+  const decodeToken = jwt.verify(token, jwtPassword);
+
+  if (!token || !decodeToken.userId) {
+    return res.status(401).json({
+      message: "Token missing or invalid",
+    });
+  }
+
   try {
     /* eslint-disable no-await-in-loop */
     // eslint-disable-next-line no-restricted-syntax
@@ -144,6 +152,76 @@ const buyProduct = async (req, res, next) => {
     }
     /* eslint-enable no-await-in-loop */
     return res.json({ message: "success" });
+  } catch (error) {
+    return next(error);
+  }
+};
+
+/**
+ * Crea el wishlist de un usuario
+ */
+const setWishlist = async (req, res, next) => {
+  const { productId, quantity } = req.body;
+  const query = "INSERT INTO wishlist (customer_id, product_id, quantity) VALUES ($1, $2, $3)";
+  const { authorization } = req.headers;
+  let token = "";
+  return res.json({ message: productId });
+
+  /*
+  if (authorization && authorization.toLowerCase().startsWith("bearer")) {
+    // eslint-disable-next-line prefer-destructuring
+    token = authorization.split(" ")[1];
+  } else {
+    return res.status(401).json({
+      token,
+      message: "Unauthorized",
+    });
+  }
+
+  const decodeToken = await jwt.verify(token, jwtPassword);
+
+  if (!token || !decodeToken.userId) {
+    return res.status(401).json({
+      message: "Token missing or invalid",
+    });
+  }
+
+  const values = [decodeToken.userId, productId, quantity];
+
+  try {
+    await pool.query(query, values);
+    return res.json({ message: "success" });
+  } catch (error) {
+    return next(error);
+  }
+  */
+};
+
+const getWishlist = async (req, res, next) => {
+  const query = "SELECT * FROM wishlist";
+  const { authorization } = req.headers;
+  let token = "";
+
+  if (authorization && authorization.toLowerCase().startsWith("bearer")) {
+    // eslint-disable-next-line prefer-destructuring
+    token = authorization.split(" ")[1];
+  } else {
+    return res.status(401).json({
+      message: "Unauthorized",
+    });
+  }
+
+  const decodeToken = jwt.verify(token, jwtPassword);
+
+  if (!token || !decodeToken.userId) {
+    return res.status(401).json({
+      message: "Token missing or invalid",
+    });
+  }
+
+  try {
+    const result = await pool.query(query);
+    return res.json(result.rows);
   } catch (error) {
     return next(error);
   }
@@ -280,6 +358,8 @@ module.exports = {
   registerUser,
   getProducts,
   buyProduct,
+  setWishlist,
+  getWishlist,
   createInvoice,
   getStores,
   getStoresPhones,

@@ -4,6 +4,8 @@ const {
   registerUser,
   getProducts,
   buyProduct,
+  setWishlist,
+  getWishlist,
   createInvoice,
   getStores,
   getStoresPhones,
@@ -22,6 +24,10 @@ router.post("/register", registerUser);
 router.put("/cart", buyProduct);
 
 router.get("/catalogue", getProducts);
+
+router.post("/set-wishlist", setWishlist);
+
+router.get("/wishlist", getWishlist);
 
 router.post("/invoice", createInvoice);
 

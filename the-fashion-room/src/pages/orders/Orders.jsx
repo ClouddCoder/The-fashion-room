@@ -18,10 +18,10 @@ function Orders() {
   /**
    * Peticion a la API para obtener la informacion de las compras realizadas por el usuario
    */
-  const loadOrderDetail = async () => {
+  const loadOrderDetail = () => {
     const config = {
       headers: {
-        Authorization: `Bearer ${token}`,
+        "Authorization": `Bearer ${token}`,
       },
     };
     axios

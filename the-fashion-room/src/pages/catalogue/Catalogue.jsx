@@ -7,13 +7,14 @@ import AuthContext from "../../context/auth-context/AuthContext";
 import ProductContext from "../../context/product-context/ProductContext";
 import Navbar from "../../commons/navbar/Navbar";
 import Footer from "../../commons/footer/Footer";
+import axios from "axios";
 
 /**
  * Componente que muestra el catalogo de productos
  */
 function Catalogue() {
   const { addToCart, loadProducts, products } = useContext(ProductContext);
-  const { auth } = useContext(AuthContext);
+  const { auth, token } = useContext(AuthContext);
 
   /**
    * Boton personalizado para agregar productos al carrito dependiendo del estado de la autenticacion global del usuario
@@ -31,6 +32,26 @@ function Catalogue() {
           Ir al carrito
         </Button>
       );
+    }
+  };
+
+  /**
+   * Agrega un producto a la tabla wishlist de la base de datos
+   */
+  const addToWishlist = async (product) => {
+    try {
+      const result = await axios.post("http://localhost:3050/api-server/set-wishlist", {
+        headers: {
+          "Authorization": `Bearer ${token}`,
+        },
+        data: {
+          productId: product.product_id,
+          quantity: 1,
+        },
+      });
+      console.log(result.data);
+    } catch (error) {
+      return console.log(error);
     }
   };
 
@@ -56,7 +77,12 @@ function Catalogue() {
           </Grid>
           <Grid container alignItems="center" justifyContent="center">
             {products?.map((product) => (
-              <ProductItem key={product.product_id} product={product} addToCart={addToCart} />
+              <ProductItem
+                key={product.product_id}
+                product={product}
+                addToCart={addToCart}
+                addWishlist={addToWishlist}
+              />
             ))}
           </Grid>
         </Grid>

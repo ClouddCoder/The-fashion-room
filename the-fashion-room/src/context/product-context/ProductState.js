@@ -64,6 +64,16 @@ function ProductState(props) {
     dispatch({ type: TYPES.GET_TOTAL_PRICE });
   };
 
+  const getWishlist = async () => {
+    const response = await axios.get("http://localhost:3050/api-server/wishlist", {
+      headers: {
+        "Authorization": `Bearer ${token}`,
+      },
+    });
+    const data = await response.data;
+    dispatch({ type: TYPES.GET_WISHLIST, payload: data });
+  };
+
   /**
    * Crea una factura nueva en la API
    */
@@ -88,6 +98,7 @@ function ProductState(props) {
         cart: state.cart,
         totalProducts: state.totalProducts,
         totalPrice: state.totalPrice,
+        wishlist: state.wishlist,
         invoiceId: state.invoiceId,
         loadProducts,
         addToCart,
@@ -95,6 +106,7 @@ function ProductState(props) {
         clearCart,
         getTotalProducts,
         getTotalPrice,
+        getWishlist,
         createInvoice,
       }}
     >

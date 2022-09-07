@@ -3,6 +3,7 @@ import { TYPES } from "../../actions/productActions";
 export const productInitialState = {
   products: [],
   cart: [],
+  wishlist: [],
   totalProducts: 0,
   totalPrice: 0,
   invoiceId: 0,
@@ -15,9 +16,9 @@ export function ProductReducer(state, action) {
   switch (action.type) {
     case TYPES.LOAD_PRODUCTS:
       return { ...state, products: action.payload };
+
     case TYPES.ADD_TO_CART: {
       let newItem = state.products.find((item) => item.product_id === action.payload);
-
       let itemInCart = state.cart.find((item) => item.product_id === newItem.product_id);
 
       return itemInCart
@@ -34,6 +35,7 @@ export function ProductReducer(state, action) {
             cart: [...state.cart, { ...newItem, quantityInCart: 1 }],
           };
     }
+
     case TYPES.REMOVE_ONE_FROM_CART: {
       let itemToDelete = state.cart.find((item) => item.product_id === action.payload);
 
@@ -51,15 +53,18 @@ export function ProductReducer(state, action) {
             cart: state.cart.filter((item) => item.product_id !== action.payload),
           };
     }
+
     case TYPES.REMOVE_ALL_FROM_CART: {
       return {
         ...state,
         cart: state.cart.filter((item) => item.product_id !== action.payload),
       };
     }
+
     case TYPES.CLEAR_CART: {
       return { ...state, products: [], cart: [], totalProducts: 0, totalPrice: 0 };
     }
+
     case TYPES.GET_TOTAL_PRODUCTS: {
       let totalProducts = state.cart
         .map((product) => product.quantityInCart)
@@ -67,6 +72,7 @@ export function ProductReducer(state, action) {
 
       return { ...state, totalProducts };
     }
+
     case TYPES.GET_TOTAL_PRICE: {
       let totalPrice = state.cart
         .map((product) => product.price * product.quantityInCart)
@@ -74,6 +80,10 @@ export function ProductReducer(state, action) {
 
       return { ...state, totalPrice };
     }
+
+    case TYPES.GET_WISHLIST:
+      return { ...state, wishlist: action.payload };
+
     case TYPES.CREATE_INVOICE: {
       return { ...state, invoiceId: action.payload };
     }

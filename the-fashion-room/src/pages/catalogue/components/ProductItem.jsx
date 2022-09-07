@@ -11,11 +11,11 @@ import { useNavigate } from "react-router-dom";
 /**
  * Componente que muestra el producto en el catalogo
  */
-function ProductItem({ product, addToCart }) {
+function ProductItem({ product, addToCart, addWishlist }) {
   const { auth } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const customButton = () => {
+  const customCartButton = () => {
     if (auth) {
       return (
         <Button variant="outlined" onClick={() => addToCart(product.product_id)}>
@@ -26,6 +26,22 @@ function ProductItem({ product, addToCart }) {
       return (
         <Button variant="outlined" onClick={() => navigate("/login")}>
           Agregar al carrito
+        </Button>
+      );
+    }
+  };
+
+  const customWishlistButton = () => {
+    if (auth) {
+      return (
+        <Button variant="outlined" onClick={() => addWishlist(product)}>
+          Wishlist
+        </Button>
+      );
+    } else {
+      return (
+        <Button variant="outlined" onClick={() => navigate("/login")}>
+          Wishlist
         </Button>
       );
     }
@@ -51,7 +67,10 @@ function ProductItem({ product, addToCart }) {
       >
         <Grid container spacing={2}>
           <Grid item={true} sx={{ width: 160, height: 160 }}>
-            <Img alt="complex" src={require(`../../../assets/products/${product.product_name}.png`)} />
+            <Img
+              alt="complex"
+              src={require(`../../../assets/products/${product.product_name}.png`)}
+            />
           </Grid>
           <Grid item={true} xs={12} sm container>
             <Grid item={true} xs container direction="column" spacing={2}>
@@ -66,7 +85,8 @@ function ProductItem({ product, addToCart }) {
                   Cantidad disponible {product.stock}
                 </Typography>
               </Grid>
-              <Grid item>{customButton()}</Grid>
+              <Grid item>{customWishlistButton()}</Grid>
+              <Grid item>{customCartButton()}</Grid>
             </Grid>
             <Grid item>
               <Typography variant="subtitle1" component="div">
