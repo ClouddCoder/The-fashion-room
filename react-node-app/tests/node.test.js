@@ -3,19 +3,21 @@ const { app, server } = require("../server/index");
 
 const api = supertest(app);
 
-describe("GET /login", () => {
+describe.skip("GET /login", () => {
   it("If user does not exist", async () => {
-    await api
+    const response = await api
       .post("/login")
-      .send({ email: "cristiano", password: "cristiano" })
+      .send({ userEmail: "rodolfo", userPassword: "12345" })
       .expect(200)
       .expect("Content-Type", /application\/json/);
+
+    expect(response.body.userName).toContain("rodolfo");
   });
 
   it("If user exists", async () => {
     await api
       .post("/login")
-      .send({ email: "rodolfo", password: "12345" })
+      .send({ userEmail: "rodolfo", userPassword: "12345" })
       .expect(200)
       .expect("Content-Type", /application\/json/);
   });
@@ -26,10 +28,10 @@ describe.skip("POST /register", () => {
     await api
       .post("/register")
       .send({
-        name: "rodolfo",
-        lastname: "hernandez",
-        email: "rodolfo",
-        password: "12345",
+        userName: "rodolfo",
+        userLastname: "hernandez",
+        userEmail: "rodolfo",
+        userPassword: "12345",
       })
       .expect(200)
       .expect("Content-Type", /application\/json/);
@@ -39,10 +41,10 @@ describe.skip("POST /register", () => {
     await api
       .post("/register")
       .send({
-        name: "alexa",
-        lastname: "fernandez",
-        email: "alexa",
-        password: "",
+        userName: "alexa",
+        userLastname: "fernandez",
+        userEmail: "alexa",
+        userPassword: "",
       })
       .expect(406)
       .expect("Content-Type", /application\/json/);
@@ -55,6 +57,25 @@ describe.skip("GET /catalogue", () => {
     const products = response.body.map((product) => product.product_name);
 
     expect(products).toContain("Camisa");
+  });
+});
+
+describe("POST /set-wishlist", () => {
+  it("Insert new wish to the database", async () => {
+    // First, login with an user to get the token
+    const user = await api
+      .post("/login")
+      .send({ userEmail: "rodolfo", userPassword: "12345" })
+      .expect(200)
+      .expect("Content-Type", /application\/json/);
+
+    const response = await api
+      .post("/set-wishlist")
+      .send({ productId: 656804, quantity: 1 })
+      .set("Authorization", `Bearer ${user.body.token}`)
+      .expect(200);
+
+    expect(response.body.message).toContain("success");
   });
 });
 

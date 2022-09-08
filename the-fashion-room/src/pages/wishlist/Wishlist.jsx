@@ -6,7 +6,7 @@ function Wishlist() {
 
   useEffect(() => {
     getWishlist();
-  });
+  }, []);
 
   return <div>{console.log(wishlist)}</div>;
 }

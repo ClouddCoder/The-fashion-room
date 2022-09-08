@@ -7,6 +7,28 @@ config();
 const jwtPassword = process.env.JWT_PASSWORD;
 
 /**
+ * Verifica si el usuario esta autorizado.
+ */
+const getAuthorization = (authorization) => {
+  let token = "";
+
+  if (authorization && authorization.toLowerCase().startsWith("bearer")) {
+    // eslint-disable-next-line prefer-destructuring
+    token = authorization.split(" ")[1];
+  } else {
+    return { code: 401, message: "Unauthorized" };
+  }
+
+  const decodeToken = jwt.verify(token, jwtPassword);
+
+  if (!token || !decodeToken.userId) {
+    return { code: 401, message: "Token missing or invalid" };
+  }
+
+  return decodeToken;
+};
+
+/**
  * Obtiene el usuario según el email y contraseña ingresados
  */
 const loginUser = async (req, res, next) => {
@@ -119,24 +141,7 @@ const buyProduct = async (req, res, next) => {
   const cart = req.body;
   const query = "UPDATE product SET stock = stock - $1 WHERE product_id = $2";
   const { authorization } = req.headers;
-  let token = "";
-
-  if (authorization && authorization.toLowerCase().startsWith("bearer")) {
-    // eslint-disable-next-line prefer-destructuring
-    token = authorization.split(" ")[1];
-  } else {
-    return res.status(401).json({
-      message: "Unauthorized",
-    });
-  }
-
-  const decodeToken = jwt.verify(token, jwtPassword);
-
-  if (!token || !decodeToken.userId) {
-    return res.status(401).json({
-      message: "Token missing or invalid",
-    });
-  }
+  const decodeToken = getAuthorization(authorization);
 
   try {
     /* eslint-disable no-await-in-loop */
@@ -164,27 +169,9 @@ const setWishlist = async (req, res, next) => {
   const { productId, quantity } = req.body;
   const query = "INSERT INTO wishlist (customer_id, product_id, quantity) VALUES ($1, $2, $3)";
   const { authorization } = req.headers;
-  let token = "";
-  return res.json({ message: productId });
+  const decodeToken = getAuthorization(authorization);
 
-  /*
-  if (authorization && authorization.toLowerCase().startsWith("bearer")) {
-    // eslint-disable-next-line prefer-destructuring
-    token = authorization.split(" ")[1];
-  } else {
-    return res.status(401).json({
-      token,
-      message: "Unauthorized",
-    });
-  }
-
-  const decodeToken = await jwt.verify(token, jwtPassword);
-
-  if (!token || !decodeToken.userId) {
-    return res.status(401).json({
-      message: "Token missing or invalid",
-    });
-  }
+  if (decodeToken.code === 401) return res.status(401).json({ message: decodeToken.message });
 
   const values = [decodeToken.userId, productId, quantity];
 
@@ -194,30 +181,14 @@ const setWishlist = async (req, res, next) => {
   } catch (error) {
     return next(error);
   }
-  */
 };
 
 const getWishlist = async (req, res, next) => {
   const query = "SELECT * FROM wishlist";
   const { authorization } = req.headers;
-  let token = "";
+  const decodeToken = getAuthorization(authorization);
 
-  if (authorization && authorization.toLowerCase().startsWith("bearer")) {
-    // eslint-disable-next-line prefer-destructuring
-    token = authorization.split(" ")[1];
-  } else {
-    return res.status(401).json({
-      message: "Unauthorized",
-    });
-  }
-
-  const decodeToken = jwt.verify(token, jwtPassword);
-
-  if (!token || !decodeToken.userId) {
-    return res.status(401).json({
-      message: "Token missing or invalid",
-    });
-  }
+  if (decodeToken.code === 401) return res.status(401).json({ message: decodeToken.message });
 
   try {
     const result = await pool.query(query);
@@ -236,24 +207,9 @@ const createInvoice = async (req, res, next) => {
   const createInvoiceQuery = "SELECT create_invoice($1, $2)";
   const insertInvoiceDetailsQuery = "SELECT invoice_data($1, $2, $3, $4)";
   const { authorization } = req.headers;
-  let token = "";
+  const decodeToken = getAuthorization(authorization);
 
-  if (authorization && authorization.toLowerCase().startsWith("bearer")) {
-    // eslint-disable-next-line prefer-destructuring
-    token = authorization.split(" ")[1];
-  } else {
-    return res.status(401).json({
-      message: "Unauthorized",
-    });
-  }
-
-  const decodeToken = await jwt.verify(token, jwtPassword);
-
-  if (!token || !decodeToken.userId) {
-    return res.status(401).json({
-      message: "Token missing or invalid",
-    });
-  }
+  if (decodeToken.code === 401) return res.status(401).json({ message: decodeToken.message });
 
   try {
     const getInvoiceId = await pool.query(createInvoiceIdQuery);
@@ -326,24 +282,9 @@ const getOrderDetail = async (req, res, next) => {
   query += "INNER JOIN product ON product.product_id = invoice_detail.product_id ";
   query += "WHERE customer_id = $1";
   const { authorization } = req.headers;
-  let token = "";
+  const decodeToken = getAuthorization(authorization);
 
-  if (authorization || authorization.toLowerCase().startsWith("bearer")) {
-    // eslint-disable-next-line prefer-destructuring
-    token = authorization.split(" ")[1];
-  } else {
-    return res.status(401).json({
-      message: "Unauthorized",
-    });
-  }
-
-  const decodeToken = await jwt.verify(token, jwtPassword);
-
-  if (!token || !decodeToken.userId) {
-    return res.status(401).json({
-      message: "Token missing or invalid",
-    });
-  }
+  if (decodeToken.code === 401) return res.status(401).json({ message: decodeToken.message });
 
   try {
     const result = await pool.query(query, [decodeToken.userId]);

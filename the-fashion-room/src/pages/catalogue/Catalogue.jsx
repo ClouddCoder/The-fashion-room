@@ -40,15 +40,18 @@ function Catalogue() {
    */
   const addToWishlist = async (product) => {
     try {
-      const result = await axios.post("http://localhost:3050/api-server/set-wishlist", {
-        headers: {
-          "Authorization": `Bearer ${token}`,
-        },
-        data: {
+      const result = await axios.post(
+        "http://localhost:3050/api-server/set-wishlist",
+        {
           productId: product.product_id,
           quantity: 1,
         },
-      });
+        {
+          headers: {
+            "Authorization": `Bearer ${token}`,
+          },
+        },
+      );
       console.log(result.data);
     } catch (error) {
       return console.log(error);

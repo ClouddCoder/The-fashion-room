@@ -93,7 +93,6 @@ CREATE TABLE wishlist (
     customer_id INTEGER,
     product_id INTEGER,
     quantity INTEGER,
-    CONSTRAINT pk_wishlist PRIMARY KEY (customer_id),
     CONSTRAINT fk_wishlist_customer FOREIGN KEY (customer_id) REFERENCES customer (customer_id),
     CONSTRAINT fk_wishlist_product FOREIGN KEY (product_id) REFERENCES product (product_id)
 );
