@@ -1,5 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import ProductContext from "../../context/product-context/ProductContext";
+import Navbar from "../../commons/navbar/Navbar";
+import Footer from "../../commons/footer/Footer";
 
 function Wishlist() {
   const { wishlist, getWishlist } = useContext(ProductContext);
@@ -8,7 +10,12 @@ function Wishlist() {
     getWishlist();
   }, []);
 
-  return <div>{console.log(wishlist)}</div>;
+  return (
+    <div>
+      <Navbar />
+      <Footer />
+    </div>
+  );
 }
 
 export default Wishlist;

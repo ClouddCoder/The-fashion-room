@@ -52,7 +52,6 @@ function Catalogue() {
           },
         },
       );
-      console.log(result.data);
     } catch (error) {
       return console.log(error);
     }

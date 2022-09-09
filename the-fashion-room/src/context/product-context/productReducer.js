@@ -15,7 +15,7 @@ export const productInitialState = {
 export function ProductReducer(state, action) {
   switch (action.type) {
     case TYPES.LOAD_PRODUCTS:
-      return { ...state, products: action.payload };
+      return { ...state, products: [...action.payload] };
 
     case TYPES.ADD_TO_CART: {
       let newItem = state.products.find((item) => item.product_id === action.payload);
@@ -82,7 +82,7 @@ export function ProductReducer(state, action) {
     }
 
     case TYPES.GET_WISHLIST:
-      return { ...state, wishlist: action.payload };
+      return { ...state, wishlist: [...action.payload] };
 
     case TYPES.CREATE_INVOICE: {
       return { ...state, invoiceId: action.payload };

@@ -51,16 +51,17 @@ describe.skip("POST /register", () => {
   });
 });
 
-describe.skip("GET /catalogue", () => {
+describe("GET /catalogue", () => {
   it("Return catalogue products", async () => {
     const response = await api.get("/catalogue");
     const products = response.body.map((product) => product.product_name);
 
     expect(products).toContain("Camisa");
+    expect(response.body).toHaveLength(6);
   });
 });
 
-describe("POST /set-wishlist", () => {
+describe.skip("POST /set-wishlist", () => {
   it("Insert new wish to the database", async () => {
     // First, login with an user to get the token
     const user = await api

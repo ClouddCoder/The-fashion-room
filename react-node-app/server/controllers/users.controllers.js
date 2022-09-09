@@ -184,14 +184,17 @@ const setWishlist = async (req, res, next) => {
 };
 
 const getWishlist = async (req, res, next) => {
-  const query = "SELECT * FROM wishlist";
+  let query = "SELECT product_name, price FROM wishlist ";
+  query += "INNER JOIN customer ON customer.customer_id = wishlist.customer_id ";
+  query += "INNER JOIN product ON product.product_id = wishlist.product_id ";
+  query += "WHERE customer.customer_id = $1";
   const { authorization } = req.headers;
   const decodeToken = getAuthorization(authorization);
 
   if (decodeToken.code === 401) return res.status(401).json({ message: decodeToken.message });
 
   try {
-    const result = await pool.query(query);
+    const result = await pool.query(query, [decodeToken.userId]);
     return res.json(result.rows);
   } catch (error) {
     return next(error);

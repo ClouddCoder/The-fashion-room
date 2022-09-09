@@ -46,7 +46,6 @@ function Registrar() {
         headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
       });
       const data = await res.json();
-      console.log(data);
       window.localStorage.setItem("logged", JSON.stringify(data));
 
       if (res.status === 200) {
