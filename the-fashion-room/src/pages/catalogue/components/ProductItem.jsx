@@ -1,5 +1,6 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import AuthContext from "../../../context/auth-context/AuthContext";
+import ProductContext from "../../../context/product-context/ProductContext";
 import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
@@ -13,6 +14,12 @@ import { useNavigate } from "react-router-dom";
  */
 function ProductItem({ product, addToCart, addWishlist }) {
   const { auth } = useContext(AuthContext);
+  const { wishlist } = useContext(ProductContext);
+
+  // Verifica si el producto esta en la wishlist
+  const productAsWish = wishlist.find((wish) => wish.product_id === product.product_id);
+
+  const [addWish, setAddWish] = useState(productAsWish || false);
   const navigate = useNavigate();
 
   const customCartButton = () => {
@@ -33,11 +40,36 @@ function ProductItem({ product, addToCart, addWishlist }) {
 
   const customWishlistButton = () => {
     if (auth) {
-      return (
-        <Button variant="outlined" onClick={() => addWishlist(product)}>
-          Wishlist
-        </Button>
-      );
+      // Si el producto esta en la wishlist, el boton cambia de color
+      // y puede ser removido de la wishlist
+      if (addWish) {
+        return (
+          <Button
+            variant="outlined"
+            onClick={() => {
+              addWishlist(product, true);
+              setAddWish(false);
+            }}
+            sx={{ backgroundColor: "blue" }}
+          >
+            Wishlist
+          </Button>
+        );
+        // Si el producto no esta en la wishlist, el boton no tiene color y
+        // puede agrega el producto de la wishlist
+      } else {
+        return (
+          <Button
+            variant="outlined"
+            onClick={() => {
+              addWishlist(product);
+              setAddWish(true);
+            }}
+          >
+            Wishlist
+          </Button>
+        );
+      }
     } else {
       return (
         <Button variant="outlined" onClick={() => navigate("/login")}>

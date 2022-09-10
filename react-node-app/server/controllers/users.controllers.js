@@ -166,17 +166,22 @@ const buyProduct = async (req, res, next) => {
  * Crea el wishlist de un usuario
  */
 const setWishlist = async (req, res, next) => {
-  const { productId, quantity } = req.body;
-  const query = "INSERT INTO wishlist (customer_id, product_id, quantity) VALUES ($1, $2, $3)";
+  const { productId, remove } = req.body;
+  const addQuery = "INSERT INTO wishlist (customer_id, product_id) VALUES ($1, $2)";
+  const removeQuery = "DELETE FROM wishlist WHERE customer_id = $1 AND product_id = $2";
   const { authorization } = req.headers;
   const decodeToken = getAuthorization(authorization);
 
   if (decodeToken.code === 401) return res.status(401).json({ message: decodeToken.message });
 
-  const values = [decodeToken.userId, productId, quantity];
+  const values = [decodeToken.userId, productId];
 
   try {
-    await pool.query(query, values);
+    if (!remove) {
+      await pool.query(addQuery, values);
+    } else {
+      await pool.query(removeQuery, values);
+    }
     return res.json({ message: "success" });
   } catch (error) {
     return next(error);
@@ -184,7 +189,7 @@ const setWishlist = async (req, res, next) => {
 };
 
 const getWishlist = async (req, res, next) => {
-  let query = "SELECT product_name, price FROM wishlist ";
+  let query = "SELECT product.product_id, product_name, price FROM wishlist ";
   query += "INNER JOIN customer ON customer.customer_id = wishlist.customer_id ";
   query += "INNER JOIN product ON product.product_id = wishlist.product_id ";
   query += "WHERE customer.customer_id = $1";

@@ -64,6 +64,9 @@ function ProductState(props) {
     dispatch({ type: TYPES.GET_TOTAL_PRICE });
   };
 
+  /**
+   * Retorna los productos del wishlist de un usuario
+   */
   const getWishlist = async () => {
     const response = await axios.get("http://localhost:3050/api-server/wishlist", {
       headers: {
@@ -100,6 +103,7 @@ function ProductState(props) {
         totalPrice: state.totalPrice,
         wishlist: state.wishlist,
         invoiceId: state.invoiceId,
+        addWish: state.addWish,
         loadProducts,
         addToCart,
         removeFromCart,

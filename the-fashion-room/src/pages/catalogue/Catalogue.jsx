@@ -38,13 +38,13 @@ function Catalogue() {
   /**
    * Agrega un producto a la tabla wishlist de la base de datos
    */
-  const addToWishlist = async (product) => {
+  const addToWishlist = async (product, remove = false) => {
     try {
-      const result = await axios.post(
+      await axios.post(
         "http://localhost:3050/api-server/set-wishlist",
         {
           productId: product.product_id,
-          quantity: 1,
+          remove,
         },
         {
           headers: {

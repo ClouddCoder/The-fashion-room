@@ -13,6 +13,7 @@ function Wishlist() {
   return (
     <div>
       <Navbar />
+      {console.log(wishlist)}
       <Footer />
     </div>
   );
