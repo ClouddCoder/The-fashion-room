@@ -47,7 +47,7 @@ function ProfileButton({ resetSession }) {
           aria-haspopup="true"
           aria-expanded={open ? "true" : undefined}
         >
-          <AccountCircleOutlinedIcon />
+          <AccountCircleOutlinedIcon sx={{ width: "40px", height: "40px" }} />
         </IconButton>
       </Tooltip>
       <div>

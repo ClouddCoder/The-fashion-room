@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import AuthContext from "../../context/auth-context/AuthContext";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
-import ProfileButton from "./components/ProfileButton";
-import CartButton from "./components/CartButton";
+import ProfileButton from "./components/profile-button/ProfileButton";
+import CustomButton from "./components/custom-button/CustomButton";
 
 /**
  * Componente que muestra la barra de navegacion
@@ -45,7 +47,9 @@ function Navbar() {
   return (
     <div className="header">
       <nav className="navbar">
-        <div className="navbarTitle">The fashion room</div>
+        <div className="navbarTitle">
+          <h1>The Fashion room</h1>
+        </div>
         <ul className="navbarLinks">
           <li className="link">
             <Link to="/">Home</Link>
@@ -65,12 +69,16 @@ function Navbar() {
             <div className="navbarUserName">
               <p>{user}</p>
             </div>
-            <div className="horizontal-line" />
-            <div>
-              <Link to="/wishlist">Wishlist</Link>
+            <div className="horizontalLine" />
+            <div className="navbarWishlistButton">
+              <CustomButton title="Wishlist" path="/wishlist">
+                <FavoriteBorderOutlinedIcon sx={{ ml: "10px" }} />
+              </CustomButton>
             </div>
             <div className="navbarCartButton">
-              <CartButton />
+              <CustomButton title="Mi carrito" path="/cart">
+                <ShoppingCartOutlinedIcon sx={{ ml: "10px" }} />
+              </CustomButton>
             </div>
             <div className="navbarProfileButton">
               <ProfileButton resetSession={resetSession} />
@@ -78,13 +86,17 @@ function Navbar() {
           </div>
         ) : (
           <div className="navbarLogin">
-            <Link to="/login" component="button" onClick={resetForm}>
-              Login
-            </Link>
-            <div className="horizontal-line" />
-            <Link to="/register" component="button" onClick={resetForm}>
-              Register
-            </Link>
+            <div className="navbarLoginButton">
+              <Link to="/login" component="button" onClick={resetForm}>
+                Login
+              </Link>
+            </div>
+            <div className="horizontalLine" />
+            <div className="navbarRegisterButton">
+              <Link to="/register" component="button" onClick={resetForm}>
+                Register
+              </Link>
+            </div>
           </div>
         )}
       </nav>
