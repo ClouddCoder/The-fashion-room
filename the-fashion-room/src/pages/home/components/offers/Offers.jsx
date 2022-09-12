@@ -13,9 +13,9 @@ import "./Offers.css";
  */
 function Offers() {
   return (
-    <Box className="offer_container" mb={3}>
-      <Grid container align="center">
-        <Grid item={true} xs={3}>
+    <Box className="offersContainer">
+      <Grid container align="center" spacing={2}>
+        <Grid item={true} xs={6} md={3}>
           <OfferItem
             alt={"calzado"}
             image={calzado}
@@ -23,7 +23,7 @@ function Offers() {
             description={"Calzado de todo tipo"}
           />
         </Grid>
-        <Grid item={true} xs={3}>
+        <Grid item={true} xs={6} md={3}>
           <OfferItem
             alt={"camisetas"}
             image={camisetas}
@@ -31,7 +31,7 @@ function Offers() {
             description={"Camisetas de todo tipo"}
           />
         </Grid>
-        <Grid item={true} xs={3}>
+        <Grid item={true} xs={6} md={3}>
           <OfferItem
             alt={"deportiva"}
             image={deportiva}
@@ -39,7 +39,7 @@ function Offers() {
             description={"Ropa deportiva de todo tipo"}
           />
         </Grid>
-        <Grid item={true} xs={3}>
+        <Grid item={true} xs={6} md={3}>
           <OfferItem
             alt={"bolsos"}
             image={bolsos}
