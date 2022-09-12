@@ -14,10 +14,11 @@ import { useNavigate } from "react-router-dom";
  */
 function ProductItem({ product, addToCart, addWishlist }) {
   const { auth } = useContext(AuthContext);
-  const { wishlist } = useContext(ProductContext);
+  const { temporaryWishlist, addTemporaryWish, removeTemporaryWish } =
+    useContext(ProductContext);
 
   // Verifica si el producto esta en la wishlist
-  const productAsWish = wishlist.find((wish) => wish.product_id === product.product_id);
+  const productAsWish = temporaryWishlist.includes(product.product_id);
 
   const [addWish, setAddWish] = useState(productAsWish || false);
   const navigate = useNavigate();
@@ -48,6 +49,7 @@ function ProductItem({ product, addToCart, addWishlist }) {
             variant="outlined"
             onClick={() => {
               addWishlist(product, true);
+              removeTemporaryWish(product);
               setAddWish(false);
             }}
             sx={{ backgroundColor: "blue" }}
@@ -63,6 +65,7 @@ function ProductItem({ product, addToCart, addWishlist }) {
             variant="outlined"
             onClick={() => {
               addWishlist(product);
+              addTemporaryWish(product);
               setAddWish(true);
             }}
           >
@@ -85,6 +88,8 @@ function ProductItem({ product, addToCart, addWishlist }) {
     maxWidth: "140px",
     maxHeight: "140px",
   });
+
+  console.log(temporaryWishlist);
 
   return (
     <Box m={1}>

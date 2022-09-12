@@ -64,6 +64,14 @@ function ProductState(props) {
     dispatch({ type: TYPES.GET_TOTAL_PRICE });
   };
 
+  const addTemporaryWish = (id) => {
+    dispatch({ type: TYPES.ADD_TEMPORARY_WISH, payload: id });
+  };
+
+  const removeTemporaryWish = (id) => {
+    dispatch({ type: TYPES.REMOVE_TEMPORARY_WISH, payload: id });
+  };
+
   /**
    * Retorna los productos del wishlist de un usuario
    */
@@ -102,6 +110,7 @@ function ProductState(props) {
         totalProducts: state.totalProducts,
         totalPrice: state.totalPrice,
         wishlist: state.wishlist,
+        temporaryWishlist: state.temporaryWishlist,
         invoiceId: state.invoiceId,
         addWish: state.addWish,
         loadProducts,
@@ -110,6 +119,8 @@ function ProductState(props) {
         clearCart,
         getTotalProducts,
         getTotalPrice,
+        addTemporaryWish,
+        removeTemporaryWish,
         getWishlist,
         createInvoice,
       }}

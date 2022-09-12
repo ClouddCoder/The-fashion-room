@@ -3,7 +3,8 @@ import { TYPES } from "../../actions/productActions";
 export const productInitialState = {
   products: [],
   cart: [],
-  wishlist: [],
+  wishlist: [], // Get all the wishes sending a request to the api
+  temporaryWishlist: [], // Add every wish instantly without send a request to the api
   totalProducts: 0,
   totalPrice: 0,
   invoiceId: 0,
@@ -79,6 +80,17 @@ export function ProductReducer(state, action) {
         .reduce((a, b) => a + b, 0);
 
       return { ...state, totalPrice };
+    }
+
+    case TYPES.ADD_TEMPORARY_WISH: {
+      return { ...state, temporaryWishlist: [...state.temporaryWishlist, action.payload] };
+    }
+
+    case TYPES.REMOVE_TEMPORARY_WISH: {
+      return {
+        ...state,
+        temporaryWishlist: state.temporaryWishlist.filter((wish) => wish !== action.payload),
+      };
     }
 
     case TYPES.GET_WISHLIST:

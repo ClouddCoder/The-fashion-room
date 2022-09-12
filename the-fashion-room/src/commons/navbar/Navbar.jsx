@@ -66,6 +66,9 @@ function Navbar() {
               <p>{user}</p>
             </div>
             <div className="horizontal-line" />
+            <div>
+              <Link to="/wishlist">Wishlist</Link>
+            </div>
             <div className="navbarCartButton">
               <CartButton />
             </div>

@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from "react";
+import { Link } from "react-router-dom";
 import ProductContext from "../../context/product-context/ProductContext";
 import Navbar from "../../commons/navbar/Navbar";
 import Footer from "../../commons/footer/Footer";
@@ -13,7 +14,9 @@ function Wishlist() {
   return (
     <div>
       <Navbar />
-      {console.log(wishlist)}
+      <div>
+        <Link to="/">Home</Link>
+      </div>
       <Footer />
     </div>
   );
