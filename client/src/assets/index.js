@@ -8,7 +8,7 @@ import Corbata from "./products/Corbata.png";
 import Pantalon from "./products/Pantalon.png";
 import Pantaloneta from "./products/Pantaloneta.png";
 import Zapatos from "./products/Zapatos.png";
-import Header from "./header.png";
+import HeaderBackground from "./header.png";
 
 export {
   Bolsos,
@@ -21,5 +21,5 @@ export {
   Pantalon,
   Pantaloneta,
   Zapatos,
-  Header,
+  HeaderBackground,
 };

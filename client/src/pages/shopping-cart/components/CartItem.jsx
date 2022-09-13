@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
+import { Blusa, Camisa, Corbata, Pantalon, Pantaloneta, Zapatos } from "../../../assets";
 import { styled } from "@mui/material/styles";
 
 /**
@@ -19,6 +20,25 @@ function CartItem({ product, removeFromCart }) {
     height: 128,
   });
 
+  const getCartItemImage = (cartItemName) => {
+    switch (cartItemName) {
+      case "Blusa":
+        return Blusa;
+      case "Camisa":
+        return Camisa;
+      case "Corbata":
+        return Corbata;
+      case "Pantalon":
+        return Pantalon;
+      case "Pantaloneta":
+        return Pantaloneta;
+      case "Zapatos":
+        return Zapatos;
+      default:
+        return null;
+    }
+  };
+
   return (
     <Box m={1}>
       <Paper
@@ -33,7 +53,7 @@ function CartItem({ product, removeFromCart }) {
       >
         <Grid container spacing={2}>
           <Grid item>
-            <Img alt="complex" src={require(`../../../assets/products/${product.product_name}.png`)} />
+            <Img alt="complex" src={getCartItemImage(product.product_name)} />
           </Grid>
           <Grid item={true} xs={12} sm container>
             <Grid item={true} xs container direction="column" spacing={2}>

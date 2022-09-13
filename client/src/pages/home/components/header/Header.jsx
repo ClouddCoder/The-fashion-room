@@ -1,4 +1,5 @@
 import React from "react";
+import { HeaderBackground } from "../../../../assets";
 import "./Header.css";
 
 /**
@@ -7,7 +8,7 @@ import "./Header.css";
 function Header() {
   return (
     <figure className="homeHeader">
-      <img src="../../../../assets/header.png" alt="The Fashion Room" />
+      <img src={HeaderBackground} alt="The Fashion Room" />
     </figure>
   );
 }
