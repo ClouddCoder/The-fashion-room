@@ -1,0 +1,30 @@
+.navbarLogin {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.navbarUserName p {
+  margin: 0 1rem;
+  color: var(--color-primary-brown);
+}
+
+.horizontalLine {
+  width: 1px;
+  height: 30px;
+  background-color: var(--color-primary-brown);
+}
+
+.navbarLoginButton a,
+.navbarRegisterButton a {
+  margin: 10px;
+  color: var(--color-primary-brown);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.navbarWishlistButton,
+.navbarCartButton {
+  margin: 10px;
+}

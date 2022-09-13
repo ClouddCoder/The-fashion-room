@@ -4,6 +4,14 @@
   box-sizing: border-box;
 }
 
+:root {
+  --color-primary-brown: #592E42;
+  --color-primary-yellow: #F2B366;
+  --color-primary-orange: #D98841;
+  --color-primary-white: #F2E4D8;
+  --color-primary-red: #BF665E;
+}
+
 html,
 body {
   height: 100%;

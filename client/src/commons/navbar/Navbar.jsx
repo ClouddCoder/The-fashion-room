@@ -1,109 +1,44 @@
-import React, { useContext } from "react";
+import React, { useState } from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
-import AuthContext from "../../context/auth-context/AuthContext";
-import { Link } from "react-router-dom";
+import MenuIcon from "@mui/icons-material/Menu";
 import "./Navbar.css";
-import ProfileButton from "./components/profile-button/ProfileButton";
-import CustomButton from "./components/custom-button/CustomButton";
+import NavBarOptionList from "./components/navbar-option-list/NavbarOptionList";
+import NavbarProfileList from "./components/navbar-profile-list/NavbarProfileList";
 
 /**
  * Componente que muestra la barra de navegacion
  */
 function Navbar() {
-  const {
-    auth,
-    setAuth,
-    user,
-    setUser,
-    setToken,
-    setUserId,
-    setUserName,
-    setUserLastname,
-    setUserEmail,
-    setUserPassword,
-  } = useContext(AuthContext);
-
-  /**
-   * Borra los datos del usuario al salir de la sesion
-   */
-  const resetSession = () => {
-    setAuth(false);
-    setUser("");
-    setToken("");
-    setUserId("");
-  };
-
-  /**
-   * Borra los campos del login y register cuando se redirige a uno de los dos
-   */
-  const resetForm = () => {
-    setUserName("");
-    setUserLastname("");
-    setUserEmail("");
-    setUserPassword("");
-  };
+  const [toggle, setToggle] = useState(false);
 
   const title = useMediaQuery("(min-width:700px)") ? "The Fashion room" : "TFR";
 
   return (
-    <div className="header">
-      <nav className="navbar">
-        <div className="navbarTitle">
-          <h1>{title}</h1>
-        </div>
-        <ul className="navbarLinks">
-          <li className="link">
-            <Link to="/">Home</Link>
-          </li>
-          <li className="link">
-            <Link to="/contact">Contacto</Link>
-          </li>
-          {auth ? (
-            <li className="orders">
-              <Link to="/orders">Mis compras</Link>
-            </li>
-          ) : null}
-        </ul>
-
-        {auth ? (
-          <div className="navbarLogin">
-            <div className="navbarUserName">
-              <p>{user}</p>
-            </div>
-            <div className="horizontalLine" />
-            <div className="navbarWishlistButton">
-              <CustomButton title="Wishlist" path="/wishlist">
-                <FavoriteBorderOutlinedIcon sx={{ ml: "10px" }} />
-              </CustomButton>
-            </div>
-            <div className="navbarCartButton">
-              <CustomButton title="Mi carrito" path="/cart">
-                <ShoppingCartOutlinedIcon sx={{ ml: "10px" }} />
-              </CustomButton>
-            </div>
-            <div className="navbarProfileButton">
-              <ProfileButton resetSession={resetSession} />
-            </div>
+    <nav className="navbar">
+      <div className="navbarToggleButton" onClick={() => setToggle(true)}>
+        <MenuIcon sx={{ width: "40px", height: "40px" }} />
+        {toggle ? (
+          <div className="displayMenu">
+            <ul>
+              <li>
+                <p>Home</p>
+              </li>
+              <li>
+                <p>About</p>
+              </li>
+              <li>
+                <p>Contact</p>
+              </li>
+            </ul>
           </div>
-        ) : (
-          <div className="navbarLogin">
-            <div className="navbarLoginButton">
-              <Link to="/login" component="button" onClick={resetForm}>
-                Login
-              </Link>
-            </div>
-            <div className="horizontalLine" />
-            <div className="navbarRegisterButton">
-              <Link to="/register" component="button" onClick={resetForm}>
-                Register
-              </Link>
-            </div>
-          </div>
-        )}
-      </nav>
-    </div>
+        ) : null}
+      </div>
+      <div className="navbarTitle">
+        <h1>{title}</h1>
+      </div>
+      <NavBarOptionList />
+      <NavbarProfileList />
+    </nav>
   );
 }
 

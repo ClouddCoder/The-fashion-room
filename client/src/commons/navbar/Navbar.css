@@ -1,38 +1,12 @@
-.header {
+.navbar {
   width: 100%;
   height: 70px;
   margin-bottom: 0;
-}
-
-/* Color Theme Swatches in Hex */
-.color-theme_Screenshot_20220820-200535_Chrome-1-hex {
-  color: #592E42;
-}
-
-.color-theme_Screenshot_20220820-200535_Chrome-2-hex {
-  color: #F2B366;
-}
-
-.color-theme_Screenshot_20220820-200535_Chrome-3-hex {
-  color: #D98841;
-}
-
-.color-theme_Screenshot_20220820-200535_Chrome-4-hex {
-  color: #F2E4D8;
-}
-
-.color-theme_Screenshot_20220820-200535_Chrome-5-hex {
-  color: #BF665E;
-}
-
-.navbar {
-  width: 100%;
-  height: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #F2E4D8;
-  color: #592E42;
+  background-color: var(--color-primary-white);
+  color: var(--color-primary-brown);
 }
 
 .navbarTitle {
@@ -40,60 +14,29 @@
   font-family: 'Roboto', sans-serif;
 }
 
-.navbarLinks {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  list-style: none;
-}
-
-.navbarLinks li {
-  margin: 0 1rem;
-  cursor: pointer;
-}
-
-.navbarLinks li a {
-  color: aliceblue;
-  text-decoration: none;
-}
-
-.navbarLinks li a:hover {
-  color: rgb(179, 174, 174);
-}
-
 .navbarTitle {
   font-family: "Roboto", sans-serif;
   font-size: 1.5rem;
 }
 
-.navbarLogin {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  margin-right: 10px;
+@media (min-width: 700px) {
+  .navbarToggleButton {
+    display: none;
+  }
 }
 
-.navbarUserName p {
-  margin: 0 1rem;
-  color: antiquewhite;
-}
-
-.horizontalLine {
-  width: 1px;
-  height: 30px;
-  background-color: rgb(179, 174, 174);
-}
-
-.navbarLoginButton a,
-.navbarRegisterButton a {
-  margin: 10px;
-  color: antiquewhite;
-  text-decoration: none;
+.navbarToggleButton:hover {
   cursor: pointer;
 }
 
-.navbarWishlistButton,
-.navbarCartButton {
-  margin: 10px;
+.displayMenu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  transition: 0.5s ease;
+  z-index: 5;
+  background-color: var(--color-primary-brown);
+  color: var(--color-primary-white)
 }
