@@ -8,6 +8,7 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { useNavigate } from "react-router-dom";
+import { Blusa, Camisa, Corbata, Pantalon, Pantaloneta, Zapatos } from "../../../assets";
 
 /**
  * Componente que muestra el producto en el catalogo
@@ -90,10 +91,27 @@ function ProductItem({ product, addToCart, addWishlist }) {
     maxHeight: "140px",
   });
 
-  console.log(addWish);
-  console.log(productAsWish);
-  console.log(product);
-  console.log(temporaryWishlist);
+  /**
+   * Obtiene la imagen del producto dependiendo de su nombre
+   */
+  const getProductImage = (productName) => {
+    switch (productName) {
+      case "Blusa":
+        return Blusa;
+      case "Camisa":
+        return Camisa;
+      case "Corbata":
+        return Corbata;
+      case "Pantalon":
+        return Pantalon;
+      case "Pantaloneta":
+        return Pantaloneta;
+      case "Zapatos":
+        return Zapatos;
+      default:
+        return null;
+    }
+  };
 
   return (
     <Box m={1}>
@@ -108,10 +126,7 @@ function ProductItem({ product, addToCart, addWishlist }) {
       >
         <Grid container spacing={2}>
           <Grid item={true} sx={{ width: 160, height: 160 }}>
-            <Img
-              alt="complex"
-              src={require(`../../../assets/products/${product.product_name}.png`)}
-            />
+            <Img alt="complex" src={getProductImage(product.product_name)} />
           </Grid>
           <Grid item={true} xs={12} sm container>
             <Grid item={true} xs container direction="column" spacing={2}>

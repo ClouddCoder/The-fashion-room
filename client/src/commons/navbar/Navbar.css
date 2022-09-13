@@ -25,49 +25,6 @@
   color: #BF665E;
 }
 
-/* Color Theme Swatches in RGBA */
-.color-theme_Screenshot_20220820-200535_Chrome-1-rgba {
-  color: rgba(89, 46, 66, 1);
-}
-
-.color-theme_Screenshot_20220820-200535_Chrome-2-rgba {
-  color: rgba(242, 179, 102, 1);
-}
-
-.color-theme_Screenshot_20220820-200535_Chrome-3-rgba {
-  color: rgba(217, 136, 65, 1);
-}
-
-.color-theme_Screenshot_20220820-200535_Chrome-4-rgba {
-  color: rgba(242, 228, 216, 1);
-}
-
-.color-theme_Screenshot_20220820-200535_Chrome-5-rgba {
-  color: rgba(191, 102, 94, 1);
-}
-
-/* Color Theme Swatches in HSLA */
-.color-theme_Screenshot_20220820-200535_Chrome-1-hsla {
-  color: hsla(332, 31, 26, 1);
-}
-
-.color-theme_Screenshot_20220820-200535_Chrome-2-hsla {
-  color: hsla(33, 84, 67, 1);
-}
-
-.color-theme_Screenshot_20220820-200535_Chrome-3-hsla {
-  color: hsla(28, 66, 55, 1);
-}
-
-.color-theme_Screenshot_20220820-200535_Chrome-4-hsla {
-  color: hsla(27, 49, 89, 1);
-}
-
-.color-theme_Screenshot_20220820-200535_Chrome-5-hsla {
-  color: hsla(4, 43, 55, 1);
-}
-
-
 .navbar {
   width: 100%;
   height: 100%;

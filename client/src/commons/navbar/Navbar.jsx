@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import AuthContext from "../../context/auth-context/AuthContext";
@@ -44,11 +45,13 @@ function Navbar() {
     setUserPassword("");
   };
 
+  const title = useMediaQuery("(min-width:700px)") ? "The Fashion room" : "TFR";
+
   return (
     <div className="header">
       <nav className="navbar">
         <div className="navbarTitle">
-          <h1>The Fashion room</h1>
+          <h1>{title}</h1>
         </div>
         <ul className="navbarLinks">
           <li className="link">
