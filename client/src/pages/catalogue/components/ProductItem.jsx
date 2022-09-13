@@ -18,7 +18,8 @@ function ProductItem({ product, addToCart, addWishlist }) {
     useContext(ProductContext);
 
   // Verifica si el producto esta en la wishlist
-  const productAsWish = temporaryWishlist.includes(product.product_id);
+  const findWish = temporaryWishlist.find((wish) => wish.product_id === product.product_id);
+  const productAsWish = Boolean(findWish);
 
   const [addWish, setAddWish] = useState(productAsWish || false);
   const navigate = useNavigate();
@@ -49,7 +50,7 @@ function ProductItem({ product, addToCart, addWishlist }) {
             variant="outlined"
             onClick={() => {
               addWishlist(product, true);
-              removeTemporaryWish(product);
+              removeTemporaryWish(product.product_id);
               setAddWish(false);
             }}
             sx={{ backgroundColor: "blue" }}
@@ -89,6 +90,9 @@ function ProductItem({ product, addToCart, addWishlist }) {
     maxHeight: "140px",
   });
 
+  console.log(addWish);
+  console.log(productAsWish);
+  console.log(product);
   console.log(temporaryWishlist);
 
   return (

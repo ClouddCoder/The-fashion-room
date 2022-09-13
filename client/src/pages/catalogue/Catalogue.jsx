@@ -41,7 +41,7 @@ function Catalogue() {
   const addToWishlist = async (product, remove = false) => {
     try {
       await axios.post(
-        "http://localhost:3050/api-server/set-wishlist",
+        "http://localhost:3050/api/set-wishlist",
         {
           productId: product.product_id,
           remove,

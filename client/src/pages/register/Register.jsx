@@ -35,7 +35,7 @@ function Registrar() {
     e.preventDefault();
     if (!errorPassword.errorPassword) {
       setErrorPassword({ errorPassword: false, errorMessage: "" });
-      const res = await fetch("http://localhost:3050/api-server/register", {
+      const res = await fetch("http://localhost:3050/api/register", {
         method: "POST",
         body: JSON.stringify({
           userName,

@@ -4,7 +4,7 @@ const loggedJSON = window.localStorage.getItem("logged");
 const user = JSON.parse(loggedJSON);
 
 export const authInitialState = {
-  auth: user?.userAuth || true,
+  auth: user?.userAuth || false,
   userId: user?.userId || "",
   user: user?.userName || "", // nombre del usuario que se muestra en el navbar
   userName: "",

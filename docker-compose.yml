@@ -3,8 +3,8 @@ services:
   nginx:
     container_name: nginx
     depends_on:
-      - api-server
-      - react-app
+      - api
+      - client
     restart: always
     build:
       context: ./nginx
@@ -14,10 +14,10 @@ services:
     networks:
       - pern-network
 
-  react-app:
-    container_name: react-app
+  client:
+    container_name: client
     build:
-      context: ./the-fashion-room
+      context: ./client
       dockerfile: Dockerfile.dev
     stdin_open: true
     ports:
@@ -25,10 +25,10 @@ services:
     networks:
       - pern-network
 
-  api-server:
-    container_name: api-server
+  api:
+    container_name: api
     build:
-      context: ./react-node-app
+      context: ./api
       dockerfile: Dockerfile.dev
     ports:
       - "3001:3001"

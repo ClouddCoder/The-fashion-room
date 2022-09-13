@@ -16,7 +16,7 @@ function ProductState(props) {
    * Obtiene los productos de la API
    */
   const loadProducts = async () => {
-    const response = await axios.get("http://localhost:3050/api-server/catalogue", {
+    const response = await axios.get("http://localhost:3050/api/catalogue", {
       crossDomain: true,
     });
     const data = await response.data;
@@ -76,7 +76,7 @@ function ProductState(props) {
    * Retorna los productos del wishlist de un usuario
    */
   const getWishlist = async () => {
-    const response = await axios.get("http://localhost:3050/api-server/wishlist", {
+    const response = await axios.get("http://localhost:3050/api/wishlist", {
       headers: {
         "Authorization": `Bearer ${token}`,
       },
@@ -89,7 +89,7 @@ function ProductState(props) {
    * Crea una factura nueva en la API
    */
   const createInvoice = async (cart) => {
-    const res = await fetch("http://localhost:3050/api-server/invoice", {
+    const res = await fetch("http://localhost:3050/api/invoice", {
       method: "POST",
       body: JSON.stringify(cart),
       headers: new Headers({

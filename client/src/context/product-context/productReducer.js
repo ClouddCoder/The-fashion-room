@@ -89,7 +89,9 @@ export function ProductReducer(state, action) {
     case TYPES.REMOVE_TEMPORARY_WISH: {
       return {
         ...state,
-        temporaryWishlist: state.temporaryWishlist.filter((wish) => wish !== action.payload),
+        temporaryWishlist: state.temporaryWishlist.filter(
+          (wish) => wish.product_id !== action.payload,
+        ),
       };
     }
 

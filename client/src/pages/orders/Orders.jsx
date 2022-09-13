@@ -25,7 +25,7 @@ function Orders() {
       },
     };
     axios
-      .get("http://localhost:3050/api-server/order-detail", config)
+      .get("http://localhost:3050/api/order-detail", config)
       .then((response) => {
         const groupsOrderDetail = Object.values(
           response.data.reduce(
