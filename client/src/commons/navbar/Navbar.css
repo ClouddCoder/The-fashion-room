@@ -19,24 +19,45 @@
   font-size: 1.5rem;
 }
 
-@media (min-width: 700px) {
-  .navbarToggleButton {
-    display: none;
-  }
+.navbarSmallscreen {
+  display: none;
 }
 
-.navbarToggleButton:hover {
-  cursor: pointer;
-}
-
-.displayMenu {
+.navbarSmallscreenOverlay {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 50%;
   height: 100vh;
-  transition: 0.5s ease;
+  box-shadow: 0 0 10px #85888C;
+  background-color: #F5F6FA;
+  -webkit-font-smoothing: antialiased;
+  transform-origin: 0% 0%;
+  transform: translate(-100%, 0);
+  transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
   z-index: 5;
-  background-color: var(--color-primary-brown);
-  color: var(--color-primary-white)
+}
+
+/*
+.displayOverlay {
+  transform: translate(-100%, 0);
+}
+*/
+
+.navbarSmallscreenLinks li {
+  padding: 10px 0;
+  transition-delay: 2s;
+}
+
+.navbarSmallScreenOverlayCloseButton {
+  cursor: pointer;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+@media screen and (max-width: 1150px) {
+  .navbarSmallscreen {
+    display: flex;
+  }
 }
