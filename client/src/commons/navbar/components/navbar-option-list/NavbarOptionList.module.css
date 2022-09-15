@@ -1,9 +1,26 @@
+@media (min-width: 701px) {
+  .navbarDesktopLinks {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+  }
+}
+/*
 .navbarDesktopLinks {
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
   list-style: none;
+}
+*/
+
+@media (max-width: 700px) {
+  .navbarDesktopLinks {
+    display: none;
+  }
 }
 
 .navbarMobileLinks {
