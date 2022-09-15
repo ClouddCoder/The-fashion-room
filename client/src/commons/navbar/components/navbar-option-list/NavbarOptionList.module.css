@@ -1,0 +1,36 @@
+.navbarDesktopLinks {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+}
+
+.navbarMobileLinks {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+}
+
+.navbarDesktopLinks li,
+.navbarMobileLinks li {
+  list-style: none;
+  margin: 0 1rem;
+  cursor: pointer;
+  padding: 10px 0;
+  transition-delay: 2s;
+}
+
+.navbarDesktopLinks li a,
+.navbarMobileLinks li a {
+  color: var(--color-primary-brown);
+  text-decoration: none;
+}
+
+.navbarDesktopLinks li a:hover,
+.navbarMobileLinks li a:hover {
+  border-bottom: 1px solid var(--color-primary-brown);
+}

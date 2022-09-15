@@ -1,19 +1,30 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./NavbarOptionList.css";
+import style from "./NavbarOptionList.module.css";
 
-function NavBarOptionList() {
+function NavBarOptionList({ displayMode }) {
   return (
-    <div>
-      <ul className="navbarLinks">
-        <li className="link">
-          <Link to="/">Home</Link>
-        </li>
-        <li className="link">
-          <Link to="/contact">Contacto</Link>
-        </li>
-      </ul>
-    </div>
+    <>
+      {displayMode ? (
+        <ul className={style.navbarMobileLinks}>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/contact">Contacto</Link>
+          </li>
+        </ul>
+      ) : (
+        <ul className={style.navbarDesktopLinks}>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/contact">Contacto</Link>
+          </li>
+        </ul>
+      )}
+    </>
   );
 }
 

@@ -1,6 +1,14 @@
-.navbarLogin {
+.navbarDesktopLogin {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.navbarMobileLogin {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
   margin-right: 10px;
 }

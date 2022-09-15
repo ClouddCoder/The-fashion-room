@@ -7,7 +7,7 @@ import ProfileButton from "../profile-button/ProfileButton";
 import CustomButton from "../custom-button/CustomButton";
 import "./NavbarProfileList.css";
 
-function NavbarProfileList() {
+function NavbarProfileList({ displayMode }) {
   const {
     auth,
     setAuth,
@@ -39,8 +39,42 @@ function NavbarProfileList() {
   };
   return (
     <>
-      {auth ? (
-        <div className="navbarLogin">
+      {displayMode ? (
+        auth ? (
+          <div className="navbarMobileLogin">
+            <div className="navbarUserName">
+              <p>{user}</p>
+            </div>
+            <div className="navbarWishlistButton">
+              <CustomButton title="Wishlist" path="/wishlist">
+                <FavoriteBorderOutlinedIcon sx={{ ml: "10px" }} />
+              </CustomButton>
+            </div>
+            <div className="navbarCartButton">
+              <CustomButton title="Mi carrito" path="/cart">
+                <ShoppingCartOutlinedIcon sx={{ ml: "10px" }} />
+              </CustomButton>
+            </div>
+            <div className="navbarProfileButton">
+              <ProfileButton resetSession={resetSession} />
+            </div>
+          </div>
+        ) : (
+          <div className="navbarMobileLogin">
+            <div className="navbarLoginButton">
+              <Link to="/login" component="button" onClick={resetForm}>
+                Login
+              </Link>
+            </div>
+            <div className="navbarRegisterButton">
+              <Link to="/register" component="button" onClick={resetForm}>
+                Register
+              </Link>
+            </div>
+          </div>
+        )
+      ) : auth ? (
+        <div className="navbarDesktopLogin">
           <div className="navbarUserName">
             <p>{user}</p>
           </div>
@@ -60,7 +94,7 @@ function NavbarProfileList() {
           </div>
         </div>
       ) : (
-        <div className="navbarLogin">
+        <div className="navbarDesktopLogin">
           <div className="navbarLoginButton">
             <Link to="/login" component="button" onClick={resetForm}>
               Login
