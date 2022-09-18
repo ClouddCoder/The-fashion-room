@@ -1,42 +1,32 @@
-import React from "react";
-import { BrowserRouter as Router } from "react-router-dom";
-import ProductContext from "../context/product-context/ProductContext";
-import AuthContext from "../context/auth-context/AuthContext";
 import "@testing-library/jest-dom/extend-expect";
-import { screen, render } from "@testing-library/react";
-import Catalogue from "../pages/catalogue/Catalogue";
+import userEvent from "@testing-library/user-event";
+import { screen } from "@testing-library/react";
+import { CatalogueTest, productContextProps, contextPropstToAddToCart } from "./helpers";
+import axios from "axios";
 
-const mockAddToCart = jest.fn();
-const product = {
-  product_id: 1,
-  product_name: "Zapatos",
-  price: 50000,
-  stock: 100,
-};
+jest.mock("axios");
 
-const products = () => product;
+describe("Catalogue component", () => {
+  test("Calls the loadProducts function to load the products", async () => {
+    CatalogueTest("catalogue");
+    expect(productContextProps.loadProducts).toHaveBeenCalledTimes(1);
+  });
 
-test("Render catalogue", () => {
-  const propsAuthContext = {
-    auth: true,
-  };
+  test("Calls the addToCart function", async () => {
+    const user = userEvent.setup();
 
-  const propsProductContext = {
-    addToCart: mockAddToCart,
-    loadProducts: jest.fn(),
-    products: [],
-  };
+    CatalogueTest("cart");
+    await user.click(screen.getByRole("button", { name: /Agregar al carrito/i }));
+    expect(contextPropstToAddToCart.addToCart).toHaveBeenCalledTimes(1);
+  });
 
-  jest.spyOn(React, "useEffect").mockImplementation((f) => f());
-  render(
-    <AuthContext.Provider value={{ propsAuthContext }}>
-      <ProductContext.Provider value={{ propsProductContext }}>
-        <Router>
-          <Catalogue />
-        </Router>
-      </ProductContext.Provider>
-      ,
-    </AuthContext.Provider>,
-  );
-  expect(screen.getByText("Zapatos")).toBeInTheDocument();
+  test("Press the wishlist button to add a product to the wishlist", async () => {
+    const user = userEvent.setup();
+    const postData = { productId: 62, remove: false };
+    axios.post.mockImplementationOnce(() => Promise.resolve({ data: postData }));
+
+    CatalogueTest("wishlist");
+    await user.click(screen.getByRole("button", { name: /Wishlist/i }));
+    expect(axios.post).toHaveBeenCalledTimes(1);
+  });
 });

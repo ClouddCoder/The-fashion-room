@@ -9,7 +9,7 @@ import Form from "../../commons/form/Form";
 /**
  * Componente que muestra el login
  */
-function Ingresar() {
+function Login() {
   const [error, setError] = useState({ error: false, errorMessage: "" });
   const {
     setAuth,
@@ -36,7 +36,7 @@ function Ingresar() {
     });
     const data = await res.json();
 
-    if (res.status === 200) {
+    if (data.status === 200) {
       // Establece el estado de autenticacion y borra los campos de login
       setAuth(data.userAuth);
       setUserId(data.userId);
@@ -59,9 +59,11 @@ function Ingresar() {
   const handleChange = (e) => {
     switch (e.target.name) {
       case "userEmail":
-        return setUserEmail(e.target.value);
+        setUserEmail(e.target.value);
+        break;
       case "userPassword":
-        return setUserPassword(e.target.value);
+        setUserPassword(e.target.value);
+        break;
       default:
         return;
     }
@@ -87,7 +89,7 @@ function Ingresar() {
           name="userPassword"
           variant="filled"
           label="Password"
-          type="password"
+          type="text"
           value={userPassword}
           sx={{ margin: ".5rem 0" }}
         />
@@ -101,4 +103,4 @@ function Ingresar() {
   );
 }
 
-export default Ingresar;
+export default Login;

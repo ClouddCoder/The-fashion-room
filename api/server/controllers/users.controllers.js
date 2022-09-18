@@ -71,6 +71,7 @@ const loginUser = async (req, res, next) => {
       userId: result.rows[0].customer_id,
       userName: result.rows[0].customer_name,
       token,
+      status: 200,
     });
   } catch (error) {
     return next(error);

@@ -9,7 +9,7 @@ import Form from "../../commons/form/Form";
 /**
  * Componente que muestra el register
  */
-function Registrar() {
+function Register() {
   const {
     setAuth,
     setUserId,
@@ -162,4 +162,4 @@ function Registrar() {
   );
 }
 
-export default Registrar;
+export default Register;

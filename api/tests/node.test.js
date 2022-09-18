@@ -4,7 +4,7 @@ const { app, server } = require("../server/index");
 const api = supertest(app);
 
 describe.skip("GET /login", () => {
-  it("If user does not exist", async () => {
+  it("If user exists", async () => {
     const response = await api
       .post("/login")
       .send({ userEmail: "rodolfo", userPassword: "12345" })
@@ -14,10 +14,10 @@ describe.skip("GET /login", () => {
     expect(response.body.userName).toContain("rodolfo");
   });
 
-  it("If user exists", async () => {
+  it("If user does not exist", async () => {
     await api
       .post("/login")
-      .send({ userEmail: "rodolfo", userPassword: "12345" })
+      .send({ userEmail: "lucas", userPassword: "12345" })
       .expect(200)
       .expect("Content-Type", /application\/json/);
   });
@@ -51,7 +51,7 @@ describe.skip("POST /register", () => {
   });
 });
 
-describe("GET /catalogue", () => {
+describe.skip("GET /catalogue", () => {
   it("Return catalogue products", async () => {
     const response = await api.get("/catalogue");
     const products = response.body.map((product) => product.product_name);

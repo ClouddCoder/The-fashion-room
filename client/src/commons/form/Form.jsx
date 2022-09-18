@@ -8,7 +8,7 @@ import Typography from "@mui/material/Typography";
 import Navbar from "../navbar/Navbar";
 import Footer from "../footer/Footer";
 
-function Form({ children, title, submit }) {
+function Form({ children, title }) {
   return (
     <Grid container direction="column" align="center">
       <Grid item>

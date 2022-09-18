@@ -8,7 +8,6 @@
     "@mui/icons-material": "^5.10.3",
     "@mui/material": "^5.9.1",
     "@mui/system": "^5.9.2",
-    "@testing-library/user-event": "^13.5.0",
     "axios": "^0.27.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -19,7 +18,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "DEBUG_PRINT_LIMIT=30000 react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -42,6 +41,7 @@
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.3.0"
+    "@testing-library/react": "^13.3.0",
+    "@testing-library/user-event": "^14.4.3"
   }
 }
