@@ -37,6 +37,9 @@ function Contact() {
    */
   useEffect(() => {
     loadStores();
+  }, []);
+
+  useEffect(() => {
     loadStoresPhones();
   }, []);
 

@@ -5,17 +5,26 @@ import AuthContext from "../context/auth-context/AuthContext";
 import ProductContext from "../context/product-context/ProductContext";
 import Login from "../pages/login/Login";
 import Catalogue from "../pages/catalogue/Catalogue";
+import Contact from "../pages/contact/Contact";
+import Home from "../pages/home/Home";
+import Invoice from "../pages/invoice/Invoice";
 
 // AuthContext props for testing login component
-export const authContext = {
+export const loginAuthContextProps = {
   setAuth: jest.fn(),
   setUserId: jest.fn(),
   setUser: jest.fn(),
   userEmail: "",
-  setUserEmail: jest.fn((value) => value),
+  setUserEmail: jest.fn(),
   userPassword: "",
   setUserPassword: jest.fn(),
   setToken: jest.fn(),
+};
+
+// AuthContext props for testing other components
+export const authContextProps = {
+  auth: true,
+  token: "token",
 };
 
 // products for testing catalogue component
@@ -27,12 +36,6 @@ export const mockProducts = [
   { product_id: "657449", product_name: "Pantaloneta", price: "45000", stock: "100" },
   { product_id: "657664", product_name: "Zapatos", price: "45000", stock: "100" },
 ];
-
-// AuthContext props for testing catalogue component
-export const authContextProps = {
-  auth: true,
-  token: "token",
-};
 
 // ProductContext props for testing catalogue component when is rendering
 export const productContextProps = {
@@ -52,10 +55,22 @@ export const contextPropstToAddToCart = {
   removeTemporaryWish: jest.fn(),
 };
 
+export const mockStores = [
+  { nit: 1, name: "Tienda 1", address: "Calle 1" },
+  { nit: 2, name: "Tienda 2", address: "Calle 2" },
+  { nit: 3, name: "Tienda 3", address: "Calle 3" },
+];
+
+export const mockStorePhone = [
+  { nit: 1, phone: "123456789" },
+  { nit: 2, phone: "987654321" },
+  { nit: 3, phone: "547897884" },
+];
+
 // Render login component
 export function LoginTest() {
   return render(
-    <AuthContext.Provider value={authContext}>
+    <AuthContext.Provider value={loginAuthContextProps}>
       <Router>
         <Login />
       </Router>
@@ -76,6 +91,46 @@ export function CatalogueTest(type = "catalogue") {
       <ProductContext.Provider value={productProps}>
         <Router>
           <Catalogue />
+        </Router>
+      </ProductContext.Provider>
+    </AuthContext.Provider>,
+  );
+}
+
+// Render contact component
+export function ContactTest() {
+  return render(
+    <AuthContext.Provider value={authContextProps}>
+      <Router>
+        <Contact />
+      </Router>
+    </AuthContext.Provider>,
+  );
+}
+
+export function HomeTest() {
+  return render(
+    <AuthContext.Provider value={authContextProps}>
+      <Router>
+        <Home />
+      </Router>
+    </AuthContext.Provider>,
+  );
+}
+
+export const productProps = {
+  cart: mockProducts,
+  totalPrice: 45000,
+  clearCart: jest.fn(),
+  invoiceId: 1,
+};
+
+export function InvoiceTest() {
+  return render(
+    <AuthContext.Provider value={authContextProps}>
+      <ProductContext.Provider value={productProps}>
+        <Router>
+          <Invoice />
         </Router>
       </ProductContext.Provider>
     </AuthContext.Provider>,

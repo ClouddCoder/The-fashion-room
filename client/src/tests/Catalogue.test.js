@@ -1,10 +1,13 @@
-import "@testing-library/jest-dom/extend-expect";
 import userEvent from "@testing-library/user-event";
 import { screen } from "@testing-library/react";
 import { CatalogueTest, productContextProps, contextPropstToAddToCart } from "./helpers";
 import axios from "axios";
 
 jest.mock("axios");
+
+afterEach(() => {
+  jest.clearAllMocks();
+});
 
 describe("Catalogue component", () => {
   test("Calls the loadProducts function to load the products", async () => {
