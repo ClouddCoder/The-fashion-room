@@ -12,8 +12,16 @@ import NavbarProfileList from "./components/navbar-profile-list/NavbarProfileLis
  */
 function Navbar() {
   const [toggle, setToggle] = useState(false);
+  let title;
+  let displayPhone;
 
-  const title = useMediaQuery("(min-width:700px)") ? "The Fashion room" : "TFR";
+  if (useMediaQuery("(min-width:700px)")) {
+    title = "The Fashion room";
+    displayPhone = false;
+  } else {
+    title = "TFR";
+    displayPhone = true;
+  }
 
   return (
     <nav className={styles.navbar}>
@@ -21,35 +29,42 @@ function Navbar() {
         <div className={styles.navbarSmallCreenToggleButton} onClick={() => setToggle(true)}>
           <MenuIcon sx={{ width: "40px", height: "40px" }} />
         </div>
-        {toggle ? (
-          <div className={styles.navbarSmallscreenOverlay}>
-            <div
-              className={styles.navbarSmallScreenOverlayCloseButton}
-              onClick={() => setToggle(false)}
-            >
-              <CloseIcon sx={{ width: "40px", height: "40px" }} />
+        {displayPhone ? (
+          toggle ? (
+            <div className={styles.navbarSmallscreenOverlay}>
+              <div
+                className={styles.navbarSmallScreenOverlayCloseButton}
+                onClick={() => setToggle(false)}
+              >
+                <CloseIcon sx={{ width: "40px", height: "40px" }} />
+              </div>
+              <NavBarOptionList displayMode={true} />
+              <NavbarProfileList displayMode={true} />
             </div>
-            <NavBarOptionList displayMode={true} />
-            <NavbarProfileList displayMode={true} />
-          </div>
+          ) : (
+            <div className={styles.navbarSmallscreenHideOverlay}>
+              <div
+                className={styles.navbarSmallScreenOverlayCloseButton}
+                onClick={() => setToggle(false)}
+              >
+                <CloseIcon sx={{ width: "40px", height: "40px" }} />
+              </div>
+              <NavBarOptionList displayMode={true} />
+              <NavbarProfileList displayMode={true} />
+            </div>
+          )
         ) : (
-          <div className={styles.navbarSmallscreenHideOverlay}>
-            <div
-              className={styles.navbarSmallScreenOverlayCloseButton}
-              onClick={() => setToggle(false)}
-            >
-              <CloseIcon sx={{ width: "40px", height: "40px" }} />
-            </div>
-            <NavBarOptionList displayMode={true} />
-            <NavbarProfileList displayMode={true} />
-          </div>
+          <>
+            <NavBarOptionList displayMode={false} />
+            <NavbarProfileList displayMode={false} />
+          </>
         )}
       </div>
       <div className={styles.navbarTitle}>
         <h1>{title}</h1>
       </div>
-      <NavBarOptionList displayMode={false} />
-      <NavbarProfileList displayMode={false} />
+      {/*<NavBarOptionList displayMode={false} />*/}
+      {/*<NavbarProfileList displayMode={false} />*/}
     </nav>
   );
 }

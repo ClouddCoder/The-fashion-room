@@ -3,7 +3,7 @@ const { app, server } = require("../server/index");
 
 const api = supertest(app);
 
-describe.skip("GET /login", () => {
+describe("GET /login", () => {
   it("If user exists", async () => {
     const response = await api
       .post("/login")

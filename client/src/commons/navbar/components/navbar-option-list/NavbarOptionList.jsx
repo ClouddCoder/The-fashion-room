@@ -11,7 +11,7 @@ function NavBarOptionList({ displayMode }) {
             <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="/contact">Contacto</Link>
+            <Link to="/contact">Contact</Link>
           </li>
         </ul>
       ) : (
@@ -20,7 +20,7 @@ function NavBarOptionList({ displayMode }) {
             <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="/contact">Contacto</Link>
+            <Link to="/contact">Contact</Link>
           </li>
         </ul>
       )}

@@ -8,7 +8,7 @@ afterEach(() => {
   jest.clearAllMocks();
 });
 
-describe("Contact component", () => {
+describe.skip("Contact component", () => {
   it("Should fetch store information", async () => {
     //const promise = Promise.resolve();
     axios.get.mockImplementationOnce(() => Promise.resolve({ data: mockStores }));

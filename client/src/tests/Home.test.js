@@ -5,7 +5,7 @@ afterEach(() => {
   jest.clearAllMocks();
 });
 
-describe("Home component", () => {
+describe.skip("Home component", () => {
   it("Should fetch data from Offers component to render the offer products", async () => {
     HomeTest();
     expect(screen.getByText("Calzado")).toBeInTheDocument();

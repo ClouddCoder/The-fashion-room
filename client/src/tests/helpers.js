@@ -8,6 +8,8 @@ import Catalogue from "../pages/catalogue/Catalogue";
 import Contact from "../pages/contact/Contact";
 import Home from "../pages/home/Home";
 import Invoice from "../pages/invoice/Invoice";
+import Navbar from "../commons/navbar/Navbar";
+import Footer from "../commons/footer/Footer";
 
 // AuthContext props for testing login component
 export const loginAuthContextProps = {
@@ -25,6 +27,7 @@ export const loginAuthContextProps = {
 export const authContextProps = {
   auth: true,
   token: "token",
+  user: "brayan",
 };
 
 // products for testing catalogue component
@@ -133,6 +136,26 @@ export function InvoiceTest() {
           <Invoice />
         </Router>
       </ProductContext.Provider>
+    </AuthContext.Provider>,
+  );
+}
+
+export function NavbarTest() {
+  return render(
+    <AuthContext.Provider value={authContextProps}>
+      <Router>
+        <Navbar />
+      </Router>
+    </AuthContext.Provider>,
+  );
+}
+
+export function FooterTest() {
+  return render(
+    <AuthContext.Provider value={authContextProps}>
+      <Router>
+        <Footer />
+      </Router>
     </AuthContext.Provider>,
   );
 }

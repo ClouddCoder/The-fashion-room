@@ -9,7 +9,7 @@ afterEach(() => {
   jest.clearAllMocks();
 });
 
-describe("Catalogue component", () => {
+describe.skip("Catalogue component", () => {
   test("Calls the loadProducts function to load the products", async () => {
     CatalogueTest("catalogue");
     expect(productContextProps.loadProducts).toHaveBeenCalledTimes(1);

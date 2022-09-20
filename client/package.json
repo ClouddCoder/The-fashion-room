@@ -18,8 +18,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "DEBUG_PRINT_LIMIT=30000 react-scripts test --watchAll",
-    "test:coverage": "react-scripts test --coverage --watchAll",
+    "test": "DEBUG_PRINT_LIMIT=30000 react-scripts test --watchAll --verbose",
+    "test:coverage": "react-scripts test --coverage --watchAll --verbose",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
