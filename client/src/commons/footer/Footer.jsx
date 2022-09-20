@@ -13,8 +13,8 @@ import "./Footer.css";
 function Footer() {
   return (
     <Box component="div" className="app_footer">
-      <Grid container alignItems="center" sx={{ pl: 10, pr: 10 }}>
-        <Grid item={true} container xs={3}>
+      <Grid container alignItems="center" sx={{ pl: 10, pr: 10 }} spacing={2}>
+        <Grid item={true} container xs={6} md={3}>
           <Grid item={true} xs={12}>
             <Typography component="div" className="title_footer">
               Conócenos
@@ -38,7 +38,7 @@ function Footer() {
             </Grid>
           </Grid>
         </Grid>
-        <Grid item={true} container xs={3}>
+        <Grid item={true} container xs={6} md={3}>
           <Grid item={true} xs={12}>
             <Typography component="div" className="title_footer">
               Gana dinero con nosotros
@@ -62,7 +62,7 @@ function Footer() {
             </Grid>
           </Grid>
         </Grid>
-        <Grid item={true} container xs={3}>
+        <Grid item={true} container xs={6} md={3}>
           <Grid item={true} xs={12}>
             <Typography component="div" className="title_footer">
               Productos de pago
@@ -86,7 +86,7 @@ function Footer() {
             </Grid>
           </Grid>
         </Grid>
-        <Grid item={true} container xs={3}>
+        <Grid item={true} container xs={6} md={3}>
           <Grid item={true} xs={12}>
             <Typography component="div" className="title_footer">
               Redes sociales
