@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import style from "./NavbarOptionList.module.css";
+import "./NavbarOptionList.css";
 
 function NavBarOptionList({ displayMode }) {
   return (
     <>
       {displayMode ? (
-        <ul className={style.navbarMobileLinks}>
+        <ul className="navbarMobileLinks">
           <li>
             <Link to="/">Home</Link>
           </li>
@@ -15,7 +15,7 @@ function NavBarOptionList({ displayMode }) {
           </li>
         </ul>
       ) : (
-        <ul className={style.navbarDesktopLinks}>
+        <ul className="navbarDesktopLinks">
           <li>
             <Link to="/">Home</Link>
           </li>

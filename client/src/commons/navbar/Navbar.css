@@ -14,10 +14,6 @@
   font-family: "Roboto", sans-serif;
 }
 
-.navbarSmallscreen {
-  display: none;
-}
-
 .navbarSmallscreenOverlay {
   display: flex;
   flex-direction: column;
@@ -72,14 +68,8 @@
 
 @media (max-width: 700px) {
   .navbarSmallscreen {
-    display: block;
-  }
-
-  .navBarOptionList {
-    display: none;
-  }
-
-  .navbarProfileList {
-    display: none;
+    display: flex;
+    justify-content: space-between;
+    width: 110px;
   }
 }
