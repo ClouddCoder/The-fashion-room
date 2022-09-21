@@ -10,7 +10,7 @@ import "./Home.css";
  */
 function Home() {
   return (
-    <div className="homeContainer">
+    <div className="container">
       <Navbar />
       <main className="mainContent">
         <Header />

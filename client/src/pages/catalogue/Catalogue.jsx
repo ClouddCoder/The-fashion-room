@@ -8,6 +8,7 @@ import ProductContext from "../../context/product-context/ProductContext";
 import Navbar from "../../commons/navbar/Navbar";
 import Footer from "../../commons/footer/Footer";
 import axios from "axios";
+import "./Catalogue.css";
 
 /**
  * Componente que muestra el catalogo de productos
@@ -65,34 +66,42 @@ function Catalogue() {
   }, []);
 
   return (
-    <Grid container direction="column">
-      <Grid item>
-        <Navbar />
-      </Grid>
-      <Grid item={true} sx={{ height: "auto", pt: 10, pb: 20 }}>
-        <Grid container component="div">
-          <Grid item container justifyContent="center">
-            <Button sx={{ mr: 1 }} component={Link} to="/" variant="outlined" color="primary">
-              Regresar
-            </Button>
-            {customButton()}
-          </Grid>
-          <Grid container alignItems="center" justifyContent="center">
-            {products?.map((product) => (
-              <ProductItem
-                key={product.product_id}
-                product={product}
-                addToCart={addToCart}
-                addWishlist={addToWishlist}
-              />
-            ))}
-          </Grid>
+    <div className="container">
+      <Navbar />
+      <Grid
+        container
+        direction="column"
+        alignItems="center"
+        justifyContent="center"
+        sx={{ pt: 10, pb: 10, width: "80%" }}
+      >
+        <Grid item container justifyContent="center" spacing={2}>
+          <Button sx={{ mr: 1 }} component={Link} to="/" variant="outlined" color="primary">
+            Regresar
+          </Button>
+          {customButton()}
+        </Grid>
+        <Grid
+          item
+          container
+          alignItems="center"
+          justifyContent="center"
+          xs={12}
+          spacing={4}
+          sx={{ mt: "16px" }}
+        >
+          {products?.map((product) => (
+            <ProductItem
+              key={product.product_id}
+              product={product}
+              addToCart={addToCart}
+              addWishlist={addToWishlist}
+            />
+          ))}
         </Grid>
       </Grid>
-      <Grid item>
-        <Footer />
-      </Grid>
-    </Grid>
+      <Footer />
+    </div>
   );
 }
 

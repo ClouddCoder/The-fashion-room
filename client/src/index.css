@@ -5,11 +5,11 @@
 }
 
 :root {
-  --color-primary-brown: #592E42;
-  --color-primary-yellow: #F2B366;
-  --color-primary-orange: #D98841;
-  --color-primary-white: #F2E4D8;
-  --color-primary-red: #BF665E;
+  --color-primary-brown: #592e42;
+  --color-primary-yellow: #f2b366;
+  --color-primary-orange: #d98841;
+  --color-primary-white: #f2e4d8;
+  --color-primary-red: #bf665e;
 }
 
 html,
@@ -24,4 +24,12 @@ body {
 #root,
 .app {
   height: 100%;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100%;
+  position: relative;
 }

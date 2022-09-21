@@ -1,12 +1,16 @@
 import React, { useState, useContext } from "react";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import IconButton from "@mui/material/IconButton";
 import AuthContext from "../../../context/auth-context/AuthContext";
 import ProductContext from "../../../context/product-context/ProductContext";
 import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
-import Paper from "@mui/material/Paper";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import { CardActionArea } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
 import { useNavigate } from "react-router-dom";
 import { Blusa, Camisa, Corbata, Pantalon, Pantaloneta, Zapatos } from "../../../assets";
 
@@ -47,39 +51,44 @@ function ProductItem({ product, addToCart, addWishlist }) {
       // y puede ser removido de la wishlist
       if (addWish) {
         return (
-          <Button
-            variant="outlined"
+          <IconButton
+            component="span"
             onClick={() => {
               addWishlist(product, true);
               removeTemporaryWish(product.product_id);
               setAddWish(false);
             }}
-            sx={{ backgroundColor: "blue" }}
+            sx={{ backgroundColor: "blue", position: "absolute", top: "10px", right: "10px" }}
           >
-            Wishlist
-          </Button>
+            <FavoriteBorderIcon />
+          </IconButton>
         );
         // Si el producto no esta en la wishlist, el boton no tiene color y
         // puede agrega el producto de la wishlist
       } else {
         return (
-          <Button
-            variant="outlined"
+          <IconButton
+            component="span"
             onClick={() => {
               addWishlist(product);
               addTemporaryWish(product);
               setAddWish(true);
             }}
+            sx={{ position: "absolute", top: "10px", right: "10px" }}
           >
-            Wishlist
-          </Button>
+            <FavoriteBorderIcon />
+          </IconButton>
         );
       }
     } else {
       return (
-        <Button variant="outlined" onClick={() => navigate("/login")}>
-          Wishlist
-        </Button>
+        <IconButton
+          component="span"
+          onClick={() => navigate("/login")}
+          sx={{ position: "absolute", top: "10px", right: "10px" }}
+        >
+          <FavoriteBorderIcon />
+        </IconButton>
       );
     }
   };
@@ -114,45 +123,52 @@ function ProductItem({ product, addToCart, addWishlist }) {
   };
 
   return (
-    <Box m={1}>
-      <Paper
-        sx={{
-          p: 2,
-          margin: "auto",
-          flexGrow: 1,
-          backgroundColor: (theme) => (theme.palette.mode === "dark" ? "#1A2027" : "#fff"),
-        }}
-        elevation={1}
-      >
-        <Grid container spacing={2}>
-          <Grid item={true} sx={{ width: 160, height: 160 }}>
-            <Img alt="complex" src={getProductImage(product.product_name)} />
+    <Grid item xs={6} md={4} sx={{ height: "260px", maxHeight: "260px", position: "relative" }}>
+      <Card sx={{ height: "100%" }}>
+        <CardActionArea sx={{ height: "100%" }}>
+          <CardMedia
+            component="img"
+            height="140"
+            image={getProductImage(product.product_name)}
+            alt={product.product_name}
+          />
+          <CardContent sx={{ p: "10px" }}>
+            <Typography gutterBottom variant="h5" component="div" sx={{ fontSize: "16px" }}>
+              {product.product_name}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              Cantidad disponible {product.stock}
+            </Typography>
+          </CardContent>
+          {customWishlistButton()}
+        </CardActionArea>
+      </Card>
+      {/*<Grid item={true} sx={{ width: 160, height: 160 }} xs={6}>
+        <Img alt="complex" src={getProductImage(product.product_name)} />
+      </Grid>
+      <Grid item={true} xs={6} sm container>
+        <Grid item={true} xs container direction="column" spacing={2}>
+          <Grid item={true} xs>
+            <Typography gutterBottom variant="subtitle1" component="div">
+              {product.product_name}
+            </Typography>
+            <Typography variant="body2" gutterBottom>
+              Full resolution 1920x1080 • JPEG
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              Cantidad disponible {product.stock}
+            </Typography>
           </Grid>
-          <Grid item={true} xs={12} sm container>
-            <Grid item={true} xs container direction="column" spacing={2}>
-              <Grid item={true} xs>
-                <Typography gutterBottom variant="subtitle1" component="div">
-                  {product.product_name}
-                </Typography>
-                <Typography variant="body2" gutterBottom>
-                  Full resolution 1920x1080 • JPEG
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  Cantidad disponible {product.stock}
-                </Typography>
-              </Grid>
-              <Grid item>{customWishlistButton()}</Grid>
-              <Grid item>{customCartButton()}</Grid>
-            </Grid>
-            <Grid item>
-              <Typography variant="subtitle1" component="div">
-                ${product.price}
-              </Typography>
-            </Grid>
-          </Grid>
+          <Grid item>{customWishlistButton()}</Grid>
+          <Grid item>{customCartButton()}</Grid>
         </Grid>
-      </Paper>
-    </Box>
+        <Grid item>
+          <Typography variant="subtitle1" component="div">
+            ${product.price}
+          </Typography>
+        </Grid>
+      </Grid>*/}
+    </Grid>
   );
 }
 

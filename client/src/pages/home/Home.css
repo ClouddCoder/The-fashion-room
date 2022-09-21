@@ -1,32 +1,3 @@
-/*
-@media (min-width: 1024px) {
-  .homeContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100%;
-    position: relative;
-  }
-
-  .mainContent {
-    width: 80%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: auto 0;
-  }
-}
-*/
-
-.homeContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: 100%;
-  position: relative;
-}
-
 .mainContent {
   width: 80%;
   display: flex;
