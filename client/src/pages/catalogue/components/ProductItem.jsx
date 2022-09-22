@@ -114,7 +114,10 @@ function ProductItem({ product, addToCart, addWishlist }) {
           "&:hover": { transform: "scale(1.1,1.1)" },
         }}
       >
-        <CardActionArea sx={{ height: "100%" }}>
+        <CardActionArea
+          sx={{ height: "100%" }}
+          onClick={auth ? () => addToCart(product.product_id) : () => navigate("/login")}
+        >
           <CardMedia
             component="img"
             height="140"

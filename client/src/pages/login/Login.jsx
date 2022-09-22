@@ -89,7 +89,7 @@ function Login() {
           name="userPassword"
           variant="filled"
           label="Password"
-          type="text"
+          type="password"
           value={userPassword}
           sx={{ margin: ".5rem 0" }}
         />

@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
 import Grid from "@mui/material/Grid";
-import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import AuthContext from "../../context/auth-context/AuthContext";
 import InvoiceDetail from "./components/InvoiceDetail";
@@ -13,10 +12,10 @@ import axios from "axios";
  */
 function Orders() {
   const { token } = useContext(AuthContext);
-  const [orderDetail, setOrderDetail] = useState();
+  const [orderDetail, setOrderDetail] = useState([]);
 
   /**
-   * Peticion a la API para obtener la informacion de las compras realizadas por el usuario
+   * Peticion a la API para obtener la informacion de las compras realizadas por el usuario.
    */
   const loadOrderDetail = () => {
     const config = {
@@ -26,19 +25,23 @@ function Orders() {
     };
     axios
       .get("http://localhost:3050/api/order-detail", config)
-      .then((response) => {
-        const groupsOrderDetail = Object.values(
-          response.data.reduce(
-            (acc, item) => ({
-              ...acc,
-              [item.invoice_id]: (acc[item.invoice_id] || []).concat(item),
-            }),
-            {},
-          ),
-        );
-        return setOrderDetail(groupsOrderDetail);
-      })
+      .then((response) => setOrderDetail(response.data))
       .catch((err) => console.log(err));
+  };
+
+  /**
+   * Separa las compras por el id de la factura.
+   */
+  const setGroupOrderDetail = (response) => {
+    const groupsOrderDetail = Object.values(
+      response.data.reduce(
+        (acc, item) => ({
+          ...acc,
+          [item.invoice_id]: (acc[item.invoice_id] || []).concat(item),
+        }),
+        {},
+      ),
+    );
   };
 
   /**
@@ -49,26 +52,20 @@ function Orders() {
   }, []);
 
   return (
-    <Grid container direction="column">
-      <Grid item>
-        <Navbar />
-      </Grid>
-      <Container>
-        <Grid container direction="column" sx={{ height: "auto", pt: 5, pb: 55 }}>
-          <Grid item>
-            <Typography variant="h3">Mis ordenes</Typography>
-          </Grid>
-          <Grid item container direction="column">
-            {orderDetail?.map((group, i) => {
-              return <InvoiceDetail groupItems={group} key={i} />;
-            })}
-          </Grid>
+    <div className="container">
+      <Navbar />
+      <Grid container direction="column" sx={{ height: "auto", width: "60%", m: 2 }}>
+        <Grid item>
+          <Typography variant="h3">Mis ordenes</Typography>
         </Grid>
-      </Container>
-      <Grid item>
-        <Footer />
+        <Grid item container direction="column" mt={4}>
+          {orderDetail?.map((order, i) => (
+            <InvoiceDetail groupItems={order} key={i} />
+          ))}
+        </Grid>
       </Grid>
-    </Grid>
+      <Footer />
+    </div>
   );
 }
 
