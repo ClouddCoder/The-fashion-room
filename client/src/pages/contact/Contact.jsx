@@ -18,18 +18,26 @@ function Contact() {
    * Peticion a la API para obtener la informacion de las tiendas
    */
   const loadStores = async () => {
-    const response = await axios.get("http://localhost:3050/api/stores");
-    const data = await response.data;
-    getStores(data);
+    try {
+      const response = await axios.get("http://localhost:3050/api/stores");
+      const data = await response.data;
+      getStores(data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   /**
    * Peticion a la API para obtener la informacion de los telefonos de las tiendas
    */
   const loadStoresPhones = async () => {
-    const response = await axios.get("http://localhost:3050/api/stores/phones");
-    const data = await response.data;
-    getStoresPhones(data);
+    try {
+      const response = await axios.get("http://localhost:3050/api/stores/phones");
+      const data = await response.data;
+      getStoresPhones(data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   /**
@@ -44,25 +52,23 @@ function Contact() {
   }, []);
 
   return (
-    <div>
+    <div className="container">
       <Navbar />
-      <Container component="div" sx={{ height: "auto", mt: 5, mb: 5 }}>
-        <Box>
-          <Grid container justifyContent="center" spacing={2}>
-            {storesPhones &&
-              stores?.map((store, index) => {
-                return (
-                  <StoreInfo
-                    key={index}
-                    store_name={store.name}
-                    store_address={store.address}
-                    store_phone={storesPhones[index].phone}
-                  />
-                );
-              })}
-          </Grid>
-        </Box>
-      </Container>
+      <Grid container sx={{ height: "auto" }}>
+        <Grid item container justifyContent="center" spacing={2}>
+          {storesPhones &&
+            stores?.map((store, index) => {
+              return (
+                <StoreInfo
+                  key={index}
+                  store_name={store.name}
+                  store_address={store.address}
+                  store_phone={storesPhones[index].phone}
+                />
+              );
+            })}
+        </Grid>
+      </Grid>
       <Footer />
     </div>
   );

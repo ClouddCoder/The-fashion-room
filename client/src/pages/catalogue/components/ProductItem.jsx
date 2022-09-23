@@ -11,7 +11,7 @@ import { CardActionArea } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { useNavigate } from "react-router-dom";
-import { Blusa, Camisa, Corbata, Pantalon, Pantaloneta, Zapatos } from "../../../assets";
+import { getProductImage } from "../../../assets";
 
 /**
  * Componente que muestra el producto en el catalogo
@@ -21,7 +21,7 @@ function ProductItem({ product, addToCart, addWishlist }) {
   const { temporaryWishlist, addTemporaryWish, removeTemporaryWish } =
     useContext(ProductContext);
 
-  // Verifica si el producto esta en la wishlist
+  // Verifica si el producto esta en la wishlist temporal.
   const findWish = temporaryWishlist.find((wish) => wish.product_id === product.product_id);
   const productAsWish = Boolean(findWish);
 
@@ -78,28 +78,6 @@ function ProductItem({ product, addToCart, addWishlist }) {
           <CustomFavIcon stateWish={addWish} />
         </IconButton>
       );
-    }
-  };
-
-  /**
-   * Obtiene la imagen del producto dependiendo de su nombre
-   */
-  const getProductImage = (productName) => {
-    switch (productName) {
-      case "Blusa":
-        return Blusa;
-      case "Camisa":
-        return Camisa;
-      case "Corbata":
-        return Corbata;
-      case "Pantalon":
-        return Pantalon;
-      case "Pantaloneta":
-        return Pantaloneta;
-      case "Zapatos":
-        return Zapatos;
-      default:
-        return null;
     }
   };
 

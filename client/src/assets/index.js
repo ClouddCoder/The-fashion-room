@@ -10,6 +10,28 @@ import Pantaloneta from "./products/Pantaloneta.png";
 import Zapatos from "./products/Zapatos.png";
 import HeaderBackground from "./header.png";
 
+/**
+ * Obtiene la imagen del producto dependiendo de su nombre
+ */
+const getProductImage = (productName) => {
+  switch (productName) {
+    case "Blusa":
+      return Blusa;
+    case "Camisa":
+      return Camisa;
+    case "Corbata":
+      return Corbata;
+    case "Pantalon":
+      return Pantalon;
+    case "Pantaloneta":
+      return Pantaloneta;
+    case "Zapatos":
+      return Zapatos;
+    default:
+      return null;
+  }
+};
+
 export {
   Bolsos,
   Calzado,
@@ -22,4 +44,5 @@ export {
   Pantaloneta,
   Zapatos,
   HeaderBackground,
+  getProductImage,
 };

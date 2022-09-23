@@ -16,11 +16,15 @@ function ProductState(props) {
    * Obtiene los productos de la API
    */
   const loadProducts = async () => {
-    const response = await axios.get("http://localhost:3050/api/catalogue", {
-      crossDomain: true,
-    });
-    const data = await response.data;
-    dispatch({ type: TYPES.LOAD_PRODUCTS, payload: data });
+    try {
+      const response = await axios.get("http://localhost:3050/api/catalogue", {
+        crossDomain: true,
+      });
+      const data = response.data;
+      dispatch({ type: TYPES.LOAD_PRODUCTS, payload: data });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   /**
@@ -76,30 +80,38 @@ function ProductState(props) {
    * Retorna los productos del wishlist de un usuario
    */
   const getWishlist = async () => {
-    const response = await axios.get("http://localhost:3050/api/wishlist", {
-      headers: {
-        "Authorization": `Bearer ${token}`,
-      },
-    });
-    const data = await response.data;
-    dispatch({ type: TYPES.GET_WISHLIST, payload: data });
+    try {
+      const response = await axios.get("http://localhost:3050/api/wishlist", {
+        headers: {
+          "Authorization": `Bearer ${token}`,
+        },
+      });
+      const data = response.data;
+      dispatch({ type: TYPES.GET_WISHLIST, payload: data });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   /**
    * Crea una factura nueva en la API
    */
   const createInvoice = async (cart) => {
-    const res = await fetch("http://localhost:3050/api/invoice", {
-      method: "POST",
-      body: JSON.stringify(cart),
-      headers: new Headers({
-        "Authorization": `Bearer ${token}`,
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-      }),
-    });
-    const data = await res.json();
-    dispatch({ type: TYPES.CREATE_INVOICE, payload: data.invoiceId });
+    try {
+      const res = await fetch("http://localhost:3050/api/invoice", {
+        method: "POST",
+        body: JSON.stringify(cart),
+        headers: new Headers({
+          "Authorization": `Bearer ${token}`,
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        }),
+      });
+      const data = await res.json();
+      dispatch({ type: TYPES.CREATE_INVOICE, payload: data.invoiceId });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

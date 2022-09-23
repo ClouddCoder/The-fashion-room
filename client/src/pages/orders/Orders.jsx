@@ -12,7 +12,7 @@ import axios from "axios";
  */
 function Orders() {
   const { token } = useContext(AuthContext);
-  const [orderDetail, setOrderDetail] = useState([]);
+  const [orders, setOrders] = useState([]);
 
   /**
    * Peticion a la API para obtener la informacion de las compras realizadas por el usuario.
@@ -25,7 +25,7 @@ function Orders() {
     };
     axios
       .get("http://localhost:3050/api/order-detail", config)
-      .then((response) => setOrderDetail(response.data))
+      .then((response) => setOrders(response.data))
       .catch((err) => console.log(err));
   };
 
@@ -59,8 +59,8 @@ function Orders() {
           <Typography variant="h3">Mis ordenes</Typography>
         </Grid>
         <Grid item container direction="column" mt={4}>
-          {orderDetail?.map((order, i) => (
-            <InvoiceDetail groupItems={order} key={i} />
+          {orders?.map((order, i) => (
+            <InvoiceDetail product={order} key={i} />
           ))}
         </Grid>
       </Grid>

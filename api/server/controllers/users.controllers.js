@@ -10,7 +10,7 @@ const jwtPassword = process.env.JWT_PASSWORD;
  * Verifica si el usuario esta autorizado.
  */
 const getAuthorization = (authorization) => {
-  let token = "";
+  let token;
 
   if (authorization && authorization.toLowerCase().startsWith("bearer")) {
     // eslint-disable-next-line prefer-destructuring
@@ -19,10 +19,14 @@ const getAuthorization = (authorization) => {
     return { code: 401, message: "Unauthorized" };
   }
 
+  if (!token) {
+    return { code: 401, message: "Token missing or invalid" };
+  }
+
   const decodeToken = jwt.verify(token, jwtPassword);
 
-  if (!token || !decodeToken.userId) {
-    return { code: 401, message: "Token missing or invalid" };
+  if (!decodeToken.userId) {
+    return { code: 401, message: "Unauthorized" };
   }
 
   return decodeToken;
@@ -173,7 +177,9 @@ const setWishlist = async (req, res, next) => {
   const { authorization } = req.headers;
   const decodeToken = getAuthorization(authorization);
 
-  if (decodeToken.code === 401) return res.status(401).json({ message: decodeToken.message });
+  if (decodeToken.code) {
+    return res.status(decodeToken.code).json({ message: decodeToken.message });
+  }
 
   const values = [decodeToken.userId, productId];
 
@@ -195,9 +201,12 @@ const getWishlist = async (req, res, next) => {
   query += "INNER JOIN product ON product.product_id = wishlist.product_id ";
   query += "WHERE customer.customer_id = $1";
   const { authorization } = req.headers;
+
   const decodeToken = getAuthorization(authorization);
 
-  if (decodeToken.code === 401) return res.status(401).json({ message: decodeToken.message });
+  if (decodeToken.code) {
+    return res.status(decodeToken.code).json({ message: decodeToken.message });
+  }
 
   try {
     const result = await pool.query(query, [decodeToken.userId]);
@@ -218,7 +227,9 @@ const createInvoice = async (req, res, next) => {
   const { authorization } = req.headers;
   const decodeToken = getAuthorization(authorization);
 
-  if (decodeToken.code === 401) return res.status(401).json({ message: decodeToken.message });
+  if (decodeToken.code) {
+    return res.status(decodeToken.code).json({ message: decodeToken.message });
+  }
 
   try {
     const getInvoiceId = await pool.query(createInvoiceIdQuery);
@@ -293,7 +304,9 @@ const getOrderDetail = async (req, res, next) => {
   const { authorization } = req.headers;
   const decodeToken = getAuthorization(authorization);
 
-  if (decodeToken.code === 401) return res.status(401).json({ message: decodeToken.message });
+  if (decodeToken.code) {
+    return res.status(decodeToken.code).json({ message: decodeToken.message });
+  }
 
   try {
     const result = await pool.query(query, [decodeToken.userId]);
