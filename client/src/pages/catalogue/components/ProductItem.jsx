@@ -16,9 +16,9 @@ import { getProductImage } from "../../../assets";
 /**
  * Componente que muestra el producto en el catalogo
  */
-function ProductItem({ product, addToCart, addWishlist }) {
+function ProductItem({ product, addToCart }) {
   const { auth } = useContext(AuthContext);
-  const { wishlist } = useContext(ProductContext);
+  const { wishlist, handleWish } = useContext(ProductContext);
 
   // Verifica si el producto esta en la wishlist.
   const findWish = wishlist.find((wish) => wish.product_id === product.product_id);
@@ -52,7 +52,7 @@ function ProductItem({ product, addToCart, addWishlist }) {
           <IconButton
             component="span"
             onClick={() => {
-              addWishlist(product, true);
+              handleWish(product, true);
               setAddWish(false);
             }}
             sx={props}
@@ -67,7 +67,7 @@ function ProductItem({ product, addToCart, addWishlist }) {
           <IconButton
             component="span"
             onClick={() => {
-              addWishlist(product);
+              handleWish(product);
               setAddWish(true);
             }}
             sx={props}

@@ -86,6 +86,33 @@ function ProductState(props) {
   };
 
   /**
+   * Agrega o elimina un producto a la tabla wishlist de la base de datos.
+   * Tambien actualiza el estado de wishlist.
+   */
+  const handleWish = async (product, remove = false) => {
+    try {
+      await axios.post(
+        "http://localhost:3050/api/set-wishlist",
+        {
+          productId: product.product_id,
+          remove,
+        },
+        {
+          headers: {
+            "Authorization": `Bearer ${token}`,
+          },
+        },
+      );
+
+      if (remove) {
+        dispatch({ type: TYPES.REMOVE_FROM_WISHLIST, payload: product.product_id });
+      }
+    } catch (error) {
+      return console.log(error);
+    }
+  };
+
+  /**
    * Crea una factura nueva en la API
    */
   const createInvoice = async (cart) => {
@@ -128,6 +155,7 @@ function ProductState(props) {
         getTotalProducts,
         getTotalPrice,
         getWishlist,
+        handleWish,
         createInvoice,
         resetProductState,
       }}

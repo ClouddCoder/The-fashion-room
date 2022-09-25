@@ -1,12 +1,36 @@
-import React from "react";
+import React, { useContext } from "react";
 import Grid from "@mui/material/Grid";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import CardActions from "@mui/material/CardActions";
+import { getProductImage } from "../../../assets";
+import ProductContext from "../../../context/product-context/ProductContext";
+import "./Wish.css";
 
-function Wish() {
+function Wish({ product }) {
+  const { handleWish, wishlist } = useContext(ProductContext);
   return (
-    <Grid item container>
-      <div>
-        <h1>hola mundo</h1>
-      </div>
+    <Grid item container mt={4}>
+      <Card sx={{ width: "100%", display: "flex", justifyContent: "space-between" }}>
+        <CardContent sx={{ width: "100%", display: "flex" }}>
+          <CardMedia
+            component="img"
+            sx={{ width: 120, height: 120 }}
+            image={getProductImage(product.product_name)}
+            alt={product.product_name}
+          />
+          <div className="description">
+            <h1>{product.product_name}</h1>
+            <div>
+              <p>${product.price}</p>
+            </div>
+          </div>
+        </CardContent>
+        <CardActions>
+          <button onClick={() => handleWish(product, true)}>Remove</button>
+        </CardActions>
+      </Card>
     </Grid>
   );
 }

@@ -18,9 +18,9 @@ function Wishlist() {
   return (
     <div className="container">
       <Navbar />
-      <Grid container direction="row" sx={{ width: "60%" }}>
+      <Grid container direction="row" sx={{ width: "60%", mt: 4, mb: 4 }}>
         {wishlist?.map((wish, i) => (
-          <Wish key={i} />
+          <Wish key={i} product={wish} />
         ))}
       </Grid>
       <Footer />

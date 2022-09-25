@@ -3,7 +3,7 @@ import { TYPES } from "../../actions/productActions";
 export const productInitialState = {
   products: [],
   cart: [],
-  wishlist: [], // Get all the wishes sending a request to the api
+  wishlist: [], // Get all the wishes from database
   totalProducts: 0,
   totalPrice: 0,
   invoiceId: 0,
@@ -83,6 +83,13 @@ export function ProductReducer(state, action) {
 
     case TYPES.GET_WISHLIST:
       return { ...state, wishlist: [...action.payload] };
+
+    case TYPES.REMOVE_FROM_WISHLIST: {
+      return {
+        ...state,
+        wishlist: state.wishlist.filter((wish) => wish.product_id !== action.payload),
+      };
+    }
 
     case TYPES.CREATE_INVOICE: {
       return { ...state, invoiceId: action.payload };
