@@ -4,7 +4,6 @@ export const productInitialState = {
   products: [],
   cart: [],
   wishlist: [], // Get all the wishes sending a request to the api
-  temporaryWishlist: [], // Add every wish instantly without send a request to the api
   totalProducts: 0,
   totalPrice: 0,
   invoiceId: 0,
@@ -82,25 +81,15 @@ export function ProductReducer(state, action) {
       return { ...state, totalPrice };
     }
 
-    case TYPES.ADD_TEMPORARY_WISH: {
-      return { ...state, temporaryWishlist: [...state.temporaryWishlist, action.payload] };
-    }
-
-    case TYPES.REMOVE_TEMPORARY_WISH: {
-      return {
-        ...state,
-        temporaryWishlist: state.temporaryWishlist.filter(
-          (wish) => wish.product_id !== action.payload,
-        ),
-      };
-    }
-
     case TYPES.GET_WISHLIST:
       return { ...state, wishlist: [...action.payload] };
 
     case TYPES.CREATE_INVOICE: {
       return { ...state, invoiceId: action.payload };
     }
+
+    case TYPES.RESET_PRODUCT_STATE:
+      return { ...state, ...productInitialState };
     default:
       return state;
   }

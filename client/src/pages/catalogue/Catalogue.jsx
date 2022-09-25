@@ -14,7 +14,7 @@ import "./Catalogue.css";
  * Componente que muestra el catalogo de productos
  */
 function Catalogue() {
-  const { addToCart, loadProducts, products } = useContext(ProductContext);
+  const { addToCart, loadProducts, products, getWishlist } = useContext(ProductContext);
   const { auth, token } = useContext(AuthContext);
 
   /**
@@ -65,8 +65,14 @@ function Catalogue() {
     loadProducts();
   }, []);
 
+  useEffect(() => {
+    console.log("renderiza useeffect");
+    if (auth) getWishlist();
+  }, []);
+
   return (
     <div className="container">
+      {console.log("renderiza componente")}
       <Navbar />
       <Grid
         container

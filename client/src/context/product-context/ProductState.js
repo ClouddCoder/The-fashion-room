@@ -68,14 +68,6 @@ function ProductState(props) {
     dispatch({ type: TYPES.GET_TOTAL_PRICE });
   };
 
-  const addTemporaryWish = (id) => {
-    dispatch({ type: TYPES.ADD_TEMPORARY_WISH, payload: id });
-  };
-
-  const removeTemporaryWish = (id) => {
-    dispatch({ type: TYPES.REMOVE_TEMPORARY_WISH, payload: id });
-  };
-
   /**
    * Retorna los productos del wishlist de un usuario
    */
@@ -114,6 +106,10 @@ function ProductState(props) {
     }
   };
 
+  const resetProductState = () => {
+    dispatch({ type: TYPES.RESET_PRODUCT_STATE });
+  };
+
   return (
     <ProductContext.Provider
       value={{
@@ -131,10 +127,9 @@ function ProductState(props) {
         clearCart,
         getTotalProducts,
         getTotalPrice,
-        addTemporaryWish,
-        removeTemporaryWish,
         getWishlist,
         createInvoice,
+        resetProductState,
       }}
     >
       {props.children}

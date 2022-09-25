@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import IconButton from "@mui/material/IconButton";
@@ -18,14 +18,20 @@ import { getProductImage } from "../../../assets";
  */
 function ProductItem({ product, addToCart, addWishlist }) {
   const { auth } = useContext(AuthContext);
-  const { temporaryWishlist, addTemporaryWish, removeTemporaryWish } =
-    useContext(ProductContext);
+  const { wishlist } = useContext(ProductContext);
 
-  // Verifica si el producto esta en la wishlist temporal.
-  const findWish = temporaryWishlist.find((wish) => wish.product_id === product.product_id);
+  // Verifica si el producto esta en la wishlist.
+  const findWish = wishlist.find((wish) => wish.product_id === product.product_id);
   const productAsWish = Boolean(findWish);
 
-  const [addWish, setAddWish] = useState(productAsWish || false);
+  const [addWish, setAddWish] = useState(productAsWish);
+
+  // Establece el initial state cada vez que la variable productAsWish cambie de valor cuando
+  // se hace peticion a la API.
+  useEffect(() => {
+    setAddWish(productAsWish);
+  }, [productAsWish]);
+
   const navigate = useNavigate();
 
   const CustomFavIcon = ({ stateWish }) => {
@@ -47,7 +53,6 @@ function ProductItem({ product, addToCart, addWishlist }) {
             component="span"
             onClick={() => {
               addWishlist(product, true);
-              removeTemporaryWish(product.product_id);
               setAddWish(false);
             }}
             sx={props}
@@ -63,7 +68,6 @@ function ProductItem({ product, addToCart, addWishlist }) {
             component="span"
             onClick={() => {
               addWishlist(product);
-              addTemporaryWish(product);
               setAddWish(true);
             }}
             sx={props}
@@ -83,6 +87,8 @@ function ProductItem({ product, addToCart, addWishlist }) {
 
   return (
     <Grid item xs={6} md={4} sx={{ height: "260px", maxHeight: "260px", position: "relative" }}>
+      {/*console.log("Este es el addWish: ", addWish)*/}
+      {/*console.log("Este es el productAsWish: ", productAsWish)*/}
       <Card
         sx={{
           height: "100%",

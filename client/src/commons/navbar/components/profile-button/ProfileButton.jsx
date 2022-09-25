@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import ProductContext from "../../../../context/product-context/ProductContext";
 import { Link } from "react-router-dom";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import IconButton from "@mui/material/IconButton";
@@ -9,6 +10,8 @@ import Divider from "@mui/material/Divider";
 
 function ProfileButton({ resetSession }) {
   const [anchorEl, setAnchorEl] = useState(null);
+  const { resetProductState } = useContext(ProductContext);
+
   const open = Boolean(anchorEl);
 
   const handleClick = (event) => {
@@ -32,6 +35,7 @@ function ProfileButton({ resetSession }) {
       component="button"
       onClick={() => {
         resetSession();
+        resetProductState();
         window.localStorage.removeItem("logged");
       }}
     />
