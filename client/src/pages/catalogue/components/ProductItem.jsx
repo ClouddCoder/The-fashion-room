@@ -87,8 +87,6 @@ function ProductItem({ product, addToCart }) {
 
   return (
     <Grid item xs={6} md={4} sx={{ height: "260px", maxHeight: "260px", position: "relative" }}>
-      {/*console.log("Este es el addWish: ", addWish)*/}
-      {/*console.log("Este es el productAsWish: ", productAsWish)*/}
       <Card
         sx={{
           height: "100%",
@@ -100,7 +98,7 @@ function ProductItem({ product, addToCart }) {
       >
         <CardActionArea
           sx={{ height: "100%" }}
-          onClick={auth ? () => addToCart(product.product_id) : () => navigate("/login")}
+          onClick={() => navigate(`/product/${product.product_id}`)}
         >
           <CardMedia
             component="img"

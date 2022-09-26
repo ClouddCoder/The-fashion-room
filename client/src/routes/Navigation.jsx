@@ -5,6 +5,7 @@ import Login from "../pages/login/Login";
 import Register from "../pages/register/Register";
 import Home from "../pages/home/Home";
 import Catalogue from "../pages/catalogue/Catalogue";
+import Product from "../pages/product/Product";
 import ShoppingCart from "../pages/shopping-cart/ShoppingCart";
 import Wishlist from "../pages/wishlist/Wishlist";
 import Contact from "../pages/contact/Contact";
@@ -26,6 +27,7 @@ function Navigation() {
             <Route path="/register" element={<Register />} />
             <Route path="/orders" element={<Orders />} />
             <Route path="/catalogue" element={<Catalogue />} />
+            <Route path="/product/:id" element={<Product />} />
             <Route path="/cart" element={<ShoppingCart />} />
             <Route path="/wishlist" element={<Wishlist />} />
             <Route path="/invoice" element={<Invoice />} />

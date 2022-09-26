@@ -43,13 +43,11 @@ function Catalogue() {
   }, []);
 
   useEffect(() => {
-    console.log("renderiza useeffect");
     if (auth) getWishlist();
   }, []);
 
   return (
     <div className="container">
-      {console.log("renderiza componente")}
       <Navbar />
       <Grid
         container
