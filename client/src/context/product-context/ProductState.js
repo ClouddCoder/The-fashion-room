@@ -112,6 +112,10 @@ function ProductState(props) {
     }
   };
 
+  const addProductToBuy = (id) => {
+    dispatch({ type: TYPES.ADD_PRODUCT_TO_BUY, payload: id });
+  };
+
   /**
    * Crea una factura nueva en la API
    */
@@ -148,6 +152,7 @@ function ProductState(props) {
         temporaryWishlist: state.temporaryWishlist,
         invoiceId: state.invoiceId,
         addWish: state.addWish,
+        productsToBuy: state.productsToBuy,
         loadProducts,
         addToCart,
         removeFromCart,
@@ -156,6 +161,7 @@ function ProductState(props) {
         getTotalPrice,
         getWishlist,
         handleWish,
+        addProductToBuy,
         createInvoice,
         resetProductState,
       }}

@@ -10,11 +10,16 @@ import { getProductImage } from "../../assets";
 function Product() {
   const navigate = useNavigate();
   const { id } = useParams();
-  const { products, addToCart } = useContext(ProductContext);
+  const { products, addToCart, addProductToBuy } = useContext(ProductContext);
   const { auth } = useContext(AuthContext);
   const productId = parseInt(id, 10);
-
   const product = products.find((product) => product.product_id === productId);
+
+  const handleBuyProduct = () => {
+    addProductToBuy(product.product_id);
+    navigate("/buy");
+  };
+
   return (
     <div className="container">
       <Navbar />
@@ -35,8 +40,10 @@ function Product() {
           <h1>{product.product_name}</h1>
           <p>{product.price}</p>
           <div style={{ display: "flex" }}>
-            <button>Comprar</button>
-            <button onClick={auth ? addToCart(product.product_id) : () => navigate("/login")}>
+            <button onClick={auth ? handleBuyProduct : () => navigate("/login")}>Comprar</button>
+            <button
+              onClick={auth ? () => addToCart(product.product_id) : () => navigate("/login")}
+            >
               Agregar al carrito
             </button>
           </div>

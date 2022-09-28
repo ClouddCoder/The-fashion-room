@@ -7,6 +7,7 @@ export const productInitialState = {
   totalProducts: 0,
   totalPrice: 0,
   invoiceId: 0,
+  productsToBuy: [],
 };
 
 /**
@@ -89,6 +90,11 @@ export function ProductReducer(state, action) {
         ...state,
         wishlist: state.wishlist.filter((wish) => wish.product_id !== action.payload),
       };
+    }
+
+    case TYPES.ADD_PRODUCT_TO_BUY: {
+      const product = state.products.find((product) => product.product_id === action.payload);
+      return { ...state, productsToBuy: [...state.productsToBuy, { ...product }] };
     }
 
     case TYPES.CREATE_INVOICE: {

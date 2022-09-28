@@ -114,8 +114,8 @@ function ProductItem({ product, addToCart }) {
               Cantidad disponible {product.stock}
             </Typography>
           </CardContent>
-          <CustomWishlistButton />
         </CardActionArea>
+        <CustomWishlistButton />
       </Card>
     </Grid>
   );

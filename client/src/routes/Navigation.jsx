@@ -9,6 +9,7 @@ import Product from "../pages/product/Product";
 import ShoppingCart from "../pages/shopping-cart/ShoppingCart";
 import Wishlist from "../pages/wishlist/Wishlist";
 import Contact from "../pages/contact/Contact";
+import Buy from "../pages/buy/Buy";
 import Invoice from "../pages/invoice/Invoice";
 import Orders from "../pages/orders/Orders";
 
@@ -31,6 +32,7 @@ function Navigation() {
             <Route path="/cart" element={<ShoppingCart />} />
             <Route path="/wishlist" element={<Wishlist />} />
             <Route path="/invoice" element={<Invoice />} />
+            <Route path="/buy" element={<Buy />} />
           </Routes>
         </Router>
       </ProductState>
