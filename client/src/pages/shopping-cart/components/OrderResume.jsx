@@ -1,36 +1,35 @@
-import React from "react";
+import React, { useContext } from "react";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
+import { useNavigate } from "react-router-dom";
+import ProductContext from "../../../context/product-context/ProductContext";
 
 /**
  * Componente que muestra el resumen de la compra que se va a realizar
  */
-function OrderResume({ buyProducts, getCart, invoice, orderTotalProducts, orderTotalPrice }) {
+function OrderResume() {
+  const { cart, totalProducts, totalPrice, addProductToBuy } = useContext(ProductContext);
+  const navigate = useNavigate();
+
+  const handleBuyCart = () => {
+    addProductToBuy(cart, true);
+    navigate("/buy");
+  };
+
   /**
    * Revisa si hay productos en el carrito para habilitar el boton de compra
    */
   const checkCartLength = () => {
-    if (getCart.length > 0) {
+    if (cart.length > 0) {
       return (
-        <Button
-          variant="contained"
-          color="secondary"
-          onClick={() => {
-            buyProducts();
-            invoice(getCart);
-          }}
-        >
+        <Button variant="contained" color="secondary" onClick={handleBuyCart}>
           Comprar
         </Button>
       );
     } else {
-      return (
-        <Typography variant="h6" component="div">
-          Carrito vacío
-        </Typography>
-      );
+      return <Typography variant="h6">Carrito vacío</Typography>;
     }
   };
 
@@ -58,9 +57,7 @@ function OrderResume({ buyProducts, getCart, invoice, orderTotalProducts, orderT
     >
       <Grid container direction="column">
         <Grid item container justifyContent="center" mt={2} mb={2}>
-          <Typography variant="h5" component="div">
-            Resumen de la compra
-          </Typography>
+          <Typography variant="h5">Resumen de la compra</Typography>
         </Grid>
         <Grid
           item
@@ -71,12 +68,8 @@ function OrderResume({ buyProducts, getCart, invoice, orderTotalProducts, orderT
             alignItems: "center",
           }}
         >
-          <Typography variant="h6" component="div">
-            Productos
-          </Typography>
-          <Typography variant="h6" component="div">
-            {orderTotalProducts}
-          </Typography>
+          <Typography variant="h6">Productos</Typography>
+          <Typography variant="h6">{totalProducts}</Typography>
         </Grid>
         <Grid
           item
@@ -87,12 +80,8 @@ function OrderResume({ buyProducts, getCart, invoice, orderTotalProducts, orderT
             alignItems: "center",
           }}
         >
-          <Typography variant="h6" component="div">
-            Total
-          </Typography>
-          <Typography variant="h6" component="div">
-            ${orderTotalPrice}
-          </Typography>
+          <Typography variant="h6">Total</Typography>
+          <Typography variant="h6">${totalPrice}</Typography>
         </Grid>
         <Grid item container justifyContent="center">
           <ColorWhiteLine color="white" />

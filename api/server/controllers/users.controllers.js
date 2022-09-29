@@ -238,7 +238,7 @@ const createInvoice = async (req, res, next) => {
 
     /**
      * Recorre el carrito de compras y agrega cada producto a la tabla
-     * que contiene los productos comprados de una factura.
+     * que contiene los productos comprados.
      */
     /* eslint-disable no-await-in-loop */
     // eslint-disable-next-line no-restricted-syntax

@@ -8,7 +8,7 @@ import { getProductImage } from "../../../assets";
 
 function ProductToBuy({ product }) {
   return (
-    <Grid item sx={{ height: "260px", maxHeight: "260px", position: "relative" }}>
+    <Grid item sx={{ maxHeight: "260px", position: "relative" }}>
       <Card sx={{ width: "100%", display: "flex", justifyContent: "space-between" }}>
         <CardContent sx={{ width: "100%", display: "flex" }}>
           <CardMedia
@@ -18,9 +18,13 @@ function ProductToBuy({ product }) {
             alt={product.product_name}
           />
           <div className="description">
-            <h1>{product.product_name}</h1>
+            <Typography variant="subtitle2" sx={{ fontSize: "14px" }}>
+              {product.product_name}
+            </Typography>
             <div>
-              <p>${product.price}</p>
+              <Typography variant="body1" sx={{ fontSize: "14px" }}>
+                ${product.price}
+              </Typography>
             </div>
           </div>
         </CardContent>

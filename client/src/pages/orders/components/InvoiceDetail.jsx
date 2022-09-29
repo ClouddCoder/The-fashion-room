@@ -35,21 +35,19 @@ function InvoiceDetail({ product }) {
               style={{ width: 120, height: 120 }}
             ></img>
             <div style={{ float: "right" }}>
-              <Typography variant="h6" component="div" sx={{ width: 150 }}>
+              <Typography variant="h6" sx={{ width: 150 }}>
                 {product.product_name}
               </Typography>
-              <Typography variant="body2" component="div" sx={{ width: 150 }}>
+              <Typography variant="body2" sx={{ width: 150 }}>
                 {"$" + product.total_amount}
               </Typography>
-              <Typography variant="body2" component="div" sx={{ width: 150 }}>
+              <Typography variant="body2" sx={{ width: 150 }}>
                 {"x" + product.quantity}
               </Typography>
             </div>
           </div>
           <div className="options">
-            <Link to="/catalogue" component="div">
-              Volver a comprar
-            </Link>
+            <Link to="/catalogue">Volver a comprar</Link>
             <Button variant="contained" color="primary">
               Borrar
             </Button>

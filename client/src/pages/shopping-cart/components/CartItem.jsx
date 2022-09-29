@@ -58,7 +58,7 @@ function CartItem({ product, removeFromCart }) {
           <Grid item={true} xs={12} sm container>
             <Grid item={true} xs container direction="column" spacing={2}>
               <Grid item={true} xs mt={3}>
-                <Typography gutterBottom variant="subtitle1" component="div">
+                <Typography gutterBottom variant="subtitle1">
                   {product.product_name}
                 </Typography>
                 <Typography variant="body2" gutterBottom>
@@ -70,9 +70,7 @@ function CartItem({ product, removeFromCart }) {
               </Grid>
             </Grid>
             <Grid item>
-              <Typography variant="subtitle1" component="div">
-                ${product.price}
-              </Typography>
+              <Typography variant="subtitle1">${product.price}</Typography>
               <Grid item container justifyContent="center" direction="column">
                 <Grid item>
                   <Button onClick={() => removeFromCart(product.product_id)} variant="outlined">

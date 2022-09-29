@@ -7,7 +7,7 @@ export const productInitialState = {
   totalProducts: 0,
   totalPrice: 0,
   invoiceId: 0,
-  productsToBuy: [],
+  productsToBuy: [], // Products ready to buy
 };
 
 /**
@@ -94,7 +94,18 @@ export function ProductReducer(state, action) {
 
     case TYPES.ADD_PRODUCT_TO_BUY: {
       const product = state.products.find((product) => product.product_id === action.payload);
-      return { ...state, productsToBuy: [...state.productsToBuy, { ...product }] };
+      return {
+        ...state,
+        productsToBuy: [...state.productsToBuy, { ...product, quantityInCart: 1 }],
+      };
+    }
+
+    case TYPES.BUY_CART: {
+      return { ...state, productsToBuy: [...action.payload] };
+    }
+
+    case TYPES.CLEAR_LIST_OF_PRODUCTS_TO_BUY: {
+      return { ...state, productsToBuy: [] };
     }
 
     case TYPES.CREATE_INVOICE: {

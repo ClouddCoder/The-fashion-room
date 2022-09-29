@@ -112,12 +112,27 @@ function ProductState(props) {
     }
   };
 
-  const addProductToBuy = (id) => {
-    dispatch({ type: TYPES.ADD_PRODUCT_TO_BUY, payload: id });
+  /**
+   * Agrega un producto para ser commprado. En caso de que sea el carrito de compras
+   * el paramtro sera un array de productos.
+   */
+  const addProductToBuy = (product, fromCart = false) => {
+    if (fromCart) {
+      dispatch({ type: TYPES.BUY_CART, payload: product });
+    } else {
+      dispatch({ type: TYPES.ADD_PRODUCT_TO_BUY, payload: product });
+    }
   };
 
   /**
-   * Crea una factura nueva en la API
+   * Limpia la lista de productos a comprar cuando el usuario salga de la pagina de compra.
+   */
+  const clearListOfProductsToBuy = () => {
+    dispatch({ type: TYPES.CLEAR_LIST_OF_PRODUCTS_TO_BUY });
+  };
+
+  /**
+   * Peticion para crear una factura despues de que el usuario realice una compra.
    */
   const createInvoice = async (cart) => {
     try {
@@ -162,6 +177,7 @@ function ProductState(props) {
         getWishlist,
         handleWish,
         addProductToBuy,
+        clearListOfProductsToBuy,
         createInvoice,
         resetProductState,
       }}

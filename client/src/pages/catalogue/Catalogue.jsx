@@ -17,7 +17,8 @@ function Catalogue() {
   const { auth } = useContext(AuthContext);
 
   /**
-   * Boton personalizado para agregar productos al carrito dependiendo del estado de la autenticacion global del usuario
+   * Boton personalizado para agregar productos al carrito
+   * dependiendo del estado de la autenticacion global del usuario
    */
   const customButton = () => {
     if (auth) {
@@ -26,13 +27,12 @@ function Catalogue() {
           Ir al carrito
         </Button>
       );
-    } else {
-      return (
-        <Button sx={{ ml: 1 }} component={Link} to="/login" variant="outlined" color="primary">
-          Ir al carrito
-        </Button>
-      );
     }
+    return (
+      <Button sx={{ ml: 1 }} component={Link} to="/login" variant="outlined" color="primary">
+        Ir al carrito
+      </Button>
+    );
   };
 
   /**

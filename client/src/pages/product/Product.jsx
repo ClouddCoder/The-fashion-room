@@ -1,24 +1,34 @@
-import React, { useContext } from "react";
-import ProductContext from "../../context/product-context/ProductContext";
-import AuthContext from "../../context/auth-context/AuthContext";
+import React, { useContext, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
+import Button from "@mui/material/Button";
+import ProductContext from "../../context/product-context/ProductContext";
+import AuthContext from "../../context/auth-context/AuthContext";
 import Navbar from "../../commons/navbar/Navbar";
 import Footer from "../../commons/footer/Footer";
 import { getProductImage } from "../../assets";
 
+/**
+ * Componente que renderiza la informacion de un producto
+ * con las opciones de comprarlo o agregarlo al carrito
+ */
 function Product() {
   const navigate = useNavigate();
   const { id } = useParams();
-  const { products, addToCart, addProductToBuy } = useContext(ProductContext);
+  const { products, addToCart, addProductToBuy, clearListOfProductsToBuy } =
+    useContext(ProductContext);
   const { auth } = useContext(AuthContext);
   const productId = parseInt(id, 10);
-  const product = products.find((product) => product.product_id === productId);
+  const product = products.find((item) => item.product_id === productId);
 
   const handleBuyProduct = () => {
     addProductToBuy(product.product_id);
     navigate("/buy");
   };
+
+  useEffect(() => {
+    clearListOfProductsToBuy();
+  }, []);
 
   return (
     <div className="container">
@@ -40,12 +50,18 @@ function Product() {
           <h1>{product.product_name}</h1>
           <p>{product.price}</p>
           <div style={{ display: "flex" }}>
-            <button onClick={auth ? handleBuyProduct : () => navigate("/login")}>Comprar</button>
-            <button
+            <Button
+              variant="contained"
+              onClick={auth ? handleBuyProduct : () => navigate("/login")}
+            >
+              Comprar
+            </Button>
+            <Button
+              variant="contained"
               onClick={auth ? () => addToCart(product.product_id) : () => navigate("/login")}
             >
               Agregar al carrito
-            </button>
+            </Button>
           </div>
         </Grid>
       </Grid>
