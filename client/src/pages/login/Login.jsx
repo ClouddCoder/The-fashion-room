@@ -1,10 +1,10 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import AuthContext from "../../context/auth-context/AuthContext";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import CardContent from "@mui/material/CardContent";
 import Form from "../../commons/form/Form";
+import AuthContext from "../../context/auth-context/AuthContext";
 
 /**
  * Componente que muestra el login
@@ -65,7 +65,6 @@ function Login() {
         setUserPassword(e.target.value);
         break;
       default:
-        return;
     }
   };
 

@@ -8,12 +8,10 @@ import { customButtonStyle } from "./style";
  */
 function CustomButton({ children, title, path }) {
   return (
-    <>
-      <IconButton sx={customButtonStyle} component={Link} to={path}>
-        <p>{title}</p>
-        {children}
-      </IconButton>
-    </>
+    <IconButton sx={customButtonStyle} component={Link} to={path}>
+      <p>{title}</p>
+      {children}
+    </IconButton>
   );
 }
 

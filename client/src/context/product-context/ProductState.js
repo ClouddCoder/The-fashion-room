@@ -1,14 +1,15 @@
-import React, { useReducer, useContext } from "react";
+/* eslint-disable no-use-before-define */
+import React, { useReducer, useContext, useMemo } from "react";
+import axios from "axios";
 import AuthContext from "../auth-context/AuthContext";
 import ProductContext from "./ProductContext";
 import { productInitialState, ProductReducer } from "./productReducer";
-import axios from "axios";
 import { TYPES } from "../../actions/productActions";
 
 /**
  * Estado inicial de los productos
  */
-function ProductState(props) {
+function ProductState({ children }) {
   const [state, dispatch] = useReducer(ProductReducer, productInitialState);
   const { token } = useContext(AuthContext);
 
@@ -20,7 +21,7 @@ function ProductState(props) {
       const response = await axios.get("http://localhost:3050/api/catalogue", {
         crossDomain: true,
       });
-      const data = response.data;
+      const { data } = response;
       dispatch({ type: TYPES.LOAD_PRODUCTS, payload: data });
     } catch (error) {
       console.log(error);
@@ -75,10 +76,10 @@ function ProductState(props) {
     try {
       const response = await axios.get("http://localhost:3050/api/wishlist", {
         headers: {
-          "Authorization": `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
       });
-      const data = response.data;
+      const { data } = response;
       dispatch({ type: TYPES.GET_WISHLIST, payload: data });
     } catch (error) {
       console.log(error);
@@ -99,7 +100,7 @@ function ProductState(props) {
         },
         {
           headers: {
-            "Authorization": `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
           },
         },
       );
@@ -156,35 +157,44 @@ function ProductState(props) {
     dispatch({ type: TYPES.RESET_PRODUCT_STATE });
   };
 
-  return (
-    <ProductContext.Provider
-      value={{
-        products: state.products,
-        cart: state.cart,
-        totalProducts: state.totalProducts,
-        totalPrice: state.totalPrice,
-        wishlist: state.wishlist,
-        temporaryWishlist: state.temporaryWishlist,
-        invoiceId: state.invoiceId,
-        addWish: state.addWish,
-        productsToBuy: state.productsToBuy,
-        loadProducts,
-        addToCart,
-        removeFromCart,
-        clearCart,
-        getTotalProducts,
-        getTotalPrice,
-        getWishlist,
-        handleWish,
-        addProductToBuy,
-        clearListOfProductsToBuy,
-        createInvoice,
-        resetProductState,
-      }}
-    >
-      {props.children}
-    </ProductContext.Provider>
+  const valueProps = useMemo(
+    () => ({
+      products: state.products,
+      cart: state.cart,
+      totalProducts: state.totalProducts,
+      totalPrice: state.totalPrice,
+      wishlist: state.wishlist,
+      temporaryWishlist: state.temporaryWishlist,
+      invoiceId: state.invoiceId,
+      addWish: state.addWish,
+      productsToBuy: state.productsToBuy,
+      loadProducts,
+      addToCart,
+      removeFromCart,
+      clearCart,
+      getTotalProducts,
+      getTotalPrice,
+      getWishlist,
+      handleWish,
+      addProductToBuy,
+      clearListOfProductsToBuy,
+      createInvoice,
+      resetProductState,
+    }),
+    [
+      state.products,
+      state.cart,
+      state.totalProducts,
+      state.totalPrice,
+      state.wishlist,
+      state.temporaryWishlist,
+      state.invoiceId,
+      state.addWish,
+      state.productsToBuy,
+    ],
   );
+
+  return <ProductContext.Provider value={valueProps}>{children}</ProductContext.Provider>;
 }
 
 export default ProductState;

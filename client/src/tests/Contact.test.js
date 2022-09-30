@@ -1,6 +1,6 @@
 import { screen } from "@testing-library/react";
-import { ContactTest, mockStores, mockStorePhone } from "./helpers";
 import axios from "axios";
+import { ContactTest, mockStores, mockStorePhone } from "./helpers";
 
 jest.mock("axios");
 
@@ -10,7 +10,7 @@ afterEach(() => {
 
 describe.skip("Contact component", () => {
   it("Should fetch store information", async () => {
-    //const promise = Promise.resolve();
+    // const promise = Promise.resolve();
     axios.get.mockImplementationOnce(() => Promise.resolve({ data: mockStores }));
     axios.get.mockImplementationOnce(() => Promise.resolve({ data: mockStorePhone }));
 

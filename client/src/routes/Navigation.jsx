@@ -18,25 +18,23 @@ import Orders from "../pages/orders/Orders";
  */
 function Navigation() {
   return (
-    <>
-      <ProductState>
-        <Router>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/orders" element={<Orders />} />
-            <Route path="/catalogue" element={<Catalogue />} />
-            <Route path="/product/:id" element={<Product />} />
-            <Route path="/cart" element={<ShoppingCart />} />
-            <Route path="/wishlist" element={<Wishlist />} />
-            <Route path="/invoice" element={<Invoice />} />
-            <Route path="/buy" element={<Buy />} />
-          </Routes>
-        </Router>
-      </ProductState>
-    </>
+    <ProductState>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/orders" element={<Orders />} />
+          <Route path="/catalogue" element={<Catalogue />} />
+          <Route path="/product/:id" element={<Product />} />
+          <Route path="/cart" element={<ShoppingCart />} />
+          <Route path="/wishlist" element={<Wishlist />} />
+          <Route path="/invoice" element={<Invoice />} />
+          <Route path="/buy" element={<Buy />} />
+        </Routes>
+      </Router>
+    </ProductState>
   );
 }
 

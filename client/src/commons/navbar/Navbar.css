@@ -59,12 +59,14 @@
   transition-delay: 2s;
 }
 
+/*
 .navbarSmallScreenOverlayCloseButton {
   cursor: pointer;
   position: absolute;
   top: 20px;
   right: 20px;
 }
+*/
 
 @media (max-width: 700px) {
   .navbarSmallscreen {

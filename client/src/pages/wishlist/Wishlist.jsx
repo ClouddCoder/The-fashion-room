@@ -1,5 +1,4 @@
 import React, { useContext, useEffect } from "react";
-import { Link } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import ProductContext from "../../context/product-context/ProductContext";
 import AuthContext from "../../context/auth-context/AuthContext";

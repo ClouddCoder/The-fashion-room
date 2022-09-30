@@ -3,6 +3,7 @@ import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
+import Divider from "@mui/material/Divider";
 import { useNavigate } from "react-router-dom";
 import ProductContext from "../../../context/product-context/ProductContext";
 
@@ -28,21 +29,9 @@ function OrderResume() {
           Comprar
         </Button>
       );
-    } else {
-      return <Typography variant="h6">Carrito vacío</Typography>;
     }
+    return <Typography variant="h6">Carrito vacío</Typography>;
   };
-
-  const ColorWhiteLine = ({ color }) => (
-    <hr
-      style={{
-        color: color,
-        backgroundColor: color,
-        height: 1,
-        width: "100%",
-      }}
-    />
-  );
 
   return (
     <Paper
@@ -84,7 +73,7 @@ function OrderResume() {
           <Typography variant="h6">${totalPrice}</Typography>
         </Grid>
         <Grid item container justifyContent="center">
-          <ColorWhiteLine color="white" />
+          <Divider />
         </Grid>
         <Grid item align="center">
           {checkCartLength()}

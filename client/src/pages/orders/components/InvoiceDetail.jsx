@@ -17,9 +17,9 @@ function InvoiceDetail({ product }) {
       <Card sx={{ width: "100%" }}>
         <CardHeader
           title="Finalizado"
-          subheader={"Factura #" + product.invoice_id}
+          subheader={`Factura #${product.invoice_id}`}
           sx={{ backgroundColor: "#17CCF9", height: "auto", p: "10" }}
-        ></CardHeader>
+        />
         <CardContent
           sx={{
             display: "flex",
@@ -33,16 +33,16 @@ function InvoiceDetail({ product }) {
               alt={product.product_name}
               src={getProductImage(product.product_name)}
               style={{ width: 120, height: 120 }}
-            ></img>
+            />
             <div style={{ float: "right" }}>
               <Typography variant="h6" sx={{ width: 150 }}>
                 {product.product_name}
               </Typography>
               <Typography variant="body2" sx={{ width: 150 }}>
-                {"$" + product.total_amount}
+                {`$${product.total_amount}`}
               </Typography>
               <Typography variant="body2" sx={{ width: 150 }}>
-                {"x" + product.quantity}
+                {`x${product.quantity}`}
               </Typography>
             </div>
           </div>

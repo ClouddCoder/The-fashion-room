@@ -1,10 +1,10 @@
 import React, { useState, useContext } from "react";
-import AuthContext from "../../context/auth-context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import CardContent from "@mui/material/CardContent";
 import Form from "../../commons/form/Form";
+import AuthContext from "../../context/auth-context/AuthContext";
 
 /**
  * Componente que muestra el register
@@ -72,7 +72,8 @@ function Register() {
   };
 
   /**
-   * Guarda la informacion del nombre, apellido, email y contraseña cuando el usuario escribe en los inputs
+   * Guarda la informacion del nombre, apellido,
+   * email y contraseña cuando el usuario escribe en los inputs.
    */
   const handleChange = (e) => {
     switch (e.target.name) {
@@ -102,8 +103,22 @@ function Register() {
         setUserPassword(e.target.value);
         break;
       default:
-        return;
     }
+  };
+
+  /**
+   * Muestra el mensaje de error dependiendo del input.
+   */
+  const handleHelperText = () => {
+    if (error.error) {
+      return error.errorMessage;
+    }
+
+    if (errorPassword.errorPassword) {
+      return errorPassword.errorMessage;
+    }
+
+    return "";
   };
 
   return (
@@ -136,14 +151,8 @@ function Register() {
           sx={{ margin: ".5rem 0" }}
         />
         <TextField
-          error={error.error || errorPassword.errorPassword ? true : false}
-          helperText={
-            error.error
-              ? error.errorMessage
-              : errorPassword.errorPassword
-              ? errorPassword.errorMessage
-              : ""
-          }
+          error={error.error || errorPassword.errorPassword}
+          helperText={handleHelperText}
           onChange={handleChange}
           name="userPassword"
           variant="filled"

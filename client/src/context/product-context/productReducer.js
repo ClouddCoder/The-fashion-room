@@ -19,17 +19,17 @@ export function ProductReducer(state, action) {
       return { ...state, products: [...action.payload] };
 
     case TYPES.ADD_TO_CART: {
-      let newItem = state.products.find((item) => item.product_id === action.payload);
-      let itemInCart = state.cart.find((item) => item.product_id === newItem.product_id);
+      const newItem = state.products.find((item) => item.product_id === action.payload);
+      const itemInCart = state.cart.find((item) => item.product_id === newItem.product_id);
 
       return itemInCart
         ? {
             ...state,
-            cart: state.cart.map((item) =>
+            cart: state.cart.map((item) => (
               item.product_id === newItem.product_id
                 ? { ...item, quantityInCart: item.quantityInCart + 1 }
-                : item,
-            ),
+                : item
+            )),
           }
         : {
             ...state,
@@ -38,16 +38,16 @@ export function ProductReducer(state, action) {
     }
 
     case TYPES.REMOVE_ONE_FROM_CART: {
-      let itemToDelete = state.cart.find((item) => item.product_id === action.payload);
+      const itemToDelete = state.cart.find((item) => item.product_id === action.payload);
 
       return itemToDelete.quantityInCart > 1
         ? {
             ...state,
-            cart: state.cart.map((item) =>
+            cart: state.cart.map((item) => (
               item.product_id === action.payload
                 ? { ...item, quantityInCart: item.quantityInCart - 1 }
-                : item,
-            ),
+                : item
+            )),
           }
         : {
             ...state,
@@ -67,7 +67,7 @@ export function ProductReducer(state, action) {
     }
 
     case TYPES.GET_TOTAL_PRODUCTS: {
-      let totalProducts = state.cart
+      const totalProducts = state.cart
         .map((product) => product.quantityInCart)
         .reduce((a, b) => a + b, 0);
 
@@ -75,7 +75,7 @@ export function ProductReducer(state, action) {
     }
 
     case TYPES.GET_TOTAL_PRICE: {
-      let totalPrice = state.cart
+      const totalPrice = state.cart
         .map((product) => product.price * product.quantityInCart)
         .reduce((a, b) => a + b, 0);
 
@@ -93,7 +93,7 @@ export function ProductReducer(state, action) {
     }
 
     case TYPES.ADD_PRODUCT_TO_BUY: {
-      const product = state.products.find((product) => product.product_id === action.payload);
+      const product = state.products.find((item) => item.product_id === action.payload);
       return {
         ...state,
         productsToBuy: [...state.productsToBuy, { ...product, quantityInCart: 1 }],

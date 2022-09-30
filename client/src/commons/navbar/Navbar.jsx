@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import "./Navbar.css";
-import Divider from "@mui/material/Divider";
 import NavBarOptionList from "./components/navbar-option-list/NavbarOptionList";
 import NavbarProfileList from "./components/navbar-profile-list/NavbarProfileList";
 
@@ -29,28 +29,28 @@ function Navbar() {
     <nav className="navbar">
       {displayPhone ? (
         <div className="navbarSmallscreen">
-          <div className="navbarSmallCreenToggleButton" onClick={() => setToggle(true)}>
+          <IconButton onClick={() => setToggle(true)}>
             <MenuIcon sx={{ width: "40px", height: "40px" }} />
-          </div>
+          </IconButton>
           {toggle ? (
             <div className="navbarSmallscreenOverlay">
-              <div
-                className="navbarSmallScreenOverlayCloseButton"
+              <IconButton
+                sx={{ position: "absolute", top: "20px", right: "20px" }}
                 onClick={() => setToggle(false)}
               >
                 <CloseIcon sx={{ width: "40px", height: "40px" }} />
-              </div>
+              </IconButton>
               <NavBarOptionList displayMode={true} />
               <NavbarProfileList displayMode={true} />
             </div>
           ) : (
             <div className="navbarSmallscreenHideOverlay">
-              <div
-                className="navbarSmallScreenOverlayCloseButton"
+              <IconButton
+                sx={{ position: "absolute", top: "20px", right: "20px" }}
                 onClick={() => setToggle(false)}
               >
                 <CloseIcon sx={{ width: "40px", height: "40px" }} />
-              </div>
+              </IconButton>
               <NavBarOptionList displayMode={true} />
               <NavbarProfileList displayMode={true} />
             </div>

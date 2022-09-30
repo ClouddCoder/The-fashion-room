@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
+import axios from "axios";
 import AuthContext from "../../context/auth-context/AuthContext";
 import InvoiceDetail from "./components/InvoiceDetail";
 import Navbar from "../../commons/navbar/Navbar";
 import Footer from "../../commons/footer/Footer";
-import axios from "axios";
 
 /**
  * Componente que muestra las compras realizadas por el usuario
@@ -20,7 +20,7 @@ function Orders() {
   const loadOrderDetail = () => {
     const config = {
       headers: {
-        "Authorization": `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
     };
     axios
@@ -32,6 +32,8 @@ function Orders() {
   /**
    * Separa las compras por el id de la factura.
    */
+
+  /*
   const setGroupOrderDetail = (response) => {
     const groupsOrderDetail = Object.values(
       response.data.reduce(
@@ -43,6 +45,7 @@ function Orders() {
       ),
     );
   };
+  */
 
   /**
    * Ejecuta la funcion loadOrderDetail()

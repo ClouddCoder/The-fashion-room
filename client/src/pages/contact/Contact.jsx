@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
-import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
+import axios from "axios";
 import StoreInfo from "./components/StoreInfo";
 import Navbar from "../../commons/navbar/Navbar";
 import Footer from "../../commons/footer/Footer";
-import axios from "axios";
 
 /**
  * Componente que muestra la informacion de la tienda
@@ -57,16 +55,14 @@ function Contact() {
       <Grid container sx={{ height: "auto" }}>
         <Grid item container justifyContent="center" spacing={2}>
           {storesPhones &&
-            stores?.map((store, index) => {
-              return (
-                <StoreInfo
-                  key={index}
-                  store_name={store.name}
-                  store_address={store.address}
-                  store_phone={storesPhones[index].phone}
-                />
-              );
-            })}
+            stores?.map((store, index) => (
+              <StoreInfo
+                key={index}
+                storeName={store.name}
+                storeAddress={store.address}
+                storePhone={storesPhones[index].phone}
+              />
+            ))}
         </Grid>
       </Grid>
       <Footer />

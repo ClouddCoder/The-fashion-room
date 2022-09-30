@@ -23,7 +23,7 @@ describe.skip("Login component", () => {
     const inputPassword = screen.getByLabelText("Password");
     await user.type(inputPassword, "1234");
     expect(inputEmail).toHaveValue("brayan");
-    //expect(inputPassword).toHaveValue("1234");
+    // expect(inputPassword).toHaveValue("1234");
     expect(loginAuthContextProps.setUserEmail).toHaveBeenCalledTimes(6);
     expect(loginAuthContextProps.setUserPassword).toHaveBeenCalledTimes(4);
   });
@@ -41,11 +41,11 @@ describe.skip("Login component", () => {
     };
 
     // Mock fetch API
-    global.fetch = jest.fn(() =>
+    global.fetch = jest.fn(() => {
       Promise.resolve({
         json: () => Promise.resolve(userInfo),
-      }),
-    );
+      });
+    });
 
     LoginTest();
 
@@ -53,9 +53,10 @@ describe.skip("Login component", () => {
     await user.click(button);
     expect(fetch).toHaveBeenCalledTimes(1);
     expect(fetch).toHaveBeenCalledWith("http://localhost:3050/api/login", {
-      "body": '{"userEmail":"","userPassword":""}',
-      "headers": { "Content-Type": "application/json" },
-      "method": "POST",
+      // eslint-disable-next-line quotes
+      body: '{"userEmail":"", "userPassword":""}',
+      headers: { "Content-Type": "application/json" },
+      method: "POST",
     });
     expect(fetch).toReturnWith(Promise.resolve({ json: () => Promise.resolve(userInfo) }));
     expect(loginAuthContextProps.setAuth).toHaveBeenCalledTimes(1);
@@ -63,6 +64,6 @@ describe.skip("Login component", () => {
     expect(loginAuthContextProps.setUser).toHaveBeenCalledTimes(1);
     expect(loginAuthContextProps.setUserEmail).toHaveBeenCalledTimes(1);
     expect(loginAuthContextProps.setUserPassword).toHaveBeenCalledTimes(1);
-    //expect(loginAuthContextProps.setToken).toHaveBeenCalledTimes(1);
+    // expect(loginAuthContextProps.setToken).toHaveBeenCalledTimes(1);
   });
 });

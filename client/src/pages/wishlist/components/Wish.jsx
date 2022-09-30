@@ -4,12 +4,13 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import CardActions from "@mui/material/CardActions";
+import Button from "@mui/material/Button";
 import { getProductImage } from "../../../assets";
 import ProductContext from "../../../context/product-context/ProductContext";
 import "./Wish.css";
 
 function Wish({ product }) {
-  const { handleWish, wishlist } = useContext(ProductContext);
+  const { handleWish } = useContext(ProductContext);
   return (
     <Grid item container mt={4}>
       <Card sx={{ width: "100%", display: "flex", justifyContent: "space-between" }}>
@@ -28,7 +29,9 @@ function Wish({ product }) {
           </div>
         </CardContent>
         <CardActions>
-          <button onClick={() => handleWish(product, true)}>Remove</button>
+          <Button variant="contained" onClick={() => handleWish(product, true)}>
+            Remove
+          </Button>
         </CardActions>
       </Card>
     </Grid>

@@ -1,5 +1,4 @@
 import React, { useState, useContext } from "react";
-import ProductContext from "../../../../context/product-context/ProductContext";
 import { Link } from "react-router-dom";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import IconButton from "@mui/material/IconButton";
@@ -7,6 +6,8 @@ import Tooltip from "@mui/material/Tooltip";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Divider from "@mui/material/Divider";
+import ProductContext from "../../../../context/product-context/ProductContext";
+import CustomLink from "./components/CustomLink";
 
 function ProfileButton({ resetSession }) {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -27,7 +28,9 @@ function ProfileButton({ resetSession }) {
    * Usa un ref para pasar el elemento a los demas hijos.
    * https://reactjs.org/docs/forwarding-refs.html
    */
-  const customLink = React.forwardRef((props, ref) => (
+
+  /*
+  const CustomLink = React.forwardRef((props, ref) => (
     <Link
       ref={ref}
       {...props}
@@ -40,6 +43,7 @@ function ProfileButton({ resetSession }) {
       }}
     />
   ));
+  */
 
   return (
     <>
@@ -74,6 +78,7 @@ function ProfileButton({ resetSession }) {
                 mr: 1,
               },
               "&:before": {
+                // eslint-disable-next-line quotes
                 content: '""',
                 display: "block",
                 position: "absolute",
@@ -97,7 +102,11 @@ function ProfileButton({ resetSession }) {
             Mis compras
           </MenuItem>
           <Divider />
-          <MenuItem component={customLink}>Logout</MenuItem>
+          <MenuItem>
+            <CustomLink session={resetSession} productState={resetProductState}>
+              Logout
+            </CustomLink>
+          </MenuItem>
         </Menu>
       </div>
     </>

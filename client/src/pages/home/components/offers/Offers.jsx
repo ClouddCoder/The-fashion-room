@@ -1,8 +1,8 @@
 import React from "react";
-import OfferItem from "../sub-components/OfferItem";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import { Bolsos, Calzado, Camisetas, Deportiva } from "../../../../assets";
+import OfferItem from "../sub-components/OfferItem";
 import "./Offers.css";
 
 /**
@@ -14,34 +14,34 @@ function Offers() {
       <Grid container align="center" spacing={2}>
         <Grid item={true} xs={6} md={3}>
           <OfferItem
-            alt={"calzado"}
+            alt="calzado"
             image={Calzado}
-            title={"Calzado"}
-            description={"Calzado de todo tipo"}
+            title="Calzado"
+            description="Calzado de todo tipo"
           />
         </Grid>
         <Grid item={true} xs={6} md={3}>
           <OfferItem
-            alt={"camisetas"}
+            alt="camisetas"
             image={Camisetas}
-            title={"Camisetas"}
-            description={"Camisetas de todo tipo"}
+            title="Camisetas"
+            description="Camisetas de todo tipo"
           />
         </Grid>
         <Grid item={true} xs={6} md={3}>
           <OfferItem
-            alt={"deportiva"}
+            alt="deportiva"
             image={Deportiva}
-            title={"Ropa deportiva"}
-            description={"Ropa deportiva de todo tipo"}
+            title="Ropa deportiva"
+            description="Ropa deportiva de todo tipo"
           />
         </Grid>
         <Grid item={true} xs={6} md={3}>
           <OfferItem
-            alt={"bolsos"}
+            alt="bolsos"
             image={Bolsos}
-            title={"Bolsos y maletas"}
-            description={"Bolsos y maletas de todo tipo"}
+            title="Bolsos y maletas"
+            description="Bolsos y maletas de todo tipo"
           />
         </Grid>
       </Grid>

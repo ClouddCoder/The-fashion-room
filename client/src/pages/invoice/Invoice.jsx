@@ -1,12 +1,13 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import ProductContext from "../../context/product-context/ProductContext";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
+import Divider from "@mui/material/Divider";
 import Navbar from "../../commons/navbar/Navbar";
 import Footer from "../../commons/footer/Footer";
+import ProductContext from "../../context/product-context/ProductContext";
 
 /**
  * Componente que muestra la factura de la compra
@@ -14,16 +15,6 @@ import Footer from "../../commons/footer/Footer";
 function Invoice() {
   const { productsToBuy, totalPrice, clearCart, invoiceId } = useContext(ProductContext);
   const navigate = useNavigate();
-  const ColorWhiteLine = ({ color }) => (
-    <hr
-      style={{
-        color: color,
-        backgroundColor: color,
-        height: 1,
-        width: "100%",
-      }}
-    />
-  );
 
   return (
     <Grid container direction="column">
@@ -44,7 +35,7 @@ function Invoice() {
           <Grid container direction="column" sx={{ height: "auto" }}>
             <Grid item container justifyContent="center">
               <Typography variant="h3">Detalles de la compra</Typography>
-              <Typography variant="h6">{"#" + invoiceId}</Typography>
+              <Typography variant="h6">{`#${invoiceId}`}</Typography>
             </Grid>
             <Grid
               item
@@ -75,7 +66,7 @@ function Invoice() {
               </Grid>
             </Grid>
             <Grid item container justifyContent="center">
-              <ColorWhiteLine color="white" />
+              <Divider />
             </Grid>
             <Grid
               item
