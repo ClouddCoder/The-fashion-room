@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
  * Usa un ref para pasar el elemento a los demas hijos.
  * https://reactjs.org/docs/forwarding-refs.html
  */
-const CustomLink = React.forwardRef(({ session, productState }, ref) => (
+const CustomLink = React.forwardRef(({ session, productState, children }, ref) => (
   <Link
     ref={ref}
     to="/"
@@ -16,7 +16,9 @@ const CustomLink = React.forwardRef(({ session, productState }, ref) => (
       productState();
       window.localStorage.removeItem("logged");
     }}
-  />
+  >
+    {children}
+  </Link>
 ));
 
 export default CustomLink;

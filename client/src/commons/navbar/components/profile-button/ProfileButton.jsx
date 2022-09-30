@@ -44,6 +44,7 @@ function ProfileButton({ resetSession }) {
     />
   ));
   */
+  const ref = React.createRef();
 
   return (
     <>
@@ -102,10 +103,13 @@ function ProfileButton({ resetSession }) {
             Mis compras
           </MenuItem>
           <Divider />
-          <MenuItem>
-            <CustomLink session={resetSession} productState={resetProductState}>
-              Logout
-            </CustomLink>
+          <MenuItem
+            component={CustomLink}
+            session={resetSession}
+            productState={resetProductState}
+            ref={ref}
+          >
+            Logout
           </MenuItem>
         </Menu>
       </div>
