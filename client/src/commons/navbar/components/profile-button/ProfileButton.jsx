@@ -7,7 +7,6 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Divider from "@mui/material/Divider";
 import ProductContext from "../../../../context/product-context/ProductContext";
-import CustomLink from "./components/CustomLink";
 
 function ProfileButton({ resetSession }) {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -22,29 +21,6 @@ function ProfileButton({ resetSession }) {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
-  /**
-   * Link personalizado que se renderiza como boton.
-   * Usa un ref para pasar el elemento a los demas hijos.
-   * https://reactjs.org/docs/forwarding-refs.html
-   */
-
-  /*
-  const CustomLink = React.forwardRef((props, ref) => (
-    <Link
-      ref={ref}
-      {...props}
-      to="/"
-      component="button"
-      onClick={() => {
-        resetSession();
-        resetProductState();
-        window.localStorage.removeItem("logged");
-      }}
-    />
-  ));
-  */
-  const ref = React.createRef();
 
   return (
     <>
@@ -104,10 +80,13 @@ function ProfileButton({ resetSession }) {
           </MenuItem>
           <Divider />
           <MenuItem
-            component={CustomLink}
-            session={resetSession}
-            productState={resetProductState}
-            ref={ref}
+            component={Link}
+            to="/"
+            onClick={() => {
+              resetSession();
+              resetProductState();
+              window.localStorage.removeItem("logged");
+            }}
           >
             Logout
           </MenuItem>

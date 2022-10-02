@@ -46,12 +46,14 @@ function NavbarProfileList({ displayMode }) {
             <p>{user}</p>
           </div>
           <div className="navbarWishlistButton">
-            <CustomButton title="Wishlist" path="/wishlist">
+            <CustomButton path="/wishlist">
+              <p>Wishlist</p>
               <FavoriteBorderOutlinedIcon sx={{ ml: "10px" }} />
             </CustomButton>
           </div>
           <div className="navbarCartButton">
-            <CustomButton title="Mi carrito" path="/cart">
+            <CustomButton path="/cart">
+              <p>Mi carrito</p>
               <ShoppingCartOutlinedIcon sx={{ ml: "10px" }} />
             </CustomButton>
           </div>
@@ -85,12 +87,14 @@ function NavbarProfileList({ displayMode }) {
         </div>
         <div className="horizontalLine" />
         <div className="navbarWishlistButton">
-          <CustomButton title="Wishlist" path="/wishlist">
+          <CustomButton path="/wishlist">
+            <p>Wishlist</p>
             <FavoriteBorderOutlinedIcon sx={{ ml: "10px" }} />
           </CustomButton>
         </div>
         <div className="navbarCartButton">
-          <CustomButton title="Mi carrito" path="/cart">
+          <CustomButton path="/cart">
+            <p>Mi carrito</p>
             <ShoppingCartOutlinedIcon sx={{ ml: "10px" }} />
           </CustomButton>
         </div>
@@ -115,82 +119,6 @@ function NavbarProfileList({ displayMode }) {
       </div>
     </div>
   );
-
-  /*
-  return (
-    <>
-      {displayMode ? (
-        auth ? (
-          <div className="navbarMobileLogin">
-            <div className="navbarUserName">
-              <p>{user}</p>
-            </div>
-            <div className="navbarWishlistButton">
-              <CustomButton title="Wishlist" path="/wishlist">
-                <FavoriteBorderOutlinedIcon sx={{ ml: "10px" }} />
-              </CustomButton>
-            </div>
-            <div className="navbarCartButton">
-              <CustomButton title="Mi carrito" path="/cart">
-                <ShoppingCartOutlinedIcon sx={{ ml: "10px" }} />
-              </CustomButton>
-            </div>
-            <div className="navbarProfileButton">
-              <ProfileButton resetSession={resetSession} />
-            </div>
-          </div>
-        ) : (
-          <div className="navbarMobileLogin">
-            <div className="navbarLoginButton">
-              <Link to="/login" component="button" onClick={resetForm}>
-                Login
-              </Link>
-            </div>
-            <div className="navbarRegisterButton">
-              <Link to="/register" component="button" onClick={resetForm}>
-                Register
-              </Link>
-            </div>
-          </div>
-        )
-      ) : auth ? (
-        <div className="navbarDesktopLogin">
-          <div className="navbarUserName">
-            <p>{user}</p>
-          </div>
-          <div className="horizontalLine" />
-          <div className="navbarWishlistButton">
-            <CustomButton title="Wishlist" path="/wishlist">
-              <FavoriteBorderOutlinedIcon sx={{ ml: "10px" }} />
-            </CustomButton>
-          </div>
-          <div className="navbarCartButton">
-            <CustomButton title="Mi carrito" path="/cart">
-              <ShoppingCartOutlinedIcon sx={{ ml: "10px" }} />
-            </CustomButton>
-          </div>
-          <div className="navbarProfileButton">
-            <ProfileButton resetSession={resetSession} />
-          </div>
-        </div>
-      ) : (
-        <div className="navbarDesktopLogin">
-          <div className="navbarLoginButton">
-            <Link to="/login" component="button" onClick={resetForm}>
-              Login
-            </Link>
-          </div>
-          <div className="horizontalLine" />
-          <div className="navbarRegisterButton">
-            <Link to="/register" component="button" onClick={resetForm}>
-              Register
-            </Link>
-          </div>
-        </div>
-      )}
-    </>
-  );
-  */
 }
 
 export default NavbarProfileList;

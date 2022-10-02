@@ -6,10 +6,9 @@ import { customButtonStyle } from "./style";
 /**
  * Boton personalizado para el carrito y la wishlist
  */
-function CustomButton({ children, title, path }) {
+function CustomButton({ children, path }) {
   return (
     <IconButton sx={customButtonStyle} component={Link} to={path}>
-      <p>{title}</p>
       {children}
     </IconButton>
   );

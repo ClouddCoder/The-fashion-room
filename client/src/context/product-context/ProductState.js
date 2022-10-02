@@ -12,6 +12,7 @@ import { TYPES } from "../../actions/productActions";
 function ProductState({ children }) {
   const [state, dispatch] = useReducer(ProductReducer, productInitialState);
   const { token } = useContext(AuthContext);
+  console.log(token);
 
   /**
    * Obtiene los productos de la API
@@ -191,6 +192,7 @@ function ProductState({ children }) {
       state.invoiceId,
       state.addWish,
       state.productsToBuy,
+      token,
     ],
   );
 
