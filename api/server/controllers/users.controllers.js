@@ -297,7 +297,7 @@ const getStoresPhones = async (req, res, next) => {
  */
 const getOrderDetail = async (req, res, next) => {
   let query = "SELECT invoice_detail.invoice_id, purchase_date, ";
-  query += "product_name, quantity, total_amount FROM invoice_detail ";
+  query += "product_name, quantity, price, total_amount FROM invoice_detail ";
   query += "INNER JOIN invoice ON invoice.invoice_id = invoice_detail.invoice_id ";
   query += "INNER JOIN product ON product.product_id = invoice_detail.product_id ";
   query += "WHERE customer_id = $1";

@@ -1,0 +1,11 @@
+.purchaseDetails {
+  display: flex;
+  justify-content: space-between;
+  width: 200px;
+}
+
+.purchaseOptions {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}

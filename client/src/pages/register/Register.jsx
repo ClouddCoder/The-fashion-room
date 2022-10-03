@@ -74,6 +74,7 @@ function Register() {
   /**
    * Guarda la informacion del nombre, apellido,
    * email y contraseña cuando el usuario escribe en los inputs.
+   * Tambien borra el mensaje de error cuando el usuario empieza a escribir nuevamente.
    */
   const handleChange = (e) => {
     switch (e.target.name) {
@@ -107,7 +108,8 @@ function Register() {
   };
 
   /**
-   * Muestra el mensaje de error dependiendo del input.
+   * Muestra el error en caso de que sea por ingresar datos incorrectos
+   * o por no cumplir con los requisitos de la contraseña.
    */
   const handleHelperText = () => {
     if (error.error) {
@@ -152,7 +154,7 @@ function Register() {
         />
         <TextField
           error={error.error || errorPassword.errorPassword}
-          helperText={handleHelperText}
+          helperText={handleHelperText()}
           onChange={handleChange}
           name="userPassword"
           variant="filled"

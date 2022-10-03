@@ -7,6 +7,7 @@ import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import { getProductImage } from "../../../assets";
+import "./InvoiceDetail.css";
 
 /**
  * Componente que muestra la informacion de la orden
@@ -38,16 +39,23 @@ function InvoiceDetail({ product }) {
               <Typography variant="h6" sx={{ width: 150 }}>
                 {product.product_name}
               </Typography>
-              <Typography variant="body2" sx={{ width: 150 }}>
-                {`$${product.total_amount}`}
-              </Typography>
-              <Typography variant="body2" sx={{ width: 150 }}>
-                {`x${product.quantity}`}
-              </Typography>
+              <div className="purchaseDetails">
+                <Typography variant="body2" sx={{ width: 150 }}>
+                  {`$${product.price}`}
+                </Typography>
+                <Typography variant="body2" sx={{ width: 150 }}>
+                  {`x${product.quantity}`}
+                </Typography>
+              </div>
             </div>
           </div>
-          <div className="options">
-            <Link to="/catalogue">Volver a comprar</Link>
+          <div className="purchaseOptions">
+            <Typography variant="body2" sx={{ width: 150 }}>
+              {`Total compra: $${product.total_amount}`}
+            </Typography>
+            <Button variant="contained" component={Link} to="/">
+              Volver a comprar
+            </Button>
             <Button variant="contained" color="primary">
               Borrar
             </Button>
