@@ -10,6 +10,7 @@ const {
   getStores,
   getStoresPhones,
   getOrderDetail,
+  removeOrderDetail,
 } = require("../controllers/users.controllers");
 
 const router = Router();
@@ -36,5 +37,7 @@ router.get("/stores", getStores);
 router.get("/stores/phones", getStoresPhones);
 
 router.get("/order-detail", getOrderDetail);
+
+router.put("/remove-order", removeOrderDetail);
 
 module.exports = router;
