@@ -133,6 +133,47 @@ function ProductState({ children }) {
   };
 
   /**
+   * Peticion a la API para obtener la informacion de las compras realizadas por el usuario.
+   */
+  const loadOrderDetail = async () => {
+    try {
+      const response = await axios.get("http://localhost:3050/api/order-detail", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const { data } = response;
+      dispatch({ type: TYPES.GET_MY_ORDERS, payload: data });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  /**
+   * Elimina una compra realizada por el usuario.
+   */
+  const removeOrder = async (product) => {
+    try {
+      axios.delete("http://localhost:3050/api/remove-order", {
+        data: {
+          invoiceId: product.invoice_id,
+          productId: product.product_id,
+        },
+
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      dispatch({
+        type: TYPES.REMOVE_AN_ORDER,
+        payload: { invoiceId: product.invoice_id, productId: product.product_id },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  /**
    * Peticion para crear una factura despues de que el usuario realice una compra.
    */
   const createInvoice = async (cart) => {
@@ -165,6 +206,7 @@ function ProductState({ children }) {
       totalPrice: state.totalPrice,
       wishlist: state.wishlist,
       temporaryWishlist: state.temporaryWishlist,
+      myOrders: state.myOrders,
       invoiceId: state.invoiceId,
       addWish: state.addWish,
       productsToBuy: state.productsToBuy,
@@ -178,6 +220,8 @@ function ProductState({ children }) {
       handleWish,
       addProductToBuy,
       clearListOfProductsToBuy,
+      loadOrderDetail,
+      removeOrder,
       createInvoice,
       resetProductState,
     }),
@@ -188,6 +232,7 @@ function ProductState({ children }) {
       state.totalPrice,
       state.wishlist,
       state.temporaryWishlist,
+      state.myOrders,
       state.invoiceId,
       state.addWish,
       state.productsToBuy,

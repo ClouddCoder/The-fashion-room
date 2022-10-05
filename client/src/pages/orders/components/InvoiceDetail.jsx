@@ -1,32 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
-import axios from "axios";
 import { getProductImage } from "../../../assets";
+import ProductContext from "../../../context/product-context/ProductContext";
 import "./InvoiceDetail.css";
 
 /**
  * Componente que muestra la informacion de la orden
  */
 function InvoiceDetail({ product }) {
-  /**
-   * Elimina una compra realizada por el usuario.
-   */
-  const removeOrderDetail = async () => {
-    try {
-      axios.put("http://localhost:3050/api/remove-order", {
-        invoiceId: product.invoice_id,
-        productId: product.product_id,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const { removeOrder } = useContext(ProductContext);
+  const navigate = useNavigate();
 
   return (
     <Grid item mt={4} sx={{ display: "flex", justifyContent: "center" }}>
@@ -68,10 +57,15 @@ function InvoiceDetail({ product }) {
             <Typography variant="body2" sx={{ width: 150 }}>
               {`Total compra: $${product.total_amount}`}
             </Typography>
-            <Button variant="contained" component={Link} to={`/product/${product.product_id}`}>
+            <Button
+              variant="contained"
+              onClick={() => {
+                navigate(`/product/${product.product_id}`);
+              }}
+            >
               Volver a comprar
             </Button>
-            <Button variant="contained" color="primary">
+            <Button variant="contained" color="primary" onClick={removeOrder}>
               Borrar
             </Button>
           </div>

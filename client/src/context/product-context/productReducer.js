@@ -7,6 +7,7 @@ export const productInitialState = {
   totalProducts: 0,
   totalPrice: 0,
   invoiceId: 0,
+  myOrders: [], // All user's purchases
   productsToBuy: [], // Products ready to buy
 };
 
@@ -25,11 +26,11 @@ export function ProductReducer(state, action) {
       return itemInCart
         ? {
             ...state,
-            cart: state.cart.map((item) => (
+            cart: state.cart.map((item) =>
               item.product_id === newItem.product_id
                 ? { ...item, quantityInCart: item.quantityInCart + 1 }
-                : item
-            )),
+                : item,
+            ),
           }
         : {
             ...state,
@@ -43,11 +44,11 @@ export function ProductReducer(state, action) {
       return itemToDelete.quantityInCart > 1
         ? {
             ...state,
-            cart: state.cart.map((item) => (
+            cart: state.cart.map((item) =>
               item.product_id === action.payload
                 ? { ...item, quantityInCart: item.quantityInCart - 1 }
-                : item
-            )),
+                : item,
+            ),
           }
         : {
             ...state,
@@ -106,6 +107,21 @@ export function ProductReducer(state, action) {
 
     case TYPES.CLEAR_LIST_OF_PRODUCTS_TO_BUY: {
       return { ...state, productsToBuy: [] };
+    }
+
+    case TYPES.GET_MY_ORDERS: {
+      return { ...state, myOrders: [...action.payload] };
+    }
+
+    case TYPES.REMOVE_AN_ORDER: {
+      return {
+        ...state,
+        myOrders: state.myOrders.filter(
+          (order) =>
+            order.invoice_id !== action.payload.invoiceId &&
+            order.product_id !== action.payload.productId,
+        ),
+      };
     }
 
     case TYPES.CREATE_INVOICE: {

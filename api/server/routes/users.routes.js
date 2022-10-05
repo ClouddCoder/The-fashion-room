@@ -38,6 +38,6 @@ router.get("/stores/phones", getStoresPhones);
 
 router.get("/order-detail", getOrderDetail);
 
-router.put("/remove-order", removeOrderDetail);
+router.delete("/remove-order", removeOrderDetail);
 
 module.exports = router;

@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import axios from "axios";
-import AuthContext from "../../context/auth-context/AuthContext";
+import ProductContext from "../../context/product-context/ProductContext";
 import InvoiceDetail from "./components/InvoiceDetail";
 import Navbar from "../../commons/navbar/Navbar";
 import Footer from "../../commons/footer/Footer";
@@ -11,47 +10,21 @@ import Footer from "../../commons/footer/Footer";
  * Componente que muestra las compras realizadas por el usuario
  */
 function Orders() {
-  const { token } = useContext(AuthContext);
-  const [orders, setOrders] = useState([]);
+  const { loadProducts, loadOrderDetail, myOrders } = useContext(ProductContext);
 
   /**
-   * Peticion a la API para obtener la informacion de las compras realizadas por el usuario.
-   */
-  const loadOrderDetail = () => {
-    const config = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    };
-    axios
-      .get("http://localhost:3050/api/order-detail", config)
-      .then((response) => setOrders(response.data))
-      .catch((err) => console.log(err));
-  };
-
-  /**
-   * Separa las compras por el id de la factura.
-   */
-
-  /*
-  const setGroupOrderDetail = (response) => {
-    const groupsOrderDetail = Object.values(
-      response.data.reduce(
-        (acc, item) => ({
-          ...acc,
-          [item.invoice_id]: (acc[item.invoice_id] || []).concat(item),
-        }),
-        {},
-      ),
-    );
-  };
-  */
-
-  /**
-   * Ejecuta la funcion loadOrderDetail()
+   * Obtiene las compras realizadas por el usuario.
    */
   useEffect(() => {
     loadOrderDetail();
+  }, []);
+
+  /**
+   * Carga los productos de la base de datos para que el usuario
+   * pueda volver a comprar alguno de los productos.
+   */
+  useEffect(() => {
+    loadProducts();
   }, []);
 
   return (
@@ -62,7 +35,7 @@ function Orders() {
           <Typography variant="h3">Mis ordenes</Typography>
         </Grid>
         <Grid item container direction="column" mt={4}>
-          {orders?.map((order, i) => (
+          {myOrders?.map((order, i) => (
             <InvoiceDetail product={order} key={i} />
           ))}
         </Grid>
