@@ -156,8 +156,7 @@ function ProductState({ children }) {
     try {
       axios.delete("http://localhost:3050/api/remove-order", {
         data: {
-          invoiceId: product.invoice_id,
-          productId: product.product_id,
+          detailId: product.detail_id,
         },
 
         headers: {
@@ -166,7 +165,7 @@ function ProductState({ children }) {
       });
       dispatch({
         type: TYPES.REMOVE_AN_ORDER,
-        payload: { invoiceId: product.invoice_id, productId: product.product_id },
+        payload: product.detail_id,
       });
     } catch (error) {
       console.log(error);
@@ -194,6 +193,9 @@ function ProductState({ children }) {
     }
   };
 
+  /**
+   * Borra los datos de los productos guardados al cerrar sesion.
+   */
   const resetProductState = () => {
     dispatch({ type: TYPES.RESET_PRODUCT_STATE });
   };

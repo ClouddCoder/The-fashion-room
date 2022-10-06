@@ -65,7 +65,7 @@ function InvoiceDetail({ product }) {
             >
               Volver a comprar
             </Button>
-            <Button variant="contained" color="primary" onClick={removeOrder}>
+            <Button variant="contained" color="primary" onClick={() => removeOrder(product)}>
               Borrar
             </Button>
           </div>

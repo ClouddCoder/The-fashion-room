@@ -113,6 +113,7 @@ CREATE SEQUENCE invoice_id_seq
 
 -- Create invoice_detail table containing the purchased products
 CREATE TABLE invoice_detail (
+    detail_id SERIAL,
     invoice_id INTEGER NOT NULL,
     product_id INTEGER NOT NULL,
     quantity INTEGER NOT NULL,

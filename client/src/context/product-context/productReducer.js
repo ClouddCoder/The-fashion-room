@@ -116,11 +116,7 @@ export function ProductReducer(state, action) {
     case TYPES.REMOVE_AN_ORDER: {
       return {
         ...state,
-        myOrders: state.myOrders.filter(
-          (order) =>
-            order.invoice_id !== action.payload.invoiceId &&
-            order.product_id !== action.payload.productId,
-        ),
+        myOrders: state.myOrders.filter((order) => order.detail_id !== action.payload),
       };
     }
 

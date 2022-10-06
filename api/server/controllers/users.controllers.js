@@ -296,7 +296,7 @@ const getStoresPhones = async (req, res, next) => {
  * Obtiene la informacion detallada de cada factura
  */
 const getOrderDetail = async (req, res, next) => {
-  let query = "SELECT invoice_detail.invoice_id, invoice_detail.product_id, purchase_date, ";
+  let query = "SELECT invoice_detail.detail_id, invoice_detail.invoice_id, invoice_detail.product_id, purchase_date, ";
   query += "product_name, quantity, price, total_amount FROM invoice_detail ";
   query += "INNER JOIN invoice ON invoice.invoice_id = invoice_detail.invoice_id ";
   query += "INNER JOIN product ON product.product_id = invoice_detail.product_id ";
@@ -320,9 +320,9 @@ const getOrderDetail = async (req, res, next) => {
  * Elimina un producto comprado.
  */
 const removeOrderDetail = async (req, res, next) => {
-  const { invoiceId, productId } = req.body;
-  const query = "DELETE FROM invoice_detail WHERE invoice_id = $1 AND product_id = $2";
-  const values = [invoiceId, productId];
+  const { detailId } = req.body;
+  const query = "DELETE FROM invoice_detail WHERE detail_id = $1";
+  const values = [detailId];
   const { authorization } = req.headers;
   const decodeToken = getAuthorization(authorization);
 
