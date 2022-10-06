@@ -5,11 +5,13 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import CardActions from "@mui/material/CardActions";
 import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
 import { getProductImage } from "../../../assets";
 import ProductContext from "../../../context/product-context/ProductContext";
 import "./Wish.css";
 
 function Wish({ product }) {
+  const navigate = useNavigate();
   const { handleWish } = useContext(ProductContext);
   return (
     <Grid item container mt={4}>
@@ -29,9 +31,17 @@ function Wish({ product }) {
           </div>
         </CardContent>
         <CardActions>
-          <Button variant="contained" onClick={() => handleWish(product, true)}>
-            Remove
-          </Button>
+          <div className="wishOptions">
+            <Button
+              variant="contained"
+              onClick={() => navigate(`/product/${product.product_id}`)}
+            >
+              Comprar
+            </Button>
+            <Button variant="contained" onClick={() => handleWish(product, true)}>
+              Remove
+            </Button>
+          </div>
         </CardActions>
       </Card>
     </Grid>

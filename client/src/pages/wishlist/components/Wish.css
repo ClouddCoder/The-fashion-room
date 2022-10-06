@@ -1,3 +1,10 @@
 .description {
   margin-left: 20px;
 }
+
+.wishOptions {
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
