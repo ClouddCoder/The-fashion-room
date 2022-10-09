@@ -42,27 +42,29 @@ function Product() {
             height="450px"
           />
         </Grid>
-        <Grid
-          item
-          xs={6}
-          sx={{ display: "flex", justifyContent: "center", flexDirection: "column" }}
-        >
-          <h1>{product.product_name}</h1>
-          <p>{product.price}</p>
-          <div style={{ display: "flex" }}>
-            <Button
-              variant="contained"
-              onClick={auth ? handleBuyProduct : () => navigate("/login")}
-            >
-              Comprar
-            </Button>
-            <Button
-              variant="contained"
-              onClick={auth ? () => addToCart(product.product_id) : () => navigate("/login")}
-            >
-              Agregar al carrito
-            </Button>
-          </div>
+        <Grid item container xs={6} direction="column" justifyContent="center">
+          <Grid item>
+            <h1>{product.product_name}</h1>
+          </Grid>
+          <Grid item>
+            <span>{product.price}</span>
+          </Grid>
+          <Grid item>
+            <div style={{ display: "flex" }}>
+              <Button
+                variant="contained"
+                onClick={auth ? handleBuyProduct : () => navigate("/login")}
+              >
+                Comprar
+              </Button>
+              <Button
+                variant="contained"
+                onClick={auth ? () => addToCart(product.product_id) : () => navigate("/login")}
+              >
+                Agregar al carrito
+              </Button>
+            </div>
+          </Grid>
         </Grid>
       </Grid>
       <Footer />
