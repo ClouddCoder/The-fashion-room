@@ -3,7 +3,7 @@ import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
+import CustomTypography from "../../../commons/custom-typography/CustomTypography";
 import { getProductImage } from "../../../assets";
 
 function ProductToBuy({ product }) {
@@ -18,13 +18,13 @@ function ProductToBuy({ product }) {
             alt={product.product_name}
           />
           <div className="description">
-            <Typography variant="subtitle2" sx={{ fontSize: "14px" }}>
+            <CustomTypography variant="body2" sx={{ fontSize: "14px" }}>
               {product.product_name}
-            </Typography>
+            </CustomTypography>
             <div>
-              <Typography variant="body1" sx={{ fontSize: "14px" }}>
+              <CustomTypography variant="body2" sx={{ fontSize: "14px" }}>
                 ${product.price}
-              </Typography>
+              </CustomTypography>
             </div>
           </div>
         </CardContent>

@@ -4,7 +4,7 @@ import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
+import CustomTypography from "../custom-typography/CustomTypography";
 import Navbar from "../navbar/Navbar";
 import Footer from "../footer/Footer";
 
@@ -18,9 +18,7 @@ function Form({ children, title }) {
         <Grid item>
           <Card sx={{ maxWidth: 300 }}>
             <CardContent>
-              <Typography variant="h5" component="h2">
-                {title}
-              </Typography>
+              <CustomTypography variant="h5">{title}</CustomTypography>
             </CardContent>
             <CardContent>{children}</CardContent>
           </Card>

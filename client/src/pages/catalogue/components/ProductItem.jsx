@@ -5,9 +5,9 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import { CardActionArea } from "@mui/material";
 import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
 import { getProductImage } from "../../../assets";
 import CustomWishlistButton from "./sub-components/CustomWishlistButton";
+import CustomTypography from "../../../commons/custom-typography/CustomTypography";
 
 /**
  * Componente que muestra el producto en el catalogo
@@ -37,12 +37,12 @@ function ProductItem({ product }) {
             alt={product.product_name}
           />
           <CardContent sx={{ p: "10px" }}>
-            <Typography gutterBottom variant="h5" sx={{ fontSize: "16px" }}>
+            <CustomTypography gutterBottom variant="h5" sx={{ fontSize: "16px" }}>
               {product.product_name}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
+            </CustomTypography>
+            <CustomTypography variant="body2" color="text.secondary">
               Cantidad disponible {product.stock}
-            </Typography>
+            </CustomTypography>
           </CardContent>
         </CardActionArea>
         <CustomWishlistButton product={product} />

@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
-import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
+import CustomTypography from "../../commons/custom-typography/CustomTypography";
 import Navbar from "../../commons/navbar/Navbar";
 import Footer from "../../commons/footer/Footer";
 import ProductContext from "../../context/product-context/ProductContext";
@@ -34,8 +34,8 @@ function Invoice() {
         >
           <Grid container direction="column" sx={{ height: "auto" }}>
             <Grid item container justifyContent="center">
-              <Typography variant="h3">Detalles de la compra</Typography>
-              <Typography variant="h6">{`#${invoiceId}`}</Typography>
+              <CustomTypography variant="h3">Detalles de la compra</CustomTypography>
+              <CustomTypography variant="body2">{`#${invoiceId}`}</CustomTypography>
             </Grid>
             <Grid
               item
@@ -46,7 +46,7 @@ function Invoice() {
                 alignItems: "center",
               }}
             >
-              <Typography variant="h4">Productos</Typography>
+              <CustomTypography variant="h4">Productos</CustomTypography>
               <Grid item container direction="column">
                 {productsToBuy?.map((product) => (
                   <Grid
@@ -55,12 +55,12 @@ function Invoice() {
                     key={product.product_id}
                     sx={{ display: "flex", justifyContent: "space-between" }}
                   >
-                    <Typography variant="h6">
+                    <CustomTypography variant="body2">
                       {product.product_name} x{product.quantityInCart}
-                    </Typography>
-                    <Typography variant="h6">
+                    </CustomTypography>
+                    <CustomTypography variant="body2">
                       ${product.price * product.quantityInCart}
-                    </Typography>
+                    </CustomTypography>
                   </Grid>
                 ))}
               </Grid>
@@ -77,8 +77,8 @@ function Invoice() {
                 alignItems: "center",
               }}
             >
-              <Typography variant="h4">Total</Typography>
-              <Typography variant="h5">${totalPrice}</Typography>
+              <CustomTypography variant="h4">Total</CustomTypography>
+              <CustomTypography variant="body2">${totalPrice}</CustomTypography>
             </Grid>
             <Grid item align="center">
               <Button

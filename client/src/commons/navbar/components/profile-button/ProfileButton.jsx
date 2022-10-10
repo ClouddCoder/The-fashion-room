@@ -27,7 +27,7 @@ function ProfileButton({ resetSession }) {
       <Tooltip title="Account settings">
         <IconButton
           onClick={handleClick}
-          sx={{ color: "white" }}
+          sx={{ color: "var(--color-primary-white)" }}
           aria-controls={open ? "account-menu" : undefined}
           aria-haspopup="true"
           aria-expanded={open ? "true" : undefined}

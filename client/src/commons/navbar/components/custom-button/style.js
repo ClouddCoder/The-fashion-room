@@ -1,6 +1,6 @@
 export const customButtonStyle = {
-  backgroundColor: "#D98841",
-  color: "#592E42",
+  backgroundColor: "var(--color-primary-yellow)",
+  color: "var(--color-primary-brown)",
   borderRadius: "5px",
   display: "flex",
   fontSize: "15px",

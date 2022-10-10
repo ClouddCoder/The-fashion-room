@@ -4,8 +4,8 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardActionArea from "@mui/material/CardActionArea";
 import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
+import CustomTypography from "../../../../commons/custom-typography/CustomTypography";
 import { style, phoneStyle, font, phoneFont } from "./style";
 
 /**
@@ -20,12 +20,12 @@ function OfferItem({ alt, image, title, description }) {
       <CardActionArea component={Link} to="/catalogue" sx={{ height: "230px" }}>
         <CardMedia component="img" alt={alt} height="140" src={image} />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2" sx={fontSize}>
+          <CustomTypography gutterBottom variant="h5" component="h2" sx={fontSize}>
             {title}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
+          </CustomTypography>
+          <CustomTypography variant="body2" color="textSecondary" component="p">
             {description}
-          </Typography>
+          </CustomTypography>
         </CardContent>
       </CardActionArea>
     </Card>

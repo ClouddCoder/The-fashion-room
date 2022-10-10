@@ -9,6 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 import ProductItem from "./components/ProductItem";
 import AuthContext from "../../context/auth-context/AuthContext";
 import ProductContext from "../../context/product-context/ProductContext";
+import CustomTypography from "../../commons/custom-typography/CustomTypography";
 import Navbar from "../../commons/navbar/Navbar";
 import Footer from "../../commons/footer/Footer";
 import "./Catalogue.css";
@@ -73,82 +74,118 @@ function Catalogue() {
         sx={{ pt: 10, pb: 10, width: "80%" }}
       >
         <Grid item container justifyContent="center" spacing={2}>
-          <Button sx={{ mr: 1 }} component={Link} to="/" variant="outlined" color="primary">
-            Regresar
-          </Button>
-
-          {auth ? (
-            <Button
-              sx={{ ml: 1 }}
-              variant="outlined"
-              color="primary"
-              onClick={() => navigate("/cart")}
-            >
-              Ir al carrito
+          <Grid item>
+            <Button sx={{ mr: 1 }} component={Link} to="/" variant="outlined" color="primary">
+              Regresar
             </Button>
-          ) : (
-            <Button
-              sx={{ ml: 1 }}
-              variant="outlined"
-              color="primary"
-              onClick={() => navigate("/login")}
-            >
-              Ir al carrito
-            </Button>
-          )}
+          </Grid>
+          <Grid item>
+            {auth ? (
+              <Button
+                sx={{ ml: 1 }}
+                variant="outlined"
+                color="primary"
+                onClick={() => navigate("/cart")}
+              >
+                Ir al carrito
+              </Button>
+            ) : (
+              <Button
+                sx={{ ml: 1 }}
+                variant="outlined"
+                color="primary"
+                onClick={() => navigate("/login")}
+              >
+                Ir al carrito
+              </Button>
+            )}
+          </Grid>
         </Grid>
         <Grid item container>
-          <Grid item container xs={4} direction="column">
-            <h1>Catalogo</h1>
-            <Grid>
+          <Grid item container xs={2} direction="column">
+            <Grid item>
+              <h1>Catalogo</h1>
+            </Grid>
+            <Grid item>
               <FormControl>
                 <FormLabel id="demo-radio-buttons-group-label">Categorías</FormLabel>
                 <FormControlLabel
                   control={
-                    <Checkbox checked={check.blusa} onChange={handleChange} name="blusa" />
+                    <Checkbox
+                      checked={check.blusa}
+                      onChange={handleChange}
+                      name="blusa"
+                      size="small"
+                      sx={{ p: "3px" }}
+                    />
                   }
-                  label="Blusa"
-                  sx={{ fontSize: 14 }}
+                  label={<CustomTypography variant="body2">Blusa</CustomTypography>}
+                  sx={{ m: 0 }}
                 />
                 <FormControlLabel
                   control={
-                    <Checkbox checked={check.camisa} onChange={handleChange} name="camisa" />
+                    <Checkbox
+                      checked={check.camisa}
+                      onChange={handleChange}
+                      name="camisa"
+                      size="small"
+                      sx={{ p: "3px" }}
+                    />
                   }
-                  label="Camisa"
-                  sx={{ fontSize: 14 }}
+                  label={<CustomTypography variant="body2">Camisa</CustomTypography>}
+                  sx={{ m: 0 }}
                 />
                 <FormControlLabel
                   control={
-                    <Checkbox checked={check.corbata} onChange={handleChange} name="corbata" />
+                    <Checkbox
+                      checked={check.corbata}
+                      onChange={handleChange}
+                      name="corbata"
+                      size="small"
+                      sx={{ p: "3px" }}
+                    />
                   }
-                  label="Corbata"
-                  sx={{ fontSize: 14 }}
+                  label={<CustomTypography variant="body2">Corbata</CustomTypography>}
+                  sx={{ m: 0 }}
                 />
                 <FormControlLabel
                   control={
-                    <Checkbox checked={check.pantalon} onChange={handleChange} name="pantalon" />
+                    <Checkbox
+                      checked={check.pantalon}
+                      onChange={handleChange}
+                      name="pantalon"
+                      size="small"
+                      sx={{ p: "3px" }}
+                    />
                   }
-                  label="Pantalon"
-                  sx={{ fontSize: 14 }}
+                  label={<CustomTypography variant="body2">Pantalon</CustomTypography>}
+                  sx={{ m: 0 }}
                 />
                 <FormControlLabel
                   control={
-                    // eslint-disable-next-line react/jsx-wrap-multilines
                     <Checkbox
                       checked={check.pantaloneta}
                       onChange={handleChange}
                       name="pantaloneta"
+                      size="small"
+                      sx={{ p: "3px" }}
                     />
                   }
-                  label="Pantaloneta"
-                  sx={{ fontSize: 14 }}
+                  label={<CustomTypography variant="body2">Pantaloneta</CustomTypography>}
+                  sx={{ m: 0 }}
                 />
                 <FormControlLabel
                   control={
-                    <Checkbox checked={check.zapatos} onChange={handleChange} name="zapatos" />
+                    <Checkbox
+                      checked={check.zapatos}
+                      onChange={handleChange}
+                      name="zapatos"
+                      size="small"
+                      sx={{ p: "3px" }}
+                    />
                   }
-                  label="Zapatos"
-                  sx={{ fontSize: 14 }}
+                  label={<CustomTypography variant="body2">Zapatos</CustomTypography>}
+                  sx={{ m: 0 }}
                 />
               </FormControl>
             </Grid>
@@ -158,7 +195,7 @@ function Catalogue() {
             container
             alignItems="center"
             justifyContent="center"
-            xs={8}
+            xs={10}
             spacing={4}
             sx={{ mt: "16px" }}
           >

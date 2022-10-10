@@ -1,22 +1,10 @@
 .app_footer {
   align-items: center;
   display: flex;
-  background-color: #000000;
+  background-color: var(--color-primary-brown);
   width: 100%;
   height: auto;
-  color: aliceblue;
+  color: var(--color-primary-white);
   margin-top: auto;
   padding: 30px 0;
-}
-
-.app_footer .title_footer {
-  font-size: 20px;
-  font-weight: bold;
-  color: aliceblue;
-}
-
-.app_footer .link_footer {
-  font-size: 13px;
-  color: aliceblue;
-  margin-top: 10px;
 }

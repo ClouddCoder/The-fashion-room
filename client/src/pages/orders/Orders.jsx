@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from "react";
 import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
 import ProductContext from "../../context/product-context/ProductContext";
+import CustomTypography from "../../commons/custom-typography/CustomTypography";
 import InvoiceDetail from "./components/InvoiceDetail";
 import Navbar from "../../commons/navbar/Navbar";
 import Footer from "../../commons/footer/Footer";
@@ -32,7 +32,7 @@ function Orders() {
       <Navbar />
       <Grid container direction="column" sx={{ height: "auto", width: "60%", m: 2 }}>
         <Grid item>
-          <Typography variant="h3">Mis ordenes</Typography>
+          <CustomTypography variant="h3">Mis ordenes</CustomTypography>
         </Grid>
         <Grid item container direction="column" mt={4}>
           {myOrders?.map((order, i) => (

@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
@@ -8,6 +7,7 @@ import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid";
 import ProductContext from "../../context/product-context/ProductContext";
 import AuthContext from "../../context/auth-context/AuthContext";
+import CustomTypography from "../../commons/custom-typography/CustomTypography";
 import Navbar from "../../commons/navbar/Navbar";
 import Footer from "../../commons/footer/Footer";
 import ProductToBuy from "./components/ProductToBuy";
@@ -55,16 +55,18 @@ function Buy() {
           <Grid item>
             <Card>
               <CardContent>
-                <Typography {...subtitleProps}>Direccion de entrega</Typography>
-                <Typography {...spanProps}>Diagonal 26h 73-11 Cali, Colombia</Typography>
+                <CustomTypography {...subtitleProps}>Direccion de entrega</CustomTypography>
+                <CustomTypography {...spanProps}>
+                  Diagonal 26h 73-11 Cali, Colombia
+                </CustomTypography>
               </CardContent>
             </Card>
           </Grid>
           <Grid item>
             <Card>
               <CardContent>
-                <Typography {...subtitleProps}>Metodo de pago</Typography>
-                <Typography {...spanProps}>Tarjeta de credito</Typography>
+                <CustomTypography {...subtitleProps}>Metodo de pago</CustomTypography>
+                <CustomTypography {...spanProps}>Tarjeta de credito</CustomTypography>
               </CardContent>
             </Card>
           </Grid>
@@ -77,29 +79,29 @@ function Buy() {
         <Grid item={true} xs={4}>
           <Card>
             <CardContent>
-              <Typography {...subtitleProps}>Resumen</Typography>
+              <CustomTypography {...subtitleProps}>Resumen</CustomTypography>
               <div className="resume">
-                <Typography {...spanProps}>Coste total de los productos</Typography>
-                <Typography {...spanProps}>$ 80000</Typography>
+                <CustomTypography {...spanProps}>Coste total de los productos</CustomTypography>
+                <CustomTypography {...spanProps}>$ 80000</CustomTypography>
               </div>
               <div className="resume">
-                <Typography {...spanProps}>Código del cupon</Typography>
-                <Typography {...spanProps}>4A5S12</Typography>
+                <CustomTypography {...spanProps}>Código del cupon</CustomTypography>
+                <CustomTypography {...spanProps}>4A5S12</CustomTypography>
               </div>
               <div className="resume">
-                <Typography {...spanProps}>Total de envío</Typography>
-                <Typography {...spanProps}>$ 1000</Typography>
+                <CustomTypography {...spanProps}>Total de envío</CustomTypography>
+                <CustomTypography {...spanProps}>$ 1000</CustomTypography>
               </div>
               <Divider sx={{ m: "8px 0" }} />
               <div className="resume">
-                <Typography
+                <CustomTypography
                   variant="body2"
                   component="span"
                   sx={{ fontWeight: "bold", m: "8px 0" }}
                 >
                   Total
-                </Typography>
-                <Typography {...spanProps}>$ 81000</Typography>
+                </CustomTypography>
+                <CustomTypography {...spanProps}>$ 81000</CustomTypography>
               </div>
               <Button
                 variant="contained"

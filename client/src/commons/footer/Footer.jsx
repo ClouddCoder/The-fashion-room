@@ -2,81 +2,91 @@ import React from "react";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import TwitterIcon from "@mui/icons-material/Twitter";
-import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
+import CustomTypography from "../custom-typography/CustomTypography";
 import "./Footer.css";
 
 /**
  * Componente que muestra el footer de la tienda
  */
 function Footer() {
+  const titleProps = {
+    variant: "body1",
+    sx: { FontSize: "14px", fontWeight: "bold", color: "var(--color-primary-white)" },
+  };
+
+  const linkProps = {
+    variant: "body2",
+    sx: { fontSize: "0.8125rem", color: "var(--color-primary-white)", mt: "10px" },
+  };
+
   return (
     <Box className="app_footer">
       <Grid container alignItems="center" sx={{ pl: 10, pr: 10 }} spacing={2}>
         <Grid item={true} container xs={6} md={3}>
           <Grid item={true} xs={12}>
-            <Typography className="title_footer">Conócenos</Typography>
+            <CustomTypography {...titleProps}>Conócenos</CustomTypography>
           </Grid>
           <Grid item container direction="column">
             <Grid item>
-              <Typography className="link_footer">Trabaja en The Fashion Room</Typography>
+              <CustomTypography {...linkProps}>Trabaja en The Fashion Room</CustomTypography>
             </Grid>
             <Grid item>
-              <Typography className="link_footer">Blog</Typography>
+              <CustomTypography {...linkProps}>Blog</CustomTypography>
             </Grid>
             <Grid item>
-              <Typography className="link_footer">Acerca de The Fashion Room</Typography>
+              <CustomTypography {...linkProps}>Acerca de The Fashion Room</CustomTypography>
             </Grid>
           </Grid>
         </Grid>
         <Grid item={true} container xs={6} md={3}>
           <Grid item={true} xs={12}>
-            <Typography className="title_footer">Gana dinero con nosotros</Typography>
+            <CustomTypography {...titleProps}>Gana dinero con nosotros</CustomTypography>
           </Grid>
           <Grid item container direction="column">
             <Grid item>
-              <Typography className="link_footer">
+              <CustomTypography {...linkProps}>
                 Vender productos en The Fashion Room
-              </Typography>
+              </CustomTypography>
             </Grid>
             <Grid item>
-              <Typography className="link_footer">
+              <CustomTypography {...linkProps}>
                 Vender en The Fashion Room business
-              </Typography>
+              </CustomTypography>
             </Grid>
             <Grid item>
-              <Typography className="link_footer">Programa de afiliados</Typography>
+              <CustomTypography {...linkProps}>Programa de afiliados</CustomTypography>
             </Grid>
           </Grid>
         </Grid>
         <Grid item={true} container xs={6} md={3}>
           <Grid item={true} xs={12}>
-            <Typography className="title_footer">Productos de pago</Typography>
+            <CustomTypography {...titleProps}>Productos de pago</CustomTypography>
           </Grid>
           <Grid item container direction="column">
             <Grid item>
-              <Typography className="link_footer">Compra con puntos</Typography>
+              <CustomTypography {...linkProps}>Compra con puntos</CustomTypography>
             </Grid>
             <Grid item>
-              <Typography className="link_footer">Recarga tu saldo</Typography>
+              <CustomTypography {...linkProps}>Recarga tu saldo</CustomTypography>
             </Grid>
             <Grid item>
-              <Typography className="link_footer">
+              <CustomTypography {...linkProps}>
                 Conversor de divisas de The Fashion Room
-              </Typography>
+              </CustomTypography>
             </Grid>
           </Grid>
         </Grid>
         <Grid item={true} container xs={6} md={3}>
           <Grid item={true} xs={12}>
-            <Typography className="title_footer">Redes sociales</Typography>
+            <CustomTypography {...titleProps}>Redes sociales</CustomTypography>
           </Grid>
           <Grid item container direction="column">
             <Grid item>
-              <Typography className="link_footer">Síguenos en</Typography>
+              <CustomTypography {...linkProps}>Síguenos en</CustomTypography>
             </Grid>
-            <Grid item container spacing={2} justifyContent="center" pt={2}>
+            <Grid item container spacing={2} pt={2}>
               <Grid item>
                 <FacebookIcon />
               </Grid>

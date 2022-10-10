@@ -1,10 +1,10 @@
 import React from "react";
-import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
+import CustomTypography from "../../../commons/custom-typography/CustomTypography";
 import { Blusa, Camisa, Corbata, Pantalon, Pantaloneta, Zapatos } from "../../../assets";
 
 /**
@@ -58,19 +58,19 @@ function CartItem({ product, removeFromCart }) {
           <Grid item={true} xs={12} sm container>
             <Grid item={true} xs container direction="column" spacing={2}>
               <Grid item={true} xs mt={3}>
-                <Typography gutterBottom variant="subtitle1">
+                <CustomTypography gutterBottom variant="subtitle1">
                   {product.product_name}
-                </Typography>
-                <Typography variant="body2" gutterBottom>
+                </CustomTypography>
+                <CustomTypography variant="body2" gutterBottom>
                   Cantidad a comprar x{product.quantityInCart}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
+                </CustomTypography>
+                <CustomTypography variant="body2" color="text.secondary">
                   Total = ${product.price * product.quantityInCart}
-                </Typography>
+                </CustomTypography>
               </Grid>
             </Grid>
             <Grid item>
-              <Typography variant="subtitle1">${product.price}</Typography>
+              <CustomTypography variant="subtitle1">${product.price}</CustomTypography>
               <Grid item container justifyContent="center" direction="column">
                 <Grid item>
                   <Button onClick={() => removeFromCart(product.product_id)} variant="outlined">
