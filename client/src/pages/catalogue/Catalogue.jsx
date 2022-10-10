@@ -102,9 +102,11 @@ function Catalogue() {
           </Grid>
         </Grid>
         <Grid item container>
-          <Grid item container xs={2} direction="column">
+          <Grid item container xs={2} direction="column" spacing={3}>
             <Grid item>
-              <h1>Catalogo</h1>
+              <CustomTypography variant="h4" component="span">
+                Catalogo
+              </CustomTypography>
             </Grid>
             <Grid item>
               <FormControl>
@@ -187,6 +189,141 @@ function Catalogue() {
                   label={<CustomTypography variant="body2">Zapatos</CustomTypography>}
                   sx={{ m: 0 }}
                 />
+              </FormControl>
+            </Grid>
+            <Grid item>
+              <FormControl>
+                <FormLabel id="demo-radio-buttons-group-label">Tallas</FormLabel>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={check.blusa}
+                      onChange={handleChange}
+                      name="xs"
+                      size="small"
+                      sx={{ p: "3px" }}
+                    />
+                  }
+                  label="XS"
+                  sx={{ m: 0 }}
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={check.blusa}
+                      onChange={handleChange}
+                      name="s"
+                      size="small"
+                      sx={{ p: "3px" }}
+                    />
+                  }
+                  label="S"
+                  sx={{ m: 0 }}
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={check.blusa}
+                      onChange={handleChange}
+                      name="m"
+                      size="small"
+                      sx={{ p: "3px" }}
+                    />
+                  }
+                  label="M"
+                  sx={{ m: 0 }}
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={check.blusa}
+                      onChange={handleChange}
+                      name="l"
+                      size="small"
+                      sx={{ p: "3px" }}
+                    />
+                  }
+                  label="L"
+                  sx={{ m: 0 }}
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={check.blusa}
+                      onChange={handleChange}
+                      name="xl"
+                      size="small"
+                      sx={{ p: "3px" }}
+                    />
+                  }
+                  label="XL"
+                  sx={{ m: 0 }}
+                />
+              </FormControl>
+            </Grid>
+            <Grid item>
+              <FormControl>
+                <FormLabel id="demo-radio-buttons-group-label">Colores</FormLabel>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={check.blusa}
+                      onChange={handleChange}
+                      name="rojo"
+                      size="small"
+                      sx={{ p: "3px" }}
+                    />
+                  }
+                  label="Rojo"
+                  sx={{ m: 0 }}
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={check.blusa}
+                      onChange={handleChange}
+                      name="azul"
+                      size="small"
+                      sx={{ p: "3px" }}
+                    />
+                  }
+                  label="Azul"
+                  sx={{ m: 0 }}
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={check.blusa}
+                      onChange={handleChange}
+                      name="verde"
+                      size="small"
+                      sx={{ p: "3px" }}
+                    />
+                  }
+                  label="Verde"
+                  sx={{ m: 0 }}
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={check.blusa}
+                      onChange={handleChange}
+                      name="amarillo"
+                      size="small"
+                      sx={{ p: "3px" }}
+                    />
+                  }
+                  label="Amarillo"
+                  sx={{ m: 0 }}
+                />
+              </FormControl>
+            </Grid>
+            <Grid item>
+              <FormControl>
+                <FormLabel id="demo-radio-buttons-group-label">Precio</FormLabel>
+                <FormControlLabel control={<span />} label="Hasta $200.000" sx={{ m: 0 }} />
+                <FormControlLabel control={<span />} label="$200.000 a $400.000" sx={{ m: 0 }} />
+                <FormControlLabel control={<span />} label="Más de $400.000" sx={{ m: 0 }} />
               </FormControl>
             </Grid>
           </Grid>
