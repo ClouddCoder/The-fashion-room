@@ -71,9 +71,10 @@ function Catalogue() {
         direction="column"
         alignItems="center"
         justifyContent="center"
+        spacing={3}
         sx={{ pt: 10, pb: 10, width: "80%" }}
       >
-        <Grid item container justifyContent="center" spacing={2}>
+        <Grid item container justifyContent="center">
           <Grid item>
             <Button sx={{ mr: 1 }} component={Link} to="/" variant="outlined" color="primary">
               Regresar
@@ -101,7 +102,7 @@ function Catalogue() {
             )}
           </Grid>
         </Grid>
-        <Grid item container>
+        <Grid item container spacing={3}>
           <Grid item container xs={2} direction="column" spacing={3}>
             <Grid item>
               <CustomTypography variant="h4" component="span">
@@ -327,15 +328,7 @@ function Catalogue() {
               </FormControl>
             </Grid>
           </Grid>
-          <Grid
-            item
-            container
-            alignItems="center"
-            justifyContent="center"
-            xs={10}
-            spacing={4}
-            sx={{ mt: "16px" }}
-          >
+          <Grid item container alignItems="center" justifyContent="center" xs={10} spacing={4}>
             {filteredProducts().map((product) => (
               <ProductItem key={product.product_id} product={product} addToCart={addToCart} />
             ))}
