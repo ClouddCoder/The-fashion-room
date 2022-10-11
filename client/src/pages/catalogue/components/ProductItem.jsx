@@ -16,9 +16,19 @@ function ProductItem({ product }) {
   const navigate = useNavigate();
 
   return (
-    <Grid item xs={6} md={4} sx={{ height: "260px", maxHeight: "260px", position: "relative" }}>
+    <Grid
+      item
+      xs={6}
+      md={2}
+      sx={{
+        height: "260px",
+        maxHeight: "260px",
+        position: "relative",
+      }}
+    >
       <Card
         sx={{
+          "width": "100%",
           "height": "100%",
           "cursor": "pointer",
           "transform": "scale(1,1)",
