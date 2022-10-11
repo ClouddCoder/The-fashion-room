@@ -115,7 +115,7 @@ function ProductState({ children }) {
 
   /**
    * Agrega un producto para ser commprado. En caso de que sea el carrito de compras
-   * el paramtro sera un array de productos.
+   * el parametro sera un array de productos.
    */
   const addProductToBuy = (product, fromCart = false) => {
     if (fromCart) {

@@ -23,7 +23,7 @@ function ProductToBuy({ product }) {
             </CustomTypography>
             <div>
               <CustomTypography variant="body2" sx={{ fontSize: "14px" }}>
-                ${product.price}
+                ${product.product_price}
               </CustomTypography>
             </div>
           </div>

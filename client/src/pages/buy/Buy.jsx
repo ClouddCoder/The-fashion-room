@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Divider from "@mui/material/Divider";
 import Button from "@mui/material/Button";
@@ -15,7 +15,8 @@ import "./Buy.css";
 
 function Buy() {
   const navigate = useNavigate();
-  const { productsToBuy, createInvoice } = useContext(ProductContext);
+  const { productsToBuy, createInvoice, getTotalPrice, getTotalProducts } =
+    useContext(ProductContext);
   const { token } = useContext(AuthContext);
   const spanProps = {
     variant: "body2",
@@ -46,6 +47,11 @@ function Buy() {
       return data.message;
     }
   };
+
+  useEffect(() => {
+    getTotalProducts();
+    getTotalPrice();
+  }, []);
 
   return (
     <div className="container">

@@ -56,10 +56,10 @@ function Invoice() {
                     sx={{ display: "flex", justifyContent: "space-between" }}
                   >
                     <CustomTypography variant="body2">
-                      {product.product_name} x{product.quantityInCart}
+                      {product.product_name} x{product.quantity_to_purchase}
                     </CustomTypography>
                     <CustomTypography variant="body2">
-                      ${product.price * product.quantityInCart}
+                      ${product.product_price * product.quantity_to_purchase}
                     </CustomTypography>
                   </Grid>
                 ))}

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
@@ -12,13 +12,7 @@ import Footer from "../../commons/footer/Footer";
  * Componente que muestra el carrito de compras
  */
 function ShoppingCart() {
-  const { cart, removeFromCart, clearCart, getTotalProducts, getTotalPrice } =
-    useContext(ProductContext);
-
-  useEffect(() => {
-    getTotalProducts();
-    getTotalPrice();
-  }, []);
+  const { cart, removeFromCart, clearCart } = useContext(ProductContext);
 
   return (
     <Grid container direction="column">

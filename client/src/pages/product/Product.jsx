@@ -47,7 +47,7 @@ function Product() {
             <h1>{product.product_name}</h1>
           </Grid>
           <Grid item>
-            <span>{product.price}</span>
+            <span>{product.product_price}</span>
           </Grid>
           <Grid item>
             <div style={{ display: "flex" }}>

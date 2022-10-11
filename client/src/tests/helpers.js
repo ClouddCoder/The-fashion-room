@@ -32,12 +32,32 @@ export const authContextProps = {
 
 // products for testing catalogue component
 export const mockProducts = [
-  { product_id: "656589", product_name: "Blusa", price: "45000", stock: "100" },
-  { product_id: "656804", product_name: "Camisa", price: "45000", stock: "100" },
-  { product_id: "657019", product_name: "Corbata", price: "45000", stock: "100" },
-  { product_id: "657234", product_name: "Pantalon", price: "45000", stock: "100" },
-  { product_id: "657449", product_name: "Pantaloneta", price: "45000", stock: "100" },
-  { product_id: "657664", product_name: "Zapatos", price: "45000", stock: "100" },
+  { product_id: "656589", product_name: "Blusa", product_price: "45000", product_stock: "100" },
+  { product_id: "656804", product_name: "Camisa", product_price: "45000", product_stock: "100" },
+  {
+    product_id: "657019",
+    product_name: "Corbata",
+    product_price: "45000",
+    product_stock: "100",
+  },
+  {
+    product_id: "657234",
+    product_name: "Pantalon",
+    product_price: "45000",
+    product_stock: "100",
+  },
+  {
+    product_id: "657449",
+    product_name: "Pantaloneta",
+    product_price: "45000",
+    product_stock: "100",
+  },
+  {
+    product_id: "657664",
+    product_name: "Zapatos",
+    product_price: "45000",
+    product_stock: "100",
+  },
 ];
 
 // ProductContext props for testing catalogue component when is rendering
@@ -48,7 +68,8 @@ export const productContextProps = {
   temporaryWishlist: [],
 };
 
-// ProductContext props for testing catalogue component when is adding a product to the cart or wishlist
+// ProductContext props for testing catalogue component
+// when is adding a product to the cart or wishlist
 export const contextPropstToAddToCart = {
   addToCart: jest.fn(),
   loadProducts: jest.fn(),
@@ -83,11 +104,14 @@ export function LoginTest() {
 
 // Render catalogue component
 export function CatalogueTest(type = "catalogue") {
-  let productProps = {};
+  let productProps;
 
-  type === "catalogue"
-    ? (productProps = { ...productContextProps })
-    : (productProps = { ...contextPropstToAddToCart });
+  const setProps = () => {
+    if (type === "catalogue") productProps = { ...productContextProps };
+    else productProps = { ...contextPropstToAddToCart };
+  };
+
+  setProps();
 
   return render(
     <AuthContext.Provider value={authContextProps}>

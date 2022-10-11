@@ -28,25 +28,25 @@ export function ProductReducer(state, action) {
             ...state,
             cart: state.cart.map((item) =>
               item.product_id === newItem.product_id
-                ? { ...item, quantityInCart: item.quantityInCart + 1 }
+                ? { ...item, quantity_to_purchase: item.quantity_to_purchase + 1 }
                 : item,
             ),
           }
         : {
             ...state,
-            cart: [...state.cart, { ...newItem, quantityInCart: 1 }],
+            cart: [...state.cart, { ...newItem, quantity_to_purchase: 1 }],
           };
     }
 
     case TYPES.REMOVE_ONE_FROM_CART: {
       const itemToDelete = state.cart.find((item) => item.product_id === action.payload);
 
-      return itemToDelete.quantityInCart > 1
+      return itemToDelete.quantity_to_purchase > 1
         ? {
             ...state,
             cart: state.cart.map((item) =>
               item.product_id === action.payload
-                ? { ...item, quantityInCart: item.quantityInCart - 1 }
+                ? { ...item, quantity_to_purchase: item.quantity_to_purchase - 1 }
                 : item,
             ),
           }
@@ -69,15 +69,15 @@ export function ProductReducer(state, action) {
 
     case TYPES.GET_TOTAL_PRODUCTS: {
       const totalProducts = state.cart
-        .map((product) => product.quantityInCart)
+        .map((product) => product.quantity_to_purchase)
         .reduce((a, b) => a + b, 0);
 
       return { ...state, totalProducts };
     }
 
     case TYPES.GET_TOTAL_PRICE: {
-      const totalPrice = state.cart
-        .map((product) => product.price * product.quantityInCart)
+      const totalPrice = state.productsToBuy
+        .map((product) => product.product_price * product.quantity_to_purchase)
         .reduce((a, b) => a + b, 0);
 
       return { ...state, totalPrice };
@@ -97,7 +97,7 @@ export function ProductReducer(state, action) {
       const product = state.products.find((item) => item.product_id === action.payload);
       return {
         ...state,
-        productsToBuy: [...state.productsToBuy, { ...product, quantityInCart: 1 }],
+        productsToBuy: [{ ...product, quantity_to_purchase: 1 }],
       };
     }
 

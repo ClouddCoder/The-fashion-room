@@ -62,15 +62,15 @@ function CartItem({ product, removeFromCart }) {
                   {product.product_name}
                 </CustomTypography>
                 <CustomTypography variant="body2" gutterBottom>
-                  Cantidad a comprar x{product.quantityInCart}
+                  Cantidad a comprar x{product.quantity_to_purchase}
                 </CustomTypography>
                 <CustomTypography variant="body2" color="text.secondary">
-                  Total = ${product.price * product.quantityInCart}
+                  Total = ${product.product_price * product.quantity_to_purchase}
                 </CustomTypography>
               </Grid>
             </Grid>
             <Grid item>
-              <CustomTypography variant="subtitle1">${product.price}</CustomTypography>
+              <CustomTypography variant="subtitle1">${product.product_price}</CustomTypography>
               <Grid item container justifyContent="center" direction="column">
                 <Grid item>
                   <Button onClick={() => removeFromCart(product.product_id)} variant="outlined">

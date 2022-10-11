@@ -41,7 +41,7 @@ function ProductItem({ product }) {
               {product.product_name}
             </CustomTypography>
             <CustomTypography variant="body2" color="text.secondary">
-              Cantidad disponible {product.stock}
+              Cantidad disponible {product.product_stock}
             </CustomTypography>
           </CardContent>
         </CardActionArea>

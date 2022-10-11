@@ -26,7 +26,7 @@ function Wish({ product }) {
           <div className="description">
             <h1>{product.product_name}</h1>
             <div>
-              <p>${product.price}</p>
+              <p>${product.product_price}</p>
             </div>
           </div>
         </CardContent>

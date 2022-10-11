@@ -144,7 +144,7 @@ const getProducts = async (req, res, next) => {
  */
 const buyProduct = async (req, res, next) => {
   const cart = req.body;
-  const query = "UPDATE product SET stock = stock - $1 WHERE product_id = $2";
+  const query = "UPDATE product SET product_stock = product_stock - $1 WHERE product_id = $2";
   const { authorization } = req.headers;
   const decodeToken = getAuthorization(authorization);
 
@@ -152,7 +152,7 @@ const buyProduct = async (req, res, next) => {
     /* eslint-disable no-await-in-loop */
     // eslint-disable-next-line no-restricted-syntax
     for (const item of cart) {
-      const result = await pool.query(query, [item.quantityInCart, item.product_id]);
+      const result = await pool.query(query, [item.quantity_to_purchase, item.product_id]);
 
       if (result.rowCount === 0) {
         return res.status(404).json({
@@ -196,7 +196,7 @@ const setWishlist = async (req, res, next) => {
 };
 
 const getWishlist = async (req, res, next) => {
-  let query = "SELECT product.product_id, product_name, price FROM wishlist ";
+  let query = "SELECT product.product_id, product_name, product_price FROM wishlist ";
   query += "INNER JOIN customer ON customer.customer_id = wishlist.customer_id ";
   query += "INNER JOIN product ON product.product_id = wishlist.product_id ";
   query += "WHERE customer.customer_id = $1";
@@ -246,8 +246,8 @@ const createInvoice = async (req, res, next) => {
       const getInvoiceDetails = await pool.query(insertInvoiceDetailsQuery, [
         invoiceId,
         item.product_id,
-        item.quantityInCart,
-        item.price * item.quantityInCart,
+        item.quantity_to_purchase,
+        item.product_price * item.quantity_to_purchase,
       ]);
 
       if (getInvoiceDetails.rowCount === 0) {
@@ -296,8 +296,9 @@ const getStoresPhones = async (req, res, next) => {
  * Obtiene la informacion detallada de cada factura
  */
 const getOrderDetail = async (req, res, next) => {
-  let query = "SELECT invoice_detail.detail_id, invoice_detail.invoice_id, invoice_detail.product_id, purchase_date, ";
-  query += "product_name, quantity, price, total_amount FROM invoice_detail ";
+  let query = "SELECT invoice_detail.detail_id, invoice_detail.invoice_id, ";
+  query += "invoice_detail.product_id, purchase_date, ";
+  query += "product_name, quantity, product_price, total_amount FROM invoice_detail ";
   query += "INNER JOIN invoice ON invoice.invoice_id = invoice_detail.invoice_id ";
   query += "INNER JOIN product ON product.product_id = invoice_detail.product_id ";
   query += "WHERE customer_id = $1";

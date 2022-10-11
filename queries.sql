@@ -59,8 +59,8 @@ CREATE OR REPLACE FUNCTION invoice_data(inv_id INTEGER, prod_id INTEGER, quant I
 CREATE TABLE product (
     product_id INTEGER,
     product_name VARCHAR(25) NOT NULL CHECK (product_name <> ''),
-    price INTEGER NOT NULL,
-    stock INTEGER NOT NULL,
+    product_price INTEGER NOT NULL,
+    product_stock INTEGER NOT NULL,
     CONSTRAINT pk_product PRIMARY KEY (product_id)
 );
 
@@ -71,12 +71,12 @@ CREATE SEQUENCE product_product_id_seq
     OWNED BY product.product_id;
 
 -- Insert available products to the product table
-INSERT INTO product (product_id, product_name, price, stock) VALUES (nextval('product_product_id_seq'), 'Blusa', 45000, 100);
-INSERT INTO product (product_id, product_name, price, stock) VALUES (nextval('product_product_id_seq'), 'Camisa', 40000, 100);
-INSERT INTO product (product_id, product_name, price, stock) VALUES (nextval('product_product_id_seq'), 'Corbata', 20000, 100);
-INSERT INTO product (product_id, product_name, price, stock) VALUES (nextval('product_product_id_seq'), 'Pantalon', 65000, 100);
-INSERT INTO product (product_id, product_name, price, stock) VALUES (nextval('product_product_id_seq'), 'Pantaloneta', 30000, 100);
-INSERT INTO product (product_id, product_name, price, stock) VALUES (nextval('product_product_id_seq'), 'Zapatos', 90000, 100);
+INSERT INTO product (product_id, product_name, product_price, product_stock) VALUES (nextval('product_product_id_seq'), 'Blusa', 45000, 100);
+INSERT INTO product (product_id, product_name, product_price, product_stock) VALUES (nextval('product_product_id_seq'), 'Camisa', 40000, 100);
+INSERT INTO product (product_id, product_name, product_price, product_stock) VALUES (nextval('product_product_id_seq'), 'Corbata', 20000, 100);
+INSERT INTO product (product_id, product_name, product_price, product_stock) VALUES (nextval('product_product_id_seq'), 'Pantalon', 65000, 100);
+INSERT INTO product (product_id, product_name, product_price, product_stock) VALUES (nextval('product_product_id_seq'), 'Pantaloneta', 30000, 100);
+INSERT INTO product (product_id, product_name, product_price, product_stock) VALUES (nextval('product_product_id_seq'), 'Zapatos', 90000, 100);
 
 -- Create customer table
 CREATE TABLE customer (
