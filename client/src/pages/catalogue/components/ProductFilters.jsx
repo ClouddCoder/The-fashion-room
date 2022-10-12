@@ -15,79 +15,79 @@ function ProductFilters({ check, handleChange }) {
           <FormControlLabel
             control={
               <Checkbox
-                checked={check.blusa}
+                checked={check.hombre}
                 onChange={handleChange}
-                name="blusa"
+                name="hombre"
                 size="small"
                 sx={{ p: "3px" }}
               />
             }
-            label={<CustomTypography variant="body2">Blusa</CustomTypography>}
+            label={<CustomTypography variant="body2">Hombre</CustomTypography>}
             sx={{ m: 0 }}
           />
           <FormControlLabel
             control={
               <Checkbox
-                checked={check.camisa}
+                checked={check.mujer}
                 onChange={handleChange}
-                name="camisa"
+                name="mujer"
                 size="small"
                 sx={{ p: "3px" }}
               />
             }
-            label={<CustomTypography variant="body2">Camisa</CustomTypography>}
+            label={<CustomTypography variant="body2">Mujer</CustomTypography>}
             sx={{ m: 0 }}
           />
           <FormControlLabel
             control={
               <Checkbox
-                checked={check.corbata}
+                checked={check.sinGenero}
                 onChange={handleChange}
-                name="corbata"
+                name="sinGenero"
                 size="small"
                 sx={{ p: "3px" }}
               />
             }
-            label={<CustomTypography variant="body2">Corbata</CustomTypography>}
+            label={<CustomTypography variant="body2">Sin género</CustomTypography>}
             sx={{ m: 0 }}
           />
           <FormControlLabel
             control={
               <Checkbox
-                checked={check.pantalon}
+                checked={check.niños}
                 onChange={handleChange}
-                name="pantalon"
+                name="niños"
                 size="small"
                 sx={{ p: "3px" }}
               />
             }
-            label={<CustomTypography variant="body2">Pantalon</CustomTypography>}
+            label={<CustomTypography variant="body2">Niños</CustomTypography>}
             sx={{ m: 0 }}
           />
           <FormControlLabel
             control={
               <Checkbox
-                checked={check.pantaloneta}
+                checked={check.niñas}
                 onChange={handleChange}
-                name="pantaloneta"
+                name="niñas"
                 size="small"
                 sx={{ p: "3px" }}
               />
             }
-            label={<CustomTypography variant="body2">Pantaloneta</CustomTypography>}
+            label={<CustomTypography variant="body2">Niñas</CustomTypography>}
             sx={{ m: 0 }}
           />
           <FormControlLabel
             control={
               <Checkbox
-                checked={check.zapatos}
+                checked={check.bebes}
                 onChange={handleChange}
-                name="zapatos"
+                name="bebes"
                 size="small"
                 sx={{ p: "3px" }}
               />
             }
-            label={<CustomTypography variant="body2">Zapatos</CustomTypography>}
+            label={<CustomTypography variant="body2">Bebés</CustomTypography>}
             sx={{ m: 0 }}
           />
         </FormControl>
@@ -98,66 +98,53 @@ function ProductFilters({ check, handleChange }) {
           <FormControlLabel
             control={
               <Checkbox
-                checked={check.blusa}
+                checked={check.calzado}
                 onChange={handleChange}
-                name="xs"
+                name="calzado"
                 size="small"
                 sx={{ p: "3px" }}
               />
             }
-            label={<CustomTypography variant="body2">XS</CustomTypography>}
+            label={<CustomTypography variant="body2">Calzado</CustomTypography>}
             sx={{ m: 0 }}
           />
           <FormControlLabel
             control={
               <Checkbox
-                checked={check.blusa}
+                checked={check.camisetas}
                 onChange={handleChange}
-                name="s"
+                name="camisetas"
                 size="small"
                 sx={{ p: "3px" }}
               />
             }
-            label={<CustomTypography variant="body2">S</CustomTypography>}
+            label={<CustomTypography variant="body2">Camisas y camisetas</CustomTypography>}
             sx={{ m: 0 }}
           />
           <FormControlLabel
             control={
               <Checkbox
-                checked={check.blusa}
+                checked={check.deportiva}
                 onChange={handleChange}
-                name="m"
+                name="deportiva"
                 size="small"
                 sx={{ p: "3px" }}
               />
             }
-            label={<CustomTypography variant="body2">M</CustomTypography>}
+            label={<CustomTypography variant="body2">Ropa deportiva</CustomTypography>}
             sx={{ m: 0 }}
           />
           <FormControlLabel
             control={
               <Checkbox
-                checked={check.blusa}
+                checked={check.bolsos}
                 onChange={handleChange}
-                name="l"
+                name="bolsos"
                 size="small"
                 sx={{ p: "3px" }}
               />
             }
-            label="L"
-            sx={{ m: 0 }}
-          />
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={check.blusa}
-                onChange={handleChange}
-                name="xl"
-                size="small"
-                sx={{ p: "3px" }}
-              />
-            }
-            label={<CustomTypography variant="body2">XL</CustomTypography>}
+            label={<CustomTypography variant="body2">Bolsos y maletas</CustomTypography>}
             sx={{ m: 0 }}
           />
         </FormControl>
@@ -168,9 +155,9 @@ function ProductFilters({ check, handleChange }) {
           <FormControlLabel
             control={
               <Checkbox
-                checked={check.blusa}
+                checked={check.envio}
                 onChange={handleChange}
-                name="rojo"
+                name="envio"
                 size="small"
                 sx={{ p: "3px" }}
               />
@@ -186,7 +173,46 @@ function ProductFilters({ check, handleChange }) {
           <FormControlLabel
             control={
               <Checkbox
-                checked={check.blusa}
+                checked={check.negro}
+                onChange={handleChange}
+                name="negro"
+                size="small"
+                sx={{ p: "3px" }}
+              />
+            }
+            label={<CustomTypography variant="body2">Negro</CustomTypography>}
+            sx={{ m: 0 }}
+          />
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={check.blanco}
+                onChange={handleChange}
+                name="blanco"
+                size="small"
+                sx={{ p: "3px" }}
+              />
+            }
+            label={<CustomTypography variant="body2">Blanco</CustomTypography>}
+            sx={{ m: 0 }}
+          />
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={check.gris}
+                onChange={handleChange}
+                name="gris"
+                size="small"
+                sx={{ p: "3px" }}
+              />
+            }
+            label={<CustomTypography variant="body2">Gris</CustomTypography>}
+            sx={{ m: 0 }}
+          />
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={check.rojo}
                 onChange={handleChange}
                 name="rojo"
                 size="small"
@@ -194,45 +220,6 @@ function ProductFilters({ check, handleChange }) {
               />
             }
             label={<CustomTypography variant="body2">Rojo</CustomTypography>}
-            sx={{ m: 0 }}
-          />
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={check.blusa}
-                onChange={handleChange}
-                name="azul"
-                size="small"
-                sx={{ p: "3px" }}
-              />
-            }
-            label={<CustomTypography variant="body2">Azul</CustomTypography>}
-            sx={{ m: 0 }}
-          />
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={check.blusa}
-                onChange={handleChange}
-                name="verde"
-                size="small"
-                sx={{ p: "3px" }}
-              />
-            }
-            label={<CustomTypography variant="body2">Verde</CustomTypography>}
-            sx={{ m: 0 }}
-          />
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={check.blusa}
-                onChange={handleChange}
-                name="amarillo"
-                size="small"
-                sx={{ p: "3px" }}
-              />
-            }
-            label={<CustomTypography variant="body2">Amarillo</CustomTypography>}
             sx={{ m: 0 }}
           />
         </FormControl>
