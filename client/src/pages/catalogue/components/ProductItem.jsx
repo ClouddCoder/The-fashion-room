@@ -19,7 +19,7 @@ function ProductItem({ product }) {
     <Grid
       item
       xs={6}
-      md={2}
+      md={3}
       sx={{
         height: "260px",
         maxHeight: "260px",
