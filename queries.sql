@@ -1,11 +1,11 @@
--- Get customer_id after register
+-- Get customer_id after register.
 CREATE OR REPLACE FUNCTION get_new_customer_id()
     RETURNS INTEGER AS
     $$
     DECLARE
         cust_id INTEGER;
     BEGIN
-        -- Get the last customer_id from customer table
+        -- Get the last customer_id from customer table.
         SELECT customer.customer_id INTO cust_id FROM customer ORDER BY customer.customer_id DESC LIMIT 1;
         IF FOUND THEN
 			RETURN cust_id;
@@ -16,41 +16,41 @@ CREATE OR REPLACE FUNCTION get_new_customer_id()
     $$
     LANGUAGE plpgsql;
 
--- Create invoice_id after making a purchase
--- This avoid creating new invoice_id for each product from the same invoice
-CREATE OR REPLACE FUNCTION create_invoice_id()
+-- Set order_detail_id after making a purchase.
+-- This avoid creating a new order_detail_id for each product from the same invoice.
+CREATE OR REPLACE FUNCTION set_order_detail_id()
 	RETURNS INTEGER AS
 	$BODY$
 	DECLARE
-		inv_id INTEGER;
+		order_id INTEGER;
 	BEGIN
-        -- Get the last value from invoice_id sequence
-		PERFORM nextval('invoice_id_seq');
-		SELECT invoice_id_seq.last_value INTO inv_id FROM invoice_id_seq;
-	RETURN inv_id;
+        -- Get the last value from order_detail_id sequence
+		PERFORM nextval('order_detail_id_seq');
+		SELECT order_detail_id_seq.last_value INTO order_id FROM order_detail_id_seq;
+	RETURN order_id;
 	END;
 	$BODY$
 	LANGUAGE plpgsql;
 
--- Insert data to the invoice table using the invoice_id created before
-CREATE OR REPLACE FUNCTION create_invoice(inv_id INTEGER, cust_id INTEGER)
+-- Insert data to the order_detail table using the order_detail_id created before
+CREATE OR REPLACE FUNCTION set_order_detail(order_id INTEGER, cust_id INTEGER)
 	RETURNS void AS
 	$BODY$
 	DECLARE
-		pur_date DATE;
+		purch_date DATE;
 	BEGIN
-		pur_date := NOW()::DATE;
-		INSERT INTO invoice (invoice_id, customer_id, purchase_date) VALUES (inv_id, cust_id, pur_date);
+		purch_date := NOW()::DATE;
+		INSERT INTO order_detail (order_detail_id, customer_id, purchase_date) VALUES (order_id, cust_id, purch_date);
 	END;
 	$BODY$
 	LANGUAGE plpgsql;
 
--- Insert the purchased products from the same invoice using the invoice_id created before
-CREATE OR REPLACE FUNCTION invoice_data(inv_id INTEGER, prod_id INTEGER, quant INTEGER, amount INTEGER)
+-- Insert the purchased products from the same order using the order_detail_id created before
+CREATE OR REPLACE FUNCTION set_order_item(order_id INTEGER, prod_id INTEGER, quant INTEGER, amount INTEGER)
     RETURNS void AS
     $BODY$
     BEGIN
-        INSERT INTO invoice_detail (invoice_id, product_id, quantity, total_amount) VALUES (inv_id, prod_id, quant, amount);
+        INSERT INTO order_item (order_detail_id, product_id, product_quantity, item_total_cost) VALUES (order_id, prod_id, quant, amount);
     END;
     $BODY$
     LANGUAGE plpgsql;
@@ -62,14 +62,11 @@ CREATE TABLE product (
     CONSTRAINT pk_product PRIMARY KEY (product_id)
 );
 
--- Joining table for product and product variants
-CREATE TABLE product_option (
-    product_id INTEGER,
-    product_variant_id INTEGER
-    CONSTRAINT pk_product_option PRIMARY KEY (product_id, product_variant_id),
-    CONSTRAINT fk_product_id FOREIGN KEY (product_id) REFERENCES product (product_id),
-    CONSTRAINT fk_product_variant_id FOREIGN KEY (product_variant_id) REFERENCES product_variant (product_variant_id)
-);
+-- Create product_id sequence for auto increment
+CREATE SEQUENCE product_product_id_seq
+    START WITH 656589
+    INCREMENT BY 215
+    OWNED BY product.product_id;
 
 -- Represents all products variants
 CREATE TABLE product_variant (
@@ -85,11 +82,7 @@ CREATE TABLE product_variant (
     CONSTRAINT fk_product_id FOREIGN KEY (product_id) REFERENCES product (product_id)
 );
 
--- Create product_id sequence for auto increment
-CREATE SEQUENCE product_product_id_seq
-    START WITH 656589
-    INCREMENT BY 215
-    OWNED BY product.product_id;
+-- pendiente tabla product_option
 
 -- Insert available products to the product table
 INSERT INTO product (product_id, product_name) VALUES (nextval('product_product_id_seq'), 'Blusa');
@@ -98,6 +91,25 @@ INSERT INTO product (product_id, product_name) VALUES (nextval('product_product_
 INSERT INTO product (product_id, product_name) VALUES (nextval('product_product_id_seq'), 'Pantalon');
 INSERT INTO product (product_id, product_name) VALUES (nextval('product_product_id_seq'), 'Pantaloneta');
 INSERT INTO product (product_id, product_name) VALUES (nextval('product_product_id_seq'), 'Zapatos');
+
+INSERT INTO product_variant (product_id, product_gender, product_category, product_shipping_cost, product_color, product_price, product_stock) VALUES (656589, 'hombre', 'camisa', 10000, 'azul', 50000, 100);
+INSERT INTO product_variant (product_id, product_gender, product_category, product_shipping_cost, product_color, product_price, product_stock) VALUES (656589, 'hombre', 'camiseta', 10000, 'rojo', 50000, 50);
+INSERT INTO product_variant (product_id, product_gender, product_category, product_shipping_cost, product_color, product_price, product_stock) VALUES (656589, 'hombre', 'camisa', 10000, 'amarillo', 50000, 60);
+INSERT INTO product_variant (product_id, product_gender, product_category, product_shipping_cost, product_color, product_price, product_stock) VALUES (656589, 'mujer', 'blusa', 10000, 'azul', 50000, 100);
+INSERT INTO product_variant (product_id, product_gender, product_category, product_shipping_cost, product_color, product_price, product_stock) VALUES (656589, 'mujer', 'camiseta', 10000, 'rojo', 50000, 50);
+INSERT INTO product_variant (product_id, product_gender, product_category, product_shipping_cost, product_color, product_price, product_stock) VALUES (656589, 'mujer', 'blusa', 10000, 'amarillo', 50000, 60);
+INSERT INTO product_variant (product_id, product_gender, product_category, product_shipping_cost, product_color, product_price, product_stock) VALUES (656589, 'sin genero', 'camiseta', 10000, 'verde', 50000, 100);
+INSERT INTO product_variant (product_id, product_gender, product_category, product_shipping_cost, product_color, product_price, product_stock) VALUES (656589, 'sin genero', 'pantalon', 10000, 'azul', 50000, 50);
+INSERT INTO product_variant (product_id, product_gender, product_category, product_shipping_cost, product_color, product_price, product_stock) VALUES (656589, 'niño', 'zapatos', 10000, 'azul', 50000, 100);
+INSERT INTO product_variant (product_id, product_gender, product_category, product_shipping_cost, product_color, product_price, product_stock) VALUES (656589, 'niño', 'camiseta', 10000, 'rojo', 50000, 50);
+INSERT INTO product_variant (product_id, product_gender, product_category, product_shipping_cost, product_color, product_price, product_stock) VALUES (656804, 'niño', 'maletin', 10000, 'amarillo', 50000, 60);
+INSERT INTO product_variant (product_id, product_gender, product_category, product_shipping_cost, product_color, product_price, product_stock) VALUES (656804, 'niña', 'zapatos', 10000, 'azul', 50000, 100);
+INSERT INTO product_variant (product_id, product_gender, product_category, product_shipping_cost, product_color, product_price, product_stock) VALUES (656589, 'niña', 'blusa', 10000, 'rojo', 50000, 50);
+INSERT INTO product_variant (product_id, product_gender, product_category, product_shipping_cost, product_color, product_price, product_stock) VALUES (656589, 'niña', 'maletin', 10000, 'amarillo', 50000, 60);
+INSERT INTO product_variant (product_id, product_gender, product_category, product_shipping_cost, product_color, product_price, product_stock) VALUES (656589, 'bebe', 'zapatos', 10000, 'azul', 50000, 100);
+INSERT INTO product_variant (product_id, product_gender, product_category, product_shipping_cost, product_color, product_price, product_stock) VALUES (656589, 'bebe', 'camiseta', 10000, 'rojo', 50000, 50);
+INSERT INTO product_variant (product_id, product_gender, product_category, product_shipping_cost, product_color, product_price, product_stock) VALUES (656589, 'bebe', 'maletin', 10000, 'amarillo', 50000, 60);
+
 
 -- Create customer table
 CREATE TABLE customer (
@@ -148,8 +160,8 @@ CREATE TABLE order_item (
 -- Create store table
 CREATE TABLE store (
     store_nit INTEGER,
-    store_name VARCHAR(30) NOT NULL CHECK (name <> ''),
-    store_address VARCHAR(30) NOT NULL CHECK (address <> ''),
+    store_name VARCHAR(30) NOT NULL CHECK (store_name <> ''),
+    store_address VARCHAR(30) NOT NULL CHECK (store_address <> ''),
     CONSTRAINT pk_store PRIMARY KEY (store_nit)
 );
 
@@ -157,7 +169,7 @@ CREATE TABLE store (
 CREATE SEQUENCE nit_seq
     START WITH 2020
     INCREMENT BY 1
-    OWNED BY store.nit;
+    OWNED BY store.store_nit;
 
 -- Insert store data to the store table
 INSERT INTO store (store_nit, store_name, store_address) VALUES (nextval('nit_seq'), 'THE FASHION ROOM SUR', 'CR 29B N 325-4');

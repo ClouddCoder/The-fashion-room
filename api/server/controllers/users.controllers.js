@@ -78,7 +78,7 @@ const loginUser = async (req, res, next) => {
       status: 200,
     });
   } catch (error) {
-    return next(error);
+    next(error);
   }
 };
 
@@ -121,7 +121,7 @@ const registerUser = async (req, res, next) => {
       token,
     });
   } catch (error) {
-    return next(error);
+    next(error);
   }
 };
 
@@ -163,7 +163,7 @@ const buyProduct = async (req, res, next) => {
     /* eslint-enable no-await-in-loop */
     return res.json({ message: "success" });
   } catch (error) {
-    return next(error);
+    next(error);
   }
 };
 
@@ -191,7 +191,7 @@ const setWishlist = async (req, res, next) => {
     }
     return res.json({ message: "success" });
   } catch (error) {
-    return next(error);
+    next(error);
   }
 };
 
@@ -212,18 +212,18 @@ const getWishlist = async (req, res, next) => {
     const result = await pool.query(query, [decodeToken.userId]);
     return res.json(result.rows);
   } catch (error) {
-    return next(error);
+    next(error);
   }
 };
 
 /**
- * Crea una nueva factura despues de cada compra
+ * Crea una nueva orden despues de cada compra
  */
 const createInvoice = async (req, res, next) => {
   const cart = req.body;
-  const createInvoiceIdQuery = "SELECT create_invoice_id()";
-  const createInvoiceQuery = "SELECT create_invoice($1, $2)";
-  const insertInvoiceDetailsQuery = "SELECT invoice_data($1, $2, $3, $4)";
+  const setOrderDetailIdQuery = "SELECT set_order_detail_id()";
+  const setOrderDetailQuery = "SELECT set_order_detail($1, $2)";
+  const setOrderItemQuery = "SELECT set_order_item($1, $2, $3, $4)";
   const { authorization } = req.headers;
   const decodeToken = getAuthorization(authorization);
 
@@ -232,9 +232,9 @@ const createInvoice = async (req, res, next) => {
   }
 
   try {
-    const getInvoiceId = await pool.query(createInvoiceIdQuery);
-    const invoiceId = getInvoiceId.rows[0].create_invoice_id;
-    await pool.query(createInvoiceQuery, [invoiceId, decodeToken.userId]);
+    const getOrderDetailId = await pool.query(setOrderDetailIdQuery);
+    const orderDetailId = getOrderDetailId.rows[0].set_order_detail_id;
+    await pool.query(setOrderDetailQuery, [orderDetailId, decodeToken.userId]);
 
     /**
      * Recorre el carrito de compras y agrega cada producto a la tabla
@@ -243,14 +243,14 @@ const createInvoice = async (req, res, next) => {
     /* eslint-disable no-await-in-loop */
     // eslint-disable-next-line no-restricted-syntax
     for (const item of cart) {
-      const getInvoiceDetails = await pool.query(insertInvoiceDetailsQuery, [
-        invoiceId,
+      const orderItemResponse = await pool.query(setOrderItemQuery, [
+        orderDetailId,
         item.product_id,
         item.quantity_to_purchase,
         item.product_price * item.quantity_to_purchase,
       ]);
 
-      if (getInvoiceDetails.rowCount === 0) {
+      if (orderItemResponse.rowCount === 0) {
         return res.status(404).json({
           message: "Product not found",
         });
@@ -258,9 +258,9 @@ const createInvoice = async (req, res, next) => {
     }
     /* eslint-enable no-await-in-loop */
 
-    return res.json({ message: "success", invoiceId });
+    return res.json({ message: "success", orderDetailId });
   } catch (error) {
-    return next(error);
+    next(error);
   }
 };
 
@@ -313,7 +313,7 @@ const getOrderDetail = async (req, res, next) => {
     const result = await pool.query(query, [decodeToken.userId]);
     return res.json(result.rows);
   } catch (error) {
-    return next(error);
+    next(error);
   }
 };
 
@@ -335,7 +335,7 @@ const removeOrderDetail = async (req, res, next) => {
     await pool.query(query, values);
     return res.json({ message: "success" });
   } catch (error) {
-    return next(error);
+    next(error);
   }
 };
 
