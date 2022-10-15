@@ -1,7 +1,7 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import { Bolsos, Calzado, Camisetas, Deportiva } from "../../../../assets";
+import { getProductImage } from "../../../../assets";
 import OfferItem from "../sub-components/OfferItem";
 import "./Offers.css";
 
@@ -15,7 +15,7 @@ function Offers() {
         <Grid item={true} xs={6} md={3}>
           <OfferItem
             alt="calzado"
-            image={Calzado}
+            image={getProductImage("calzado")}
             title="Calzado"
             description="Calzado de todo tipo"
           />
@@ -23,7 +23,7 @@ function Offers() {
         <Grid item={true} xs={6} md={3}>
           <OfferItem
             alt="camisetas"
-            image={Camisetas}
+            image={getProductImage("camisetas")}
             title="Camisetas"
             description="Camisetas de todo tipo"
           />
@@ -31,7 +31,7 @@ function Offers() {
         <Grid item={true} xs={6} md={3}>
           <OfferItem
             alt="deportiva"
-            image={Deportiva}
+            image={getProductImage("deportiva")}
             title="Ropa deportiva"
             description="Ropa deportiva de todo tipo"
           />
@@ -39,7 +39,7 @@ function Offers() {
         <Grid item={true} xs={6} md={3}>
           <OfferItem
             alt="bolsos"
-            image={Bolsos}
+            image={getProductImage("bolsos")}
             title="Bolsos y maletas"
             description="Bolsos y maletas de todo tipo"
           />

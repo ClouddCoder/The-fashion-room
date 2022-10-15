@@ -55,11 +55,34 @@ CREATE OR REPLACE FUNCTION set_order_item(order_id INTEGER, prod_id INTEGER, qua
     $BODY$
     LANGUAGE plpgsql;
 
+-- Inserts a new product variant
+CREATE OR REPLACE FUNCTION set_product_variant(prod_gender VARCHAR(25), prod_categ VARCHAR(25), prod_ship_cost INT, prod_color VARCHAR(25), prod_price INT, prod_stock INT)
+    RETURNS void AS
+    $BODY$
+    DECLARE
+        prod_var_id INTEGER;
+    BEGIN
+        SELECT product_id INTO prod_var_id FROM product WHERE product.product_name = prod_categ;
+        INSERT INTO product_variant (product_id, product_gender, product_category, product_shipping_cost, product_color, product_price, product_stock) VALUES (prod_var_id, prod_gender, prod_categ, prod_ship_cost, prod_color, prod_price, prod_stock);
+    END;
+    $BODY$
+    LANGUAGE plpgsql;
+
+CREATE TABLE category (
+    category_id SERIAL,
+    category_name VARCHAR(25) NOT NULL,
+    CONSTRAINT pk_category PRIMARY KEY (category_id)
+);
+
+INSERT INTO category (category_name) VALUES ('calzado'), ('camisas'), ('deportiva'), ('bolsos');
+
 -- Create product table
 CREATE TABLE product (
     product_id INTEGER,
+    category_id INTEGER,
     product_name VARCHAR(25) NOT NULL CHECK (product_name <> ''),
-    CONSTRAINT pk_product PRIMARY KEY (product_id)
+    CONSTRAINT pk_product PRIMARY KEY (product_id),
+    CONSTRAINT fk_category FOREIGN KEY (category_id) REFERENCES category (category_id)
 );
 
 -- Create product_id sequence for auto increment
@@ -69,47 +92,147 @@ CREATE SEQUENCE product_product_id_seq
     OWNED BY product.product_id;
 
 -- Represents all products variants
-CREATE TABLE product_variant (
+CREATE TABLE variant (
+    variant_id SERIAL,
     product_id INTEGER,
-    product_variant_id SERIAL,
-    product_gender VARCHAR(25),
-    product_category VARCHAR(25),
-    product_shipping_cost INTEGER NOT NULL,
-    product_color VARCHAR(25),
-    product_price INTEGER NOT NULL,
-    product_stock INTEGER NOT NULL,
-    CONSTRAINT pk_product_variant_id PRIMARY KEY (product_id, product_variant_id),
+    variant_name VARCHAR(25) NOT NULL CHECK (variant_name <> ''),
+    CONSTRAINT pk_product_variant PRIMARY KEY (variant_id),
     CONSTRAINT fk_product_id FOREIGN KEY (product_id) REFERENCES product (product_id)
 );
 
--- pendiente tabla product_option
+-- Contains all attributes for product variants
+CREATE TABLE attribute (
+    attribute_id SERIAL,
+    attribute_type VARCHAR(25),
+    attribute_value VARCHAR(25),
+    CONSTRAINT pk_attribute PRIMARY KEY (attribute_id)
+);
+
+INSERT INTO attribute (attribute_type, attribute_value)
+VALUES
+('genero', 'hombre'),
+('genero', 'mujer'),
+('genero', 'niño'),
+('genero', 'niña'),
+('genero', 'bebe'),
+('genero', 'unisex'),
+('envio', 0),
+('envio', 1000),
+('envio', 2000),
+('envio', 10000),
+('color', 'negro'),
+('color', 'blanco'),
+('color', 'gris'),
+('color', 'rojo');
+
+-- Joining table for product_variant and attribute
+CREATE TABLE variant_attribute (
+    variant_id INTEGER,
+    attribute_id INTEGER,
+    CONSTRAINT pk_variant_attribute PRIMARY KEY (variant_id, attribute_id),
+    CONSTRAINT fk_product_variant_id FOREIGN KEY (variant_id) REFERENCES variant (variant_id),
+    CONSTRAINT fk_attribute_id FOREIGN KEY (attribute_id) REFERENCES attribute (attribute_id)
+);
 
 -- Insert available products to the product table
-INSERT INTO product (product_id, product_name) VALUES (nextval('product_product_id_seq'), 'Blusa');
-INSERT INTO product (product_id, product_name) VALUES (nextval('product_product_id_seq'), 'Camisa');
-INSERT INTO product (product_id, product_name) VALUES (nextval('product_product_id_seq'), 'Corbata');
-INSERT INTO product (product_id, product_name) VALUES (nextval('product_product_id_seq'), 'Pantalon');
-INSERT INTO product (product_id, product_name) VALUES (nextval('product_product_id_seq'), 'Pantaloneta');
-INSERT INTO product (product_id, product_name) VALUES (nextval('product_product_id_seq'), 'Zapatos');
+INSERT INTO product (product_id, product_name)
+VALUES
+(nextval('product_product_id_seq'), 'blusa'),
+(nextval('product_product_id_seq'), 'camisa'),
+(nextval('product_product_id_seq'), 'corbata'),
+(nextval('product_product_id_seq'), 'pantalon'),
+(nextval('product_product_id_seq'), 'pantaloneta'),
+(nextval('product_product_id_seq'), 'zapatos');
 
-INSERT INTO product_variant (product_id, product_gender, product_category, product_shipping_cost, product_color, product_price, product_stock) VALUES (656589, 'hombre', 'camisa', 10000, 'azul', 50000, 100);
-INSERT INTO product_variant (product_id, product_gender, product_category, product_shipping_cost, product_color, product_price, product_stock) VALUES (656589, 'hombre', 'camiseta', 10000, 'rojo', 50000, 50);
-INSERT INTO product_variant (product_id, product_gender, product_category, product_shipping_cost, product_color, product_price, product_stock) VALUES (656589, 'hombre', 'camisa', 10000, 'amarillo', 50000, 60);
-INSERT INTO product_variant (product_id, product_gender, product_category, product_shipping_cost, product_color, product_price, product_stock) VALUES (656589, 'mujer', 'blusa', 10000, 'azul', 50000, 100);
-INSERT INTO product_variant (product_id, product_gender, product_category, product_shipping_cost, product_color, product_price, product_stock) VALUES (656589, 'mujer', 'camiseta', 10000, 'rojo', 50000, 50);
-INSERT INTO product_variant (product_id, product_gender, product_category, product_shipping_cost, product_color, product_price, product_stock) VALUES (656589, 'mujer', 'blusa', 10000, 'amarillo', 50000, 60);
-INSERT INTO product_variant (product_id, product_gender, product_category, product_shipping_cost, product_color, product_price, product_stock) VALUES (656589, 'sin genero', 'camiseta', 10000, 'verde', 50000, 100);
-INSERT INTO product_variant (product_id, product_gender, product_category, product_shipping_cost, product_color, product_price, product_stock) VALUES (656589, 'sin genero', 'pantalon', 10000, 'azul', 50000, 50);
-INSERT INTO product_variant (product_id, product_gender, product_category, product_shipping_cost, product_color, product_price, product_stock) VALUES (656589, 'niño', 'zapatos', 10000, 'azul', 50000, 100);
-INSERT INTO product_variant (product_id, product_gender, product_category, product_shipping_cost, product_color, product_price, product_stock) VALUES (656589, 'niño', 'camiseta', 10000, 'rojo', 50000, 50);
-INSERT INTO product_variant (product_id, product_gender, product_category, product_shipping_cost, product_color, product_price, product_stock) VALUES (656804, 'niño', 'maletin', 10000, 'amarillo', 50000, 60);
-INSERT INTO product_variant (product_id, product_gender, product_category, product_shipping_cost, product_color, product_price, product_stock) VALUES (656804, 'niña', 'zapatos', 10000, 'azul', 50000, 100);
-INSERT INTO product_variant (product_id, product_gender, product_category, product_shipping_cost, product_color, product_price, product_stock) VALUES (656589, 'niña', 'blusa', 10000, 'rojo', 50000, 50);
-INSERT INTO product_variant (product_id, product_gender, product_category, product_shipping_cost, product_color, product_price, product_stock) VALUES (656589, 'niña', 'maletin', 10000, 'amarillo', 50000, 60);
-INSERT INTO product_variant (product_id, product_gender, product_category, product_shipping_cost, product_color, product_price, product_stock) VALUES (656589, 'bebe', 'zapatos', 10000, 'azul', 50000, 100);
-INSERT INTO product_variant (product_id, product_gender, product_category, product_shipping_cost, product_color, product_price, product_stock) VALUES (656589, 'bebe', 'camiseta', 10000, 'rojo', 50000, 50);
-INSERT INTO product_variant (product_id, product_gender, product_category, product_shipping_cost, product_color, product_price, product_stock) VALUES (656589, 'bebe', 'maletin', 10000, 'amarillo', 50000, 60);
+INSERT INTO variant (product_id, variant_name)
+VALUES
+((SELECT product_id FROM product WHERE product_name = 'blusa'), 'blusa adultos'),
+((SELECT product_id FROM product WHERE product_name = 'blusa'), 'blusa niños'),
+((SELECT product_id FROM product WHERE product_name = 'camisa'), 'camisa adultos'),
+((SELECT product_id FROM product WHERE product_name = 'camisa'), 'camisa niños'),
+((SELECT product_id FROM product WHERE product_name = 'corbata'), 'corbata adultos'),
+((SELECT product_id FROM product WHERE product_name = 'corbata'), 'corbata niños'),
+((SELECT product_id FROM product WHERE product_name = 'pantalon'), 'pantalon adultos'),
+((SELECT product_id FROM product WHERE product_name = 'pantalon'), 'pantalon niños'),
+((SELECT product_id FROM product WHERE product_name = 'pantaloneta'), 'pantaloneta adultos'),
+((SELECT product_id FROM product WHERE product_name = 'pantaloneta'), 'pantaloneta niños'),
+((SELECT product_id FROM product WHERE product_name = 'zapatos'), 'zapatos adultos'),
+((SELECT product_id FROM product WHERE product_name = 'zapatos'), 'zapatos niños');
 
+INSERT INTO variant_attribute (variant_id, attribute_id)
+VALUES
+((SELECT variant_id FROM variant WHERE variant_name = 'blusa adultos'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'hombre')),
+((SELECT variant_id FROM variant WHERE variant_name = 'blusa adultos'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'mujer')),
+((SELECT variant_id FROM variant WHERE variant_name = 'blusa adultos'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'unisex')),
+((SELECT variant_id FROM variant WHERE variant_name = 'blusa adultos'), (SELECT attribute_id FROM attribute WHERE attribute_value = '1000')),
+((SELECT variant_id FROM variant WHERE variant_name = 'blusa adultos'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'negro')),
+((SELECT variant_id FROM variant WHERE variant_name = 'blusa adultos'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'blanco')),
+((SELECT variant_id FROM variant WHERE variant_name = 'blusa adultos'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'rojo')),
+((SELECT variant_id FROM variant WHERE variant_name = 'blusa niños'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'niño')),
+((SELECT variant_id FROM variant WHERE variant_name = 'blusa niños'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'niña')),
+((SELECT variant_id FROM variant WHERE variant_name = 'blusa niños'), (SELECT attribute_id FROM attribute WHERE attribute_value = '2000')),
+((SELECT variant_id FROM variant WHERE variant_name = 'blusa niños'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'gris')),
+((SELECT variant_id FROM variant WHERE variant_name = 'blusa niños'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'blanco')),
+((SELECT variant_id FROM variant WHERE variant_name = 'blusa niños'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'rojo')),
+((SELECT variant_id FROM variant WHERE variant_name = 'camisa adultos'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'hombre')),
+((SELECT variant_id FROM variant WHERE variant_name = 'camisa adultos'), (SELECT attribute_id FROM attribute WHERE attribute_value = '1000')),
+((SELECT variant_id FROM variant WHERE variant_name = 'camisa adultos'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'negro')),
+((SELECT variant_id FROM variant WHERE variant_name = 'camisa adultos'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'blanco')),
+((SELECT variant_id FROM variant WHERE variant_name = 'camisa adultos'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'rojo')),
+((SELECT variant_id FROM variant WHERE variant_name = 'camisa niños'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'niño')),
+((SELECT variant_id FROM variant WHERE variant_name = 'camisa niños'), (SELECT attribute_id FROM attribute WHERE attribute_value = '2000')),
+((SELECT variant_id FROM variant WHERE variant_name = 'camisa niños'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'gris')),
+((SELECT variant_id FROM variant WHERE variant_name = 'camisa niños'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'blanco')),
+((SELECT variant_id FROM variant WHERE variant_name = 'camisa niños'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'rojo')),
+((SELECT variant_id FROM variant WHERE variant_name = 'corbata adultos'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'hombre')),
+((SELECT variant_id FROM variant WHERE variant_name = 'corbata adultos'), (SELECT attribute_id FROM attribute WHERE attribute_value = '1000')),
+((SELECT variant_id FROM variant WHERE variant_name = 'corbata adultos'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'negro')),
+((SELECT variant_id FROM variant WHERE variant_name = 'corbata adultos'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'blanco')),
+((SELECT variant_id FROM variant WHERE variant_name = 'corbata adultos'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'rojo')),
+((SELECT variant_id FROM variant WHERE variant_name = 'corbata niños'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'niño')),
+((SELECT variant_id FROM variant WHERE variant_name = 'corbata niños'), (SELECT attribute_id FROM attribute WHERE attribute_value = '2000')),
+((SELECT variant_id FROM variant WHERE variant_name = 'corbata niños'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'gris')),
+((SELECT variant_id FROM variant WHERE variant_name = 'corbata niños'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'blanco')),
+((SELECT variant_id FROM variant WHERE variant_name = 'corbata niños'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'rojo')),
+((SELECT variant_id FROM variant WHERE variant_name = 'pantalon adultos'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'hombre')),
+((SELECT variant_id FROM variant WHERE variant_name = 'pantalon adultos'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'mujer')),
+((SELECT variant_id FROM variant WHERE variant_name = 'pantalon adultos'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'unisex')),
+((SELECT variant_id FROM variant WHERE variant_name = 'pantalon adultos'), (SELECT attribute_id FROM attribute WHERE attribute_value = '2000')),
+((SELECT variant_id FROM variant WHERE variant_name = 'pantalon adultos'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'negro')),
+((SELECT variant_id FROM variant WHERE variant_name = 'pantalon adultos'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'blanco')),
+((SELECT variant_id FROM variant WHERE variant_name = 'pantalon adultos'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'rojo')),
+((SELECT variant_id FROM variant WHERE variant_name = 'pantalon niños'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'niño')),
+((SELECT variant_id FROM variant WHERE variant_name = 'pantalon niños'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'niña')),
+((SELECT variant_id FROM variant WHERE variant_name = 'pantalon niños'), (SELECT attribute_id FROM attribute WHERE attribute_value = '2000')),
+((SELECT variant_id FROM variant WHERE variant_name = 'pantalon niños'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'gris')),
+((SELECT variant_id FROM variant WHERE variant_name = 'pantalon niños'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'blanco')),
+((SELECT variant_id FROM variant WHERE variant_name = 'pantalon niños'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'rojo')),
+((SELECT variant_id FROM variant WHERE variant_name = 'pantaloneta adultos'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'hombre')),
+((SELECT variant_id FROM variant WHERE variant_name = 'pantaloneta adultos'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'mujer')),
+((SELECT variant_id FROM variant WHERE variant_name = 'pantaloneta adultos'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'unisex')),
+((SELECT variant_id FROM variant WHERE variant_name = 'pantaloneta adultos'), (SELECT attribute_id FROM attribute WHERE attribute_value = '2000')),
+((SELECT variant_id FROM variant WHERE variant_name = 'pantaloneta adultos'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'negro')),
+((SELECT variant_id FROM variant WHERE variant_name = 'pantaloneta adultos'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'blanco')),
+((SELECT variant_id FROM variant WHERE variant_name = 'pantaloneta adultos'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'rojo')),
+((SELECT variant_id FROM variant WHERE variant_name = 'pantaloneta niños'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'niño')),
+((SELECT variant_id FROM variant WHERE variant_name = 'pantaloneta niños'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'niña')),
+((SELECT variant_id FROM variant WHERE variant_name = 'pantaloneta niños'), (SELECT attribute_id FROM attribute WHERE attribute_value = '2000')),
+((SELECT variant_id FROM variant WHERE variant_name = 'pantaloneta niños'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'gris')),
+((SELECT variant_id FROM variant WHERE variant_name = 'pantaloneta niños'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'blanco')),
+((SELECT variant_id FROM variant WHERE variant_name = 'pantaloneta niños'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'rojo')),
+((SELECT variant_id FROM variant WHERE variant_name = 'zapatos adultos'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'hombre')),
+((SELECT variant_id FROM variant WHERE variant_name = 'zapatos adultos'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'mujer')),
+((SELECT variant_id FROM variant WHERE variant_name = 'zapatos adultos'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'unisex')),
+((SELECT variant_id FROM variant WHERE variant_name = 'zapatos adultos'), (SELECT attribute_id FROM attribute WHERE attribute_value = '10000')),
+((SELECT variant_id FROM variant WHERE variant_name = 'zapatos adultos'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'negro')),
+((SELECT variant_id FROM variant WHERE variant_name = 'zapatos adultos'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'blanco')),
+((SELECT variant_id FROM variant WHERE variant_name = 'zapatos adultos'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'rojo')),
+((SELECT variant_id FROM variant WHERE variant_name = 'zapatos niños'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'niño')),
+((SELECT variant_id FROM variant WHERE variant_name = 'zapatos niños'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'niña')),
+((SELECT variant_id FROM variant WHERE variant_name = 'zapatos niños'), (SELECT attribute_id FROM attribute WHERE attribute_value = '10000')),
+((SELECT variant_id FROM variant WHERE variant_name = 'zapatos niños'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'gris')),
+((SELECT variant_id FROM variant WHERE variant_name = 'zapatos niños'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'blanco')),
+((SELECT variant_id FROM variant WHERE variant_name = 'zapatos niños'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'rojo'));
 
 -- Create customer table
 CREATE TABLE customer (
@@ -136,7 +259,7 @@ CREATE TABLE order_detail (
     customer_id INTEGER NOT NULL,
     purchase_date DATE NOT NULL,
     CONSTRAINT pk_order_detail PRIMARY KEY (order_detail_id),
-    CONSTRAINT fk_order_detail_customer_id FOREIGN KEY (customer_id) REFERENCES customer(customer_id)
+    CONSTRAINT fk_order_detail FOREIGN KEY (customer_id) REFERENCES customer (customer_id)
 );
 
 -- Automatic sequence for order_detail_id
