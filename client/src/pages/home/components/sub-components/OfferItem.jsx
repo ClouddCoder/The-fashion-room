@@ -17,7 +17,7 @@ function OfferItem({ alt, image, title, description }) {
 
   return (
     <Card sx={cardSxProps}>
-      <CardActionArea component={Link} to="/catalogue" sx={{ height: "230px" }}>
+      <CardActionArea component={Link} to={`/catalogue/${alt}`} sx={{ height: "230px" }}>
         <CardMedia component="img" alt={alt} height="140" src={image} />
         <CardContent>
           <CustomTypography gutterBottom variant="h5" component="h2" sx={fontSize}>

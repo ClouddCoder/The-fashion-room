@@ -24,10 +24,10 @@ function Catalogue() {
   const [state, dispatch] = useReducer(CatalogueReducer, catalogueInitialState);
 
   /**
-   * Ejecuta la funcion loadProducts() del contexto ProductContext
+   * Realiza una peticion a la API para obtener los productos de la categoria correspondiente.
    */
   useEffect(() => {
-    loadProducts();
+    loadProducts("calzado");
   }, []);
 
   useEffect(() => {

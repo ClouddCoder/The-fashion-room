@@ -129,10 +129,17 @@ const registerUser = async (req, res, next) => {
  * Obtiene todos los productos de la base de datos
  */
 const getProducts = async (req, res, next) => {
-  const query = "SELECT * FROM product";
+  const { category } = req.query;
+  let query = "SELECT product.product_id, product_name, variant_price, variant_quantity, ";
+  query += "attribute_type, attribute_value FROM category ";
+  query += "JOIN product ON product.category_id = category.category_id ";
+  query += "JOIN variant ON variant.product_id = product.product_id ";
+  query += "JOIN variant_attribute va ON va.variant_id = variant.variant_id ";
+  query += "JOIN attribute ON attribute.attribute_id = va.attribute_id ";
+  query += "WHERE category_name = $1";
 
   try {
-    const result = await pool.query(query);
+    const result = await pool.query(query, [category]);
     res.json(result.rows);
   } catch (error) {
     next(error);

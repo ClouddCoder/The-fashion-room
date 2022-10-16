@@ -16,12 +16,16 @@ function ProductState({ children }) {
   /**
    * Obtiene los productos de la API
    */
-  const loadProducts = async () => {
+  const loadProducts = async (category) => {
     try {
       const response = await axios.get("http://localhost:3050/api/catalogue", {
-        crossDomain: true,
+        // crossDomain: true,
+        params: {
+          category,
+        },
       });
       const { data } = response;
+      console.log(data);
       dispatch({ type: TYPES.LOAD_PRODUCTS, payload: data });
     } catch (error) {
       console.log(error);

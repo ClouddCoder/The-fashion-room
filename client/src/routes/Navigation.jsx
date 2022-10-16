@@ -26,7 +26,7 @@ function Navigation() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/orders" element={<Orders />} />
-          <Route path="/catalogue" element={<Catalogue />} />
+          <Route path="/catalogue/:category" element={<Catalogue />} />
           <Route path="/product/:id" element={<Product />} />
           <Route path="/cart" element={<ShoppingCart />} />
           <Route path="/wishlist" element={<Wishlist />} />
