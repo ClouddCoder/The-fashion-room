@@ -2,7 +2,7 @@ import React, { useEffect, useContext, useReducer } from "react";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import ProductItem from "./components/ProductItem";
 import AuthContext from "../../context/auth-context/AuthContext";
 import ProductContext from "../../context/product-context/ProductContext";
@@ -18,6 +18,7 @@ import "./Catalogue.css";
  * Componente que muestra el catalogo de productos
  */
 function Catalogue() {
+  const { category } = useParams();
   const navigate = useNavigate();
   const { addToCart, loadProducts, products, getWishlist } = useContext(ProductContext);
   const { auth } = useContext(AuthContext);
@@ -27,7 +28,7 @@ function Catalogue() {
    * Realiza una peticion a la API para obtener los productos de la categoria correspondiente.
    */
   useEffect(() => {
-    loadProducts("calzado");
+    loadProducts(category);
   }, []);
 
   useEffect(() => {
@@ -41,8 +42,11 @@ function Catalogue() {
     });
   };
 
+  /**
+   * Filtra los productos de acuerdo a la seleccion del usuario
+   */
   const filteredProducts = () => {
-    const filtered = products?.filter((product) => state[product.product_name.toLowerCase()]);
+    const filtered = products?.filter((product) => state[product.product_name]);
 
     if (filtered.length > 0) return filtered;
 
@@ -117,12 +121,8 @@ function Catalogue() {
                 sx={{ width: "95%", height: "100%", m: 0 }}
                 spacing={2}
               >
-                {filteredProducts().map((product) => (
-                  <ProductItem
-                    key={product.product_id}
-                    product={product}
-                    addToCart={addToCart}
-                  />
+                {filteredProducts()?.map((product, index) => (
+                  <ProductItem key={index} product={product} addToCart={addToCart} />
                 ))}
               </Grid>
             </Paper>

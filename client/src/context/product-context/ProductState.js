@@ -25,8 +25,19 @@ function ProductState({ children }) {
         },
       });
       const { data } = response;
-      console.log(data);
-      dispatch({ type: TYPES.LOAD_PRODUCTS, payload: data });
+
+      // Agrupa los productos por el nombre de su variante
+      const variantGroups = Object.values(
+        data?.reduce(
+          (acc, item) => ({
+            ...acc,
+            [item.variant_name]: (acc[item.variant_name] || []).concat(item),
+          }),
+          {},
+        ),
+      );
+
+      dispatch({ type: TYPES.LOAD_PRODUCTS, payload: variantGroups });
     } catch (error) {
       console.log(error);
     }
@@ -113,7 +124,7 @@ function ProductState({ children }) {
         dispatch({ type: TYPES.REMOVE_FROM_WISHLIST, payload: product.product_id });
       }
     } catch (error) {
-      return console.log(error);
+      console.log(error);
     }
   };
 

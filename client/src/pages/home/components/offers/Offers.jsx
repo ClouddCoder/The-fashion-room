@@ -22,7 +22,7 @@ function Offers() {
         </Grid>
         <Grid item={true} xs={6} md={3}>
           <OfferItem
-            alt="camisetas"
+            alt="camisas"
             image={getProductImage("camisetas")}
             title="Camisetas"
             description="Camisetas de todo tipo"
