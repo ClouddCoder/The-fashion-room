@@ -18,8 +18,7 @@ function Product() {
   const { products, addToCart, addProductToBuy, clearListOfProductsToBuy } =
     useContext(ProductContext);
   const { auth } = useContext(AuthContext);
-  const productId = parseInt(id, 10);
-  const product = products.find((item) => item[0]?.product_id === productId);
+  const product = products.find((item) => item[0]?.variant_name === id);
 
   const handleBuyProduct = () => {
     addProductToBuy(product[0]?.product_id);
@@ -32,6 +31,7 @@ function Product() {
 
   return (
     <div className="container">
+      {console.log("product: ", product)}
       <Navbar />
       <Grid container sx={{ width: "80%", m: "auto 0" }}>
         <Grid item xs={6} sx={{ display: "flex", justifyContent: "center" }}>
