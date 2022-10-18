@@ -151,7 +151,7 @@ const getProducts = async (req, res, next) => {
  */
 const buyProduct = async (req, res, next) => {
   const cart = req.body;
-  const query = "UPDATE product SET product_stock = product_stock - $1 WHERE product_id = $2";
+  const query = "UPDATE variant SET variant_quantity = variant_quantity - $1 WHERE product_id = $2";
   const { authorization } = req.headers;
   const decodeToken = getAuthorization(authorization);
 
@@ -203,7 +203,7 @@ const setWishlist = async (req, res, next) => {
 };
 
 const getWishlist = async (req, res, next) => {
-  let query = "SELECT product.product_id, product_name, product_price FROM wishlist ";
+  let query = "SELECT product.product_id, product_name, variant_price FROM wishlist ";
   query += "INNER JOIN customer ON customer.customer_id = wishlist.customer_id ";
   query += "INNER JOIN product ON product.product_id = wishlist.product_id ";
   query += "WHERE customer.customer_id = $1";

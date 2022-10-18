@@ -19,10 +19,10 @@ function Product() {
     useContext(ProductContext);
   const { auth } = useContext(AuthContext);
   const productId = parseInt(id, 10);
-  const product = products.find((item) => item.product_id === productId);
+  const product = products.find((item) => item[0]?.product_id === productId);
 
   const handleBuyProduct = () => {
-    addProductToBuy(product.product_id);
+    addProductToBuy(product[0]?.product_id);
     navigate("/buy");
   };
 
@@ -36,18 +36,18 @@ function Product() {
       <Grid container sx={{ width: "80%", m: "auto 0" }}>
         <Grid item xs={6} sx={{ display: "flex", justifyContent: "center" }}>
           <img
-            src={getProductImage(product.product_name)}
-            alt={product.name}
+            src={getProductImage(product[0]?.product_name)}
+            alt={product[0]?.product_name}
             width="450px"
             height="450px"
           />
         </Grid>
         <Grid item container xs={6} direction="column" justifyContent="center">
           <Grid item>
-            <h1>{product.product_name}</h1>
+            <h1>{product[0]?.product_name}</h1>
           </Grid>
           <Grid item>
-            <span>{product.product_price}</span>
+            <span>{product[0]?.variant_price}</span>
           </Grid>
           <Grid item>
             <div style={{ display: "flex" }}>
@@ -59,7 +59,7 @@ function Product() {
               </Button>
               <Button
                 variant="contained"
-                onClick={auth ? () => addToCart(product.product_id) : () => navigate("/login")}
+                onClick={auth ? () => addToCart(product[0]?.product_id) : () => navigate("/login")}
               >
                 Agregar al carrito
               </Button>

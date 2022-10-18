@@ -20,8 +20,8 @@ export function ProductReducer(state, action) {
       return { ...state, products: [...action.payload] };
 
     case TYPES.ADD_TO_CART: {
-      const newItem = state.products.find((item) => item.product_id === action.payload);
-      const itemInCart = state.cart.find((item) => item.product_id === newItem.product_id);
+      const newItem = state.products.find((item) => item[0].product_id === action.payload);
+      const itemInCart = state.cart.find((item) => item[0].product_id === newItem.product_id);
 
       return itemInCart
         ? {
@@ -94,7 +94,7 @@ export function ProductReducer(state, action) {
     }
 
     case TYPES.ADD_PRODUCT_TO_BUY: {
-      const product = state.products.find((item) => item.product_id === action.payload);
+      const product = state.products.find((item) => item[0].product_id === action.payload);
       return {
         ...state,
         productsToBuy: [{ ...product, quantity_to_purchase: 1 }],
