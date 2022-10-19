@@ -20,21 +20,23 @@ export function ProductReducer(state, action) {
       return { ...state, products: [...action.payload] };
 
     case TYPES.ADD_TO_CART: {
-      const newItem = state.products.find((item) => item[0].product_id === action.payload);
-      const itemInCart = state.cart.find((item) => item[0].product_id === newItem.product_id);
+      const newItem = state.products.find((item) => item[0].variant_name === action.payload);
+      const itemInCart = state.cart.find(
+        (item) => item[0].variant_name === newItem[0].variant_name,
+      );
 
       return itemInCart
         ? {
             ...state,
             cart: state.cart.map((item) =>
-              item.product_id === newItem.product_id
-                ? { ...item, quantity_to_purchase: item.quantity_to_purchase + 1 }
+              item[0]?.product_id === newItem[0]?.product_id
+                ? [...item, { quantity_to_purchase: item[3].quantity_to_purchase + 1 }]
                 : item,
             ),
           }
         : {
             ...state,
-            cart: [...state.cart, { ...newItem, quantity_to_purchase: 1 }],
+            cart: [...state.cart, [...newItem, { quantity_to_purchase: 1 }]],
           };
     }
 
@@ -69,7 +71,7 @@ export function ProductReducer(state, action) {
 
     case TYPES.GET_TOTAL_PRODUCTS: {
       const totalProducts = state.cart
-        .map((product) => product.quantity_to_purchase)
+        .map((product) => product[3].quantity_to_purchase)
         .reduce((a, b) => a + b, 0);
 
       return { ...state, totalProducts };
@@ -77,7 +79,7 @@ export function ProductReducer(state, action) {
 
     case TYPES.GET_TOTAL_PRICE: {
       const totalPrice = state.productsToBuy
-        .map((product) => product.product_price * product.quantity_to_purchase)
+        .map((product) => product[0].variant_price * product[3].quantity_to_purchase)
         .reduce((a, b) => a + b, 0);
 
       return { ...state, totalPrice };
@@ -94,10 +96,10 @@ export function ProductReducer(state, action) {
     }
 
     case TYPES.ADD_PRODUCT_TO_BUY: {
-      const product = state.products.find((item) => item[0].product_id === action.payload);
+      const product = state.products.find((item) => item[0].variant_name === action.payload);
       return {
         ...state,
-        productsToBuy: [{ ...product, quantity_to_purchase: 1 }],
+        productsToBuy: [[...product, { quantity_to_purchase: 1 }]],
       };
     }
 

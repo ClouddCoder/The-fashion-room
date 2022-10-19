@@ -22,7 +22,7 @@ router.post("/login", loginUser);
 
 router.post("/register", registerUser);
 
-router.put("/cart", buyProduct);
+router.put("/buy", buyProduct);
 
 router.get("/catalogue", getProducts);
 

@@ -150,7 +150,7 @@ const getProducts = async (req, res, next) => {
  * Actualiza la informacion de un producto despues de realizar una compra
  */
 const buyProduct = async (req, res, next) => {
-  const cart = req.body;
+  const productsToBuy = req.body;
   const query = "UPDATE variant SET variant_quantity = variant_quantity - $1 WHERE product_id = $2";
   const { authorization } = req.headers;
   const decodeToken = getAuthorization(authorization);
@@ -158,8 +158,8 @@ const buyProduct = async (req, res, next) => {
   try {
     /* eslint-disable no-await-in-loop */
     // eslint-disable-next-line no-restricted-syntax
-    for (const item of cart) {
-      const result = await pool.query(query, [item.quantity_to_purchase, item.product_id]);
+    for (const item of productsToBuy) {
+      const result = await pool.query(query, [item[3]?.quantity_to_purchase, item[0]?.product_id]);
 
       if (result.rowCount === 0) {
         return res.status(404).json({
@@ -227,7 +227,7 @@ const getWishlist = async (req, res, next) => {
  * Crea una nueva orden despues de cada compra
  */
 const createInvoice = async (req, res, next) => {
-  const cart = req.body;
+  const productsToBuy = req.body;
   const setOrderDetailIdQuery = "SELECT set_order_detail_id()";
   const setOrderDetailQuery = "SELECT set_order_detail($1, $2)";
   const setOrderItemQuery = "SELECT set_order_item($1, $2, $3, $4)";
@@ -249,12 +249,12 @@ const createInvoice = async (req, res, next) => {
      */
     /* eslint-disable no-await-in-loop */
     // eslint-disable-next-line no-restricted-syntax
-    for (const item of cart) {
+    for (const item of productsToBuy) {
       const orderItemResponse = await pool.query(setOrderItemQuery, [
         orderDetailId,
-        item.product_id,
-        item.quantity_to_purchase,
-        item.product_price * item.quantity_to_purchase,
+        item[0].product_id,
+        item[3].quantity_to_purchase,
+        item[0].variant_price * item[3].quantity_to_purchase,
       ]);
 
       if (orderItemResponse.rowCount === 0) {

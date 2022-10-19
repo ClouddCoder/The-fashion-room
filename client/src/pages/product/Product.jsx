@@ -21,7 +21,7 @@ function Product() {
   const product = products.find((item) => item[0]?.variant_name === id);
 
   const handleBuyProduct = () => {
-    addProductToBuy(product[0]?.product_id);
+    addProductToBuy(product[0]?.variant_name);
     navigate("/buy");
   };
 
@@ -59,7 +59,7 @@ function Product() {
               </Button>
               <Button
                 variant="contained"
-                onClick={auth ? () => addToCart(product[0]?.product_id) : () => navigate("/login")}
+                onClick={auth ? () => addToCart(product[0]?.variant_name) : () => navigate("/login")}
               >
                 Agregar al carrito
               </Button>

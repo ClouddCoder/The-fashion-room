@@ -190,11 +190,11 @@ function ProductState({ children }) {
   /**
    * Peticion para crear una factura despues de que el usuario realice una compra.
    */
-  const createInvoice = async (cart) => {
+  const createInvoice = async (productsToBuy) => {
     try {
       const res = await fetch("http://localhost:3050/api/invoice", {
         method: "POST",
-        body: JSON.stringify(cart),
+        body: JSON.stringify(productsToBuy),
         headers: new Headers({
           "Authorization": `Bearer ${token}`,
           "Content-Type": "application/json",

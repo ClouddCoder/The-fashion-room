@@ -30,7 +30,7 @@ function Buy() {
    */
   // eslint-disable-next-line consistent-return
   const buyProducts = async () => {
-    const res = await fetch("http://localhost:3050/api/cart", {
+    const res = await fetch("http://localhost:3050/api/buy", {
       method: "PUT",
       body: JSON.stringify(productsToBuy),
       headers: new Headers({

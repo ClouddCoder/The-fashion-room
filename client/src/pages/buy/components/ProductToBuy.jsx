@@ -14,16 +14,16 @@ function ProductToBuy({ product }) {
           <CardMedia
             component="img"
             sx={{ width: 120, height: 120 }}
-            image={getProductImage(product.product_name)}
-            alt={product.product_name}
+            image={getProductImage(product[0]?.product_name)}
+            alt={product[0]?.product_name}
           />
           <div className="description">
             <CustomTypography variant="body2" sx={{ fontSize: "14px" }}>
-              {product.product_name}
+              {product[0]?.product_name}
             </CustomTypography>
             <div>
               <CustomTypography variant="body2" sx={{ fontSize: "14px" }}>
-                ${product.product_price}
+                ${product[0]?.variant_price}
               </CustomTypography>
             </div>
           </div>

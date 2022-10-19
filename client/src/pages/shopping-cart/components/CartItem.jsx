@@ -5,7 +5,7 @@ import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 import CustomTypography from "../../../commons/custom-typography/CustomTypography";
-import { Blusa, Camisa, Corbata, Pantalon, Pantaloneta, Zapatos } from "../../../assets";
+import { getProductImage } from "../../../assets";
 
 /**
  * Componente que muestra el producto que esta en el carrito de compras
@@ -19,25 +19,6 @@ function CartItem({ product, removeFromCart }) {
     width: 128,
     height: 128,
   });
-
-  const getCartItemImage = (cartItemName) => {
-    switch (cartItemName) {
-      case "Blusa":
-        return Blusa;
-      case "Camisa":
-        return Camisa;
-      case "Corbata":
-        return Corbata;
-      case "Pantalon":
-        return Pantalon;
-      case "Pantaloneta":
-        return Pantaloneta;
-      case "Zapatos":
-        return Zapatos;
-      default:
-        return null;
-    }
-  };
 
   return (
     <Box m={1}>
@@ -53,33 +34,38 @@ function CartItem({ product, removeFromCart }) {
       >
         <Grid container spacing={2}>
           <Grid item>
-            <Img alt="complex" src={getCartItemImage(product.product_name)} />
+            <Img alt="complex" src={getProductImage(product[0]?.product_name)} />
           </Grid>
           <Grid item={true} xs={12} sm container>
             <Grid item={true} xs container direction="column" spacing={2}>
               <Grid item={true} xs mt={3}>
                 <CustomTypography gutterBottom variant="subtitle1">
-                  {product.product_name}
+                  {product[0]?.product_name}
                 </CustomTypography>
                 <CustomTypography variant="body2" gutterBottom>
-                  Cantidad a comprar x{product.quantity_to_purchase}
+                  Cantidad a comprar x{product[3]?.quantity_to_purchase}
                 </CustomTypography>
                 <CustomTypography variant="body2" color="text.secondary">
-                  Total = ${product.product_price * product.quantity_to_purchase}
+                  Total = ${product[0].variant_price * product[3].quantity_to_purchase}
                 </CustomTypography>
               </Grid>
             </Grid>
             <Grid item>
-              <CustomTypography variant="subtitle1">${product.product_price}</CustomTypography>
+              <CustomTypography variant="subtitle1">
+                ${product[0].variant_price}
+              </CustomTypography>
               <Grid item container justifyContent="center" direction="column">
                 <Grid item>
-                  <Button onClick={() => removeFromCart(product.product_id)} variant="outlined">
+                  <Button
+                    onClick={() => removeFromCart(product[0]?.product_id)}
+                    variant="outlined"
+                  >
                     Eliminar uno
                   </Button>
                 </Grid>
                 <Grid item>
                   <Button
-                    onClick={() => removeFromCart(product.product_id, true)}
+                    onClick={() => removeFromCart(product[0]?.product_id, true)}
                     variant="outlined"
                   >
                     Eliminar todos

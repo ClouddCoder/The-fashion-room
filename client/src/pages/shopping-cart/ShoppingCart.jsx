@@ -44,8 +44,8 @@ function ShoppingCart() {
               </Grid>
             </Grid>
             <Grid item container justifyContent="center" direction="column">
-              {cart.map((product) => (
-                <Grid item key={product.product_id}>
+              {cart.map((product, index) => (
+                <Grid item key={index}>
                   <CartItem product={product} removeFromCart={removeFromCart} />
                 </Grid>
               ))}
