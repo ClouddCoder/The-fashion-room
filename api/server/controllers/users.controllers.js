@@ -294,8 +294,7 @@ const getStores = async (req, res, next) => {
  * Obtiene los telefonos de las tiendas de la base de datos
  */
 const getStoresPhones = async (req, res, next) => {
-  const query = "SELECT phone FROM store_phone INNER JOIN store ON store.nit = store_phone.nit";
-
+  const query = "SELECT * FROM store_phone";
   try {
     const result = await pool.query(query);
     res.json(result.rows);

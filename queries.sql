@@ -482,14 +482,20 @@ INSERT INTO store (store_nit, store_name, store_address) VALUES (nextval('nit_se
 -- Create a table containing the store's phone numbers
 CREATE TABLE store_phone (
     store_nit INTEGER,
-    store_phone BIGINT NOT NULL,
-    CONSTRAINT pk_store_phone PRIMARY KEY (store_nit),
+    phone BIGINT NOT NULL,
+    CONSTRAINT pk_store_phone PRIMARY KEY (store_nit, phone),
     CONSTRAINT fk_store_phone FOREIGN KEY (store_nit) REFERENCES store(store_nit)
 );
 
 -- Insert store's phone numbers to the store_phone table
-INSERT INTO store_phone (store_nit, store_phone) VALUES (2020, 4225136);
-INSERT INTO store_phone (store_nit, store_phone) VALUES (2021, 4225136);
-INSERT INTO store_phone (store_nit, store_phone) VALUES (2022, 4218755);
-INSERT INTO store_phone (store_nit, store_phone) VALUES (2023, 4856923);
-INSERT INTO store_phone (store_nit, store_phone) VALUES (2024, 4128745);
+INSERT INTO store_phone (store_nit, phone) VALUES
+((SELECT store_nit FROM store WHERE store_name = 'THE FASHION ROOM SUR'), 4225136),
+((SELECT store_nit FROM store WHERE store_name = 'THE FASHION ROOM SUR'), 4215489),
+((SELECT store_nit FROM store WHERE store_name = 'THE FASHION ROOM NORTE'), 3254984),
+((SELECT store_nit FROM store WHERE store_name = 'THE FASHION ROOM NORTE'), 3254856),
+((SELECT store_nit FROM store WHERE store_name = 'THE FASHION ROOM ORIENTE'), 8445623),
+((SELECT store_nit FROM store WHERE store_name = 'THE FASHION ROOM ORIENTE'), 4725148),
+((SELECT store_nit FROM store WHERE store_name = 'THE FASHION ROOM OCCIDENTE'), 4227452),
+((SELECT store_nit FROM store WHERE store_name = 'THE FASHION ROOM OCCIDENTE'), 8742394),
+((SELECT store_nit FROM store WHERE store_name = 'THE FASHION ROOM SUROCCIDENTE'), 1225478),
+((SELECT store_nit FROM store WHERE store_name = 'THE FASHION ROOM SUROCCIDENTE'), 3668741);

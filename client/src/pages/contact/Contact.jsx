@@ -9,8 +9,8 @@ import Footer from "../../commons/footer/Footer";
  * Componente que muestra la informacion de la tienda
  */
 function Contact() {
-  const [stores, getStores] = useState();
-  const [storesPhones, getStoresPhones] = useState();
+  const [stores, getStores] = useState([]);
+  const [storesPhones, getStoresPhones] = useState([]);
 
   /**
    * Peticion a la API para obtener la informacion de las tiendas
@@ -18,7 +18,7 @@ function Contact() {
   const loadStores = async () => {
     try {
       const response = await axios.get("http://localhost:3050/api/stores");
-      const data = await response.data;
+      const { data } = await response;
       getStores(data);
     } catch (error) {
       console.log(error);
@@ -31,20 +31,37 @@ function Contact() {
   const loadStoresPhones = async () => {
     try {
       const response = await axios.get("http://localhost:3050/api/stores/phones");
-      const data = await response.data;
-      getStoresPhones(data);
+      const { data } = response;
+
+      // Agrupa los telefonos por el nombre de la tienda.
+      const phones = Object.values(
+        data?.reduce(
+          (acc, item) => ({
+            ...acc,
+            [item.store_nit]: (acc[item.store_nit] || []).concat(item),
+          }),
+          {},
+        ),
+      );
+      getStoresPhones(phones);
+      console.log(phones);
     } catch (error) {
       console.log(error);
     }
   };
 
+  const getPhones = (storeNit, stores) => {
+    // codigo
+  };
+
   /**
-   * Ejecuta la funcion loadStores() y loadStoresPhones()
+   * Peticion a la API para obtener la informaion de las tiendas.
    */
   useEffect(() => {
     loadStores();
   }, []);
 
+  // Peticion a la API para obtener la informacion de los telefonos de las tiendas.
   useEffect(() => {
     loadStoresPhones();
   }, []);
@@ -58,8 +75,8 @@ function Contact() {
             stores?.map((store, index) => (
               <StoreInfo
                 key={index}
-                storeName={store.name}
-                storeAddress={store.address}
+                storeName={store.store_name}
+                storeAddress={store.store_address}
                 storePhone={storesPhones[index].phone}
               />
             ))}

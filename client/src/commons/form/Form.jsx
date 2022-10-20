@@ -10,11 +10,9 @@ import Footer from "../footer/Footer";
 
 function Form({ children, title }) {
   return (
-    <Grid container direction="column" align="center">
-      <Grid item>
-        <Navbar />
-      </Grid>
-      <Grid item={true} container direction="column" pt={15} pb={25}>
+    <div className="container">
+      <Navbar />
+      <Grid container direction="column" justifyContent="center">
         <Grid item>
           <Card sx={{ maxWidth: 300 }}>
             <CardContent>
@@ -29,10 +27,8 @@ function Form({ children, title }) {
           </Button>
         </Grid>
       </Grid>
-      <Grid item>
-        <Footer />
-      </Grid>
-    </Grid>
+      <Footer />
+    </div>
   );
 }
 
