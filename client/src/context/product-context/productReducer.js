@@ -20,19 +20,18 @@ export function ProductReducer(state, action) {
       return { ...state, products: [...action.payload] };
 
     case TYPES.ADD_TO_CART: {
-      const newItem = state.products.find((item) => item[0].variant_name === action.payload);
-      const itemInCart = state.cart.find(
-        (item) => item[0].variant_name === newItem[0].variant_name,
-      );
+      const newItem = state.products.find((item) => item[0].variant_id === action.payload);
+      const itemInCart = state.cart.find((item) => item[0].variant_id === newItem[0].variant_id);
+      let arr;
 
       return itemInCart
         ? {
             ...state,
-            cart: state.cart.map((item) =>
-              item[0]?.product_id === newItem[0]?.product_id
-                ? [...item, { quantity_to_purchase: item[3].quantity_to_purchase + 1 }]
-                : item,
-            ),
+            cart: state.cart.map((item) => {
+              arr = [...item];
+              arr.splice(3, 1, { quantity_to_purchase: arr[3].quantity_to_purchase + 1 });
+              return item[0]?.variant_id === newItem[0]?.variant_id ? arr : item;
+            }),
           }
         : {
             ...state,
@@ -85,18 +84,26 @@ export function ProductReducer(state, action) {
       return { ...state, totalPrice };
     }
 
+    case TYPES.GET_RESUME_TOTAL_PRICE: {
+      const totalPrice = state.cart
+        .map((product) => product[0].variant_price * product[3].quantity_to_purchase)
+        .reduce((a, b) => a + b, 0);
+
+      return { ...state, totalPrice };
+    }
+
     case TYPES.GET_WISHLIST:
       return { ...state, wishlist: [...action.payload] };
 
     case TYPES.REMOVE_FROM_WISHLIST: {
       return {
         ...state,
-        wishlist: state.wishlist.filter((wish) => wish.product_id !== action.payload),
+        wishlist: state.wishlist.filter((wish) => wish.variant_id !== action.payload),
       };
     }
 
     case TYPES.ADD_PRODUCT_TO_BUY: {
-      const product = state.products.find((item) => item[0].variant_name === action.payload);
+      const product = state.products.find((item) => item[0].variant_id === action.payload);
       return {
         ...state,
         productsToBuy: [[...product, { quantity_to_purchase: 1 }]],

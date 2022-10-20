@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
@@ -11,13 +11,19 @@ import ProductContext from "../../../context/product-context/ProductContext";
  * Componente que muestra el resumen de la compra que se va a realizar
  */
 function OrderResume() {
-  const { cart, totalProducts, totalPrice, addProductToBuy } = useContext(ProductContext);
+  const { cart, totalProducts, totalPrice, addProductToBuy, getTotalProducts, getTotalPrice } =
+    useContext(ProductContext);
   const navigate = useNavigate();
 
   const handleBuyCart = () => {
     addProductToBuy(cart, true);
     navigate("/buy");
   };
+
+  useEffect(() => {
+    getTotalProducts();
+    getTotalPrice();
+  }, []);
 
   /**
    * Revisa si hay productos en el carrito para habilitar el boton de compra

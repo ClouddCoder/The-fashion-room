@@ -49,7 +49,7 @@ function Buy() {
   };
 
   useEffect(() => {
-    getTotalProducts();
+    getTotalProducts(true);
     getTotalPrice();
   }, []);
 

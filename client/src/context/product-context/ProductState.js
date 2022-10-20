@@ -80,8 +80,9 @@ function ProductState({ children }) {
   /**
    * Obtiene el total de precio en el carrito de compras
    */
-  const getTotalPrice = () => {
-    dispatch({ type: TYPES.GET_TOTAL_PRICE });
+  const getTotalPrice = (resume = false) => {
+    if (resume) dispatch({ type: TYPES.GET_TOTAL_PRICE });
+    else dispatch({ type: TYPES.GET_RESUME_TOTAL_PRICE });
   };
 
   /**
@@ -110,7 +111,7 @@ function ProductState({ children }) {
       await axios.post(
         "http://localhost:3050/api/set-wishlist",
         {
-          productId: product.product_id,
+          variantId: product,
           remove,
         },
         {
@@ -121,7 +122,7 @@ function ProductState({ children }) {
       );
 
       if (remove) {
-        dispatch({ type: TYPES.REMOVE_FROM_WISHLIST, payload: product.product_id });
+        dispatch({ type: TYPES.REMOVE_FROM_WISHLIST, payload: product });
       }
     } catch (error) {
       console.log(error);

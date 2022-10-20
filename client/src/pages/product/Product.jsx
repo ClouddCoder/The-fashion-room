@@ -15,13 +15,14 @@ import { getProductImage } from "../../assets";
 function Product() {
   const navigate = useNavigate();
   const { id } = useParams();
+  const variantId = parseInt(id, 10);
   const { products, addToCart, addProductToBuy, clearListOfProductsToBuy } =
     useContext(ProductContext);
   const { auth } = useContext(AuthContext);
-  const product = products.find((item) => item[0]?.variant_name === id);
+  const product = products.find((item) => item[0]?.variant_id === variantId);
 
   const handleBuyProduct = () => {
-    addProductToBuy(product[0]?.variant_name);
+    addProductToBuy(product[0]?.variant_id);
     navigate("/buy");
   };
 
@@ -31,7 +32,6 @@ function Product() {
 
   return (
     <div className="container">
-      {console.log("product: ", product)}
       <Navbar />
       <Grid container sx={{ width: "80%", m: "auto 0" }}>
         <Grid item xs={6} sx={{ display: "flex", justifyContent: "center" }}>
@@ -59,7 +59,9 @@ function Product() {
               </Button>
               <Button
                 variant="contained"
-                onClick={auth ? () => addToCart(product[0]?.variant_name) : () => navigate("/login")}
+                onClick={
+                  auth ? () => addToCart(product[0]?.variant_id) : () => navigate("/login")
+                }
               >
                 Agregar al carrito
               </Button>

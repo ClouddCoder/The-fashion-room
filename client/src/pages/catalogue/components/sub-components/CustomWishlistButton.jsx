@@ -11,7 +11,7 @@ function CustomWishlistButton({ product }) {
   const props = { position: "absolute", top: "10px", right: "10px" };
 
   // Verifica si el producto esta en la wishlist.
-  const findWish = wishlist.find((wish) => wish.product_id === product.product_id);
+  const findWish = wishlist.find((wish) => wish.variant_id === product[0]?.variant_id);
   const productAsWish = Boolean(findWish);
 
   const [addWish, setAddWish] = useState(productAsWish);
@@ -26,13 +26,13 @@ function CustomWishlistButton({ product }) {
 
   if (auth) {
     // Si el producto esta en la wishlist, el boton cambia de color
-    // y puede ser removido de la wishlist
+    // y puede ser removido.
     if (addWish) {
       return (
         <IconButton
           component="span"
           onClick={() => {
-            handleWish(product, true);
+            handleWish(product[0].variant_id, true);
             setAddWish(false);
           }}
           sx={props}
@@ -43,12 +43,12 @@ function CustomWishlistButton({ product }) {
     }
 
     // Si el producto no esta en la wishlist, el boton no tiene color y
-    // puede agrega el producto de la wishlist
+    // puede agregar.
     return (
       <IconButton
         component="span"
         onClick={() => {
-          handleWish(product);
+          handleWish(product[0].variant_id);
           setAddWish(true);
         }}
         sx={props}

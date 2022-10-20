@@ -38,7 +38,7 @@ function ProductItem({ product }) {
       >
         <CardActionArea
           sx={{ height: "100%" }}
-          onClick={() => navigate(`/product/${product[0]?.variant_name}`)}
+          onClick={() => navigate(`/product/${product[0]?.variant_id}`)}
         >
           <CardMedia
             component="img"

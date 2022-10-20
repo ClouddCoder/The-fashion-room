@@ -130,8 +130,8 @@ const registerUser = async (req, res, next) => {
  */
 const getProducts = async (req, res, next) => {
   const { category } = req.query;
-  let query = "SELECT product.product_id, product_name, variant_name, variant_price, ";
-  query += "variant_quantity, attribute_type, attribute_value FROM category ";
+  let query = "SELECT variant.product_id, product_name, variant.variant_id, variant_name, ";
+  query += "variant_price, variant_quantity, attribute_type, attribute_value FROM category ";
   query += "JOIN product ON product.category_id = category.category_id ";
   query += "JOIN variant ON variant.product_id = product.product_id ";
   query += "JOIN variant_attribute va ON va.variant_id = variant.variant_id ";
@@ -151,7 +151,8 @@ const getProducts = async (req, res, next) => {
  */
 const buyProduct = async (req, res, next) => {
   const productsToBuy = req.body;
-  const query = "UPDATE variant SET variant_quantity = variant_quantity - $1 WHERE product_id = $2";
+  let query = "UPDATE variant SET variant_quantity = variant_quantity - $1 ";
+  query += "WHERE product_id = $2";
   const { authorization } = req.headers;
   const decodeToken = getAuthorization(authorization);
 
@@ -159,7 +160,10 @@ const buyProduct = async (req, res, next) => {
     /* eslint-disable no-await-in-loop */
     // eslint-disable-next-line no-restricted-syntax
     for (const item of productsToBuy) {
-      const result = await pool.query(query, [item[3]?.quantity_to_purchase, item[0]?.product_id]);
+      const result = await pool.query(query, [
+        item[3]?.quantity_to_purchase,
+        item[0]?.product_id,
+      ]);
 
       if (result.rowCount === 0) {
         return res.status(404).json({
@@ -178,9 +182,9 @@ const buyProduct = async (req, res, next) => {
  * Crea el wishlist de un usuario
  */
 const setWishlist = async (req, res, next) => {
-  const { productId, remove } = req.body;
-  const addQuery = "INSERT INTO wishlist (customer_id, product_id) VALUES ($1, $2)";
-  const removeQuery = "DELETE FROM wishlist WHERE customer_id = $1 AND product_id = $2";
+  const { variantId, remove } = req.body;
+  const addQuery = "INSERT INTO wishlist (customer_id, variant_id) VALUES ($1, $2)";
+  const removeQuery = "DELETE FROM wishlist WHERE customer_id = $1 AND variant_id = $2";
   const { authorization } = req.headers;
   const decodeToken = getAuthorization(authorization);
 
@@ -188,7 +192,7 @@ const setWishlist = async (req, res, next) => {
     return res.status(decodeToken.code).json({ message: decodeToken.message });
   }
 
-  const values = [decodeToken.userId, productId];
+  const values = [decodeToken.userId, variantId];
 
   try {
     if (!remove) {
@@ -203,9 +207,10 @@ const setWishlist = async (req, res, next) => {
 };
 
 const getWishlist = async (req, res, next) => {
-  let query = "SELECT product.product_id, product_name, variant_price FROM wishlist ";
+  let query = "SELECT wishlist.variant_id, product_name, variant_price FROM wishlist ";
   query += "INNER JOIN customer ON customer.customer_id = wishlist.customer_id ";
-  query += "INNER JOIN product ON product.product_id = wishlist.product_id ";
+  query += "INNER JOIN variant ON variant.variant_id = wishlist.variant_id ";
+  query += "INNER JOIN product ON product.product_id = variant.product_id ";
   query += "WHERE customer.customer_id = $1";
   const { authorization } = req.headers;
 
