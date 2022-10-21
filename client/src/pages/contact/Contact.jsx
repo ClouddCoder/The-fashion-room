@@ -44,14 +44,9 @@ function Contact() {
         ),
       );
       getStoresPhones(phones);
-      console.log(phones);
     } catch (error) {
       console.log(error);
     }
-  };
-
-  const getPhones = (storeNit, stores) => {
-    // codigo
   };
 
   /**
@@ -75,9 +70,10 @@ function Contact() {
             stores?.map((store, index) => (
               <StoreInfo
                 key={index}
+                storeNit={store.store_nit}
                 storeName={store.store_name}
                 storeAddress={store.store_address}
-                storePhone={storesPhones[index].phone}
+                storePhone={storesPhones}
               />
             ))}
         </Grid>

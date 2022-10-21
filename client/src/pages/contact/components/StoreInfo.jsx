@@ -6,7 +6,16 @@ import CustomTypography from "../../../commons/custom-typography/CustomTypograph
 /**
  * Componente que muestra la informacion de la tienda
  */
-function StoreInfo({ storeName, storeAddress, storePhone }) {
+function StoreInfo({ storeNit, storeName, storeAddress, storePhone }) {
+  let phones = [];
+  /**
+   * Obtiene los telefonos de la tienda y los retorna en una lista.
+   */
+  const getPhone = () => {
+    phones = storePhone?.filter((store) => store[0]?.store_nit === storeNit);
+    return phones;
+  };
+
   return (
     <Grid item container>
       <Grid item={true} xs={12}>
@@ -23,7 +32,12 @@ function StoreInfo({ storeName, storeAddress, storePhone }) {
         </Grid>
         <Grid item>
           <CustomTypography variant="body2" gutterBottom>
-            Teléfono: {storePhone}
+            Teléfono 1: {getPhone()[0][0]?.phone}
+          </CustomTypography>
+        </Grid>
+        <Grid item>
+          <CustomTypography variant="body2" gutterBottom>
+            Teléfono 2: {getPhone()[0][1]?.phone}
           </CustomTypography>
         </Grid>
       </Grid>

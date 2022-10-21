@@ -19,7 +19,6 @@ function ProductState({ children }) {
   const loadProducts = async (category) => {
     try {
       const response = await axios.get("http://localhost:3050/api/catalogue", {
-        // crossDomain: true,
         params: {
           category,
         },
