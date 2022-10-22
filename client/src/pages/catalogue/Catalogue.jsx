@@ -25,7 +25,7 @@ function Catalogue() {
   const [state, dispatch] = useReducer(CatalogueReducer, catalogueInitialState);
 
   /**
-   * Realiza una peticion a la API para obtener los productos de la categoria correspondiente.
+   * Peticion a la API para obtener los productos de la categoria correspondiente.
    */
   useEffect(() => {
     loadProducts(category);
@@ -46,7 +46,7 @@ function Catalogue() {
    * Filtra los productos de acuerdo a la seleccion del usuario
    */
   const filteredProducts = () => {
-    const filtered = products?.filter((product) => state[product.product_name]);
+    const filtered = products.filter((product) => state[product.product_name]);
 
     if (filtered.length > 0) return filtered;
 
@@ -121,7 +121,7 @@ function Catalogue() {
                 sx={{ width: "95%", height: "100%", m: 0 }}
                 spacing={2}
               >
-                {filteredProducts()?.map((product, index) => (
+                {filteredProducts().map((product, index) => (
                   <ProductItem key={index} product={product} addToCart={addToCart} />
                 ))}
               </Grid>

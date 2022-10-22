@@ -18,7 +18,7 @@ function Contact() {
   const loadStores = async () => {
     try {
       const response = await axios.get("http://localhost:3050/api/stores");
-      const { data } = await response;
+      const { data } = response;
       getStores(data);
     } catch (error) {
       console.log(error);
@@ -50,6 +50,11 @@ function Contact() {
   };
 
   /**
+   * Obtiene los telefonos de la tienda y los retorna en una lista.
+   */
+  const getPhone = (storeNit) => storesPhones.filter((store) => store[0].store_nit === storeNit);
+
+  /**
    * Peticion a la API para obtener la informaion de las tiendas.
    */
   useEffect(() => {
@@ -66,16 +71,15 @@ function Contact() {
       <Navbar />
       <Grid container sx={{ height: "auto" }}>
         <Grid item container justifyContent="center" spacing={2}>
-          {storesPhones &&
-            stores?.map((store, index) => (
-              <StoreInfo
-                key={index}
-                storeNit={store.store_nit}
-                storeName={store.store_name}
-                storeAddress={store.store_address}
-                storePhone={storesPhones}
-              />
-            ))}
+          {stores.map((store, index) => (
+            <StoreInfo
+              key={index}
+              storeNit={store.store_nit}
+              storeName={store.store_name}
+              storeAddress={store.store_address}
+              storePhone={getPhone(store.store_nit)}
+            />
+          ))}
         </Grid>
       </Grid>
       <Footer />

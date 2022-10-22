@@ -27,7 +27,7 @@ function ProductState({ children }) {
 
       // Agrupa los productos por el nombre de su variante
       const variantGroups = Object.values(
-        data?.reduce(
+        data.reduce(
           (acc, item) => ({
             ...acc,
             [item.variant_name]: (acc[item.variant_name] || []).concat(item),
