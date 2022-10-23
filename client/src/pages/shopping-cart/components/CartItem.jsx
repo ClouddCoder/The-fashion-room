@@ -57,7 +57,7 @@ function CartItem({ product, removeFromCart }) {
               <Grid item container justifyContent="center" direction="column">
                 <Grid item>
                   <Button
-                    onClick={() => removeFromCart(product[0]?.product_id)}
+                    onClick={() => removeFromCart(product[0]?.variant_id)}
                     variant="outlined"
                   >
                     Eliminar uno
@@ -65,7 +65,7 @@ function CartItem({ product, removeFromCart }) {
                 </Grid>
                 <Grid item>
                   <Button
-                    onClick={() => removeFromCart(product[0]?.product_id, true)}
+                    onClick={() => removeFromCart(product[0]?.variant_id, true)}
                     variant="outlined"
                   >
                     Eliminar todos

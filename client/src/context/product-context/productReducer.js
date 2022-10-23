@@ -22,15 +22,17 @@ export function ProductReducer(state, action) {
     case TYPES.ADD_TO_CART: {
       const newItem = state.products.find((item) => item[0].variant_id === action.payload);
       const itemInCart = state.cart.find((item) => item[0].variant_id === newItem[0].variant_id);
-      let arr;
+      let itemModified;
 
       return itemInCart
         ? {
             ...state,
             cart: state.cart.map((item) => {
-              arr = [...item];
-              arr.splice(3, 1, { quantity_to_purchase: arr[3].quantity_to_purchase + 1 });
-              return item[0]?.variant_id === newItem[0]?.variant_id ? arr : item;
+              itemModified = [...item];
+              itemModified.splice(3, 1, {
+                quantity_to_purchase: itemModified[3].quantity_to_purchase + 1,
+              });
+              return item[0]?.variant_id === newItem[0]?.variant_id ? itemModified : item;
             }),
           }
         : {
@@ -40,27 +42,30 @@ export function ProductReducer(state, action) {
     }
 
     case TYPES.REMOVE_ONE_FROM_CART: {
-      const itemToDelete = state.cart.find((item) => item.product_id === action.payload);
+      const itemToDelete = state.cart.find((item) => item[0].variant_id === action.payload);
+      let itemModified;
 
-      return itemToDelete.quantity_to_purchase > 1
+      return itemToDelete[3].quantity_to_purchase > 1
         ? {
             ...state,
-            cart: state.cart.map((item) =>
-              item.product_id === action.payload
-                ? { ...item, quantity_to_purchase: item.quantity_to_purchase - 1 }
-                : item,
-            ),
+            cart: state.cart.map((item) => {
+              itemModified = [...item];
+              itemModified.splice(3, 1, {
+                quantity_to_purchase: itemModified[3].quantity_to_purchase - 1,
+              });
+              return item[0]?.variant_id === itemToDelete[0]?.variant_id ? itemModified : item;
+            }),
           }
         : {
             ...state,
-            cart: state.cart.filter((item) => item.product_id !== action.payload),
+            cart: state.cart.filter((item) => item[0].variant_id !== action.payload),
           };
     }
 
     case TYPES.REMOVE_ALL_FROM_CART: {
       return {
         ...state,
-        cart: state.cart.filter((item) => item.product_id !== action.payload),
+        cart: state.cart.filter((item) => item[0].variant_id !== action.payload),
       };
     }
 

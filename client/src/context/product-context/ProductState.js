@@ -14,7 +14,7 @@ function ProductState({ children }) {
   const { token } = useContext(AuthContext);
 
   /**
-   * Obtiene los productos de la API
+   * Obtiene los productos de la API.
    */
   const loadProducts = async (category) => {
     try {
@@ -25,7 +25,7 @@ function ProductState({ children }) {
       });
       const { data } = response;
 
-      // Agrupa los productos por el nombre de su variante
+      // Agrupa los productos por el nombre de su variante.
       const variantGroups = Object.values(
         data.reduce(
           (acc, item) => ({
@@ -43,14 +43,14 @@ function ProductState({ children }) {
   };
 
   /**
-   * Agrega un producto al carrito de compras
+   * Agrega un producto al carrito de compras.
    */
   const addToCart = (id) => {
     dispatch({ type: TYPES.ADD_TO_CART, payload: id });
   };
 
   /**
-   * Elimina un producto del carrito de compras
+   * Elimina un producto del carrito de compras.
    */
   const removeFromCart = (id, all = false) => {
     if (all) {
@@ -59,33 +59,34 @@ function ProductState({ children }) {
       dispatch({ type: TYPES.REMOVE_ONE_FROM_CART, payload: id });
     }
     getTotalProducts();
-    getTotalPrice();
+    getTotalPrice(true);
   };
 
   /**
-   * Limpia el carrito de compras
+   * Limpia el carrito de compras.
    */
   const clearCart = () => {
     dispatch({ type: TYPES.CLEAR_CART });
   };
 
   /**
-   * Obtiene el total de productos en el carrito de compras
+   * Obtiene el total de productos en el carrito de compras.
    */
   const getTotalProducts = () => {
     dispatch({ type: TYPES.GET_TOTAL_PRODUCTS });
   };
 
   /**
-   * Obtiene el total de precio en el carrito de compras
+   * Calcula la cantidad total del carrito de compras
+   * o la cantidad total a pagar.
    */
   const getTotalPrice = (resume = false) => {
-    if (resume) dispatch({ type: TYPES.GET_TOTAL_PRICE });
-    else dispatch({ type: TYPES.GET_RESUME_TOTAL_PRICE });
+    if (resume) dispatch({ type: TYPES.GET_RESUME_TOTAL_PRICE });
+    else dispatch({ type: TYPES.GET_TOTAL_PRICE });
   };
 
   /**
-   * Retorna los productos del wishlist de un usuario
+   * Retorna los productos del wishlist de un usuario.
    */
   const getWishlist = async () => {
     try {

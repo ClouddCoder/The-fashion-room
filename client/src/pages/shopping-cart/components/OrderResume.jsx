@@ -22,7 +22,7 @@ function OrderResume() {
 
   useEffect(() => {
     getTotalProducts();
-    getTotalPrice();
+    getTotalPrice(true);
   }, []);
 
   /**

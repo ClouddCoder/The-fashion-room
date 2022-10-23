@@ -15,7 +15,7 @@ import "./Buy.css";
 
 function Buy() {
   const navigate = useNavigate();
-  const { productsToBuy, createInvoice, getTotalPrice, getTotalProducts } =
+  const { productsToBuy, createInvoice, getTotalPrice, getTotalProducts, totalPrice } =
     useContext(ProductContext);
   const { token } = useContext(AuthContext);
   const spanProps = {
@@ -26,7 +26,7 @@ function Buy() {
   const subtitleProps = { variant: "subtitle1", sx: { fontWeight: "bold" } };
 
   /**
-   * Peticion a la API para actualizar un producto despues de una compra
+   * Peticion a la API para actualizar un producto despues de una compra.
    */
   // eslint-disable-next-line consistent-return
   const buyProducts = async () => {
@@ -88,7 +88,7 @@ function Buy() {
               <CustomTypography {...subtitleProps}>Resumen</CustomTypography>
               <div className="resume">
                 <CustomTypography {...spanProps}>Coste total de los productos</CustomTypography>
-                <CustomTypography {...spanProps}>$ 80000</CustomTypography>
+                <CustomTypography {...spanProps}>`${totalPrice}`</CustomTypography>
               </div>
               <div className="resume">
                 <CustomTypography {...spanProps}>Código del cupon</CustomTypography>
@@ -96,7 +96,7 @@ function Buy() {
               </div>
               <div className="resume">
                 <CustomTypography {...spanProps}>Total de envío</CustomTypography>
-                <CustomTypography {...spanProps}>$ 1000</CustomTypography>
+                <CustomTypography {...spanProps}>{`${totalPrice}`}</CustomTypography>
               </div>
               <Divider sx={{ m: "8px 0" }} />
               <div className="resume">

@@ -24,16 +24,13 @@ function StoreInfo({ storeName, storeAddress, storePhone }) {
             Dirección: {storeAddress}
           </CustomTypography>
         </Grid>
-        <Grid item>
-          <CustomTypography variant="body2" gutterBottom>
-            Teléfono 1: {phones[0]?.phone}
-          </CustomTypography>
-        </Grid>
-        <Grid item>
-          <CustomTypography variant="body2" gutterBottom>
-            Teléfono 2: {phones[1]?.phone}
-          </CustomTypography>
-        </Grid>
+        {phones.map((phone, index) => (
+          <Grid item key={index}>
+            <CustomTypography variant="body2" gutterBottom>
+              {`Teléfono: ${index + 1}`}: {phone.phone}
+            </CustomTypography>
+          </Grid>
+        ))}
       </Grid>
     </Grid>
   );
