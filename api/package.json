@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=test jest --verbose --detectOpenHandles",
+    "test:jest": "NODE_ENV=test jest --verbose --detectOpenHandles",
+    "test:api": "NODE_ENV=test_api nodemon server/index.js",
     "start": "NODE_ENV=production node server/index.js",
     "dev": "NODE_ENV=development nodemon server/index.js"
   },

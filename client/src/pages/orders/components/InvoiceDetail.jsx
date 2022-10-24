@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardContent from "@mui/material/CardContent";
@@ -14,15 +14,19 @@ import "./InvoiceDetail.css";
  * Componente que muestra la informacion de la orden
  */
 function InvoiceDetail({ product }) {
-  const { removeOrder } = useContext(ProductContext);
+  const { removeOrder, getProduct } = useContext(ProductContext);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    getProduct(product.variant_id);
+  }, []);
 
   return (
     <Grid item mt={4} sx={{ display: "flex", justifyContent: "center" }}>
       <Card sx={{ width: "100%" }}>
         <CardHeader
           title="Finalizado"
-          subheader={`Factura #${product.invoice_id}`}
+          subheader={`Factura #${product.order_detail_id}`}
           sx={{ backgroundColor: "#17CCF9", height: "auto", p: "10" }}
         />
         <CardContent
@@ -45,22 +49,22 @@ function InvoiceDetail({ product }) {
               </CustomTypography>
               <div className="purchaseDetails">
                 <CustomTypography variant="body2" sx={{ width: 150 }}>
-                  {`$${product.product_price}`}
+                  {`$${product.variant_price}`}
                 </CustomTypography>
                 <CustomTypography variant="body2" sx={{ width: 150 }}>
-                  {`x${product.quantity}`}
+                  {`x${product.variant_quantity}`}
                 </CustomTypography>
               </div>
             </div>
           </div>
           <div className="purchaseOptions">
             <CustomTypography variant="body2" sx={{ width: 150 }}>
-              {`Total compra: $${product.total_amount}`}
+              {`Total compra: $${product.item_total_cost}`}
             </CustomTypography>
             <Button
               variant="contained"
               onClick={() => {
-                navigate(`/product/${product.product_id}`);
+                navigate(`/product/${product.variant_id}`);
               }}
             >
               Volver a comprar

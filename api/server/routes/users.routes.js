@@ -2,7 +2,8 @@ const { Router } = require("express");
 const {
   loginUser,
   registerUser,
-  getProducts,
+  getAllProducts,
+  getProduct,
   buyProduct,
   setWishlist,
   getWishlist,
@@ -24,7 +25,9 @@ router.post("/register", registerUser);
 
 router.put("/buy", buyProduct);
 
-router.get("/catalogue", getProducts);
+router.get("/catalogue", getAllProducts);
+
+router.get("/product", getProduct);
 
 router.post("/set-wishlist", setWishlist);
 

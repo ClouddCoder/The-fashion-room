@@ -46,7 +46,7 @@ function Catalogue() {
    * Filtra los productos de acuerdo a la seleccion del usuario
    */
   const filteredProducts = () => {
-    const filtered = products.filter((product) => state[product.product_name]);
+    const filtered = products.filter((product) => state[product[0].product_name]);
 
     if (filtered.length > 0) return filtered;
 

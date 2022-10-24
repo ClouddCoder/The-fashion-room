@@ -46,11 +46,11 @@ CREATE OR REPLACE FUNCTION set_order_detail(order_id INTEGER, cust_id INTEGER)
 	LANGUAGE plpgsql;
 
 -- Insert the purchased products from the same order using the order_detail_id created before
-CREATE OR REPLACE FUNCTION set_order_item(order_id INTEGER, prod_id INTEGER, quant INTEGER, amount INTEGER)
+CREATE OR REPLACE FUNCTION set_order_item(order_id INTEGER, var_id INTEGER, var_quant INTEGER, amount INTEGER)
     RETURNS void AS
     $BODY$
     BEGIN
-        INSERT INTO order_item (order_detail_id, product_id, product_quantity, item_total_cost) VALUES (order_id, prod_id, quant, amount);
+        INSERT INTO order_item (order_detail_id, variant_id, product_quantity, item_total_cost) VALUES (order_id, var_id, var_quant, amount);
     END;
     $BODY$
     LANGUAGE plpgsql;
@@ -99,7 +99,7 @@ CREATE TABLE variant (
     variant_price INTEGER NOT NULL CHECK (variant_price > 0),
     variant_quantity INTEGER NOT NULL,
     CONSTRAINT pk_product_variant PRIMARY KEY (variant_id),
-    CONSTRAINT fk_product_id FOREIGN KEY (product_id) REFERENCES product (product_id)
+    CONSTRAINT fk_product_id FOREIGN KEY (product_id) REFERENCES product (product_id) ON DELETE RESTRICT
 );
 
 -- Contains all attributes for product variants
@@ -450,12 +450,12 @@ CREATE SEQUENCE order_detail_id_seq
 CREATE TABLE order_item (
     order_item_id SERIAL,
     order_detail_id INTEGER NOT NULL,
-    product_id INTEGER NOT NULL,
+    variant_id INTEGER NOT NULL,
     product_quantity INTEGER NOT NULL,
     item_total_cost INTEGER NOT NULL,
     CONSTRAINT pk_order_item PRIMARY KEY (order_item_id, order_detail_id),
-    CONSTRAINT fk_order_item_order_detail_id FOREIGN KEY (order_detail_id) REFERENCES order_detail(order_detail_id),
-    CONSTRAINT fk_order_item_product_id FOREIGN KEY (product_id) REFERENCES product(product_id)
+    CONSTRAINT fk_order_item_order_detail_id FOREIGN KEY (order_detail_id) REFERENCES order_detail(order_detail_id) ON DELETE CASCADE,
+    CONSTRAINT fk_order_item_variant_id FOREIGN KEY (variant_id) REFERENCES variant(variant_id) ON DELETE RESTRICT
 );
 
 -- Create store table

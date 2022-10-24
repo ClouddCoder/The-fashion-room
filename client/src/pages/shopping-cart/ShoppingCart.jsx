@@ -16,7 +16,6 @@ function ShoppingCart() {
 
   return (
     <Grid container direction="column">
-      {console.log(cart)}
       <Grid item>
         <Navbar />
       </Grid>

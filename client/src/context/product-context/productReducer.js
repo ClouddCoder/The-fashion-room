@@ -19,6 +19,9 @@ export function ProductReducer(state, action) {
     case TYPES.LOAD_PRODUCTS:
       return { ...state, products: [...action.payload] };
 
+    case TYPES.GET_PRODUCT:
+      return { ...state, products: [...action.payload] };
+
     case TYPES.ADD_TO_CART: {
       const newItem = state.products.find((item) => item[0].variant_id === action.payload);
       const itemInCart = state.cart.find((item) => item[0].variant_id === newItem[0].variant_id);
@@ -130,7 +133,7 @@ export function ProductReducer(state, action) {
     case TYPES.REMOVE_AN_ORDER: {
       return {
         ...state,
-        myOrders: state.myOrders.filter((order) => order.detail_id !== action.payload),
+        myOrders: state.myOrders.filter((order) => order.order_item_id !== action.payload),
       };
     }
 

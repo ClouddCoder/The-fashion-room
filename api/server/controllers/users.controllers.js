@@ -7,7 +7,7 @@ config();
 const jwtPassword = process.env.JWT_PASSWORD;
 
 /**
- * Verifica si el usuario esta autorizado.
+ * Verifies if the user is authorized.
  */
 const getAuthorization = (authorization) => {
   let token;
@@ -33,7 +33,7 @@ const getAuthorization = (authorization) => {
 };
 
 /**
- * Obtiene el usuario según el email y contraseña ingresados
+ * Verifies if the user exists in the database and returns the user information.
  */
 const loginUser = async (req, res, next) => {
   const { userEmail, userPassword } = req.body;
@@ -68,7 +68,7 @@ const loginUser = async (req, res, next) => {
       userEmail,
     };
 
-    const token = await jwt.sign(payload, jwtPassword);
+    const token = jwt.sign(payload, jwtPassword);
 
     return res.json({
       userAuth: true,
@@ -83,7 +83,7 @@ const loginUser = async (req, res, next) => {
 };
 
 /**
- * Registra un usuario nuevo a la base de datos
+ * Creates a new record in the database with the user information.
  */
 const registerUser = async (req, res, next) => {
   // eslint-disable-next-line object-curly-newline
@@ -126,9 +126,9 @@ const registerUser = async (req, res, next) => {
 };
 
 /**
- * Obtiene todos los productos de la base de datos
+ * Gets the information of the specific product's category.
  */
-const getProducts = async (req, res, next) => {
+const getAllProducts = async (req, res, next) => {
   const { category } = req.query;
   let query = "SELECT variant.product_id, product_name, variant.variant_id, variant_name, ";
   query += "variant_price, variant_quantity, attribute_type, attribute_value FROM category ";
@@ -147,7 +147,24 @@ const getProducts = async (req, res, next) => {
 };
 
 /**
- * Actualiza la informacion de un producto despues de realizar una compra
+ * Gets an specific product information.
+ */
+const getProduct = async (req, res, next) => {
+  const { id } = req.query;
+  let query = "SELECT *, product.product_name FROM variant ";
+  query += "JOIN product ON product.product_id = variant.product_id ";
+  query += "WHERE variant_id = $1";
+
+  try {
+    const result = await pool.query(query, [id]);
+    res.json(result.rows);
+  } catch (error) {
+    next(error);
+  }
+};
+
+/**
+ * Updates the product's quantity in the database.
  */
 const buyProduct = async (req, res, next) => {
   const productsToBuy = req.body;
@@ -179,7 +196,8 @@ const buyProduct = async (req, res, next) => {
 };
 
 /**
- * Crea el wishlist de un usuario
+ * Creates new records in the database's wishlist table
+ * every time the user adds a product to the wishlist.
  */
 const setWishlist = async (req, res, next) => {
   const { variantId, remove } = req.body;
@@ -229,7 +247,7 @@ const getWishlist = async (req, res, next) => {
 };
 
 /**
- * Crea una nueva orden despues de cada compra
+ * Creates the order detail every time the user buys products.
  */
 const createInvoice = async (req, res, next) => {
   const productsToBuy = req.body;
@@ -249,15 +267,15 @@ const createInvoice = async (req, res, next) => {
     await pool.query(setOrderDetailQuery, [orderDetailId, decodeToken.userId]);
 
     /**
-     * Recorre el carrito de compras y agrega cada producto a la tabla
-     * que contiene los productos comprados.
+     * Iterates through the products to buy and creates new records
+     * in the table that contains the purchased products.
      */
     /* eslint-disable no-await-in-loop */
     // eslint-disable-next-line no-restricted-syntax
     for (const item of productsToBuy) {
       const orderItemResponse = await pool.query(setOrderItemQuery, [
         orderDetailId,
-        item[0].product_id,
+        item[0].variant_id,
         item[3].quantity_to_purchase,
         item[0].variant_price * item[3].quantity_to_purchase,
       ]);
@@ -277,7 +295,7 @@ const createInvoice = async (req, res, next) => {
 };
 
 /**
- * Obtiene la informacion de las tiendas de la base de datos
+ * Gets the store information.
  */
 const getStores = async (req, res, next) => {
   const query = "SELECT * FROM store";
@@ -291,7 +309,7 @@ const getStores = async (req, res, next) => {
 };
 
 /**
- * Obtiene los telefonos de las tiendas de la base de datos
+ * Gets the store's phone number.
  */
 const getStoresPhones = async (req, res, next) => {
   const query = "SELECT * FROM store_phone";
@@ -304,15 +322,16 @@ const getStoresPhones = async (req, res, next) => {
 };
 
 /**
- * Obtiene la informacion detallada de cada factura
+ * Gets the user's order information.
  */
 const getOrderDetail = async (req, res, next) => {
-  let query = "SELECT invoice_detail.detail_id, invoice_detail.invoice_id, ";
-  query += "invoice_detail.product_id, purchase_date, ";
-  query += "product_name, quantity, product_price, total_amount FROM invoice_detail ";
-  query += "INNER JOIN invoice ON invoice.invoice_id = invoice_detail.invoice_id ";
-  query += "INNER JOIN product ON product.product_id = invoice_detail.product_id ";
-  query += "WHERE customer_id = $1";
+  let query = "SELECT od.order_detail_id, order_item.order_item_id, ";
+  query += "product.product_id, purchase_date, product_name, variant.variant_id, ";
+  query += "variant_quantity, variant_price, item_total_cost FROM order_item ";
+  query += "INNER JOIN order_detail od ON od.order_detail_id = order_item.order_detail_id ";
+  query += "INNER JOIN variant ON variant.variant_id = order_item.variant_id ";
+  query += "INNER JOIN product ON product.product_id = variant.product_id ";
+  query += "WHERE od.customer_id = $1";
   const { authorization } = req.headers;
   const decodeToken = getAuthorization(authorization);
 
@@ -329,12 +348,11 @@ const getOrderDetail = async (req, res, next) => {
 };
 
 /**
- * Elimina un producto comprado.
+ * Deletes an order that user has made.
  */
 const removeOrderDetail = async (req, res, next) => {
-  const { detailId } = req.body;
-  const query = "DELETE FROM invoice_detail WHERE detail_id = $1";
-  const values = [detailId];
+  const { orderDetailId } = req.body;
+  const query = "DELETE FROM order_item WHERE order_item_id = $1";
   const { authorization } = req.headers;
   const decodeToken = getAuthorization(authorization);
 
@@ -343,7 +361,7 @@ const removeOrderDetail = async (req, res, next) => {
   }
 
   try {
-    await pool.query(query, values);
+    await pool.query(query, [orderDetailId]);
     return res.json({ message: "success" });
   } catch (error) {
     next(error);
@@ -353,7 +371,8 @@ const removeOrderDetail = async (req, res, next) => {
 module.exports = {
   loginUser,
   registerUser,
-  getProducts,
+  getAllProducts,
+  getProduct,
   buyProduct,
   setWishlist,
   getWishlist,

@@ -20,12 +20,15 @@ function Orders() {
   }, []);
 
   /**
-   * Carga los productos de la base de datos para que el usuario
-   * pueda volver a comprar alguno de los productos.
+   * Trae los productos de la base de datos para que el usuario
+   * pueda volver a comprar.
    */
+
+  /*
   useEffect(() => {
     loadProducts();
   }, []);
+  */
 
   return (
     <div className="container">

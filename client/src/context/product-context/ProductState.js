@@ -43,6 +43,25 @@ function ProductState({ children }) {
   };
 
   /**
+   * Gets one product information.
+   */
+  const getProduct = async (id) => {
+    try {
+      const response = await axios.get("http://localhost:3050/api/product", {
+        params: {
+          id,
+        },
+      });
+
+      const { data } = response;
+      console.log(data);
+      dispatch({ type: TYPES.GET_PRODUCT, payload: data });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  /**
    * Agrega un producto al carrito de compras.
    */
   const addToCart = (id) => {
@@ -172,7 +191,7 @@ function ProductState({ children }) {
     try {
       axios.delete("http://localhost:3050/api/remove-order", {
         data: {
-          detailId: product.detail_id,
+          orderDetailId: product.order_item_id,
         },
 
         headers: {
@@ -181,7 +200,7 @@ function ProductState({ children }) {
       });
       dispatch({
         type: TYPES.REMOVE_AN_ORDER,
-        payload: product.detail_id,
+        payload: product.order_item_id,
       });
     } catch (error) {
       console.log(error);
@@ -203,7 +222,7 @@ function ProductState({ children }) {
         }),
       });
       const data = await res.json();
-      dispatch({ type: TYPES.CREATE_INVOICE, payload: data.invoiceId });
+      dispatch({ type: TYPES.CREATE_INVOICE, payload: data.orderDetailId });
     } catch (error) {
       console.log(error);
     }
@@ -229,6 +248,7 @@ function ProductState({ children }) {
       addWish: state.addWish,
       productsToBuy: state.productsToBuy,
       loadProducts,
+      getProduct,
       addToCart,
       removeFromCart,
       clearCart,

@@ -16,7 +16,6 @@ function Wishlist() {
 
   return (
     <div className="container">
-      {console.log(wishlist)}
       <Navbar />
       <Grid container direction="row" sx={{ width: "60%", mt: 4, mb: 4 }}>
         {wishlist?.map((wish, i) => (
