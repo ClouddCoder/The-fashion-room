@@ -130,12 +130,12 @@ const registerUser = async (req, res, next) => {
  */
 const getAllProducts = async (req, res, next) => {
   const { category } = req.query;
-  let query = "SELECT variant.product_id, product_name, variant.variant_id, variant_name, ";
-  query += "variant_price, variant_quantity, attribute_type, attribute_value FROM category ";
-  query += "JOIN product ON product.category_id = category.category_id ";
-  query += "JOIN variant ON variant.product_id = product.product_id ";
+  let query = "SELECT variant.*, product.product_name, ";
+  query += "attribute.attribute_type, attribute.attribute_value FROM variant ";
   query += "JOIN variant_attribute va ON va.variant_id = variant.variant_id ";
   query += "JOIN attribute ON attribute.attribute_id = va.attribute_id ";
+  query += "JOIN product ON product.product_id = variant.product_id ";
+  query += "JOIN category ON category.category_id = product.category_id ";
   query += "WHERE category_name = $1";
 
   try {
