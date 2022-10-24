@@ -54,8 +54,17 @@ function ProductState({ children }) {
       });
 
       const { data } = response;
-      console.log(data);
-      dispatch({ type: TYPES.GET_PRODUCT, payload: data });
+      const groupProduct = Object.values(
+        data.reduce(
+          (acc, item) => ({
+            ...acc,
+            [item.variant_name]: (acc[item.variant_name] || []).concat(item),
+          }),
+          {},
+        ),
+      );
+
+      dispatch({ type: TYPES.GET_PRODUCT, payload: groupProduct });
     } catch (error) {
       console.log(error);
     }
