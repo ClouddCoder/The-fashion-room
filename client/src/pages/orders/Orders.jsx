@@ -10,7 +10,7 @@ import Footer from "../../commons/footer/Footer";
  * Componente que muestra las compras realizadas por el usuario
  */
 function Orders() {
-  const { loadProducts, loadOrderDetail, myOrders } = useContext(ProductContext);
+  const { loadOrderDetail, myOrders } = useContext(ProductContext);
 
   /**
    * Obtiene las compras realizadas por el usuario.
@@ -18,17 +18,6 @@ function Orders() {
   useEffect(() => {
     loadOrderDetail();
   }, []);
-
-  /**
-   * Trae los productos de la base de datos para que el usuario
-   * pueda volver a comprar.
-   */
-
-  /*
-  useEffect(() => {
-    loadProducts();
-  }, []);
-  */
 
   return (
     <div className="container">

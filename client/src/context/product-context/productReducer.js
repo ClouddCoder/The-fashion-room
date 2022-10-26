@@ -20,7 +20,7 @@ export function ProductReducer(state, action) {
       return { ...state, products: [...action.payload] };
 
     case TYPES.GET_PRODUCT:
-      return { ...state, products: [...action.payload] };
+      return { ...state, products: [...state.products, ...action.payload] };
 
     case TYPES.ADD_TO_CART: {
       const newItem = state.products.find((item) => item[0].variant_id === action.payload);

@@ -19,7 +19,7 @@ function InvoiceDetail({ product }) {
 
   useEffect(() => {
     getProduct(product.variant_id);
-  }, []);
+  }, [product.variant_id]);
 
   return (
     <Grid item mt={4} sx={{ display: "flex", justifyContent: "center" }}>

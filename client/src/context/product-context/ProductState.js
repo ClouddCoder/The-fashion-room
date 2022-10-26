@@ -63,7 +63,7 @@ function ProductState({ children }) {
           {},
         ),
       );
-
+      console.log(groupProduct);
       dispatch({ type: TYPES.GET_PRODUCT, payload: groupProduct });
     } catch (error) {
       console.log(error);

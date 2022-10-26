@@ -68,6 +68,7 @@ CREATE OR REPLACE FUNCTION set_product_variant(prod_gender VARCHAR(25), prod_cat
     $BODY$
     LANGUAGE plpgsql;
 
+-- Contains product's category
 CREATE TABLE category (
     category_id SERIAL,
     category_name VARCHAR(25) NOT NULL,
@@ -76,7 +77,7 @@ CREATE TABLE category (
 
 INSERT INTO category (category_name) VALUES ('calzado'), ('camisas'), ('pantalones'), ('deportiva'), ('bolsos');
 
--- Create product table
+-- Contains different products
 CREATE TABLE product (
     product_id INTEGER,
     category_id INTEGER,
@@ -91,7 +92,7 @@ CREATE SEQUENCE product_product_id_seq
     INCREMENT BY 215
     OWNED BY product.product_id;
 
--- Represents all products variants
+-- Contains product' variants
 CREATE TABLE variant (
     variant_id SERIAL,
     product_id INTEGER,
@@ -102,7 +103,7 @@ CREATE TABLE variant (
     CONSTRAINT fk_product_id FOREIGN KEY (product_id) REFERENCES product (product_id) ON DELETE RESTRICT
 );
 
--- Contains all attributes for product variants
+-- Contains all attributes of the product's variants
 CREATE TABLE attribute (
     attribute_id SERIAL,
     attribute_type VARCHAR(25),
@@ -412,7 +413,7 @@ VALUES
 ((SELECT variant_id FROM variant WHERE variant_name = 'zapatos-azules-niña'), (SELECT attribute_id FROM attribute WHERE attribute_value = '2000')),
 ((SELECT variant_id FROM variant WHERE variant_name = 'zapatos-azules-niña'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'azul'));
 
--- Create customer table
+-- Contains all customers.
 CREATE TABLE customer (
     customer_id SERIAL,
     customer_name VARCHAR(25) NOT NULL CHECK (customer_name <> ''),
@@ -422,7 +423,7 @@ CREATE TABLE customer (
     CONSTRAINT pk_customer PRIMARY KEY (customer_id)
 );
 
--- Create wishlist table
+-- Contains customer's wishlist.
 CREATE TABLE wishlist (
     customer_id INTEGER,
     variant_id INTEGER,
@@ -431,7 +432,7 @@ CREATE TABLE wishlist (
     CONSTRAINT fk_wishlist_variant FOREIGN KEY (variant_id) REFERENCES variant (variant_id)
 );
 
--- Set the customer orders
+-- Contains all customer's orders.
 CREATE TABLE order_detail (
     order_detail_id INTEGER,
     customer_id INTEGER NOT NULL,
@@ -446,7 +447,7 @@ CREATE SEQUENCE order_detail_id_seq
     INCREMENT BY 1
     OWNED BY order_detail.order_detail_id;
 
--- Contains the products purchased by the customer
+-- Contains the customer's purchased products for each order.
 CREATE TABLE order_item (
     order_item_id SERIAL,
     order_detail_id INTEGER NOT NULL,
@@ -458,7 +459,7 @@ CREATE TABLE order_item (
     CONSTRAINT fk_order_item_variant_id FOREIGN KEY (variant_id) REFERENCES variant(variant_id) ON DELETE RESTRICT
 );
 
--- Create store table
+-- Contains store's information.
 CREATE TABLE store (
     store_nit INTEGER,
     store_name VARCHAR(30) NOT NULL CHECK (store_name <> ''),
@@ -479,7 +480,7 @@ INSERT INTO store (store_nit, store_name, store_address) VALUES (nextval('nit_se
 INSERT INTO store (store_nit, store_name, store_address) VALUES (nextval('nit_seq'), 'THE FASHION ROOM OCCIDENTE', 'CR 5 N1-2');
 INSERT INTO store (store_nit, store_name, store_address) VALUES (nextval('nit_seq'), 'THE FASHION ROOM SUROCCIDENTE', 'CR 7 N56-32');
 
--- Create a table containing the store's phone numbers
+-- Contains store's phone numbers.
 CREATE TABLE store_phone (
     store_nit INTEGER,
     phone BIGINT NOT NULL,
