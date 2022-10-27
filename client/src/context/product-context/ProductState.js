@@ -7,14 +7,14 @@ import { productInitialState, ProductReducer } from "./productReducer";
 import { TYPES } from "../../actions/productActions";
 
 /**
- * Estado inicial de los productos
+ * Initial state.
  */
 function ProductState({ children }) {
   const [state, dispatch] = useReducer(ProductReducer, productInitialState);
   const { token } = useContext(AuthContext);
 
   /**
-   * Obtiene los productos de la API.
+   * Gets all variant's products.
    */
   const loadProducts = async (category) => {
     try {
@@ -25,7 +25,7 @@ function ProductState({ children }) {
       });
       const { data } = response;
 
-      // Agrupa los productos por el nombre de su variante.
+      // Groups the products by variant's name.
       const variantGroups = Object.values(
         data.reduce(
           (acc, item) => ({
@@ -43,7 +43,7 @@ function ProductState({ children }) {
   };
 
   /**
-   * Gets one product information.
+   * Gets one product's information.
    */
   const getProduct = async (id) => {
     try {
@@ -63,7 +63,6 @@ function ProductState({ children }) {
           {},
         ),
       );
-      console.log(groupProduct);
       dispatch({ type: TYPES.GET_PRODUCT, payload: groupProduct });
     } catch (error) {
       console.log(error);
@@ -71,14 +70,14 @@ function ProductState({ children }) {
   };
 
   /**
-   * Agrega un producto al carrito de compras.
+   * Adds one product to the shopping cart list.
    */
   const addToCart = (id) => {
     dispatch({ type: TYPES.ADD_TO_CART, payload: id });
   };
 
   /**
-   * Elimina un producto del carrito de compras.
+   * Removes one or all products from the shopping cart list.
    */
   const removeFromCart = (id, all = false) => {
     if (all) {
@@ -91,22 +90,22 @@ function ProductState({ children }) {
   };
 
   /**
-   * Limpia el carrito de compras.
+   * Cleans the shopping cart list.
    */
   const clearCart = () => {
     dispatch({ type: TYPES.CLEAR_CART });
   };
 
   /**
-   * Obtiene el total de productos en el carrito de compras.
+   * Gets the number of products inside the shopping cart.
    */
   const getTotalProducts = () => {
     dispatch({ type: TYPES.GET_TOTAL_PRODUCTS });
   };
 
   /**
-   * Calcula la cantidad total del carrito de compras
-   * o la cantidad total a pagar.
+   * Gets shopping cart's total price or
+   * the total amount to pay.
    */
   const getTotalPrice = (resume = false) => {
     if (resume) dispatch({ type: TYPES.GET_RESUME_TOTAL_PRICE });
@@ -114,7 +113,7 @@ function ProductState({ children }) {
   };
 
   /**
-   * Retorna los productos del wishlist de un usuario.
+   * Gets user's whislist.
    */
   const getWishlist = async () => {
     try {
@@ -131,8 +130,8 @@ function ProductState({ children }) {
   };
 
   /**
-   * Agrega o elimina un producto a la tabla wishlist de la base de datos.
-   * Tambien actualiza el estado de wishlist.
+   * Sets or removes a product from the wishlist.
+   * Also updates wishlist's state.
    */
   const handleWish = async (product, remove = false) => {
     try {
@@ -158,8 +157,8 @@ function ProductState({ children }) {
   };
 
   /**
-   * Agrega un producto para ser commprado. En caso de que sea el carrito de compras
-   * el parametro sera un array de productos.
+   * Inserts a product to be purchased. If argument is the shopping cart,
+   * it will be a list.
    */
   const addProductToBuy = (product, fromCart = false) => {
     if (fromCart) {
@@ -170,14 +169,15 @@ function ProductState({ children }) {
   };
 
   /**
-   * Limpia la lista de productos a comprar cuando el usuario salga de la pagina de compra.
+   * Cleans list of products to buy when the user leaves
+   * the checkout page.
    */
   const clearListOfProductsToBuy = () => {
     dispatch({ type: TYPES.CLEAR_LIST_OF_PRODUCTS_TO_BUY });
   };
 
   /**
-   * Peticion a la API para obtener la informacion de las compras realizadas por el usuario.
+   * Gets the purchase information made by the user.
    */
   const loadOrderDetail = async () => {
     try {
@@ -194,7 +194,7 @@ function ProductState({ children }) {
   };
 
   /**
-   * Elimina una compra realizada por el usuario.
+   * Removes an order made by the user.
    */
   const removeOrder = async (product) => {
     try {
@@ -217,7 +217,7 @@ function ProductState({ children }) {
   };
 
   /**
-   * Peticion para crear una factura despues de que el usuario realice una compra.
+   * Sets a new order after each purchase.
    */
   const createInvoice = async (productsToBuy) => {
     try {
@@ -238,7 +238,7 @@ function ProductState({ children }) {
   };
 
   /**
-   * Borra los datos de los productos guardados al cerrar sesion.
+   * Removes the product data after user log out.
    */
   const resetProductState = () => {
     dispatch({ type: TYPES.RESET_PRODUCT_STATE });

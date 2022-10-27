@@ -18,10 +18,8 @@ function Product() {
   const variantId = parseInt(id, 10);
   const { products, addToCart, addProductToBuy, clearListOfProductsToBuy } =
     useContext(ProductContext);
-  console.log(products);
   const { auth } = useContext(AuthContext);
   const product = products.find((item) => item[0]?.variant_id === variantId);
-  console.log(product);
 
   const handleBuyProduct = () => {
     addProductToBuy(product[0]?.variant_id);
