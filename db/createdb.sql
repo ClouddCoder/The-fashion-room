@@ -10,6 +10,7 @@ CREATE TABLE product (
     product_id INTEGER,
     category_id INTEGER,
     product_name VARCHAR(25) NOT NULL CHECK (product_name <> ''),
+    shipping_cost INTEGER NOT NULL,
     CONSTRAINT pk_product PRIMARY KEY (product_id),
     CONSTRAINT fk_category FOREIGN KEY (category_id) REFERENCES category (category_id)
 );

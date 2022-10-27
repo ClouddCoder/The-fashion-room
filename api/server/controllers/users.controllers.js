@@ -130,7 +130,7 @@ const registerUser = async (req, res, next) => {
  */
 const getAllProducts = async (req, res, next) => {
   const { category } = req.query;
-  let query = "SELECT variant.*, product.product_name, ";
+  let query = "SELECT variant.*, product.product_name, product.shipping_cost, ";
   query += "attribute.attribute_type, attribute.attribute_value FROM variant ";
   query += "JOIN variant_attribute va ON va.variant_id = variant.variant_id ";
   query += "JOIN attribute ON attribute.attribute_id = va.attribute_id ";
@@ -151,7 +151,7 @@ const getAllProducts = async (req, res, next) => {
  */
 const getProduct = async (req, res, next) => {
   const { id } = req.query;
-  let query = "SELECT variant.*, product.product_name, ";
+  let query = "SELECT variant.*, product.product_name, product.shipping_cost, ";
   query += "attribute.attribute_type, attribute.attribute_value FROM variant ";
   query += "JOIN variant_attribute va ON va.variant_id = variant.variant_id ";
   query += "JOIN attribute ON attribute.attribute_id = va.attribute_id ";

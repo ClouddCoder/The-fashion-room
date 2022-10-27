@@ -18,12 +18,19 @@ function ProductToBuy({ product }) {
             alt={product[0]?.product_name}
           />
           <div className="description">
-            <CustomTypography variant="body2" sx={{ fontSize: "14px" }}>
-              {product[0]?.product_name}
-            </CustomTypography>
+            <div>
+              <CustomTypography variant="body2" sx={{ fontSize: "14px" }}>
+                {product[0]?.product_name}
+              </CustomTypography>
+            </div>
             <div>
               <CustomTypography variant="body2" sx={{ fontSize: "14px" }}>
                 ${product[0]?.variant_price}
+              </CustomTypography>
+            </div>
+            <div>
+              <CustomTypography variant="body2" sx={{ fontSize: "14px" }}>
+                ${product[0]?.shipping_cost}
               </CustomTypography>
             </div>
           </div>

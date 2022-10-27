@@ -26,7 +26,8 @@ function Buy() {
   const subtitleProps = { variant: "subtitle1", sx: { fontWeight: "bold" } };
 
   /**
-   * Peticion a la API para actualizar un producto despues de una compra.
+   * Updates the product's available quantity in the database after
+   * the purchase.
    */
   // eslint-disable-next-line consistent-return
   const buyProducts = async () => {
