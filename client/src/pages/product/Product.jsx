@@ -16,10 +16,15 @@ function Product() {
   const navigate = useNavigate();
   const { id } = useParams();
   const variantId = parseInt(id, 10);
-  const { products, addToCart, addProductToBuy, clearListOfProductsToBuy } =
+  const { products, addToCart, addProductToBuy, clearListOfProductsToBuy, getProduct } =
     useContext(ProductContext);
   const { auth } = useContext(AuthContext);
-  const product = products.find((item) => item[0]?.variant_id === variantId);
+  const product = products.find((item) => item[0]?.variant_id === variantId) || [];
+
+  // Gets the product information.
+  useEffect(() => {
+    getProduct(id);
+  }, []);
 
   const handleBuyProduct = () => {
     addProductToBuy(product[0]?.variant_id);
