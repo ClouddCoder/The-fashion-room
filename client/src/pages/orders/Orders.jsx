@@ -10,10 +10,18 @@ import Footer from "../../commons/footer/Footer";
  * Componente que muestra las compras realizadas por el usuario
  */
 function Orders() {
-  const { loadOrderDetail, myOrders } = useContext(ProductContext);
+  const { loadOrderDetail, myOrders, clearProductsList } = useContext(ProductContext);
 
   /**
-   * Obtiene las compras realizadas por el usuario.
+   * Clears the products list to avoid duplicates
+   * when the user wants to buy the product again.
+   */
+  useEffect(() => {
+    clearProductsList();
+  }, []);
+
+  /**
+   * Gets the orders made by the user.
    */
   useEffect(() => {
     loadOrderDetail();

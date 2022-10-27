@@ -70,6 +70,11 @@ function ProductState({ children }) {
   };
 
   /**
+   * Clears the products list to avoid duplicates.
+   */
+  const clearProductsList = () => dispatch({ type: TYPES.CLEAR_PRODUCTS_LIST });
+
+  /**
    * Adds one product to the shopping cart list.
    */
   const addToCart = (id) => {
@@ -258,6 +263,7 @@ function ProductState({ children }) {
       productsToBuy: state.productsToBuy,
       loadProducts,
       getProduct,
+      clearProductsList,
       addToCart,
       removeFromCart,
       clearCart,
