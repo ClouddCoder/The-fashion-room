@@ -20,7 +20,6 @@ function Product() {
     useContext(ProductContext);
   const { auth } = useContext(AuthContext);
   const product = products.find((item) => item[0]?.variant_id === variantId) || [];
-  console.log(products);
 
   // Gets the product information.
   useEffect(() => {

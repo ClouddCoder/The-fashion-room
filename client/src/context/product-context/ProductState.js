@@ -75,6 +75,13 @@ function ProductState({ children }) {
   const clearProductsList = () => dispatch({ type: TYPES.CLEAR_PRODUCTS_LIST });
 
   /**
+   * Gets the total shipping cost.
+   */
+  const getTotalShippingCost = () => {
+    dispatch({ type: TYPES.TOTAL_SHIPPING_COST });
+  };
+
+  /**
    * Adds one product to the shopping cart list.
    */
   const addToCart = (id) => {
@@ -261,9 +268,11 @@ function ProductState({ children }) {
       invoiceId: state.invoiceId,
       addWish: state.addWish,
       productsToBuy: state.productsToBuy,
+      shippingCost: state.shippingCost,
       loadProducts,
       getProduct,
       clearProductsList,
+      getTotalShippingCost,
       addToCart,
       removeFromCart,
       clearCart,
@@ -289,6 +298,7 @@ function ProductState({ children }) {
       state.invoiceId,
       state.addWish,
       state.productsToBuy,
+      state.shippingCost,
       token,
     ],
   );

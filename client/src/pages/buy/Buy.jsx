@@ -15,8 +15,15 @@ import "./Buy.css";
 
 function Buy() {
   const navigate = useNavigate();
-  const { productsToBuy, createInvoice, getTotalPrice, getTotalProducts, totalPrice } =
-    useContext(ProductContext);
+  const {
+    productsToBuy,
+    createInvoice,
+    getTotalPrice,
+    getTotalProducts,
+    totalPrice,
+    getTotalShippingCost,
+    shippingCost,
+  } = useContext(ProductContext);
   const { token } = useContext(AuthContext);
   const spanProps = {
     variant: "body2",
@@ -54,6 +61,10 @@ function Buy() {
     getTotalPrice();
   }, []);
 
+  useEffect(() => {
+    getTotalShippingCost();
+  }, []);
+
   return (
     <div className="container">
       <Navbar />
@@ -89,7 +100,7 @@ function Buy() {
               <CustomTypography {...subtitleProps}>Resumen</CustomTypography>
               <div className="resume">
                 <CustomTypography {...spanProps}>Coste total de los productos</CustomTypography>
-                <CustomTypography {...spanProps}>`${totalPrice}`</CustomTypography>
+                <CustomTypography {...spanProps}>{`$${totalPrice}`}</CustomTypography>
               </div>
               <div className="resume">
                 <CustomTypography {...spanProps}>Código del cupon</CustomTypography>
@@ -97,7 +108,7 @@ function Buy() {
               </div>
               <div className="resume">
                 <CustomTypography {...spanProps}>Total de envío</CustomTypography>
-                <CustomTypography {...spanProps}>{`${totalPrice}`}</CustomTypography>
+                <CustomTypography {...spanProps}>{`$${shippingCost}`}</CustomTypography>
               </div>
               <Divider sx={{ m: "8px 0" }} />
               <div className="resume">
@@ -108,7 +119,9 @@ function Buy() {
                 >
                   Total
                 </CustomTypography>
-                <CustomTypography {...spanProps}>$ 81000</CustomTypography>
+                <CustomTypography {...spanProps}>
+                  {`$${totalPrice + shippingCost}`}
+                </CustomTypography>
               </div>
               <Button
                 variant="contained"

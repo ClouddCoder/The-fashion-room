@@ -13,7 +13,8 @@ import ProductContext from "../../context/product-context/ProductContext";
  * Componente que muestra la factura de la compra
  */
 function Invoice() {
-  const { productsToBuy, totalPrice, clearCart, invoiceId } = useContext(ProductContext);
+  const { productsToBuy, totalPrice, clearCart, invoiceId, shippingCost } =
+    useContext(ProductContext);
   const navigate = useNavigate();
 
   return (
@@ -58,26 +59,42 @@ function Invoice() {
                         {product[0].product_name} x{product[3].quantity_to_purchase}
                       </CustomTypography>
                       <CustomTypography variant="body2">
-                        ${product[0].variant_price * product[3].quantity_to_purchase}
+                        {`$${product[0].variant_price * product[3].quantity_to_purchase}`}
                       </CustomTypography>
                     </Grid>
                   ))}
                 </Grid>
               </Grid>
-              <Grid item container justifyContent="center">
+              <Grid item>
                 <Divider />
               </Grid>
-              <Grid
-                item
-                container
-                sx={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                }}
-              >
-                <CustomTypography variant="h4">Total</CustomTypography>
-                <CustomTypography variant="body2">${totalPrice}</CustomTypography>
+              <Grid item container>
+                <Grid
+                  item
+                  container
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
+                >
+                  <CustomTypography variant="h4">Costo de envío</CustomTypography>
+                  <CustomTypography variant="body2">{`$${shippingCost}`}</CustomTypography>
+                </Grid>
+                <Grid
+                  item
+                  container
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
+                >
+                  <CustomTypography variant="h4">Total</CustomTypography>
+                  <CustomTypography variant="body2">
+                    {`$${totalPrice + shippingCost}`}
+                  </CustomTypography>
+                </Grid>
               </Grid>
               <Grid item align="center">
                 <Button

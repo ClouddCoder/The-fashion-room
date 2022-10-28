@@ -9,6 +9,7 @@ export const productInitialState = {
   invoiceId: 0,
   myOrders: [], // All user's purchases
   productsToBuy: [], // Products ready to buy
+  shippingCost: 0,
 };
 
 /**
@@ -24,6 +25,13 @@ export function ProductReducer(state, action) {
 
     case TYPES.CLEAR_PRODUCTS_LIST:
       return { ...state, products: [] };
+
+    case TYPES.TOTAL_SHIPPING_COST: {
+      // First we get every product's shipping cost and then sum them.
+      const allShippingCosts = state.productsToBuy.map((product) => product[0].shipping_cost);
+      const total = allShippingCosts.reduce((a, b) => a + b);
+      return { ...state, shippingCost: total };
+    }
 
     case TYPES.ADD_TO_CART: {
       const newItem = state.products.find((item) => item[0].variant_id === action.payload);
