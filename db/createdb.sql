@@ -26,21 +26,52 @@ CREATE TABLE variant (
     CONSTRAINT fk_product_id FOREIGN KEY (product_id) REFERENCES product (product_id) ON DELETE RESTRICT
 );
 
--- Contains all attributes of the product's variants.
-CREATE TABLE attribute (
-    attribute_id SERIAL,
-    attribute_type VARCHAR(25),
-    attribute_value VARCHAR(25),
-    CONSTRAINT pk_attribute PRIMARY KEY (attribute_id)
+-- Contains different genders for the product.
+CREATE TABLE gender (
+    gender_id SERIAL,
+    gender_value VARCHAR(25),
+    CONSTRAINT pk_attribute PRIMARY KEY (gender_id)
 );
 
--- Joining table for product_variant and attribute.
-CREATE TABLE variant_attribute (
+-- Joining table for variant and gender.
+CREATE TABLE variant_gender (
     variant_id INTEGER,
-    attribute_id INTEGER,
-    CONSTRAINT pk_variant_attribute PRIMARY KEY (variant_id, attribute_id),
-    CONSTRAINT fk_product_variant_id FOREIGN KEY (variant_id) REFERENCES variant (variant_id),
-    CONSTRAINT fk_attribute_id FOREIGN KEY (attribute_id) REFERENCES attribute (attribute_id)
+    gender_id INTEGER,
+    CONSTRAINT pk_variant_gender PRIMARY KEY (variant_id, gender_id),
+    CONSTRAINT fk_variant_id FOREIGN KEY (variant_id) REFERENCES variant (variant_id),
+    CONSTRAINT fk_gender_id FOREIGN KEY (gender_id) REFERENCES gender (gender_id)
+);
+
+-- Contains different shipping costs for the product.
+CREATE TABLE shipping_cost (
+    shipping_id SERIAL,
+    shipping_value INTEGER,
+    CONSTRAINT pk_attribute PRIMARY KEY (shipping_id)
+);
+
+-- Joining table for variant and shipping_cost.
+CREATE TABLE variant_shipping_cost (
+    variant_id INTEGER,
+    shipping_id INTEGER,
+    CONSTRAINT pk_variant_attribute PRIMARY KEY (variant_id, shipping_id),
+    CONSTRAINT fk_variant_id FOREIGN KEY (variant_id) REFERENCES variant (variant_id),
+    CONSTRAINT fk_shipping_id FOREIGN KEY (shipping_id) REFERENCES shipping_cost (shipping_id)
+);
+
+-- Contains different colors for the product.
+CREATE TABLE color (
+    color_id SERIAL,
+    color_value VARCHAR(25),
+    CONSTRAINT pk_attribute PRIMARY KEY (color_id)
+);
+
+-- Joining table for variant and color.
+CREATE TABLE variant_color (
+    variant_id INTEGER,
+    color_id INTEGER,
+    CONSTRAINT pk_variant_attribute PRIMARY KEY (variant_id, color_id),
+    CONSTRAINT fk_variant_id FOREIGN KEY (variant_id) REFERENCES variant (variant_id),
+    CONSTRAINT fk_color_id FOREIGN KEY (color_id) REFERENCES color (color_id)
 );
 
 -- Contains all customers.

@@ -8,25 +8,31 @@ INSERT INTO category (category_name) VALUES
 ('deportiva'),
 ('bolsos');
 
-INSERT INTO attribute (attribute_type, attribute_value)
+INSERT INTO gender (gender_value)
 VALUES
-('genero', 'hombre'),
-('genero', 'mujer'),
-('genero', 'niño'),
-('genero', 'niña'),
-('genero', 'bebe'),
-('genero', 'unisex'),
-('envio', 0),
-('envio', 1000),
-('envio', 2000),
-('envio', 10000),
-('color', 'negro'),
-('color', 'blanco'),
-('color', 'gris'),
-('color', 'rojo'),
-('color', 'azul'),
-('color', 'amarillo'),
-('color', 'verde');
+('hombre'),
+('mujer'),
+('niño'),
+('niña'),
+('bebe'),
+('unisex');
+
+INSERT INTO shipping_cost (shipping_value)
+VALUES
+( 0),
+(1000),
+(2000),
+(10000);
+
+INSERT INTO color (color_value)
+VALUES
+('negro'),
+('blanco'),
+('gris'),
+('rojo'),
+('azul'),
+('amarillo'),
+('verde');
 
 -- Insert available products to the product table.
 INSERT INTO product (product_id, category_id, product_name, shipping_cost)
@@ -84,14 +90,22 @@ VALUES
 ((SELECT product_id FROM product WHERE product_name = 'zapatos'), 'zapatos-verdes-niña', 80000, 25),
 ((SELECT product_id FROM product WHERE product_name = 'zapatos'), 'zapatos-azules-niña', 80000, 41);
 
-INSERT INTO variant_attribute (variant_id, attribute_id)
-VALUES
 -- blusa-negra-mujer
-((SELECT variant_id FROM variant WHERE variant_name = 'blusa-negra-mujer'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'mujer')),
-((SELECT variant_id FROM variant WHERE variant_name = 'blusa-negra-mujer'), (SELECT attribute_id FROM attribute WHERE attribute_value = '1000')),
-((SELECT variant_id FROM variant WHERE variant_name = 'blusa-negra-mujer'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'negro')),
+INSERT INTO variant_gender (variant_id, gender_id)
+VALUES
+((SELECT variant_id FROM variant WHERE variant_name = 'blusa-negra-mujer'), (SELECT gender_id FROM gender WHERE gender_value = 'mujer'));
+
+INSERT INTO variant_shipping_cost (variant_id, shipping_id)
+VALUES
+((SELECT variant_id FROM variant WHERE variant_name = 'blusa-negra-mujer'), (SELECT shipping_id FROM shipping_cost WHERE shipping_value = '1000'));
+
+INSERT INTO variant_color (variant_id, color_id)
+VALUES
+((SELECT variant_id FROM variant WHERE variant_name = 'blusa-negra-mujer'), (SELECT color_id FROM color WHERE color_value = 'negro'));
 
 -- blusa-blanca-mujer
+INSERT INTO variant_gender (variant_id, gender_id)
+VALUES
 ((SELECT variant_id FROM variant WHERE variant_name = 'blusa-blanca-mujer'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'mujer')),
 ((SELECT variant_id FROM variant WHERE variant_name = 'blusa-blanca-mujer'), (SELECT attribute_id FROM attribute WHERE attribute_value = '1000')),
 ((SELECT variant_id FROM variant WHERE variant_name = 'blusa-blanca-mujer'), (SELECT attribute_id FROM attribute WHERE attribute_value = 'blanco')),
