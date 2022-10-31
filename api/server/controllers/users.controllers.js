@@ -130,13 +130,17 @@ const registerUser = async (req, res, next) => {
  */
 const getAllProducts = async (req, res, next) => {
   const { category } = req.query;
-  let query = "SELECT variant.*, product.product_name, product.shipping_cost, ";
-  query += "attribute.attribute_type, attribute.attribute_value FROM variant ";
-  query += "JOIN variant_attribute va ON va.variant_id = variant.variant_id ";
-  query += "JOIN attribute ON attribute.attribute_id = va.attribute_id ";
-  query += "JOIN product ON product.product_id = variant.product_id ";
-  query += "JOIN category ON category.category_id = product.category_id ";
-  query += "WHERE category_name = $1";
+  let query = "SELECT v.*, p.product_name, p.shipping_cost, ";
+  query += "g.*, sc.*, c.* FROM variant v ";
+  query += "JOIN variant_gender vg ON vg.variant_id = v.variant_id ";
+  query += "JOIN gender g ON g.gender_id = vg.gender_id ";
+  query += "JOIN variant_shipping_cost vsc ON vsc.variant_id = v.variant_id ";
+  query += "JOIN shipping_cost sc ON sc.shipping_id = vsc.shipping_id ";
+  query += "JOIN variant_color vc ON vc.variant_id = v.variant_id ";
+  query += "JOIN color c ON c.color_id = vc.color_id ";
+  query += "JOIN product p ON p.product_id = v.product_id ";
+  query += "JOIN category ca ON ca.category_id = p.category_id ";
+  query += "WHERE ca.category_name = $1";
 
   try {
     const result = await pool.query(query, [category]);
@@ -151,12 +155,16 @@ const getAllProducts = async (req, res, next) => {
  */
 const getProduct = async (req, res, next) => {
   const { id } = req.query;
-  let query = "SELECT variant.*, product.product_name, product.shipping_cost, ";
-  query += "attribute.attribute_type, attribute.attribute_value FROM variant ";
-  query += "JOIN variant_attribute va ON va.variant_id = variant.variant_id ";
-  query += "JOIN attribute ON attribute.attribute_id = va.attribute_id ";
-  query += "JOIN product ON product.product_id = variant.product_id ";
-  query += "WHERE variant.variant_id = $1";
+  let query = "SELECT v.*, p.product_name, p.shipping_cost, ";
+  query += "g.*, sc.*, c.* FROM variant v ";
+  query += "JOIN variant_gender vg ON vg.variant_id = v.variant_id ";
+  query += "JOIN gender g ON g.gender_id = vg.gender_id ";
+  query += "JOIN variant_shipping_cost vsc ON vsc.variant_id = v.variant_id ";
+  query += "JOIN shipping_cost sc ON sc.shipping_id = vsc.shipping_id ";
+  query += "JOIN variant_color vc ON vc.variant_id = v.variant_id ";
+  query += "JOIN color c ON c.color_id = vc.color_id ";
+  query += "JOIN product p ON p.product_id = v.product_id ";
+  query += "WHERE v.variant_id = $1";
 
   try {
     const result = await pool.query(query, [id]);

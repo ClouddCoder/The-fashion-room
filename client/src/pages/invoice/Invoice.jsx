@@ -52,14 +52,14 @@ function Invoice() {
                     <Grid
                       item
                       container
-                      key={product[0].product_id}
+                      key={product.product_id}
                       sx={{ display: "flex", justifyContent: "space-between" }}
                     >
                       <CustomTypography variant="body2">
-                        {product[0].product_name} x{product[3].quantity_to_purchase}
+                        {product.product_name} x{product.quantity_to_purchase}
                       </CustomTypography>
                       <CustomTypography variant="body2">
-                        {`$${product[0].variant_price * product[3].quantity_to_purchase}`}
+                        {`$${product.variant_price * product.quantity_to_purchase}`}
                       </CustomTypography>
                     </Grid>
                   ))}

@@ -19,7 +19,7 @@ function Product() {
   const { products, addToCart, addProductToBuy, clearListOfProductsToBuy, getProduct } =
     useContext(ProductContext);
   const { auth } = useContext(AuthContext);
-  const product = products.find((item) => item[0]?.variant_id === variantId) || [];
+  const product = products.find((item) => item.variant_id === variantId) || [];
 
   // Gets the product information.
   useEffect(() => {
@@ -27,7 +27,7 @@ function Product() {
   }, []);
 
   const handleBuyProduct = () => {
-    addProductToBuy(product[0]?.variant_id);
+    addProductToBuy(product.variant_id);
     navigate("/buy");
   };
 
@@ -41,18 +41,18 @@ function Product() {
       <Grid container sx={{ width: "80%", m: "auto 0" }}>
         <Grid item xs={6} sx={{ display: "flex", justifyContent: "center" }}>
           <img
-            src={getProductImage(product[0]?.product_name)}
-            alt={product[0]?.product_name}
+            src={getProductImage(product.product_name)}
+            alt={product.product_name}
             width="450px"
             height="450px"
           />
         </Grid>
         <Grid item container xs={6} direction="column" justifyContent="center">
           <Grid item>
-            <h1>{product[0]?.product_name}</h1>
+            <h1>{product.product_name}</h1>
           </Grid>
           <Grid item>
-            <span>{product[0]?.variant_price}</span>
+            <span>{product.variant_price}</span>
           </Grid>
           <Grid item>
             <div style={{ display: "flex" }}>
@@ -64,9 +64,7 @@ function Product() {
               </Button>
               <Button
                 variant="contained"
-                onClick={
-                  auth ? () => addToCart(product[0]?.variant_id) : () => navigate("/login")
-                }
+                onClick={auth ? () => addToCart(product.variant_id) : () => navigate("/login")}
               >
                 Agregar al carrito
               </Button>

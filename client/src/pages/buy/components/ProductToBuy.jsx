@@ -14,23 +14,23 @@ function ProductToBuy({ product }) {
           <CardMedia
             component="img"
             sx={{ width: 120, height: 120 }}
-            image={getProductImage(product[0]?.product_name)}
-            alt={product[0]?.product_name}
+            image={getProductImage(product.product_name)}
+            alt={product.product_name}
           />
           <div className="description">
             <div>
               <CustomTypography variant="body2" sx={{ fontSize: "14px" }}>
-                {product[0]?.product_name}
+                {product.product_name}
               </CustomTypography>
             </div>
             <div>
               <CustomTypography variant="body2" sx={{ fontSize: "14px" }}>
-                ${product[0]?.variant_price}
+                ${product.variant_price}
               </CustomTypography>
             </div>
             <div>
               <CustomTypography variant="body2" sx={{ fontSize: "14px" }}>
-                ${product[0]?.shipping_cost}
+                ${product.shipping_cost}
               </CustomTypography>
             </div>
           </div>

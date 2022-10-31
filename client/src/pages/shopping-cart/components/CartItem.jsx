@@ -34,38 +34,33 @@ function CartItem({ product, removeFromCart }) {
       >
         <Grid container spacing={2}>
           <Grid item>
-            <Img alt="complex" src={getProductImage(product[0]?.product_name)} />
+            <Img alt="complex" src={getProductImage(product.product_name)} />
           </Grid>
           <Grid item={true} xs={12} sm container>
             <Grid item={true} xs container direction="column" spacing={2}>
               <Grid item={true} xs mt={3}>
                 <CustomTypography gutterBottom variant="subtitle1">
-                  {product[0]?.product_name}
+                  {product.product_name}
                 </CustomTypography>
                 <CustomTypography variant="body2" gutterBottom>
-                  Cantidad a comprar x{product[3]?.quantity_to_purchase}
+                  Cantidad a comprar x{product.quantity_to_purchase}
                 </CustomTypography>
                 <CustomTypography variant="body2" color="text.secondary">
-                  Total = ${product[0].variant_price * product[3].quantity_to_purchase}
+                  Total = ${product.variant_price * product.quantity_to_purchase}
                 </CustomTypography>
               </Grid>
             </Grid>
             <Grid item>
-              <CustomTypography variant="subtitle1">
-                ${product[0].variant_price}
-              </CustomTypography>
+              <CustomTypography variant="subtitle1">${product.variant_price}</CustomTypography>
               <Grid item container justifyContent="center" direction="column">
                 <Grid item>
-                  <Button
-                    onClick={() => removeFromCart(product[0]?.variant_id)}
-                    variant="outlined"
-                  >
+                  <Button onClick={() => removeFromCart(product.variant_id)} variant="outlined">
                     Eliminar uno
                   </Button>
                 </Grid>
                 <Grid item>
                   <Button
-                    onClick={() => removeFromCart(product[0]?.variant_id, true)}
+                    onClick={() => removeFromCart(product.variant_id, true)}
                     variant="outlined"
                   >
                     Eliminar todos

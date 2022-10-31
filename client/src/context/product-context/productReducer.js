@@ -28,38 +28,31 @@ export function ProductReducer(state, action) {
 
     case TYPES.TOTAL_SHIPPING_COST: {
       // First we get every product's shipping cost and then sum them.
-      const allShippingCosts = state.productsToBuy.map((product) => product[0].shipping_cost);
+      const allShippingCosts = state.productsToBuy.map((product) => product.shipping_cost);
       const total = allShippingCosts.reduce((a, b) => a + b);
       return { ...state, shippingCost: total };
     }
 
     case TYPES.ADD_TO_CART: {
-      const newItem = state.products.find((item) => item[0].variant_id === action.payload);
-      const itemInCart = state.cart.find((item) => item[0].variant_id === newItem[0].variant_id);
-      let itemModified;
+      const newItem = state.products.find((item) => item.variant_id === action.payload);
+      const itemInCart = state.cart.find((item) => item.variant_id === newItem.variant_id);
 
       return itemInCart
         ? {
             ...state,
-            cart: state.cart.map((item) => {
-              itemModified = [...item];
-              itemModified.splice(3, 1, {
-                quantity_to_purchase: itemModified[3].quantity_to_purchase + 1,
-              });
-              return item[0]?.variant_id === newItem[0]?.variant_id ? itemModified : item;
-            }),
+            cart: state.cart.map((item) => {}),
           }
         : {
             ...state,
-            cart: [...state.cart, [...newItem, { quantity_to_purchase: 1 }]],
+            cart: { ...state.cart, quantity_to_purchase: 1 },
           };
     }
 
     case TYPES.REMOVE_ONE_FROM_CART: {
-      const itemToDelete = state.cart.find((item) => item[0].variant_id === action.payload);
+      const itemToDelete = state.cart.find((item) => item.variant_id === action.payload);
       let itemModified;
 
-      return itemToDelete[3].quantity_to_purchase > 1
+      return itemToDelete.quantity_to_purchase > 1
         ? {
             ...state,
             cart: state.cart.map((item) => {
@@ -67,19 +60,19 @@ export function ProductReducer(state, action) {
               itemModified.splice(3, 1, {
                 quantity_to_purchase: itemModified[3].quantity_to_purchase - 1,
               });
-              return item[0]?.variant_id === itemToDelete[0]?.variant_id ? itemModified : item;
+              return item.variant_id === itemToDelete.variant_id ? itemModified : item;
             }),
           }
         : {
             ...state,
-            cart: state.cart.filter((item) => item[0].variant_id !== action.payload),
+            cart: state.cart.filter((item) => item.variant_id !== action.payload),
           };
     }
 
     case TYPES.REMOVE_ALL_FROM_CART: {
       return {
         ...state,
-        cart: state.cart.filter((item) => item[0].variant_id !== action.payload),
+        cart: state.cart.filter((item) => item.variant_id !== action.payload),
       };
     }
 
@@ -89,7 +82,7 @@ export function ProductReducer(state, action) {
 
     case TYPES.GET_TOTAL_PRODUCTS: {
       const totalProducts = state.cart
-        .map((product) => product[3].quantity_to_purchase)
+        .map((product) => product.quantity_to_purchase)
         .reduce((a, b) => a + b, 0);
 
       return { ...state, totalProducts };
@@ -97,7 +90,7 @@ export function ProductReducer(state, action) {
 
     case TYPES.GET_TOTAL_PRICE: {
       const totalPrice = state.productsToBuy
-        .map((product) => product[0].variant_price * product[3].quantity_to_purchase)
+        .map((product) => product.variant_price * product.quantity_to_purchase)
         .reduce((a, b) => a + b, 0);
 
       return { ...state, totalPrice };
@@ -105,7 +98,7 @@ export function ProductReducer(state, action) {
 
     case TYPES.GET_RESUME_TOTAL_PRICE: {
       const totalPrice = state.cart
-        .map((product) => product[0].variant_price * product[3].quantity_to_purchase)
+        .map((product) => product.variant_price * product.quantity_to_purchase)
         .reduce((a, b) => a + b, 0);
 
       return { ...state, totalPrice };
@@ -122,10 +115,10 @@ export function ProductReducer(state, action) {
     }
 
     case TYPES.ADD_PRODUCT_TO_BUY: {
-      const product = state.products.find((item) => item[0].variant_id === action.payload);
+      const product = state.products.find((item) => item.variant_id === action.payload);
       return {
         ...state,
-        productsToBuy: [[...product, { quantity_to_purchase: 1 }]],
+        productsToBuy: [{ ...product, quantity_to_purchase: 1 }],
       };
     }
 

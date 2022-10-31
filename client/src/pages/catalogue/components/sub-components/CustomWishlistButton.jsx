@@ -11,7 +11,7 @@ function CustomWishlistButton({ product }) {
   const props = { position: "absolute", top: "10px", right: "10px" };
 
   // Verifica si el producto esta en la wishlist.
-  const findWish = wishlist.find((wish) => wish.variant_id === product[0]?.variant_id);
+  const findWish = wishlist.find((wish) => wish.variant_id === product.variant_id);
   const productAsWish = Boolean(findWish);
 
   const [addWish, setAddWish] = useState(productAsWish);
@@ -32,7 +32,7 @@ function CustomWishlistButton({ product }) {
         <IconButton
           component="span"
           onClick={() => {
-            handleWish(product[0].variant_id, true);
+            handleWish(product.variant_id, true);
             setAddWish(false);
           }}
           sx={props}
@@ -48,7 +48,7 @@ function CustomWishlistButton({ product }) {
       <IconButton
         component="span"
         onClick={() => {
-          handleWish(product[0].variant_id);
+          handleWish(product.variant_id);
           setAddWish(true);
         }}
         sx={props}
