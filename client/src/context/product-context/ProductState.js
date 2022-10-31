@@ -25,17 +25,28 @@ function ProductState({ children }) {
       });
       const { data } = response;
 
-      // Groups the products by variant's name.
       const variantGroups = Object.values(
         data.reduce(
+          // Groups the products by variant's name.
           (acc, item) => ({
             ...acc,
             [item.variant_name]: (acc[item.variant_name] || []).concat(item),
           }),
           {},
         ),
+      ).map((element) =>
+        // Joins the element with the same variant_id in one object.
+        element.reduce((previousValue, currentValue) => {
+          for (const i in currentValue) {
+            if (previousValue[i] !== currentValue[i]) {
+              currentValue = { ...previousValue, [i]: currentValue[i] };
+            }
+          }
+          return currentValue;
+        }),
       );
 
+      console.log(variantGroups);
       dispatch({ type: TYPES.LOAD_PRODUCTS, payload: variantGroups });
     } catch (error) {
       console.log(error);

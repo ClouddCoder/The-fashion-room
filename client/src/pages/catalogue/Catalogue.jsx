@@ -10,12 +10,13 @@ import CustomTypography from "../../commons/custom-typography/CustomTypography";
 import Navbar from "../../commons/navbar/Navbar";
 import Footer from "../../commons/footer/Footer";
 import ProductFilters from "./components/ProductFilters";
-import { catalogueActions } from "./catalogue-reducer/catalogueActions";
-import { catalogueInitialState, CatalogueReducer } from "./catalogue-reducer/catalogueReducer";
+import { catalogueActions } from "./reducer/catalogueActions";
+import { catalogueInitialState, CatalogueReducer } from "./reducer/catalogueReducer";
 import "./Catalogue.css";
 
 /**
- * Componente que muestra el catalogo de productos
+ * This component shows all products by their category or filtered the
+ * user selection.
  */
 function Catalogue() {
   const { category } = useParams();
@@ -25,7 +26,7 @@ function Catalogue() {
   const [state, dispatch] = useReducer(CatalogueReducer, catalogueInitialState);
 
   /**
-   * Peticion a la API para obtener los productos de la categoria correspondiente.
+   * Gets the products by their category.
    */
   useEffect(() => {
     loadProducts(category);
@@ -43,11 +44,10 @@ function Catalogue() {
   };
 
   /**
-   * Filtra los productos de acuerdo a la seleccion del usuario
+   * Filters all products according with the user selection.
    */
   const filteredProducts = () => {
     const filtered = products.filter((product) => state[product[0].product_name]);
-
     if (filtered.length > 0) return filtered;
 
     return products;

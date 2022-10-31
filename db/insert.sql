@@ -1,4 +1,12 @@
-INSERT INTO category (category_name) VALUES ('calzado'), ('camisas'), ('pantalones'), ('deportiva'), ('bolsos');
+INSERT INTO category (category_name) VALUES
+('accesorios-moda'),
+('calzado'),
+('camisas'),
+('camisetas'),
+('blusas'),
+('pantalones-y-jeans'),
+('deportiva'),
+('bolsos');
 
 INSERT INTO attribute (attribute_type, attribute_value)
 VALUES
@@ -23,11 +31,11 @@ VALUES
 -- Insert available products to the product table.
 INSERT INTO product (product_id, category_id, product_name, shipping_cost)
 VALUES
-(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'camisas'), 'blusa', 1000),
+(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'blusas'), 'blusa', 1000),
 (nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'camisas'), 'camisa', 1000),
-(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'camisas'), 'corbata', 1000),
-(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'pantalones'), 'pantalon', 2000),
-(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'pantalones'), 'pantaloneta', 2000),
+(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'accesorios-moda'), 'corbata', 1000),
+(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'pantalones-y-jeans'), 'pantalon', 2000),
+(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'pantalones-y-jeans'), 'pantaloneta', 2000),
 (nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'zapatos', 5000);
 
 INSERT INTO variant (product_id, variant_name, variant_price, variant_quantity)
