@@ -9,14 +9,16 @@ export const catalogueInitialState = {
   zapatos: false,
   hombre: false,
   mujer: false,
-  sinGenero: false,
-  niños: false,
-  niñas: false,
-  bebes: false,
+  unisex: false,
+  niño: false,
+  niña: false,
+  bebe: false,
   calzado: false,
+  camisas: false,
   camisetas: false,
-  ropaDeportiva: false,
-  bolsosYMaletas: false,
+  blusas: false,
+  deportiva: false,
+  bolsos: false,
 };
 
 export function CatalogueReducer(state, action) {

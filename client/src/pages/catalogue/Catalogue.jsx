@@ -47,7 +47,18 @@ function Catalogue() {
    * Filters all products according with the user selection.
    */
   const filteredProducts = () => {
-    const filtered = products.filter((product) => state[product.product_name]);
+    let filtered = [];
+    // eslint-disable-next-line no-restricted-syntax
+    for (const value of state) {
+      filtered = [
+        ...filtered,
+        ...products.filter((product) =>
+          Object.keys(product).find((key) => product[key] === state[value]),
+        ),
+      ];
+    }
+
+    console.log("Valores del filtered: ", filtered);
     if (filtered.length > 0) return filtered;
 
     return products;
@@ -55,6 +66,7 @@ function Catalogue() {
 
   return (
     <div className="container">
+      {console.log(filteredProducts())}
       <Navbar />
       <Grid
         container
