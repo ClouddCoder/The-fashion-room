@@ -188,10 +188,7 @@ const buyProduct = async (req, res, next) => {
     /* eslint-disable no-await-in-loop */
     // eslint-disable-next-line no-restricted-syntax
     for (const item of productsToBuy) {
-      const result = await pool.query(query, [
-        item[3]?.quantity_to_purchase,
-        item[0]?.product_id,
-      ]);
+      const result = await pool.query(query, [item.quantity_to_purchase, item.product_id]);
 
       if (result.rowCount === 0) {
         return res.status(404).json({
@@ -286,9 +283,9 @@ const createInvoice = async (req, res, next) => {
     for (const item of productsToBuy) {
       const orderItemResponse = await pool.query(setOrderItemQuery, [
         orderDetailId,
-        item[0].variant_id,
-        item[3].quantity_to_purchase,
-        item[0].variant_price * item[3].quantity_to_purchase,
+        item.variant_id,
+        item.quantity_to_purchase,
+        item.variant_price * item.quantity_to_purchase,
       ]);
 
       if (orderItemResponse.rowCount === 0) {

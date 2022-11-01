@@ -40,28 +40,29 @@ export function ProductReducer(state, action) {
       return itemInCart
         ? {
             ...state,
-            cart: state.cart.map((item) => {}),
+            cart: state.cart.map((item) =>
+              item.variant_id === itemInCart.variant_id
+                ? { ...item, quantity_to_purchase: item.quantity_to_purchase + 1 }
+                : item,
+            ),
           }
         : {
             ...state,
-            cart: { ...state.cart, quantity_to_purchase: 1 },
+            cart: [...state.cart, { ...newItem, quantity_to_purchase: 1 }],
           };
     }
 
     case TYPES.REMOVE_ONE_FROM_CART: {
       const itemToDelete = state.cart.find((item) => item.variant_id === action.payload);
-      let itemModified;
 
       return itemToDelete.quantity_to_purchase > 1
         ? {
             ...state,
-            cart: state.cart.map((item) => {
-              itemModified = [...item];
-              itemModified.splice(3, 1, {
-                quantity_to_purchase: itemModified[3].quantity_to_purchase - 1,
-              });
-              return item.variant_id === itemToDelete.variant_id ? itemModified : item;
-            }),
+            cart: state.cart.map((item) =>
+              item.variant_id === itemToDelete.variant_id
+                ? { ...item, quantity_to_purchase: item.quantity_to_purchase - 1 }
+                : item,
+            ),
           }
         : {
             ...state,

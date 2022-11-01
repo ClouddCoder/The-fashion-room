@@ -48,11 +48,11 @@ function Invoice() {
               >
                 <CustomTypography variant="h4">Productos</CustomTypography>
                 <Grid item container direction="column">
-                  {productsToBuy?.map((product) => (
+                  {productsToBuy?.map((product, i) => (
                     <Grid
                       item
                       container
-                      key={product.product_id}
+                      key={i}
                       sx={{ display: "flex", justifyContent: "space-between" }}
                     >
                       <CustomTypography variant="body2">
