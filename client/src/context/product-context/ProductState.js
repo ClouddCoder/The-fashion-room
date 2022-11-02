@@ -42,6 +42,19 @@ function ProductState({ children }) {
       }),
     );
 
+    // Separates every product's variant by its product name.
+    const productGroups = Object.values(
+      variantGroups.reduce(
+        // Groups the products by variant's name.
+        (acc, item) => ({
+          ...acc,
+          [item.product_name]: (acc[item.product_name] || []).concat(item),
+        }),
+        {},
+      ),
+    );
+    console.log(productGroups);
+
     return variantGroups;
   };
 

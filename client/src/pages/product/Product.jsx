@@ -6,6 +6,7 @@ import ProductContext from "../../context/product-context/ProductContext";
 import AuthContext from "../../context/auth-context/AuthContext";
 import Navbar from "../../commons/navbar/Navbar";
 import Footer from "../../commons/footer/Footer";
+import CustomTypography from "../../commons/custom-typography/CustomTypography";
 import { getProductImage } from "../../assets";
 
 /**
@@ -49,10 +50,19 @@ function Product() {
         </Grid>
         <Grid item container xs={6} direction="column" justifyContent="center">
           <Grid item>
-            <h1>{product.product_name}</h1>
+            <CustomTypography variant="h4">{product.product_name}</CustomTypography>
           </Grid>
           <Grid item>
-            <span>{product.variant_price}</span>
+            <CustomTypography variant="body2">99 reviews</CustomTypography>
+          </Grid>
+          <Grid item>
+            <CustomTypography variant="body2">{product.variant_price}</CustomTypography>
+          </Grid>
+          <Grid item>
+            <CustomTypography variant="body2">Color: Azul</CustomTypography>
+          </Grid>
+          <Grid item>
+            <CustomTypography variant="body2">Color: Azul</CustomTypography>
           </Grid>
           <Grid item>
             <div style={{ display: "flex" }}>
