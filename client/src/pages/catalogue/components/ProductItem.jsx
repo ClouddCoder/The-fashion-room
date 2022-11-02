@@ -1,4 +1,4 @@
-import React /* useState, useContext, useEffect */ from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -38,20 +38,20 @@ function ProductItem({ product }) {
       >
         <CardActionArea
           sx={{ height: "100%" }}
-          onClick={() => navigate(`/product/${product.variant_id}`)}
+          onClick={() => navigate(`/product/${product[0].variant_id}`)}
         >
           <CardMedia
             component="img"
             height="140"
-            image={getProductImage(product.product_name)}
-            alt={product.product_name}
+            image={getProductImage("zapatos")}
+            alt={product[0].product_name}
           />
           <CardContent sx={{ p: "10px" }}>
             <CustomTypography gutterBottom variant="h5" sx={{ fontSize: "16px" }}>
-              {product.product_name}
+              {product[0].product_name}
             </CustomTypography>
             <CustomTypography variant="body2" color="text.secondary">
-              Cantidad disponible {product.variant_quantity}
+              Cantidad disponible {product[0].variant_quantity}
             </CustomTypography>
           </CardContent>
         </CardActionArea>

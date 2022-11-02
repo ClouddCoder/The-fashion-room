@@ -55,7 +55,7 @@ function ProductState({ children }) {
     );
     console.log(productGroups);
 
-    return variantGroups;
+    return productGroups;
   };
 
   /**
