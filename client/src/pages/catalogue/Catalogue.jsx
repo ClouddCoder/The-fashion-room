@@ -47,18 +47,17 @@ function Catalogue() {
    * Filters all products according with the user selection.
    */
   const filteredProducts = () => {
-    let filtered = [];
-    // eslint-disable-next-line no-restricted-syntax
-    for (const value of state) {
-      filtered = [
-        ...filtered,
-        ...products.filter((product) =>
-          Object.keys(product).find((key) => product[key] === state[value]),
-        ),
-      ];
-    }
+    const filtered = products.filter((product) => {
+      const allKeys = Object.keys(product);
+      for (const item of allKeys) {
+        if (Boolean(product[item]) === state[product[item]]) {
+          return true;
+        }
+      }
+      return false;
+    });
 
-    console.log("Valores del filtered: ", filtered);
+    console.log(filtered);
     if (filtered.length > 0) return filtered;
 
     return products;
@@ -66,7 +65,6 @@ function Catalogue() {
 
   return (
     <div className="container">
-      {console.log(filteredProducts())}
       <Navbar />
       <Grid
         container

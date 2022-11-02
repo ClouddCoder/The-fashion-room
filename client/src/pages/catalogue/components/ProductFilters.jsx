@@ -41,9 +41,9 @@ function ProductFilters({ check, handleChange }) {
           <FormControlLabel
             control={
               <Checkbox
-                checked={check.sinGenero}
+                checked={check.unisex}
                 onChange={handleChange}
-                name="sinGenero"
+                name="unisex"
                 size="small"
                 sx={{ p: "3px" }}
               />
@@ -54,9 +54,9 @@ function ProductFilters({ check, handleChange }) {
           <FormControlLabel
             control={
               <Checkbox
-                checked={check.niños}
+                checked={check.niño}
                 onChange={handleChange}
-                name="niños"
+                name="niño"
                 size="small"
                 sx={{ p: "3px" }}
               />
@@ -67,9 +67,9 @@ function ProductFilters({ check, handleChange }) {
           <FormControlLabel
             control={
               <Checkbox
-                checked={check.niñas}
+                checked={check.niña}
                 onChange={handleChange}
-                name="niñas"
+                name="niña"
                 size="small"
                 sx={{ p: "3px" }}
               />
@@ -80,9 +80,9 @@ function ProductFilters({ check, handleChange }) {
           <FormControlLabel
             control={
               <Checkbox
-                checked={check.bebes}
+                checked={check.bebe}
                 onChange={handleChange}
-                name="bebes"
+                name="bebe"
                 size="small"
                 sx={{ p: "3px" }}
               />
