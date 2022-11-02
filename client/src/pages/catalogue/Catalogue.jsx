@@ -48,7 +48,10 @@ function Catalogue() {
    */
   const filteredProducts = () => {
     const filtered = products.filter((product) => {
+      // Gets all product's object keys to know which state is checked.
+      // Product's object keys do not have the same name as the state's keys.
       const allKeys = Object.keys(product);
+      // eslint-disable-next-line no-restricted-syntax
       for (const item of allKeys) {
         if (Boolean(product[item]) === state[product[item]]) {
           return true;
@@ -57,7 +60,6 @@ function Catalogue() {
       return false;
     });
 
-    console.log(filtered);
     if (filtered.length > 0) return filtered;
 
     return products;
