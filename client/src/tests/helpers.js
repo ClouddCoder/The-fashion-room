@@ -10,8 +10,9 @@ import Home from "../pages/home/Home";
 import Invoice from "../pages/invoice/Invoice";
 import Navbar from "../commons/navbar/Navbar";
 import Footer from "../commons/footer/Footer";
+import Product from "../pages/product/Product";
 
-// AuthContext props for testing login component
+// AuthContext props for testing login component.
 export const loginAuthContextProps = {
   setAuth: jest.fn(),
   setUserId: jest.fn(),
@@ -23,14 +24,14 @@ export const loginAuthContextProps = {
   setToken: jest.fn(),
 };
 
-// AuthContext props for testing other components
+// AuthContext props for testing other components.
 export const authContextProps = {
   auth: true,
   token: "token",
   user: "brayan",
 };
 
-// products for testing catalogue component
+// products for testing catalogue component.
 export const mockProducts = [
   { product_id: "656589", product_name: "Blusa", product_price: "45000", product_stock: "100" },
   { product_id: "656804", product_name: "Camisa", product_price: "45000", product_stock: "100" },
@@ -60,16 +61,32 @@ export const mockProducts = [
   },
 ];
 
-// ProductContext props for testing catalogue component when is rendering
+// product' variants for testing product component.
+export const mockProductVariants = [
+  {
+    color_value: "negro",
+  },
+];
+
+// ProductContext props for testing catalogue component.
 export const productContextProps = {
   addToCart: jest.fn(),
   loadProducts: jest.fn(),
+  getProduct: jest.fn(),
+  clearListOfProductsToBuy: jest.fn(),
   products: mockProducts,
   temporaryWishlist: [],
 };
 
+// ProductContext props for testing Product component.
+export const ProductProductContextProps = {
+  getProduct: jest.fn(),
+  clearListOfProductsToBuy: jest.fn(),
+  products: mockProductVariants,
+};
+
 // ProductContext props for testing catalogue component
-// when is adding a product to the cart or wishlist
+// when is adding a product to the cart or wishlist.
 export const contextPropstToAddToCart = {
   addToCart: jest.fn(),
   loadProducts: jest.fn(),
@@ -91,7 +108,7 @@ export const mockStorePhone = [
   { nit: 3, phone: "547897884" },
 ];
 
-// Render login component
+// Renders login component
 export function LoginTest() {
   return render(
     <AuthContext.Provider value={loginAuthContextProps}>
@@ -102,7 +119,7 @@ export function LoginTest() {
   );
 }
 
-// Render catalogue component
+// Renders catalogue component.
 export function CatalogueTest(type = "catalogue") {
   let productProps;
 
@@ -124,7 +141,7 @@ export function CatalogueTest(type = "catalogue") {
   );
 }
 
-// Render contact component
+// Renders contact component.
 export function ContactTest() {
   return render(
     <AuthContext.Provider value={authContextProps}>
@@ -135,6 +152,7 @@ export function ContactTest() {
   );
 }
 
+// Renders Home component.
 export function HomeTest() {
   return render(
     <AuthContext.Provider value={authContextProps}>
@@ -152,6 +170,7 @@ export const productProps = {
   invoiceId: 1,
 };
 
+// Renders Invoice component.
 export function InvoiceTest() {
   return render(
     <AuthContext.Provider value={authContextProps}>
@@ -164,6 +183,7 @@ export function InvoiceTest() {
   );
 }
 
+// Renders Navbar component.
 export function NavbarTest() {
   return render(
     <AuthContext.Provider value={authContextProps}>
@@ -174,12 +194,26 @@ export function NavbarTest() {
   );
 }
 
+// Renders Footer component.
 export function FooterTest() {
   return render(
     <AuthContext.Provider value={authContextProps}>
       <Router>
         <Footer />
       </Router>
+    </AuthContext.Provider>,
+  );
+}
+
+// Renders Product component.
+export function ProductTest() {
+  return render(
+    <AuthContext.Provider value={authContextProps}>
+      <ProductContext.Provider value={ProductProductContextProps}>
+        <Router>
+          <Product />
+        </Router>
+      </ProductContext.Provider>
     </AuthContext.Provider>,
   );
 }

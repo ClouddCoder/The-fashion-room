@@ -42,7 +42,7 @@ function Product() {
       <Grid container sx={{ width: "80%", m: "auto 0" }}>
         <Grid item xs={6} sx={{ display: "flex", justifyContent: "center" }}>
           <img
-            src={getProductImage(product.product_name)}
+            src={getProductImage(product[0]?.product_name)}
             alt={product.product_name}
             width="450px"
             height="450px"
@@ -62,7 +62,10 @@ function Product() {
             <CustomTypography variant="body2">Color: Azul</CustomTypography>
           </Grid>
           <Grid item>
-            <CustomTypography variant="body2">Color: Azul</CustomTypography>
+            {products.map((variant) => (
+              // eslint-disable-next-line react/button-has-type
+              <button>{variant.color_value}</button>
+            ))}
           </Grid>
           <Grid item>
             <div style={{ display: "flex" }}>
