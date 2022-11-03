@@ -42,20 +42,7 @@ function ProductState({ children }) {
       }),
     );
 
-    // Separates every product's variant by its product name.
-    const productGroups = Object.values(
-      variantGroups.reduce(
-        // Groups the products by variant's name.
-        (acc, item) => ({
-          ...acc,
-          [item.product_name]: (acc[item.product_name] || []).concat(item),
-        }),
-        {},
-      ),
-    );
-    console.log(productGroups);
-
-    return productGroups;
+    return variantGroups;
   };
 
   /**
@@ -70,7 +57,7 @@ function ProductState({ children }) {
       });
       const { data } = response;
 
-      dispatch({ type: TYPES.LOAD_PRODUCTS, payload: reduceProducts(data) });
+      dispatch({ type: TYPES.LOAD_PRODUCTS, payload: data });
     } catch (error) {
       console.log(error);
     }
@@ -88,6 +75,7 @@ function ProductState({ children }) {
       });
 
       const { data } = response;
+      console.log(reduceProducts(data));
       dispatch({ type: TYPES.GET_PRODUCT, payload: reduceProducts(data) });
     } catch (error) {
       console.log(error);

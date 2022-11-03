@@ -17,16 +17,6 @@ VALUES
 ('bebe'),
 ('unisex');
 
-INSERT INTO shipping_cost (shipping_value)
-VALUES
-( 0),
-(1000),
-(2000),
-(3000),
-(4000),
-(5000),
-(10000);
-
 INSERT INTO color (color_value)
 VALUES
 ('negro'),
@@ -38,23 +28,23 @@ VALUES
 ('verde');
 
 -- Insert available products to the product table.
-INSERT INTO product (product_id, category_id, product_name, shipping_cost)
+INSERT INTO product (product_id, category_id, product_name, default_price, shipping_cost)
 VALUES
-(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'blusas'), 'blusa', 1000),
-(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'camisas'), 'camisa', 1000),
-(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'accesorios-moda'), 'corbata', 1000),
-(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'pantalones-y-jeans'), 'pantalon', 2000),
-(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'pantalones-y-jeans'), 'pantaloneta', 2000),
-(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'tenis-colegial', 5000),
-(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'tenis-golty', 5000),
-(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'botas-militar', 5000),
-(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'zapatos-colegial', 5000),
-(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'tenis-royal', 5000),
-(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'tenis-sneakers', 5000),
-(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'pantuflas', 5000),
-(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'tenis-clasicos', 5000),
-(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'botas-udan', 5000),
-(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'sandalias', 5000);
+(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'blusas'), 'blusa', 45000, 1000),
+(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'camisas'), 'camisa', 55000, 1000),
+(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'accesorios-moda'), 'corbata', 25000, 1000),
+(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'pantalones-y-jeans'), 'pantalon', 60000, 2000),
+(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'pantalones-y-jeans'), 'pantaloneta', 20000, 2000),
+(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'tenis-colegial', 80000,5000),
+(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'tenis-golty', 70000, 5000),
+(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'botas-militar', 80000, 5000),
+(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'zapatos-colegial', 70000, 5000),
+(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'tenis-royal', 50000, 5000),
+(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'tenis-sneakers', 80000, 5000),
+(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'pantuflas', 80000, 5000),
+(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'tenis-clasicos', 80000, 5000),
+(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'botas-udan', 80000, 5000),
+(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'sandalias', 40000, 5000);
 
 INSERT INTO variant (product_id, variant_name, variant_price, variant_quantity)
 VALUES
@@ -109,8 +99,8 @@ VALUES
 ((SELECT product_id FROM product WHERE product_name = 'tenis-clasicos'), 'tcl-rojos-hombre', 80000, 41),
 ((SELECT product_id FROM product WHERE product_name = 'botas-udan'), 'bu-negras-hombre', 80000, 41),
 ((SELECT product_id FROM product WHERE product_name = 'botas-udan'), 'bu-blancas-hombre', 80000, 41),
-((SELECT product_id FROM product WHERE product_name = 'sandalias'), 's-azules-mujer', 80000, 41),
-((SELECT product_id FROM product WHERE product_name = 'sandalias'), 's-verdes-niña', 80000, 41);
+((SELECT product_id FROM product WHERE product_name = 'sandalias'), 's-azules-mujer', 40000, 41),
+((SELECT product_id FROM product WHERE product_name = 'sandalias'), 's-verdes-niña', 40000, 41);
 
 -- blusa-negra-mujer
 INSERT INTO variant_gender (variant_id, gender_id)
@@ -165,60 +155,6 @@ VALUES
 ((SELECT variant_id FROM variant WHERE variant_name = 'bu-blancas-hombre'), (SELECT gender_id FROM gender WHERE gender_value = 'hombre')),
 ((SELECT variant_id FROM variant WHERE variant_name = 's-azules-mujer'), (SELECT gender_id FROM gender WHERE gender_value = 'mujer')),
 ((SELECT variant_id FROM variant WHERE variant_name = 's-verdes-niña'), (SELECT gender_id FROM gender WHERE gender_value = 'niña'));
-
-
-INSERT INTO variant_shipping_cost (variant_id, shipping_id)
-VALUES
-((SELECT variant_id FROM variant WHERE variant_name = 'blusa-negra-mujer'), (SELECT shipping_id FROM shipping_cost WHERE shipping_value = 1000)),
-((SELECT variant_id FROM variant WHERE variant_name = 'blusa-blanca-mujer'), (SELECT shipping_id FROM shipping_cost WHERE shipping_value = 1000)),
-((SELECT variant_id FROM variant WHERE variant_name = 'blusa-roja-mujer'), (SELECT shipping_id FROM shipping_cost WHERE shipping_value = 1000)),
-((SELECT variant_id FROM variant WHERE variant_name = 'blusa-blanca-niña'), (SELECT shipping_id FROM shipping_cost WHERE shipping_value = 1000)),
-((SELECT variant_id FROM variant WHERE variant_name = 'blusa-roja-niña'), (SELECT shipping_id FROM shipping_cost WHERE shipping_value = 1000)),
-((SELECT variant_id FROM variant WHERE variant_name = 'camisa-negra-hombre'), (SELECT shipping_id FROM shipping_cost WHERE shipping_value = 1000)),
-((SELECT variant_id FROM variant WHERE variant_name = 'camisa-amarilla-hombre'), (SELECT shipping_id FROM shipping_cost WHERE shipping_value = 1000)),
-((SELECT variant_id FROM variant WHERE variant_name = 'camisa-verde-hombre'), (SELECT shipping_id FROM shipping_cost WHERE shipping_value = 1000)),
-((SELECT variant_id FROM variant WHERE variant_name = 'camisa-blanca-niño'), (SELECT shipping_id FROM shipping_cost WHERE shipping_value = 1000)),
-((SELECT variant_id FROM variant WHERE variant_name = 'camisa-negra-niño'), (SELECT shipping_id FROM shipping_cost WHERE shipping_value = 1000)),
-((SELECT variant_id FROM variant WHERE variant_name = 'corbata-negra-hombre'), (SELECT shipping_id FROM shipping_cost WHERE shipping_value = 2000)),
-((SELECT variant_id FROM variant WHERE variant_name = 'corbata-azul-hombre'), (SELECT shipping_id FROM shipping_cost WHERE shipping_value = 2000)),
-((SELECT variant_id FROM variant WHERE variant_name = 'corbata-verde-hombre'), (SELECT shipping_id FROM shipping_cost WHERE shipping_value = 2000)),
-((SELECT variant_id FROM variant WHERE variant_name = 'corbata-negra-niño'), (SELECT shipping_id FROM shipping_cost WHERE shipping_value = 2000)),
-((SELECT variant_id FROM variant WHERE variant_name = 'corbata-azul-niño'), (SELECT shipping_id FROM shipping_cost WHERE shipping_value = 2000)),
-((SELECT variant_id FROM variant WHERE variant_name = 'pantalon-negro-hombre'), (SELECT shipping_id FROM shipping_cost WHERE shipping_value = 3000)),
-((SELECT variant_id FROM variant WHERE variant_name = 'pantalon-azul-hombre'), (SELECT shipping_id FROM shipping_cost WHERE shipping_value = 3000)),
-((SELECT variant_id FROM variant WHERE variant_name = 'pantalon-gris-hombre'), (SELECT shipping_id FROM shipping_cost WHERE shipping_value = 3000)),
-((SELECT variant_id FROM variant WHERE variant_name = 'pantalon-rojo-mujer'), (SELECT shipping_id FROM shipping_cost WHERE shipping_value = 3000)),
-((SELECT variant_id FROM variant WHERE variant_name = 'pantalon-gris-mujer'), (SELECT shipping_id FROM shipping_cost WHERE shipping_value = 3000)),
-((SELECT variant_id FROM variant WHERE variant_name = 'pantalon-azul-mujer'), (SELECT shipping_id FROM shipping_cost WHERE shipping_value = 3000)),
-((SELECT variant_id FROM variant WHERE variant_name = 'pantalon-azul-niño'), (SELECT shipping_id FROM shipping_cost WHERE shipping_value = 3000)),
-((SELECT variant_id FROM variant WHERE variant_name = 'pantalon-rojo-niño'), (SELECT shipping_id FROM shipping_cost WHERE shipping_value = 3000)),
-((SELECT variant_id FROM variant WHERE variant_name = 'pantalon-amarillo-niña'), (SELECT shipping_id FROM shipping_cost WHERE shipping_value = 3000)),
-((SELECT variant_id FROM variant WHERE variant_name = 'pantalon-azul-niña'), (SELECT shipping_id FROM shipping_cost WHERE shipping_value = 3000)),
-((SELECT variant_id FROM variant WHERE variant_name = 'pantaloneta-roja-hombre'), (SELECT shipping_id FROM shipping_cost WHERE shipping_value = 2000)),
-((SELECT variant_id FROM variant WHERE variant_name = 'pantaloneta-amarilla-hombre'), (SELECT shipping_id FROM shipping_cost WHERE shipping_value = 2000)),
-((SELECT variant_id FROM variant WHERE variant_name = 'pantaloneta-blanca-hombre'), (SELECT shipping_id FROM shipping_cost WHERE shipping_value = 2000)),
-((SELECT variant_id FROM variant WHERE variant_name = 'pantaloneta-amarilla-niño'), (SELECT shipping_id FROM shipping_cost WHERE shipping_value = 2000)),
-((SELECT variant_id FROM variant WHERE variant_name = 'pantaloneta-gris-niño'), (SELECT shipping_id FROM shipping_cost WHERE shipping_value = 2000)),
-((SELECT variant_id FROM variant WHERE variant_name = 'tc-negros-hombre'), (SELECT shipping_id FROM shipping_cost WHERE shipping_value = 2000)),
-((SELECT variant_id FROM variant WHERE variant_name = 'tc-azules-hombre'), (SELECT shipping_id FROM shipping_cost WHERE shipping_value = 2000)),
-((SELECT variant_id FROM variant WHERE variant_name = 'tg-verdes-hombre'), (SELECT shipping_id FROM shipping_cost WHERE shipping_value = 3000)),
-((SELECT variant_id FROM variant WHERE variant_name = 'tg-amarillos-mujer'), (SELECT shipping_id FROM shipping_cost WHERE shipping_value = 3000)),
-((SELECT variant_id FROM variant WHERE variant_name = 'bm-verdes-hombre'), (SELECT shipping_id FROM shipping_cost WHERE shipping_value = 2000)),
-((SELECT variant_id FROM variant WHERE variant_name = 'bm-negros-hombre'), (SELECT shipping_id FROM shipping_cost WHERE shipping_value = 2000)),
-((SELECT variant_id FROM variant WHERE variant_name = 'zc-azules-mujer'), (SELECT shipping_id FROM shipping_cost WHERE shipping_value = 4000)),
-((SELECT variant_id FROM variant WHERE variant_name = 'zc-grises-mujer'), (SELECT shipping_id FROM shipping_cost WHERE shipping_value = 4000)),
-((SELECT variant_id FROM variant WHERE variant_name = 'tr-grises-niño'), (SELECT shipping_id FROM shipping_cost WHERE shipping_value = 3000)),
-((SELECT variant_id FROM variant WHERE variant_name = 'tr-amarillos-niño'), (SELECT shipping_id FROM shipping_cost WHERE shipping_value = 3000)),
-((SELECT variant_id FROM variant WHERE variant_name = 'ts-verdes-niña'), (SELECT shipping_id FROM shipping_cost WHERE shipping_value = 2000)),
-((SELECT variant_id FROM variant WHERE variant_name = 'ts-azules-niña'), (SELECT shipping_id FROM shipping_cost WHERE shipping_value = 2000)),
-((SELECT variant_id FROM variant WHERE variant_name = 'p-negras-niño'), (SELECT shipping_id FROM shipping_cost WHERE shipping_value = 2000)),
-((SELECT variant_id FROM variant WHERE variant_name = 'p-amarillas-niña'), (SELECT shipping_id FROM shipping_cost WHERE shipping_value = 2000)),
-((SELECT variant_id FROM variant WHERE variant_name = 'tcl-blancos-hombre'), (SELECT shipping_id FROM shipping_cost WHERE shipping_value = 2000)),
-((SELECT variant_id FROM variant WHERE variant_name = 'tcl-rojos-hombre'), (SELECT shipping_id FROM shipping_cost WHERE shipping_value = 2000)),
-((SELECT variant_id FROM variant WHERE variant_name = 'bu-negras-hombre'), (SELECT shipping_id FROM shipping_cost WHERE shipping_value = 5000)),
-((SELECT variant_id FROM variant WHERE variant_name = 'bu-blancas-hombre'), (SELECT shipping_id FROM shipping_cost WHERE shipping_value = 5000)),
-((SELECT variant_id FROM variant WHERE variant_name = 's-azules-mujer'), (SELECT shipping_id FROM shipping_cost WHERE shipping_value = 2000)),
-((SELECT variant_id FROM variant WHERE variant_name = 's-verdes-niña'), (SELECT shipping_id FROM shipping_cost WHERE shipping_value = 2000));
 
 INSERT INTO variant_color (variant_id, color_id)
 VALUES

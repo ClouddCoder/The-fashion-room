@@ -38,20 +38,20 @@ function ProductItem({ product }) {
       >
         <CardActionArea
           sx={{ height: "100%" }}
-          onClick={() => navigate(`/product/${product[0].variant_id}`)}
+          onClick={() => navigate(`/product/${product.product_id}`)}
         >
           <CardMedia
             component="img"
             height="140"
             image={getProductImage("zapatos")}
-            alt={product[0].product_name}
+            alt={product.product_name}
           />
           <CardContent sx={{ p: "10px" }}>
             <CustomTypography gutterBottom variant="h5" sx={{ fontSize: "16px" }}>
-              {product[0].product_name}
+              {product.product_name}
             </CustomTypography>
             <CustomTypography variant="body2" color="text.secondary">
-              Cantidad disponible {product[0].variant_quantity}
+              Cantidad disponible {product.variant_quantity}
             </CustomTypography>
           </CardContent>
         </CardActionArea>

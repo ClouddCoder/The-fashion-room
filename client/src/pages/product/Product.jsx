@@ -16,11 +16,11 @@ import { getProductImage } from "../../assets";
 function Product() {
   const navigate = useNavigate();
   const { id } = useParams();
-  const variantId = parseInt(id, 10);
+  const productId = parseInt(id, 10);
   const { products, addToCart, addProductToBuy, clearListOfProductsToBuy, getProduct } =
     useContext(ProductContext);
   const { auth } = useContext(AuthContext);
-  const product = products.find((item) => item.variant_id === variantId) || [];
+  const product = products.find((item) => item.product_id === productId) || [];
 
   // Gets the product information.
   useEffect(() => {
