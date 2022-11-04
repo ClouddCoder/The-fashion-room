@@ -6,7 +6,7 @@ afterEach(() => {
 });
 
 describe.skip("Home component", () => {
-  it("Should fetch data from Offers component to render the offer products", async () => {
+  it("Offers component should fetch data to render the offer products' cards", async () => {
     HomeTest();
     expect(screen.getByText("Calzado")).toBeInTheDocument();
     expect(screen.getByText("Camisetas")).toBeInTheDocument();

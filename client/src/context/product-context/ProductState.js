@@ -155,7 +155,7 @@ function ProductState({ children }) {
   };
 
   /**
-   * Sets or removes a product from the wishlist.
+   * Adds or removes a product from the wishlist.
    * Also updates wishlist's state.
    */
   const handleWish = async (product, remove = false) => {
@@ -163,7 +163,7 @@ function ProductState({ children }) {
       await axios.post(
         "http://localhost:3050/api/set-wishlist",
         {
-          variantId: product,
+          productId: product,
           remove,
         },
         {

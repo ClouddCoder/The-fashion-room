@@ -12,7 +12,6 @@ describe.skip("Invoice component", () => {
     expect(screen.getByText("Detalles de la compra")).toBeInTheDocument();
     expect(screen.getByText("#1")).toBeInTheDocument();
     expect(screen.getByText("Productos")).toBeInTheDocument();
-    // expect(screen.getByText("Blusa x0")).toBeInTheDocument();
   });
 
   it("Should call function clearCart after click button", async () => {

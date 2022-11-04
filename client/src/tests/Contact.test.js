@@ -27,6 +27,6 @@ describe.skip("Contact component", () => {
 
     expect(axios.get).toHaveBeenCalledTimes(2);
     expect(await screen.findByText("Tienda 1")).toBeInTheDocument();
-    expect(await screen.findByText("Teléfono: 987654321")).toBeInTheDocument();
+    expect(await screen.findByText("Teléfono 1: 123456789")).toBeInTheDocument();
   });
 });

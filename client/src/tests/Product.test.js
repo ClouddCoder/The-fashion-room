@@ -5,7 +5,7 @@ afterEach(() => {
   jest.clearAllMocks();
 });
 
-describe("Catalogue component", () => {
+describe.skip("Catalogue component", () => {
   test("Should render Product component", async () => {
     ProductTest();
     expect(screen.getByText("negro")).toBeInTheDocument();

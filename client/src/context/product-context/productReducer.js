@@ -111,7 +111,7 @@ export function ProductReducer(state, action) {
     case TYPES.REMOVE_FROM_WISHLIST: {
       return {
         ...state,
-        wishlist: state.wishlist.filter((wish) => wish.variant_id !== action.payload),
+        wishlist: state.wishlist.filter((wish) => wish.product_id !== action.payload),
       };
     }
 

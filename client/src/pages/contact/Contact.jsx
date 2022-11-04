@@ -13,7 +13,7 @@ function Contact() {
   const [storesPhones, getStoresPhones] = useState([]);
 
   /**
-   * Peticion a la API para obtener la informacion de las tiendas
+   * Gets the store's information.
    */
   const loadStores = async () => {
     try {
@@ -26,14 +26,14 @@ function Contact() {
   };
 
   /**
-   * Peticion a la API para obtener la informacion de los telefonos de las tiendas
+   * Gets the store's phones.
    */
   const loadStoresPhones = async () => {
     try {
       const response = await axios.get("http://localhost:3050/api/stores/phones");
       const { data } = response;
 
-      // Agrupa los telefonos por el nombre de la tienda.
+      // Groups the phone by their store's name.
       const phones = Object.values(
         data?.reduce(
           (acc, item) => ({
@@ -50,18 +50,14 @@ function Contact() {
   };
 
   /**
-   * Obtiene los telefonos de la tienda y los retorna en una lista.
+   * Gets the store's phones in a list.
    */
   const getPhone = (storeNit) => storesPhones.filter((store) => store[0].store_nit === storeNit);
 
-  /**
-   * Peticion a la API para obtener la informaion de las tiendas.
-   */
   useEffect(() => {
     loadStores();
   }, []);
 
-  // Peticion a la API para obtener la informacion de los telefonos de las tiendas.
   useEffect(() => {
     loadStoresPhones();
   }, []);

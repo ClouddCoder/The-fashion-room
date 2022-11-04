@@ -72,10 +72,10 @@ CREATE TABLE customer (
 -- Contains customer's wishlist.
 CREATE TABLE wishlist (
     customer_id INTEGER,
-    variant_id INTEGER,
-    CONSTRAINT pk_wishlist PRIMARY KEY (customer_id, variant_id),
+    product_id INTEGER,
+    CONSTRAINT pk_wishlist PRIMARY KEY (customer_id, product_id),
     CONSTRAINT fk_wishlist_customer_id FOREIGN KEY (customer_id) REFERENCES customer (customer_id),
-    CONSTRAINT fk_wishlist_variant_id FOREIGN KEY (variant_id) REFERENCES variant (variant_id)
+    CONSTRAINT fk_wishlist_variant_id FOREIGN KEY (product_id) REFERENCES product (product_id)
 );
 
 -- Contains all customer's orders.

@@ -10,8 +10,8 @@ function CustomWishlistButton({ product }) {
   const { wishlist, handleWish } = useContext(ProductContext);
   const props = { position: "absolute", top: "10px", right: "10px" };
 
-  // Verifica si el producto esta en la wishlist.
-  const findWish = wishlist.find((wish) => wish.variant_id === product.variant_id);
+  // Verifies if product is in wishlist.
+  const findWish = wishlist.find((wish) => wish.product_id === product.product_id);
   const productAsWish = Boolean(findWish);
 
   const [addWish, setAddWish] = useState(productAsWish);
@@ -32,7 +32,7 @@ function CustomWishlistButton({ product }) {
         <IconButton
           component="span"
           onClick={() => {
-            handleWish(product.variant_id, true);
+            handleWish(product.product_id, true);
             setAddWish(false);
           }}
           sx={props}
@@ -46,9 +46,10 @@ function CustomWishlistButton({ product }) {
     // puede agregar.
     return (
       <IconButton
+        aria-label={`Add ${product.product_name} to wishlist`}
         component="span"
         onClick={() => {
-          handleWish(product.variant_id);
+          handleWish(product.product_id);
           setAddWish(true);
         }}
         sx={props}
