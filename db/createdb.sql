@@ -5,15 +5,24 @@ CREATE TABLE category (
     CONSTRAINT pk_category PRIMARY KEY (category_id)
 );
 
+-- Contains different genders for the product.
+CREATE TABLE gender (
+    gender_id SERIAL,
+    gender_value VARCHAR(25),
+    CONSTRAINT pk_gender PRIMARY KEY (gender_id)
+);
+
 -- Contains different products.
 CREATE TABLE product (
     product_id INTEGER,
     category_id INTEGER,
     product_name VARCHAR(25) NOT NULL CHECK (product_name <> ''),
+    gender_id INTEGER,
     default_price INTEGER NOT NULL CHECK (default_price >= 0),
     shipping_cost INTEGER NOT NULL,
     CONSTRAINT pk_product PRIMARY KEY (product_id),
-    CONSTRAINT fk_product_category_id FOREIGN KEY (category_id) REFERENCES category (category_id)
+    CONSTRAINT fk_product_category_id FOREIGN KEY (category_id) REFERENCES category (category_id),
+    CONSTRAINT fk_product_gender_id FOREIGN KEY (gender_id) REFERENCES gender (gender_id)
 );
 
 -- Contains product' variants.
@@ -25,22 +34,6 @@ CREATE TABLE variant (
     variant_quantity INTEGER NOT NULL,
     CONSTRAINT pk_variant PRIMARY KEY (variant_id),
     CONSTRAINT fk_variant_product_id FOREIGN KEY (product_id) REFERENCES product (product_id) ON DELETE RESTRICT
-);
-
--- Contains different genders for the product.
-CREATE TABLE gender (
-    gender_id SERIAL,
-    gender_value VARCHAR(25),
-    CONSTRAINT pk_gender PRIMARY KEY (gender_id)
-);
-
--- Joining table for variant and gender.
-CREATE TABLE variant_gender (
-    variant_id INTEGER,
-    gender_id INTEGER,
-    CONSTRAINT pk_variant_gender PRIMARY KEY (variant_id, gender_id),
-    CONSTRAINT fk_variant_gender_variant_id FOREIGN KEY (variant_id) REFERENCES variant (variant_id),
-    CONSTRAINT fk_variant_gender_gender_id FOREIGN KEY (gender_id) REFERENCES gender (gender_id)
 );
 
 -- Contains different colors for the product.

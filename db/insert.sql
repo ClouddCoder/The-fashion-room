@@ -28,23 +28,23 @@ VALUES
 ('verde');
 
 -- Insert available products to the product table.
-INSERT INTO product (product_id, category_id, product_name, default_price, shipping_cost)
+INSERT INTO product (product_id, category_id, product_name, gender_id, default_price, shipping_cost)
 VALUES
-(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'blusas'), 'blusa', 45000, 1000),
-(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'camisas'), 'camisa', 55000, 1000),
-(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'accesorios-moda'), 'corbata', 25000, 1000),
-(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'pantalones-y-jeans'), 'pantalon', 60000, 2000),
-(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'pantalones-y-jeans'), 'pantaloneta', 20000, 2000),
-(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'tenis-colegial', 80000,5000),
-(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'tenis-golty', 70000, 5000),
-(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'botas-militar', 80000, 5000),
-(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'zapatos-colegial', 70000, 5000),
-(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'tenis-royal', 50000, 5000),
-(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'tenis-sneakers', 80000, 5000),
-(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'pantuflas', 80000, 5000),
-(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'tenis-clasicos', 80000, 5000),
-(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'botas-udan', 80000, 5000),
-(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'sandalias', 40000, 5000);
+(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'blusas'), 'blusa', 2, 45000, 1000),
+(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'camisas'), 'camisa', 1, 55000, 1000),
+(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'accesorios-moda'), 'corbata', 1, 25000, 1000),
+(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'pantalones-y-jeans'), 'pantalon', 1, 60000, 2000),
+(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'pantalones-y-jeans'), 'pantaloneta', 1, 20000, 2000),
+(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'tenis-colegial', 3, 80000,5000),
+(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'tenis-golty', 3, 70000, 5000),
+(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'botas-militar', 1, 80000, 5000),
+(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'zapatos-colegial', 4, 70000, 5000),
+(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'tenis-royal', 1, 50000, 5000),
+(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'tenis-sneakers', 3, 80000, 5000),
+(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'pantuflas', 1, 80000, 5000),
+(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'tenis-clasicos', 1, 80000, 5000),
+(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'botas-udan', 2, 80000, 5000),
+(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'sandalias', 2, 40000, 5000);
 
 INSERT INTO variant (product_id, variant_name, variant_price, variant_quantity)
 VALUES
@@ -101,60 +101,6 @@ VALUES
 ((SELECT product_id FROM product WHERE product_name = 'botas-udan'), 'bu-blancas-hombre', 80000, 41),
 ((SELECT product_id FROM product WHERE product_name = 'sandalias'), 's-azules-mujer', 40000, 41),
 ((SELECT product_id FROM product WHERE product_name = 'sandalias'), 's-verdes-niña', 40000, 41);
-
--- blusa-negra-mujer
-INSERT INTO variant_gender (variant_id, gender_id)
-VALUES
-((SELECT variant_id FROM variant WHERE variant_name = 'blusa-negra-mujer'), (SELECT gender_id FROM gender WHERE gender_value = 'mujer')),
-((SELECT variant_id FROM variant WHERE variant_name = 'blusa-blanca-mujer'), (SELECT gender_id FROM gender WHERE gender_value = 'mujer')),
-((SELECT variant_id FROM variant WHERE variant_name = 'blusa-roja-mujer'), (SELECT gender_id FROM gender WHERE gender_value = 'mujer')),
-((SELECT variant_id FROM variant WHERE variant_name = 'blusa-blanca-niña'), (SELECT gender_id FROM gender WHERE gender_value = 'niña')),
-((SELECT variant_id FROM variant WHERE variant_name = 'blusa-roja-niña'), (SELECT gender_id FROM gender WHERE gender_value = 'niña')),
-((SELECT variant_id FROM variant WHERE variant_name = 'camisa-negra-hombre'), (SELECT gender_id FROM gender WHERE gender_value = 'hombre')),
-((SELECT variant_id FROM variant WHERE variant_name = 'camisa-amarilla-hombre'), (SELECT gender_id FROM gender WHERE gender_value = 'hombre')),
-((SELECT variant_id FROM variant WHERE variant_name = 'camisa-verde-hombre'), (SELECT gender_id FROM gender WHERE gender_value = 'hombre')),
-((SELECT variant_id FROM variant WHERE variant_name = 'camisa-blanca-niño'), (SELECT gender_id FROM gender WHERE gender_value = 'niño')),
-((SELECT variant_id FROM variant WHERE variant_name = 'camisa-negra-niño'), (SELECT gender_id FROM gender WHERE gender_value = 'niño')),
-((SELECT variant_id FROM variant WHERE variant_name = 'corbata-negra-hombre'), (SELECT gender_id FROM gender WHERE gender_value = 'hombre')),
-((SELECT variant_id FROM variant WHERE variant_name = 'corbata-azul-hombre'), (SELECT gender_id FROM gender WHERE gender_value = 'hombre')),
-((SELECT variant_id FROM variant WHERE variant_name = 'corbata-verde-hombre'), (SELECT gender_id FROM gender WHERE gender_value = 'hombre')),
-((SELECT variant_id FROM variant WHERE variant_name = 'corbata-negra-niño'), (SELECT gender_id FROM gender WHERE gender_value = 'niño')),
-((SELECT variant_id FROM variant WHERE variant_name = 'corbata-azul-niño'), (SELECT gender_id FROM gender WHERE gender_value = 'niño')),
-((SELECT variant_id FROM variant WHERE variant_name = 'pantalon-negro-hombre'), (SELECT gender_id FROM gender WHERE gender_value = 'hombre')),
-((SELECT variant_id FROM variant WHERE variant_name = 'pantalon-azul-hombre'), (SELECT gender_id FROM gender WHERE gender_value = 'hombre')),
-((SELECT variant_id FROM variant WHERE variant_name = 'pantalon-gris-hombre'), (SELECT gender_id FROM gender WHERE gender_value = 'hombre')),
-((SELECT variant_id FROM variant WHERE variant_name = 'pantalon-rojo-mujer'), (SELECT gender_id FROM gender WHERE gender_value = 'mujer')),
-((SELECT variant_id FROM variant WHERE variant_name = 'pantalon-gris-mujer'), (SELECT gender_id FROM gender WHERE gender_value = 'mujer')),
-((SELECT variant_id FROM variant WHERE variant_name = 'pantalon-azul-mujer'), (SELECT gender_id FROM gender WHERE gender_value = 'mujer')),
-((SELECT variant_id FROM variant WHERE variant_name = 'pantalon-azul-niño'), (SELECT gender_id FROM gender WHERE gender_value = 'niño')),
-((SELECT variant_id FROM variant WHERE variant_name = 'pantalon-rojo-niño'), (SELECT gender_id FROM gender WHERE gender_value = 'niño')),
-((SELECT variant_id FROM variant WHERE variant_name = 'pantalon-amarillo-niña'), (SELECT gender_id FROM gender WHERE gender_value = 'niña')),
-((SELECT variant_id FROM variant WHERE variant_name = 'pantalon-azul-niña'), (SELECT gender_id FROM gender WHERE gender_value = 'niña')),
-((SELECT variant_id FROM variant WHERE variant_name = 'pantaloneta-roja-hombre'), (SELECT gender_id FROM gender WHERE gender_value = 'hombre')),
-((SELECT variant_id FROM variant WHERE variant_name = 'pantaloneta-amarilla-hombre'), (SELECT gender_id FROM gender WHERE gender_value = 'hombre')),
-((SELECT variant_id FROM variant WHERE variant_name = 'pantaloneta-blanca-hombre'), (SELECT gender_id FROM gender WHERE gender_value = 'hombre')),
-((SELECT variant_id FROM variant WHERE variant_name = 'pantaloneta-amarilla-niño'), (SELECT gender_id FROM gender WHERE gender_value = 'niño')),
-((SELECT variant_id FROM variant WHERE variant_name = 'pantaloneta-gris-niño'), (SELECT gender_id FROM gender WHERE gender_value = 'niño')),
-((SELECT variant_id FROM variant WHERE variant_name = 'tc-negros-hombre'), (SELECT gender_id FROM gender WHERE gender_value = 'hombre')),
-((SELECT variant_id FROM variant WHERE variant_name = 'tc-azules-hombre'), (SELECT gender_id FROM gender WHERE gender_value = 'hombre')),
-((SELECT variant_id FROM variant WHERE variant_name = 'tg-verdes-hombre'), (SELECT gender_id FROM gender WHERE gender_value = 'hombre')),
-((SELECT variant_id FROM variant WHERE variant_name = 'tg-amarillos-mujer'), (SELECT gender_id FROM gender WHERE gender_value = 'mujer')),
-((SELECT variant_id FROM variant WHERE variant_name = 'bm-verdes-hombre'), (SELECT gender_id FROM gender WHERE gender_value = 'hombre')),
-((SELECT variant_id FROM variant WHERE variant_name = 'bm-negros-hombre'), (SELECT gender_id FROM gender WHERE gender_value = 'hombre')),
-((SELECT variant_id FROM variant WHERE variant_name = 'zc-azules-mujer'), (SELECT gender_id FROM gender WHERE gender_value = 'mujer')),
-((SELECT variant_id FROM variant WHERE variant_name = 'zc-grises-mujer'), (SELECT gender_id FROM gender WHERE gender_value = 'mujer')),
-((SELECT variant_id FROM variant WHERE variant_name = 'tr-grises-niño'), (SELECT gender_id FROM gender WHERE gender_value = 'niño')),
-((SELECT variant_id FROM variant WHERE variant_name = 'tr-amarillos-niño'), (SELECT gender_id FROM gender WHERE gender_value = 'niño')),
-((SELECT variant_id FROM variant WHERE variant_name = 'ts-verdes-niña'), (SELECT gender_id FROM gender WHERE gender_value = 'niña')),
-((SELECT variant_id FROM variant WHERE variant_name = 'ts-azules-niña'), (SELECT gender_id FROM gender WHERE gender_value = 'niña')),
-((SELECT variant_id FROM variant WHERE variant_name = 'p-negras-niño'), (SELECT gender_id FROM gender WHERE gender_value = 'niño')),
-((SELECT variant_id FROM variant WHERE variant_name = 'p-amarillas-niña'), (SELECT gender_id FROM gender WHERE gender_value = 'niña')),
-((SELECT variant_id FROM variant WHERE variant_name = 'tcl-blancos-hombre'), (SELECT gender_id FROM gender WHERE gender_value = 'hombre')),
-((SELECT variant_id FROM variant WHERE variant_name = 'tcl-rojos-hombre'), (SELECT gender_id FROM gender WHERE gender_value = 'hombre')),
-((SELECT variant_id FROM variant WHERE variant_name = 'bu-negras-hombre'), (SELECT gender_id FROM gender WHERE gender_value = 'hombre')),
-((SELECT variant_id FROM variant WHERE variant_name = 'bu-blancas-hombre'), (SELECT gender_id FROM gender WHERE gender_value = 'hombre')),
-((SELECT variant_id FROM variant WHERE variant_name = 's-azules-mujer'), (SELECT gender_id FROM gender WHERE gender_value = 'mujer')),
-((SELECT variant_id FROM variant WHERE variant_name = 's-verdes-niña'), (SELECT gender_id FROM gender WHERE gender_value = 'niña'));
 
 INSERT INTO variant_color (variant_id, color_id)
 VALUES
