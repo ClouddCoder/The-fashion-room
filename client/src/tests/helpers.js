@@ -34,29 +34,45 @@ export const authContextProps = {
 
 // products for testing catalogue component.
 export const mockProducts = [
-  { product_id: "656589", product_name: "Blusa", product_price: "45000", product_stock: "100" },
-  { product_id: "656804", product_name: "Camisa", product_price: "45000", product_stock: "100" },
+  {
+    product_id: "656589",
+    product_name: "Blusa",
+    gender_value: "mujer",
+    product_price: "45000",
+    product_stock: "100",
+  },
+  {
+    product_id: "656804",
+    product_name: "Camisa",
+    gender_value: "hombre",
+    product_price: "45000",
+    product_stock: "100",
+  },
   {
     product_id: "657019",
     product_name: "Corbata",
+    gender_value: "hombre",
     product_price: "45000",
     product_stock: "100",
   },
   {
     product_id: "657234",
     product_name: "Pantalon",
+    gender_value: "mujer",
     product_price: "45000",
     product_stock: "100",
   },
   {
     product_id: "657449",
     product_name: "Pantaloneta",
+    gender_value: "niño",
     product_price: "45000",
     product_stock: "100",
   },
   {
     product_id: "657664",
     product_name: "tenis-colegial",
+    gender_value: "niña",
     product_price: "45000",
     product_stock: "100",
   },
@@ -65,7 +81,34 @@ export const mockProducts = [
 // product' variants for testing product component.
 export const mockProductVariants = [
   {
+    variant_id: 1,
+    product_id: 656589,
+    variant_name: "blusa-negra-mujer",
+    variant_price: 50000,
+    variant_quantity: 10,
+    gender_value: "mujer",
+    color_id: 1,
     color_value: "negro",
+  },
+  {
+    variant_id: 2,
+    product_id: 656589,
+    variant_name: "blusa-blanca-mujer",
+    variant_price: 60000,
+    variant_quantity: 10,
+    gender_value: "mujer",
+    color_id: 2,
+    color_value: "blanco",
+  },
+  {
+    variant_id: 3,
+    product_id: 656589,
+    variant_name: "blusa-roja-mujer",
+    variant_price: 55000,
+    variant_quantity: 50,
+    gender_value: "mujer",
+    color_id: 4,
+    color_value: "rojo",
   },
 ];
 
@@ -73,9 +116,10 @@ export const mockProductVariants = [
 export const productContextProps = {
   addToCart: jest.fn(),
   loadProducts: jest.fn(),
-  getProduct: jest.fn(),
+  getProductVariants: jest.fn(),
   clearListOfProductsToBuy: jest.fn(),
   products: mockProducts,
+  variants: mockProductVariants,
   wishlist: [],
   getWishlist: jest.fn(),
   handleWish: jest.fn(),
@@ -86,9 +130,10 @@ export const productContextProps = {
 export const productProductContextProps = {
   addToCart: jest.fn(),
   loadProducts: jest.fn(),
-  getProduct: jest.fn(),
+  getProductVariants: jest.fn(),
   clearListOfProductsToBuy: jest.fn(),
-  products: mockProductVariants,
+  products: mockProducts,
+  variants: mockProductVariants,
   wishlist: [],
   getWishlist: jest.fn(),
   resetProductState: jest.fn(),

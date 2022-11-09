@@ -17,14 +17,20 @@ function Product() {
   const navigate = useNavigate();
   const { id } = useParams();
   const productId = parseInt(id, 10);
-  const { products, addToCart, addProductToBuy, clearListOfProductsToBuy, getProduct } =
-    useContext(ProductContext);
+  const {
+    products,
+    variants,
+    addToCart,
+    addProductToBuy,
+    clearListOfProductsToBuy,
+    getProductVariants,
+  } = useContext(ProductContext);
   const { auth } = useContext(AuthContext);
   const product = products.find((item) => item.product_id === productId) || [];
 
   // Gets the product information.
   useEffect(() => {
-    getProduct(id);
+    getProductVariants(id);
   }, []);
 
   const handleBuyProduct = () => {
@@ -42,7 +48,7 @@ function Product() {
       <Grid container sx={{ width: "80%", m: "auto 0" }}>
         <Grid item xs={6} sx={{ display: "flex", justifyContent: "center" }}>
           <img
-            src={getProductImage(product[0]?.product_name)}
+            src={getProductImage(product.product_name)}
             alt={product.product_name}
             width="450px"
             height="450px"
@@ -56,15 +62,15 @@ function Product() {
             <CustomTypography variant="body2">99 reviews</CustomTypography>
           </Grid>
           <Grid item>
-            <CustomTypography variant="body2">{product.variant_price}</CustomTypography>
+            <CustomTypography variant="body2">{product.default_price}</CustomTypography>
           </Grid>
           <Grid item>
             <CustomTypography variant="body2">Color: Azul</CustomTypography>
           </Grid>
           <Grid item>
-            {products.map((variant) => (
+            {variants.map((variant, index) => (
               // eslint-disable-next-line react/button-has-type
-              <button>{variant.color_value}</button>
+              <button key={index}>{variant.color_value}</button>
             ))}
           </Grid>
           <Grid item>

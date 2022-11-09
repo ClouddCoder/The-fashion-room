@@ -5,9 +5,11 @@ afterEach(() => {
   jest.clearAllMocks();
 });
 
-describe.skip("Catalogue component", () => {
-  test("Should render Product component", async () => {
+describe("Catalogue component", () => {
+  test("Should render variant's color buttons", async () => {
     ProductTest();
-    expect(screen.getByText("negro")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /negro/i })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /rojo/i })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /blanco/i })).toBeInTheDocument();
   });
 });

@@ -21,4 +21,13 @@ describe.skip("Catalogue component", () => {
     await user.click(screen.getByRole("button", { name: /Add tenis-colegial to wishlist/i }));
     expect(productContextProps.handleWish).toHaveBeenCalledTimes(1);
   });
+
+  test("Should render filtered products by gender", async () => {
+    const user = userEvent.setup();
+
+    CatalogueTest();
+    await user.click(screen.getByRole("checkbox", { name: /hombre/i }));
+    const images = await screen.findAllByRole("img");
+    expect(images).toHaveLength(1);
+  });
 });

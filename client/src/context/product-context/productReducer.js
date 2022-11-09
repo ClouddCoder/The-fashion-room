@@ -2,6 +2,7 @@ import { TYPES } from "../../actions/productActions";
 
 export const productInitialState = {
   products: [],
+  variants: [],
   cart: [],
   wishlist: [], // Get all the wishes from database
   totalProducts: 0,
@@ -20,8 +21,8 @@ export function ProductReducer(state, action) {
     case TYPES.LOAD_PRODUCTS:
       return { ...state, products: [...action.payload] };
 
-    case TYPES.GET_PRODUCT:
-      return { ...state, products: [...state.products, ...action.payload] };
+    case TYPES.GET_VARIANTS:
+      return { ...state, variants: [...action.payload] };
 
     case TYPES.CLEAR_PRODUCTS_LIST:
       return { ...state, products: [] };

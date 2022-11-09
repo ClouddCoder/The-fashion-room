@@ -30,8 +30,10 @@ VALUES
 -- Insert available products to the product table.
 INSERT INTO product (product_id, category_id, product_name, gender_id, default_price, shipping_cost)
 VALUES
-(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'blusas'), 'blusa', 2, 45000, 1000),
-(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'camisas'), 'camisa', 1, 55000, 1000),
+(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'blusas'), 'blusa-mujer', 2, 45000, 1000),
+(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'blusas'), 'blusa-niña', 4, 45000, 1000),
+(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'camisas'), 'camisa-niño', 3, 55000, 1000),
+(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'camisas'), 'camisa-hombre', 1, 55000, 1000),
 (nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'accesorios-moda'), 'corbata', 1, 25000, 1000),
 (nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'pantalones-y-jeans'), 'pantalon', 1, 60000, 2000),
 (nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'pantalones-y-jeans'), 'pantaloneta', 1, 20000, 2000),
@@ -48,16 +50,16 @@ VALUES
 
 INSERT INTO variant (product_id, variant_name, variant_price, variant_quantity)
 VALUES
-((SELECT product_id FROM product WHERE product_name = 'blusa'), 'blusa-negra-mujer', 50000, 10),
-((SELECT product_id FROM product WHERE product_name = 'blusa'), 'blusa-blanca-mujer', 60000, 10),
-((SELECT product_id FROM product WHERE product_name = 'blusa'), 'blusa-roja-mujer', 55000, 50),
-((SELECT product_id FROM product WHERE product_name = 'blusa'), 'blusa-blanca-niña', 45000, 10),
-((SELECT product_id FROM product WHERE product_name = 'blusa'), 'blusa-roja-niña', 40000, 20),
-((SELECT product_id FROM product WHERE product_name = 'camisa'), 'camisa-negra-hombre', 65000, 35),
-((SELECT product_id FROM product WHERE product_name = 'camisa'), 'camisa-amarilla-hombre', 55000, 35),
-((SELECT product_id FROM product WHERE product_name = 'camisa'), 'camisa-verde-hombre', 50000, 35),
-((SELECT product_id FROM product WHERE product_name = 'camisa'), 'camisa-blanca-niño', 30000, 20),
-((SELECT product_id FROM product WHERE product_name = 'camisa'), 'camisa-negra-niño', 45000, 15),
+((SELECT product_id FROM product WHERE product_name = 'blusa-mujer'), 'blusa-negra-mujer', 50000, 10),
+((SELECT product_id FROM product WHERE product_name = 'blusa-mujer'), 'blusa-blanca-mujer', 60000, 10),
+((SELECT product_id FROM product WHERE product_name = 'blusa-mujer'), 'blusa-roja-mujer', 55000, 50),
+((SELECT product_id FROM product WHERE product_name = 'blusa-niña'), 'blusa-blanca-niña', 45000, 10),
+((SELECT product_id FROM product WHERE product_name = 'blusa-niña'), 'blusa-roja-niña', 40000, 20),
+((SELECT product_id FROM product WHERE product_name = 'camisa-hombre'), 'camisa-negra-hombre', 65000, 35),
+((SELECT product_id FROM product WHERE product_name = 'camisa-hombre'), 'camisa-amarilla-hombre', 55000, 35),
+((SELECT product_id FROM product WHERE product_name = 'camisa-hombre'), 'camisa-verde-hombre', 50000, 35),
+((SELECT product_id FROM product WHERE product_name = 'camisa-niño'), 'camisa-blanca-niño', 30000, 20),
+((SELECT product_id FROM product WHERE product_name = 'camisa-niño'), 'camisa-negra-niño', 45000, 15),
 ((SELECT product_id FROM product WHERE product_name = 'corbata'), 'corbata-negra-hombre', 30000, 20),
 ((SELECT product_id FROM product WHERE product_name = 'corbata'), 'corbata-azul-hombre', 23000, 50),
 ((SELECT product_id FROM product WHERE product_name = 'corbata'), 'corbata-verde-hombre', 25000, 15),

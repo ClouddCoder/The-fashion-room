@@ -29,7 +29,7 @@ function ProductState({ children }) {
         {},
       ),
     ).map((element) =>
-      // Joins the element with the same variant_id in one object.
+      // Joins the different keys into one object.
       element.reduce((previousValue, currentValue) => {
         // eslint-disable-next-line no-restricted-syntax
         for (const i in currentValue) {
@@ -64,9 +64,9 @@ function ProductState({ children }) {
   };
 
   /**
-   * Gets one product's information.
+   * Gets one product's variants information.
    */
-  const getProduct = async (id) => {
+  const getProductVariants = async (id) => {
     try {
       const response = await axios.get("http://localhost:3050/api/product", {
         params: {
@@ -75,8 +75,8 @@ function ProductState({ children }) {
       });
 
       const { data } = response;
-      console.log(reduceProducts(data));
-      dispatch({ type: TYPES.GET_PRODUCT, payload: reduceProducts(data) });
+      console.log(data);
+      dispatch({ type: TYPES.GET_VARIANTS, payload: data });
     } catch (error) {
       console.log(error);
     }
@@ -283,7 +283,7 @@ function ProductState({ children }) {
       productsToBuy: state.productsToBuy,
       shippingCost: state.shippingCost,
       loadProducts,
-      getProduct,
+      getProductVariants,
       clearProductsList,
       getTotalShippingCost,
       addToCart,
