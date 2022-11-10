@@ -3,6 +3,7 @@ import { TYPES } from "../../actions/productActions";
 export const productInitialState = {
   products: [],
   variants: [],
+  variantId: 0,
   cart: [],
   wishlist: [], // Get all the wishes from database
   totalProducts: 0,
@@ -23,6 +24,9 @@ export function ProductReducer(state, action) {
 
     case TYPES.GET_VARIANTS:
       return { ...state, variants: [...action.payload] };
+
+    case TYPES.SET_VARIANT_ID:
+      return { ...state, variantId: action.payload };
 
     case TYPES.CLEAR_PRODUCTS_LIST:
       return { ...state, products: [] };
@@ -117,7 +121,7 @@ export function ProductReducer(state, action) {
     }
 
     case TYPES.ADD_PRODUCT_TO_BUY: {
-      const product = state.products.find((item) => item.variant_id === action.payload);
+      const product = state.variants.find((variant) => variant.variant_id === action.payload);
       return {
         ...state,
         productsToBuy: [{ ...product, quantity_to_purchase: 1 }],

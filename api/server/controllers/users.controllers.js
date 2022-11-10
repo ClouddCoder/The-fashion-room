@@ -164,12 +164,12 @@ const getProductVariants = async (req, res, next) => {
 };
 
 /**
- * Updates the product's quantity in the database.
+ * Updates the product's variant quantity in the database.
  */
 const buyProduct = async (req, res, next) => {
   const productsToBuy = req.body;
   let query = "UPDATE variant SET variant_quantity = variant_quantity - $1 ";
-  query += "WHERE product_id = $2";
+  query += "WHERE variant_id = $2";
   const { authorization } = req.headers;
   const decodeToken = getAuthorization(authorization);
 
@@ -177,7 +177,7 @@ const buyProduct = async (req, res, next) => {
     /* eslint-disable no-await-in-loop */
     // eslint-disable-next-line no-restricted-syntax
     for (const item of productsToBuy) {
-      const result = await pool.query(query, [item.quantity_to_purchase, item.product_id]);
+      const result = await pool.query(query, [item.quantity_to_purchase, item.variant_id]);
 
       if (result.rowCount === 0) {
         return res.status(404).json({

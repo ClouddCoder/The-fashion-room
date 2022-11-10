@@ -51,6 +51,13 @@ function ProductState({ children }) {
   };
 
   /**
+   * Sets the variant's id.
+   */
+  const setVariantId = (variantId) => {
+    dispatch({ type: TYPES.SET_VARIANT_ID, payload: parseInt(variantId, 10) });
+  };
+
+  /**
    * Clears the products list to avoid duplicates.
    */
   const clearProductsList = () => dispatch({ type: TYPES.CLEAR_PRODUCTS_LIST });
@@ -150,7 +157,7 @@ function ProductState({ children }) {
   };
 
   /**
-   * Inserts a product to be purchased. If argument is the shopping cart,
+   * Inserts a product's variant to be purchased. If argument is the shopping cart,
    * it will be a list.
    */
   const addProductToBuy = (product, fromCart = false) => {
@@ -241,6 +248,7 @@ function ProductState({ children }) {
     () => ({
       products: state.products,
       variants: state.variants,
+      variantId: state.variantId,
       cart: state.cart,
       totalProducts: state.totalProducts,
       totalPrice: state.totalPrice,
@@ -253,6 +261,7 @@ function ProductState({ children }) {
       shippingCost: state.shippingCost,
       loadProducts,
       getProductVariants,
+      setVariantId,
       clearProductsList,
       getTotalShippingCost,
       addToCart,

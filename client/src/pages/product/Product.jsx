@@ -20,21 +20,26 @@ function Product() {
   const {
     products,
     variants,
+    variantId,
     addToCart,
     addProductToBuy,
     clearListOfProductsToBuy,
     getProductVariants,
+    setVariantId,
   } = useContext(ProductContext);
   const { auth } = useContext(AuthContext);
   const product = products.find((item) => item.product_id === productId) || [];
 
-  // Gets the product information.
+  const handleChange = (e) => {
+    setVariantId(e.target.name);
+  };
+  // Gets the product's variants information.
   useEffect(() => {
     getProductVariants(productId);
   }, []);
 
   const handleBuyProduct = () => {
-    addProductToBuy(product.variant_id);
+    addProductToBuy(variantId);
     navigate("/buy");
   };
 
@@ -44,7 +49,6 @@ function Product() {
 
   return (
     <div className="container">
-      {console.log(variants)}
       <Navbar />
       <Grid container sx={{ width: "80%", m: "auto 0" }}>
         <Grid item xs={6} sx={{ display: "flex", justifyContent: "center" }}>
@@ -71,7 +75,7 @@ function Product() {
           <Grid item>
             {variants?.map((variant, index) => (
               // eslint-disable-next-line react/button-has-type
-              <button name={variant.variant_id} key={index}>
+              <button name={variant.variant_id} key={index} onClick={handleChange}>
                 {variant.color_value}
               </button>
             ))}
@@ -80,7 +84,7 @@ function Product() {
             <div style={{ display: "flex" }}>
               <Button
                 variant="contained"
-                onClick={auth ? handleBuyProduct : () => navigate("/login")}
+                onClick={auth ? handleBuyProduct() : () => navigate("/login")}
               >
                 Comprar
               </Button>
