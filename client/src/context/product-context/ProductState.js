@@ -14,38 +14,6 @@ function ProductState({ children }) {
   const { token } = useContext(AuthContext);
 
   /**
-   * Reduces the number of objects in every array to one.
-   * It avoids the repetition of the same object in the array by
-   * adding every product's attribute in one object.
-   */
-  const reduceProducts = (products) => {
-    const variantGroups = Object.values(
-      products.reduce(
-        // Groups the products by variant's name.
-        (acc, item) => ({
-          ...acc,
-          [item.variant_name]: (acc[item.variant_name] || []).concat(item),
-        }),
-        {},
-      ),
-    ).map((element) =>
-      // Joins the different keys into one object.
-      element.reduce((previousValue, currentValue) => {
-        // eslint-disable-next-line no-restricted-syntax
-        for (const i in currentValue) {
-          if (previousValue[i] !== currentValue[i]) {
-            // eslint-disable-next-line no-param-reassign
-            currentValue = { ...previousValue, [i]: currentValue[i] };
-          }
-        }
-        return currentValue;
-      }),
-    );
-
-    return variantGroups;
-  };
-
-  /**
    * Gets all variant's products.
    */
   const loadProducts = async (category) => {
@@ -272,6 +240,7 @@ function ProductState({ children }) {
   const valueProps = useMemo(
     () => ({
       products: state.products,
+      variants: state.variants,
       cart: state.cart,
       totalProducts: state.totalProducts,
       totalPrice: state.totalPrice,
@@ -302,6 +271,7 @@ function ProductState({ children }) {
     }),
     [
       state.products,
+      state.variants,
       state.cart,
       state.totalProducts,
       state.totalPrice,

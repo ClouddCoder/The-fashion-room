@@ -3,7 +3,7 @@ const {
   loginUser,
   registerUser,
   getAllProducts,
-  getProduct,
+  getProductVariants,
   buyProduct,
   setWishlist,
   getWishlist,
@@ -27,7 +27,7 @@ router.put("/buy", buyProduct);
 
 router.get("/catalogue", getAllProducts);
 
-router.get("/product", getProduct);
+router.get("/product", getProductVariants);
 
 router.post("/set-wishlist", setWishlist);
 

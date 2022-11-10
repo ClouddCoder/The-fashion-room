@@ -144,9 +144,9 @@ const getAllProducts = async (req, res, next) => {
 };
 
 /**
- * Gets an specific product information.
+ * Gets the product's variants information.
  */
-const getProduct = async (req, res, next) => {
+const getProductVariants = async (req, res, next) => {
   const { id } = req.query;
   let query = "SELECT v.*, g.gender_value, c.* FROM variant v ";
   query += "JOIN product p ON p.product_id = v.product_id ";
@@ -368,7 +368,7 @@ module.exports = {
   loginUser,
   registerUser,
   getAllProducts,
-  getProduct,
+  getProductVariants,
   buyProduct,
   setWishlist,
   getWishlist,

@@ -30,7 +30,7 @@ function Product() {
 
   // Gets the product information.
   useEffect(() => {
-    getProductVariants(id);
+    getProductVariants(productId);
   }, []);
 
   const handleBuyProduct = () => {
@@ -44,6 +44,7 @@ function Product() {
 
   return (
     <div className="container">
+      {console.log(variants)}
       <Navbar />
       <Grid container sx={{ width: "80%", m: "auto 0" }}>
         <Grid item xs={6} sx={{ display: "flex", justifyContent: "center" }}>
@@ -68,9 +69,11 @@ function Product() {
             <CustomTypography variant="body2">Color: Azul</CustomTypography>
           </Grid>
           <Grid item>
-            {variants.map((variant, index) => (
+            {variants?.map((variant, index) => (
               // eslint-disable-next-line react/button-has-type
-              <button key={index}>{variant.color_value}</button>
+              <button name={variant.variant_id} key={index}>
+                {variant.color_value}
+              </button>
             ))}
           </Grid>
           <Grid item>
