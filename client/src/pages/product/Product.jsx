@@ -84,13 +84,13 @@ function Product() {
             <div style={{ display: "flex" }}>
               <Button
                 variant="contained"
-                onClick={auth ? handleBuyProduct() : () => navigate("/login")}
+                onClick={auth ? handleBuyProduct : () => navigate("/login")}
               >
                 Comprar
               </Button>
               <Button
                 variant="contained"
-                onClick={auth ? () => addToCart(product.variant_id) : () => navigate("/login")}
+                onClick={auth ? () => addToCart(variantId) : () => navigate("/login")}
               >
                 Agregar al carrito
               </Button>

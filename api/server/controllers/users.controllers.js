@@ -148,12 +148,13 @@ const getAllProducts = async (req, res, next) => {
  */
 const getProductVariants = async (req, res, next) => {
   const { id } = req.query;
-  let query = "SELECT v.*, g.gender_value, c.* FROM variant v ";
+  let query = "SELECT v.*, g.gender_value, c.color_value, p.product_name, ";
+  query += "p.default_price, p.shipping_cost FROM variant v ";
   query += "JOIN product p ON p.product_id = v.product_id ";
   query += "JOIN gender g ON g.gender_id = p.gender_id ";
   query += "JOIN variant_color vc ON vc.variant_id = v.variant_id ";
   query += "JOIN color c ON c.color_id = vc.color_id ";
-  query += "WHERE v.product_id = $1 ";
+  query += "WHERE v.product_id = $1";
 
   try {
     const result = await pool.query(query, [id]);

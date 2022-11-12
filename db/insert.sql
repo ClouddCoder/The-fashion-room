@@ -137,7 +137,7 @@ VALUES
 ((SELECT variant_id FROM variant WHERE variant_name = 'pantaloneta-amarilla-niño'), (SELECT color_id FROM color WHERE color_value = 'amarillo')),
 ((SELECT variant_id FROM variant WHERE variant_name = 'pantaloneta-gris-niño'), (SELECT color_id FROM color WHERE color_value = 'gris')),
 ((SELECT variant_id FROM variant WHERE variant_name = 'tc-negros-hombre'), (SELECT color_id FROM color WHERE color_value = 'negro')),
-((SELECT variant_id FROM variant WHERE variant_name = 'tc-azules-hombre'), (SELECT color_id FROM color WHERE color_value = 'negro')),
+((SELECT variant_id FROM variant WHERE variant_name = 'tc-azules-hombre'), (SELECT color_id FROM color WHERE color_value = 'azul')),
 ((SELECT variant_id FROM variant WHERE variant_name = 'tg-verdes-hombre'), (SELECT color_id FROM color WHERE color_value = 'verde')),
 ((SELECT variant_id FROM variant WHERE variant_name = 'tg-amarillos-mujer'), (SELECT color_id FROM color WHERE color_value = 'amarillo')),
 ((SELECT variant_id FROM variant WHERE variant_name = 'bm-verdes-hombre'), (SELECT color_id FROM color WHERE color_value = 'verde')),

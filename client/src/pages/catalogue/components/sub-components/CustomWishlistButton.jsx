@@ -18,8 +18,7 @@ function CustomWishlistButton({ product }) {
 
   const navigate = useNavigate();
 
-  // Establece el initial state cada vez que la variable productAsWish cambie de valor cuando
-  // se hace peticion a la API.
+  // Sets initial state every time productAsWish changes.
   useEffect(() => {
     setAddWish(productAsWish);
   }, [productAsWish]);

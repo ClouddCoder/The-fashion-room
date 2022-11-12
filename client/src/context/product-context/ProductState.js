@@ -43,7 +43,6 @@ function ProductState({ children }) {
       });
 
       const { data } = response;
-      console.log(data);
       dispatch({ type: TYPES.GET_VARIANTS, payload: data });
     } catch (error) {
       console.log(error);
@@ -281,6 +280,7 @@ function ProductState({ children }) {
     [
       state.products,
       state.variants,
+      state.variantId,
       state.cart,
       state.totalProducts,
       state.totalPrice,

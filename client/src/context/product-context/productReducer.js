@@ -39,7 +39,7 @@ export function ProductReducer(state, action) {
     }
 
     case TYPES.ADD_TO_CART: {
-      const newItem = state.products.find((item) => item.variant_id === action.payload);
+      const newItem = state.variants.find((item) => item.variant_id === action.payload);
       const itemInCart = state.cart.find((item) => item.variant_id === newItem.variant_id);
 
       return itemInCart
