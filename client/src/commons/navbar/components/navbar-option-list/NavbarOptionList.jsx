@@ -26,31 +26,6 @@ function NavBarOptionList({ displayMode }) {
       </li>
     </ul>
   );
-  /*
-  return (
-    <>
-      {displayMode ? (
-        <ul className="navbarMobileLinks">
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/contact">Contact</Link>
-          </li>
-        </ul>
-      ) : (
-        <ul className="navbarDesktopLinks">
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/contact">Contact</Link>
-          </li>
-        </ul>
-      )}
-    </>
-  );
-  */
 }
 
 export default NavBarOptionList;

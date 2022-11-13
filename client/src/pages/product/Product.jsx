@@ -8,6 +8,7 @@ import Navbar from "../../commons/navbar/Navbar";
 import Footer from "../../commons/footer/Footer";
 import CustomTypography from "../../commons/custom-typography/CustomTypography";
 import { getProductImage } from "../../assets";
+import "./Product.css";
 
 /**
  * Componente que renderiza la informacion de un producto
@@ -30,9 +31,18 @@ function Product() {
   const { auth } = useContext(AuthContext);
   const product = products.find((item) => item.product_id === productId) || [];
 
+  /**
+   * Event delegation to handle the click on the variants.
+   */
   const handleChange = (e) => {
-    setVariantId(e.target.name);
+    if (e.target.matches(".productColor div") || e.target.matches(".productColor span")) {
+      const parent = e.target.closest("li");
+      setVariantId(parent.getAttribute("name"));
+    } else if (e.target.matches(".productColor")) {
+      setVariantId(e.target.getAttribute("name"));
+    }
   };
+
   // Gets the product's variants information.
   useEffect(() => {
     getProductVariants(productId);
@@ -73,12 +83,24 @@ function Product() {
             <CustomTypography variant="body2">Color: Azul</CustomTypography>
           </Grid>
           <Grid item>
-            {variants?.map((variant, index) => (
-              // eslint-disable-next-line react/button-has-type
-              <button name={variant.variant_id} key={index} onClick={handleChange}>
-                {variant.color_value}
-              </button>
-            ))}
+            <ul className="variantColors">
+              {variants?.map((variant, index) => (
+                // eslint-disable-next-line max-len
+                // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions
+                <li
+                  name={variant.variant_id}
+                  className={`productColor${
+                    variantId === variant.variant_id ? " selected" : ""
+                  }`}
+                  key={index}
+                  onClick={handleChange}
+                >
+                  <div>
+                    <span>{variant.color_value}</span>
+                  </div>
+                </li>
+              ))}
+            </ul>
           </Grid>
           <Grid item>
             <div style={{ display: "flex" }}>

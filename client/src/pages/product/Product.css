@@ -1,0 +1,19 @@
+.variantColors {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.variantColors li {
+  list-style: none;
+  cursor: pointer;
+  margin-right: 12px;
+}
+
+.productColor div {
+  width: 55px;
+  height: 30px;
+}
+
+.selected {
+  border: 2px solid red;
+}
