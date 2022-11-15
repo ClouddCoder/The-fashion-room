@@ -18,7 +18,6 @@ CREATE TABLE product (
     category_id INTEGER,
     product_name VARCHAR(25) NOT NULL CHECK (product_name <> ''),
     gender_id INTEGER,
-    default_price INTEGER NOT NULL CHECK (default_price >= 0),
     shipping_cost INTEGER NOT NULL,
     CONSTRAINT pk_product PRIMARY KEY (product_id),
     CONSTRAINT fk_product_category_id FOREIGN KEY (category_id) REFERENCES category (category_id),

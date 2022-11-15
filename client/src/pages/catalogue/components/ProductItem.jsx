@@ -44,14 +44,14 @@ function ProductItem({ product }) {
             component="img"
             height="140"
             image={getProductImage("zapatos")}
-            alt={product.product_name}
+            alt={product.variant_name}
           />
           <CardContent sx={{ p: "10px" }}>
             <CustomTypography gutterBottom variant="h5" sx={{ fontSize: "16px" }}>
               {product.product_name}
             </CustomTypography>
             <CustomTypography variant="body2" color="text.secondary">
-              Cantidad disponible {product.variant_quantity}
+              {product.min_price}
             </CustomTypography>
           </CardContent>
         </CardActionArea>

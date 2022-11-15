@@ -28,25 +28,25 @@ VALUES
 ('verde');
 
 -- Insert available products to the product table.
-INSERT INTO product (product_id, category_id, product_name, gender_id, default_price, shipping_cost)
+INSERT INTO product (product_id, category_id, product_name, gender_id, shipping_cost)
 VALUES
-(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'blusas'), 'blusa-mujer', 2, 45000, 1000),
-(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'blusas'), 'blusa-niña', 4, 45000, 1000),
-(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'camisas'), 'camisa-niño', 3, 55000, 1000),
-(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'camisas'), 'camisa-hombre', 1, 55000, 1000),
-(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'accesorios-moda'), 'corbata', 1, 25000, 1000),
-(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'pantalones-y-jeans'), 'pantalon', 1, 60000, 2000),
-(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'pantalones-y-jeans'), 'pantaloneta', 1, 20000, 2000),
-(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'tenis-colegial', 3, 80000,5000),
-(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'tenis-golty', 3, 70000, 5000),
-(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'botas-militar', 1, 80000, 5000),
-(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'zapatos-colegial', 4, 70000, 5000),
-(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'tenis-royal', 1, 50000, 5000),
-(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'tenis-sneakers', 3, 80000, 5000),
-(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'pantuflas', 1, 80000, 5000),
-(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'tenis-clasicos', 1, 80000, 5000),
-(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'botas-udan', 2, 80000, 5000),
-(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'sandalias', 2, 40000, 5000);
+(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'blusas'), 'blusa-mujer', 2, 1000),
+(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'blusas'), 'blusa-niña', 4, 1000),
+(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'camisas'), 'camisa-niño', 3, 1000),
+(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'camisas'), 'camisa-hombre', 1, 1000),
+(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'accesorios-moda'), 'corbata', 1, 1000),
+(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'pantalones-y-jeans'), 'pantalon', 1, 2000),
+(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'pantalones-y-jeans'), 'pantaloneta', 1, 2000),
+(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'tenis-colegial', 3, 5000),
+(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'tenis-golty', 3, 5000),
+(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'botas-militar', 1, 5000),
+(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'zapatos-colegial', 4, 5000),
+(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'tenis-royal', 1, 5000),
+(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'tenis-sneakers', 3, 5000),
+(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'pantuflas', 1, 5000),
+(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'tenis-clasicos', 1, 5000),
+(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'botas-udan', 2, 5000),
+(nextval('product_product_id_seq'), (SELECT category_id FROM category WHERE category_name = 'calzado'), 'sandalias', 2, 5000);
 
 INSERT INTO variant (product_id, variant_name, variant_price, variant_quantity)
 VALUES

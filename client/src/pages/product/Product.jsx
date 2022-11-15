@@ -48,6 +48,10 @@ function Product() {
     getProductVariants(productId);
   }, []);
 
+  useEffect(() => {
+    setVariantId(product.variant_id);
+  }, []);
+
   const handleBuyProduct = () => {
     addProductToBuy(variantId);
     navigate("/buy");
@@ -74,13 +78,10 @@ function Product() {
             <CustomTypography variant="h4">{product.product_name}</CustomTypography>
           </Grid>
           <Grid item>
-            <CustomTypography variant="body2">99 reviews</CustomTypography>
+            <CustomTypography variant="body2">{product.min_price}</CustomTypography>
           </Grid>
           <Grid item>
-            <CustomTypography variant="body2">{product.default_price}</CustomTypography>
-          </Grid>
-          <Grid item>
-            <CustomTypography variant="body2">Color: Azul</CustomTypography>
+            <CustomTypography variant="body2">Color:</CustomTypography>
           </Grid>
           <Grid item>
             <ul className="variantColors">

@@ -126,14 +126,23 @@ const registerUser = async (req, res, next) => {
 };
 
 /**
- * Gets the information of the specific product's category.
+ * Gets the information of the products with one variant to show the main category.
  */
 const getAllProducts = async (req, res, next) => {
   const { category } = req.query;
-  let query = "SELECT p.*, g.gender_value FROM product p ";
-  query += "JOIN category c ON c.category_id = p.category_id ";
+  let query = "SELECT DISTINCT ON (p.product_id) p.product_id, p.product_name, p.shipping_cost, ";
+  query += "g.gender_value, v.variant_id, v.variant_name, v.variant_quantity, ";
+  query += "t.min_price, c.color_value FROM product p ";
+  query += "JOIN category ca ON ca.category_id = p.category_id ";
   query += "JOIN gender g ON g.gender_id = p.gender_id ";
-  query += "WHERE c.category_name = $1";
+  query += "JOIN variant v ON v.product_id = p.product_id ";
+  query += "JOIN variant_color vc ON vc.variant_id = v.variant_id ";
+  query += "JOIN color c ON c.color_id = vc.color_id ";
+  query += "JOIN (SELECT product_id, MIN(variant_price) AS min_price ";
+  query += "FROM variant GROUP BY product_id) t ";
+  query += "ON v.product_id = t.product_id and t.min_price = v.variant_price ";
+  query += "WHERE ca.category_name = $1 ";
+  query += "ORDER BY p.product_id;";
 
   try {
     const result = await pool.query(query, [category]);
@@ -149,7 +158,7 @@ const getAllProducts = async (req, res, next) => {
 const getProductVariants = async (req, res, next) => {
   const { id } = req.query;
   let query = "SELECT v.*, g.gender_value, c.color_value, p.product_name, ";
-  query += "p.default_price, p.shipping_cost FROM variant v ";
+  query += "p.shipping_cost FROM variant v ";
   query += "JOIN product p ON p.product_id = v.product_id ";
   query += "JOIN gender g ON g.gender_id = p.gender_id ";
   query += "JOIN variant_color vc ON vc.variant_id = v.variant_id ";
