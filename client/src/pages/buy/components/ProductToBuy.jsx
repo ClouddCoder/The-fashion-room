@@ -14,8 +14,8 @@ function ProductToBuy({ product }) {
           <CardMedia
             component="img"
             sx={{ width: 120, height: 120 }}
-            image={getProductImage(product.product_name)}
-            alt={product.product_name}
+            image={getProductImage(product.variant_name)}
+            alt={product.variant_name}
           />
           <div className="description">
             <div>

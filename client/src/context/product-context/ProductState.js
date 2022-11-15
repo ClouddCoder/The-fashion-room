@@ -147,6 +147,7 @@ function ProductState({ children }) {
         },
       );
 
+      console.log(product);
       if (remove) {
         dispatch({ type: TYPES.REMOVE_FROM_WISHLIST, payload: product });
       }

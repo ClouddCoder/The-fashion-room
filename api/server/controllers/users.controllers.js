@@ -39,7 +39,7 @@ const loginUser = async (req, res, next) => {
   const { userEmail, userPassword } = req.body;
   let query = "SELECT customer_id, customer_name, customer_lastname, ";
   query += "customer_email, customer_password ";
-  query += "FROM customer WHERE customer_email = $1";
+  query += "FROM customer WHERE customer_email = $1;";
   const values = [userEmail];
 
   try {
@@ -90,8 +90,8 @@ const registerUser = async (req, res, next) => {
   const { userName, userLastname, userEmail, userPassword } = req.body;
   let query = "INSERT INTO customer ";
   query += "(customer_name, customer_lastname, customer_email, customer_password) ";
-  query += "VALUES ($1, $2, $3, $4)";
-  const userIdquery = "SELECT get_new_customer_id()";
+  query += "VALUES ($1, $2, $3, $4);";
+  const userIdquery = "SELECT get_new_customer_id();";
 
   if (userPassword.length <= 4) {
     return res.status(406).json({
@@ -132,13 +132,10 @@ const registerUser = async (req, res, next) => {
 const getAllProducts = async (req, res, next) => {
   const { category } = req.query;
   let query = "SELECT DISTINCT ON (p.product_id) p.product_id, p.product_name, ";
-  query += "p.shipping_cost, g.gender_value, v.variant_id, v.variant_name, ";
-  query += "v.variant_quantity, t.min_price, c.color_value FROM product p ";
+  query += "g.gender_value, v.variant_id, v.variant_name, t.min_price FROM product p ";
   query += "JOIN category ca ON ca.category_id = p.category_id ";
   query += "JOIN gender g ON g.gender_id = p.gender_id ";
   query += "JOIN variant v ON v.product_id = p.product_id ";
-  query += "JOIN variant_color vc ON vc.variant_id = v.variant_id ";
-  query += "JOIN color c ON c.color_id = vc.color_id ";
   query += "JOIN (SELECT product_id, MIN(variant_price) AS min_price ";
   query += "FROM variant GROUP BY product_id) t ";
   query += "ON v.product_id = t.product_id and t.min_price = v.variant_price ";
@@ -164,7 +161,7 @@ const getProductVariants = async (req, res, next) => {
   query += "JOIN gender g ON g.gender_id = p.gender_id ";
   query += "JOIN variant_color vc ON vc.variant_id = v.variant_id ";
   query += "JOIN color c ON c.color_id = vc.color_id ";
-  query += "WHERE v.product_id = $1";
+  query += "WHERE v.product_id = $1;";
 
   try {
     const result = await pool.query(query, [id]);
@@ -180,7 +177,7 @@ const getProductVariants = async (req, res, next) => {
 const buyProduct = async (req, res, next) => {
   const productsToBuy = req.body;
   let query = "UPDATE variant SET variant_quantity = variant_quantity - $1 ";
-  query += "WHERE variant_id = $2";
+  query += "WHERE variant_id = $2;";
   const { authorization } = req.headers;
   const decodeToken = getAuthorization(authorization);
 
@@ -209,8 +206,8 @@ const buyProduct = async (req, res, next) => {
  */
 const setWishlist = async (req, res, next) => {
   const { productId, remove } = req.body;
-  const addQuery = "INSERT INTO wishlist (customer_id, product_id) VALUES ($1, $2)";
-  const removeQuery = "DELETE FROM wishlist WHERE customer_id = $1 AND product_id = $2";
+  const addQuery = "INSERT INTO wishlist (customer_id, product_id) VALUES ($1, $2);";
+  const removeQuery = "DELETE FROM wishlist WHERE customer_id = $1 AND product_id = $2;";
   const { authorization } = req.headers;
   const decodeToken = getAuthorization(authorization);
 
@@ -233,10 +230,15 @@ const setWishlist = async (req, res, next) => {
 };
 
 const getWishlist = async (req, res, next) => {
-  let query = "SELECT wishlist.product_id, product_name, default_price FROM wishlist ";
-  query += "JOIN customer ON customer.customer_id = wishlist.customer_id ";
-  query += "JOIN product ON product.product_id = wishlist.product_id ";
-  query += "WHERE customer.customer_id = $1";
+  let query = "SELECT w.product_id, p.product_name, v.variant_id, ";
+  query += "v.variant_name, t.min_price FROM wishlist w ";
+  query += "JOIN product p ON p.product_id = w.product_id ";
+  query += "JOIN variant v ON v.product_id = p.product_id ";
+  query += "JOIN customer cu ON cu.customer_id = w.customer_id ";
+  query += "JOIN (SELECT product_id, MIN(variant_price) AS min_price ";
+  query += "FROM variant GROUP BY product_id) t ";
+  query += "ON v.product_id = t.product_id and t.min_price = v.variant_price ";
+  query += "WHERE cu.customer_id = $1;";
   const { authorization } = req.headers;
 
   const decodeToken = getAuthorization(authorization);
@@ -258,9 +260,9 @@ const getWishlist = async (req, res, next) => {
  */
 const createInvoice = async (req, res, next) => {
   const productsToBuy = req.body;
-  const setOrderDetailIdQuery = "SELECT set_order_detail_id()";
-  const setOrderDetailQuery = "SELECT set_order_detail($1, $2)";
-  const setOrderItemQuery = "SELECT set_order_item($1, $2, $3, $4)";
+  const setOrderDetailIdQuery = "SELECT set_order_detail_id();";
+  const setOrderDetailQuery = "SELECT set_order_detail($1, $2);";
+  const setOrderItemQuery = "SELECT set_order_item($1, $2, $3, $4);";
   const { authorization } = req.headers;
   const decodeToken = getAuthorization(authorization);
 
@@ -305,7 +307,7 @@ const createInvoice = async (req, res, next) => {
  * Gets the store information.
  */
 const getStores = async (req, res, next) => {
-  const query = "SELECT * FROM store";
+  const query = "SELECT * FROM store;";
 
   try {
     const result = await pool.query(query);
@@ -319,7 +321,7 @@ const getStores = async (req, res, next) => {
  * Gets the store's phone number.
  */
 const getStoresPhones = async (req, res, next) => {
-  const query = "SELECT * FROM store_phone";
+  const query = "SELECT * FROM store_phone;";
   try {
     const result = await pool.query(query);
     res.json(result.rows);
@@ -338,7 +340,7 @@ const getOrderDetail = async (req, res, next) => {
   query += "INNER JOIN order_detail od ON od.order_detail_id = order_item.order_detail_id ";
   query += "INNER JOIN variant ON variant.variant_id = order_item.variant_id ";
   query += "INNER JOIN product ON product.product_id = variant.product_id ";
-  query += "WHERE od.customer_id = $1";
+  query += "WHERE od.customer_id = $1;";
   const { authorization } = req.headers;
   const decodeToken = getAuthorization(authorization);
 
@@ -359,7 +361,7 @@ const getOrderDetail = async (req, res, next) => {
  */
 const removeOrderDetail = async (req, res, next) => {
   const { orderDetailId } = req.body;
-  const query = "DELETE FROM order_item WHERE order_item_id = $1";
+  const query = "DELETE FROM order_item WHERE order_item_id = $1;";
   const { authorization } = req.headers;
   const decodeToken = getAuthorization(authorization);
 

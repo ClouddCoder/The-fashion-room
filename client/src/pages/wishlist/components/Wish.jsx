@@ -26,7 +26,7 @@ function Wish({ product }) {
           <div className="description">
             <h1>{product.product_name}</h1>
             <div>
-              <p>${product.default_price}</p>
+              <p>${product.min_price}</p>
             </div>
           </div>
         </CardContent>
@@ -34,7 +34,7 @@ function Wish({ product }) {
           <div className="wishOptions">
             <Button
               variant="contained"
-              onClick={() => navigate(`/product/${product.product_id}`)}
+              onClick={() => navigate(`/product/${product.product_id}-${product.variant_id}`)}
             >
               Comprar
             </Button>

@@ -44,21 +44,21 @@ function Product() {
     }
   };
 
+  const handleBuyProduct = () => {
+    addProductToBuy(variantId);
+    navigate("/buy");
+  };
+
   // Gets the product's variants information.
   useEffect(() => {
     getProductVariants(productId);
   }, []);
 
-  // The variant that is fetched with the product will be the default variant
+  // The variant that is fetched with the product will be the default one
   // to check the variant's color button.
   useEffect(() => {
     setVariantId(productVariantId);
   }, []);
-
-  const handleBuyProduct = () => {
-    addProductToBuy(variantId);
-    navigate("/buy");
-  };
 
   useEffect(() => {
     clearListOfProductsToBuy();
@@ -70,8 +70,8 @@ function Product() {
       <Grid container sx={{ width: "80%", m: "auto 0" }}>
         <Grid item xs={6} sx={{ display: "flex", justifyContent: "center" }}>
           <img
-            src={getProductImage(product.product_name)}
-            alt={product.product_name}
+            src={getProductImage(product.variant_name)}
+            alt={product.variant_name}
             width="450px"
             height="450px"
           />

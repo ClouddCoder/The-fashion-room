@@ -24,8 +24,8 @@ function CustomWishlistButton({ product }) {
   }, [productAsWish]);
 
   if (auth) {
-    // Si el producto esta en la wishlist, el boton cambia de color
-    // y puede ser removido.
+    //  If the product is in the wishlist, the button gets red color
+    // and can remove the product.
     if (addWish) {
       return (
         <IconButton
@@ -41,8 +41,8 @@ function CustomWishlistButton({ product }) {
       );
     }
 
-    // Si el producto no esta en la wishlist, el boton no tiene color y
-    // puede agregar.
+    // If the product is not in the wishlist. the button does not have color
+    // and can add the product.
     return (
       <IconButton
         aria-label={`Add ${product.product_name} to wishlist`}
