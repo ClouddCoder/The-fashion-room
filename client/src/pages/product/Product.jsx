@@ -17,9 +17,10 @@ import "./Product.css";
 function Product() {
   const navigate = useNavigate();
   const { id } = useParams();
-  const productId = parseInt(id, 10);
+  const productInfo = id.split("-");
+  const productId = parseInt(productInfo[0], 10);
+  const productVariantId = parseInt(productInfo[1], 10);
   const {
-    products,
     variants,
     variantId,
     addToCart,
@@ -29,7 +30,7 @@ function Product() {
     setVariantId,
   } = useContext(ProductContext);
   const { auth } = useContext(AuthContext);
-  const product = products.find((item) => item.product_id === productId) || [];
+  const product = variants.find((item) => item.variant_id === variantId) || [];
 
   /**
    * Event delegation to handle the click on the variants.
@@ -48,8 +49,10 @@ function Product() {
     getProductVariants(productId);
   }, []);
 
+  // The variant that is fetched with the product will be the default variant
+  // to check the variant's color button.
   useEffect(() => {
-    setVariantId(product.variant_id);
+    setVariantId(productVariantId);
   }, []);
 
   const handleBuyProduct = () => {
@@ -78,7 +81,7 @@ function Product() {
             <CustomTypography variant="h4">{product.product_name}</CustomTypography>
           </Grid>
           <Grid item>
-            <CustomTypography variant="body2">{product.min_price}</CustomTypography>
+            <CustomTypography variant="body2">{product.variant_price}</CustomTypography>
           </Grid>
           <Grid item>
             <CustomTypography variant="body2">Color:</CustomTypography>

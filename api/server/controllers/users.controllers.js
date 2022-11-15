@@ -126,13 +126,14 @@ const registerUser = async (req, res, next) => {
 };
 
 /**
- * Gets the information of the products with one variant to show the main category.
+ * Gets the information of the products with one variant to show them
+ * on the main category.
  */
 const getAllProducts = async (req, res, next) => {
   const { category } = req.query;
-  let query = "SELECT DISTINCT ON (p.product_id) p.product_id, p.product_name, p.shipping_cost, ";
-  query += "g.gender_value, v.variant_id, v.variant_name, v.variant_quantity, ";
-  query += "t.min_price, c.color_value FROM product p ";
+  let query = "SELECT DISTINCT ON (p.product_id) p.product_id, p.product_name, ";
+  query += "p.shipping_cost, g.gender_value, v.variant_id, v.variant_name, ";
+  query += "v.variant_quantity, t.min_price, c.color_value FROM product p ";
   query += "JOIN category ca ON ca.category_id = p.category_id ";
   query += "JOIN gender g ON g.gender_id = p.gender_id ";
   query += "JOIN variant v ON v.product_id = p.product_id ";
