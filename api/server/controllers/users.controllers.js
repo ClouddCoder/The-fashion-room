@@ -230,7 +230,7 @@ const setWishlist = async (req, res, next) => {
 };
 
 const getWishlist = async (req, res, next) => {
-  let query = "SELECT w.product_id, p.product_name, v.variant_id, ";
+  let query = "SELECT DISTINCT ON (w.product_id) w.product_id, p.product_name, v.variant_id, ";
   query += "v.variant_name, t.min_price FROM wishlist w ";
   query += "JOIN product p ON p.product_id = w.product_id ";
   query += "JOIN variant v ON v.product_id = p.product_id ";
