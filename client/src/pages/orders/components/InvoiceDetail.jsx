@@ -48,7 +48,7 @@ function InvoiceDetail({ product }) {
                   {`$${product.variant_price}`}
                 </CustomTypography>
                 <CustomTypography variant="body2" sx={{ width: 150 }}>
-                  {`x${product.variant_quantity}`}
+                  {`x${product.product_quantity}`}
                 </CustomTypography>
               </div>
             </div>

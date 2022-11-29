@@ -334,12 +334,12 @@ const getStoresPhones = async (req, res, next) => {
  * Gets the user's order information.
  */
 const getOrderDetail = async (req, res, next) => {
-  let query = "SELECT od.order_detail_id, order_item.order_item_id, ";
-  query += "product.product_id, purchase_date, product_name, variant.variant_id, ";
-  query += "variant_quantity, variant_price, item_total_cost FROM order_item ";
-  query += "INNER JOIN order_detail od ON od.order_detail_id = order_item.order_detail_id ";
-  query += "INNER JOIN variant ON variant.variant_id = order_item.variant_id ";
-  query += "INNER JOIN product ON product.product_id = variant.product_id ";
+  let query = "SELECT oi.order_detail_id, oi.order_item_id, oi.item_total_cost, ";
+  query += "oi.product_quantity, p.product_id, od.purchase_date, p.product_name, v.variant_id, ";
+  query += "v.variant_quantity, v.variant_price FROM order_item oi ";
+  query += "JOIN order_detail od ON od.order_detail_id = oi.order_detail_id ";
+  query += "JOIN variant v ON v.variant_id = oi.variant_id ";
+  query += "JOIN product p ON p.product_id = v.product_id ";
   query += "WHERE od.customer_id = $1;";
   const { authorization } = req.headers;
   const decodeToken = getAuthorization(authorization);
