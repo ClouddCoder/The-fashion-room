@@ -14,6 +14,21 @@ function ProductState({ children }) {
   const { token } = useContext(AuthContext);
 
   /**
+   * Changes all product names.
+   */
+  const getProductNameCapitalized = (products) => {
+    products.forEach((product) => {
+      const productName = product.product_name.replace("-", " ");
+      const productNameCapitalized = productName.replace(
+        productName[0],
+        productName[0].toUpperCase(),
+      );
+      // eslint-disable-next-line no-param-reassign
+      product.product_name = productNameCapitalized;
+    });
+  };
+
+  /**
    * Gets all variant's products.
    */
   const loadProducts = async (category) => {
@@ -23,8 +38,9 @@ function ProductState({ children }) {
           category,
         },
       });
-      const { data } = response;
 
+      const { data } = response;
+      getProductNameCapitalized(data);
       dispatch({ type: TYPES.LOAD_PRODUCTS, payload: data });
     } catch (error) {
       console.log(error);
@@ -43,6 +59,7 @@ function ProductState({ children }) {
       });
 
       const { data } = response;
+      getProductNameCapitalized(data);
       dispatch({ type: TYPES.GET_VARIANTS, payload: data });
     } catch (error) {
       console.log(error);
@@ -122,6 +139,7 @@ function ProductState({ children }) {
         },
       });
       const { data } = response;
+      getProductNameCapitalized(data);
       dispatch({ type: TYPES.GET_WISHLIST, payload: data });
     } catch (error) {
       console.log(error);
@@ -186,6 +204,7 @@ function ProductState({ children }) {
         },
       });
       const { data } = response;
+      getProductNameCapitalized(data);
       dispatch({ type: TYPES.GET_MY_ORDERS, payload: data });
     } catch (error) {
       console.log(error);
