@@ -16,6 +16,7 @@ function Register() {
     setUser,
     userName,
     setUserName,
+    setUsername,
     userLastname,
     setUserLastname,
     userEmail,
@@ -53,6 +54,7 @@ function Register() {
         setAuth(data.userAuth);
         setUserId(data.userId);
         setUser(data.userName);
+        setUsername(data.username);
         setUserName("");
         setUserLastname("");
         setUserEmail("");

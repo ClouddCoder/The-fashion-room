@@ -15,6 +15,7 @@ function Login() {
     setAuth,
     setUserId,
     setUser,
+    setUsername,
     userEmail,
     setUserEmail,
     userPassword,
@@ -41,6 +42,7 @@ function Login() {
       setAuth(data.userAuth);
       setUserId(data.userId);
       setUser(data.userName);
+      setUsername(data.username);
       setUserEmail("");
       setUserPassword("");
       setToken(data.token);

@@ -21,6 +21,10 @@ function AuthState({ children }) {
     dispatch({ type: authActions.SET_USER, payload: user });
   };
 
+  const setUsername = (user) => {
+    dispatch({ type: authActions.SET_USER_NAME, payload: user });
+  };
+
   const setUserName = (name) => {
     dispatch({ type: authActions.SET_USERNAME, payload: name });
   };
@@ -49,6 +53,8 @@ function AuthState({ children }) {
       setUserId,
       user: state.user,
       setUser,
+      username: state.username,
+      setUsername,
       userName: state.userName,
       setUserName,
       userLastname: state.userLastname,

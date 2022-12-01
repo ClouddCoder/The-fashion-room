@@ -74,6 +74,7 @@ const loginUser = async (req, res, next) => {
       userAuth: true,
       userId: result.rows[0].customer_id,
       userName: result.rows[0].customer_name,
+      username: `${result.rows[0].customer_name} ${result.rows[0].customer_lastname}`,
       token,
       status: 200,
     });
@@ -118,6 +119,7 @@ const registerUser = async (req, res, next) => {
       userAuth: true,
       userId,
       userName,
+      username: `${userName} ${userLastname}`,
       token,
     });
   } catch (error) {

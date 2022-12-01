@@ -16,6 +16,7 @@ function NavbarProfileList({ displayMode }) {
     setToken,
     setUserId,
     setUserName,
+    setUsername,
     setUserLastname,
     setUserEmail,
     setUserPassword,
@@ -24,6 +25,7 @@ function NavbarProfileList({ displayMode }) {
   const resetSession = () => {
     setAuth(false);
     setUser("");
+    setUsername("");
     setToken("");
     setUserId("");
   };
