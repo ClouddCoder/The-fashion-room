@@ -5,6 +5,7 @@ import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid";
+import TextField from "@mui/material/TextField";
 import ProductContext from "../../context/product-context/ProductContext";
 import AuthContext from "../../context/auth-context/AuthContext";
 import CustomTypography from "../../commons/custom-typography/CustomTypography";
@@ -74,9 +75,13 @@ function Buy() {
             <Card>
               <CardContent>
                 <CustomTypography {...subtitleProps}>Direccion de entrega</CustomTypography>
-                <CustomTypography {...spanProps}>
-                  Diagonal 26h 73-11 Cali, Colombia
-                </CustomTypography>
+                <TextField
+                  hiddenLabel
+                  fullWidth
+                  id="filled-hidden-label-small"
+                  variant="filled"
+                  size="small"
+                />
               </CardContent>
             </Card>
           </Grid>

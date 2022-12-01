@@ -17,11 +17,6 @@ function InvoiceDetail({ product }) {
   const { removeOrder } = useContext(ProductContext);
   const navigate = useNavigate();
 
-  const productName = product ? product.product_name.replace("-", " ") : null;
-  const productNameCapitalized = productName
-    ? productName.replace(productName[0], productName[0].toUpperCase())
-    : null;
-
   return (
     <Grid item mt={4} sx={{ display: "flex", justifyContent: "center" }}>
       <Card sx={{ width: "100%" }}>
@@ -46,7 +41,7 @@ function InvoiceDetail({ product }) {
             />
             <div style={{ float: "right" }}>
               <CustomTypography variant="h6" sx={{ width: 150 }}>
-                {productNameCapitalized}
+                {product.product_name}
               </CustomTypography>
               <div className="purchaseDetails">
                 <CustomTypography variant="body2" sx={{ width: 150 }}>
@@ -65,7 +60,7 @@ function InvoiceDetail({ product }) {
             <Button
               variant="contained"
               onClick={() => {
-                navigate(`/product/${product.variant_id}`);
+                navigate(`/product/${product.product_id}-${product.variant_id}`);
               }}
             >
               Volver a comprar
