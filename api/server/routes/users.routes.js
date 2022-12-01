@@ -1,7 +1,6 @@
 const { Router } = require("express");
+const { loginUser, registerUser } = require("../controllers/users.controllers");
 const {
-  loginUser,
-  registerUser,
   getAllProducts,
   getProductVariants,
   buyProduct,
@@ -12,7 +11,7 @@ const {
   getStoresPhones,
   getOrderDetail,
   removeOrderDetail,
-} = require("../controllers/users.controllers");
+} = require("../controllers/products.controllers");
 
 const router = Router();
 
