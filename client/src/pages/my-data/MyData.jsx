@@ -5,40 +5,57 @@ import AuthContext from "../../context/auth-context/AuthContext";
 import CustomTypography from "../../commons/custom-typography/CustomTypography";
 import Navbar from "../../commons/navbar/Navbar";
 import Footer from "../../commons/footer/Footer";
-import "./Profile.css";
 
-function Profile() {
-  const { username, userLastname } = useContext(AuthContext);
+function MyData() {
+  const { username, user } = useContext(AuthContext);
   return (
     <div className="container">
       <Navbar />
       <Grid container direction="column">
         <Grid item>
           <CustomTypography variant="h3" sx={{ fontWeight: "bold" }}>
-            {`${username} ${userLastname}`}
+            Mis datos
           </CustomTypography>
         </Grid>
         <Grid item>
-          <ul className="profileOptions">
+          <ul>
             <li>
-              <Link to="/my-data">
+              <Link to="/edit-email">
                 <div>
                   <CustomTypography variant="h6" sx={{ fontWeight: "bold" }}>
-                    Mis datos
+                    Email
                   </CustomTypography>
-                  <CustomTypography variant="body2">Valida tus datos</CustomTypography>
+                  <CustomTypography variant="body2">Valida tu email</CustomTypography>
                 </div>
               </Link>
             </li>
             <li>
-              <Link to="/address">
+              <Link to="/edit-user-name">
                 <div>
                   <CustomTypography variant="h6" sx={{ fontWeight: "bold" }}>
-                    Direcciones
+                    Nombre elegido
                   </CustomTypography>
-                  <CustomTypography variant="body2">
-                    Modifica tus direcciones o agrega una nueva
+                  <CustomTypography variant="body2">{username}</CustomTypography>
+                </div>
+              </Link>
+            </li>
+            <li>
+              <Link to="/edit-username">
+                <div>
+                  <CustomTypography variant="h6" sx={{ fontWeight: "bold" }}>
+                    Usuario
                   </CustomTypography>
+                  <CustomTypography variant="body2">{user}</CustomTypography>
+                </div>
+              </Link>
+            </li>
+            <li>
+              <Link to="/edit-phone">
+                <div>
+                  <CustomTypography variant="h6" sx={{ fontWeight: "bold" }}>
+                    Teléfono de contacto
+                  </CustomTypography>
+                  <CustomTypography variant="body2">3183899776</CustomTypography>
                 </div>
               </Link>
             </li>
@@ -50,4 +67,4 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default MyData;
