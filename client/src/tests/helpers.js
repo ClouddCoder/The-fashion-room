@@ -11,6 +11,7 @@ import Invoice from "../pages/invoice/Invoice";
 import Navbar from "../commons/navbar/Navbar";
 import Footer from "../commons/footer/Footer";
 import Product from "../pages/product/Product";
+import EditEmail from "../pages/edit-email/EditEmail";
 
 // AuthContext props for testing components.
 export const authContextProps = {
@@ -256,6 +257,18 @@ export function ProductTest() {
       <ProductContext.Provider value={productProductContextProps}>
         <Router>
           <Product />
+        </Router>
+      </ProductContext.Provider>
+    </AuthContext.Provider>,
+  );
+}
+
+export function EditEmailTest() {
+  return render(
+    <AuthContext.Provider value={authContextProps}>
+      <ProductContext.Provider value={productProductContextProps}>
+        <Router>
+          <EditEmail />
         </Router>
       </ProductContext.Provider>
     </AuthContext.Provider>,

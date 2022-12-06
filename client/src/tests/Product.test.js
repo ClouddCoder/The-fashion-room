@@ -5,7 +5,7 @@ afterEach(() => {
   jest.clearAllMocks();
 });
 
-describe("Catalogue component", () => {
+describe.skip("Catalogue component", () => {
   test("Should render variant's color buttons", async () => {
     ProductTest();
     expect(screen.getByRole("button", { name: /negro/i })).toBeInTheDocument();
