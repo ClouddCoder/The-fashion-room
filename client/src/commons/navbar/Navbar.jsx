@@ -26,7 +26,7 @@ function Navbar() {
   }
 
   return (
-    <nav className="navbar">
+    <nav id="navbar">
       {displayPhone ? (
         <div className="navbarSmallscreen">
           <IconButton onClick={() => setToggle(true)}>

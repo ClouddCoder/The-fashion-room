@@ -22,7 +22,7 @@ function Footer() {
   };
 
   return (
-    <Box className="app_footer">
+    <Box id="app_footer">
       <Grid container alignItems="center" sx={{ pl: 10, pr: 10 }} spacing={2}>
         <Grid item={true} container xs={6} md={3}>
           <Grid item={true} xs={12}>

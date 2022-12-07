@@ -1,4 +1,4 @@
-.app_footer {
+#app_footer {
   align-items: center;
   display: flex;
   background-color: var(--color-primary-brown);

@@ -18,8 +18,8 @@ describe("EditEmail component", () => {
   it("Should type emails' input", async () => {
     const user = userEvent.setup();
     EditEmailTest();
-    const inputEmail = screen.getByLabelText("email");
-    const inputNewEmail = screen.getByLabelText("newEmail");
+    const inputEmail = screen.getByRole("textbox", { name: "email" });
+    const inputNewEmail = screen.getByRole("textbox", { name: "newEmail" });
     await user.type(inputEmail, "brayan");
     await user.type(inputNewEmail, "lucas");
     expect(inputEmail).toHaveValue("brayan");
