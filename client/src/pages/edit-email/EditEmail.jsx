@@ -1,11 +1,13 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
 import Grid from "@mui/material/Grid";
+import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import AuthContext from "../../context/auth-context/AuthContext";
 import CustomTypography from "../../commons/custom-typography/CustomTypography";
 import Navbar from "../../commons/navbar/Navbar";
 import Footer from "../../commons/footer/Footer";
+import "./EditEmail.css";
 
 function EditEmail() {
   const [email, setEmail] = useState("");
@@ -26,6 +28,7 @@ function EditEmail() {
         },
       },
     );
+    console.log(response.data);
   };
 
   const handleChange = (e) => {
@@ -50,26 +53,33 @@ function EditEmail() {
           </CustomTypography>
         </Grid>
         <form onSubmit={handleSubmit}>
-          <CustomTypography variant="body2">Email anterior</CustomTypography>
-          <TextField
-            hiddenLabel
-            fullWidth
-            onChange={handleChange}
-            name="email"
-            label="email"
-            variant="filled"
-            size="small"
-          />
-          <CustomTypography variant="body2">Email nuevo</CustomTypography>
-          <TextField
-            hiddenLabel
-            fullWidth
-            onChange={handleChange}
-            name="newEmail"
-            label="newEmail"
-            variant="filled"
-            size="small"
-          />
+          <div className="editEmail">
+            <CustomTypography variant="body2">Email anterior</CustomTypography>
+            <TextField
+              hiddenLabel
+              fullWidth
+              onChange={handleChange}
+              name="email"
+              variant="filled"
+              size="small"
+            />
+          </div>
+          <div className="editEmail">
+            <CustomTypography variant="body2">Email nuevo</CustomTypography>
+            <TextField
+              hiddenLabel
+              fullWidth
+              onChange={handleChange}
+              name="newEmail"
+              variant="filled"
+              size="small"
+            />
+          </div>
+          <div>
+            <Button variant="contained" color="secondary" type="submit">
+              Login
+            </Button>
+          </div>
         </form>
       </Grid>
       <Footer />
