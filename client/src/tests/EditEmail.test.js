@@ -2,7 +2,7 @@ import userEvent from "@testing-library/user-event";
 import { screen } from "@testing-library/react";
 import { EditEmailTest } from "./helpers";
 
-describe("EditEmail component", () => {
+describe.skip("EditEmail component", () => {
   it("Should render inputs", () => {
     EditEmailTest();
     expect(screen.getByLabelText("email")).toBeInTheDocument();

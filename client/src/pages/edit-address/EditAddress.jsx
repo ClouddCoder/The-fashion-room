@@ -47,96 +47,102 @@ function EditAddress() {
         <Grid item>
           <CustomTypography variant="h3">Editar domicilio</CustomTypography>
         </Grid>
-        <Grid item xs={6}>
-          <div>
-            <CustomTypography variant="body2">Nombre y apellido</CustomTypography>
-            <TextField
-              inputProps={{ "aria-label": "name" }}
-              hiddenLabel
-              fullWidth
-              onChange={handleChange}
-              variant="filled"
-              size="small"
-            />
-          </div>
-        </Grid>
-        <Grid item xs={6}>
-          <div>
-            <CustomTypography variant="body2">Departamento</CustomTypography>
-            <TextField
-              inputProps={{ "aria-label": "deparment" }}
-              hiddenLabel
-              fullWidth
-              onChange={handleChange}
-              variant="filled"
-              size="small"
-            />
-          </div>
-        </Grid>
-        <Grid item xs={6}>
-          <div>
-            <CustomTypography variant="body2">Municipio o ciudad capital</CustomTypography>
-            <TextField
-              inputProps={{ "aria-label": "city" }}
-              hiddenLabel
-              fullWidth
-              onChange={handleChange}
-              variant="filled"
-              size="small"
-            />
-          </div>
-        </Grid>
-        <Grid item xs={6}>
-          <div>
-            <CustomTypography variant="body2">Barrio</CustomTypography>
-            <TextField
-              inputProps={{ "aria-label": "neighborhood" }}
-              hiddenLabel
-              fullWidth
-              onChange={handleChange}
-              variant="filled"
-              size="small"
-            />
-          </div>
-        </Grid>
-        <Grid item xs={6}>
-          <div>
-            <CustomTypography variant="body2">Tipo de calle</CustomTypography>
-            <TextField
-              inputProps={{ "aria-label": "streetType" }}
-              hiddenLabel
-              fullWidth
-              onChange={handleChange}
-              variant="filled"
-              size="small"
-            />
-          </div>
-        </Grid>
-        <Grid item xs={6}>
-          <div>
-            <CustomTypography variant="body2">Carrera</CustomTypography>
-            <TextField
-              inputProps={{ "aria-label": "street" }}
-              hiddenLabel
-              fullWidth
-              onChange={handleChange}
-              variant="filled"
-              size="small"
-            />
-          </div>
-        </Grid>
-        <Grid item xs={6}>
-          <div>
-            <CustomTypography variant="body2">Número</CustomTypography>
-            <TextField
-              inputProps={{ "aria-label": "number" }}
-              hiddenLabel
-              fullWidth
-              onChange={handleChange}
-              variant="filled"
-              size="small"
-            />
-          </div>
+        <Grid item>
+          <form onChange={handleSubmit}>
+            <Grid container>
+              <Grid item xs={6}>
+                <div>
+                  <CustomTypography variant="body2">Nombre y apellido</CustomTypography>
+                  <TextField
+                    inputProps={{ "aria-label": "name" }}
+                    hiddenLabel
+                    fullWidth
+                    onChange={handleChange}
+                    variant="filled"
+                    size="small"
+                  />
+                </div>
+              </Grid>
+              <Grid item xs={6}>
+                <div>
+                  <CustomTypography variant="body2">Departamento</CustomTypography>
+                  <TextField
+                    inputProps={{ "aria-label": "deparment" }}
+                    hiddenLabel
+                    fullWidth
+                    onChange={handleChange}
+                    variant="filled"
+                    size="small"
+                  />
+                </div>
+              </Grid>
+              <Grid item xs={6}>
+                <div>
+                  <CustomTypography variant="body2">Municipio o ciudad capital</CustomTypography>
+                  <TextField
+                    inputProps={{ "aria-label": "city" }}
+                    hiddenLabel
+                    fullWidth
+                    onChange={handleChange}
+                    variant="filled"
+                    size="small"
+                  />
+                </div>
+              </Grid>
+              <Grid item xs={6}>
+                <div>
+                  <CustomTypography variant="body2">Barrio</CustomTypography>
+                  <TextField
+                    inputProps={{ "aria-label": "neighborhood" }}
+                    hiddenLabel
+                    fullWidth
+                    onChange={handleChange}
+                    variant="filled"
+                    size="small"
+                  />
+                </div>
+              </Grid>
+              <Grid item xs={6}>
+                <div>
+                  <CustomTypography variant="body2">Tipo de calle</CustomTypography>
+                  <TextField
+                    inputProps={{ "aria-label": "streetType" }}
+                    hiddenLabel
+                    fullWidth
+                    onChange={handleChange}
+                    variant="filled"
+                    size="small"
+                  />
+                </div>
+              </Grid>
+              <Grid item xs={6}>
+                <div>
+                  <CustomTypography variant="body2">Carrera</CustomTypography>
+                  <TextField
+                    inputProps={{ "aria-label": "street" }}
+                    hiddenLabel
+                    fullWidth
+                    onChange={handleChange}
+                    variant="filled"
+                    size="small"
+                  />
+                </div>
+              </Grid>
+              <Grid item xs={6}>
+                <div>
+                  <CustomTypography variant="body2">Número</CustomTypography>
+                  <TextField
+                    inputProps={{ "aria-label": "number" }}
+                    hiddenLabel
+                    fullWidth
+                    onChange={handleChange}
+                    variant="filled"
+                    size="small"
+                  />
+                </div>
+              </Grid>
+            </Grid>
+          </form>
         </Grid>
       </Grid>
       <Footer />

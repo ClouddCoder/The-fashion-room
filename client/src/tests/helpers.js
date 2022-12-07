@@ -12,6 +12,7 @@ import Navbar from "../commons/navbar/Navbar";
 import Footer from "../commons/footer/Footer";
 import Product from "../pages/product/Product";
 import EditEmail from "../pages/edit-email/EditEmail";
+import EditAddress from "../pages/edit-address/EditAddress";
 
 // AuthContext props for testing components.
 export const authContextProps = {
@@ -263,12 +264,26 @@ export function ProductTest() {
   );
 }
 
+// Renders EditMail component.
 export function EditEmailTest() {
   return render(
     <AuthContext.Provider value={authContextProps}>
       <ProductContext.Provider value={productProductContextProps}>
         <Router>
           <EditEmail />
+        </Router>
+      </ProductContext.Provider>
+    </AuthContext.Provider>,
+  );
+}
+
+// Renders EditAddress component.
+export function EditAddressTest() {
+  return render(
+    <AuthContext.Provider value={authContextProps}>
+      <ProductContext.Provider value={productProductContextProps}>
+        <Router>
+          <EditAddress />
         </Router>
       </ProductContext.Provider>
     </AuthContext.Provider>,
