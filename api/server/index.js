@@ -22,18 +22,22 @@ app.use(userRoutes);
 app.use((err, req, res, next) => {
   if (err.code === "23505") {
     return res.status(409).json({
-      message: "User already exists",
+      errorMessage: "User already exists",
+      constraint: err.constraint.split("_")[3],
+
     });
   }
 
   if (err.code === "23502") {
     return res.status(404).json({
-      message: "Invalid data",
+      errorMessage: "Invalid data",
+      constraint: err.constraint.split("_")[3],
     });
   }
 
   return res.status(400).json({
-    message: "Something went wrong",
+    errorMessage: "Something went wrong",
+    constraint: err.constraint.split("_")[3],
   });
 });
 

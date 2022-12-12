@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
+import axios from "axios";
 import CustomTypography from "../../commons/custom-typography/CustomTypography";
+import AuthContext from "../../context/auth-context/AuthContext";
 import Navbar from "../../commons/navbar/Navbar";
 import Footer from "../../commons/footer/Footer";
 
@@ -13,6 +15,28 @@ function EditAddress() {
   const [streetType, setStreetType] = useState("");
   const [street, setStreet] = useState("");
   const [number, setNumber] = useState("");
+  const { token } = useContext(AuthContext);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const response = axios.put(
+      "http:localhost.3050/api/edit-address",
+      {
+        name,
+        department,
+        city,
+        neighborhood,
+        streetType,
+        street,
+        number,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
+  };
 
   const handleChange = (e) => {
     switch (e.target.name) {

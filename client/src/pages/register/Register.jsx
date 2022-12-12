@@ -25,7 +25,11 @@ function Register() {
     setUserPassword,
     setToken,
   } = useContext(AuthContext);
-  const [error, setError] = useState({ error: false, errorMessage: "" });
+
+  // Check if the user's name, lastname or email is empty
+  const [error, setError] = useState({ error: false, constraint: "", errorMessage: "" });
+
+  // Check if the user's password is less than 4 characters
   const [errorPassword, setErrorPassword] = useState({ errorPassword: false, errorMessage: "" });
   const navigate = useNavigate();
 
@@ -34,6 +38,8 @@ function Register() {
    */
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // If the user submits the form with a password error, it will not be sent
     if (!errorPassword.errorPassword) {
       setErrorPassword({ errorPassword: false, errorMessage: "" });
       const res = await fetch("http://localhost:3050/api/register", {
@@ -62,7 +68,13 @@ function Register() {
         setToken(data.token);
         navigate("/");
       } else {
-        setError({ ...error, error: true, errorMessage: data.message });
+        console.log(data);
+        setError({
+          ...error,
+          error: true,
+          constraint: data.constraint,
+          errorMessage: data.errorMessage,
+        });
       }
     } else {
       setErrorPassword({
@@ -81,19 +93,19 @@ function Register() {
   const handleChange = (e) => {
     switch (e.target.name) {
       case "userName":
-        setError({ ...error, error: false, errorMessage: "" });
+        setError({ ...error, error: false, constraint: "", errorMessage: "" });
         setUserName(e.target.value);
         break;
       case "userLastname":
-        setError({ ...error, error: false, errorMessage: "" });
+        setError({ ...error, error: false, constraint: "", errorMessage: "" });
         setUserLastname(e.target.value);
         break;
       case "userEmail":
-        setError({ ...error, error: false, errorMessage: "" });
+        setError({ ...error, error: false, constraint: "", errorMessage: "" });
         setUserEmail(e.target.value);
         break;
       case "userPassword":
-        setError({ ...error, error: false, errorMessage: "" });
+        setError({ ...error, error: false, constraint: "", errorMessage: "" });
         if (e.target.value.length <= 4) {
           setErrorPassword({
             ...errorPassword,
@@ -113,7 +125,7 @@ function Register() {
    * Muestra el error en caso de que sea por ingresar datos incorrectos
    * o por no cumplir con los requisitos de la contraseña.
    */
-  const handleHelperText = () => {
+  const handleError = () => {
     if (error.error) {
       return error.errorMessage;
     }
@@ -129,6 +141,8 @@ function Register() {
     <Form title="Registrarse">
       <form onSubmit={handleSubmit}>
         <TextField
+          error={error.constraint === "name"}
+          helperText={error.constraint === "name" ? error.errorMessage : ""}
           onChange={handleChange}
           name="userName"
           variant="filled"
@@ -137,6 +151,8 @@ function Register() {
           sx={{ margin: ".5rem 0" }}
         />
         <TextField
+          error={error.constraint === "lastname"}
+          helperText={error.constraint === "lastname" ? error.errorMessage : ""}
           onChange={handleChange}
           name="userLastname"
           variant="filled"
@@ -145,8 +161,8 @@ function Register() {
           sx={{ margin: ".5rem 0" }}
         />
         <TextField
-          error={error.error}
-          helperText={error.errorMessage}
+          error={error.constraint === "email"}
+          helperText={error.constraint === "email" ? error.errorMessage : ""}
           onChange={handleChange}
           name="userEmail"
           variant="filled"
@@ -155,8 +171,8 @@ function Register() {
           sx={{ margin: ".5rem 0" }}
         />
         <TextField
-          error={error.error || errorPassword.errorPassword}
-          helperText={handleHelperText()}
+          error={error.constraint === "password" || errorPassword.errorPassword}
+          helperText={handleError()}
           onChange={handleChange}
           name="userPassword"
           variant="filled"

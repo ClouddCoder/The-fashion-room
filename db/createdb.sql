@@ -54,11 +54,17 @@ CREATE TABLE variant_color (
 -- Contains all customers.
 CREATE TABLE customer (
     customer_id SERIAL,
-    customer_name VARCHAR(25) NOT NULL CHECK (customer_name <> ''),
+    customer_name VARCHAR(25),
     customer_lastname VARCHAR(25),
-    customer_email VARCHAR(40) UNIQUE NOT NULL CHECK (customer_email <> ''),
-    customer_password VARCHAR(100) NOT NULL CHECK (customer_password <> ''),
-    CONSTRAINT pk_customer PRIMARY KEY (customer_id)
+    customer_email VARCHAR(40) UNIQUE,
+    customer_password VARCHAR(100),
+    CONSTRAINT pk_customer PRIMARY KEY (customer_id),
+    CONSTRAINT check_not_null_name CHECK (customer_name IS NOT NULL),
+    CONSTRAINT check_not_empty_name CHECK (customer_name <> ''),
+    CONSTRAINT check_not_null_email CHECK (customer_email IS NOT NULL),
+    CONSTRAINT check_not_empty_email CHECK (customer_email <> ''),
+    CONSTRAINT check_not_null_password CHECK (customer_password IS NOT NULL),
+    CONSTRAINT check_not_empty_password CHECK (customer_password <> '')
 );
 
 -- Contains customer's wishlist.
