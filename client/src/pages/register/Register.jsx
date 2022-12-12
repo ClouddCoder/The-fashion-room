@@ -178,7 +178,7 @@ function Register() {
           </Grid>
         </Grid>
         <CardContent>
-          <Button variant="contained" color="secondary" type="submit">
+          <Button variant="contained" color="secondary" type="submit" fullWidth>
             Registrar
           </Button>
         </CardContent>

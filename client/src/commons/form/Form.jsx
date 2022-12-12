@@ -15,19 +15,21 @@ function Form({ children, title }) {
       <Grid
         container
         direction="column"
-        justifyContent="center"
+        alignContent="center"
         sx={{ width: "80%", m: "auto 0" }}
       >
         <Grid item>
-          <Card sx={{ maxWidth: 600 }}>
+          <Card sx={{ maxWidth: 400 }}>
             <CardContent>
-              <CustomTypography variant="h5">{title}</CustomTypography>
+              <CustomTypography variant="h5" align="center">
+                {title}
+              </CustomTypography>
             </CardContent>
             <CardContent>{children}</CardContent>
           </Card>
         </Grid>
         <Grid item>
-          <Button component={Link} variant="contained" to="/" color="primary">
+          <Button component={Link} variant="contained" to="/" color="primary" fullWidth>
             Regresar
           </Button>
         </Grid>
