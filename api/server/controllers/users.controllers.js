@@ -70,7 +70,8 @@ const registerUser = async (req, res, next) => {
 
   if (userPassword.length <= 4) {
     return res.status(406).json({
-      message: "Password must be at least 4 characters long",
+      constraint: "password",
+      errorMessage: "La contraseña debe tener al menos 4 caracteres",
     });
   }
 

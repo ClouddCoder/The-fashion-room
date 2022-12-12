@@ -7,7 +7,7 @@ import Form from "../../commons/form/Form";
 import AuthContext from "../../context/auth-context/AuthContext";
 
 /**
- * Componente que muestra el login
+ * This component renders the login form
  */
 function Login() {
   const [error, setError] = useState({ error: false, errorMessage: "" });
@@ -26,7 +26,7 @@ function Login() {
   const navigate = useNavigate();
 
   /**
-   * Peticion a la API para validar el usuario
+   * Send the user's data to the server
    */
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,7 +38,7 @@ function Login() {
     const data = await res.json();
 
     if (data.status === 200) {
-      // Establece el estado de autenticacion y borra los campos de login
+      // Set the user's data to login and deletes the data from the inputs
       setAuth(data.userAuth);
       setUserId(data.userId);
       setUser(data.userName);
@@ -56,7 +56,7 @@ function Login() {
   };
 
   /**
-   * Guarda la informacion del email y contraseña cuando el usuario escribe en los inputs
+   * Gets email and password from the inputs
    */
   const handleChange = (e) => {
     switch (e.target.name) {
@@ -78,7 +78,7 @@ function Login() {
           helperText={error.errorMessage}
           onChange={handleChange}
           name="userEmail"
-          variant="filled"
+          variant="outlined"
           label="Email"
           value={userEmail}
           sx={{ margin: ".5rem 0" }}
@@ -88,7 +88,7 @@ function Login() {
           helperText={error.errorMessage}
           onChange={handleChange}
           name="userPassword"
-          variant="filled"
+          variant="outlined"
           label="Password"
           type="password"
           value={userPassword}

@@ -15,7 +15,7 @@ import { catalogueInitialState, CatalogueReducer } from "./reducer/catalogueRedu
 import "./Catalogue.css";
 
 /**
- * This component shows all products by their category or filtered the
+ * This component renders all products by category or filtered the
  * user selection.
  */
 function Catalogue() {

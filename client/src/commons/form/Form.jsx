@@ -12,16 +12,21 @@ function Form({ children, title }) {
   return (
     <div className="container">
       <Navbar />
-      <Grid container direction="column" justifyContent="center">
+      <Grid
+        container
+        direction="column"
+        justifyContent="center"
+        sx={{ width: "80%", m: "auto 0" }}
+      >
         <Grid item>
-          <Card sx={{ maxWidth: 300 }}>
+          <Card sx={{ maxWidth: 600 }}>
             <CardContent>
               <CustomTypography variant="h5">{title}</CustomTypography>
             </CardContent>
             <CardContent>{children}</CardContent>
           </Card>
         </Grid>
-        <Grid>
+        <Grid item>
           <Button component={Link} variant="contained" to="/" color="primary">
             Regresar
           </Button>

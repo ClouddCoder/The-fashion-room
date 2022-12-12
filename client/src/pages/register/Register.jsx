@@ -3,11 +3,12 @@ import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import CardContent from "@mui/material/CardContent";
+import Grid from "@mui/material/Grid";
 import Form from "../../commons/form/Form";
 import AuthContext from "../../context/auth-context/AuthContext";
 
 /**
- * Componente que muestra el register
+ * This component is responsible for registering a new user.
  */
 function Register() {
   const {
@@ -26,15 +27,15 @@ function Register() {
     setToken,
   } = useContext(AuthContext);
 
-  // Check if the user's name, lastname or email is empty
-  const [error, setError] = useState({ error: false, constraint: "", errorMessage: "" });
+  // Checks if the user's name, lastname or email is empty
+  const [error, setError] = useState({ constraint: "", errorMessage: "" });
 
-  // Check if the user's password is less than 4 characters
+  // Checks if the user's password is less than 4 characters
   const [errorPassword, setErrorPassword] = useState({ errorPassword: false, errorMessage: "" });
   const navigate = useNavigate();
 
   /**
-   * Peticion a la API para validar el usuario y crearlo
+   * Send the user's data to the server
    */
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -56,7 +57,7 @@ function Register() {
       window.localStorage.setItem("logged", JSON.stringify(data));
 
       if (res.status === 200) {
-        // Establece el estado de autenticacion y borra los campos de registro
+        // Set the user's data to login and deletes the data from the inputs
         setAuth(data.userAuth);
         setUserId(data.userId);
         setUser(data.userName);
@@ -86,9 +87,8 @@ function Register() {
   };
 
   /**
-   * Guarda la informacion del nombre, apellido,
-   * email y contraseña cuando el usuario escribe en los inputs.
-   * Tambien borra el mensaje de error cuando el usuario empieza a escribir nuevamente.
+   * Gets the user's data from the inputs. It also deletes the error message
+   * when the user starts typing again.
    */
   const handleChange = (e) => {
     switch (e.target.name) {
@@ -121,66 +121,62 @@ function Register() {
     }
   };
 
-  /**
-   * Muestra el error en caso de que sea por ingresar datos incorrectos
-   * o por no cumplir con los requisitos de la contraseña.
-   */
-  const handleError = () => {
-    if (error.error) {
-      return error.errorMessage;
-    }
-
-    if (errorPassword.errorPassword) {
-      return errorPassword.errorMessage;
-    }
-
-    return "";
-  };
-
   return (
     <Form title="Registrarse">
       <form onSubmit={handleSubmit}>
-        <TextField
-          error={error.constraint === "name"}
-          helperText={error.constraint === "name" ? error.errorMessage : ""}
-          onChange={handleChange}
-          name="userName"
-          variant="filled"
-          label="Name"
-          value={userName}
-          sx={{ margin: ".5rem 0" }}
-        />
-        <TextField
-          error={error.constraint === "lastname"}
-          helperText={error.constraint === "lastname" ? error.errorMessage : ""}
-          onChange={handleChange}
-          name="userLastname"
-          variant="filled"
-          label="Lastname"
-          value={userLastname}
-          sx={{ margin: ".5rem 0" }}
-        />
-        <TextField
-          error={error.constraint === "email"}
-          helperText={error.constraint === "email" ? error.errorMessage : ""}
-          onChange={handleChange}
-          name="userEmail"
-          variant="filled"
-          label="Email"
-          value={userEmail}
-          sx={{ margin: ".5rem 0" }}
-        />
-        <TextField
-          error={error.constraint === "password" || errorPassword.errorPassword}
-          helperText={handleError()}
-          onChange={handleChange}
-          name="userPassword"
-          variant="filled"
-          label="Password"
-          type="password"
-          value={userPassword}
-          sx={{ margin: ".5rem 0" }}
-        />
+        <Grid container spacing={1}>
+          <Grid item xs={6}>
+            <TextField
+              error={error.constraint === "name"}
+              helperText={error.constraint === "name" ? error.errorMessage : ""}
+              onChange={handleChange}
+              name="userName"
+              variant="outlined"
+              label="Name"
+              value={userName}
+              sx={{ margin: ".5rem 0", width: "100%" }}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              error={error.constraint === "lastname"}
+              helperText={error.constraint === "lastname" ? error.errorMessage : ""}
+              onChange={handleChange}
+              name="userLastname"
+              variant="outlined"
+              label="Lastname"
+              value={userLastname}
+              sx={{ margin: ".5rem 0", width: "100%" }}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              error={error.constraint === "email"}
+              helperText={error.constraint === "email" ? error.errorMessage : ""}
+              onChange={handleChange}
+              name="userEmail"
+              variant="outlined"
+              label="Email"
+              value={userEmail}
+              sx={{ margin: ".5rem 0", width: "100%" }}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              error={error.constraint === "password" || errorPassword.errorPassword}
+              helperText={
+                error.constraint === "password" ? error.errorMessage : errorPassword.errorMessage
+              }
+              onChange={handleChange}
+              name="userPassword"
+              variant="outlined"
+              label="Password"
+              type="password"
+              value={userPassword}
+              sx={{ margin: ".5rem 0", width: "100%" }}
+            />
+          </Grid>
+        </Grid>
         <CardContent>
           <Button variant="contained" color="secondary" type="submit">
             Registrar

@@ -16,28 +16,49 @@ app.use(cors());
 app.use(userRoutes);
 
 /**
- * Determina las peticiones, respuestas y errores personalizados en cada consulta
+ * Set the requests, responses and custom error messages.
  */
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
-  if (err.code === "23505") {
-    return res.status(409).json({
-      errorMessage: "User already exists",
-      constraint: err.constraint.split("_")[3],
-
-    });
-  }
+  const constraint = err.constraint.split("_")[3];
 
   if (err.code === "23502") {
     return res.status(404).json({
-      errorMessage: "Invalid data",
-      constraint: err.constraint.split("_")[3],
+      errorMessage: "Información invalida",
+      constraint,
     });
+  }
+
+  if (err.code === "23505") {
+    return res.status(409).json({
+      errorMessage: "El usuario ya existe",
+      constraint,
+    });
+  }
+
+  if (err.code === "23514") {
+    let errorMessage = "";
+    switch (constraint) {
+      case "name":
+        errorMessage = "Debes ingresar tu nombre";
+        break;
+      case "lastname":
+        errorMessage = "Debes ingresar tu apellido";
+        break;
+      case "email":
+        errorMessage = "Debes ingresar tu email";
+        break;
+      case "password":
+        errorMessage = "Debes ingresar tu contraseña";
+        break;
+      default:
+    }
+    return res.status(422).json({ errorMessage, constraint });
   }
 
   return res.status(400).json({
     errorMessage: "Something went wrong",
-    constraint: err.constraint.split("_")[3],
+    constraint,
   });
 });
 
