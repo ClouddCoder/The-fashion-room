@@ -1,39 +1,25 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import Grid from "@mui/material/Grid";
-import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CustomTypography from "../custom-typography/CustomTypography";
 import Navbar from "../navbar/Navbar";
 import Footer from "../footer/Footer";
+import "./Form.css";
 
 function Form({ children, title }) {
   return (
     <div className="container">
       <Navbar />
-      <Grid
-        container
-        direction="column"
-        alignContent="center"
-        sx={{ width: "80%", m: "auto 0" }}
-      >
-        <Grid item>
-          <Card sx={{ maxWidth: 400 }}>
-            <CardContent>
-              <CustomTypography variant="h5" align="center">
-                {title}
-              </CustomTypography>
-            </CardContent>
-            <CardContent>{children}</CardContent>
-          </Card>
-        </Grid>
-        <Grid item>
-          <Button component={Link} variant="contained" to="/" color="primary" fullWidth>
-            Regresar
-          </Button>
-        </Grid>
-      </Grid>
+      <main id="form-card">
+        <Card sx={{ maxWidth: 400 }}>
+          <CardContent>
+            <CustomTypography variant="h5" align="center">
+              {title}
+            </CustomTypography>
+            {children}
+          </CardContent>
+        </Card>
+      </main>
       <Footer />
     </div>
   );

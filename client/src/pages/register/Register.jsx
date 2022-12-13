@@ -2,7 +2,6 @@ import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid";
 import Form from "../../commons/form/Form";
 import AuthContext from "../../context/auth-context/AuthContext";
@@ -176,12 +175,12 @@ function Register() {
               sx={{ margin: ".5rem 0", width: "100%" }}
             />
           </Grid>
+          <Grid item xs={12}>
+            <Button variant="contained" color="secondary" type="submit" fullWidth>
+              Registrar
+            </Button>
+          </Grid>
         </Grid>
-        <CardContent>
-          <Button variant="contained" color="secondary" type="submit" fullWidth>
-            Registrar
-          </Button>
-        </CardContent>
       </form>
     </Form>
   );

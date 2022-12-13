@@ -5,7 +5,7 @@ import Navigation from "./routes/Navigation";
 
 function App() {
   return (
-    <div className="app">
+    <div id="app">
       <AuthState>
         <Navigation />
       </AuthState>

@@ -3,7 +3,6 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
 import CustomTypography from "../custom-typography/CustomTypography";
 import "./Footer.css";
 
@@ -22,8 +21,8 @@ function Footer() {
   };
 
   return (
-    <Box id="app_footer">
-      <Grid container alignItems="center" sx={{ pl: 10, pr: 10 }} spacing={2}>
+    <div id="app_footer">
+      <Grid container alignItems="center" sx={{ width: "80%" }} spacing={2}>
         <Grid item={true} container xs={6} md={3}>
           <Grid item={true} xs={12}>
             <CustomTypography {...titleProps}>Conócenos</CustomTypography>
@@ -100,7 +99,7 @@ function Footer() {
           </Grid>
         </Grid>
       </Grid>
-    </Box>
+    </div>
   );
 }
 

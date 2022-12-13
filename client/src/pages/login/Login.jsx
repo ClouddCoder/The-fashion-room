@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import CardContent from "@mui/material/CardContent";
+import Grid from "@mui/material/Grid";
 import Form from "../../commons/form/Form";
 import AuthContext from "../../context/auth-context/AuthContext";
 
@@ -73,32 +73,50 @@ function Login() {
   return (
     <Form title="Iniciar sesión">
       <form onSubmit={handleSubmit}>
-        <TextField
-          error={error.error}
-          helperText={error.errorMessage}
-          onChange={handleChange}
-          name="userEmail"
-          variant="outlined"
-          label="Email"
-          value={userEmail}
-          sx={{ margin: ".5rem 0" }}
-        />
-        <TextField
-          error={error.error}
-          helperText={error.errorMessage}
-          onChange={handleChange}
-          name="userPassword"
-          variant="outlined"
-          label="Password"
-          type="password"
-          value={userPassword}
-          sx={{ margin: ".5rem 0" }}
-        />
-        <CardContent>
-          <Button variant="contained" color="secondary" type="submit">
-            Login
-          </Button>
-        </CardContent>
+        <Grid container spacing={1}>
+          <Grid item xs={12}>
+            <TextField
+              error={error.error}
+              helperText={error.errorMessage}
+              onChange={handleChange}
+              name="userEmail"
+              variant="outlined"
+              label="Email"
+              value={userEmail}
+              sx={{ margin: ".5rem 0", width: "100%" }}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              error={error.error}
+              helperText={error.errorMessage}
+              onChange={handleChange}
+              name="userPassword"
+              variant="outlined"
+              label="Password"
+              type="password"
+              value={userPassword}
+              sx={{ margin: ".5rem 0", width: "100%" }}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Button variant="contained" color="secondary" type="submit" fullWidth>
+              Login
+            </Button>
+          </Grid>
+          <Grid container item justifyContent="space-between" xs={12}>
+            <Grid item>
+              <Link to="/">
+                <span>Forgot password?</span>
+              </Link>
+            </Grid>
+            <Grid item>
+              <Link to="/">
+                <span>Don't have an account? Sign Up</span>
+              </Link>
+            </Grid>
+          </Grid>
+        </Grid>
       </form>
     </Form>
   );

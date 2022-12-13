@@ -1,10 +1,10 @@
 #app_footer {
-  align-items: center;
   display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: var(--color-primary-brown);
   width: 100%;
   height: auto;
   color: var(--color-primary-white);
-  margin-top: auto;
   padding: 30px 0;
 }

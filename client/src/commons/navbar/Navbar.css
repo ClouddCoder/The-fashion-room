@@ -1,11 +1,15 @@
-#navbar {
+#nav-header {
   width: 100%;
   height: 70px;
-  margin-bottom: 0;
+  background-color: var(--color-primary-white);
+}
+
+#navbar {
+  width: inherit;
+  height: inherit;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--color-primary-white);
   color: var(--color-primary-brown);
 }
 

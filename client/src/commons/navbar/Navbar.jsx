@@ -26,49 +26,51 @@ function Navbar() {
   }
 
   return (
-    <nav id="navbar">
-      {displayPhone ? (
-        <div className="navbarSmallscreen">
-          <IconButton onClick={() => setToggle(true)}>
-            <MenuIcon sx={{ width: "40px", height: "40px" }} />
-          </IconButton>
-          {toggle ? (
-            <div className="navbarSmallscreenOverlay">
-              <IconButton
-                sx={{ position: "absolute", top: "20px", right: "20px" }}
-                onClick={() => setToggle(false)}
-              >
-                <CloseIcon sx={{ width: "40px", height: "40px" }} />
-              </IconButton>
-              <NavBarOptionList displayMode={true} />
-              <NavbarProfileList displayMode={true} />
+    <header id="nav-header">
+      <nav id="navbar">
+        {displayPhone ? (
+          <div className="navbarSmallscreen">
+            <IconButton onClick={() => setToggle(true)}>
+              <MenuIcon sx={{ width: "40px", height: "40px" }} />
+            </IconButton>
+            {toggle ? (
+              <div className="navbarSmallscreenOverlay">
+                <IconButton
+                  sx={{ position: "absolute", top: "20px", right: "20px" }}
+                  onClick={() => setToggle(false)}
+                >
+                  <CloseIcon sx={{ width: "40px", height: "40px" }} />
+                </IconButton>
+                <NavBarOptionList displayMode={true} />
+                <NavbarProfileList displayMode={true} />
+              </div>
+            ) : (
+              <div className="navbarSmallscreenHideOverlay">
+                <IconButton
+                  sx={{ position: "absolute", top: "20px", right: "20px" }}
+                  onClick={() => setToggle(false)}
+                >
+                  <CloseIcon sx={{ width: "40px", height: "40px" }} />
+                </IconButton>
+                <NavBarOptionList displayMode={true} />
+                <NavbarProfileList displayMode={true} />
+              </div>
+            )}
+            <div className="navbarTitle">
+              <h1>{title}</h1>
             </div>
-          ) : (
-            <div className="navbarSmallscreenHideOverlay">
-              <IconButton
-                sx={{ position: "absolute", top: "20px", right: "20px" }}
-                onClick={() => setToggle(false)}
-              >
-                <CloseIcon sx={{ width: "40px", height: "40px" }} />
-              </IconButton>
-              <NavBarOptionList displayMode={true} />
-              <NavbarProfileList displayMode={true} />
+          </div>
+        ) : (
+          <>
+            <div className="navbarTitle">
+              <h1>{title}</h1>
             </div>
-          )}
-          <div className="navbarTitle">
-            <h1>{title}</h1>
-          </div>
-        </div>
-      ) : (
-        <>
-          <div className="navbarTitle">
-            <h1>{title}</h1>
-          </div>
-          <NavBarOptionList displayMode={false} />
-          <NavbarProfileList displayMode={false} />
-        </>
-      )}
-    </nav>
+            <NavBarOptionList displayMode={false} />
+            <NavbarProfileList displayMode={false} />
+          </>
+        )}
+      </nav>
+    </header>
   );
 }
 

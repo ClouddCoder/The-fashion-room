@@ -22,8 +22,9 @@ body {
 }
 
 #root,
-.app {
-  height: 100%;
+#app {
+  height: inherit;
+  width: inherit;
 }
 
 .container {
@@ -31,5 +32,9 @@ body {
   flex-direction: column;
   align-items: center;
   min-height: 100%;
-  position: relative;
+  height: auto;
+}
+
+main {
+  flex: 1 0 auto;
 }
