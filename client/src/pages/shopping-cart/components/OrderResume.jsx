@@ -4,7 +4,7 @@ import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Divider from "@mui/material/Divider";
 import { useNavigate } from "react-router-dom";
-import CustomTypography from "../../../commons/custom-typography/CustomTypography";
+import CustomTypography from "../../../components/custom-typography/CustomTypography";
 import ProductContext from "../../../context/product-context/ProductContext";
 
 /**

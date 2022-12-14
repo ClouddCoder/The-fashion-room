@@ -2,15 +2,13 @@ import React, { useContext } from "react";
 import Grid from "@mui/material/Grid";
 import { Link } from "react-router-dom";
 import AuthContext from "../../context/auth-context/AuthContext";
-import CustomTypography from "../../commons/custom-typography/CustomTypography";
-import Navbar from "../../commons/navbar/Navbar";
-import Footer from "../../commons/footer/Footer";
+import CustomTypography from "../../components/custom-typography/CustomTypography";
+import Layout from "../../components/layout/Layout";
 
 function MyData() {
   const { username, user } = useContext(AuthContext);
   return (
-    <div className="container">
-      <Navbar />
+    <Layout>
       <Grid container direction="column">
         <Grid item>
           <CustomTypography variant="h3" sx={{ fontWeight: "bold" }}>
@@ -62,8 +60,7 @@ function MyData() {
           </ul>
         </Grid>
       </Grid>
-      <Footer />
-    </div>
+    </Layout>
   );
 }
 

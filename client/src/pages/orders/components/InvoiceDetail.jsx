@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import { getProductImage } from "../../../assets";
 import ProductContext from "../../../context/product-context/ProductContext";
-import CustomTypography from "../../../commons/custom-typography/CustomTypography";
+import CustomTypography from "../../../components/custom-typography/CustomTypography";
 import "./InvoiceDetail.css";
 
 /**
@@ -43,7 +43,7 @@ function InvoiceDetail({ product }) {
               <CustomTypography variant="h6" sx={{ width: 150 }}>
                 {product.product_name}
               </CustomTypography>
-              <div className="purchaseDetails">
+              <div className="order-price-quantity">
                 <CustomTypography variant="body2" sx={{ width: 150 }}>
                   {`$${product.variant_price}`}
                 </CustomTypography>
@@ -53,7 +53,7 @@ function InvoiceDetail({ product }) {
               </div>
             </div>
           </div>
-          <div className="purchaseOptions">
+          <div className="order-user-options">
             <CustomTypography variant="body2" sx={{ width: 150 }}>
               {`Total compra: $${product.item_total_cost}`}
             </CustomTypography>

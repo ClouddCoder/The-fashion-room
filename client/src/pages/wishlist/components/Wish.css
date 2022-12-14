@@ -1,8 +1,8 @@
-.description {
+.wish-description {
   margin-left: 20px;
 }
 
-.wishOptions {
+.wish-user-options {
   height: 70%;
   display: flex;
   flex-direction: column;

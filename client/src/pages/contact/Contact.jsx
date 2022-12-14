@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import axios from "axios";
 import StoreInfo from "./components/StoreInfo";
-import Navbar from "../../commons/navbar/Navbar";
-import Footer from "../../commons/footer/Footer";
+import Layout from "../../components/layout/Layout";
 
 /**
  * Componente que muestra la informacion de la tienda
@@ -63,8 +62,7 @@ function Contact() {
   }, []);
 
   return (
-    <div className="container">
-      <Navbar />
+    <Layout>
       <Grid container sx={{ height: "auto" }}>
         <Grid item container justifyContent="center" spacing={2}>
           {stores.map((store, index) => (
@@ -78,8 +76,7 @@ function Contact() {
           ))}
         </Grid>
       </Grid>
-      <Footer />
-    </div>
+    </Layout>
   );
 }
 

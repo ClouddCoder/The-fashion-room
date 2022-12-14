@@ -1,8 +1,7 @@
 import React from "react";
-import Navbar from "../../commons/navbar/Navbar";
+import Layout from "../../components/layout/Layout";
 import Header from "./components/header/Header";
-import Footer from "../../commons/footer/Footer";
-import Offers from "./components/offers/Offers";
+import Categories from "./components/categories/Categories";
 import "./Home.css";
 
 /**
@@ -10,14 +9,12 @@ import "./Home.css";
  */
 function Home() {
   return (
-    <div className="container">
-      <Navbar />
-      <main className="mainContent">
+    <Layout>
+      <div>
         <Header />
-        <Offers />
-      </main>
-      <Footer />
-    </div>
+        <Categories />
+      </div>
+    </Layout>
   );
 }
 

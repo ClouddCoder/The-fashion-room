@@ -4,9 +4,8 @@ import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import AuthContext from "../../context/auth-context/AuthContext";
-import CustomTypography from "../../commons/custom-typography/CustomTypography";
-import Navbar from "../../commons/navbar/Navbar";
-import Footer from "../../commons/footer/Footer";
+import CustomTypography from "../../components/custom-typography/CustomTypography";
+import Layout from "../../components/layout/Layout";
 import "./EditEmail.css";
 
 function EditEmail() {
@@ -44,8 +43,7 @@ function EditEmail() {
   };
 
   return (
-    <div className="container">
-      <Navbar />
+    <Layout>
       <Grid container direction="column">
         <Grid item>
           <CustomTypography variant="h3" sx={{ fontWeight: "bold" }}>
@@ -53,7 +51,7 @@ function EditEmail() {
           </CustomTypography>
         </Grid>
         <form onSubmit={handleSubmit}>
-          <div className="editEmail">
+          <div className="email-input">
             <CustomTypography variant="body2">Email anterior</CustomTypography>
             <TextField
               inputProps={{ "aria-label": "email" }}
@@ -64,7 +62,7 @@ function EditEmail() {
               size="small"
             />
           </div>
-          <div className="editEmail">
+          <div className="email-input">
             <CustomTypography variant="body2">Email nuevo</CustomTypography>
             <TextField
               inputProps={{ "aria-label": "newEmail" }}
@@ -82,8 +80,7 @@ function EditEmail() {
           </div>
         </form>
       </Grid>
-      <Footer />
-    </div>
+    </Layout>
   );
 }
 

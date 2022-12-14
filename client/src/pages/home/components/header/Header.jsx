@@ -7,7 +7,7 @@ import "./Header.css";
  */
 function Header() {
   return (
-    <figure className="homeHeader">
+    <figure className="home-header">
       <img src={HeaderBackground} alt="The Fashion Room" />
     </figure>
   );

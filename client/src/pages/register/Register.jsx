@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
-import Form from "../../commons/form/Form";
+import Form from "../../components/form/Form";
 import AuthContext from "../../context/auth-context/AuthContext";
 
 /**

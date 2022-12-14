@@ -1,19 +1,18 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
 import { getProductImage } from "../../../../assets";
-import OfferItem from "../sub-components/OfferItem";
-import "./Offers.css";
+import Category from "../sub-components/Category";
+import "./Categories.css";
 
 /**
  * Componente que muestra las diferentes categorias de la tienda en el inicio
  */
-function Offers() {
+function Categories() {
   return (
-    <Box className="offersContainer">
+    <div className="categories-container">
       <Grid container align="center" spacing={2}>
         <Grid item={true} xs={6} md={3}>
-          <OfferItem
+          <Category
             alt="calzado"
             image={getProductImage("calzado")}
             title="Calzado"
@@ -21,7 +20,7 @@ function Offers() {
           />
         </Grid>
         <Grid item={true} xs={6} md={3}>
-          <OfferItem
+          <Category
             alt="camisas"
             image={getProductImage("camisetas")}
             title="Camisetas"
@@ -29,7 +28,7 @@ function Offers() {
           />
         </Grid>
         <Grid item={true} xs={6} md={3}>
-          <OfferItem
+          <Category
             alt="deportiva"
             image={getProductImage("deportiva")}
             title="Ropa deportiva"
@@ -37,7 +36,7 @@ function Offers() {
           />
         </Grid>
         <Grid item={true} xs={6} md={3}>
-          <OfferItem
+          <Category
             alt="bolsos"
             image={getProductImage("bolsos")}
             title="Bolsos y maletas"
@@ -45,8 +44,8 @@ function Offers() {
           />
         </Grid>
       </Grid>
-    </Box>
+    </div>
   );
 }
 
-export default Offers;
+export default Categories;

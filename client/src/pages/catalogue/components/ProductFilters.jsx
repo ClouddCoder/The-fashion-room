@@ -4,7 +4,7 @@ import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
-import CustomTypography from "../../../commons/custom-typography/CustomTypography";
+import CustomTypography from "../../../components/custom-typography/CustomTypography";
 
 function ProductFilters({ check, handleChange }) {
   return (

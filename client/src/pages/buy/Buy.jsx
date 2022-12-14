@@ -8,9 +8,8 @@ import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import ProductContext from "../../context/product-context/ProductContext";
 import AuthContext from "../../context/auth-context/AuthContext";
-import CustomTypography from "../../commons/custom-typography/CustomTypography";
-import Navbar from "../../commons/navbar/Navbar";
-import Footer from "../../commons/footer/Footer";
+import CustomTypography from "../../components/custom-typography/CustomTypography";
+import Layout from "../../components/layout/Layout";
 import ProductToBuy from "./components/ProductToBuy";
 import "./Buy.css";
 
@@ -67,8 +66,7 @@ function Buy() {
   }, []);
 
   return (
-    <div className="container">
-      <Navbar />
+    <Layout>
       <Grid container sx={{ width: "80%", m: "auto 0" }} spacing={2}>
         <Grid item={true} xs={8} container direction="column" spacing={2}>
           <Grid item>
@@ -102,21 +100,21 @@ function Buy() {
         <Grid item={true} xs={4}>
           <Card>
             <CardContent>
-              <CustomTypography {...subtitleProps}>Resumen</CustomTypography>
-              <div className="resume">
+              <CustomTypography {...subtitleProps}>Detalles</CustomTypography>
+              <div className="purchase-details">
                 <CustomTypography {...spanProps}>Coste total de los productos</CustomTypography>
                 <CustomTypography {...spanProps}>{`$${totalPrice}`}</CustomTypography>
               </div>
-              <div className="resume">
+              <div className="purchase-details">
                 <CustomTypography {...spanProps}>Código del cupon</CustomTypography>
                 <CustomTypography {...spanProps}>4A5S12</CustomTypography>
               </div>
-              <div className="resume">
+              <div className="purchase-details">
                 <CustomTypography {...spanProps}>Total de envío</CustomTypography>
                 <CustomTypography {...spanProps}>{`$${shippingCost}`}</CustomTypography>
               </div>
               <Divider sx={{ m: "8px 0" }} />
-              <div className="resume">
+              <div className="purchase-details">
                 <CustomTypography
                   variant="body2"
                   component="span"
@@ -142,8 +140,7 @@ function Buy() {
           </Card>
         </Grid>
       </Grid>
-      <Footer />
-    </div>
+    </Layout>
   );
 }
 

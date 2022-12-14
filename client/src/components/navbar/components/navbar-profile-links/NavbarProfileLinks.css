@@ -1,11 +1,11 @@
-.navbarDesktopLogin {
+.header__navbar__user-links {
   display: flex;
   justify-content: flex-end;
   align-items: center;
   margin-right: 10px;
 }
 
-.navbarMobileLogin {
+.header__navbar__small-screen-user-links {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -13,26 +13,30 @@
   margin-right: 10px;
 }
 
-.navbarUserName p {
+.header__navbar__username p {
   margin: 0 1rem;
   color: var(--color-primary-brown);
 }
 
-.horizontalLine {
+.horizontal-line {
   width: 1px;
   height: 30px;
   background-color: var(--color-primary-brown);
 }
 
-.navbarLoginButton a,
-.navbarRegisterButton a {
+.header__navbar__login a,
+.header__navbar__register a {
   margin: 10px;
   color: var(--color-primary-brown);
   text-decoration: none;
   cursor: pointer;
 }
 
-.navbarWishlistButton,
-.navbarCartButton {
+.header__navbar__wishlist,
+.header__navbar__cart {
   margin: 10px;
+}
+
+.header__navbar__profile {
+  color: var(--color-primary-brown);
 }

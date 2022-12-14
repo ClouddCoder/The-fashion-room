@@ -1,10 +1,4 @@
-#nav-header {
-  width: 100%;
-  height: 70px;
-  background-color: var(--color-primary-white);
-}
-
-#navbar {
+.header__navbar {
   width: inherit;
   height: inherit;
   display: flex;
@@ -13,12 +7,12 @@
   color: var(--color-primary-brown);
 }
 
-.navbarTitle {
+.header__navbar__title {
   font-size: 22px;
   font-family: "Roboto", sans-serif;
 }
 
-.navbarSmallscreenOverlay {
+.header__navbar__overlay {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -37,7 +31,7 @@
   z-index: 5;
 }
 
-.navbarSmallscreenHideOverlay {
+.header__navbar__overlay--hidden {
   display: flex;
   flex-direction: column;
   position: fixed;
@@ -55,7 +49,7 @@
 }
 
 @media (max-width: 700px) {
-  .navbarSmallscreen {
+  .header__navbar--small-screen {
     display: flex;
     justify-content: space-between;
     width: 110px;

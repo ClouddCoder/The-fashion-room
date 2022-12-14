@@ -6,13 +6,11 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import ProductItem from "./components/ProductItem";
 import AuthContext from "../../context/auth-context/AuthContext";
 import ProductContext from "../../context/product-context/ProductContext";
-import CustomTypography from "../../commons/custom-typography/CustomTypography";
-import Navbar from "../../commons/navbar/Navbar";
-import Footer from "../../commons/footer/Footer";
+import CustomTypography from "../../components/custom-typography/CustomTypography";
+import Layout from "../../components/layout/Layout";
 import ProductFilters from "./components/ProductFilters";
 import { catalogueActions } from "./reducer/catalogueActions";
 import { catalogueInitialState, CatalogueReducer } from "./reducer/catalogueReducer";
-import "./Catalogue.css";
 
 /**
  * This component renders all products by category or filtered the
@@ -66,8 +64,7 @@ function Catalogue() {
   };
 
   return (
-    <div className="container">
-      <Navbar />
+    <Layout>
       <Grid
         container
         direction="column"
@@ -141,8 +138,7 @@ function Catalogue() {
           </Grid>
         </Grid>
       </Grid>
-      <Footer />
-    </div>
+    </Layout>
   );
 }
 

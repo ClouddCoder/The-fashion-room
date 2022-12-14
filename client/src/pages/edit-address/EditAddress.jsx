@@ -2,10 +2,9 @@ import React, { useState, useContext } from "react";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import axios from "axios";
-import CustomTypography from "../../commons/custom-typography/CustomTypography";
+import CustomTypography from "../../components/custom-typography/CustomTypography";
 import AuthContext from "../../context/auth-context/AuthContext";
-import Navbar from "../../commons/navbar/Navbar";
-import Footer from "../../commons/footer/Footer";
+import Layout from "../../components/layout/Layout";
 
 function EditAddress() {
   const [name, setName] = useState("");
@@ -65,8 +64,7 @@ function EditAddress() {
     }
   };
   return (
-    <div className="container">
-      <Navbar />
+    <Layout>
       <Grid container direction="column">
         <Grid item>
           <CustomTypography variant="h3">Editar domicilio</CustomTypography>
@@ -169,8 +167,7 @@ function EditAddress() {
           </form>
         </Grid>
       </Grid>
-      <Footer />
-    </div>
+    </Layout>
   );
 }
 

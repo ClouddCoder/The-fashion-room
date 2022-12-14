@@ -7,7 +7,7 @@ import { CardActionArea } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import { getProductImage } from "../../../assets";
 import CustomWishlistButton from "./sub-components/CustomWishlistButton";
-import CustomTypography from "../../../commons/custom-typography/CustomTypography";
+import CustomTypography from "../../../components/custom-typography/CustomTypography";
 
 /**
  * Componente que muestra el producto en el catalogo

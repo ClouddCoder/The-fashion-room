@@ -4,7 +4,7 @@ import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
-import CustomTypography from "../../../commons/custom-typography/CustomTypography";
+import CustomTypography from "../../../components/custom-typography/CustomTypography";
 import { getProductImage } from "../../../assets";
 
 /**

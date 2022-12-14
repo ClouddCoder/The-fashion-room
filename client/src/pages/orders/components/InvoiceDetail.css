@@ -1,10 +1,10 @@
-.purchaseDetails {
+.order-price-quantity {
   display: flex;
   justify-content: space-between;
   width: 200px;
 }
 
-.purchaseOptions {
+.order-user-options {
   display: flex;
   flex-direction: column;
   justify-content: space-around;

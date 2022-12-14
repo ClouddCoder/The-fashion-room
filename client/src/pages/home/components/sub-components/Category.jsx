@@ -5,13 +5,13 @@ import CardContent from "@mui/material/CardContent";
 import CardActionArea from "@mui/material/CardActionArea";
 import CardMedia from "@mui/material/CardMedia";
 import { Link } from "react-router-dom";
-import CustomTypography from "../../../../commons/custom-typography/CustomTypography";
+import CustomTypography from "../../../../components/custom-typography/CustomTypography";
 import { style, phoneStyle, font, phoneFont } from "./style";
 
 /**
  * Componente que muestra la categoria en el inicio de la pagina
  */
-function OfferItem({ alt, image, title, description }) {
+function Category({ alt, image, title, description }) {
   const cardSxProps = useMediaQuery("(min-width:600px)") ? style : phoneStyle;
   const fontSize = useMediaQuery("(min-width:600px)") ? font : phoneFont;
 
@@ -32,4 +32,4 @@ function OfferItem({ alt, image, title, description }) {
   );
 }
 
-export default OfferItem;
+export default Category;

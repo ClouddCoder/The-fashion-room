@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./NavbarOptionList.css";
+import "./NavbarLinks.css";
 
-function NavBarOptionList({ displayMode }) {
+function NavbarLinks({ displayMode }) {
   if (displayMode) {
     return (
-      <ul className="navbarMobileLinks">
+      <ul className="header__navbar__small-screen-links">
         <li>
           <Link to="/">Home</Link>
         </li>
@@ -17,7 +17,7 @@ function NavBarOptionList({ displayMode }) {
   }
 
   return (
-    <ul className="navbarDesktopLinks">
+    <ul className="header__navbar__links">
       <li>
         <Link to="/">Home</Link>
       </li>
@@ -28,4 +28,4 @@ function NavBarOptionList({ displayMode }) {
   );
 }
 
-export default NavBarOptionList;
+export default NavbarLinks;

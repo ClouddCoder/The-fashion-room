@@ -5,9 +5,9 @@ import { Link } from "react-router-dom";
 import ProfileButton from "../profile-button/ProfileButton";
 import CustomButton from "../custom-button/CustomButton";
 import AuthContext from "../../../../context/auth-context/AuthContext";
-import "./NavbarProfileList.css";
+import "./NavbarProfileLinks.css";
 
-function NavbarProfileList({ displayMode }) {
+function NavbarProfileLinks({ displayMode }) {
   const {
     auth,
     setAuth,
@@ -43,36 +43,36 @@ function NavbarProfileList({ displayMode }) {
   if (displayMode) {
     if (auth) {
       return (
-        <div className="navbarMobileLogin">
-          <div className="navbarUserName">
+        <div className="header__navbar__small-screen-user-links">
+          <div className="header__navbar__username">
             <p>{user}</p>
           </div>
-          <div className="navbarWishlistButton">
+          <div className="header__navbar__wishlist">
             <CustomButton path="/wishlist">
               <p>Wishlist</p>
               <FavoriteBorderOutlinedIcon sx={{ ml: "10px" }} />
             </CustomButton>
           </div>
-          <div className="navbarCartButton">
+          <div className="header__navbar__cart">
             <CustomButton path="/cart">
               <p>Mi carrito</p>
               <ShoppingCartOutlinedIcon sx={{ ml: "10px" }} />
             </CustomButton>
           </div>
-          <div className="navbarProfileButton">
+          <div className="header__navbar__profile">
             <ProfileButton resetSession={resetSession} />
           </div>
         </div>
       );
     }
     return (
-      <div className="navbarMobileLogin">
-        <div className="navbarLoginButton">
+      <div className="header__navbar__small-screen-user-links">
+        <div className="header__navbar__login">
           <Link to="/login" component="button" onClick={resetForm}>
             Login
           </Link>
         </div>
-        <div className="navbarRegisterButton">
+        <div className="header__navbar__register">
           <Link to="/register" component="button" onClick={resetForm}>
             Register
           </Link>
@@ -83,38 +83,38 @@ function NavbarProfileList({ displayMode }) {
 
   if (auth) {
     return (
-      <div className="navbarDesktopLogin">
-        <div className="navbarUserName">
+      <div className="header__navbar__user-links">
+        <div className="header__navbar__username">
           <p>{user}</p>
         </div>
-        <div className="horizontalLine" />
-        <div className="navbarWishlistButton">
+        <div className="horizontal-line" />
+        <div className="header__navbar__wishlist">
           <CustomButton path="/wishlist">
             <p>Wishlist</p>
             <FavoriteBorderOutlinedIcon sx={{ ml: "10px" }} />
           </CustomButton>
         </div>
-        <div className="navbarCartButton">
+        <div className="header__navbar__cart">
           <CustomButton path="/cart">
             <p>Mi carrito</p>
             <ShoppingCartOutlinedIcon sx={{ ml: "10px" }} />
           </CustomButton>
         </div>
-        <div className="navbarProfileButton">
+        <div className="header__navbar__profile">
           <ProfileButton resetSession={resetSession} />
         </div>
       </div>
     );
   }
   return (
-    <div className="navbarDesktopLogin">
-      <div className="navbarLoginButton">
+    <div className="header__navbar__user-links">
+      <div className="header__navbar__login">
         <Link to="/login" component="button" onClick={resetForm}>
           Login
         </Link>
       </div>
-      <div className="horizontalLine" />
-      <div className="navbarRegisterButton">
+      <div className="horizontal-line" />
+      <div className="header__navbar__register">
         <Link to="/register" component="button" onClick={resetForm}>
           Register
         </Link>
@@ -123,4 +123,4 @@ function NavbarProfileList({ displayMode }) {
   );
 }
 
-export default NavbarProfileList;
+export default NavbarProfileLinks;

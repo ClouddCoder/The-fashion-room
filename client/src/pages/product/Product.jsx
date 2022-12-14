@@ -4,9 +4,8 @@ import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import ProductContext from "../../context/product-context/ProductContext";
 import AuthContext from "../../context/auth-context/AuthContext";
-import Navbar from "../../commons/navbar/Navbar";
-import Footer from "../../commons/footer/Footer";
-import CustomTypography from "../../commons/custom-typography/CustomTypography";
+import Layout from "../../components/layout/Layout";
+import CustomTypography from "../../components/custom-typography/CustomTypography";
 import { getProductImage } from "../../assets";
 import "./Product.css";
 
@@ -36,10 +35,10 @@ function Product() {
    * Event delegation to handle the click on the variants.
    */
   const handleChange = (e) => {
-    if (e.target.matches(".productColor div") || e.target.matches(".productColor span")) {
+    if (e.target.matches(".product-color div") || e.target.matches(".product-color span")) {
       const parent = e.target.closest("li");
       setVariantId(parent.getAttribute("name"));
-    } else if (e.target.matches(".productColor")) {
+    } else if (e.target.matches(".product-color")) {
       setVariantId(e.target.getAttribute("name"));
     }
   };
@@ -65,8 +64,7 @@ function Product() {
   }, []);
 
   return (
-    <div className="container">
-      <Navbar />
+    <Layout>
       <Grid container sx={{ width: "80%", m: "auto 0" }}>
         <Grid item xs={6} sx={{ display: "flex", justifyContent: "center" }}>
           <img
@@ -87,13 +85,13 @@ function Product() {
             <CustomTypography variant="body2">Color:</CustomTypography>
           </Grid>
           <Grid item>
-            <ul className="variantColors">
+            <ul className="product-variant-colors">
               {variants?.map((variant, index) => (
                 // eslint-disable-next-line max-len
                 // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions
                 <li
                   name={variant.variant_id}
-                  className={`productColor${
+                  className={`product-color${
                     variantId === variant.variant_id ? " selected" : ""
                   }`}
                   key={index}
@@ -124,8 +122,7 @@ function Product() {
           </Grid>
         </Grid>
       </Grid>
-      <Footer />
-    </div>
+    </Layout>
   );
 }
 

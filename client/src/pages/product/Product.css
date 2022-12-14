@@ -1,15 +1,15 @@
-.variantColors {
+.product-variant-colors {
   display: flex;
   flex-wrap: wrap;
 }
 
-.variantColors li {
+.product-variant-colors li {
   list-style: none;
   cursor: pointer;
   margin-right: 12px;
 }
 
-.productColor div {
+.product-color div {
   width: 55px;
   height: 30px;
 }

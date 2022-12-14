@@ -4,9 +4,8 @@ import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Divider from "@mui/material/Divider";
-import CustomTypography from "../../commons/custom-typography/CustomTypography";
-import Navbar from "../../commons/navbar/Navbar";
-import Footer from "../../commons/footer/Footer";
+import CustomTypography from "../../components/custom-typography/CustomTypography";
+import Layout from "../../components/layout/Layout";
 import ProductContext from "../../context/product-context/ProductContext";
 
 /**
@@ -18,8 +17,7 @@ function Invoice() {
   const navigate = useNavigate();
 
   return (
-    <div className="container">
-      <Navbar />
+    <Layout>
       <Grid container justifyContent="center">
         <Grid item>
           <Paper
@@ -112,8 +110,7 @@ function Invoice() {
           </Paper>
         </Grid>
       </Grid>
-      <Footer />
-    </div>
+    </Layout>
   );
 }
 

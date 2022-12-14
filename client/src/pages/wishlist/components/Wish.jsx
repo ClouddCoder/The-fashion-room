@@ -23,7 +23,7 @@ function Wish({ product }) {
             image={getProductImage(product.product_name)}
             alt={product.product_name}
           />
-          <div className="description">
+          <div className="wish-description">
             <h1>{product.product_name}</h1>
             <div>
               <p>${product.min_price}</p>
@@ -31,7 +31,7 @@ function Wish({ product }) {
           </div>
         </CardContent>
         <CardActions>
-          <div className="wishOptions">
+          <div className="wish-user-options">
             <Button
               variant="contained"
               onClick={() => navigate(`/product/${product.product_id}-${product.variant_id}`)}

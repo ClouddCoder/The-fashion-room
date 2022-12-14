@@ -1,10 +1,9 @@
 import React, { useEffect, useContext } from "react";
 import Grid from "@mui/material/Grid";
 import ProductContext from "../../context/product-context/ProductContext";
-import CustomTypography from "../../commons/custom-typography/CustomTypography";
+import CustomTypography from "../../components/custom-typography/CustomTypography";
 import InvoiceDetail from "./components/InvoiceDetail";
-import Navbar from "../../commons/navbar/Navbar";
-import Footer from "../../commons/footer/Footer";
+import Layout from "../../components/layout/Layout";
 
 /**
  * Componente que muestra las compras realizadas por el usuario
@@ -28,8 +27,7 @@ function Orders() {
   }, []);
 
   return (
-    <div className="container">
-      <Navbar />
+    <Layout>
       <Grid container direction="column" sx={{ height: "auto", width: "60%", m: 2 }}>
         <Grid item>
           <CustomTypography variant="h3">Mis ordenes</CustomTypography>
@@ -40,8 +38,7 @@ function Orders() {
           ))}
         </Grid>
       </Grid>
-      <Footer />
-    </div>
+    </Layout>
   );
 }
 

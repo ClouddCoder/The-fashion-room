@@ -3,7 +3,8 @@ import { useNavigate, Link } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
-import Form from "../../commons/form/Form";
+import Form from "../../components/form/Form";
+import CustomTypography from "../../components/custom-typography/CustomTypography";
 import AuthContext from "../../context/auth-context/AuthContext";
 
 /**
@@ -37,8 +38,8 @@ function Login() {
     });
     const data = await res.json();
 
+    // Sets the user's data to login and deletes the data from the inputs
     if (data.status === 200) {
-      // Set the user's data to login and deletes the data from the inputs
       setAuth(data.userAuth);
       setUserId(data.userId);
       setUser(data.userName);
@@ -48,7 +49,7 @@ function Login() {
       setToken(data.token);
       navigate("/");
 
-      // Save token to localStorage
+      // Saves the token to localStorage
       window.localStorage.setItem("logged", JSON.stringify(data));
     } else {
       setError({ error: true, errorMessage: data.message });
@@ -56,14 +57,16 @@ function Login() {
   };
 
   /**
-   * Gets email and password from the inputs
+   * Gets the email and password from the inputs
    */
   const handleChange = (e) => {
     switch (e.target.name) {
       case "userEmail":
+        setError({ error: false, errorMessage: "" });
         setUserEmail(e.target.value);
         break;
       case "userPassword":
+        setError({ error: false, errorMessage: "" });
         setUserPassword(e.target.value);
         break;
       default:
@@ -107,12 +110,14 @@ function Login() {
           <Grid container item justifyContent="space-between" xs={12}>
             <Grid item>
               <Link to="/">
-                <span>Forgot password?</span>
+                <CustomTypography variant="body2">Forgot password?</CustomTypography>
               </Link>
             </Grid>
             <Grid item>
               <Link to="/">
-                <span>Don't have an account? Sign Up</span>
+                <CustomTypography variant="body2">
+                  Don't have an account? Sign Up
+                </CustomTypography>
               </Link>
             </Grid>
           </Grid>

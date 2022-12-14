@@ -5,8 +5,7 @@ import Button from "@mui/material/Button";
 import ProductContext from "../../context/product-context/ProductContext";
 import OrderResume from "./components/OrderResume";
 import CartItem from "./components/CartItem";
-import Navbar from "../../commons/navbar/Navbar";
-import Footer from "../../commons/footer/Footer";
+import Layout from "../../components/layout/Layout";
 
 /**
  * Componente que muestra el carrito de compras
@@ -15,8 +14,7 @@ function ShoppingCart() {
   const { cart, removeFromCart, clearCart } = useContext(ProductContext);
 
   return (
-    <div className="container">
-      <Navbar />
+    <Layout>
       <Grid container spacing={2}>
         <Grid item={true} container xs={6}>
           <Grid item container justifyContent="center">
@@ -48,8 +46,7 @@ function ShoppingCart() {
           <OrderResume />
         </Grid>
       </Grid>
-      <Footer />
-    </div>
+    </Layout>
   );
 }
 
