@@ -68,7 +68,6 @@ function Register() {
         setToken(data.token);
         navigate("/");
       } else {
-        console.log(data);
         setError({
           ...error,
           error: true,

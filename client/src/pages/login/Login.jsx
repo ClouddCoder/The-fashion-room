@@ -31,15 +31,16 @@ function Login() {
    */
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await fetch("http://localhost:3050/api/login", {
-      method: "POST",
-      body: JSON.stringify({ userEmail, userPassword }),
-      headers: { "Content-Type": "application/json" },
-    });
-    const data = await res.json();
 
-    // Sets the user's data to login and deletes the data from the inputs
-    if (data.status === 200) {
+    try {
+      const res = await fetch("http://localhost:3050/api/login", {
+        method: "POST",
+        body: JSON.stringify({ userEmail, userPassword }),
+        headers: { "Content-Type": "application/json" },
+      });
+      const data = await res.json();
+
+      // Sets the user's data to login and deletes the data from the inputs
       setAuth(data.userAuth);
       setUserId(data.userId);
       setUser(data.userName);
@@ -51,8 +52,9 @@ function Login() {
 
       // Saves the token to localStorage
       window.localStorage.setItem("logged", JSON.stringify(data));
-    } else {
-      setError({ error: true, errorMessage: data.message });
+    } catch (err) {
+      setError({ error: true, errorMessage: err.message });
+      throw new Error(err.message);
     }
   };
 
@@ -109,12 +111,12 @@ function Login() {
           </Grid>
           <Grid container item justifyContent="space-between" xs={12}>
             <Grid item>
-              <Link to="/">
+              <Link to="/edit-password">
                 <CustomTypography variant="body2">Forgot password?</CustomTypography>
               </Link>
             </Grid>
             <Grid item>
-              <Link to="/">
+              <Link to="/register">
                 <CustomTypography variant="body2">
                   Don't have an account? Sign Up
                 </CustomTypography>

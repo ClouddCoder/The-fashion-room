@@ -9,6 +9,7 @@ import EditUsername from "../pages/edit-username/EditUsername";
 import EditPhone from "../pages/edit-phone/EditPhone";
 import Address from "../pages/address/Address";
 import EditAddress from "../pages/edit-address/EditAddress";
+import EditPassword from "../pages/edit-password/EditPassword";
 import Login from "../pages/login/Login";
 import Register from "../pages/register/Register";
 import Home from "../pages/home/Home";
@@ -38,6 +39,7 @@ function Navigation() {
           <Route path="/edit-phone" element={<EditPhone />} />
           <Route path="/address" element={<Address />} />
           <Route path="/edit-address" element={<EditAddress />} />
+          <Route path="/edit-password" element={<EditPassword />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
