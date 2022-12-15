@@ -249,7 +249,12 @@ function ProductState({ children }) {
         }),
       });
       const data = await res.json();
-      dispatch({ type: TYPES.CREATE_INVOICE, payload: data.orderDetailId });
+
+      if (res.ok) {
+        dispatch({ type: TYPES.CREATE_INVOICE, payload: data.orderDetailId });
+      } else {
+        throw new Error(data.message);
+      }
     } catch (error) {
       console.log(error);
     }

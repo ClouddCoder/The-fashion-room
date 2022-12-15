@@ -42,38 +42,45 @@ function Register() {
     // If the user submits the form with a password error, it will not be sent
     if (!errorPassword.errorPassword) {
       setErrorPassword({ errorPassword: false, errorMessage: "" });
-      const res = await fetch("http://localhost:3050/api/register", {
-        method: "POST",
-        body: JSON.stringify({
-          userName,
-          userLastname,
-          userEmail,
-          userPassword,
-        }),
-        headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
-      });
-      const data = await res.json();
-      window.localStorage.setItem("logged", JSON.stringify(data));
 
-      if (res.status === 200) {
-        // Set the user's data to login and deletes the data from the inputs
-        setAuth(data.userAuth);
-        setUserId(data.userId);
-        setUser(data.userName);
-        setUsername(data.username);
-        setUserName("");
-        setUserLastname("");
-        setUserEmail("");
-        setUserPassword("");
-        setToken(data.token);
-        navigate("/");
-      } else {
-        setError({
-          ...error,
-          error: true,
-          constraint: data.constraint,
-          errorMessage: data.errorMessage,
+      try {
+        const res = await fetch("http://localhost:3050/api/register", {
+          method: "POST",
+          body: JSON.stringify({
+            userName,
+            userLastname,
+            userEmail,
+            userPassword,
+          }),
+          headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
         });
+        const data = await res.json();
+
+        if (res.ok) {
+          // Set the user's data to login and deletes the data from the inputs
+          setAuth(data.userAuth);
+          setUserId(data.userId);
+          setUser(data.userName);
+          setUsername(data.username);
+          setUserName("");
+          setUserLastname("");
+          setUserEmail("");
+          setUserPassword("");
+          setToken(data.token);
+          navigate("/");
+          window.localStorage.setItem("logged", JSON.stringify(data));
+        } else {
+          setError({
+            ...error,
+            error: true,
+            constraint: data.constraint,
+            errorMessage: data.errorMessage,
+          });
+
+          throw new Error(data.message);
+        }
+      } catch (err) {
+        console.log(err);
       }
     } else {
       setErrorPassword({

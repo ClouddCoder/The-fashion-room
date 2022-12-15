@@ -38,21 +38,25 @@ function Buy() {
    */
   // eslint-disable-next-line consistent-return
   const buyProducts = async () => {
-    const res = await fetch("http://localhost:3050/api/buy", {
-      method: "PUT",
-      body: JSON.stringify(productsToBuy),
-      headers: new Headers({
-        "Authorization": `Bearer ${token}`,
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-      }),
-    });
-    const data = await res.json();
+    try {
+      const res = await fetch("http://localhost:3050/api/buy", {
+        method: "PUT",
+        body: JSON.stringify(productsToBuy),
+        headers: new Headers({
+          "Authorization": `Bearer ${token}`,
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        }),
+      });
+      const data = await res.json();
 
-    if (res.status === 200) {
-      navigate("/invoice");
-    } else {
-      return data.message;
+      if (res.ok) {
+        navigate("/invoice");
+      } else {
+        throw new Error(data.message);
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 

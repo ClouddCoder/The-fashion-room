@@ -4,7 +4,7 @@ const cors = require("cors");
 // eslint-disable-next-line import/no-extraneous-dependencies
 const bodyParser = require("body-parser");
 const { config } = require("dotenv");
-const userRoutes = require("./routes/users.routes");
+const routes = require("./routes/routes");
 
 config();
 const app = express();
@@ -13,7 +13,7 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(cors());
-app.use(userRoutes);
+app.use(routes);
 
 /**
  * Set the requests, responses and custom error messages.

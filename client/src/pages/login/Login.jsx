@@ -41,20 +41,24 @@ function Login() {
       const data = await res.json();
 
       // Sets the user's data to login and deletes the data from the inputs
-      setAuth(data.userAuth);
-      setUserId(data.userId);
-      setUser(data.userName);
-      setUsername(data.username);
-      setUserEmail("");
-      setUserPassword("");
-      setToken(data.token);
-      navigate("/");
+      if (res.ok) {
+        setAuth(data.userAuth);
+        setUserId(data.userId);
+        setUser(data.userName);
+        setUsername(data.username);
+        setUserEmail("");
+        setUserPassword("");
+        setToken(data.token);
+        navigate("/");
 
-      // Saves the token to localStorage
-      window.localStorage.setItem("logged", JSON.stringify(data));
+        // Saves the token to localStorasge
+        window.localStorage.setItem("logged", JSON.stringify(data));
+      } else {
+        setError({ error: true, errorMessage: data.message });
+        throw new Error(data.message);
+      }
     } catch (err) {
-      setError({ error: true, errorMessage: err.message });
-      throw new Error(err.message);
+      console.log(err);
     }
   };
 
