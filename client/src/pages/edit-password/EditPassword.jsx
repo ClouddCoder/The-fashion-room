@@ -88,6 +88,16 @@ function EditPassword() {
     }
   };
 
+  const hideEmailInput = (remove = false) => {
+    if (!remove) {
+      const element = document.querySelector(".email-input");
+      element.classList.remove("email-input--hidden");
+    } else {
+      const element = document.querySelector(".email-input");
+      element.classList.add("email-input--hidden");
+    }
+  };
+
   return (
     <Layout>
       <div className="email-input">
@@ -105,7 +115,13 @@ function EditPassword() {
             value={email}
             sx={{ margin: ".5rem 0", width: "100%" }}
           />
-          <Button variant="contained" color="secondary" type="submit" fullWidth>
+          <Button
+            variant="contained"
+            color="secondary"
+            type="submit"
+            fullWidth
+            onClick={() => hideEmailInput(true)}
+          >
             Continuar
           </Button>
         </form>
@@ -138,10 +154,10 @@ function EditPassword() {
               value={newPassword.password}
               sx={{ margin: ".5rem 0", width: "100%" }}
             />
+            <Button variant="contained" color="secondary" type="submit" fullWidth>
+              Actualizar
+            </Button>
           </form>
-          <Button variant="contained" color="secondary" type="submit" fullWidth>
-            Actualizar
-          </Button>
         </div>
       )}
     </Layout>
