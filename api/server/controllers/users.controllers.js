@@ -123,7 +123,11 @@ const getUserId = async (req, res, next) => {
 
   try {
     const result = await pool.query(query, [email]);
-    return res.json(result.rows);
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ message: "Correo no existe" });
+    }
+    return res.json({ userId: result.rows[0].customer_id });
   } catch (error) {
     next(error);
   }

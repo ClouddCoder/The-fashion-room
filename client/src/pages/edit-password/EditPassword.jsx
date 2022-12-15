@@ -17,6 +17,7 @@ const usePassword = () => {
   };
 };
 
+// Custom hook to get the user's email
 const useEmail = () => {
   const [email, setEmail] = useState("");
 
@@ -30,24 +31,29 @@ const useEmail = () => {
 
 function EditPassword() {
   const [error, setError] = useState({ error: false, errorMessage: "" });
+  const [userId, setUserId] = useState("");
   const [success, setSuccess] = useState(false);
   const { email, getEmail } = useEmail();
   const currentPassword = usePassword();
   const newPassword = usePassword();
 
-  const handleSubmit = async (e) => {
+  // Sends the user's new password to change the current one using the user's id.
+  const handleSubmitPassword = async (e) => {
     e.preventDefault();
 
     try {
-      const res = await axios.put("http://localhost:3001/api/edit-password", {
-        currentPassword: currentPassword.password,
+      await axios.put("http://localhost:3001/api/edit-password", {
+        userId,
         newPassword: newPassword.password,
       });
     } catch (err) {
+      setError({ error: true, errorMessage: err.message });
       throw new Error(err);
     }
   };
 
+  // Sends the user's email to check if it exists in the database.
+  // If it does, the function will return the user's id.
   const handleSubmitEmail = async (e) => {
     e.preventDefault();
 
@@ -59,10 +65,11 @@ function EditPassword() {
       });
 
       const { data } = res;
+      setUserId(data.userId);
       setSuccess(true);
-      console.log(data);
     } catch (err) {
-      throw new Error(err);
+      const { response } = err;
+      console.log(response.data.message);
     }
   };
 
@@ -89,8 +96,8 @@ function EditPassword() {
         </div>
         <form onSubmit={handleSubmitEmail}>
           <TextField
-            error
-            helperText="email"
+            error={error.error}
+            helperText={error.errorMessage}
             onChange={handleChange}
             name="email"
             variant="outlined"
@@ -108,10 +115,10 @@ function EditPassword() {
           <div className="password-inputs__title">
             <h1>Cambiar contraseña</h1>
           </div>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmitPassword}>
             <TextField
-              error
-              helperText="tim"
+              error={error.error}
+              helperText={error.errorMessage}
               onChange={handleChange}
               name="currentPassword"
               variant="outlined"
@@ -121,8 +128,8 @@ function EditPassword() {
               sx={{ margin: ".5rem 0", width: "100%" }}
             />
             <TextField
-              error
-              helperText="tom"
+              error={error.error}
+              helperText={error.errorMessage}
               onChange={handleChange}
               name="newPassword"
               variant="outlined"
