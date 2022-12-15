@@ -1,5 +1,10 @@
 const { Router } = require("express");
-const { loginUser, registerUser } = require("../controllers/users.controllers");
+const {
+  loginUser,
+  registerUser,
+  updatePassword,
+  getUserId,
+} = require("../controllers/users.controllers");
 const {
   getAllProducts,
   getProductVariants,
@@ -21,6 +26,10 @@ const router = Router();
 router.post("/login", loginUser);
 
 router.post("/register", registerUser);
+
+router.get("/user-id", getUserId);
+
+router.put("edit-password", updatePassword);
 
 router.put("/buy", buyProduct);
 

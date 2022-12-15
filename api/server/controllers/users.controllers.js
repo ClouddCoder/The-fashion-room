@@ -102,7 +102,36 @@ const registerUser = async (req, res, next) => {
   }
 };
 
+const updatePassword = async (req, res, next) => {
+  const { userId, newPassword } = req.body;
+  let query = "UPDATE customer SET customer_password = $2 ";
+  query += "WHERE customer_id = $1;";
+  const values = [userId, newPassword];
+
+  try {
+    await pool.query(query, values);
+
+    return res.json({ message: "success" });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const getUserId = async (req, res, next) => {
+  const { email } = req.query;
+  const query = "SELECT customer_id FROM customer WHERE customer_email = $1;";
+
+  try {
+    const result = await pool.query(query, [email]);
+    return res.json(result.rows);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   loginUser,
   registerUser,
+  updatePassword,
+  getUserId,
 };
