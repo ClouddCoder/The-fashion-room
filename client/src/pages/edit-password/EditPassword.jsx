@@ -162,8 +162,10 @@ function EditPassword() {
               sx={{ margin: ".5rem 0", width: "100%" }}
             />
             <TextField
-              error={password.shortPassword}
-              helperText={password.shortPassword && password.errorMessage}
+              error={password.shortPassword || error.constraint === "newPassword"}
+              helperText={
+                error.constraint === "newPassword" ? error.errorMessage : password.errorMessage
+              }
               onChange={handleChange}
               name="newPassword"
               variant="outlined"

@@ -71,7 +71,7 @@ const registerUser = async (req, res, next) => {
   if (userPassword.length <= 4) {
     return res.status(406).json({
       constraint: "password",
-      errorMessage: "La contraseña debe tener al menos 4 caracteres",
+      errorMessage: "La contraseña debe tener más de 4 caracteres",
     });
   }
 
@@ -102,11 +102,17 @@ const registerUser = async (req, res, next) => {
   }
 };
 
+/**
+ * Updates the user's password when the user forgot it
+ */
 const updatePassword = async (req, res, next) => {
   const { userId, currentPassword, newPassword } = req.body;
+
+  // Query to get the user's current password
   let userCurrentPasswordQuery = "SELECT customer_password FROM customer ";
   userCurrentPasswordQuery += "WHERE customer_id = $1;";
 
+  // Query to update the user's password
   let updatePasswordquery = "UPDATE customer SET customer_password = $2 ";
   updatePasswordquery += "WHERE customer_id = $1;";
 
@@ -122,12 +128,30 @@ const updatePassword = async (req, res, next) => {
 
     const userPassword = result.rows[0].customer_password;
 
-    const checkPassword = await bcrypt.compare(currentPassword, userPassword);
+    // Checks if the current password is correct
+    const checkCurrentPassword = await bcrypt.compare(currentPassword, userPassword);
 
-    if (!checkPassword) {
+    if (!checkCurrentPassword) {
       return res.status(401).json({
         constraint: "currentPassword",
         message: "Contraseña incorrecta",
+      });
+    }
+
+    // Checks if the new password is different from the current password
+    const checkNewPassword = await bcrypt.compare(newPassword, userPassword);
+
+    if (checkNewPassword) {
+      return res.status(406).json({
+        constraint: "newPassword",
+        message: "La nueva contraseña debe ser diferente a la actual",
+      });
+    }
+
+    if (newPassword.length <= 4) {
+      return res.status(406).json({
+        constraint: "newPassword",
+        message: "La contraseña debe tener más de 4 caracteres",
       });
     }
 
@@ -140,6 +164,10 @@ const updatePassword = async (req, res, next) => {
   }
 };
 
+/**
+ * Returns the user's id based on the email. This is used when
+ * the user forgot their password
+ */
 const getUserId = async (req, res, next) => {
   const { email } = req.query;
   const query = "SELECT customer_id FROM customer WHERE customer_email = $1;";
