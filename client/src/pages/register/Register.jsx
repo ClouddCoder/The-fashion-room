@@ -29,12 +29,12 @@ function Register() {
   // Checks if the user's name, lastname or email is empty
   const [error, setError] = useState({ constraint: "", errorMessage: "" });
 
-  // Checks if the user's password is less than 4 characters
+  // Checks if the user's password is less than or equal to 4 characters
   const [errorPassword, setErrorPassword] = useState({ errorPassword: false, errorMessage: "" });
   const navigate = useNavigate();
 
   /**
-   * Send the user's data to the server
+   * Sends the user's data to the server
    */
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -56,8 +56,8 @@ function Register() {
         });
         const data = await res.json();
 
+        // Sets the user's data to login and deletes the data from the inputs
         if (res.ok) {
-          // Set the user's data to login and deletes the data from the inputs
           setAuth(data.userAuth);
           setUserId(data.userId);
           setUser(data.userName);
@@ -82,12 +82,6 @@ function Register() {
       } catch (err) {
         console.log(err);
       }
-    } else {
-      setErrorPassword({
-        ...errorPassword,
-        errorPassword: true,
-        errorMessage: "Debe tener más de 4 caracteres",
-      });
     }
   };
 
@@ -96,21 +90,18 @@ function Register() {
    * when the user starts typing again.
    */
   const handleChange = (e) => {
+    setError({ ...error, error: false, constraint: "", errorMessage: "" });
     switch (e.target.name) {
       case "userName":
-        setError({ ...error, error: false, constraint: "", errorMessage: "" });
         setUserName(e.target.value);
         break;
       case "userLastname":
-        setError({ ...error, error: false, constraint: "", errorMessage: "" });
         setUserLastname(e.target.value);
         break;
       case "userEmail":
-        setError({ ...error, error: false, constraint: "", errorMessage: "" });
         setUserEmail(e.target.value);
         break;
       case "userPassword":
-        setError({ ...error, error: false, constraint: "", errorMessage: "" });
         if (e.target.value.length <= 4) {
           setErrorPassword({
             ...errorPassword,
@@ -133,7 +124,7 @@ function Register() {
           <Grid item xs={6}>
             <TextField
               error={error.constraint === "name"}
-              helperText={error.constraint === "name" ? error.errorMessage : ""}
+              helperText={error.constraint === "name" && error.errorMessage}
               onChange={handleChange}
               name="userName"
               variant="outlined"
@@ -145,7 +136,7 @@ function Register() {
           <Grid item xs={6}>
             <TextField
               error={error.constraint === "lastname"}
-              helperText={error.constraint === "lastname" ? error.errorMessage : ""}
+              helperText={error.constraint === "lastname" && error.errorMessage}
               onChange={handleChange}
               name="userLastname"
               variant="outlined"
@@ -157,7 +148,7 @@ function Register() {
           <Grid item xs={12}>
             <TextField
               error={error.constraint === "email"}
-              helperText={error.constraint === "email" ? error.errorMessage : ""}
+              helperText={error.constraint === "email" && error.errorMessage}
               onChange={handleChange}
               name="userEmail"
               variant="outlined"

@@ -29,7 +29,7 @@ router.post("/register", registerUser);
 
 router.get("/user-id", getUserId);
 
-router.put("edit-password", updatePassword);
+router.put("/edit-password", updatePassword);
 
 router.put("/buy", buyProduct);
 

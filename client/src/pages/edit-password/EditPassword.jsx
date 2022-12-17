@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import axios from "axios";
@@ -17,6 +18,19 @@ const usePassword = () => {
   };
 };
 
+// Custom hook to check if the user's password is less than
+// or equal to 4 characters
+const usePasswordLength = () => {
+  const [password, setPassword] = useState({ shortPassword: false, errorMessage: "" });
+
+  const checkPasswordLength = (response) => setPassword(response);
+
+  return {
+    password,
+    checkPasswordLength,
+  };
+};
+
 // Custom hook to get the user's email
 const useEmail = () => {
   const [email, setEmail] = useState("");
@@ -30,25 +44,34 @@ const useEmail = () => {
 };
 
 function EditPassword() {
-  const [error, setError] = useState({ error: false, errorMessage: "" });
+  const [error, setError] = useState({ constraint: "", errorMessage: "" });
   const [userId, setUserId] = useState("");
   const [success, setSuccess] = useState(false);
+  const navigate = useNavigate();
   const { email, getEmail } = useEmail();
   const currentPassword = usePassword();
   const newPassword = usePassword();
+  const { password, checkPasswordLength } = usePasswordLength();
 
   // Sends the user's new password to change the current one using the user's id.
   const handleSubmitPassword = async (e) => {
     e.preventDefault();
 
-    try {
-      await axios.put("http://localhost:3001/api/edit-password", {
-        userId,
-        newPassword: newPassword.password,
-      });
-    } catch (err) {
-      setError({ error: true, errorMessage: err.message });
-      throw new Error(err);
+    if (!password.shortPassword) {
+      try {
+        await axios.put("http://localhost:3050/api/edit-password", {
+          userId,
+          currentPassword: currentPassword.password,
+          newPassword: newPassword.password,
+        });
+        console.log("Contraseña actualizada");
+        navigate("/");
+      } catch (err) {
+        const { response } = err;
+        const { data } = response;
+        const { message, constraint } = data;
+        setError({ constraint, errorMessage: message });
+      }
     }
   };
 
@@ -69,11 +92,14 @@ function EditPassword() {
       setSuccess(true);
     } catch (err) {
       const { response } = err;
-      console.log(response.data.message);
+      const { data } = response;
+      const { message } = data;
+      setError({ constraint: "email", errorMessage: message });
     }
   };
 
   const handleChange = (e) => {
+    setError({ constraint: "", errorMessage: "" });
     switch (e.target.name) {
       case "email":
         getEmail(e.target.value);
@@ -82,32 +108,30 @@ function EditPassword() {
         currentPassword.getPassword(e.target.value);
         break;
       case "newPassword":
+        if (e.target.value.length <= 4) {
+          checkPasswordLength({
+            shortPassword: true,
+            errorMessage: "La contraseña debe tener más de 4 caracteres",
+          });
+        } else {
+          checkPasswordLength({ shortPassword: false, errorMessage: "" });
+        }
         newPassword.getPassword(e.target.value);
         break;
       default:
     }
   };
 
-  const hideEmailInput = (remove = false) => {
-    if (!remove) {
-      const element = document.querySelector(".email-input");
-      element.classList.remove("email-input--hidden");
-    } else {
-      const element = document.querySelector(".email-input");
-      element.classList.add("email-input--hidden");
-    }
-  };
-
   return (
     <Layout>
-      <div className="email-input">
+      <div className={`email-input ${success && "email-input--hidden"}`}>
         <div className="email-input__title">
           <h1>Escribe tu correo</h1>
         </div>
         <form onSubmit={handleSubmitEmail}>
           <TextField
-            error={error.error}
-            helperText={error.errorMessage}
+            error={error.constraint === "email"}
+            helperText={error.constraint === "email" && error.errorMessage}
             onChange={handleChange}
             name="email"
             variant="outlined"
@@ -115,13 +139,7 @@ function EditPassword() {
             value={email}
             sx={{ margin: ".5rem 0", width: "100%" }}
           />
-          <Button
-            variant="contained"
-            color="secondary"
-            type="submit"
-            fullWidth
-            onClick={() => hideEmailInput(true)}
-          >
+          <Button variant="contained" color="secondary" type="submit" fullWidth>
             Continuar
           </Button>
         </form>
@@ -133,8 +151,8 @@ function EditPassword() {
           </div>
           <form onSubmit={handleSubmitPassword}>
             <TextField
-              error={error.error}
-              helperText={error.errorMessage}
+              error={error.constraint === "currentPassword"}
+              helperText={error.constraint === "currentPassword" && error.errorMessage}
               onChange={handleChange}
               name="currentPassword"
               variant="outlined"
@@ -144,8 +162,8 @@ function EditPassword() {
               sx={{ margin: ".5rem 0", width: "100%" }}
             />
             <TextField
-              error={error.error}
-              helperText={error.errorMessage}
+              error={password.shortPassword}
+              helperText={password.shortPassword && password.errorMessage}
               onChange={handleChange}
               name="newPassword"
               variant="outlined"

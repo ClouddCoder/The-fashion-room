@@ -103,15 +103,38 @@ const registerUser = async (req, res, next) => {
 };
 
 const updatePassword = async (req, res, next) => {
-  const { userId, newPassword } = req.body;
-  let query = "UPDATE customer SET customer_password = $2 ";
-  query += "WHERE customer_id = $1;";
-  const values = [userId, newPassword];
+  const { userId, currentPassword, newPassword } = req.body;
+  let userCurrentPasswordQuery = "SELECT customer_password FROM customer ";
+  userCurrentPasswordQuery += "WHERE customer_id = $1;";
+
+  let updatePasswordquery = "UPDATE customer SET customer_password = $2 ";
+  updatePasswordquery += "WHERE customer_id = $1;";
 
   try {
-    await pool.query(query, values);
+    const result = await pool.query(userCurrentPasswordQuery, [userId]);
 
-    return res.json({ message: "success" });
+    if (result.rows.length === 0) {
+      return res.status(404).json({
+        constraint: "currentPassword",
+        message: "Ingresa una contraseña válida",
+      });
+    }
+
+    const userPassword = result.rows[0].customer_password;
+
+    const checkPassword = await bcrypt.compare(currentPassword, userPassword);
+
+    if (!checkPassword) {
+      return res.status(401).json({
+        constraint: "currentPassword",
+        message: "Contraseña incorrecta",
+      });
+    }
+
+    const newPasswordHash = await bcrypt.hash(newPassword, 10);
+    await pool.query(updatePasswordquery, [userId, newPasswordHash]);
+
+    return res.json({ message: "Contraseña actualizada" });
   } catch (error) {
     next(error);
   }
