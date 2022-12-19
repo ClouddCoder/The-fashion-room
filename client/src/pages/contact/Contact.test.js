@@ -25,6 +25,7 @@ describe("Contact component", () => {
     getStorePhones.mockReturnValue({ data: mockStorePhone });
     ContactTest();
     expect(await screen.findByText("Tienda 1")).toBeInTheDocument();
+    expect(await screen.findByText(/123456789/)).toBeInTheDocument();
     expect(getStoreInformation).toHaveBeenCalledTimes(1);
     expect(getStorePhones).toHaveBeenCalledTimes(1);
   });

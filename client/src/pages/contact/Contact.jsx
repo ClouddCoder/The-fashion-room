@@ -63,18 +63,16 @@ function Contact() {
 
   return (
     <Layout>
-      <Grid container sx={{ height: "auto" }}>
-        <Grid item container justifyContent="center" spacing={2}>
-          {stores.map((store, index) => (
-            <StoreInfo
-              key={index}
-              storeNit={store.store_nit}
-              storeName={store.store_name}
-              storeAddress={store.store_address}
-              storePhone={getPhone(store.store_nit)}
-            />
-          ))}
-        </Grid>
+      <Grid container justifyContent="center" sx={{ height: "auto" }} spacing={2}>
+        {stores.map((store, index) => (
+          <StoreInfo
+            key={index}
+            storeNit={store.store_nit}
+            storeName={store.store_name}
+            storeAddress={store.store_address}
+            storePhone={getPhone(store.store_nit)}
+          />
+        ))}
       </Grid>
     </Layout>
   );
