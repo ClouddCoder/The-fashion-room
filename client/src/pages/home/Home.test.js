@@ -1,5 +1,5 @@
 import { screen } from "@testing-library/react";
-import { HomeTest } from "./helpers";
+import { HomeTest } from "../../tests/test.utils";
 
 afterEach(() => {
   jest.clearAllMocks();

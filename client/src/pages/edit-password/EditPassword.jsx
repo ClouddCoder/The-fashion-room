@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import axios from "axios";
 import Layout from "../../components/layout/Layout";
+import { changeUserPassword, getUserId } from "../../services/user";
 import "./EditPassword.css";
 
 // Custom hook to get the user's password
@@ -59,11 +59,7 @@ function EditPassword() {
 
     if (!password.shortPassword) {
       try {
-        await axios.put("http://localhost:3050/api/edit-password", {
-          userId,
-          currentPassword: currentPassword.password,
-          newPassword: newPassword.password,
-        });
+        await changeUserPassword(userId, currentPassword.password, newPassword.password);
         console.log("Contraseña actualizada");
         navigate("/");
       } catch (err) {
@@ -81,11 +77,7 @@ function EditPassword() {
     e.preventDefault();
 
     try {
-      const res = await axios.get("http://localhost:3050/api/user-id", {
-        params: {
-          email,
-        },
-      });
+      const res = await getUserId(email);
 
       const { data } = res;
       setUserId(data.userId);

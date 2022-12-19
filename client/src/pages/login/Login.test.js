@@ -1,6 +1,6 @@
 import userEvent from "@testing-library/user-event";
 import { screen } from "@testing-library/react";
-import { LoginTest, authContextProps } from "./helpers";
+import { LoginTest, authContextProps } from "../../tests/test.utils";
 
 afterEach(() => {
   jest.clearAllMocks();

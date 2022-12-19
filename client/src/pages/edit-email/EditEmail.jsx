@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
-import axios from "axios";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
+import { changeUserEmail } from "../../services/user";
 import AuthContext from "../../context/auth-context/AuthContext";
 import CustomTypography from "../../components/custom-typography/CustomTypography";
 import Layout from "../../components/layout/Layout";
@@ -13,21 +13,17 @@ function EditEmail() {
   const [newEmail, setNewEmail] = useState("");
   const { token } = useContext(AuthContext);
 
+  /**
+   * Sends the user's new email to update it in the database
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await axios.put(
-      "http://localhost:3050/api/edit-email",
-      {
-        email,
-        newEmail,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      },
-    );
-    console.log(response.data);
+    try {
+      const response = await changeUserEmail(email, newEmail, token);
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleChange = (e) => {

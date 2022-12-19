@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom";
 import { screen } from "@testing-library/react";
-import { FooterTest } from "./helpers";
+import { FooterTest } from "../../tests/test.utils";
 
 describe.skip("Footer component", () => {
   it("Should render the footer component", () => {

@@ -1,6 +1,6 @@
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { NavbarTest } from "./helpers";
+import { NavbarTest } from "../../tests/test.utils";
 
 afterEach(() => {
   jest.clearAllMocks();

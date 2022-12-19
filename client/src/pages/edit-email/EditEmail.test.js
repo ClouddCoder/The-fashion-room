@@ -1,6 +1,6 @@
 import userEvent from "@testing-library/user-event";
 import { screen } from "@testing-library/react";
-import { EditEmailTest } from "./helpers";
+import { EditEmailTest } from "../../tests/test.utils";
 
 describe.skip("EditEmail component", () => {
   it("Should render inputs", () => {

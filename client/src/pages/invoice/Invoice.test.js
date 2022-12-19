@@ -1,6 +1,6 @@
 import userEvent from "@testing-library/user-event";
 import { screen } from "@testing-library/react";
-import { InvoiceTest, productProps } from "./helpers";
+import { InvoiceTest, productProps } from "../../tests/test.utils";
 
 afterEach(() => {
   jest.clearAllMocks();

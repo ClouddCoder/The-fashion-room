@@ -35,7 +35,7 @@ router.put("/buy", buyProduct);
 
 router.get("/catalogue", getAllProducts);
 
-router.get("/product", getProductVariants);
+router.get("/product-variants", getProductVariants);
 
 router.post("/set-wishlist", setWishlist);
 

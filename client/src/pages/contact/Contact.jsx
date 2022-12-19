@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
-import axios from "axios";
+import { getStoreInformation, getStorePhones } from "../../services/store";
 import StoreInfo from "./components/StoreInfo";
 import Layout from "../../components/layout/Layout";
 
@@ -16,7 +16,7 @@ function Contact() {
    */
   const loadStores = async () => {
     try {
-      const response = await axios.get("http://localhost:3050/api/stores");
+      const response = await getStoreInformation();
       const { data } = response;
       getStores(data);
     } catch (error) {
@@ -29,7 +29,7 @@ function Contact() {
    */
   const loadStoresPhones = async () => {
     try {
-      const response = await axios.get("http://localhost:3050/api/stores/phones");
+      const response = await getStorePhones();
       const { data } = response;
 
       // Groups the phone by their store's name.

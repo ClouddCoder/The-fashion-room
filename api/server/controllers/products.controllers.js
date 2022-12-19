@@ -5,8 +5,7 @@ const { getAuthorization } = require("./helpers");
 config();
 
 /**
- * Gets the information of the products with one variant to show them
- * on the main category.
+ * Gets the information of the products with one variant, given a category.
  */
 const getAllProducts = async (req, res, next) => {
   const { category } = req.query;
@@ -210,7 +209,7 @@ const getStoresPhones = async (req, res, next) => {
 };
 
 /**
- * Gets the user's order information.
+ * Gets the user's orders information.
  */
 const getOrderDetail = async (req, res, next) => {
   let query = "SELECT oi.order_detail_id, oi.order_item_id, oi.item_total_cost, ";

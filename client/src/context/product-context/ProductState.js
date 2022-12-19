@@ -1,8 +1,15 @@
 /* eslint-disable no-use-before-define */
 import React, { useReducer, useContext, useMemo } from "react";
-import axios from "axios";
 import AuthContext from "../auth-context/AuthContext";
 import ProductContext from "./ProductContext";
+import {
+  getProductsByCategory,
+  getVariantsOfTheProduct,
+  getUserWishlist,
+  handleUserWish,
+  getUserPurchases,
+  removeUserPurchase,
+} from "../../services/product";
 import { productInitialState, ProductReducer } from "./productReducer";
 import { TYPES } from "../../actions/productActions";
 
@@ -29,15 +36,11 @@ function ProductState({ children }) {
   };
 
   /**
-   * Gets all variant's products.
+   * Gets all products from a category.
    */
   const loadProducts = async (category) => {
     try {
-      const response = await axios.get("http://localhost:3050/api/catalogue", {
-        params: {
-          category,
-        },
-      });
+      const response = await getProductsByCategory(category);
 
       const { data } = response;
       getProductNameCapitalized(data);
@@ -52,11 +55,7 @@ function ProductState({ children }) {
    */
   const getProductVariants = async (id) => {
     try {
-      const response = await axios.get("http://localhost:3050/api/product", {
-        params: {
-          id,
-        },
-      });
+      const response = await getVariantsOfTheProduct(id);
 
       const { data } = response;
       getProductNameCapitalized(data);
@@ -133,11 +132,7 @@ function ProductState({ children }) {
    */
   const getWishlist = async () => {
     try {
-      const response = await axios.get("http://localhost:3050/api/wishlist", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await getUserWishlist(token);
       const { data } = response;
       getProductNameCapitalized(data);
       dispatch({ type: TYPES.GET_WISHLIST, payload: data });
@@ -148,22 +143,10 @@ function ProductState({ children }) {
 
   /**
    * Adds or removes a product from the wishlist.
-   * Also updates wishlist's state.
    */
   const handleWish = async (product, remove = false) => {
     try {
-      await axios.post(
-        "http://localhost:3050/api/set-wishlist",
-        {
-          productId: product,
-          remove,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
+      await handleUserWish(token, product, remove);
 
       if (remove) {
         dispatch({ type: TYPES.REMOVE_FROM_WISHLIST, payload: product });
@@ -194,15 +177,11 @@ function ProductState({ children }) {
   };
 
   /**
-   * Gets the purchase information made by the user.
+   * Gets the user's purchases.
    */
   const loadOrderDetail = async () => {
     try {
-      const response = await axios.get("http://localhost:3050/api/order-detail", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await getUserPurchases(token);
       const { data } = response;
       getProductNameCapitalized(data);
       dispatch({ type: TYPES.GET_MY_ORDERS, payload: data });
@@ -216,15 +195,8 @@ function ProductState({ children }) {
    */
   const removeOrder = async (product) => {
     try {
-      axios.delete("http://localhost:3050/api/remove-order", {
-        data: {
-          orderDetailId: product.order_item_id,
-        },
+      await removeUserPurchase(token, product.order_item_id);
 
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
       dispatch({
         type: TYPES.REMOVE_AN_ORDER,
         payload: product.order_item_id,
