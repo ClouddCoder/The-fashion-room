@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Layout from "../../components/layout/Layout";
+import Modal from "../../components/modal/Modal";
 import { changeUserPassword, getUserId } from "../../services/user";
 import useUserInput from "../../hooks/useUserInput";
 import usePasswordLength from "../../hooks/usePasswordLength";
@@ -12,6 +13,7 @@ import "./EditPassword.css";
 function EditPassword() {
   const [userId, setUserId] = useState("");
   const [success, setSuccess] = useState(false); // If the user's email exists, turns true.
+  const [open, setOpen] = useState(false); // Opens the modal.
   const { error, setInputError } = useError();
   const userEmail = useUserInput();
   const userCurrentPassword = useUserInput();
@@ -27,7 +29,7 @@ function EditPassword() {
       try {
         await changeUserPassword(userId, userCurrentPassword.input, userNewPassword.input);
         console.log("Contraseña actualizada");
-        navigate("/");
+        setOpen(true);
       } catch (err) {
         const { response } = err;
         const { data } = response;
@@ -89,7 +91,7 @@ function EditPassword() {
         <form onSubmit={handleSubmitEmail}>
           <TextField
             error={error.constraint === "email"}
-            helperText={error.constraint === "email" && error.errorMessage}
+            helperText={error.constraint === "email" && error.message}
             onChange={handleChange}
             name="email"
             variant="outlined"
@@ -110,7 +112,7 @@ function EditPassword() {
           <form onSubmit={handleSubmitPassword}>
             <TextField
               error={error.constraint === "currentPassword"}
-              helperText={error.constraint === "currentPassword" && error.errorMessage}
+              helperText={error.constraint === "currentPassword" && error.message}
               onChange={handleChange}
               name="currentPassword"
               variant="outlined"
@@ -122,7 +124,7 @@ function EditPassword() {
             <TextField
               error={password.shortPassword || error.constraint === "newPassword"}
               helperText={
-                error.constraint === "newPassword" ? error.errorMessage : password.errorMessage
+                error.constraint === "newPassword" ? error.message : password.errorMessage
               }
               onChange={handleChange}
               name="newPassword"
@@ -136,6 +138,11 @@ function EditPassword() {
               Actualizar
             </Button>
           </form>
+          <Modal state={open}>
+            <button type="button" onClick={() => setOpen(false)}>
+              Hola mundo
+            </button>
+          </Modal>
         </div>
       )}
     </Layout>
