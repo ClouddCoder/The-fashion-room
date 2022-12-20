@@ -4,54 +4,20 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Layout from "../../components/layout/Layout";
 import { changeUserPassword, getUserId } from "../../services/user";
+import useUserInput from "../../hooks/useUserInput";
+import usePasswordLength from "../../hooks/usePasswordLength";
+import useError from "../../hooks/useError";
 import "./EditPassword.css";
 
-// Custom hook to get the user's password
-const usePassword = () => {
-  const [password, setPassword] = useState("");
-
-  const getPassword = (input) => setPassword(input);
-
-  return {
-    password,
-    getPassword,
-  };
-};
-
-// Custom hook to check if the user's password is less than
-// or equal to 4 characters
-const usePasswordLength = () => {
-  const [password, setPassword] = useState({ shortPassword: false, errorMessage: "" });
-
-  const checkPasswordLength = (response) => setPassword(response);
-
-  return {
-    password,
-    checkPasswordLength,
-  };
-};
-
-// Custom hook to get the user's email
-const useEmail = () => {
-  const [email, setEmail] = useState("");
-
-  const getEmail = (input) => setEmail(input);
-
-  return {
-    email,
-    getEmail,
-  };
-};
-
 function EditPassword() {
-  const [error, setError] = useState({ constraint: "", errorMessage: "" });
   const [userId, setUserId] = useState("");
-  const [success, setSuccess] = useState(false);
-  const navigate = useNavigate();
-  const { email, getEmail } = useEmail();
-  const currentPassword = usePassword();
-  const newPassword = usePassword();
+  const [success, setSuccess] = useState(false); // If the user's email exists, turns true.
+  const { error, setInputError } = useError();
+  const userEmail = useUserInput();
+  const userCurrentPassword = useUserInput();
+  const userNewPassword = useUserInput();
   const { password, checkPasswordLength } = usePasswordLength();
+  const navigate = useNavigate();
 
   // Sends the user's new password to change the current one using the user's id.
   const handleSubmitPassword = async (e) => {
@@ -59,14 +25,14 @@ function EditPassword() {
 
     if (!password.shortPassword) {
       try {
-        await changeUserPassword(userId, currentPassword.password, newPassword.password);
+        await changeUserPassword(userId, userCurrentPassword.input, userNewPassword.input);
         console.log("Contraseña actualizada");
         navigate("/");
       } catch (err) {
         const { response } = err;
         const { data } = response;
         const { message, constraint } = data;
-        setError({ constraint, errorMessage: message });
+        setInputError({ constraint, message });
       }
     }
   };
@@ -77,7 +43,7 @@ function EditPassword() {
     e.preventDefault();
 
     try {
-      const res = await getUserId(email);
+      const res = await getUserId(userEmail.input);
 
       const { data } = res;
       setUserId(data.userId);
@@ -86,18 +52,18 @@ function EditPassword() {
       const { response } = err;
       const { data } = response;
       const { message } = data;
-      setError({ constraint: "email", errorMessage: message });
+      setInputError({ constraint: "email", message });
     }
   };
 
   const handleChange = (e) => {
-    setError({ constraint: "", errorMessage: "" });
+    setInputError({ constraint: "", message: "" });
     switch (e.target.name) {
       case "email":
-        getEmail(e.target.value);
+        userEmail.setUserInput(e.target.value);
         break;
       case "currentPassword":
-        currentPassword.getPassword(e.target.value);
+        userCurrentPassword.setUserInput(e.target.value);
         break;
       case "newPassword":
         if (e.target.value.length <= 4) {
@@ -108,7 +74,7 @@ function EditPassword() {
         } else {
           checkPasswordLength({ shortPassword: false, errorMessage: "" });
         }
-        newPassword.getPassword(e.target.value);
+        userNewPassword.setUserInput(e.target.value);
         break;
       default:
     }
@@ -128,7 +94,7 @@ function EditPassword() {
             name="email"
             variant="outlined"
             label="Email"
-            value={email}
+            value={userEmail.input}
             sx={{ margin: ".5rem 0", width: "100%" }}
           />
           <Button variant="contained" color="secondary" type="submit" fullWidth>
@@ -150,7 +116,7 @@ function EditPassword() {
               variant="outlined"
               label="Contraseña actual"
               type="password"
-              value={currentPassword.password}
+              value={userCurrentPassword.input}
               sx={{ margin: ".5rem 0", width: "100%" }}
             />
             <TextField
@@ -163,7 +129,7 @@ function EditPassword() {
               variant="outlined"
               label="Contraseña nueva"
               type="password"
-              value={newPassword.password}
+              value={userNewPassword.input}
               sx={{ margin: ".5rem 0", width: "100%" }}
             />
             <Button variant="contained" color="secondary" type="submit" fullWidth>

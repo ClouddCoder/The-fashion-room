@@ -13,6 +13,7 @@ import Footer from "../components/footer/Footer";
 import Product from "../pages/product/Product";
 import EditEmail from "../pages/edit-email/EditEmail";
 import EditAddress from "../pages/edit-address/EditAddress";
+import EditPassword from "../pages/edit-password/EditPassword";
 
 // AuthContext props for testing components.
 export const authContextProps = {
@@ -155,6 +156,23 @@ export const mockStorePhone = [
   ],
 ];
 
+export const mockCustomers = [
+  {
+    customer_id: 1,
+    customer_name: "carlos",
+    customer_lastname: "vargas",
+    customer_email: "carlos",
+    customer_password: "1234",
+  },
+  {
+    customer_id: 2,
+    customer_name: "luna",
+    customer_lastname: "cortes",
+    customer_email: "luna",
+    customer_password: "12345",
+  },
+];
+
 // Renders login component
 export function LoginTest() {
   return render(
@@ -284,6 +302,19 @@ export function EditAddressTest() {
       <ProductContext.Provider value={productProductContextProps}>
         <Router>
           <EditAddress />
+        </Router>
+      </ProductContext.Provider>
+    </AuthContext.Provider>,
+  );
+}
+
+// Renders EditPassword component.
+export function EditPasswordTest() {
+  return render(
+    <AuthContext.Provider value={authContextProps}>
+      <ProductContext.Provider value={productProductContextProps}>
+        <Router>
+          <EditPassword />
         </Router>
       </ProductContext.Provider>
     </AuthContext.Provider>,
