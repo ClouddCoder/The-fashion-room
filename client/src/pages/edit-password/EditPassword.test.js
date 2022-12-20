@@ -32,14 +32,27 @@ describe("EditPassword component", () => {
     expect(inputEmail).toHaveValue("brayan");
   });
 
-  it("Should get the user's id after submit the email and render the password inputs", async () => {
+  it("Should hide the input email after sending the email", async () => {
     getUserId.mockReturnValue({ data: { userId: 1 } });
     const user = userEvent.setup();
     EditPasswordTest();
     const button = screen.getByRole("button", { name: "Continuar" });
     await user.click(button);
-    const passwordInput = await screen.findByRole("textbox", { name: "Email" });
-    expect(passwordInput).toBeInTheDocument();
-    expect(screen.getByRole("textbox", { name: "Contraseña nueva" })).toBeInTheDocument();
+    const emailInput = screen.getByRole("textbox", { name: "Email" });
+    const emailInputClosestForm = emailInput.closest("form");
+    const emailInputClosestFormParent = emailInputClosestForm.parentNode;
+    expect(emailInputClosestFormParent.className).toMatch(/hidden/);
+  });
+
+  it("Should render the password inputs after submiting the email", async () => {
+    getUserId.mockReturnValue({ data: { userId: 1 } });
+    const user = userEvent.setup();
+    EditPasswordTest();
+    const button = screen.getByRole("button", { name: "Continuar" });
+    await user.click(button);
+    const currentPasswordInput = screen.getByLabelText(/Contraseña actual/);
+    expect(currentPasswordInput).toBeInTheDocument();
+    const newPasswordInput = screen.getByLabelText(/Contraseña nueva/);
+    expect(newPasswordInput).toBeInTheDocument();
   });
 });
