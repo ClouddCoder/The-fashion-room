@@ -10,7 +10,7 @@ import CustomTypography from "../custom-typography/CustomTypography";
  */
 function Footer() {
   const titleProps = {
-    variant: "body1",
+    variant: "body2",
     sx: { FontSize: "14px", fontWeight: "bold", color: "var(--color-primary-white)" },
   };
 

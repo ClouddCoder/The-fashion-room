@@ -19,7 +19,7 @@ export function changeUserEmail(email, newEmail, token) {
  * Requests the API to change the user's password
  */
 export function changeUserPassword(userId, currentPassword, newPassword) {
-  return instance.put("/edit/password", {
+  return instance.put("/edit-password", {
     userId,
     currentPassword,
     newPassword,

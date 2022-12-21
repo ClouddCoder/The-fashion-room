@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
 import Layout from "../../components/layout/Layout";
 import Modal from "../../components/modal/Modal";
 import { changeUserPassword, getUserId } from "../../services/user";
@@ -84,27 +85,7 @@ function EditPassword() {
 
   return (
     <Layout>
-      <div className={`email-input ${success && "email-input--hidden"}`}>
-        <div className="email-input__title">
-          <h1>Escribe tu correo</h1>
-        </div>
-        <form onSubmit={handleSubmitEmail}>
-          <TextField
-            error={error.constraint === "email"}
-            helperText={error.constraint === "email" && error.message}
-            onChange={handleChange}
-            name="email"
-            variant="outlined"
-            label="Email"
-            value={userEmail.input}
-            sx={{ margin: ".5rem 0", width: "100%" }}
-          />
-          <Button variant="contained" color="secondary" type="submit" fullWidth>
-            Continuar
-          </Button>
-        </form>
-      </div>
-      {success && (
+      {success ? (
         <div className="password-inputs">
           <div className="password-inputs__title">
             <h1>Cambiar contraseña</h1>
@@ -139,10 +120,55 @@ function EditPassword() {
             </Button>
           </form>
           <Modal state={open}>
-            <button type="button" onClick={() => setOpen(false)}>
-              Hola mundo
-            </button>
+            <Grid
+              container
+              direction="column"
+              alignItems="center"
+              justifyContent="center"
+              sx={{ height: "100%" }}
+              spacing={2}
+            >
+              <Grid item>
+                <h1 className="modal-window__title">Contraseña actualizada</h1>
+              </Grid>
+              <Grid item>
+                <span>Inicia sesión para ver los cambios</span>
+              </Grid>
+              <Grid item>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={() => {
+                    setOpen(false);
+                    navigate("/login");
+                  }}
+                >
+                  Aceptar
+                </Button>
+              </Grid>
+            </Grid>
           </Modal>
+        </div>
+      ) : (
+        <div className="email-input">
+          <div className="email-input__title">
+            <h1>Escribe tu correo</h1>
+          </div>
+          <form onSubmit={handleSubmitEmail}>
+            <TextField
+              error={error.constraint === "email"}
+              helperText={error.constraint === "email" && error.message}
+              onChange={handleChange}
+              name="email"
+              variant="outlined"
+              label="Email"
+              value={userEmail.input}
+              sx={{ margin: ".5rem 0", width: "100%" }}
+            />
+            <Button variant="contained" color="secondary" type="submit" fullWidth>
+              Continuar
+            </Button>
+          </form>
         </div>
       )}
     </Layout>
