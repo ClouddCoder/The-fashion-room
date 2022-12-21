@@ -6,7 +6,7 @@ import CardMedia from "@mui/material/CardMedia";
 import { CardActionArea } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import { getProductImage } from "../../../assets";
-import CustomWishlistButton from "./sub-components/CustomWishlistButton";
+import CustomWishlistButton from "./CustomWishlistButton";
 import CustomTypography from "../../../components/custom-typography/CustomTypography";
 
 /**

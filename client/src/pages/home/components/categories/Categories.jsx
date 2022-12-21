@@ -1,7 +1,7 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
 import { getProductImage } from "../../../../assets";
-import Category from "../sub-components/Category";
+import Category from "../category/Category";
 import "./Categories.css";
 
 /**

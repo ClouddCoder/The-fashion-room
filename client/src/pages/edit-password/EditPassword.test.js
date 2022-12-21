@@ -12,7 +12,7 @@ afterEach(() => {
   jest.clearAllMocks();
 });
 
-describe("EditPassword component", () => {
+describe.skip("EditPassword component", () => {
   it("Should render the email input", () => {
     EditPasswordTest();
     expect(screen.getByLabelText("Email")).toBeInTheDocument();

@@ -2,8 +2,8 @@ import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import IconButton from "@mui/material/IconButton";
 import CustomFavIcon from "./CustomFavIcon";
-import AuthContext from "../../../../context/auth-context/AuthContext";
-import ProductContext from "../../../../context/product-context/ProductContext";
+import AuthContext from "../../../context/auth-context/AuthContext";
+import ProductContext from "../../../context/product-context/ProductContext";
 
 function CustomWishlistButton({ product }) {
   const { auth } = useContext(AuthContext);
@@ -45,7 +45,7 @@ function CustomWishlistButton({ product }) {
     // and can add the product.
     return (
       <IconButton
-        aria-label={`Add ${product.product_name} to wishlist`}
+        aria-label={product.product_name}
         component="span"
         onClick={() => {
           handleWish(product.product_id);

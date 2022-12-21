@@ -31,7 +31,7 @@ function Catalogue() {
   }, []);
 
   useEffect(() => {
-    if (auth) getWishlist();
+    getWishlist();
   }, []);
 
   const handleChange = (e) => {
