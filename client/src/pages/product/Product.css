@@ -1,12 +1,18 @@
 .product-variant-colors {
   display: flex;
-  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 150px;
 }
 
 .product-variant-colors li {
   list-style: none;
   cursor: pointer;
   margin-right: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 35px;
 }
 
 .product-color div {

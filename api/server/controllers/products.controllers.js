@@ -1,8 +1,5 @@
-const { config } = require("dotenv");
 const pool = require("../db");
 const { getAuthorization } = require("./helpers");
-
-config();
 
 /**
  * Gets the information of the products with one variant, given a category.

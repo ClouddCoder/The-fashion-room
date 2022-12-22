@@ -32,15 +32,15 @@ function Product() {
   const product = variants.find((item) => item.variant_id === variantId) || [];
 
   /**
-   * Event delegation to handle the click on the variants.
+   * Event delegation to change the color of the variant's button border
    */
-  const handleChange = (e) => {
-    if (e.target.matches(".product-color div") || e.target.matches(".product-color span")) {
-      const parent = e.target.closest("li");
-      setVariantId(parent.getAttribute("name"));
-    } else if (e.target.matches(".product-color")) {
+  const changeButtonBorderColor = (e) => {
+    if (e.target.matches(".product-color")) {
       setVariantId(e.target.getAttribute("name"));
     }
+
+    const parent = e.target.closest("li");
+    setVariantId(parent.getAttribute("name"));
   };
 
   const handleBuyProduct = () => {
@@ -85,21 +85,17 @@ function Product() {
             <CustomTypography variant="body2">Color:</CustomTypography>
           </Grid>
           <Grid item>
-            <ul className="product-variant-colors">
+            {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
+            <ul className="product-variant-colors" onClick={changeButtonBorderColor}>
               {variants?.map((variant, index) => (
-                // eslint-disable-next-line max-len
-                // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions
                 <li
                   name={variant.variant_id}
                   className={`product-color${
                     variantId === variant.variant_id ? " selected" : ""
                   }`}
                   key={index}
-                  onClick={handleChange}
                 >
-                  <div>
-                    <span>{variant.color_value}</span>
-                  </div>
+                  <span>{variant.color_value}</span>
                 </li>
               ))}
             </ul>
