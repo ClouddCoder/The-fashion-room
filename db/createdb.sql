@@ -58,6 +58,7 @@ CREATE TABLE customer (
     customer_lastname VARCHAR(25),
     customer_email VARCHAR(40) UNIQUE,
     customer_password VARCHAR(100),
+    customer_phone VARCHAR(25),
     CONSTRAINT pk_customer PRIMARY KEY (customer_id),
     CONSTRAINT check_not_null_name CHECK (customer_name IS NOT NULL),
     CONSTRAINT check_not_empty_name CHECK (customer_name <> ''),
@@ -108,7 +109,7 @@ CREATE TABLE store (
 -- Contains store's phone numbers.
 CREATE TABLE store_phone (
     store_nit INTEGER,
-    phone BIGINT NOT NULL,
+    phone VARCHAR(25) NOT NULL,
     CONSTRAINT pk_store_phone PRIMARY KEY (store_nit, phone),
     CONSTRAINT fk_store_phone_store_nit FOREIGN KEY (store_nit) REFERENCES store(store_nit)
 );

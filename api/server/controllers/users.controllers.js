@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { config } = require("dotenv");
 const pool = require("../db");
+const { getAuthorization } = require("./helpers");
 
 config();
 const jwtPassword = process.env.JWT_PASSWORD;
@@ -103,7 +104,30 @@ const registerUser = async (req, res, next) => {
 };
 
 /**
- * Updates the user's password when the user forgot it
+ * Updates the user's email
+ */
+const updateEmail = async (req, res, next) => {
+  const { newEmail, token } = req.body;
+  const query = "UPDATE customer SET customer_email = $1 WHERE customer_id = $2;";
+  const decodeToken = getAuthorization(token);
+
+  /*
+  if (decodeToken.code) {
+    return res.status(decodeToken.code).json({ message: decodeToken.message });
+  }
+*/
+  const values = [newEmail];
+
+  try {
+    await pool.query(query, values);
+    return res.json({ message: "Email actualizado con éxito" });
+  } catch (error) {
+    next(error);
+  }
+};
+
+/**
+ * Updates the user's password when the user forgets it
  */
 const updatePassword = async (req, res, next) => {
   const { userId, currentPassword, newPassword } = req.body;
@@ -187,6 +211,7 @@ const getUserId = async (req, res, next) => {
 module.exports = {
   loginUser,
   registerUser,
+  updateEmail,
   updatePassword,
   getUserId,
 };

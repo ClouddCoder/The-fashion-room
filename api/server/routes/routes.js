@@ -2,6 +2,7 @@ const { Router } = require("express");
 const {
   loginUser,
   registerUser,
+  updateEmail,
   updatePassword,
   getUserId,
 } = require("../controllers/users.controllers");
@@ -28,6 +29,8 @@ router.post("/login", loginUser);
 router.post("/register", registerUser);
 
 router.get("/user-id", getUserId);
+
+router.put("/edit-email", updateEmail);
 
 router.put("/edit-password", updatePassword);
 

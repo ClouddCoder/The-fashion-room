@@ -3,10 +3,10 @@ import instance from "./api";
 /**
  * Requests the API to change the user's email
  */
-export function changeUserEmail(email, newEmail, token) {
+export function changeUserEmail(newEmail, token) {
   return instance.put(
     "/edit-email",
-    { email, newEmail },
+    { newEmail },
     {
       headers: {
         Authorization: `Bearer ${token}`,

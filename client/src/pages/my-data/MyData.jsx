@@ -53,7 +53,7 @@ function MyData() {
                   <CustomTypography variant="h6" sx={{ fontWeight: "bold" }}>
                     Teléfono de contacto
                   </CustomTypography>
-                  <CustomTypography variant="body2">3183899776</CustomTypography>
+                  <CustomTypography variant="body2">Agrega un teléfono</CustomTypography>
                 </div>
               </Link>
             </li>

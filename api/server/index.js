@@ -16,11 +16,17 @@ app.use(cors());
 app.use(routes);
 
 /**
- * Set the requests, responses and custom error messages.
+ * Set the requests, responses and custom error messages
  */
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
-  const constraint = err.constraint.split("_")[3];
+  // If it is a database error, the error object will return a constraint
+  let constraint;
+  if (err.constraint) {
+    // The third part of the constraint is the name of the field
+    // eslint-disable-next-line prefer-destructuring
+    constraint = err.constraint.split("_")[3];
+  }
 
   if (err.code === "23502") {
     return res.status(404).json({

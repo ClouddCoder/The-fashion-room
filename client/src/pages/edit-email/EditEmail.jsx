@@ -6,11 +6,12 @@ import { changeUserEmail } from "../../services/user";
 import AuthContext from "../../context/auth-context/AuthContext";
 import CustomTypography from "../../components/custom-typography/CustomTypography";
 import Layout from "../../components/layout/Layout";
+import useUserInput from "../../hooks/useUserInput";
 import "./EditEmail.css";
 
 function EditEmail() {
-  const [email, setEmail] = useState("");
-  const [newEmail, setNewEmail] = useState("");
+  const { input, setUserInput } = useUserInput();
+  const [success, setSuccess] = useState(false);
   const { token } = useContext(AuthContext);
 
   /**
@@ -19,23 +20,16 @@ function EditEmail() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await changeUserEmail(email, newEmail, token);
-      console.log(response.data);
+      const res = await changeUserEmail(input, token);
+      console.log(res.data);
+      setSuccess(true);
     } catch (error) {
       console.log(error);
     }
   };
 
   const handleChange = (e) => {
-    switch (e.target.name) {
-      case "email":
-        setEmail(e.target.value);
-        break;
-      case "newEmail":
-        setNewEmail(e.target.value);
-        break;
-      default:
-    }
+    setUserInput(e.target.value);
   };
 
   return (
@@ -46,35 +40,33 @@ function EditEmail() {
             Editar email
           </CustomTypography>
         </Grid>
-        <form onSubmit={handleSubmit}>
-          <div className="email-input">
-            <CustomTypography variant="body2">Email anterior</CustomTypography>
-            <TextField
-              inputProps={{ "aria-label": "email" }}
-              hiddenLabel
-              fullWidth
-              onChange={handleChange}
-              variant="filled"
-              size="small"
-            />
-          </div>
-          <div className="email-input">
-            <CustomTypography variant="body2">Email nuevo</CustomTypography>
-            <TextField
-              inputProps={{ "aria-label": "newEmail" }}
-              hiddenLabel
-              fullWidth
-              onChange={handleChange}
-              variant="filled"
-              size="small"
-            />
-          </div>
-          <div>
-            <Button variant="contained" color="secondary" type="submit">
-              Login
-            </Button>
-          </div>
-        </form>
+        <Grid item>
+          <form onSubmit={handleSubmit}>
+            <div className="email-input">
+              <CustomTypography variant="body2">Email nuevo</CustomTypography>
+              <TextField
+                inputProps={{ "aria-label": "newEmail" }}
+                hiddenLabel
+                fullWidth
+                onChange={handleChange}
+                variant="filled"
+                size="small"
+              />
+            </div>
+            <div>
+              <Button variant="contained" color="secondary" type="submit">
+                Cambiar
+              </Button>
+            </div>
+          </form>
+        </Grid>
+        {success && (
+          <Grid item>
+            <CustomTypography variant="body2">
+              El email se ha cambiado correctamente
+            </CustomTypography>
+          </Grid>
+        )}
       </Grid>
     </Layout>
   );
