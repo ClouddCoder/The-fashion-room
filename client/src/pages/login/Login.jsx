@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -6,12 +6,13 @@ import Grid from "@mui/material/Grid";
 import Form from "../../components/form/Form";
 import CustomTypography from "../../components/custom-typography/CustomTypography";
 import AuthContext from "../../context/auth-context/AuthContext";
+import useError from "../../hooks/useError";
 
 /**
  * This component renders the login form
  */
 function Login() {
-  const [error, setError] = useState({ error: false, errorMessage: "" });
+  const { error, setInputError } = useError();
   const {
     setAuth,
     setUserId,
@@ -54,7 +55,7 @@ function Login() {
         // Saves the token to localStorasge
         window.localStorage.setItem("logged", JSON.stringify(data));
       } else {
-        setError({ error: true, errorMessage: data.message });
+        setInputError({ ...error, error: true, errorMessage: data.message });
         throw new Error(data.message);
       }
     } catch (err) {
@@ -66,13 +67,13 @@ function Login() {
    * Gets the email and password from the inputs
    */
   const handleChange = (e) => {
+    setInputError({ ...error, error: false, errorMessage: "" });
+
     switch (e.target.name) {
       case "userEmail":
-        setError({ error: false, errorMessage: "" });
         setUserEmail(e.target.value);
         break;
       case "userPassword":
-        setError({ error: false, errorMessage: "" });
         setUserPassword(e.target.value);
         break;
       default:

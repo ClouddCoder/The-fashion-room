@@ -1,10 +1,12 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Form from "../../components/form/Form";
 import AuthContext from "../../context/auth-context/AuthContext";
+import useError from "../../hooks/useError";
+import usePasswordLength from "../../hooks/usePasswordLength";
 
 /**
  * This component is responsible for registering a new user.
@@ -27,10 +29,10 @@ function Register() {
   } = useContext(AuthContext);
 
   // Checks if the user's name, lastname or email is empty
-  const [error, setError] = useState({ constraint: "", errorMessage: "" });
+  const { error, setInputError } = useError();
 
   // Checks if the user's password is less than or equal to 4 characters
-  const [errorPassword, setErrorPassword] = useState({ errorPassword: false, errorMessage: "" });
+  const { password, checkPasswordLength } = usePasswordLength();
   const navigate = useNavigate();
 
   /**
@@ -40,8 +42,8 @@ function Register() {
     e.preventDefault();
 
     // If the user submits the form with a password error, it will not be sent
-    if (!errorPassword.errorPassword) {
-      setErrorPassword({ errorPassword: false, errorMessage: "" });
+    if (!password.shortPassword) {
+      checkPasswordLength({ ...password, shortPassword: false, errorMessage: "" });
 
       try {
         const res = await fetch("http://localhost:3050/api/register", {
@@ -70,7 +72,7 @@ function Register() {
           navigate("/");
           window.localStorage.setItem("logged", JSON.stringify(data));
         } else {
-          setError({
+          setInputError({
             ...error,
             error: true,
             constraint: data.constraint,
@@ -90,7 +92,7 @@ function Register() {
    * when the user starts typing again.
    */
   const handleChange = (e) => {
-    setError({ ...error, error: false, constraint: "", errorMessage: "" });
+    setInputError({ ...error, error: false, constraint: "", errorMessage: "" });
     switch (e.target.name) {
       case "userName":
         setUserName(e.target.value);
@@ -103,13 +105,13 @@ function Register() {
         break;
       case "userPassword":
         if (e.target.value.length <= 4) {
-          setErrorPassword({
-            ...errorPassword,
-            errorPassword: true,
+          checkPasswordLength({
+            ...password,
+            shortPassword: true,
             errorMessage: "Debe tener más de 4 caracteres",
           });
         } else {
-          setErrorPassword({ ...errorPassword, errorPassword: false, errorMessage: "" });
+          checkPasswordLength({ ...password, shortPassword: false, errorMessage: "" });
         }
         setUserPassword(e.target.value);
         break;
@@ -159,9 +161,9 @@ function Register() {
           </Grid>
           <Grid item xs={12}>
             <TextField
-              error={error.constraint === "password" || errorPassword.errorPassword}
+              error={error.constraint === "password" || password.shortPassword}
               helperText={
-                error.constraint === "password" ? error.errorMessage : errorPassword.errorMessage
+                error.constraint === "password" ? error.errorMessage : password.errorMessage
               }
               onChange={handleChange}
               name="userPassword"

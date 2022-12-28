@@ -24,12 +24,15 @@ function Buy() {
     getTotalShippingCost,
     shippingCost,
   } = useContext(ProductContext);
+
   const { token } = useContext(AuthContext);
+
   const spanProps = {
     variant: "body2",
     component: "span",
     sx: { display: "block", m: "8px 0" },
   };
+
   const subtitleProps = { variant: "subtitle1", sx: { fontWeight: "bold" } };
 
   /**
