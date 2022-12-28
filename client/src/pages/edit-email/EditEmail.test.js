@@ -31,6 +31,7 @@ describe("EditEmail component", () => {
   });
 
   it("The new message should not render before user's email is updated", async () => {
+    changeUserEmail.mockRejectedValue(new Error("error"));
     const user = userEvent.setup();
     EditEmailTest();
     const button = screen.getByRole("button", { name: "Cambiar" });
@@ -39,7 +40,7 @@ describe("EditEmail component", () => {
   });
 
   it("Should update user's email", async () => {
-    changeUserEmail.mockReturnValue({ data: { message: "success" } });
+    changeUserEmail.mockResolvedValue({ data: { message: "success" } });
     const user = userEvent.setup();
     EditEmailTest();
     const button = screen.getByRole("button", { name: "Cambiar" });

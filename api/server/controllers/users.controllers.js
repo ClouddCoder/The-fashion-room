@@ -107,20 +107,28 @@ const registerUser = async (req, res, next) => {
  * Updates the user's email
  */
 const updateEmail = async (req, res, next) => {
-  const { newEmail, token } = req.body;
-  const query = "UPDATE customer SET customer_email = $1 WHERE customer_id = $2;";
-  const decodeToken = getAuthorization(token);
+  const { newEmail } = req.body;
+  const { authorization } = req.headers;
+  const updateEmailQuery = "UPDATE customer SET customer_email = $1 WHERE customer_id = $2;";
+  const getUserEmailquery = "SELECT customer_email FROM customer WHERE customer_id = $1;";
+  const decodeToken = getAuthorization(authorization);
 
-  /*
   if (decodeToken.code) {
     return res.status(decodeToken.code).json({ message: decodeToken.message });
   }
-*/
-  const values = [newEmail];
 
   try {
-    await pool.query(query, values);
-    return res.json({ message: "Email actualizado con éxito" });
+    const response = await pool.query(getUserEmailquery, [decodeToken.userId]);
+    const userCurrentEmail = response.rows[0].customer_email;
+
+    if (userCurrentEmail === newEmail) {
+      return res.status(406).json({
+        message: "El email debe ser diferente al actual",
+      });
+    }
+
+    await pool.query(updateEmailQuery, [newEmail, decodeToken.userId]);
+    return res.json({ message: "Email actualizado con éxito", email: userCurrentEmail });
   } catch (error) {
     next(error);
   }

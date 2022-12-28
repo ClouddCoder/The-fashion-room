@@ -20,11 +20,12 @@ function EditEmail() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await changeUserEmail(input, token);
-      console.log(res.data);
+      await changeUserEmail(input, token);
       setSuccess(true);
     } catch (error) {
-      console.log(error);
+      const { response } = error;
+      const { data } = response;
+      console.log(data.message);
     }
   };
 
