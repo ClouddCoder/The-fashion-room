@@ -57,6 +57,10 @@ const buyProduct = async (req, res, next) => {
   query += "WHERE variant_id = $2;";
   const decodeToken = getAuthorization(authorization);
 
+  if (decodeToken.code) {
+    return res.status(decodeToken.code).json({ message: decodeToken.message });
+  }
+
   try {
     /* eslint-disable no-await-in-loop */
     // eslint-disable-next-line no-restricted-syntax
@@ -77,14 +81,13 @@ const buyProduct = async (req, res, next) => {
 };
 
 /**
- * Creates new records in the database's wishlist table
- * every time the user adds a product to the wishlist.
+ * Creates or deletes records in the database's wishlist table
  */
 const setWishlist = async (req, res, next) => {
   const { productId, remove } = req.body;
   const { authorization } = req.headers;
-  const addQuery = "INSERT INTO wishlist (customer_id, product_id) VALUES ($1, $2);";
-  const removeQuery = "DELETE FROM wishlist WHERE customer_id = $1 AND product_id = $2;";
+  const addWishlistQuery = "INSERT INTO wishlist (customer_id, product_id) VALUES ($1, $2);";
+  const removeWishlistQuery = "DELETE FROM wishlist WHERE customer_id = $1 AND product_id = $2;";
   const decodeToken = getAuthorization(authorization);
 
   if (decodeToken.code) {
@@ -95,9 +98,9 @@ const setWishlist = async (req, res, next) => {
 
   try {
     if (!remove) {
-      await pool.query(addQuery, values);
+      await pool.query(addWishlistQuery, values);
     } else {
-      await pool.query(removeQuery, values);
+      await pool.query(removeWishlistQuery, values);
     }
     return res.json({ message: "success" });
   } catch (error) {
@@ -105,6 +108,9 @@ const setWishlist = async (req, res, next) => {
   }
 };
 
+/**
+ * Gets the wishlist of a customer.
+ */
 const getWishlist = async (req, res, next) => {
   const { authorization } = req.headers;
   let query = "SELECT DISTINCT ON (w.product_id) w.product_id, p.product_name, v.variant_id, ";

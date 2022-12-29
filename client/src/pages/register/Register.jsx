@@ -7,6 +7,7 @@ import Form from "../../components/form/Form";
 import AuthContext from "../../context/auth-context/AuthContext";
 import useError from "../../hooks/useError";
 import usePasswordLength from "../../hooks/usePasswordLength";
+import { registerUser } from "../../services/user";
 
 /**
  * This component is responsible for registering a new user.
@@ -46,16 +47,7 @@ function Register() {
       checkPasswordLength({ ...password, shortPassword: false, errorMessage: "" });
 
       try {
-        const res = await fetch("http://localhost:3050/api/register", {
-          method: "POST",
-          body: JSON.stringify({
-            userName,
-            userLastname,
-            userEmail,
-            userPassword,
-          }),
-          headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
-        });
+        const res = await registerUser(userName, userLastname, userEmail, userPassword);
         const data = await res.json();
 
         // Sets the user's data to login and deletes the data from the inputs

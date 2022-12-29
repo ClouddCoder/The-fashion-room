@@ -104,7 +104,7 @@ const registerUser = async (req, res, next) => {
 };
 
 /**
- * Updates the user's email
+ * Updates the email of the user
  */
 const updateEmail = async (req, res, next) => {
   const { newEmail } = req.body;
@@ -135,7 +135,7 @@ const updateEmail = async (req, res, next) => {
 };
 
 /**
- * Updates the user's password when the user forgets it
+ * Updates the password of the user when forgets it
  */
 const updatePassword = async (req, res, next) => {
   const { userId, currentPassword, newPassword } = req.body;

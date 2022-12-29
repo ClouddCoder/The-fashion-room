@@ -1,10 +1,10 @@
 import React, { useState, useContext } from "react";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
-import axios from "axios";
 import CustomTypography from "../../components/custom-typography/CustomTypography";
 import AuthContext from "../../context/auth-context/AuthContext";
 import Layout from "../../components/layout/Layout";
+import { editUserAddress } from "../../services/user";
 
 function EditAddress() {
   const [name, setName] = useState("");
@@ -16,11 +16,10 @@ function EditAddress() {
   const [number, setNumber] = useState("");
   const { token } = useContext(AuthContext);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = axios.put(
-      "http:localhost.3050/api/edit-address",
-      {
+    try {
+      const res = await editUserAddress(
         name,
         department,
         city,
@@ -28,13 +27,12 @@ function EditAddress() {
         streetType,
         street,
         number,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      },
-    );
+        token,
+      );
+      console.log(res.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleChange = (e) => {

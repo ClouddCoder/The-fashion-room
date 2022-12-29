@@ -48,18 +48,12 @@ function Product() {
     navigate("/buy");
   };
 
-  // Gets the product's variants information.
   useEffect(() => {
+    // Gets the product's variants information.
     getProductVariants(productId);
-  }, []);
-
-  // The variant that is fetched with the product will be the default one
-  // to check the variant's color button.
-  useEffect(() => {
+    // The variant that is fetched with the product will be the default one
+    // to check the variant's color button.
     setVariantId(productVariantId);
-  }, []);
-
-  useEffect(() => {
     clearListOfProductsToBuy();
   }, []);
 

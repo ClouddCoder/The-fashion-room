@@ -11,18 +11,11 @@ import Layout from "../../components/layout/Layout";
 function Orders() {
   const { loadOrderDetail, myOrders, clearProductsList } = useContext(ProductContext);
 
-  /**
-   * Clears the products list to avoid duplicates
-   * when the user wants to buy the product again.
-   */
   useEffect(() => {
+    // Clears the products list to avoid duplicates
+    // when the user wants to buy the product again.
     clearProductsList();
-  }, []);
-
-  /**
-   * Gets the orders made by the user.
-   */
-  useEffect(() => {
+    // Gets the orders made by the user.
     loadOrderDetail();
   }, []);
 

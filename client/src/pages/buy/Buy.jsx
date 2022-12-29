@@ -11,6 +11,7 @@ import AuthContext from "../../context/auth-context/AuthContext";
 import CustomTypography from "../../components/custom-typography/CustomTypography";
 import Layout from "../../components/layout/Layout";
 import ProductToBuy from "./components/ProductToBuy";
+import { makeThePurchase } from "../../services/product";
 import "./Buy.css";
 
 function Buy() {
@@ -36,21 +37,12 @@ function Buy() {
   const subtitleProps = { variant: "subtitle1", sx: { fontWeight: "bold" } };
 
   /**
-   * Updates the product's available quantity in the database after
-   * the purchase.
+   * Buys the products and updates the stock
    */
   // eslint-disable-next-line consistent-return
   const buyProducts = async () => {
     try {
-      const res = await fetch("http://localhost:3050/api/buy", {
-        method: "PUT",
-        body: JSON.stringify(productsToBuy),
-        headers: new Headers({
-          "Authorization": `Bearer ${token}`,
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-        }),
-      });
+      const res = await makeThePurchase(token, productsToBuy);
       const data = await res.json();
 
       if (res.ok) {
@@ -66,9 +58,6 @@ function Buy() {
   useEffect(() => {
     getTotalProducts(true);
     getTotalPrice();
-  }, []);
-
-  useEffect(() => {
     getTotalShippingCost();
   }, []);
 

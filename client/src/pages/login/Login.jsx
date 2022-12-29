@@ -7,6 +7,7 @@ import Form from "../../components/form/Form";
 import CustomTypography from "../../components/custom-typography/CustomTypography";
 import AuthContext from "../../context/auth-context/AuthContext";
 import useError from "../../hooks/useError";
+import { loginUser } from "../../services/user";
 
 /**
  * This component renders the login form
@@ -34,11 +35,7 @@ function Login() {
     e.preventDefault();
 
     try {
-      const res = await fetch("http://localhost:3050/api/login", {
-        method: "POST",
-        body: JSON.stringify({ userEmail, userPassword }),
-        headers: { "Content-Type": "application/json" },
-      });
+      const res = await loginUser(userEmail, userPassword);
       const data = await res.json();
 
       // Sets the user's data to login and deletes the data from the inputs
@@ -123,7 +120,7 @@ function Login() {
             <Grid item>
               <Link to="/register">
                 <CustomTypography variant="body2">
-                  Don't have an account? Sign Up
+                  Do not have an account? Sign Up
                 </CustomTypography>
               </Link>
             </Grid>

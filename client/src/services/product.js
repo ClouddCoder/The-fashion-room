@@ -75,3 +75,18 @@ export function removeUserPurchase(token, orderDetailId) {
     },
   });
 }
+
+/**
+ * Buys the products selected by the user
+ */
+export function makeThePurchase(token, productsToBuy) {
+  return fetch("http://localhost:3050/api/buy", {
+    method: "PUT",
+    body: JSON.stringify(productsToBuy),
+    headers: new Headers({
+      "Authorization": `Bearer ${token}`,
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+    }),
+  });
+}
