@@ -1,5 +1,5 @@
 import { screen } from "@testing-library/react";
-import { ContactTest, mockStores, mockStorePhone } from "../../tests/test.utils";
+import { StoreContactTest, mockStores, mockStorePhone } from "../../tests/test.utils";
 import { getStoreInformation, getStorePhones } from "../../services/store";
 
 /**
@@ -23,7 +23,7 @@ describe.skip("Contact component", () => {
     // https://www.robinwieruch.de/react-testing-library/}
     getStoreInformation.mockReturnValue({ data: mockStores });
     getStorePhones.mockReturnValue({ data: mockStorePhone });
-    ContactTest();
+    StoreContactTest();
     expect(await screen.findByText("Tienda 1")).toBeInTheDocument();
     expect(await screen.findByText(/123456789/)).toBeInTheDocument();
     expect(getStoreInformation).toHaveBeenCalledTimes(1);

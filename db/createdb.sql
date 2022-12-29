@@ -51,6 +51,18 @@ CREATE TABLE variant_color (
     CONSTRAINT fk_variant_color_color_id FOREIGN KEY (color_id) REFERENCES color (color_id)
 );
 
+-- Containes customer's and store's addresses.
+CREATE TABLE addresses (
+    address_id SERIAL,
+    department VARCHAR(25) NOT NULL,
+    city VARCHAR(25) NOT NULL,
+    neighborhood VARCHAR(25) NOT NULL,
+    street_name VARCHAR(25) NOT NULL,
+    street VARCHAR(25) NOT NULL,
+    street_number VARCHAR(25) NOT NULL,
+    CONSTRAINT pk_addresses PRIMARY KEY (address_id)
+);
+
 -- Contains all customers.
 CREATE TABLE customer (
     customer_id SERIAL,
@@ -102,7 +114,6 @@ CREATE TABLE order_item (
 CREATE TABLE store (
     store_nit INTEGER,
     store_name VARCHAR(30) NOT NULL CHECK (store_name <> ''),
-    store_address VARCHAR(30) NOT NULL CHECK (store_address <> ''),
     CONSTRAINT pk_store PRIMARY KEY (store_nit)
 );
 
@@ -112,4 +123,22 @@ CREATE TABLE store_phone (
     phone VARCHAR(25) NOT NULL,
     CONSTRAINT pk_store_phone PRIMARY KEY (store_nit, phone),
     CONSTRAINT fk_store_phone_store_nit FOREIGN KEY (store_nit) REFERENCES store(store_nit)
+);
+
+-- Joining table for customer and addresses.
+CREATE TABLE customer_address (
+    customer_id INTEGER,
+    address_id INTEGER,
+    CONSTRAINT pk_customer_address PRIMARY KEY (customer_id, address_id),
+    CONSTRAINT fk_customer_address_customer_id FOREIGN KEY (customer_id) REFERENCES customer(customer_id),
+    CONSTRAINT fk_customer_address_address_id FOREIGN KEY (address_id) REFERENCES addresses(address_id)
+);
+
+-- Joining table for store and addresses.
+CREATE TABLE store_address (
+    store_nit INTEGER,
+    address_id INTEGER,
+    CONSTRAINT pk_store_address PRIMARY KEY (store_nit, address_id),
+    CONSTRAINT fk_store_address_store_nit FOREIGN KEY (store_nit) REFERENCES store(store_nit),
+    CONSTRAINT fk_store_address_address_id FOREIGN KEY (address_id) REFERENCES addresses(address_id)
 );

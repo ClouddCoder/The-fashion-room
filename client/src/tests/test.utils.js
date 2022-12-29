@@ -5,7 +5,7 @@ import AuthContext from "../context/auth-context/AuthContext";
 import ProductContext from "../context/product-context/ProductContext";
 import Login from "../pages/login/Login";
 import Catalogue from "../pages/catalogue/Catalogue";
-import Contact from "../pages/contact/Contact";
+import StoreContact from "../pages/store-contact/StoreContact";
 import Home from "../pages/home/Home";
 import Invoice from "../pages/invoice/Invoice";
 import Navbar from "../components/navbar/Navbar";
@@ -200,12 +200,12 @@ export function CatalogueTest() {
 }
 
 // Renders contact component.
-export function ContactTest() {
+export function StoreContactTest() {
   return render(
     <AuthContext.Provider value={authContextProps}>
       <ProductContext.Provider value={productContextProps}>
         <Router>
-          <Contact />
+          <StoreContact />
         </Router>
       </ProductContext.Provider>
     </AuthContext.Provider>,

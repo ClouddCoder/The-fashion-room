@@ -35,7 +35,7 @@ function EditEmail() {
 
   return (
     <Layout>
-      <Grid container direction="column">
+      <Grid container direction="column" sx={{ width: "auto" }}>
         <Grid item>
           <CustomTypography variant="h3" sx={{ fontWeight: "bold" }}>
             Editar email
@@ -50,7 +50,7 @@ function EditEmail() {
                 hiddenLabel
                 fullWidth
                 onChange={handleChange}
-                variant="filled"
+                variant="outlined"
                 size="small"
               />
             </div>

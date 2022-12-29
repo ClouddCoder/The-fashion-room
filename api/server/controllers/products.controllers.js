@@ -3,6 +3,7 @@ const { getAuthorization } = require("./helpers");
 
 /**
  * Gets the information of the products with one variant, given a category.
+ * The variant chosen is the one with the lowest price.
  */
 const getAllProducts = async (req, res, next) => {
   const { category } = req.query;
@@ -193,9 +194,27 @@ const getStores = async (req, res, next) => {
 };
 
 /**
+ * Gets the store's address.
+ */
+const getStoreAddress = async (req, res, next) => {
+  const { storeNit } = req.query;
+  let query = "SELECT * FROM addresses ad ";
+  query += "JOIN store_address sa ON sa.address_id = ad.address_id ";
+  query += "JOIN store s ON s.store_nit = sa.store_nit ";
+  query += "WHERE s.store_nit = $1;";
+
+  try {
+    const response = await pool.query(query, [storeNit]);
+    res.json(response.rows);
+  } catch (error) {
+    next(error);
+  }
+};
+
+/**
  * Gets the store's phone number.
  */
-const getStoresPhones = async (req, res, next) => {
+const getStorePhones = async (req, res, next) => {
   const query = "SELECT * FROM store_phone;";
   try {
     const result = await pool.query(query);
@@ -260,7 +279,8 @@ module.exports = {
   getWishlist,
   createInvoice,
   getStores,
-  getStoresPhones,
+  getStoreAddress,
+  getStorePhones,
   getOrderDetail,
   removeOrderDetail,
 };

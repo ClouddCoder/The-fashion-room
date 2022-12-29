@@ -9,7 +9,7 @@ function MyData() {
   const { username, user } = useContext(AuthContext);
   return (
     <Layout>
-      <Grid container direction="column">
+      <Grid container direction="column" sx={{ width: "auto" }}>
         <Grid item>
           <CustomTypography variant="h3" sx={{ fontWeight: "bold" }}>
             Mis datos

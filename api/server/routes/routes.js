@@ -14,7 +14,8 @@ const {
   getWishlist,
   createInvoice,
   getStores,
-  getStoresPhones,
+  getStoreAddress,
+  getStorePhones,
   getOrderDetail,
   removeOrderDetail,
 } = require("../controllers/products.controllers");
@@ -48,7 +49,9 @@ router.post("/invoice", createInvoice);
 
 router.get("/stores", getStores);
 
-router.get("/stores/phones", getStoresPhones);
+router.get("/stores/address", getStoreAddress);
+
+router.get("/stores/phones", getStorePhones);
 
 router.get("/order-detail", getOrderDetail);
 

@@ -9,7 +9,7 @@ import Layout from "../../components/layout/Layout";
  */
 function Contact() {
   const [stores, getStores] = useState([]);
-  const [storesPhones, getStoresPhones] = useState([]);
+  const [storesPhones, setStorePhones] = useState([]);
 
   /**
    * Gets the store's information.
@@ -17,8 +17,7 @@ function Contact() {
   const loadStores = async () => {
     try {
       const response = await getStoreInformation();
-      const { data } = response;
-      getStores(data);
+      getStores(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -42,22 +41,19 @@ function Contact() {
           {},
         ),
       );
-      getStoresPhones(phones);
+      setStorePhones(phones);
     } catch (error) {
       console.log(error);
     }
   };
 
   /**
-   * Gets the store's phones in a list.
+   * Gets the phones for a specific store given its nit.
    */
   const getPhone = (storeNit) => storesPhones.filter((store) => store[0].store_nit === storeNit);
 
   useEffect(() => {
     loadStores();
-  }, []);
-
-  useEffect(() => {
     loadStoresPhones();
   }, []);
 
@@ -69,7 +65,6 @@ function Contact() {
             key={index}
             storeNit={store.store_nit}
             storeName={store.store_name}
-            storeAddress={store.store_address}
             storePhone={getPhone(store.store_nit)}
           />
         ))}

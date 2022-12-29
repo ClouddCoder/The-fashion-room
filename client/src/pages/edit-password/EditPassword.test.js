@@ -33,7 +33,7 @@ describe.skip("EditPassword component", () => {
   });
 
   it("Should hide the input email after sending the email", async () => {
-    getUserId.mockReturnValue({ data: { userId: 1 } });
+    getUserId.mockResolvedValue({ data: { userId: 1 } });
     const user = userEvent.setup();
     EditPasswordTest();
     const button = screen.getByRole("button", { name: "Continuar" });
@@ -45,7 +45,7 @@ describe.skip("EditPassword component", () => {
   });
 
   it("Should render the password inputs after submiting the email", async () => {
-    getUserId.mockReturnValue({ data: { userId: 1 } });
+    getUserId.mockResolvedValue({ data: { userId: 1 } });
     const user = userEvent.setup();
     EditPasswordTest();
     const button = screen.getByRole("button", { name: "Continuar" });

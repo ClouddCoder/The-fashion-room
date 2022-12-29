@@ -1,14 +1,34 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Grid from "@mui/material/Grid";
 import Divider from "@mui/material/Divider";
 import CustomTypography from "../../../components/custom-typography/CustomTypography";
+import { getStoreAddress } from "../../../services/store";
 
 /**
  * Componente que muestra la informacion de la tienda
  */
-function StoreInfo({ storeName, storeAddress, storePhone }) {
-  // Retorna undefined si el array no tiene elementos.
+function StoreInfo({ storeNit, storeName, storePhone }) {
+  const [storeAddress, setStoreAddress] = useState([]);
+  // Retorna undefined si las listas no tienen elementos. Asi no se rompe el codigo.
   const phones = storePhone[0] || [];
+  const address = storeAddress[0] || [];
+  console.log(address);
+
+  /**
+   * Gets the store's address.
+   */
+  const loadStoreAddress = async () => {
+    try {
+      const response = await getStoreAddress(storeNit);
+      setStoreAddress(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    loadStoreAddress();
+  }, []);
 
   return (
     <Grid item container>
@@ -21,7 +41,7 @@ function StoreInfo({ storeName, storeAddress, storePhone }) {
       <Grid item container direction="column">
         <Grid item>
           <CustomTypography variant="body2" gutterBottom>
-            Dirección: {storeAddress}
+            Dirección: {`${address.street_name} ${address.street} ${address.street_number}`}
           </CustomTypography>
         </Grid>
         {phones.map((phone, index) => (

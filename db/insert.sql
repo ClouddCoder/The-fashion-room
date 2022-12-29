@@ -158,13 +158,13 @@ VALUES
 ((SELECT variant_id FROM variant WHERE variant_name = 's-verdes-niña'), (SELECT color_id FROM color WHERE color_value = 'verde'));
 
 -- Inserts store's information to the store table.
-INSERT INTO store (store_nit, store_name, store_address)
+INSERT INTO store (store_nit, store_name)
 VALUES
-(nextval('nit_seq'), 'THE FASHION ROOM SUR', 'CR 29B N 325-4'),
-(nextval('nit_seq'), 'THE FASHION ROOM NORTE', 'CR 100 N110-2'),
-(nextval('nit_seq'), 'THE FASHION ROOM ORIENTE', 'CR 5 N20-12'),
-(nextval('nit_seq'), 'THE FASHION ROOM OCCIDENTE', 'CR 5 N1-2'),
-(nextval('nit_seq'), 'THE FASHION ROOM SUROCCIDENTE', 'CR 7 N56-32');
+(nextval('nit_seq'), 'THE FASHION ROOM SUR'),
+(nextval('nit_seq'), 'THE FASHION ROOM NORTE'),
+(nextval('nit_seq'), 'THE FASHION ROOM ORIENTE'),
+(nextval('nit_seq'), 'THE FASHION ROOM OCCIDENTE'),
+(nextval('nit_seq'), 'THE FASHION ROOM SUROCCIDENTE');
 
 -- Inserts store's phone numbers to the store_phone table.
 INSERT INTO store_phone (store_nit, phone) VALUES
@@ -178,3 +178,22 @@ INSERT INTO store_phone (store_nit, phone) VALUES
 ((SELECT store_nit FROM store WHERE store_name = 'THE FASHION ROOM OCCIDENTE'), 8742394),
 ((SELECT store_nit FROM store WHERE store_name = 'THE FASHION ROOM SUROCCIDENTE'), 1225478),
 ((SELECT store_nit FROM store WHERE store_name = 'THE FASHION ROOM SUROCCIDENTE'), 3668741);
+
+-- Inserts store's and customer's addresses to the addresses table.
+INSERT INTO addresses (department, city, neighborhood, street_name, street, street_number)
+VALUES
+('Valle', 'Cali', 'Ciudad Jardin', 'Carrera', '45A', '18-58'),
+('Antioquia', 'Medellin', 'El Poblado', 'Avenida', '2', '58-41'),
+('Cundinamarca', 'Bogota', 'Usaquen', 'Calle', '12', '32-8'),
+('Valle', 'Cali', 'Centenario', 'Transversal', '5', '12-1'),
+('Antioquia', 'Medellin', 'El Poblado', 'Avenida', '5', '7-25'),
+('Cundinamarca', 'Bogota', 'Usaquen', 'Calle', '45', '72-69');
+
+-- Inserts store's addresses to the store_address table.
+INSERT INTO store_address (store_nit, address_id)
+VALUES
+((SELECT store_nit FROM store WHERE store_name = 'THE FASHION ROOM SUR'), (SELECT address_id FROM addresses WHERE street_number = '18-58')),
+((SELECT store_nit FROM store WHERE store_name = 'THE FASHION ROOM NORTE'), (SELECT address_id FROM addresses WHERE street_number = '58-41')),
+((SELECT store_nit FROM store WHERE store_name = 'THE FASHION ROOM ORIENTE'), (SELECT address_id FROM addresses WHERE street_number = '32-8')),
+((SELECT store_nit FROM store WHERE store_name = 'THE FASHION ROOM OCCIDENTE'), (SELECT address_id FROM addresses WHERE street_number = '12-1')),
+((SELECT store_nit FROM store WHERE store_name = 'THE FASHION ROOM SUROCCIDENTE'), (SELECT address_id FROM addresses WHERE street_number = '7-25'));
