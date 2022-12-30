@@ -221,9 +221,14 @@ const getStoreAddress = async (req, res, next) => {
  * Gets the store's phone number.
  */
 const getStorePhones = async (req, res, next) => {
-  const query = "SELECT * FROM store_phone;";
+  const { storeNit } = req.query;
+  let query = "SELECT * FROM phone p ";
+  query += "JOIN store_phone sp ON sp.phone_id = p.phone_id ";
+  query += "JOIN store s ON s.store_nit = sp.store_nit ";
+  query += "WHERE s.store_nit = $1;";
+
   try {
-    const result = await pool.query(query);
+    const result = await pool.query(query, [storeNit]);
     res.json(result.rows);
   } catch (error) {
     next(error);

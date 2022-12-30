@@ -51,18 +51,6 @@ CREATE TABLE variant_color (
     CONSTRAINT fk_variant_color_color_id FOREIGN KEY (color_id) REFERENCES color (color_id)
 );
 
--- Containes customer's and store's addresses.
-CREATE TABLE addresses (
-    address_id SERIAL,
-    department VARCHAR(25) NOT NULL,
-    city VARCHAR(25) NOT NULL,
-    neighborhood VARCHAR(25) NOT NULL,
-    street_name VARCHAR(25) NOT NULL,
-    street VARCHAR(25) NOT NULL,
-    street_number VARCHAR(25) NOT NULL,
-    CONSTRAINT pk_addresses PRIMARY KEY (address_id)
-);
-
 -- Contains all customers.
 CREATE TABLE customer (
     customer_id SERIAL,
@@ -117,12 +105,41 @@ CREATE TABLE store (
     CONSTRAINT pk_store PRIMARY KEY (store_nit)
 );
 
--- Contains store's phone numbers.
+-- Contains customer's and store's addresses.
+CREATE TABLE addresses (
+    address_id SERIAL,
+    department VARCHAR(25) NOT NULL,
+    city VARCHAR(25) NOT NULL,
+    neighborhood VARCHAR(25) NOT NULL,
+    street_name VARCHAR(25) NOT NULL,
+    street VARCHAR(25) NOT NULL,
+    street_number VARCHAR(25) NOT NULL,
+    CONSTRAINT pk_addresses PRIMARY KEY (address_id)
+);
+
+-- Contains the phone of the stores and customers.
+CREATE TABLE phone (
+    phone_id SERIAL,
+    phone_number VARCHAR(25) NOT NULL,
+    CONSTRAINT pk_phone PRIMARY KEY (phone_id)
+);
+
+-- Joining table for store and phones.
 CREATE TABLE store_phone (
     store_nit INTEGER,
-    phone VARCHAR(25) NOT NULL,
-    CONSTRAINT pk_store_phone PRIMARY KEY (store_nit, phone),
-    CONSTRAINT fk_store_phone_store_nit FOREIGN KEY (store_nit) REFERENCES store(store_nit)
+    phone_id INTEGER,
+    CONSTRAINT pk_store_phone PRIMARY KEY (store_nit, phone_id),
+    CONSTRAINT fk_store_phone_store_nit FOREIGN KEY (store_nit) REFERENCES store(store_nit),
+    CONSTRAINT fk_store_phone_phone_id FOREIGN KEY (phone_id) REFERENCES phone(phone_id)
+);
+
+-- Joining table for customer and phones.
+CREATE TABLE customer_phone (
+    customer_id INTEGER,
+    phone_id INTEGER,
+    CONSTRAINT pk_customer_phone PRIMARY KEY (customer_id, phone_id),
+    CONSTRAINT fk_customer_phone_customer_id FOREIGN KEY (customer_id) REFERENCES customer(customer_id),
+    CONSTRAINT fk_customer_phone_phone_id FOREIGN KEY (phone_id) REFERENCES phone(phone_id)
 );
 
 -- Joining table for customer and addresses.

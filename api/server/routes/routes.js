@@ -5,6 +5,8 @@ const {
   updateEmail,
   updatePassword,
   getUserId,
+  getPhone,
+  updatePhone,
 } = require("../controllers/users.controllers");
 const {
   getAllProducts,
@@ -34,6 +36,10 @@ router.get("/user-id", getUserId);
 router.put("/edit-email", updateEmail);
 
 router.put("/edit-password", updatePassword);
+
+router.get("/phone", getPhone);
+
+router.put("/edit-phone", updatePhone);
 
 router.put("/buy", buyProduct);
 

@@ -2,17 +2,14 @@ import React, { useState, useEffect } from "react";
 import Grid from "@mui/material/Grid";
 import Divider from "@mui/material/Divider";
 import CustomTypography from "../../../components/custom-typography/CustomTypography";
-import { getStoreAddress } from "../../../services/store";
+import { getStoreAddress, getStorePhones } from "../../../services/store";
 
 /**
  * Componente que muestra la informacion de la tienda
  */
-function StoreInfo({ storeNit, storeName, storePhone }) {
+function StoreInfo({ storeNit, storeName }) {
   const [storeAddress, setStoreAddress] = useState([]);
-  // Retorna undefined si las listas no tienen elementos. Asi no se rompe el codigo.
-  const phones = storePhone[0] || [];
-  const address = storeAddress[0] || [];
-  console.log(address);
+  const [storePhones, setStorePhones] = useState([]);
 
   /**
    * Gets the store's address.
@@ -26,8 +23,21 @@ function StoreInfo({ storeNit, storeName, storePhone }) {
     }
   };
 
+  /**
+   * Gets the store's phones.
+   */
+  const loadStoresPhones = async () => {
+    try {
+      const response = await getStorePhones(storeNit);
+      setStorePhones(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     loadStoreAddress();
+    loadStoresPhones();
   }, []);
 
   return (
@@ -41,13 +51,13 @@ function StoreInfo({ storeNit, storeName, storePhone }) {
       <Grid item container direction="column">
         <Grid item>
           <CustomTypography variant="body2" gutterBottom>
-            Dirección: {`${address.street_name} ${address.street} ${address.street_number}`}
+            {`Dirección: ${storeAddress.street_name} ${storeAddress.street} ${storeAddress.street_number}`}
           </CustomTypography>
         </Grid>
-        {phones.map((phone, index) => (
+        {storePhones.map((phone, index) => (
           <Grid item key={index}>
             <CustomTypography variant="body2" gutterBottom>
-              {`Teléfono ${index + 1}`}: {phone.phone}
+              {`Teléfono ${index + 1}`}: {phone.phone_number}
             </CustomTypography>
           </Grid>
         ))}

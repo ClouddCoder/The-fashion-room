@@ -216,10 +216,53 @@ const getUserId = async (req, res, next) => {
   }
 };
 
+/**
+ * Returns the user's phone numbers
+ */
+const getPhone = async (req, res, next) => {
+  const { authorization } = req.headers;
+  const query = "SELECT * FROM phone WHERE customer_id = $1;";
+  const decodeToken = getAuthorization(authorization);
+
+  if (decodeToken.code) {
+    return res.status(decodeToken.code).json({ message: decodeToken.message });
+  }
+
+  try {
+    const result = await pool.query(query, [decodeToken.userId]);
+    return res.json(result.rows);
+  } catch (error) {
+    next(error);
+  }
+};
+
+/**
+ * Updates the user's phone number
+ */
+const updatePhone = async (req, res, next) => {
+  const { newPhone, phoneId } = req.body;
+  const { authorization } = req.headers;
+  const query = "UPDATE phone SET phone_number = $1 WHERE phone_id = $2;";
+  const decodeToken = getAuthorization(authorization);
+
+  if (decodeToken.code) {
+    return res.status(decodeToken.code).json({ message: decodeToken.message });
+  }
+
+  try {
+    await pool.query(query, [newPhone, phoneId]);
+    return res.json({ message: "Teléfono actualizado con éxito" });
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   loginUser,
   registerUser,
   updateEmail,
   updatePassword,
   getUserId,
+  getPhone,
+  updatePhone,
 };

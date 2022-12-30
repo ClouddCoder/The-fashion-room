@@ -157,6 +157,20 @@ VALUES
 ((SELECT variant_id FROM variant WHERE variant_name = 's-azules-mujer'), (SELECT color_id FROM color WHERE color_value = 'azul')),
 ((SELECT variant_id FROM variant WHERE variant_name = 's-verdes-niña'), (SELECT color_id FROM color WHERE color_value = 'verde'));
 
+-- Inserts phone numbers to the phone table.
+INSERT INTO phone (phone_number)
+VALUES
+('4225136'),
+('4215489'),
+('3254984'),
+('3254856'),
+('8445623'),
+('4725148'),
+('4227452'),
+('8742394'),
+('1225478'),
+('3668741');
+
 -- Inserts store's information to the store table.
 INSERT INTO store (store_nit, store_name)
 VALUES
@@ -166,18 +180,18 @@ VALUES
 (nextval('nit_seq'), 'THE FASHION ROOM OCCIDENTE'),
 (nextval('nit_seq'), 'THE FASHION ROOM SUROCCIDENTE');
 
--- Inserts store's phone numbers to the store_phone table.
-INSERT INTO store_phone (store_nit, phone) VALUES
-((SELECT store_nit FROM store WHERE store_name = 'THE FASHION ROOM SUR'), 4225136),
-((SELECT store_nit FROM store WHERE store_name = 'THE FASHION ROOM SUR'), 4215489),
-((SELECT store_nit FROM store WHERE store_name = 'THE FASHION ROOM NORTE'), 3254984),
-((SELECT store_nit FROM store WHERE store_name = 'THE FASHION ROOM NORTE'), 3254856),
-((SELECT store_nit FROM store WHERE store_name = 'THE FASHION ROOM ORIENTE'), 8445623),
-((SELECT store_nit FROM store WHERE store_name = 'THE FASHION ROOM ORIENTE'), 4725148),
-((SELECT store_nit FROM store WHERE store_name = 'THE FASHION ROOM OCCIDENTE'), 4227452),
-((SELECT store_nit FROM store WHERE store_name = 'THE FASHION ROOM OCCIDENTE'), 8742394),
-((SELECT store_nit FROM store WHERE store_name = 'THE FASHION ROOM SUROCCIDENTE'), 1225478),
-((SELECT store_nit FROM store WHERE store_name = 'THE FASHION ROOM SUROCCIDENTE'), 3668741);
+-- Relates the store's phone numbers to the store.
+INSERT INTO store_phone (store_nit, phone_id) VALUES
+((SELECT store_nit FROM store WHERE store_name = 'THE FASHION ROOM SUR'), (SELECT phone_id FROM phone WHERE phone_number = '4225136')),
+((SELECT store_nit FROM store WHERE store_name = 'THE FASHION ROOM SUR'), (SELECT phone_id FROM phone WHERE phone_number = '4215489')),
+((SELECT store_nit FROM store WHERE store_name = 'THE FASHION ROOM NORTE'), (SELECT phone_id FROM phone WHERE phone_number = '3254984')),
+((SELECT store_nit FROM store WHERE store_name = 'THE FASHION ROOM NORTE'), (SELECT phone_id FROM phone WHERE phone_number = '3254856')),
+((SELECT store_nit FROM store WHERE store_name = 'THE FASHION ROOM ORIENTE'), (SELECT phone_id FROM phone WHERE phone_number = '8445623')),
+((SELECT store_nit FROM store WHERE store_name = 'THE FASHION ROOM ORIENTE'), (SELECT phone_id FROM phone WHERE phone_number = '4725148')),
+((SELECT store_nit FROM store WHERE store_name = 'THE FASHION ROOM OCCIDENTE'), (SELECT phone_id FROM phone WHERE phone_number = '4227452')),
+((SELECT store_nit FROM store WHERE store_name = 'THE FASHION ROOM OCCIDENTE'), (SELECT phone_id FROM phone WHERE phone_number = '8742394')),
+((SELECT store_nit FROM store WHERE store_name = 'THE FASHION ROOM SUROCCIDENTE'), (SELECT phone_id FROM phone WHERE phone_number = '1225478')),
+((SELECT store_nit FROM store WHERE store_name = 'THE FASHION ROOM SUROCCIDENTE'), (SELECT phone_id FROM phone WHERE phone_number = '3668741'));
 
 -- Inserts store's and customer's addresses to the addresses table.
 INSERT INTO addresses (department, city, neighborhood, street_name, street, street_number)
@@ -189,7 +203,7 @@ VALUES
 ('Antioquia', 'Medellin', 'El Poblado', 'Avenida', '5', '7-25'),
 ('Cundinamarca', 'Bogota', 'Usaquen', 'Calle', '45', '72-69');
 
--- Inserts store's addresses to the store_address table.
+-- Relates the store's addresses to the store.
 INSERT INTO store_address (store_nit, address_id)
 VALUES
 ((SELECT store_nit FROM store WHERE store_name = 'THE FASHION ROOM SUR'), (SELECT address_id FROM addresses WHERE street_number = '18-58')),

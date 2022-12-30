@@ -6,6 +6,7 @@ import ProductContext from "../context/product-context/ProductContext";
 import Login from "../pages/login/Login";
 import Catalogue from "../pages/catalogue/Catalogue";
 import StoreContact from "../pages/store-contact/StoreContact";
+import StoreInfo from "../pages/store-contact/components/StoreInfo";
 import Home from "../pages/home/Home";
 import Invoice from "../pages/invoice/Invoice";
 import Navbar from "../components/navbar/Navbar";
@@ -149,11 +150,9 @@ export const mockStores = [
 ];
 
 export const mockStorePhone = [
-  [
-    { store_nit: 1, phone: "123456789" },
-    { store_nit: 2, phone: "987654321" },
-    { store_nit: 3, phone: "547897884" },
-  ],
+  { store_nit: 1, phone_number: "123456789" },
+  { store_nit: 2, phone_number: "987654321" },
+  { store_nit: 3, phone_number: "547897884" },
 ];
 
 export const mockCustomers = [
@@ -199,13 +198,26 @@ export function CatalogueTest() {
   );
 }
 
-// Renders contact component.
+// Renders store component.
 export function StoreContactTest() {
   return render(
     <AuthContext.Provider value={authContextProps}>
       <ProductContext.Provider value={productContextProps}>
         <Router>
           <StoreContact />
+        </Router>
+      </ProductContext.Provider>
+    </AuthContext.Provider>,
+  );
+}
+
+// Renders store info component.
+export function StoreInfoTest() {
+  return render(
+    <AuthContext.Provider value={authContextProps}>
+      <ProductContext.Provider value={productContextProps}>
+        <Router>
+          <StoreInfo />
         </Router>
       </ProductContext.Provider>
     </AuthContext.Provider>,
