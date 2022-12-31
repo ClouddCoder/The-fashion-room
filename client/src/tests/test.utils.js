@@ -12,8 +12,8 @@ import Invoice from "../pages/invoice/Invoice";
 import Navbar from "../components/navbar/Navbar";
 import Footer from "../components/footer/Footer";
 import Product from "../pages/product/Product";
-import EditUsername from "../pages/edit-username/EditUsername";
-import EditEmail from "../pages/edit-email/EditEmail";
+import MyData from "../pages/my-data/MyData";
+import EditData from "../pages/edit-data/EditData";
 import EditAddress from "../pages/edit-address/EditAddress";
 import EditPassword from "../pages/edit-password/EditPassword";
 
@@ -173,6 +173,15 @@ export const mockCustomers = [
   },
 ];
 
+// This component is used to wrap the Navigation component to test it
+export function GlobalContext({ children }) {
+  return (
+    <AuthContext.Provider value={authContextProps}>
+      <ProductContext.Provider value={productContextProps}>{children}</ProductContext.Provider>
+    </AuthContext.Provider>
+  );
+}
+
 // Renders login component
 export function LoginTest() {
   return render(
@@ -295,26 +304,26 @@ export function ProductTest() {
   );
 }
 
-// Renders EditUsername component.
-export function EditUsernameTest() {
+// Renders MyData component.
+export function MyDataTest() {
   return render(
     <AuthContext.Provider value={authContextProps}>
       <ProductContext.Provider value={productProductContextProps}>
         <Router>
-          <EditUsername />
+          <MyData />
         </Router>
       </ProductContext.Provider>
     </AuthContext.Provider>,
   );
 }
 
-// Renders EditMail component.
-export function EditEmailTest() {
+// Renders EditData component.
+export function EditDataTest() {
   return render(
     <AuthContext.Provider value={authContextProps}>
       <ProductContext.Provider value={productProductContextProps}>
         <Router>
-          <EditEmail />
+          <EditData />
         </Router>
       </ProductContext.Provider>
     </AuthContext.Provider>,

@@ -1,0 +1,14 @@
+.container-input {
+  width: 400px;
+}
+
+.complete-name {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.container-input div {
+  display: grid;
+  grid-template-columns: auto;
+}

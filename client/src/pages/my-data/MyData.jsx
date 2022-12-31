@@ -18,7 +18,7 @@ function MyData() {
         <Grid item>
           <ul>
             <li>
-              <Link to="/edit-email">
+              <Link to="/edit-data/email">
                 <div>
                   <CustomTypography variant="h6" sx={{ fontWeight: "bold" }}>
                     Email
@@ -28,7 +28,7 @@ function MyData() {
               </Link>
             </li>
             <li>
-              <Link to="/edit-user-name">
+              <Link to="/edit-data/name">
                 <div>
                   <CustomTypography variant="h6" sx={{ fontWeight: "bold" }}>
                     Nombre elegido
@@ -38,7 +38,7 @@ function MyData() {
               </Link>
             </li>
             <li>
-              <Link to="/edit-username">
+              <Link to="/edit-data/username">
                 <div>
                   <CustomTypography variant="h6" sx={{ fontWeight: "bold" }}>
                     Usuario
@@ -48,7 +48,7 @@ function MyData() {
               </Link>
             </li>
             <li>
-              <Link to="/edit-phone">
+              <Link to="/edit-data/phone">
                 <div>
                   <CustomTypography variant="h6" sx={{ fontWeight: "bold" }}>
                     Teléfono de contacto
