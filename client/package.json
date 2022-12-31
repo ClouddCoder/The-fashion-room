@@ -51,5 +51,11 @@
     "eslint-plugin-react": "7.31.11",
     "eslint-plugin-react-hooks": "4.6.0",
     "react-test-renderer": "18.2.0"
+  },
+  "_comment": "See https://stackoverflow.com/questions/73958968/cannot-use-import-statement-outside-a-module-with-axios",
+  "jest": {
+    "moduleNameMapper": {
+      "axios": "axios/dist/node/axios.cjs"
+    }
   }
 }

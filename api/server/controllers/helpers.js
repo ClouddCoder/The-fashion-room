@@ -8,7 +8,7 @@ const jwtPassword = process.env.JWT_PASSWORD;
  * Verifies if the user is authorized.
  */
 const getAuthorization = (authorization) => {
-  let token;
+  let token = null;
 
   if (authorization && authorization.toLowerCase().startsWith("bearer")) {
     // eslint-disable-next-line prefer-destructuring

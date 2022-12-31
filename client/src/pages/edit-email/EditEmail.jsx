@@ -46,7 +46,7 @@ function EditEmail() {
             <div className="email-input">
               <CustomTypography variant="body2">Email nuevo</CustomTypography>
               <TextField
-                inputProps={{ "aria-label": "newEmail" }}
+                inputProps={{ "aria-label": "new-email" }}
                 hiddenLabel
                 fullWidth
                 onChange={handleChange}

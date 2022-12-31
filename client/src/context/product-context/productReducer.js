@@ -5,7 +5,7 @@ export const productInitialState = {
   variants: [],
   variantId: 0,
   cart: [],
-  wishlist: [], // Get all the wishes from database
+  wishlist: [], // Gets all the wishes from database
   totalProducts: 0,
   totalPrice: 0,
   invoiceId: 0,

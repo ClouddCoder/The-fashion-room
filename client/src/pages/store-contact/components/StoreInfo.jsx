@@ -51,7 +51,10 @@ function StoreInfo({ storeNit, storeName }) {
       <Grid item container direction="column">
         <Grid item>
           <CustomTypography variant="body2" gutterBottom>
-            {`Dirección: ${storeAddress.street_name} ${storeAddress.street} ${storeAddress.street_number}`}
+            {storeAddress.map(
+              (address) =>
+                `Dirección: ${address.street_name} ${address.street} ${address.street_number}`,
+            )}
           </CustomTypography>
         </Grid>
         {storePhones.map((phone, index) => (

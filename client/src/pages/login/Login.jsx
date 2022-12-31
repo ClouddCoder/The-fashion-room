@@ -40,13 +40,13 @@ function Login() {
 
       // Sets the user's data to login and deletes the data from the inputs
       if (res.ok) {
-        setAuth(data.userAuth);
+        setAuth(data.isAuth);
         setUserId(data.userId);
         setUser(data.userName);
         setUsername(data.username);
+        setToken(data.token);
         setUserEmail("");
         setUserPassword("");
-        setToken(data.token);
         navigate("/");
 
         // Saves the token to localStorasge

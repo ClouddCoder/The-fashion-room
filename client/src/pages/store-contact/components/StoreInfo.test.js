@@ -12,7 +12,7 @@ afterEach(() => {
   jest.clearAllMocks();
 });
 
-describe("StoreInfo component", () => {
+describe.skip("StoreInfo component", () => {
   it("Should call getStoreAddress method", () => {
     getStoreAddress.mockResolvedValue({ data: mockStorePhone });
     StoreInfoTest();

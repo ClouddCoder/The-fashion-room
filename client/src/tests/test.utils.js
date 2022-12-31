@@ -12,6 +12,7 @@ import Invoice from "../pages/invoice/Invoice";
 import Navbar from "../components/navbar/Navbar";
 import Footer from "../components/footer/Footer";
 import Product from "../pages/product/Product";
+import EditUsername from "../pages/edit-username/EditUsername";
 import EditEmail from "../pages/edit-email/EditEmail";
 import EditAddress from "../pages/edit-address/EditAddress";
 import EditPassword from "../pages/edit-password/EditPassword";
@@ -288,6 +289,19 @@ export function ProductTest() {
       <ProductContext.Provider value={productProductContextProps}>
         <Router>
           <Product />
+        </Router>
+      </ProductContext.Provider>
+    </AuthContext.Provider>,
+  );
+}
+
+// Renders EditUsername component.
+export function EditUsernameTest() {
+  return render(
+    <AuthContext.Provider value={authContextProps}>
+      <ProductContext.Provider value={productProductContextProps}>
+        <Router>
+          <EditUsername />
         </Router>
       </ProductContext.Provider>
     </AuthContext.Provider>,

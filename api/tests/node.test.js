@@ -3,9 +3,20 @@ const { app, server } = require("../server/index");
 
 const api = supertest(app);
 
+// eslint-disable-next-line operator-linebreak
+const token =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJOYW1lIjoiYnJheWFuIiwidXNlckVtYWlsIjoiYnJheWFuIiwiaWF0IjoxNjcyMzc1MTc1fQ._SwAU5xky2Myd2TeZAEeVHz37y-wFy2L6VJ12V55Z3I";
+
+/*
+ * Closes the server after each test
+ */
+afterEach(() => {
+  server.close();
+});
+
 describe.skip("POST /register", () => {
   it("If password length is equal or less than or equal to 4", async () => {
-    await api
+    const response = await api
       .post("/register")
       .send({
         userName: "brayan",
@@ -13,12 +24,14 @@ describe.skip("POST /register", () => {
         userEmail: "brayan",
         userPassword: "12345",
       })
-      .expect(200)
-      .expect("Content-Type", /application\/json/);
+      .expect("Content-Type", /application\/json/)
+      .expect(200);
+
+    expect(response.body.userName).toContain("brayan");
   });
 
   it("If password is empty", async () => {
-    await api
+    const response = await api
       .post("/register")
       .send({
         userName: "alexa",
@@ -26,8 +39,10 @@ describe.skip("POST /register", () => {
         userEmail: "alexa",
         userPassword: "",
       })
-      .expect(406)
-      .expect("Content-Type", /application\/json/);
+      .expect("Content-Type", /application\/json/)
+      .expect(406);
+
+    expect(response.body.errorMessage).toContain("La contraseña debe tener más de 4 caracteres");
   });
 });
 
@@ -39,6 +54,8 @@ describe.skip("POST /login", () => {
       .expect(200)
       .expect("Content-Type", /application\/json/);
 
+    expect(response.body.isAuth).toBe(true);
+    expect(response.body.userId).toBe(1);
     expect(response.body.userName).toContain("brayan");
   });
 
@@ -61,11 +78,21 @@ describe.skip("GET /catalogue", () => {
   });
 });
 
-describe("POST /set-wishlist", () => {
+describe.skip("PUT /edit-username", () => {
+  it("Should update the username", async () => {
+    const response = await api
+      .put("/edit-username")
+      .set("Authorization", `Bearer ${token}`)
+      .send({ newUsername: "luladasilva" })
+      .expect(200)
+      .expect("Content-Type", /application\/json/);
+
+    expect(response.body.message).toBe("Username actualizado con éxito");
+  });
+});
+
+describe.skip("POST /set-wishlist", () => {
   it("Insert new wish to the database", async () => {
-    // eslint-disable-next-line operator-linebreak
-    const token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJOYW1lIjoiYnJheWFuIiwidXNlckVtYWlsIjoiYnJheWFuIiwiaWF0IjoxNjcyMzc1MTc1fQ._SwAU5xky2Myd2TeZAEeVHz37y-wFy2L6VJ12V55Z3I";
     // First, login with an user to get the token
     await api
       .post("/set-wishlist")
@@ -74,11 +101,4 @@ describe("POST /set-wishlist", () => {
       .expect(200)
       .expect("Content-Type", /application\/json/);
   });
-});
-
-/*
- * Closes the server after each test
- */
-afterAll(() => {
-  server.close();
 });

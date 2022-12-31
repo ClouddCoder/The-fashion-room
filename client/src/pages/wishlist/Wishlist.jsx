@@ -16,7 +16,7 @@ function Wishlist() {
   return (
     <Layout>
       <Grid container direction="row" sx={{ width: "60%", mt: 4, mb: 4 }}>
-        {wishlist?.map((wish, i) => (
+        {wishlist.map((wish, i) => (
           <Wish key={i} product={wish} />
         ))}
       </Grid>

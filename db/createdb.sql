@@ -54,12 +54,15 @@ CREATE TABLE variant_color (
 -- Contains all customers.
 CREATE TABLE customer (
     customer_id SERIAL,
+    customer_username VARCHAR(25) UNIQUE,
     customer_name VARCHAR(25),
     customer_lastname VARCHAR(25),
     customer_email VARCHAR(40) UNIQUE,
     customer_password VARCHAR(100),
     customer_phone VARCHAR(25),
     CONSTRAINT pk_customer PRIMARY KEY (customer_id),
+    CONSTRAINT check_not_null_username CHECK (customer_username IS NOT NULL),
+    CONSTRAINT check_not_empty_username CHECK (customer_username <> ''),
     CONSTRAINT check_not_null_name CHECK (customer_name IS NOT NULL),
     CONSTRAINT check_not_empty_name CHECK (customer_name <> ''),
     CONSTRAINT check_not_null_email CHECK (customer_email IS NOT NULL),

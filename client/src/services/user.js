@@ -30,6 +30,21 @@ export function registerUser(userName, userLastname, userEmail, userPassword) {
 }
 
 /**
+ * Requests the API to get the username of the user
+ */
+export function changeUsername(newUsername, token) {
+  return instance.put(
+    "/edit-username",
+    { newUsername },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    },
+  );
+}
+
+/**
  * Requests the API to change the user's email
  */
 export function changeUserEmail(newEmail, token) {

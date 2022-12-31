@@ -2,6 +2,7 @@ const { Router } = require("express");
 const {
   loginUser,
   registerUser,
+  updateUsername,
   updateEmail,
   updatePassword,
   getUserId,
@@ -32,6 +33,8 @@ router.post("/login", loginUser);
 router.post("/register", registerUser);
 
 router.get("/user-id", getUserId);
+
+router.put("/edit-username", updateUsername);
 
 router.put("/edit-email", updateEmail);
 

@@ -52,15 +52,15 @@ function Register() {
 
         // Sets the user's data to login and deletes the data from the inputs
         if (res.ok) {
-          setAuth(data.userAuth);
+          setAuth(data.isAuth);
           setUserId(data.userId);
-          setUser(data.userName);
-          setUsername(data.username);
+          setUser(userName);
+          setUsername(userName); // The username will be the same as the name at the beginning
+          setToken(data.token);
           setUserName("");
           setUserLastname("");
           setUserEmail("");
           setUserPassword("");
-          setToken(data.token);
           navigate("/");
           window.localStorage.setItem("logged", JSON.stringify(data));
         } else {

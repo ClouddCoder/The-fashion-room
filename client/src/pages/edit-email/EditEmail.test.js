@@ -12,9 +12,9 @@ afterEach(() => {
 });
 
 describe.skip("EditEmail component", () => {
-  it("Should render inputs", () => {
+  it("Should render the input", () => {
     EditEmailTest();
-    expect(screen.getByLabelText("newEmail")).toBeInTheDocument();
+    expect(screen.getByLabelText("new-email")).toBeInTheDocument();
   });
 
   it("Should render input's title", () => {
@@ -25,13 +25,13 @@ describe.skip("EditEmail component", () => {
   it("Should type emails' input", async () => {
     const user = userEvent.setup();
     EditEmailTest();
-    const inputNewEmail = screen.getByRole("textbox", { name: "newEmail" });
+    const inputNewEmail = screen.getByRole("textbox", { name: "new-email" });
     await user.type(inputNewEmail, "lucas");
     expect(inputNewEmail).toHaveValue("lucas");
   });
 
   it("The new message should not render before user's email is updated", async () => {
-    changeUserEmail.mockRejectedValue(new Error("error"));
+    changeUserEmail.mockRejectedValue({ response: { data: { message: "error" } } });
     const user = userEvent.setup();
     EditEmailTest();
     const button = screen.getByRole("button", { name: "Cambiar" });
