@@ -30,7 +30,77 @@ export function registerUser(userName, userLastname, userEmail, userPassword) {
 }
 
 /**
- * Requests the API to get the username of the user
+ * Fetches the user's id given the email
+ */
+export function getUserId(email) {
+  return instance.get("/user-id", {
+    params: {
+      email,
+    },
+  });
+}
+
+/**
+ * Updates the name of the user
+ */
+export function changeName(newName, token) {
+  return instance.put(
+    "/edit-name",
+    { newName },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    },
+  );
+}
+
+/**
+ * Gets all the phones that the user has
+ */
+export function getPhone(token) {
+  return instance.get("/user-phone", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+}
+
+/**
+ * Adds a new phone to the user
+ */
+export function setPhone(newPhone, token) {
+  return instance.post(
+    "/add-phone",
+    { newPhone },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    },
+  );
+}
+
+/**
+ * Updates the phone of the user
+ */
+export function editPhone(newPhone, currentPhoneId, token) {
+  return instance.put(
+    "/edit-phone",
+    {
+      newPhone,
+      currentPhoneId,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    },
+  );
+}
+
+/**
+ * Updates the username of the user
  */
 export function changeUsername(newUsername, token) {
   return instance.put(
@@ -45,7 +115,7 @@ export function changeUsername(newUsername, token) {
 }
 
 /**
- * Requests the API to change the user's email
+ * Updates the email of the user
  */
 export function changeUserEmail(newEmail, token) {
   return instance.put(
@@ -60,24 +130,13 @@ export function changeUserEmail(newEmail, token) {
 }
 
 /**
- * Requests the API to change the user's password
+ * Updates the password of the user
  */
 export function changeUserPassword(userId, currentPassword, newPassword) {
   return instance.put("/edit-password", {
     userId,
     currentPassword,
     newPassword,
-  });
-}
-
-/**
- * Fetches the user's id given the email
- */
-export function getUserId(email) {
-  return instance.get("/user-id", {
-    params: {
-      email,
-    },
   });
 }
 

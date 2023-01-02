@@ -8,7 +8,7 @@ import Layout from "../../components/layout/Layout";
  * Componente que muestra la informacion de la tienda
  */
 function Contact() {
-  const [stores, getStores] = useState([]);
+  const [stores, setStores] = useState([]);
 
   /**
    * Gets the store's information.
@@ -16,7 +16,7 @@ function Contact() {
   const loadStores = async () => {
     try {
       const response = await getStoreInformation();
-      getStores(response.data);
+      setStores(response.data);
     } catch (error) {
       console.log(error);
     }

@@ -11,7 +11,7 @@ export function getStoreInformation() {
  * Fetches the store's address
  */
 export function getStoreAddress(storeNit) {
-  return instance.get("/stores/address", {
+  return instance.get("/store/address", {
     params: {
       storeNit,
     },
@@ -22,7 +22,7 @@ export function getStoreAddress(storeNit) {
  * Fetches the store's phones
  */
 export function getStorePhones(storeNit) {
-  return instance.get("/stores/phones", {
+  return instance.get("/store/phones", {
     params: {
       storeNit,
     },

@@ -13,6 +13,7 @@ import Navbar from "../components/navbar/Navbar";
 import Footer from "../components/footer/Footer";
 import Product from "../pages/product/Product";
 import MyData from "../pages/my-data/MyData";
+import Phone from "../pages/phone/Phone";
 import EditData from "../pages/edit-data/EditData";
 import EditAddress from "../pages/edit-address/EditAddress";
 import EditPassword from "../pages/edit-password/EditPassword";
@@ -173,6 +174,17 @@ export const mockCustomers = [
   },
 ];
 
+export const mockUserPhone = [
+  {
+    phone_id: 1,
+    phone_number: "123456789",
+  },
+  {
+    phone_id: 2,
+    phone_number: "987654321",
+  },
+];
+
 // This component is used to wrap the Navigation component to test it
 export function GlobalContext({ children }) {
   return (
@@ -298,6 +310,19 @@ export function ProductTest() {
       <ProductContext.Provider value={productProductContextProps}>
         <Router>
           <Product />
+        </Router>
+      </ProductContext.Provider>
+    </AuthContext.Provider>,
+  );
+}
+
+// Renders Phone component.
+export function PhoneTest() {
+  return render(
+    <AuthContext.Provider value={authContextProps}>
+      <ProductContext.Provider value={productProductContextProps}>
+        <Router>
+          <Phone />
         </Router>
       </ProductContext.Provider>
     </AuthContext.Provider>,

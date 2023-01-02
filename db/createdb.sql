@@ -59,7 +59,6 @@ CREATE TABLE customer (
     customer_lastname VARCHAR(25),
     customer_email VARCHAR(40) UNIQUE,
     customer_password VARCHAR(100),
-    customer_phone VARCHAR(25),
     CONSTRAINT pk_customer PRIMARY KEY (customer_id),
     CONSTRAINT check_not_null_username CHECK (customer_username IS NOT NULL),
     CONSTRAINT check_not_empty_username CHECK (customer_username <> ''),
@@ -123,8 +122,10 @@ CREATE TABLE addresses (
 -- Contains the phone of the stores and customers.
 CREATE TABLE phone (
     phone_id SERIAL,
-    phone_number VARCHAR(25) NOT NULL,
-    CONSTRAINT pk_phone PRIMARY KEY (phone_id)
+    phone_number VARCHAR(25) UNIQUE,
+    CONSTRAINT pk_phone PRIMARY KEY (phone_id),
+    CONSTRAINT check_not_null_phone_number CHECK (phone_number IS NOT NULL),
+    CONSTRAINT check_not_empty_phone_number CHECK (phone_number <> '')
 );
 
 -- Joining table for store and phones.

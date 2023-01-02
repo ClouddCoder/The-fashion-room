@@ -48,7 +48,7 @@ function MyData() {
               </Link>
             </li>
             <li>
-              <Link to="/edit-data/phone">
+              <Link to="/phone">
                 <div>
                   <CustomTypography variant="h6" sx={{ fontWeight: "bold" }}>
                     Teléfono de contacto

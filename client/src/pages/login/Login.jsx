@@ -52,7 +52,7 @@ function Login() {
         // Saves the token to localStorasge
         window.localStorage.setItem("logged", JSON.stringify(data));
       } else {
-        setInputError({ ...error, error: true, errorMessage: data.message });
+        setInputError({ ...error, constraint: "incorrecto", message: data.message });
         throw new Error(data.message);
       }
     } catch (err) {
@@ -64,7 +64,7 @@ function Login() {
    * Gets the email and password from the inputs
    */
   const handleChange = (e) => {
-    setInputError({ ...error, error: false, errorMessage: "" });
+    setInputError({ ...error, constraint: "", message: "" });
 
     switch (e.target.name) {
       case "userEmail":
@@ -83,8 +83,8 @@ function Login() {
         <Grid container spacing={1}>
           <Grid item xs={12}>
             <TextField
-              error={error.error}
-              helperText={error.errorMessage}
+              error={error.constraint === "incorrecto"}
+              helperText={error.message}
               onChange={handleChange}
               name="userEmail"
               variant="outlined"
@@ -95,8 +95,8 @@ function Login() {
           </Grid>
           <Grid item xs={12}>
             <TextField
-              error={error.error}
-              helperText={error.errorMessage}
+              error={error.constraint === "incorrecto"}
+              helperText={error.message}
               onChange={handleChange}
               name="userPassword"
               variant="outlined"

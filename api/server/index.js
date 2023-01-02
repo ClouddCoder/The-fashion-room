@@ -20,46 +20,69 @@ app.use(routes);
  */
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
-  // If it is a database error, the error object will return a constraint
-  let constraint;
-  if (err.constraint) {
-    // The third part of the constraint is the name of the field
-    // eslint-disable-next-line prefer-destructuring
-    constraint = err.constraint.split("_")[3];
-  }
-
+  // If whatever input is null
   if (err.code === "23502") {
     return res.status(404).json({
       errorMessage: "Información invalida",
-      constraint,
     });
   }
 
-  if (err.code === "23505") {
+  // eslint-disable-next-line prefer-destructuring
+  const constraint = err.constraint;
+
+  // If the user already exists
+  if (constraint === "pk_customer" || constraint === "customer_customer_username_key") {
     return res.status(409).json({
       errorMessage: "El usuario ya existe",
-      constraint,
+      constraint: "email",
     });
   }
 
-  if (err.code === "23514") {
-    let errorMessage = "";
-    switch (constraint) {
-      case "name":
-        errorMessage = "Debes ingresar tu nombre";
-        break;
-      case "lastname":
-        errorMessage = "Debes ingresar tu apellido";
-        break;
-      case "email":
-        errorMessage = "Debes ingresar tu email";
-        break;
-      case "password":
-        errorMessage = "Debes ingresar tu contraseña";
-        break;
-      default:
-    }
-    return res.status(422).json({ errorMessage, constraint });
+  if (constraint === "check_not_null_username" || constraint === "check_not_empty_username") {
+    return res.status(422).json({
+      errorMessage: "Debes ingresar tu nombre de usuario",
+      constraint: "username",
+    });
+  }
+
+  if (constraint === "check_not_null_name" || constraint === "check_not_empty_name") {
+    return res.status(422).json({
+      errorMessage: "Debes ingresar tu nombre",
+      constraint: "name",
+    });
+  }
+
+  if (constraint === "check_not_null_email" || constraint === "check_not_empty_email") {
+    return res.status(422).json({
+      errorMessage: "Debes ingresar tu email",
+      constraint: "email",
+    });
+  }
+
+  if (constraint === "check_not_null_password" || constraint === "check_not_empty_password") {
+    return res.status(422).json({
+      errorMessage: "Debes ingresar tu contraseña",
+      constraint: "password",
+    });
+  }
+
+  // If the phone number already exists
+  if (err.constraint === "phone_phone_number_key") {
+    return res.status(409).json({
+      errorMessage: "El número ya está registrado",
+      constraint: "phone_number",
+    });
+  }
+
+  if (
+    // eslint-disable-next-line operator-linebreak
+    err.constraint === "check_not_null_phone_number" ||
+    err.constraint === "check_not_empty_phone_number"
+  ) {
+    return res.status(422).json({
+      errorMessage: "Ingresar un número de teléfono",
+      constraint: "phone_number",
+    });
   }
 
   return res.status(400).json({

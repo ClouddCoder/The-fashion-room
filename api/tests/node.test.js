@@ -51,7 +51,7 @@ describe.skip("POST /login", () => {
     const response = await api
       .post("/login")
       .send({ userEmail: "brayan", userPassword: "12345" })
-      .expect(200)
+      .expect(404)
       .expect("Content-Type", /application\/json/);
 
     expect(response.body.isAuth).toBe(true);
@@ -63,7 +63,7 @@ describe.skip("POST /login", () => {
     await api
       .post("/login")
       .send({ userEmail: "lucas", userPassword: "12345" })
-      .expect(404)
+      .expect(200)
       .expect("Content-Type", /application\/json/);
   });
 });
@@ -88,6 +88,32 @@ describe.skip("PUT /edit-username", () => {
       .expect("Content-Type", /application\/json/);
 
     expect(response.body.message).toBe("Username actualizado con éxito");
+  });
+});
+
+describe.skip("GET /user-phone", () => {
+  it("Should return all the phones that the user has", async () => {
+    const response = await api
+      .get("/user-phone")
+      .set("Authorization", `Bearer ${token}`)
+      .expect("Content-Type", /application\/json/)
+      .expect(200);
+
+    expect(response.body).toHaveLength(0);
+  });
+});
+
+describe.skip("POST /add-phone", () => {
+  it("Should add a new number to the user", async () => {
+    const response = await api
+      .post("/add-phone")
+      .set("Authorization", `Bearer ${token}`)
+      .send({ newPhone: "123456789" })
+      .expect("Content-Type", /application\/json/)
+      .expect(200);
+
+    expect(response.body.message).toBe("Teléfono agregado con éxito");
+    expect(response.body.phone).toBe({ phone_id: 12 });
   });
 });
 

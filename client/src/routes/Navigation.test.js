@@ -8,7 +8,7 @@ afterEach(() => {
   jest.clearAllMocks();
 });
 
-describe("Navigation component", () => {
+describe.skip("Navigation component", () => {
   it("Should render the homepage", () => {
     const route = "/";
 

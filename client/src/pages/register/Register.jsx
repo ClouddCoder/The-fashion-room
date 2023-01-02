@@ -66,9 +66,8 @@ function Register() {
         } else {
           setInputError({
             ...error,
-            error: true,
             constraint: data.constraint,
-            errorMessage: data.errorMessage,
+            message: data.errorMessage,
           });
 
           throw new Error(data.message);
@@ -84,7 +83,7 @@ function Register() {
    * when the user starts typing again.
    */
   const handleChange = (e) => {
-    setInputError({ ...error, error: false, constraint: "", errorMessage: "" });
+    setInputError({ ...error, constraint: "", message: "" });
     switch (e.target.name) {
       case "userName":
         setUserName(e.target.value);
@@ -118,7 +117,7 @@ function Register() {
           <Grid item xs={6}>
             <TextField
               error={error.constraint === "name"}
-              helperText={error.constraint === "name" && error.errorMessage}
+              helperText={error.constraint === "name" && error.message}
               onChange={handleChange}
               name="userName"
               variant="outlined"
@@ -130,7 +129,7 @@ function Register() {
           <Grid item xs={6}>
             <TextField
               error={error.constraint === "lastname"}
-              helperText={error.constraint === "lastname" && error.errorMessage}
+              helperText={error.constraint === "lastname" && error.message}
               onChange={handleChange}
               name="userLastname"
               variant="outlined"
@@ -142,7 +141,7 @@ function Register() {
           <Grid item xs={12}>
             <TextField
               error={error.constraint === "email"}
-              helperText={error.constraint === "email" && error.errorMessage}
+              helperText={error.constraint === "email" && error.message}
               onChange={handleChange}
               name="userEmail"
               variant="outlined"
@@ -155,7 +154,7 @@ function Register() {
             <TextField
               error={error.constraint === "password" || password.shortPassword}
               helperText={
-                error.constraint === "password" ? error.errorMessage : password.errorMessage
+                error.constraint === "password" ? error.message : password.errorMessage
               }
               onChange={handleChange}
               name="userPassword"

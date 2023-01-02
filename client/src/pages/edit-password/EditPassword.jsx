@@ -35,7 +35,7 @@ function EditPassword() {
         const { response } = err;
         const { data } = response;
         const { message, constraint } = data;
-        setInputError({ constraint, message });
+        setInputError({ ...error, constraint, message });
       }
     }
   };
@@ -55,12 +55,12 @@ function EditPassword() {
       const { response } = err;
       const { data } = response;
       const { message } = data;
-      setInputError({ constraint: "email", message });
+      setInputError({ ...error, constraint: "email", message });
     }
   };
 
   const handleChange = (e) => {
-    setInputError({ constraint: "", message: "" });
+    setInputError({ ...error, constraint: "", message: "" });
     switch (e.target.name) {
       case "email":
         userEmail.setUserInput(e.target.value);

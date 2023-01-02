@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Profile from "../pages/profile/Profile";
 import MyData from "../pages/my-data/MyData";
+import Phone from "../pages/phone/Phone";
 import EditData from "../pages/edit-data/EditData";
 import Address from "../pages/address/Address";
 import EditAddress from "../pages/edit-address/EditAddress";
@@ -27,6 +28,7 @@ function Navigation() {
       <Route path="/" element={<Home />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/my-data" element={<MyData />} />
+      <Route path="/phone" element={<Phone />} />
       <Route path="/edit-data/:info" element={<EditData />} />
       <Route path="/address" element={<Address />} />
       <Route path="/edit-address" element={<EditAddress />} />

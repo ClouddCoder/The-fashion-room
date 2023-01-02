@@ -20,7 +20,6 @@ function EditEmail() {
   // Variables to change the information displayed in the form
   let title = "";
   let successMessage = "";
-  let inputTitle = "";
   let inputLabel = "";
   let secondInputLabel = "";
   let inputAriaLabel = "";
@@ -31,7 +30,6 @@ function EditEmail() {
     case "email":
       title = "Editar email";
       successMessage = "El email se ha cambiado correctamente";
-      inputTitle = "Cambia tu email";
       inputLabel = "Nuevo email";
       inputAriaLabel = "new-email";
       method = services.changeUserEmail;
@@ -39,17 +37,15 @@ function EditEmail() {
     case "name":
       title = "Editar nombre";
       successMessage = "El nombre se ha cambiado correctamente";
-      inputTitle = "¿Como quieres que te llamemos?";
       inputLabel = "Nombre escogido";
       secondInputLabel = "Apellido escogido";
       inputAriaLabel = "new-name";
       secondInpuAriaLabel = "new-lastname";
-      //method = services.changeName;
+      method = services.changeName;
       break;
     case "username":
       title = "Modificar usuario";
       successMessage = "El nombre de usuario se ha cambiado correctamente";
-      //inputTitle = "Escoge tu nuevo usuario";
       inputLabel = "Nombre de usuario";
       inputAriaLabel = "new-username";
       method = services.changeUsername;
@@ -57,10 +53,9 @@ function EditEmail() {
     case "phone":
       title = "Editar teléfono";
       successMessage = "El teléfono se ha cambiado correctamente";
-      inputTitle = "Escoge tu nuevo teléfono";
       inputLabel = "Teléfono escogido";
       inputAriaLabel = "new-phone";
-      //method = services.changePhone;
+      method = services.editPhone;
       break;
     default:
   }
@@ -97,9 +92,6 @@ function EditEmail() {
           </CustomTypography>
         </Grid>
         <Grid container item direction="column">
-          <Grid item>
-            <CustomTypography variant="body2">{inputTitle}</CustomTypography>
-          </Grid>
           <Grid>
             <form onSubmit={handleSubmit}>
               {info === "name" ? (
