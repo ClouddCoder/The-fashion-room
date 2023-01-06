@@ -51,9 +51,9 @@ services:
       - POSTGRES_DB=tfr
     volumes:
       - postgres-data:/var/lib/postgresql/data
-      - ./db/createdb.sql:/docker-entrypoint-initdb.d/createdb.sql # creates database's tables.
-      - ./db/functions.sql:/docker-entrypoint-initdb.d/functions.sql # creates database's functions.
-      - ./db/insert.sql:/docker-entrypoint-initdb.d/insert.sql # inserts data into database's tables.
+      - ./api/db/createdb.sql:/docker-entrypoint-initdb.d/createdb.sql # creates database's tables.
+      - ./api/db/functions.sql:/docker-entrypoint-initdb.d/functions.sql # creates database's functions.
+      - ./api/db/insert.sql:/docker-entrypoint-initdb.d/insert.sql # inserts data into database's tables.
 
   pgadmin-tfr:
     container_name: pgadmin-tfr

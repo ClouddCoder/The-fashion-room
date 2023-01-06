@@ -22,6 +22,7 @@ const getAllProducts = async (req, res, next) => {
     const result = await pool.query(query, [category]);
     res.json(result.rows);
   } catch (error) {
+    console.log(error);
     next(error);
   }
 };

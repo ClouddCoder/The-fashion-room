@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test:jest": "NODE_ENV=test jest --verbose --detectOpenHandles",
+    "test:jest": "NODE_ENV=test_jest jest --verbose --detectOpenHandles",
     "test:api": "NODE_ENV=test_api nodemon server/index.js",
-    "start": "NODE_ENV=production node server/index.js",
+    "start": "node server/index.js",
     "dev": "NODE_ENV=development nodemon server/index.js"
   },
   "keywords": [],
@@ -22,9 +22,9 @@
     "pg": "8.8.0"
   },
   "devDependencies": {
-    "eslint": "8.30.0",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.26.0",
+    "eslint": "8.31.0",
+    "eslint-config-airbnb-base": "15.0.0",
+    "eslint-plugin-import": "2.26.0",
     "jest": "29.3.1",
     "nodemon": "2.0.20",
     "supertest": "6.3.3"

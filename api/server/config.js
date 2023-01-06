@@ -2,31 +2,46 @@ const { config } = require("dotenv");
 
 config();
 // Variables to connect the database.
-let host;
-let port;
+let user = "";
+let password = "";
+let host = "";
+let port = "";
+let ssl = false;
 
 /**
  * For testing and development the database is different.
  */
 switch (process.env.NODE_ENV) {
-  case "test":
+  case "test_jest":
   case "test_api":
+    user = process.env.DB_USER_DEV;
+    password = process.env.DB_PASSWORD_DEV;
     host = process.env.DB_HOST_TEST;
     port = process.env.DB_PORT_TEST;
+    ssl = process.env.DB_SSL_DEV;
     break;
   case "development":
-    host = process.env.DB_HOST;
+    user = process.env.DB_USER_DEV;
+    password = process.env.DB_PASSWORD_DEV;
+    host = process.env.DB_HOST_DEV;
+    port = process.env.DB_PORT_DEV;
+    ssl = process.env.DB_SSL_DEV;
     break;
   default:
+    user = process.env.DB_USER;
+    password = process.env.DB_PASSWORD;
     host = process.env.DB_HOST;
+    port = process.env.DB_PORT;
+    ssl = process.env.DB_SSL;
 }
 
 module.exports = {
   db: {
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
+    user,
+    password,
     host,
-    database: process.env.DB_DATABASE,
+    database: process.env.DB_NAME,
     port,
+    ssl: Boolean(parseInt(ssl, 10)),
   },
 };
