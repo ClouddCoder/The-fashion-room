@@ -1,10 +1,9 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Form from "../../components/form/Form";
-import CustomTypography from "../../components/custom-typography/CustomTypography";
 import AuthContext from "../../context/auth-context/AuthContext";
 import useError from "../../hooks/useError";
 import { loginUser } from "../../services/user";
@@ -114,14 +113,12 @@ function Login() {
           <Grid container item justifyContent="space-between" xs={12}>
             <Grid item>
               <Link to="/edit-password">
-                <CustomTypography variant="body2">Forgot password?</CustomTypography>
+                <span>Forgot password?</span>
               </Link>
             </Grid>
             <Grid item>
               <Link to="/register">
-                <CustomTypography variant="body2">
-                  Do not have an account? Sign Up
-                </CustomTypography>
+                <span>Do not have an account? Sign Up</span>
               </Link>
             </Grid>
           </Grid>

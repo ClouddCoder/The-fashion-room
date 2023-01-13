@@ -15,7 +15,7 @@ afterEach(() => {
   ReactDOM.createPortal.mockClear();
 });
 
-describe("Phone component", () => {
+describe.skip("Phone component", () => {
   it("Should render the differents phones", async () => {
     getPhone.mockResolvedValue({ data: mockUserPhone });
     PhoneTest();

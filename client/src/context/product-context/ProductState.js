@@ -1,5 +1,5 @@
 /* eslint-disable no-use-before-define */
-import React, { useReducer, useContext, useMemo } from "react";
+import { useReducer, useContext, useMemo } from "react";
 import AuthContext from "../auth-context/AuthContext";
 import ProductContext from "./ProductContext";
 import {
@@ -9,6 +9,7 @@ import {
   handleUserWish,
   getUserPurchases,
   removeUserPurchase,
+  createUserInvoice,
 } from "../../services/product";
 import { productInitialState, ProductReducer } from "./productReducer";
 import { TYPES } from "../../actions/productActions";
@@ -19,6 +20,13 @@ import { TYPES } from "../../actions/productActions";
 function ProductState({ children }) {
   const [state, dispatch] = useReducer(ProductReducer, productInitialState);
   const { token } = useContext(AuthContext);
+
+  /**
+   * Set to true to display de loader.
+   */
+  const setLoader = () => {
+    dispatch({ type: TYPES.LOADER, payload: true });
+  };
 
   /**
    * Changes all product names.
@@ -45,6 +53,7 @@ function ProductState({ children }) {
       const { data } = response;
       getProductNameCapitalized(data);
       dispatch({ type: TYPES.LOAD_PRODUCTS, payload: data });
+      dispatch({ type: TYPES.LOADER, payload: false });
     } catch (error) {
       console.log(error);
     }
@@ -66,7 +75,7 @@ function ProductState({ children }) {
   };
 
   /**
-   * Sets the variant's id.
+   * Stores the variant id that will come by the default with the product when is fetched.
    */
   const setVariantId = (variantId) => {
     dispatch({ type: TYPES.SET_VARIANT_ID, payload: parseInt(variantId, 10) });
@@ -136,6 +145,7 @@ function ProductState({ children }) {
       const { data } = response;
       getProductNameCapitalized(data);
       dispatch({ type: TYPES.GET_WISHLIST, payload: data });
+      dispatch({ type: TYPES.LOADER, payload: false });
     } catch (error) {
       console.log(error);
     }
@@ -185,6 +195,7 @@ function ProductState({ children }) {
       const { data } = response;
       getProductNameCapitalized(data);
       dispatch({ type: TYPES.GET_MY_ORDERS, payload: data });
+      dispatch({ type: TYPES.LOADER, payload: false });
     } catch (error) {
       console.log(error);
     }
@@ -211,15 +222,7 @@ function ProductState({ children }) {
    */
   const createInvoice = async (productsToBuy) => {
     try {
-      const res = await fetch("http://localhost:3050/api/invoice", {
-        method: "POST",
-        body: JSON.stringify(productsToBuy),
-        headers: new Headers({
-          "Authorization": `Bearer ${token}`,
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-        }),
-      });
+      const res = await createUserInvoice(token, productsToBuy);
       const data = await res.json();
 
       if (res.ok) {
@@ -241,6 +244,7 @@ function ProductState({ children }) {
 
   const valueProps = useMemo(
     () => ({
+      loader: state.loader,
       products: state.products,
       variants: state.variants,
       variantId: state.variantId,
@@ -254,6 +258,7 @@ function ProductState({ children }) {
       addWish: state.addWish,
       productsToBuy: state.productsToBuy,
       shippingCost: state.shippingCost,
+      setLoader,
       loadProducts,
       getProductVariants,
       setVariantId,
@@ -274,6 +279,7 @@ function ProductState({ children }) {
       resetProductState,
     }),
     [
+      state.loader,
       state.products,
       state.variants,
       state.variantId,

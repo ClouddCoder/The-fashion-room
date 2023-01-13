@@ -1,6 +1,4 @@
-import instance from "./api";
-
-const baseURL = "http://localhost:3050/api";
+import instance, { baseURL } from "./api";
 
 /**
  * Requests the API to log in the user
@@ -43,16 +41,60 @@ export function getUserId(email) {
 /**
  * Updates the name of the user
  */
-export function changeName(newName, token) {
+export function changeName({ input, secondInput }, token) {
   return instance.put(
     "/edit-name",
-    { newName },
+    {
+      input,
+      secondInput,
+    },
     {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     },
   );
+}
+
+/**
+ * Updates the email of the user
+ */
+export function changeUserEmail({ input }, token) {
+  return instance.put(
+    "/edit-email",
+    { input },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    },
+  );
+}
+
+/**
+ * Updates the username of the user
+ */
+export function changeUsername({ input }, token) {
+  return instance.put(
+    "/edit-username",
+    { input },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    },
+  );
+}
+
+/**
+ * Updates the password of the user
+ */
+export function changeUserPassword(userId, currentPassword, newPassword) {
+  return instance.put("/edit-password", {
+    userId,
+    currentPassword,
+    newPassword,
+  });
 }
 
 /**
@@ -82,92 +124,103 @@ export function setPhone(newPhone, token) {
 }
 
 /**
- * Updates the phone of the user
+ * Deletes the phone of the user
  */
-export function editPhone(newPhone, currentPhoneId, token) {
-  return instance.put(
-    "/edit-phone",
-    {
-      newPhone,
-      currentPhoneId,
+export function deletePhone(phoneId, token) {
+  return instance.delete("/delete-phone", {
+    headers: {
+      Authorization: `Bearer ${token}`,
     },
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+    data: {
+      phoneId,
     },
-  );
-}
-
-/**
- * Updates the username of the user
- */
-export function changeUsername(newUsername, token) {
-  return instance.put(
-    "/edit-username",
-    { newUsername },
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    },
-  );
-}
-
-/**
- * Updates the email of the user
- */
-export function changeUserEmail(newEmail, token) {
-  return instance.put(
-    "/edit-email",
-    { newEmail },
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    },
-  );
-}
-
-/**
- * Updates the password of the user
- */
-export function changeUserPassword(userId, currentPassword, newPassword) {
-  return instance.put("/edit-password", {
-    userId,
-    currentPassword,
-    newPassword,
   });
 }
 
 /**
- * Modifies the user's address
+ * Gets all the user's address
  */
-export function editUserAddress(
-  name,
+export function getAddress(token) {
+  return instance.get("/user-address", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+}
+
+/**
+ * Gest a single address to update it
+ */
+export function getSingleAddress(addressId, token) {
+  return instance.get("/single-address", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    params: {
+      addressId,
+    },
+  });
+}
+
+/**
+ * Adds a new address to the user
+ */
+export function setAddress(
   department,
   city,
   neighborhood,
   streetType,
   street,
-  number,
+  streetNumber,
+  references,
   token,
 ) {
-  return instance.put(
-    "/edit-address",
-    {
-      name,
-      department,
-      city,
-      neighborhood,
-      streetType,
-      street,
-      number,
-    },
+  return instance.post(
+    "/add-address",
+    { department, city, neighborhood, streetType, street, streetNumber, references },
     {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     },
   );
+}
+
+/**
+ * Updates the address of the user
+ */
+export function updateAddress(
+  addressId,
+  token,
+  department,
+  city,
+  neighborhood,
+  streetType,
+  street,
+  streetNumber,
+  references,
+) {
+  return instance.put(
+    "/update-address",
+    { addressId, department, city, neighborhood, streetType, street, streetNumber, references },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    },
+  );
+}
+
+/**
+ * Deletes the address of the user
+ */
+export function deleteAddress(addressId, token) {
+  return instance.delete("/delete-phone", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    data: {
+      addressId,
+    },
+  });
 }

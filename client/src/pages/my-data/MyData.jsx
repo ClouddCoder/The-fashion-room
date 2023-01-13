@@ -1,8 +1,7 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import Grid from "@mui/material/Grid";
 import { Link } from "react-router-dom";
 import AuthContext from "../../context/auth-context/AuthContext";
-import CustomTypography from "../../components/custom-typography/CustomTypography";
 import Layout from "../../components/layout/Layout";
 
 function MyData() {
@@ -11,49 +10,39 @@ function MyData() {
     <Layout>
       <Grid container direction="column" sx={{ width: "auto" }}>
         <Grid item>
-          <CustomTypography variant="h3" sx={{ fontWeight: "bold" }}>
-            Mis datos
-          </CustomTypography>
+          <h3>Mis datos</h3>
         </Grid>
         <Grid item>
           <ul>
             <li>
               <Link to="/edit-data/email">
                 <div>
-                  <CustomTypography variant="h6" sx={{ fontWeight: "bold" }}>
-                    Email
-                  </CustomTypography>
-                  <CustomTypography variant="body2">Valida tu email</CustomTypography>
+                  <h6>Email</h6>
+                  <span>Valida tu email</span>
                 </div>
               </Link>
             </li>
             <li>
               <Link to="/edit-data/name">
                 <div>
-                  <CustomTypography variant="h6" sx={{ fontWeight: "bold" }}>
-                    Nombre elegido
-                  </CustomTypography>
-                  <CustomTypography variant="body2">{username}</CustomTypography>
+                  <h6>Nombre elegido</h6>
+                  <span>{username}</span>
                 </div>
               </Link>
             </li>
             <li>
               <Link to="/edit-data/username">
                 <div>
-                  <CustomTypography variant="h6" sx={{ fontWeight: "bold" }}>
-                    Usuario
-                  </CustomTypography>
-                  <CustomTypography variant="body2">{user}</CustomTypography>
+                  <h6>Usuario</h6>
+                  <span>{user}</span>
                 </div>
               </Link>
             </li>
             <li>
               <Link to="/phone">
                 <div>
-                  <CustomTypography variant="h6" sx={{ fontWeight: "bold" }}>
-                    Teléfono de contacto
-                  </CustomTypography>
-                  <CustomTypography variant="body2">Agrega un teléfono</CustomTypography>
+                  <h6>Teléfono de contacto</h6>
+                  <span>Agrega un teléfono</span>
                 </div>
               </Link>
             </li>

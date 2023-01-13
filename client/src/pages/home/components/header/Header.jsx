@@ -1,4 +1,3 @@
-import React from "react";
 import { HeaderBackground } from "../../../../assets";
 import "./Header.css";
 

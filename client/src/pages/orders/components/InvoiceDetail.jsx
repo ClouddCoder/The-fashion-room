@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardContent from "@mui/material/CardContent";
@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import { getProductImage } from "../../../assets";
 import ProductContext from "../../../context/product-context/ProductContext";
-import CustomTypography from "../../../components/custom-typography/CustomTypography";
 import "./InvoiceDetail.css";
 
 /**
@@ -40,23 +39,15 @@ function InvoiceDetail({ product }) {
               style={{ width: 120, height: 120 }}
             />
             <div style={{ float: "right" }}>
-              <CustomTypography variant="h6" sx={{ width: 150 }}>
-                {product.product_name}
-              </CustomTypography>
+              <h6>{product.product_name}</h6>
               <div className="order-price-quantity">
-                <CustomTypography variant="body2" sx={{ width: 150 }}>
-                  {`$${product.variant_price}`}
-                </CustomTypography>
-                <CustomTypography variant="body2" sx={{ width: 150 }}>
-                  {`x${product.product_quantity}`}
-                </CustomTypography>
+                <span>{`$${product.variant_price}`}</span>
+                <span>{`x${product.product_quantity}`}</span>
               </div>
             </div>
           </div>
           <div className="order-user-options">
-            <CustomTypography variant="body2" sx={{ width: 150 }}>
-              {`Total compra: $${product.item_total_cost}`}
-            </CustomTypography>
+            <span>{`Total compra: $${product.item_total_cost}`}</span>
             <Button
               variant="contained"
               onClick={() => {

@@ -1,4 +1,3 @@
-import React from "react";
 import Grid from "@mui/material/Grid";
 import { getProductImage } from "../../../../assets";
 import Category from "../category/Category";
@@ -9,8 +8,11 @@ import "./Categories.css";
  */
 function Categories() {
   return (
-    <div className="categories-container">
-      <Grid container align="center" spacing={2}>
+    <Grid container direction="column" spacing={2} mb="20px">
+      <Grid item>
+        <h3>Ofertas</h3>
+      </Grid>
+      <Grid item container>
         <Grid item={true} xs={6} md={3}>
           <Category
             alt="calzado"
@@ -44,7 +46,7 @@ function Categories() {
           />
         </Grid>
       </Grid>
-    </div>
+    </Grid>
   );
 }
 

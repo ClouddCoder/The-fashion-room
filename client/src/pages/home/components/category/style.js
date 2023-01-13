@@ -11,11 +11,3 @@ export const phoneStyle = {
   maxHeight: 250,
   minHeight: 150,
 };
-
-export const font = {
-  fontSize: 19,
-};
-
-export const phoneFont = {
-  fontSize: 16,
-};

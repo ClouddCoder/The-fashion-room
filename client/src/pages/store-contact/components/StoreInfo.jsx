@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Grid from "@mui/material/Grid";
 import Divider from "@mui/material/Divider";
-import CustomTypography from "../../../components/custom-typography/CustomTypography";
 import { getStoreAddress, getStorePhones } from "../../../services/store";
 
 /**
@@ -43,25 +42,23 @@ function StoreInfo({ storeNit, storeName }) {
   return (
     <Grid item container>
       <Grid item={true} xs={12}>
-        <CustomTypography variant="h4" gutterBottom>
-          {storeName}
-        </CustomTypography>
+        <h4>{storeName}</h4>
         <Divider />
       </Grid>
       <Grid item container direction="column">
         <Grid item>
-          <CustomTypography variant="body2" gutterBottom>
+          <span>
             {storeAddress.map(
               (address) =>
                 `Dirección: ${address.street_name} ${address.street} ${address.street_number}`,
             )}
-          </CustomTypography>
+          </span>
         </Grid>
         {storePhones.map((phone, index) => (
           <Grid item key={index}>
-            <CustomTypography variant="body2" gutterBottom>
+            <span>
               {`Teléfono ${index + 1}`}: {phone.phone_number}
-            </CustomTypography>
+            </span>
           </Grid>
         ))}
       </Grid>

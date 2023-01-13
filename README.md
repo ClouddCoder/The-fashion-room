@@ -1,58 +1,78 @@
-# The Fashion Room
+# Lottus
+Small ecommerce to practice PERN stack. This is still in development.
 
-Este proyecto tiene como objetivo demostrar las habilidades adquiridas durante el semestre en la materia Bases de datos, cuya arquitectura consiste en una tienda online
-que contiene el cliente (Frontend), api-server (Backend) y una base de datos en Postgres.
+## Build with
+- PostgreSQL
+- Express.js
+- ReactJS
+- Node.js
+- JWT
 
-## Instalación
+# Getting started
+## Prerequisites
+- Install node.js, preferably using NVM.
+- Install Docker and Docker Compose to deploy the project locally.
 
-Para poner en prueba el proyecto se deben seguir los siguientes pasos:
-
-1. Clonar el código
+## Installation
+1. Clone the repo
 ```
-https://github.com/ClouddCoder/The-fashion-room.git
+git clone https://github.com/ClouddCoder/ecommerce-PERN.git
 ```
-2. Abrir una terminal dentro de la carpeta **react-node-app** y ejecutar el comando `npm install`.
 
-3. Dentro de **react-node-app** se debe crear un archivo ***.env*** para establecer las variables de entorno que conectarán con la base de datos Postgres.
-
-Las variables son:
-- DB_USER = <user>
-- DB_PASSWORD = <password>
-- DB_HOST = <host>
-- DB_DATABASE = <database>
-- DB_PORT = <port>
-
-4. Abrir una terminal dentro de la carpeta **the-fashion-room** y ejecutar el comando `npm install`.
-
-5. Crear una imagen y contenedor de Postgres en Docker con sus respectivas variables de entorno que coincidan con el archivo ***.env*** de la carpeta **react-node-app**
+2. Inside the folder, install NPM packages
 ```
-docker run --name <nombre> -p <puertos> -e POSTGRES_USER=<usuario> -e POSTGRES_PASSWORD=<contraseña> -e POSTGRES_DB=<nombre_bd> -d postgres
+npm install
 ```
-6. Crear una imagen y contenedor de pgAdmin en Docker
+
+3. You must create an **.env** file for the **api** and **client** folders with the following variables:
+
+**api** folder
 ```
-docker run --name <nombre> -p <puertos> -e 'PGADMIN_DEFAULT_EMAIL=<email> -e 'PGADMIN_DEFAULT_PASSWORD=<contraseña> -d dpage/pgadmin4
+PORT = <SERVER_PORT>
+JWT_PASSWORD = <JWT_PASSWORD> # The backend uses JWT to authenticate the user.
+
+# Database setup for deployment.
+DB_USER = <YOUR_DB_USERNAME>
+DB_PASSWORD = <YOUR_DB_PASSWORD>
+DB_HOST = <YOUR_DB_HOST>
+DB_NAME = <YOUR_DB_NAME>
+DB_PORT = <YOUR_DB_PORT>
+DB_SSL = <1_OR_0> # If your database is hosted in a server, probably you need to set SSL.
+
+# Database setup for development using docker-compose.
+DB_USER_DEV = <YOUR_DB_FOR_DEVELOPING>
+DB_PASSWORD_DEV = <YOUR_DB_PASSWORD_FOR_DEVELOPING>
+DB_HOST_DEV = <YOUR_DB_HOST_FOR_DEVELOPING>
+DB_NAME_DEV = <YOUR_DB_NAME_FOR_DEVELOPING>
+DB_PORT_DEV = <YOUR_DB_PORT_FOR_DEVELOPING>
+DB_SSL_DEV = <1_OR_0>
+
+# Database setup for testing using a docker container.
+DB_USER_TEST = <YOUR_DB_USER_FOR_TESTING>
+DB_PASSWORD_TEST = <YOUR_DB_PASSWORD_FOR_TESTING>
+DB_HOST_TEST = <YOUR_DB_HOST_FOR_TESTING>
+DB_NAME_TEST = <YOUR_DB_NAME_FOR_TESTING>
+DB_PORT_TEST = <YOUR_DB_PORT_FOR_TESTING>
+DB_SSL_TEST = <1_OR_0>
 ```
-7. Abrir un ***localhost:<puerto>*** en el navegador con el fin de acceder a pgAdmin para conectar la base de datos, este último debe coincidir con las variables de entorno establecidas en el archivo ***.env*** de la carpeta **react-node-pp**.
+**client** folder
+```
+# These variables are used to connect the backend.
 
-Cabe resaltar que al momento de conectar la base de datos, en ***Host name/address*** de la sección ***Connection*** se debe colocar la IP del contenedor de Postgres. Para ello es necesario ejecutar `docker inspect <contenedor_postgres>` en una terminal y copiar la IP de "IPAddress".
+# For deployment.
+BASE_URL = <ENTER_YOUR_BACKEND_SERVER_URL>
 
-8. Copiar el contenido del archivo ***queries.sql*** que se encuentra en la carpeta **react-node-app** y pegarlo dentro de la sección de ***Query tools*** de pgAdmin para crear las tablas,
-funciones e inserciones para el correcto funcionamiento de la tienda.
-
-9. Ejecutar el comando `npm run dev`en una terminal dentro de la carpeta **react-node-app** para desplegar el backend de la aplicación, no se debe cerrar la terminal.
-
-10. En otra terminal se debe ejecutar el comando `npm start` dentro de la carpeta **the-fashion-room** para mostrar el frontend de la aplicación y empezar a interactuar desde el navegador. Por defecto se abrirá un ***localhost:3000*** en
-el navegador.
-
-## Desplegar proyecto con Docker compose
-
-Dentro del proyecto se encuentra una carpeta **nginx** con dos archivos para crear un contenedor del mismo en docker, esto es para poder desplegar la aplicación
-completa con un docker compose, por ende en las carpetas **react-node-app** y **the-fashion-room** se encuentran sus respectivos archivos Dockerfile y en el directorio raíz del proyecto se encuentra el archivo ***docker-compose-yml*** para su respectiva configuración.
-
-Esta funcionalidad aún está en prueba, sin embargo el usuario lo puede modificar y desplegar a su gusto.
-
-## Equipo de trabajo
-- Brayan Sánchez [@ClouddCoder](https://github.com/ClouddCoder)
-- Diana Cadena [@DianaCadenaMoreno](https://github.com/DianaCadenaMoreno)
-- Juan Majin [@JuanMajin](https://github.com/JuanMajin)
-- Mayra Sánchez [@mayra-Sanchez](https://github.com/mayra-Sanchez)
+# For developing using docker-compose.
+BASE_URL_DEV = <ENTER_YOUR_LOCALHOST_URL>
+```
+# Usage
+This project can be deployed locally with Docker compose. Inside the project folder, open a terminal and do
+```
+docker compose up
+```
+Currently the ecommerce is deployed using Google Cloud for the frontend and backend, the database is using a different server.
+```
+https://lottus-shop.cf
+```
+# Contributors
+- [@ClouddCoder](https://github.com/ClouddCoder)

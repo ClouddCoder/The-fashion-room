@@ -2,6 +2,7 @@
  * Constantes que determina el tipo de accion en el ProductReducer
  */
 export const TYPES = {
+  LOADER: "LOADER",
   LOAD_PRODUCTS: "LOAD_PRODUCTS",
   GET_VARIANTS: "GET_VARIANTS",
   CLEAR_PRODUCTS_LIST: "CLEAR_PRODUCTS_LIST",

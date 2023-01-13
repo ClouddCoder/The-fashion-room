@@ -1,14 +1,13 @@
-import React, { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import IconButton from "@mui/material/IconButton";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import CustomTypography from "../../components/custom-typography/CustomTypography";
 import Layout from "../../components/layout/Layout";
 import Modal from "../../components/modal/Modal";
 import AuthContext from "../../context/auth-context/AuthContext";
-import { getPhone, setPhone } from "../../services/user";
+import { getPhone, setPhone, deletePhone } from "../../services/user";
 import useUserInput from "../../hooks/useUserInput";
 import useError from "../../hooks/useError";
 
@@ -16,21 +15,25 @@ function Phone() {
   const { input, setUserInput } = useUserInput();
   const { error, setInputError } = useError();
   const [openModal, setOpenModal] = useState(false);
+  const [isPhoneDeleted, setIsPhoneDeleted] = useState(false);
   const { token } = useContext(AuthContext);
   const [listPhone, setListPhone] = useState([]);
+  const [loader, setLoader] = useState(true);
 
   const getPhoneList = async () => {
     try {
       const response = await getPhone(token);
       setListPhone(response.data);
+      setLoader(false);
     } catch (err) {
+      setListPhone([]);
       console.log(err);
     }
   };
 
   useEffect(() => {
     getPhoneList();
-  }, [openModal]);
+  }, [openModal, isPhoneDeleted]);
 
   const handleChange = (e) => {
     setUserInput(e.target.value);
@@ -54,19 +57,35 @@ function Phone() {
 
   return (
     <Layout>
+      {loader && (
+        <div className="loader-container">
+          <div className="spinner" />
+        </div>
+      )}
+
       <Grid container direction="column" sx={{ width: "auto" }}>
         <Grid item>
-          <CustomTypography variant="h3">Teléfonos</CustomTypography>
+          <h3>Teléfonos</h3>
         </Grid>
         <Grid item>
-          <CustomTypography variant="body2">
-            Selecciona o agrega un número celular
-          </CustomTypography>
+          <span>Selecciona o agrega un número celular</span>
         </Grid>
         <Grid item container direction="column">
           {listPhone.map((phone, index) => (
-            <Grid item key={index}>
-              <CustomTypography variant="body2">{phone.phone_number}</CustomTypography>
+            <Grid
+              item
+              key={index}
+              sx={{ width: "200px", display: "flex", justifyContent: "space-around" }}
+            >
+              <span>{phone.phone_number}</span>
+              <IconButton
+                onClick={() => {
+                  deletePhone(phone.phone_id, token);
+                  setIsPhoneDeleted(!isPhoneDeleted); // It helps to re-render
+                }}
+              >
+                <CloseIcon />
+              </IconButton>
             </Grid>
           ))}
         </Grid>

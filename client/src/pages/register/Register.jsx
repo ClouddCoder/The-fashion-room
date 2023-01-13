@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -153,9 +153,7 @@ function Register() {
           <Grid item xs={12}>
             <TextField
               error={error.constraint === "password" || password.shortPassword}
-              helperText={
-                error.constraint === "password" ? error.message : password.errorMessage
-              }
+              helperText={error.constraint === "password" ? error.message : password.errorMessage}
               onChange={handleChange}
               name="userPassword"
               variant="outlined"

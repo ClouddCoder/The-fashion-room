@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useReducer } from "react";
+import { useEffect, useContext, useReducer } from "react";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
@@ -6,7 +6,6 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import ProductItem from "./components/ProductItem";
 import AuthContext from "../../context/auth-context/AuthContext";
 import ProductContext from "../../context/product-context/ProductContext";
-import CustomTypography from "../../components/custom-typography/CustomTypography";
 import Layout from "../../components/layout/Layout";
 import ProductFilters from "./components/ProductFilters";
 import { catalogueActions } from "./reducer/catalogueActions";
@@ -19,18 +18,17 @@ import { catalogueInitialState, CatalogueReducer } from "./reducer/catalogueRedu
 function Catalogue() {
   const { category } = useParams();
   const navigate = useNavigate();
-  const { addToCart, loadProducts, products, getWishlist } = useContext(ProductContext);
+  const { loader, setLoader, addToCart, loadProducts, products, getWishlist } =
+    useContext(ProductContext);
   const { auth } = useContext(AuthContext);
   const [state, dispatch] = useReducer(CatalogueReducer, catalogueInitialState);
 
-  /**
-   * Gets the products by their category.
-   */
   useEffect(() => {
-    loadProducts(category);
-  }, []);
+    // Displays the loader every time the component is re-render.
+    setLoader(true);
 
-  useEffect(() => {
+    // Gets the products by their category.
+    loadProducts(category);
     getWishlist();
   }, []);
 
@@ -65,6 +63,12 @@ function Catalogue() {
 
   return (
     <Layout>
+      {loader && (
+        <div className="loader-container">
+          <div className="spinner" />
+        </div>
+      )}
+
       <Grid
         container
         direction="column"
@@ -108,9 +112,7 @@ function Catalogue() {
             >
               <Grid container direction="column" sx={{ width: "95%", height: "100%" }}>
                 <Grid item sx={{ m: 0 }}>
-                  <CustomTypography variant="h6" component="span">
-                    Catalogo
-                  </CustomTypography>
+                  <h6>Catalogo</h6>
                 </Grid>
                 <Grid container item direction="column" rowSpacing={3} sx={{ m: 0 }}>
                   <ProductFilters check={state} handleChange={handleChange} />

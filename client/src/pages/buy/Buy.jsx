@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Divider from "@mui/material/Divider";
 import Button from "@mui/material/Button";
@@ -8,7 +8,6 @@ import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import ProductContext from "../../context/product-context/ProductContext";
 import AuthContext from "../../context/auth-context/AuthContext";
-import CustomTypography from "../../components/custom-typography/CustomTypography";
 import Layout from "../../components/layout/Layout";
 import ProductToBuy from "./components/ProductToBuy";
 import { makeThePurchase } from "../../services/product";
@@ -27,14 +26,6 @@ function Buy() {
   } = useContext(ProductContext);
 
   const { token } = useContext(AuthContext);
-
-  const spanProps = {
-    variant: "body2",
-    component: "span",
-    sx: { display: "block", m: "8px 0" },
-  };
-
-  const subtitleProps = { variant: "subtitle1", sx: { fontWeight: "bold" } };
 
   /**
    * Buys the products and updates the stock
@@ -56,7 +47,7 @@ function Buy() {
   };
 
   useEffect(() => {
-    getTotalProducts(true);
+    getTotalProducts();
     getTotalPrice();
     getTotalShippingCost();
   }, []);
@@ -68,7 +59,7 @@ function Buy() {
           <Grid item>
             <Card>
               <CardContent>
-                <CustomTypography {...subtitleProps}>Direccion de entrega</CustomTypography>
+                <h3>Direccion de entrega</h3>
                 <TextField
                   hiddenLabel
                   fullWidth
@@ -82,9 +73,10 @@ function Buy() {
           <Grid item>
             <Card>
               <CardContent>
-                <CustomTypography {...subtitleProps}>Metodo de pago</CustomTypography>
-                <CustomTypography {...spanProps}>Tarjeta de credito</CustomTypography>
+                <h3>Metodo de pago</h3>
+                <span>Tarjeta de credito</span>
               </CardContent>
+              span
             </Card>
           </Grid>
           <Grid item container direction="column" spacing={2}>
@@ -96,31 +88,23 @@ function Buy() {
         <Grid item={true} xs={4}>
           <Card>
             <CardContent>
-              <CustomTypography {...subtitleProps}>Detalles</CustomTypography>
+              <h3>Detalles</h3>
               <div className="purchase-details">
-                <CustomTypography {...spanProps}>Coste total de los productos</CustomTypography>
-                <CustomTypography {...spanProps}>{`$${totalPrice}`}</CustomTypography>
+                <span>Coste total de los productos</span>
+                <span>{`$${totalPrice}`}</span>
               </div>
               <div className="purchase-details">
-                <CustomTypography {...spanProps}>Código del cupon</CustomTypography>
-                <CustomTypography {...spanProps}>4A5S12</CustomTypography>
+                <span>Código del cupon</span>
+                <span>4A5S12</span>
               </div>
               <div className="purchase-details">
-                <CustomTypography {...spanProps}>Total de envío</CustomTypography>
-                <CustomTypography {...spanProps}>{`$${shippingCost}`}</CustomTypography>
+                <span>Total de envío</span>
+                <span>{`$${shippingCost}`}</span>
               </div>
               <Divider sx={{ m: "8px 0" }} />
               <div className="purchase-details">
-                <CustomTypography
-                  variant="body2"
-                  component="span"
-                  sx={{ fontWeight: "bold", m: "8px 0" }}
-                >
-                  Total
-                </CustomTypography>
-                <CustomTypography {...spanProps}>
-                  {`$${totalPrice + shippingCost}`}
-                </CustomTypography>
+                <span>Total</span>
+                <span>{`$${totalPrice + shippingCost}`}</span>
               </div>
               <Button
                 variant="contained"

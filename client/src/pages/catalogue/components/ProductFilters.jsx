@@ -1,10 +1,8 @@
-import React from "react";
 import Grid from "@mui/material/Grid";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
-import CustomTypography from "../../../components/custom-typography/CustomTypography";
 
 function ProductFilters({ check, handleChange }) {
   return (
@@ -22,7 +20,7 @@ function ProductFilters({ check, handleChange }) {
                 sx={{ p: "3px" }}
               />
             }
-            label={<CustomTypography variant="body2">Hombre</CustomTypography>}
+            label={<span>Hombre</span>}
             sx={{ m: 0 }}
           />
           <FormControlLabel
@@ -35,7 +33,7 @@ function ProductFilters({ check, handleChange }) {
                 sx={{ p: "3px" }}
               />
             }
-            label={<CustomTypography variant="body2">Mujer</CustomTypography>}
+            label={<span>Mujer</span>}
             sx={{ m: 0 }}
           />
           <FormControlLabel
@@ -48,7 +46,7 @@ function ProductFilters({ check, handleChange }) {
                 sx={{ p: "3px" }}
               />
             }
-            label={<CustomTypography variant="body2">Sin género</CustomTypography>}
+            label={<span>Sin género</span>}
             sx={{ m: 0 }}
           />
           <FormControlLabel
@@ -61,7 +59,7 @@ function ProductFilters({ check, handleChange }) {
                 sx={{ p: "3px" }}
               />
             }
-            label={<CustomTypography variant="body2">Niños</CustomTypography>}
+            label={<span>Niños</span>}
             sx={{ m: 0 }}
           />
           <FormControlLabel
@@ -74,7 +72,7 @@ function ProductFilters({ check, handleChange }) {
                 sx={{ p: "3px" }}
               />
             }
-            label={<CustomTypography variant="body2">Niñas</CustomTypography>}
+            label={<span>Niñas</span>}
             sx={{ m: 0 }}
           />
           <FormControlLabel
@@ -87,7 +85,7 @@ function ProductFilters({ check, handleChange }) {
                 sx={{ p: "3px" }}
               />
             }
-            label={<CustomTypography variant="body2">Bebés</CustomTypography>}
+            label={<span>Bebés</span>}
             sx={{ m: 0 }}
           />
         </FormControl>
@@ -105,7 +103,7 @@ function ProductFilters({ check, handleChange }) {
                 sx={{ p: "3px" }}
               />
             }
-            label={<CustomTypography variant="body2">Calzado</CustomTypography>}
+            label={<span>Calzado</span>}
             sx={{ m: 0 }}
           />
           <FormControlLabel
@@ -118,7 +116,7 @@ function ProductFilters({ check, handleChange }) {
                 sx={{ p: "3px" }}
               />
             }
-            label={<CustomTypography variant="body2">Camisas y camisetas</CustomTypography>}
+            label={<span>Camisas y camisetas</span>}
             sx={{ m: 0 }}
           />
           <FormControlLabel
@@ -131,7 +129,7 @@ function ProductFilters({ check, handleChange }) {
                 sx={{ p: "3px" }}
               />
             }
-            label={<CustomTypography variant="body2">Ropa deportiva</CustomTypography>}
+            label={<span>Ropa deportiva</span>}
             sx={{ m: 0 }}
           />
           <FormControlLabel
@@ -144,7 +142,7 @@ function ProductFilters({ check, handleChange }) {
                 sx={{ p: "3px" }}
               />
             }
-            label={<CustomTypography variant="body2">Bolsos y maletas</CustomTypography>}
+            label={<span>Bolsos y maletas</span>}
             sx={{ m: 0 }}
           />
         </FormControl>
@@ -162,7 +160,7 @@ function ProductFilters({ check, handleChange }) {
                 sx={{ p: "3px" }}
               />
             }
-            label={<CustomTypography variant="body2">Gratis</CustomTypography>}
+            label={<span>Gratis</span>}
             sx={{ m: 0 }}
           />
         </FormControl>
@@ -180,7 +178,7 @@ function ProductFilters({ check, handleChange }) {
                 sx={{ p: "3px" }}
               />
             }
-            label={<CustomTypography variant="body2">Negro</CustomTypography>}
+            label={<span>Negro</span>}
             sx={{ m: 0 }}
           />
           <FormControlLabel
@@ -193,7 +191,7 @@ function ProductFilters({ check, handleChange }) {
                 sx={{ p: "3px" }}
               />
             }
-            label={<CustomTypography variant="body2">Blanco</CustomTypography>}
+            label={<span>Blanco</span>}
             sx={{ m: 0 }}
           />
           <FormControlLabel
@@ -206,7 +204,7 @@ function ProductFilters({ check, handleChange }) {
                 sx={{ p: "3px" }}
               />
             }
-            label={<CustomTypography variant="body2">Gris</CustomTypography>}
+            label={<span>Gris</span>}
             sx={{ m: 0 }}
           />
           <FormControlLabel
@@ -219,7 +217,7 @@ function ProductFilters({ check, handleChange }) {
                 sx={{ p: "3px" }}
               />
             }
-            label={<CustomTypography variant="body2">Rojo</CustomTypography>}
+            label={<span>Rojo</span>}
             sx={{ m: 0 }}
           />
         </FormControl>
@@ -227,21 +225,13 @@ function ProductFilters({ check, handleChange }) {
       <Grid item>
         <FormControl>
           <FormLabel id="demo-radio-buttons-group-label">Precio</FormLabel>
+          <FormControlLabel control={<span />} label={<span>Hasta $200.000</span>} sx={{ m: 0 }} />
           <FormControlLabel
             control={<span />}
-            label={<CustomTypography variant="body2">Hasta $200.000</CustomTypography>}
+            label={<span>$200.000 a $400.000</span>}
             sx={{ m: 0 }}
           />
-          <FormControlLabel
-            control={<span />}
-            label={<CustomTypography variant="body2">$200.000 a $400.000</CustomTypography>}
-            sx={{ m: 0 }}
-          />
-          <FormControlLabel
-            control={<span />}
-            label={<CustomTypography variant="body2">Más de $400.000</CustomTypography>}
-            sx={{ m: 0 }}
-          />
+          <FormControlLabel control={<span />} label={<span>Más de $400.000</span>} sx={{ m: 0 }} />
         </FormControl>
       </Grid>
     </>

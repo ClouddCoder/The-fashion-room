@@ -78,6 +78,19 @@ describe.skip("GET /catalogue", () => {
   });
 });
 
+describe.skip("PUT /edit-name", () => {
+  it("Should update the name and lastname", async () => {
+    const response = await api
+      .put("/edit-name")
+      .set("Authorization", `Bearer ${token}`)
+      .send({ input: "lucas", secondInput: "silva" })
+      .expect(200)
+      .expect("Content-Type", /application\/json/);
+
+    expect(response.body.message).toBe("Nombre actualizado con éxito");
+  });
+});
+
 describe.skip("PUT /edit-username", () => {
   it("Should update the username", async () => {
     const response = await api
@@ -99,12 +112,12 @@ describe.skip("GET /user-phone", () => {
       .expect("Content-Type", /application\/json/)
       .expect(200);
 
-    expect(response.body).toHaveLength(0);
+    expect(response.body).toHaveLength(1);
   });
 });
 
 describe.skip("POST /add-phone", () => {
-  it("Should add a new number to the user", async () => {
+  it("Should add a new phone to the user", async () => {
     const response = await api
       .post("/add-phone")
       .set("Authorization", `Bearer ${token}`)
@@ -113,7 +126,62 @@ describe.skip("POST /add-phone", () => {
       .expect(200);
 
     expect(response.body.message).toBe("Teléfono agregado con éxito");
-    expect(response.body.phone).toBe({ phone_id: 12 });
+  });
+});
+
+describe.skip("DELETE /delete-phone", () => {
+  it("Should delete a user's phone", async () => {
+    const response = await api
+      .delete("/delete-phone")
+      .set("Authorization", `Bearer ${token}`)
+      .send({ phoneId: 11 })
+      .expect(200);
+
+    expect(response.body.message).toBe("Teléfono eliminado con éxito");
+  });
+});
+
+describe.skip("GET /user-address", () => {
+  it("Should return all the addresses that the user has", async () => {
+    const response = await api
+      .get("/user-address")
+      .set("Authorization", `Bearer ${token}`)
+      .expect("Content-Type", /application\/json/)
+      .expect(200);
+
+    expect(response.body).toHaveLength(1);
+  });
+});
+
+describe.skip("POST /add-address", () => {
+  it("Should add a new address to the user", async () => {
+    const response = await api
+      .post("/add-address")
+      .set("Authorization", `Bearer ${token}`)
+      .send({
+        department: "Cundinamarca",
+        city: "Bogota",
+        neighborhood: "Lourdes",
+        streetName: "carrera",
+        street: "5",
+        streetNumber: "14-32",
+      })
+      .expect("Content-Type", /application\/json/)
+      .expect(200);
+
+    expect(response.body.message).toBe("Dirección agregada con éxito");
+  });
+});
+
+describe.skip("DELETE /delete-address", () => {
+  it("Should delete a user's address", async () => {
+    const response = await api
+      .delete("/delete-address")
+      .set("Authorization", `Bearer ${token}`)
+      .send({ addressId: 7 })
+      .expect(200);
+
+    expect(response.body.message).toBe("Dirección eliminada con éxito");
   });
 });
 

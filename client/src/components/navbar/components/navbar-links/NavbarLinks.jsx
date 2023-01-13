@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import "./NavbarLinks.css";
 
@@ -10,7 +9,7 @@ function NavbarLinks({ displayMode }) {
           <Link to="/">Home</Link>
         </li>
         <li>
-          <Link to="/contact">Contact</Link>
+          <Link to="/store-contact">Contact</Link>
         </li>
       </ul>
     );
@@ -22,7 +21,7 @@ function NavbarLinks({ displayMode }) {
         <Link to="/">Home</Link>
       </li>
       <li>
-        <Link to="/contact">Contact</Link>
+        <Link to="/store-contact">Contact</Link>
       </li>
     </ul>
   );

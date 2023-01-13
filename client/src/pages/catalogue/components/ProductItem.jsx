@@ -1,4 +1,3 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -7,7 +6,6 @@ import { CardActionArea } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import { getProductImage } from "../../../assets";
 import CustomWishlistButton from "./CustomWishlistButton";
-import CustomTypography from "../../../components/custom-typography/CustomTypography";
 
 /**
  * Componente que muestra el producto en el catalogo
@@ -47,12 +45,8 @@ function ProductItem({ product }) {
             alt={product.variant_name}
           />
           <CardContent sx={{ p: "10px" }}>
-            <CustomTypography gutterBottom variant="h5" sx={{ fontSize: "16px" }}>
-              {product.product_name}
-            </CustomTypography>
-            <CustomTypography variant="body2" color="text.secondary">
-              {product.min_price}
-            </CustomTypography>
+            <h5>{product.product_name}</h5>
+            <span>{product.min_price}</span>
           </CardContent>
         </CardActionArea>
         <CustomWishlistButton product={product} />

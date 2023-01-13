@@ -1,4 +1,4 @@
-import instance from "./api";
+import instance, { baseURL } from "./api";
 
 /**
  * Fetches all products from a given category
@@ -80,8 +80,23 @@ export function removeUserPurchase(token, orderDetailId) {
  * Buys the products selected by the user
  */
 export function makeThePurchase(token, productsToBuy) {
-  return fetch("http://localhost:3050/api/buy", {
+  return fetch(`${baseURL}/buy`, {
     method: "PUT",
+    body: JSON.stringify(productsToBuy),
+    headers: new Headers({
+      "Authorization": `Bearer ${token}`,
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+    }),
+  });
+}
+
+/**
+ * Creates a new invoice after each purchase
+ */
+export function createUserInvoice(token, productsToBuy) {
+  return fetch(`${baseURL}/invoice`, {
+    method: "POST",
     body: JSON.stringify(productsToBuy),
     headers: new Headers({
       "Authorization": `Bearer ${token}`,

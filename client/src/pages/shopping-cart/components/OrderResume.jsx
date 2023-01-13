@@ -1,10 +1,9 @@
-import React, { useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Divider from "@mui/material/Divider";
 import { useNavigate } from "react-router-dom";
-import CustomTypography from "../../../components/custom-typography/CustomTypography";
 import ProductContext from "../../../context/product-context/ProductContext";
 
 /**
@@ -36,7 +35,7 @@ function OrderResume() {
         </Button>
       );
     }
-    return <CustomTypography variant="h6">Carrito vacío</CustomTypography>;
+    return <h6>Carrito vacío</h6>;
   };
 
   return (
@@ -52,7 +51,7 @@ function OrderResume() {
     >
       <Grid container direction="column">
         <Grid item container justifyContent="center" mt={2} mb={2}>
-          <CustomTypography variant="h5">Resumen de la compra</CustomTypography>
+          <h5>Resumen de la compra</h5>
         </Grid>
         <Grid
           item
@@ -63,8 +62,8 @@ function OrderResume() {
             alignItems: "center",
           }}
         >
-          <CustomTypography variant="h6">Productos</CustomTypography>
-          <CustomTypography variant="h6">{totalProducts}</CustomTypography>
+          <h6>Productos</h6>
+          <h6>{totalProducts}</h6>
         </Grid>
         <Grid
           item
@@ -75,8 +74,8 @@ function OrderResume() {
             alignItems: "center",
           }}
         >
-          <CustomTypography variant="h6">Total</CustomTypography>
-          <CustomTypography variant="h6">${totalPrice}</CustomTypography>
+          <h6>Total</h6>
+          <h6>${totalPrice}</h6>
         </Grid>
         <Grid item container justifyContent="center">
           <Divider />

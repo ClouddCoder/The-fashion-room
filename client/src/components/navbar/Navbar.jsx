@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -8,20 +8,15 @@ import NavbarProfileLinks from "./components/navbar-profile-links/NavbarProfileL
 import "./Navbar.css";
 
 /**
- * Componente que muestra la barra de navegacion
+ * Components that renders the main navbar
  */
 function Navbar() {
   const [toggle, setToggle] = useState(false);
-  let title;
-  let smallScreen;
+  const title = "Lottus";
+  let smallScreen = false;
 
-  // Si el tamaño de la pantalla es menor a 700px, el titulo cambia y se muestra el boton que
-  // despliega el menu.
-  if (useMediaQuery("(min-width:700px)")) {
-    title = "The Fashion room";
-    smallScreen = false;
-  } else {
-    title = "TFR";
+  // Media query to change the title of the navbar
+  if (!useMediaQuery("(min-width:700px)")) {
     smallScreen = true;
   }
 

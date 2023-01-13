@@ -194,7 +194,7 @@ INSERT INTO store_phone (store_nit, phone_id) VALUES
 ((SELECT store_nit FROM store WHERE store_name = 'THE FASHION ROOM SUROCCIDENTE'), (SELECT phone_id FROM phone WHERE phone_number = '3668741'));
 
 -- Inserts store's and customer's addresses to the addresses table.
-INSERT INTO addresses (department, city, neighborhood, street_name, street, street_number)
+INSERT INTO addresses (department, city, neighborhood, street_type, street, street_number)
 VALUES
 ('Valle', 'Cali', 'Ciudad Jardin', 'Carrera', '45A', '18-58'),
 ('Antioquia', 'Medellin', 'El Poblado', 'Avenida', '2', '58-41'),

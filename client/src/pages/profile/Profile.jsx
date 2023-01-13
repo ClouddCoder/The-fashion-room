@@ -1,8 +1,7 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import Grid from "@mui/material/Grid";
 import { Link } from "react-router-dom";
 import AuthContext from "../../context/auth-context/AuthContext";
-import CustomTypography from "../../components/custom-typography/CustomTypography";
 import Layout from "../../components/layout/Layout";
 import "./Profile.css";
 
@@ -12,31 +11,23 @@ function Profile() {
     <Layout>
       <Grid container direction="column">
         <Grid item>
-          <CustomTypography variant="h3" sx={{ fontWeight: "bold" }}>
-            {`${username} ${userLastname}`}
-          </CustomTypography>
+          <h3>{`${username} ${userLastname}`}</h3>
         </Grid>
         <Grid item>
           <ul className="profile-data">
             <li>
               <Link to="/my-data">
                 <div>
-                  <CustomTypography variant="h6" sx={{ fontWeight: "bold" }}>
-                    Mis datos
-                  </CustomTypography>
-                  <CustomTypography variant="body2">Valida tus datos</CustomTypography>
+                  <h6>Mis datos</h6>
+                  <span>Valida tus datos</span>
                 </div>
               </Link>
             </li>
             <li>
               <Link to="/address">
                 <div>
-                  <CustomTypography variant="h6" sx={{ fontWeight: "bold" }}>
-                    Direcciones
-                  </CustomTypography>
-                  <CustomTypography variant="body2">
-                    Modifica tus direcciones o agrega una nueva
-                  </CustomTypography>
+                  <h6>Direcciones</h6>
+                  <span>Modifica tus direcciones o agrega una nueva</span>
                 </div>
               </Link>
             </li>

@@ -1,9 +1,7 @@
-import React from "react";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import CustomTypography from "../../../components/custom-typography/CustomTypography";
 import { getProductImage } from "../../../assets";
 
 function ProductToBuy({ product }) {
@@ -19,19 +17,13 @@ function ProductToBuy({ product }) {
           />
           <div className="product-description">
             <div>
-              <CustomTypography variant="body2" sx={{ fontSize: "14px" }}>
-                {product.product_name}
-              </CustomTypography>
+              <span>{product.product_name}</span>
             </div>
             <div>
-              <CustomTypography variant="body2" sx={{ fontSize: "14px" }}>
-                ${product.variant_price}
-              </CustomTypography>
+              <span>${product.variant_price}</span>
             </div>
             <div>
-              <CustomTypography variant="body2" sx={{ fontSize: "14px" }}>
-                ${product.shipping_cost}
-              </CustomTypography>
+              <span>${product.shipping_cost}</span>
             </div>
           </div>
         </CardContent>

@@ -113,9 +113,10 @@ CREATE TABLE addresses (
     department VARCHAR(25) NOT NULL,
     city VARCHAR(25) NOT NULL,
     neighborhood VARCHAR(25) NOT NULL,
-    street_name VARCHAR(25) NOT NULL,
+    street_type VARCHAR(25) NOT NULL,
     street VARCHAR(25) NOT NULL,
     street_number VARCHAR(25) NOT NULL,
+    address_references VARCHAR(100),
     CONSTRAINT pk_addresses PRIMARY KEY (address_id)
 );
 
@@ -143,7 +144,7 @@ CREATE TABLE customer_phone (
     phone_id INTEGER,
     CONSTRAINT pk_customer_phone PRIMARY KEY (customer_id, phone_id),
     CONSTRAINT fk_customer_phone_customer_id FOREIGN KEY (customer_id) REFERENCES customer(customer_id),
-    CONSTRAINT fk_customer_phone_phone_id FOREIGN KEY (phone_id) REFERENCES phone(phone_id)
+    CONSTRAINT fk_customer_phone_phone_id FOREIGN KEY (phone_id) REFERENCES phone(phone_id) ON DELETE CASCADE
 );
 
 -- Joining table for customer and addresses.
@@ -152,7 +153,7 @@ CREATE TABLE customer_address (
     address_id INTEGER,
     CONSTRAINT pk_customer_address PRIMARY KEY (customer_id, address_id),
     CONSTRAINT fk_customer_address_customer_id FOREIGN KEY (customer_id) REFERENCES customer(customer_id),
-    CONSTRAINT fk_customer_address_address_id FOREIGN KEY (address_id) REFERENCES addresses(address_id)
+    CONSTRAINT fk_customer_address_address_id FOREIGN KEY (address_id) REFERENCES addresses(address_id) ON DELETE CASCADE
 );
 
 -- Joining table for store and addresses.

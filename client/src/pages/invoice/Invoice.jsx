@@ -1,10 +1,9 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Divider from "@mui/material/Divider";
-import CustomTypography from "../../components/custom-typography/CustomTypography";
 import Layout from "../../components/layout/Layout";
 import ProductContext from "../../context/product-context/ProductContext";
 
@@ -32,8 +31,8 @@ function Invoice() {
           >
             <Grid container direction="column" sx={{ height: "auto" }}>
               <Grid item container justifyContent="center">
-                <CustomTypography variant="h3">Detalles de la compra</CustomTypography>
-                <CustomTypography variant="body2">{`#${invoiceId}`}</CustomTypography>
+                <h3>Detalles de la compra</h3>
+                <span>{`#${invoiceId}`}</span>
               </Grid>
               <Grid
                 item
@@ -44,7 +43,7 @@ function Invoice() {
                   alignItems: "center",
                 }}
               >
-                <CustomTypography variant="h4">Productos</CustomTypography>
+                <h4>Productos</h4>
                 <Grid item container direction="column">
                   {productsToBuy?.map((product, i) => (
                     <Grid
@@ -53,12 +52,10 @@ function Invoice() {
                       key={i}
                       sx={{ display: "flex", justifyContent: "space-between" }}
                     >
-                      <CustomTypography variant="body2">
+                      <span>
                         {product.product_name} x{product.quantity_to_purchase}
-                      </CustomTypography>
-                      <CustomTypography variant="body2">
-                        {`$${product.variant_price * product.quantity_to_purchase}`}
-                      </CustomTypography>
+                      </span>
+                      <span>{`$${product.variant_price * product.quantity_to_purchase}`}</span>
                     </Grid>
                   ))}
                 </Grid>
@@ -76,8 +73,8 @@ function Invoice() {
                     alignItems: "center",
                   }}
                 >
-                  <CustomTypography variant="h4">Costo de envío</CustomTypography>
-                  <CustomTypography variant="body2">{`$${shippingCost}`}</CustomTypography>
+                  <h4>Costo de envío</h4>
+                  <span>{`$${shippingCost}`}</span>
                 </Grid>
                 <Grid
                   item
@@ -88,10 +85,8 @@ function Invoice() {
                     alignItems: "center",
                   }}
                 >
-                  <CustomTypography variant="h4">Total</CustomTypography>
-                  <CustomTypography variant="body2">
-                    {`$${totalPrice + shippingCost}`}
-                  </CustomTypography>
+                  <h4>Total</h4>
+                  <span>{`$${totalPrice + shippingCost}`}</span>
                 </Grid>
               </Grid>
               <Grid item align="center">

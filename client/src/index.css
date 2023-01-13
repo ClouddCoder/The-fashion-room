@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Source Sans Pro", sans-serif;
 }
 
 :root {
@@ -34,4 +35,19 @@ body,
   justify-content: center;
   flex: 1 0 auto;
   width: 100%;
+}
+
+.loader-container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.834) url("https://media.giphy.com/media/8agqybiK5LW8qrG3vJ/giphy.gif")
+    center no-repeat;
+  z-index: 999;
+}
+
+h5 {
+  text-align: center;
 }

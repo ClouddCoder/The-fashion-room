@@ -1,17 +1,15 @@
-import React, { useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import ProductContext from "../../context/product-context/ProductContext";
 import AuthContext from "../../context/auth-context/AuthContext";
 import Layout from "../../components/layout/Layout";
-import CustomTypography from "../../components/custom-typography/CustomTypography";
 import { getProductImage } from "../../assets";
 import "./Product.css";
 
 /**
- * Componente que renderiza la informacion de un producto
- * con las opciones de comprarlo o agregarlo al carrito
+ * Component that renders de product information.
  */
 function Product() {
   const navigate = useNavigate();
@@ -32,7 +30,7 @@ function Product() {
   const product = variants.find((item) => item.variant_id === variantId) || [];
 
   /**
-   * Event delegation to change the color of the variant's button border
+   * Event delegation to change the color of the variant's button border.
    */
   const changeButtonBorderColor = (e) => {
     if (e.target.matches(".product-color")) {
@@ -51,8 +49,8 @@ function Product() {
   useEffect(() => {
     // Gets the product's variants information.
     getProductVariants(productId);
-    // The variant that is fetched with the product will be the default one
-    // to check the variant's color button.
+
+    // The variant that is fetched with the product will be the default one.
     setVariantId(productVariantId);
     clearListOfProductsToBuy();
   }, []);
@@ -70,13 +68,13 @@ function Product() {
         </Grid>
         <Grid item container xs={6} direction="column" justifyContent="center">
           <Grid item>
-            <CustomTypography variant="h4">{product.product_name}</CustomTypography>
+            <h4>{product.product_name}</h4>
           </Grid>
           <Grid item>
-            <CustomTypography variant="body2">{product.variant_price}</CustomTypography>
+            <span>{product.variant_price}</span>
           </Grid>
           <Grid item>
-            <CustomTypography variant="body2">Color:</CustomTypography>
+            <span>Color:</span>
           </Grid>
           <Grid item>
             {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
@@ -84,9 +82,7 @@ function Product() {
               {variants?.map((variant, index) => (
                 <li
                   name={variant.variant_id}
-                  className={`product-color${
-                    variantId === variant.variant_id ? " selected" : ""
-                  }`}
+                  className={`product-color${variantId === variant.variant_id ? " selected" : ""}`}
                   key={index}
                 >
                   <span>{variant.color_value}</span>

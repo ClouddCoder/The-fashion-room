@@ -1,7 +1,6 @@
-import React, { useEffect, useContext } from "react";
+import { useEffect, useContext } from "react";
 import Grid from "@mui/material/Grid";
 import ProductContext from "../../context/product-context/ProductContext";
-import CustomTypography from "../../components/custom-typography/CustomTypography";
 import InvoiceDetail from "./components/InvoiceDetail";
 import Layout from "../../components/layout/Layout";
 
@@ -9,7 +8,13 @@ import Layout from "../../components/layout/Layout";
  * Componente que muestra las compras realizadas por el usuario
  */
 function Orders() {
-  const { loadOrderDetail, myOrders, clearProductsList } = useContext(ProductContext);
+  const { loader, setLoader, loadOrderDetail, myOrders, clearProductsList } =
+    useContext(ProductContext);
+
+  // Displays the loader every time the component is re-render.
+  useEffect(() => {
+    setLoader(true);
+  }, []);
 
   useEffect(() => {
     // Clears the products list to avoid duplicates
@@ -21,9 +26,15 @@ function Orders() {
 
   return (
     <Layout>
+      {loader && (
+        <div className="loader-container">
+          <div className="spinner" />
+        </div>
+      )}
+
       <Grid container direction="column" sx={{ height: "auto", width: "60%", m: 2 }}>
         <Grid item>
-          <CustomTypography variant="h3">Mis ordenes</CustomTypography>
+          <h3>Mis ordenes</h3>
         </Grid>
         <Grid item container direction="column" mt={4}>
           {myOrders?.map((order, i) => (

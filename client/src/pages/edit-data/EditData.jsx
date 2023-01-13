@@ -1,11 +1,10 @@
-import React, { useState, useContext } from "react";
+import { useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import * as services from "../../services/user";
 import AuthContext from "../../context/auth-context/AuthContext";
-import CustomTypography from "../../components/custom-typography/CustomTypography";
 import Layout from "../../components/layout/Layout";
 import useUserInput from "../../hooks/useUserInput";
 import "./EditData.css";
@@ -24,16 +23,10 @@ function EditEmail() {
   let secondInputLabel = "";
   let inputAriaLabel = "";
   let secondInpuAriaLabel = "";
+  let inputObject = {};
   let method = null;
 
   switch (info) {
-    case "email":
-      title = "Editar email";
-      successMessage = "El email se ha cambiado correctamente";
-      inputLabel = "Nuevo email";
-      inputAriaLabel = "new-email";
-      method = services.changeUserEmail;
-      break;
     case "name":
       title = "Editar nombre";
       successMessage = "El nombre se ha cambiado correctamente";
@@ -43,6 +36,13 @@ function EditEmail() {
       secondInpuAriaLabel = "new-lastname";
       method = services.changeName;
       break;
+    case "email":
+      title = "Editar email";
+      successMessage = "El email se ha cambiado correctamente";
+      inputLabel = "Nuevo email";
+      inputAriaLabel = "new-email";
+      method = services.changeUserEmail;
+      break;
     case "username":
       title = "Modificar usuario";
       successMessage = "El nombre de usuario se ha cambiado correctamente";
@@ -50,23 +50,17 @@ function EditEmail() {
       inputAriaLabel = "new-username";
       method = services.changeUsername;
       break;
-    case "phone":
-      title = "Editar teléfono";
-      successMessage = "El teléfono se ha cambiado correctamente";
-      inputLabel = "Teléfono escogido";
-      inputAriaLabel = "new-phone";
-      method = services.editPhone;
-      break;
     default:
   }
 
   /**
-   * Sends the user's new email to update it in the database
+   * Sends the user's data to update it in the database
    */
   const handleSubmit = async (e) => {
     e.preventDefault();
+    inputObject = { ...inputObject, input, secondInput: inputLastname.input };
     try {
-      await method(input, token);
+      await method(inputObject, token);
       setSuccess(true);
     } catch (error) {
       const { response } = error;
@@ -87,19 +81,19 @@ function EditEmail() {
     <Layout>
       <Grid container direction="column" sx={{ width: "auto" }}>
         <Grid item>
-          <CustomTypography variant="h3" sx={{ fontWeight: "bold" }}>
-            {title}
-          </CustomTypography>
+          <h3>{title}</h3>
         </Grid>
         <Grid container item direction="column">
           <Grid>
             <form onSubmit={handleSubmit}>
+              {/* If the user is going to change their name, must change name and lastname */}
               {info === "name" ? (
                 <div className="container-input complete-name">
                   <div>
                     <span>{inputLabel}</span>
                     <TextField
                       inputProps={{ "aria-label": inputAriaLabel }}
+                      name="new-name"
                       hiddenLabel
                       fullWidth
                       onChange={handleChange}
@@ -111,6 +105,7 @@ function EditEmail() {
                     <span>{secondInputLabel}</span>
                     <TextField
                       inputProps={{ "aria-label": secondInpuAriaLabel }}
+                      name="new-lastname"
                       hiddenLabel
                       fullWidth
                       onChange={handleChange}
@@ -144,7 +139,7 @@ function EditEmail() {
         </Grid>
         {success && (
           <Grid item>
-            <CustomTypography variant="body2">{successMessage}</CustomTypography>
+            <span>{successMessage}</span>
           </Grid>
         )}
       </Grid>

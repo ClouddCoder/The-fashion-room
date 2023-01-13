@@ -1,0 +1,11 @@
+.footer__subtitle {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: var(--color-primary-white);
+}
+
+.font__link {
+  font-size: 0.8125rem;
+  margin-top: 10px;
+  color: var(--color-primary-white);
+}
