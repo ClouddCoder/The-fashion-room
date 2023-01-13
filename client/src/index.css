@@ -13,28 +13,16 @@
   --color-primary-red: #bf665e;
 }
 
-html,
-body,
-#root,
-#app {
+html {
   height: 100%;
   width: 100%;
 }
 
-.layout {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+body,
+#root,
+#app {
+  height: 100%;
   min-height: 100%;
-  height: auto;
-}
-
-.main-content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex: 1 0 auto;
-  width: 100%;
 }
 
 .loader-container {
@@ -48,6 +36,7 @@ body,
   z-index: 999;
 }
 
-h5 {
-  text-align: center;
+img {
+  max-width: 100%;
+  max-height: 100%;
 }

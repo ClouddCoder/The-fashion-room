@@ -8,11 +8,11 @@ import "./Categories.css";
  */
 function Categories() {
   return (
-    <Grid container direction="column" spacing={2} mb="20px">
+    <Grid container direction="column">
       <Grid item>
-        <h3>Ofertas</h3>
+        <h2>Ofertas</h2>
       </Grid>
-      <Grid item container>
+      <Grid item container spacing={1}>
         <Grid item={true} xs={6} md={3}>
           <Category
             alt="calzado"
@@ -22,12 +22,7 @@ function Categories() {
           />
         </Grid>
         <Grid item={true} xs={6} md={3}>
-          <Category
-            alt="camisas"
-            image={getProductImage("camisetas")}
-            title="Camisetas"
-            description="Camisetas de todo tipo"
-          />
+          <Category alt="camisas" image={getProductImage("camisetas")} title="Camisetas" />
         </Grid>
         <Grid item={true} xs={6} md={3}>
           <Category

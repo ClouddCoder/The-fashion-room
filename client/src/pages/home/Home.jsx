@@ -1,6 +1,7 @@
 import Layout from "../../components/layout/Layout";
 import Header from "./components/header/Header";
 import Categories from "./components/categories/Categories";
+import "./Home.css";
 
 /**
  * Componente que muestra el inicio de la tienda
@@ -8,9 +9,11 @@ import Categories from "./components/categories/Categories";
 function Home() {
   return (
     <Layout>
-      <div>
+      <div className="main-content__container">
         <Header />
-        <Categories />
+        <div className="container">
+          <Categories />
+        </div>
       </div>
     </Layout>
   );

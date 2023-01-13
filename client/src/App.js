@@ -4,7 +4,7 @@ import { router } from "./routes";
 import AuthState from "./context/auth-context/AuthState";
 import ProductState from "./context/product-context/ProductState";
 
-// Default font family to MUI components
+// Default font family to MUI components.
 const theme = createTheme({
   typography: {
     fontFamily: ["Source Sans Pro"].join(","),
