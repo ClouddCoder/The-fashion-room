@@ -3,6 +3,11 @@ import { screen } from "@testing-library/react";
 import { EditAddressTest } from "../../tests/test.utils";
 
 describe.skip("EditAddress component", () => {
+  it("Should render the component", () => {
+    EditAddressTest();
+    expect(screen.getByText(/Editar domicilio/)).toBeInTheDocument();
+  });
+
   it("Should render address's inputs", () => {
     EditAddressTest();
     expect(screen.getByText("Nombre y apellido")).toBeInTheDocument();

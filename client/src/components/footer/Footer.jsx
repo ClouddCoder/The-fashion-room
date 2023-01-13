@@ -1,4 +1,3 @@
-import React from "react";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import TwitterIcon from "@mui/icons-material/Twitter";
@@ -43,14 +42,10 @@ function Footer() {
         </Grid>
         <Grid item container direction="column">
           <Grid item>
-            <CustomTypography {...linkProps}>
-              Vender productos en The Fashion Room
-            </CustomTypography>
+            <CustomTypography {...linkProps}>Vender productos en The Fashion Room</CustomTypography>
           </Grid>
           <Grid item>
-            <CustomTypography {...linkProps}>
-              Vender en The Fashion Room business
-            </CustomTypography>
+            <CustomTypography {...linkProps}>Vender en The Fashion Room business</CustomTypography>
           </Grid>
           <Grid item>
             <CustomTypography {...linkProps}>Programa de afiliados</CustomTypography>

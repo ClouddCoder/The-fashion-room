@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useReducer } from "react";
+import { useEffect, useContext, useReducer } from "react";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
@@ -19,9 +19,15 @@ import { catalogueInitialState, CatalogueReducer } from "./reducer/catalogueRedu
 function Catalogue() {
   const { category } = useParams();
   const navigate = useNavigate();
-  const { addToCart, loadProducts, products, getWishlist } = useContext(ProductContext);
+  const { loader, setLoader, addToCart, loadProducts, products, getWishlist } =
+    useContext(ProductContext);
   const { auth } = useContext(AuthContext);
   const [state, dispatch] = useReducer(CatalogueReducer, catalogueInitialState);
+
+  // Displays the loader every time the component is re-render.
+  useEffect(() => {
+    setLoader(true);
+  }, []);
 
   /**
    * Gets the products by their category.
@@ -65,6 +71,12 @@ function Catalogue() {
 
   return (
     <Layout>
+      {loader && (
+        <div className="loader-container">
+          <div className="spinner" />
+        </div>
+      )}
+
       <Grid
         container
         direction="column"

@@ -1,6 +1,7 @@
 import userEvent from "@testing-library/user-event";
 import { screen } from "@testing-library/react";
-import { LoginTest, authContextProps } from "../../tests/test.utils";
+import { LoginTest } from "../../tests/test.utils";
+import { authContextProps } from "../../tests/mockedData";
 
 afterEach(() => {
   jest.clearAllMocks();
@@ -9,23 +10,29 @@ afterEach(() => {
 describe.skip("Login component", () => {
   it("Should render Login component", () => {
     LoginTest();
-    expect(screen.getByText("Iniciar sesión")).toBeInTheDocument();
-    expect(screen.getByText("Email")).toBeInTheDocument();
-    expect(screen.getByText("Password")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Iniciar sesión" })).toBeInTheDocument();
+    expect(screen.getByRole("textbox", { name: "Email" })).toBeInTheDocument();
   });
 
-  it("Should type email and password's inputs", async () => {
+  it("Email input should have user@user.com and Password input 1234 as values", () => {
+    LoginTest();
+
+    const inputEmail = screen.getByRole("textbox", { name: "Email" });
+
+    const inputPassword = screen.getByLabelText("Password");
+
+    expect(inputEmail).toHaveValue("user@user.com");
+    expect(inputPassword).toHaveValue("1234");
+  });
+
+  it("Should type on the inputs and call the set method of the useState because of the onChange method", async () => {
     const user = userEvent.setup();
     LoginTest();
 
-    const inputEmail = screen.getByLabelText("Email");
-    await user.type(inputEmail, "brayan");
-    const inputPassword = screen.getByLabelText("Password");
-    await user.type(inputPassword, "1234");
-    expect(inputEmail).toHaveValue("brayan");
-    expect(inputPassword).toHaveValue("1234");
-    expect(authContextProps.setUserEmail).toHaveBeenCalledTimes(6);
-    expect(authContextProps.setUserPassword).toHaveBeenCalledTimes(4);
+    const inputEmail = screen.getByRole("textbox", { name: "Email" });
+
+    await user.type(inputEmail, "user@user.com");
+    expect(authContextProps.setUserEmail).toHaveBeenCalledTimes(13);
   });
 
   it("Should call handlesubmit function to fetch data", async () => {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import { getStoreInformation } from "../../services/store";
 import StoreInfo from "./components/StoreInfo";

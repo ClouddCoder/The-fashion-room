@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -119,9 +119,7 @@ function Login() {
             </Grid>
             <Grid item>
               <Link to="/register">
-                <CustomTypography variant="body2">
-                  Do not have an account? Sign Up
-                </CustomTypography>
+                <CustomTypography variant="body2">Do not have an account? Sign Up</CustomTypography>
               </Link>
             </Grid>
           </Grid>

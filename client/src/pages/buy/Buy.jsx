@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Divider from "@mui/material/Divider";
 import Button from "@mui/material/Button";
@@ -56,7 +56,7 @@ function Buy() {
   };
 
   useEffect(() => {
-    getTotalProducts(true);
+    getTotalProducts();
     getTotalPrice();
     getTotalShippingCost();
   }, []);

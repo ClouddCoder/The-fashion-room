@@ -9,7 +9,12 @@ const {
   updatePassword,
   getPhone,
   setPhone,
-  updatePhone,
+  deletePhone,
+  getAddress,
+  getSingleAddress,
+  setAddress,
+  updateAddress,
+  deleteAddress,
 } = require("../controllers/users.controllers");
 const {
   getAllProducts,
@@ -48,7 +53,17 @@ router.get("/user-phone", getPhone);
 
 router.post("/add-phone", setPhone);
 
-router.put("/edit-phone", updatePhone);
+router.delete("/delete-phone", deletePhone);
+
+router.get("/user-address", getAddress);
+
+router.get("/single-address", getSingleAddress);
+
+router.post("/add-address", setAddress);
+
+router.put("/update-address", updateAddress);
+
+router.delete("/delete-address", deleteAddress);
 
 router.put("/buy", buyProduct);
 

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
@@ -10,8 +10,7 @@ import { getProductImage } from "../../assets";
 import "./Product.css";
 
 /**
- * Componente que renderiza la informacion de un producto
- * con las opciones de comprarlo o agregarlo al carrito
+ * Component that renders de product information.
  */
 function Product() {
   const navigate = useNavigate();
@@ -32,7 +31,7 @@ function Product() {
   const product = variants.find((item) => item.variant_id === variantId) || [];
 
   /**
-   * Event delegation to change the color of the variant's button border
+   * Event delegation to change the color of the variant's button border.
    */
   const changeButtonBorderColor = (e) => {
     if (e.target.matches(".product-color")) {
@@ -51,8 +50,8 @@ function Product() {
   useEffect(() => {
     // Gets the product's variants information.
     getProductVariants(productId);
-    // The variant that is fetched with the product will be the default one
-    // to check the variant's color button.
+
+    // The variant that is fetched with the product will be the default one.
     setVariantId(productVariantId);
     clearListOfProductsToBuy();
   }, []);
@@ -84,9 +83,7 @@ function Product() {
               {variants?.map((variant, index) => (
                 <li
                   name={variant.variant_id}
-                  className={`product-color${
-                    variantId === variant.variant_id ? " selected" : ""
-                  }`}
+                  className={`product-color${variantId === variant.variant_id ? " selected" : ""}`}
                   key={index}
                 >
                   <span>{variant.color_value}</span>

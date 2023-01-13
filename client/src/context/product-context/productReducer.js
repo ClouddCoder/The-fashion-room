@@ -1,6 +1,7 @@
 import { TYPES } from "../../actions/productActions";
 
 export const productInitialState = {
+  loader: true, // Loader to wait for data
   products: [],
   variants: [],
   variantId: 0,
@@ -19,6 +20,9 @@ export const productInitialState = {
  */
 export function ProductReducer(state, action) {
   switch (action.type) {
+    case TYPES.LOADER:
+      return { ...state, loader: action.payload };
+
     case TYPES.LOAD_PRODUCTS:
       return { ...state, products: [...action.payload] };
 
