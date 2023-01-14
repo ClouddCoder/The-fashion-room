@@ -2,11 +2,11 @@
 Small ecommerce to practice PERN stack. This is still in development.
 
 ## Build with
-- PostgreSQL
-- Express.js
-- ReactJS
-- Node.js
-- JWT
+- [![postgres](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org)
+- [![express](https://img.shields.io/badge/Express.js-404D59?style=for-the-badge)](https://expressjs.com)
+- [![react](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
+- [![node](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/en/)
+- [![jwt](https://img.shields.io/badge/json%20web%20tokens-323330?style=for-the-badge&logo=json-web-tokens&logoColor=pink)](https://jwt.io/)
 
 # Getting started
 ## Prerequisites
@@ -19,14 +19,14 @@ Small ecommerce to practice PERN stack. This is still in development.
 git clone https://github.com/ClouddCoder/ecommerce-PERN.git
 ```
 
-2. Inside the folder, install NPM packages
+2. In the project root install NPM packages
 ```
 npm install
 ```
 
-3. You must create an **.env** file for the **api** and **client** folders with the following variables:
+3. You must create an **.env** file for the **api** and **client** directories with the following variables:
 
-**api** folder
+**api** directory
 ```
 PORT = <SERVER_PORT>
 JWT_PASSWORD = <JWT_PASSWORD> # The backend uses JWT to authenticate the user.
@@ -55,7 +55,7 @@ DB_NAME_TEST = <YOUR_DB_NAME_FOR_TESTING>
 DB_PORT_TEST = <YOUR_DB_PORT_FOR_TESTING>
 DB_SSL_TEST = <1_OR_0>
 ```
-**client** folder
+**client** directory
 ```
 # These variables are used to connect the backend.
 
@@ -66,7 +66,7 @@ BASE_URL = <ENTER_YOUR_BACKEND_SERVER_URL>
 BASE_URL_DEV = <ENTER_YOUR_LOCALHOST_URL>
 ```
 # Usage
-This project can be deployed locally with Docker compose. Inside the project folder, open a terminal and do
+This project can be deployed locally with Docker compose. In the project root, open a terminal and do
 ```
 docker compose up
 ```
