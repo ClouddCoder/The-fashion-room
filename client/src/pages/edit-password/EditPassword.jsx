@@ -6,9 +6,9 @@ import Grid from "@mui/material/Grid";
 import Layout from "../../components/layout/Layout";
 import Modal from "../../components/modal/Modal";
 import { changeUserPassword, getUserId } from "../../services/user";
-import useUserInput from "../../hooks/useUserInput";
-import usePasswordLength from "../../hooks/usePasswordLength";
-import useError from "../../hooks/useError";
+import useUserInput from "../../utils/hooks/useUserInput";
+import usePasswordLength from "../../utils/hooks/usePasswordLength";
+import useError from "../../utils/hooks/useError";
 import "./EditPassword.css";
 
 function EditPassword() {

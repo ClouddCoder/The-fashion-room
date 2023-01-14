@@ -5,7 +5,7 @@ import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Form from "../../components/form/Form";
 import AuthContext from "../../context/auth-context/AuthContext";
-import useError from "../../hooks/useError";
+import useError from "../../utils/hooks/useError";
 import { loginUser } from "../../services/user";
 
 /**

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import IconButton from "@mui/material/IconButton";
-import { customButtonStyle } from "./style";
+import { customButtonStyle } from "./CustomButtonMUIStyle.js";
 
 /**
  * Boton personalizado para el carrito y la wishlist

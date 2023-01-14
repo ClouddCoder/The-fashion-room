@@ -6,7 +6,7 @@ import TextField from "@mui/material/TextField";
 import * as services from "../../services/user";
 import AuthContext from "../../context/auth-context/AuthContext";
 import Layout from "../../components/layout/Layout";
-import useUserInput from "../../hooks/useUserInput";
+import useUserInput from "../../utils/hooks/useUserInput";
 import "./EditData.css";
 
 function EditEmail() {

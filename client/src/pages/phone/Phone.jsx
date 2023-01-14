@@ -8,8 +8,8 @@ import Layout from "../../components/layout/Layout";
 import Modal from "../../components/modal/Modal";
 import AuthContext from "../../context/auth-context/AuthContext";
 import { getPhone, setPhone, deletePhone } from "../../services/user";
-import useUserInput from "../../hooks/useUserInput";
-import useError from "../../hooks/useError";
+import useUserInput from "../../utils/hooks/useUserInput";
+import useError from "../../utils/hooks/useError";
 
 function Phone() {
   const { input, setUserInput } = useUserInput();

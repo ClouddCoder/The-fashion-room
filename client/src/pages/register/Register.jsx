@@ -5,8 +5,8 @@ import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Form from "../../components/form/Form";
 import AuthContext from "../../context/auth-context/AuthContext";
-import useError from "../../hooks/useError";
-import usePasswordLength from "../../hooks/usePasswordLength";
+import useError from "../../utils/hooks/useError";
+import usePasswordLength from "../../utils/hooks/usePasswordLength";
 import { registerUser } from "../../services/user";
 
 /**

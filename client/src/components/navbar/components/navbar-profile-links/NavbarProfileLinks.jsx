@@ -7,7 +7,12 @@ import CustomButton from "../custom-button/CustomButton";
 import AuthContext from "../../../../context/auth-context/AuthContext";
 import "./NavbarProfileLinks.css";
 
-function NavbarProfileLinks({ displayMode }) {
+/**
+ * Component that renders the profile links in the navbar.
+ * @param {string} newSelector - Class selector to render the links on the navbar or the overlay.
+ * @returns {JSX.Element} - NavbarProfileLinks component
+ */
+function NavbarProfileLinks({ newSelector }) {
   const {
     auth,
     setAuth,
@@ -22,6 +27,9 @@ function NavbarProfileLinks({ displayMode }) {
     setUserPassword,
   } = useContext(AuthContext);
 
+  /**
+   * Resets the session.
+   */
   const resetSession = () => {
     setAuth(false);
     setUser("");
@@ -31,7 +39,7 @@ function NavbarProfileLinks({ displayMode }) {
   };
 
   /**
-   * Borra los campos del login y register cuando se redirige a uno de los dos
+   * Resets the form values in the login and register components.
    */
   const resetForm = () => {
     setUserName("");
@@ -40,10 +48,11 @@ function NavbarProfileLinks({ displayMode }) {
     setUserPassword("");
   };
 
-  if (displayMode) {
-    if (auth) {
-      return (
-        <div className="header__navbar__small-screen-user-links">
+  return (
+    <div className={newSelector}>
+      {/* If the user is authenticated */}
+      {auth ? (
+        <>
           <div className="header__navbar__username">
             <p>{user}</p>
           </div>
@@ -62,63 +71,23 @@ function NavbarProfileLinks({ displayMode }) {
           <div className="header__navbar__profile">
             <ProfileButton resetSession={resetSession} />
           </div>
-        </div>
-      );
-    }
-    return (
-      <div className="header__navbar__small-screen-user-links">
-        <div className="header__navbar__login">
-          <Link to="/login" component="button" onClick={resetForm}>
-            Login
-          </Link>
-        </div>
-        <div className="header__navbar__register">
-          <Link to="/register" component="button" onClick={resetForm}>
-            Register
-          </Link>
-        </div>
-      </div>
-    );
-  }
-
-  if (auth) {
-    return (
-      <div className="header__navbar__user-links">
-        <div className="header__navbar__username">
-          <p>{user}</p>
-        </div>
-        <div className="horizontal-line" />
-        <div className="header__navbar__wishlist">
-          <CustomButton path="/wishlist">
-            <p>Wishlist</p>
-            <FavoriteBorderOutlinedIcon sx={{ ml: "10px" }} />
-          </CustomButton>
-        </div>
-        <div className="header__navbar__cart">
-          <CustomButton path="/cart">
-            <p>Mi carrito</p>
-            <ShoppingCartOutlinedIcon sx={{ ml: "10px" }} />
-          </CustomButton>
-        </div>
-        <div className="header__navbar__profile">
-          <ProfileButton resetSession={resetSession} />
-        </div>
-      </div>
-    );
-  }
-  return (
-    <div className="header__navbar__user-links">
-      <div className="header__navbar__login">
-        <Link to="/login" component="button" onClick={resetForm}>
-          Login
-        </Link>
-      </div>
-      <div className="horizontal-line" />
-      <div className="header__navbar__register">
-        <Link to="/register" component="button" onClick={resetForm}>
-          Register
-        </Link>
-      </div>
+        </>
+      ) : (
+        <>
+          {/* If the user is not authenticated */}
+          <div className="header__navbar__login">
+            <Link to="/login" component="button" onClick={resetForm}>
+              Login
+            </Link>
+          </div>
+          <div className="vertical-line" />
+          <div className="header__navbar__register">
+            <Link to="/register" component="button" onClick={resetForm}>
+              Register
+            </Link>
+          </div>
+        </>
+      )}
     </div>
   );
 }
