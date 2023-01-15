@@ -3,27 +3,32 @@
   display: none;
 }
 
-.header__navbar__overlay-profile-links {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-right: 10px;
+/* Hides the profile button */
+.header__navbar__profile {
+  display: none;
 }
 
-.header__navbar__username p {
-  margin: 0 1rem;
-  color: var(--color-primary-brown);
-}
-
-.header__navbar__wishlist,
-.header__navbar__cart {
+.header__navbar__profile-links li {
+  list-style: none;
   margin: 10px;
+}
+
+.header__navbar__profile-links a {
+  cursor: pointer;
+  color: var(--color-primary-brown);
+  text-decoration: none;
+}
+
+.header__navbar__username span {
+  position: absolute;
+  top: 70px;
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: var(--color-primary-brown);
 }
 
 .header__navbar__login a,
 .header__navbar__register a {
-  margin: 10px;
   color: var(--color-primary-brown);
   text-decoration: none;
   cursor: pointer;
@@ -33,11 +38,55 @@
 @media only screen and (min-width: 601px) {
   .header__navbar__profile-links {
     display: flex;
+    flex-direction: row;
     align-items: center;
-    margin-right: 10px;
+  }
+
+  .header__navbar__profile-links li {
+    padding: 0;
+  }
+
+  .header__navbar__profile-links a {
+    display: flex;
+    align-items: center;
+  }
+
+  .header__navbar__profile,
+  .header__navbar__username,
+  .header__navbar__wishlist,
+  .header__navbar__cart {
+    margin: 10px;
+  }
+
+  .header__navbar__username span {
+    position: relative;
+    top: 0;
+    font-size: 1rem;
+    color: var(--color-primary-brown);
+  }
+
+  .header__navbar__wishlist a,
+  .header__navbar__cart a {
+    transition: 0.4s;
+    padding: 10px;
+    border-radius: 5px;
+    background: var(--color-primary-orange);
+  }
+
+  .header__navbar__wishlist a:hover,
+  .header__navbar__cart a:hover {
+    background: var(--color-primary-yellow);
   }
 
   .header__navbar__profile {
+    display: block;
+  }
+
+  .header__navbar__profile button {
+    padding: 0;
+  }
+
+  .header__navbar__profile svg {
     color: var(--color-primary-brown);
   }
 

@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import StorefrontOutlinedIcon from "@mui/icons-material/StorefrontOutlined";
 import "./NavbarLinks.css";
 
 /**
@@ -10,10 +12,16 @@ function NavbarLinks({ newSelector }) {
   return (
     <ul className={newSelector}>
       <li>
-        <Link to="/">Home</Link>
+        <Link to="/">
+          <HomeOutlinedIcon />
+          <span>Home</span>
+        </Link>
       </li>
       <li>
-        <Link to="/store-contact">Contact</Link>
+        <Link to="/store-contact">
+          <StorefrontOutlinedIcon />
+          <span>Stores</span>
+        </Link>
       </li>
     </ul>
   );

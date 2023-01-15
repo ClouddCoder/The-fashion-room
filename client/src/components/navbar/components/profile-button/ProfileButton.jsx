@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import Menu from "@mui/material/Menu";
@@ -32,7 +32,7 @@ function ProfileButton({ resetSession }) {
           aria-haspopup="true"
           aria-expanded={open ? "true" : undefined}
         >
-          <AccountCircleOutlinedIcon sx={{ width: "40px", height: "40px" }} />
+          <PersonOutlineOutlinedIcon fontSize="large" />
         </IconButton>
       </Tooltip>
       <div>

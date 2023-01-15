@@ -50,7 +50,7 @@ function Register() {
         const res = await registerUser(userName, userLastname, userEmail, userPassword);
         const data = await res.json();
 
-        // Sets the user's data to login and deletes the data from the inputs
+        // Sets the user's data to login and resets the data from the inputs
         if (res.ok) {
           setAuth(data.isAuth);
           setUserId(data.userId);
@@ -62,6 +62,7 @@ function Register() {
           setUserEmail("");
           setUserPassword("");
           navigate("/");
+
           window.localStorage.setItem("logged", JSON.stringify(data));
         } else {
           setInputError({
