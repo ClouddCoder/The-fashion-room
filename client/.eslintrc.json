@@ -41,6 +41,7 @@
     "implicit-arrow-linebreak": "off",
     "no-confusing-arrow": "off",
     "function-paren-newline": "off",
-    "jsx-a11y/click-events-have-key-events": 0
+    "jsx-a11y/click-events-have-key-events": 0,
+    "jsx-a11y/anchor-is-valid": 0
   }
 }

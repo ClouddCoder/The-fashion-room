@@ -1,7 +1,6 @@
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import TwitterIcon from "@mui/icons-material/Twitter";
-import Grid from "@mui/material/Grid";
 import "./Footer.css";
 
 /**
@@ -9,77 +8,69 @@ import "./Footer.css";
  */
 function Footer() {
   return (
-    <Grid container alignItems="center" sx={{ width: "80%" }} spacing={2}>
-      <Grid item={true} container xs={6} md={3}>
-        <Grid item={true} xs={12}>
+    <footer>
+      <div className="footer">
+        <div>
           <span className="footer__subtitle">Conócenos</span>
-        </Grid>
-        <Grid item container direction="column">
-          <Grid item>
-            <span className="footer__link">Trabaja en The Fashion Room</span>
-          </Grid>
-          <Grid item>
-            <span className="footer__link">Blog</span>
-          </Grid>
-          <Grid item>
-            <span className="footer__link">Acerca de The Fashion Room</span>
-          </Grid>
-        </Grid>
-      </Grid>
-      <Grid item={true} container xs={6} md={3}>
-        <Grid item={true} xs={12}>
+          <ul>
+            <li className="footer__link">
+              <a href="#">Trabaja en Lottus</a>
+            </li>
+            <li className="footer__link">
+              <a href="#">Blog</a>
+            </li>
+            <li className="footer__link">
+              <a href="#">Acerca de Lottus</a>
+            </li>
+          </ul>
+        </div>
+        <div>
           <span className="footer__subtitle">Gana dinero con nosotros</span>
-        </Grid>
-        <Grid item container direction="column">
-          <Grid item>
-            <span className="footer__link">Vender productos en The Fashion Room</span>
-          </Grid>
-          <Grid item>
-            <span className="footer__link">Vender en The Fashion Room business</span>
-          </Grid>
-          <Grid item>
-            <span className="footer__link">Programa de afiliados</span>
-          </Grid>
-        </Grid>
-      </Grid>
-      <Grid item={true} container xs={6} md={3}>
-        <Grid item={true} xs={12}>
+          <ul>
+            <li className="footer__link">
+              <a href="#">Vender productos en Lottus</a>
+            </li>
+            <li className="footer__link">
+              <a href="#">Programa de afiliados</a>
+            </li>
+          </ul>
+        </div>
+        <div>
           <span className="footer__subtitle">Productos de pago</span>
-        </Grid>
-        <Grid item container direction="column">
-          <Grid item>
-            <span className="footer__link">Compra con puntos</span>
-          </Grid>
-          <Grid item>
-            <span className="footer__link">Recarga tu saldo</span>
-          </Grid>
-          <Grid item>
-            <span className="footer__link">Conversor de divisas de The Fashion Room</span>
-          </Grid>
-        </Grid>
-      </Grid>
-      <Grid item={true} container xs={6} md={3}>
-        <Grid item={true} xs={12}>
+          <ul>
+            <li className="footer__link">
+              <a href="#">Compra con puntos</a>
+            </li>
+            <li className="footer__link">
+              <a href="#">Recarga tu saldo</a>
+            </li>
+            <li className="footer__link">
+              <a href="#">Conversor de divisas de Lottus</a>
+            </li>
+          </ul>
+        </div>
+        <div>
           <span className="footer__subtitle">Redes sociales</span>
-        </Grid>
-        <Grid item container direction="column">
-          <Grid item>
-            <span className="footer__link">Síguenos en</span>
-          </Grid>
-          <Grid item container spacing={2} pt={2}>
-            <Grid item>
-              <FacebookIcon />
-            </Grid>
-            <Grid item>
-              <InstagramIcon />
-            </Grid>
-            <Grid item>
-              <TwitterIcon />
-            </Grid>
-          </Grid>
-        </Grid>
-      </Grid>
-    </Grid>
+          <ul className="social-media">
+            <li className="footer__link">
+              <a href="#">
+                <FacebookIcon />
+              </a>
+            </li>
+            <li className="footer__link">
+              <a href="#">
+                <InstagramIcon />
+              </a>
+            </li>
+            <li className="footer__link">
+              <a href="#">
+                <TwitterIcon />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </footer>
   );
 }
 

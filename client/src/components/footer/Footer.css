@@ -1,11 +1,50 @@
+/* For mobile phones */
+.footer {
+  display: grid;
+  grid-template-columns: repeat(2, 160px);
+  grid-template-rows: repeat(2, 1fr);
+  justify-content: center;
+  background-color: var(--color-primary-brown);
+  width: 100%;
+  height: 100%;
+  color: var(--color-primary-white);
+  padding: 30px 0;
+}
+
 .footer__subtitle {
   font-size: 0.9rem;
   font-weight: bold;
   color: var(--color-primary-white);
 }
 
-.font__link {
+.footer__link {
+  list-style: none;
   font-size: 0.8125rem;
   margin-top: 10px;
   color: var(--color-primary-white);
+}
+
+.footer__link a {
+  color: var(--color-primary-white);
+  text-decoration: none;
+}
+
+.social-media {
+  display: flex;
+  column-gap: 10px;
+}
+
+/* For tablets */
+@media only screen and (min-width: 601px) {
+  .footer {
+    grid-template-columns: repeat(2, 240px);
+  }
+}
+
+/* For desktop */
+@media only screen and (min-width: 992px) {
+  .footer {
+    grid-template-columns: repeat(4, 240px);
+    grid-template-rows: repeat(1, 1fr);
+  }
 }

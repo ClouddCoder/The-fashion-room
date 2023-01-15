@@ -1,4 +1,10 @@
 /* For mobile phones */
+.header {
+  width: 100%;
+  height: 70px;
+  background-color: var(--color-primary-white);
+}
+
 .header__navbar {
   width: inherit;
   height: inherit;

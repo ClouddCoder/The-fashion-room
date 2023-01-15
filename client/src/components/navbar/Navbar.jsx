@@ -22,31 +22,33 @@ function Navbar() {
   if (checkScreenSize() === "phone") phoneScreen = true;
 
   return (
-    <nav className="header__navbar">
-      {phoneScreen ? (
-        <>
-          <IconButton onClick={() => setToggle(true)}>
-            <MenuIcon sx={{ width: "40px", height: "40px" }} />
-          </IconButton>
-          {toggle ? (
-            <Overlay newClassName="header__navbar__overlay" setToggle={setToggle} />
-          ) : (
-            <Overlay newClassName="header__navbar__overlay hidden" setToggle={setToggle} />
-          )}
-          <div className="header__navbar__title">
-            <h1>{title}</h1>
-          </div>
-        </>
-      ) : (
-        <>
-          <div className="header__navbar__title">
-            <h1>{title}</h1>
-          </div>
-          <NavbarLinks newSelector="header__navbar__links" />
-          <NavbarProfileLinks newSelector="header__navbar__profile-links" />
-        </>
-      )}
-    </nav>
+    <header className="header">
+      <nav className="header__navbar">
+        {phoneScreen ? (
+          <>
+            <IconButton onClick={() => setToggle(true)}>
+              <MenuIcon sx={{ width: "40px", height: "40px" }} />
+            </IconButton>
+            {toggle ? (
+              <Overlay newClassName="header__navbar__overlay" setToggle={setToggle} />
+            ) : (
+              <Overlay newClassName="header__navbar__overlay hidden" setToggle={setToggle} />
+            )}
+            <div className="header__navbar__title">
+              <h1>{title}</h1>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="header__navbar__title">
+              <h1>{title}</h1>
+            </div>
+            <NavbarLinks newSelector="header__navbar__links" />
+            <NavbarProfileLinks newSelector="header__navbar__profile-links" />
+          </>
+        )}
+      </nav>
+    </header>
   );
 }
 

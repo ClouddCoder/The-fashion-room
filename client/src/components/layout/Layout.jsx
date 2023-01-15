@@ -5,13 +5,9 @@ import "./Layout.css";
 function Layout({ children }) {
   return (
     <div className="layout">
-      <header className="header">
-        <Navbar />
-      </header>
+      <Navbar />
       <main className="main-content">{children}</main>
-      <footer className="footer">
-        <Footer />
-      </footer>
+      <Footer />
     </div>
   );
 }
