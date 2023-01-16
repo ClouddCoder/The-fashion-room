@@ -11,6 +11,10 @@ import usePasswordLength from "../../utils/hooks/usePasswordLength";
 import useError from "../../utils/hooks/useError";
 import "./EditPassword.css";
 
+/**
+ * Component to change user's password.
+ * @returns {JSX.Element} - EditPassword component.
+ */
 function EditPassword() {
   const [userId, setUserId] = useState("");
   const [success, setSuccess] = useState(false); // If the user's email exists, turns true.

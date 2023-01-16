@@ -8,6 +8,10 @@ import Layout from "../../components/layout/Layout";
 import { setAddress, updateAddress, getSingleAddress } from "../../services/user";
 import "./EditAddress.css";
 
+/**
+ * Component to render the fields to change or add the user's address.
+ * @returns {JSX.Element} - EditAddress component.
+ */
 function EditAddress() {
   const [department, setDepartment] = useState("");
   const [city, setCity] = useState("");

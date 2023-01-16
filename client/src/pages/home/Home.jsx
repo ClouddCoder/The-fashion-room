@@ -4,7 +4,8 @@ import Categories from "./components/categories/Categories";
 import "./Home.css";
 
 /**
- * Componente que muestra el inicio de la tienda
+ * Component to render the home page.
+ * @returns {JSX.Element} - Home component
  */
 function Home() {
   return (

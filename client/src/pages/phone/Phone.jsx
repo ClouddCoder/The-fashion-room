@@ -11,6 +11,11 @@ import { getPhone, setPhone, deletePhone } from "../../services/user";
 import useUserInput from "../../utils/hooks/useUserInput";
 import useError from "../../utils/hooks/useError";
 
+/**
+ * Component to render user's phones and the fields to
+ * change or add a new phone.
+ * @returns {JSX.Element} - Phone component.
+ */
 function Phone() {
   const { input, setUserInput } = useUserInput();
   const { error, setInputError } = useError();

@@ -4,7 +4,9 @@ import Divider from "@mui/material/Divider";
 import { getStoreAddress, getStorePhones } from "../../../services/store";
 
 /**
- * Componente que muestra la informacion de la tienda
+ * Component to render the store's information.
+ * @param {object} { storeNit, storeName } - Store's nit and name.
+ * @returns {JSX.Element} - StoreInfo component.
  */
 function StoreInfo({ storeNit, storeName }) {
   const [storeAddress, setStoreAddress] = useState([]);

@@ -7,7 +7,8 @@ import { useNavigate } from "react-router-dom";
 import ProductContext from "../../../context/product-context/ProductContext";
 
 /**
- * Componente que muestra el resumen de la compra que se va a realizar
+ * Component to render the resume of the order.
+ * @returns {JSX.Element} - OrderResume component.
  */
 function OrderResume() {
   const { cart, totalProducts, totalPrice, addProductToBuy, getTotalProducts, getTotalPrice } =
@@ -25,7 +26,8 @@ function OrderResume() {
   }, []);
 
   /**
-   * Revisa si hay productos en el carrito para habilitar el boton de compra
+   * Checks if there are products in the shopping cart to enable
+   * the Buy button.
    */
   const checkCartLength = () => {
     if (cart.length > 0) {

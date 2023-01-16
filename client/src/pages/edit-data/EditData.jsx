@@ -9,6 +9,10 @@ import Layout from "../../components/layout/Layout";
 import useUserInput from "../../utils/hooks/useUserInput";
 import "./EditData.css";
 
+/**
+ * Component to edit user's data. This edits the user's name, email or username.
+ * @returns {JSX.Element} - EditData component.
+ */
 function EditEmail() {
   const { info } = useParams();
   const { input, setUserInput } = useUserInput();

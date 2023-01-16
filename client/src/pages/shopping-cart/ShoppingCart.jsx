@@ -7,7 +7,8 @@ import CartItem from "./components/CartItem";
 import Layout from "../../components/layout/Layout";
 
 /**
- * Componente que muestra el carrito de compras
+ * Component to render the shopping cart of the user.
+ * @returns {JSX.Element} - ShoppingCart component.
  */
 function ShoppingCart() {
   const { cart, removeFromCart, clearCart } = useContext(ProductContext);

@@ -2,7 +2,8 @@ import { HeaderBackground } from "../../../../assets";
 import "./Header.css";
 
 /**
- * Componente que muestra el header de la tienda
+ * Component to render the header on the home page.
+ * @returns {JSX.Element} - Header component.
  */
 function Header() {
   return (

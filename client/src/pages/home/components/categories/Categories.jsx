@@ -4,7 +4,8 @@ import Category from "../category/Category";
 import "./Categories.css";
 
 /**
- * Componente que muestra las diferentes categorias de la tienda en el inicio
+ * Component to render the categories on the home page.
+ * @returns {JSX.Element} - Categories component.
  */
 function Categories() {
   return (

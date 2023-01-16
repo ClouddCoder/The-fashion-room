@@ -5,6 +5,11 @@ import CustomFavIcon from "./CustomFavIcon";
 import AuthContext from "../../../context/auth-context/AuthContext";
 import ProductContext from "../../../context/product-context/ProductContext";
 
+/**
+ * Component to render the custom wishlist button.
+ * @param {object} { product } - Product to add or remove from wishlist.
+ * @returns {JSX.Element} - CustomWishlistButton component.
+ */
 function CustomWishlistButton({ product }) {
   const { auth } = useContext(AuthContext);
   const { wishlist, handleWish } = useContext(ProductContext);

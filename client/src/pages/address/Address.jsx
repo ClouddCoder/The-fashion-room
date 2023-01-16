@@ -8,6 +8,10 @@ import Layout from "../../components/layout/Layout";
 import AuthContext from "../../context/auth-context/AuthContext";
 import { getAddress } from "../../services/user";
 
+/**
+ * Component to render the addresses of the user.
+ * @returns {JSX.Element} - Address component.
+ */
 function Address() {
   const { token } = useContext(AuthContext);
   const [addressList, setAddressList] = useState([]);

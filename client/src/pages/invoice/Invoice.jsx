@@ -8,7 +8,8 @@ import Layout from "../../components/layout/Layout";
 import ProductContext from "../../context/product-context/ProductContext";
 
 /**
- * Componente que muestra la factura de la compra
+ *  Component to render the invoice of the purchase.
+ * @returns {JSX.Element} - Invoice component.
  */
 function Invoice() {
   const { productsToBuy, totalPrice, clearCart, invoiceId, shippingCost } =

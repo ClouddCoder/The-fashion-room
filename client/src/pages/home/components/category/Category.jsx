@@ -7,7 +7,9 @@ import { getMUIprops } from "../../../../utils/MUIMediaQuery";
 import { phoneStyle, tabletStyle, desktopStyle, largeDevicesStyle } from "./CategoryMUIStyle";
 
 /**
- * Componente que muestra la categoria en el inicio de la pagina
+ * Component to render the category.
+ * @param {object} { alt, image, title } - props to render the category.
+ * @returns {JSX.Element} - Category component.
  */
 function Category({ alt, image, title }) {
   let cardProps = {};

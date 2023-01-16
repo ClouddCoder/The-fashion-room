@@ -5,6 +5,10 @@ import AuthContext from "../../context/auth-context/AuthContext";
 import Layout from "../../components/layout/Layout";
 import "./Profile.css";
 
+/**
+ * Component to render the user's profile.
+ * @returns {JSX.Element} - Profile component.
+ */
 function Profile() {
   const { username, userLastname } = useContext(AuthContext);
   return (

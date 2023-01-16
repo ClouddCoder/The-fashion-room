@@ -13,6 +13,10 @@ import ProductToBuy from "./components/ProductToBuy";
 import { makeThePurchase } from "../../services/product";
 import "./Buy.css";
 
+/**
+ * Component to render the buy page.
+ * @returns {JSX.Element} - Buy component.
+ */
 function Buy() {
   const navigate = useNavigate();
   const {

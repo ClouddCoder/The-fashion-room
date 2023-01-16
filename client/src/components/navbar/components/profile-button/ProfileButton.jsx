@@ -8,6 +8,11 @@ import MenuItem from "@mui/material/MenuItem";
 import Divider from "@mui/material/Divider";
 import ProductContext from "../../../../context/product-context/ProductContext";
 
+/**
+ * Component to render the profile button.
+ * @param {object} { resetSession } - It is used to reset the data session.
+ * @returns {JSX.Element} - ProfileButton component
+ */
 function ProfileButton({ resetSession }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const { resetProductState } = useContext(ProductContext);

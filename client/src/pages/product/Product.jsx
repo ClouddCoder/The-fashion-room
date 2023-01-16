@@ -9,7 +9,8 @@ import { getProductImage } from "../../assets";
 import "./Product.css";
 
 /**
- * Component that renders de product information.
+ * Component to render the product's information.
+ * @returns {JSX.Element} - Product component.
  */
 function Product() {
   const navigate = useNavigate();

@@ -5,7 +5,8 @@ import InvoiceDetail from "./components/InvoiceDetail";
 import Layout from "../../components/layout/Layout";
 
 /**
- * Componente que muestra las compras realizadas por el usuario
+ * Component to render the orders made by the user.
+ * @returns {JSX.Element} - Orders component.
  */
 function Orders() {
   const { loader, setLoader, loadOrderDetail, myOrders, clearProductsList } =

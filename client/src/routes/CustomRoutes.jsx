@@ -18,6 +18,10 @@ import Buy from "../pages/buy/Buy";
 import Invoice from "../pages/invoice/Invoice";
 import Orders from "../pages/orders/Orders";
 
+/**
+ * Routes for the application.
+ * @returns {JSX.Element} - CustomRoutes component.
+ */
 function CustomRoutes() {
   return createRoutesFromElements(
     <>

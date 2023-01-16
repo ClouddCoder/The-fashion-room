@@ -10,7 +10,8 @@ import usePasswordLength from "../../utils/hooks/usePasswordLength";
 import { registerUser } from "../../services/user";
 
 /**
- * This component is responsible for registering a new user.
+ * Component to register a new user.
+ * @returns {JSX.Element} - Register component.
  */
 function Register() {
   const {

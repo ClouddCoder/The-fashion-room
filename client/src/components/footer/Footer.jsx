@@ -4,7 +4,8 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import "./Footer.css";
 
 /**
- * Componente que muestra el footer de la tienda
+ * Component that renders the footer.
+ * @returns {JSX.Element} Footer
  */
 function Footer() {
   return (

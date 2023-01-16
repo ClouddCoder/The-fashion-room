@@ -10,6 +10,11 @@ import { getProductImage } from "../../../assets";
 import ProductContext from "../../../context/product-context/ProductContext";
 import "./Wish.css";
 
+/**
+ * Component to render the products in the wishlist of the user.
+ * @param {object} { product } - product to show.
+ * @returns {JSX.Element} - Wish component.
+ */
 function Wish({ product }) {
   const navigate = useNavigate();
   const { handleWish } = useContext(ProductContext);

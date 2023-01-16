@@ -10,7 +10,9 @@ import ProductContext from "../../../context/product-context/ProductContext";
 import "./InvoiceDetail.css";
 
 /**
- * Componente que muestra la informacion de la orden
+ *  Component to render the products purchased by the user.
+ * @param {object} { product } - product to show.
+ * @returns {JSX.Element} - InvoiceDetail component.
  */
 function InvoiceDetail({ product }) {
   const { removeOrder } = useContext(ProductContext);

@@ -5,7 +5,8 @@ import StoreInfo from "./components/StoreInfo";
 import Layout from "../../components/layout/Layout";
 
 /**
- * Componente que muestra la informacion de la tienda
+ * Component to render the contact information of the stores.
+ * @returns {JSX.Element} - Contact component.
  */
 function Contact() {
   const [stores, setStores] = useState([]);

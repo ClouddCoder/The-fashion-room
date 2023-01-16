@@ -4,6 +4,11 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import { getProductImage } from "../../../assets";
 
+/**
+ * Component to render the product to buy.
+ * @param {object} { product } - product to buy.
+ * @returns {JSX.Element} - ProductToBuy component.
+ */
 function ProductToBuy({ product }) {
   return (
     <Grid item sx={{ maxHeight: "260px", position: "relative" }}>

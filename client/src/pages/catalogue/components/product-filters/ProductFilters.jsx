@@ -9,7 +9,7 @@ import "./ProductFilters.css";
 
 /**
  * Component that shows the filters for the products.
- * @param {*} param0
+ * @param {object} { check, handleChange }
  * @returns {JSX.Element} Component ProductFilters.
  */
 function ProductFilters({ check, handleChange }) {

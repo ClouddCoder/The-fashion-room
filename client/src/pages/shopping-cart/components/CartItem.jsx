@@ -6,7 +6,9 @@ import { styled } from "@mui/material/styles";
 import { getProductImage } from "../../../assets";
 
 /**
- * Componente que muestra el producto que esta en el carrito de compras
+ * Component to render the product's information.
+ * @param {object} { product, removeFromCart } - product to show.
+ * @returns
  */
 function CartItem({ product, removeFromCart }) {
   const Img = styled("img")({

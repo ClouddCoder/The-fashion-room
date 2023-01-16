@@ -9,7 +9,8 @@ import useError from "../../utils/hooks/useError";
 import { loginUser } from "../../services/user";
 
 /**
- * This component renders the login form
+ * Component that renders the login page.
+ * @returns {JSX.Element} Login component.
  */
 function Login() {
   const { error, setInputError } = useError();
@@ -28,7 +29,7 @@ function Login() {
   const navigate = useNavigate();
 
   /**
-   * Send the user's data to the server
+   * Sends the user's data to the server.
    */
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,7 +38,7 @@ function Login() {
       const res = await loginUser(userEmail, userPassword);
       const data = await res.json();
 
-      // Sets the user's data to login and deletes the data from the inputs
+      // Sets the user's data to login and deletes the data from the inputs.
       if (res.ok) {
         setAuth(data.isAuth);
         setUserId(data.userId);
@@ -48,7 +49,7 @@ function Login() {
         setUserPassword("");
         navigate("/");
 
-        // Saves the token to localStorasge
+        // Saves the token to the local storage.
         window.localStorage.setItem("logged", JSON.stringify(data));
       } else {
         setInputError({ ...error, constraint: "incorrecto", message: data.message });
@@ -60,7 +61,7 @@ function Login() {
   };
 
   /**
-   * Gets the email and password from the inputs
+   * Gets the email and password from the inputs.
    */
   const handleChange = (e) => {
     setInputError({ ...error, constraint: "", message: "" });

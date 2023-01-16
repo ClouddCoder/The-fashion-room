@@ -11,7 +11,9 @@ import { phoneStyle, tabletStyle, desktopStyle, largeDevicesStyle } from "./Prod
 import "./ProductItem.css";
 
 /**
- * Componente que muestra el producto en el catalogo
+ * Component to render the product card on the catalogue.
+ * @param {object} { product } - product to show.
+ * @returns {JSX.Element} - Product component.
  */
 function ProductItem({ product }) {
   const navigate = useNavigate();

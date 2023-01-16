@@ -4,6 +4,10 @@ import { Link } from "react-router-dom";
 import AuthContext from "../../context/auth-context/AuthContext";
 import Layout from "../../components/layout/Layout";
 
+/**
+ *  Component to render the user's data.
+ * @returns {JSX.Element} - MyData component.
+ */
 function MyData() {
   const { username, user } = useContext(AuthContext);
   return (
