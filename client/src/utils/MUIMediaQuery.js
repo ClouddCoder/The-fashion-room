@@ -5,23 +5,24 @@ import useMediaQuery from "@mui/material/useMediaQuery";
  * @returns {string} The screen size.
  */
 export function checkScreenSize() {
+  let screenSize = "phone";
   const tablet = useMediaQuery("(min-width:601px)");
   const desktop = useMediaQuery("(min-width:992px)");
   const largeDevices = useMediaQuery("(min-width:1200px)");
 
   if (tablet) {
-    return "tablet";
+    screenSize = "tablet";
   }
 
   if (desktop) {
-    return "desktop";
+    screenSize = "desktop";
   }
 
   if (largeDevices) {
-    return "largeDevices";
+    screenSize = "largeDevices";
   }
 
-  return "phone";
+  return screenSize;
 }
 
 /**
