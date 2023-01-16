@@ -9,9 +9,18 @@
   width: inherit;
   height: inherit;
   display: flex;
-  flex-direction: flex-start;
+  justify-content: space-between;
   align-items: center;
   color: var(--color-primary-brown);
+}
+
+.headere__navbar svg {
+  color: var(--color-primary-brown);
+}
+
+.header__navbar__menu {
+  display: flex;
+  align-items: center;
 }
 
 .header__navbar__title {

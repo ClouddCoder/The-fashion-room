@@ -1,24 +1,29 @@
+/* eslint-disable quote-props */
 import { catalogueActions } from "./catalogueActions";
 
 export const catalogueInitialState = {
-  blusa: false,
-  camisa: false,
-  corbata: false,
-  pantalon: false,
-  pantaloneta: false,
-  zapatos: false,
+  // Genders
   hombre: false,
   mujer: false,
   unisex: false,
   niño: false,
   niña: false,
   bebe: false,
-  calzado: false,
-  camisas: false,
-  camisetas: false,
-  blusas: false,
-  deportiva: false,
-  bolsos: false,
+
+  // Colors
+  negro: false,
+  blanco: false,
+  gris: false,
+  rojo: false,
+  azul: false,
+  amarillo: false,
+  verde: false,
+
+  // Prices
+  "40000": false,
+  "50000": false,
+  "70000": false,
+  "80000": false,
 };
 
 export function CatalogueReducer(state, action) {

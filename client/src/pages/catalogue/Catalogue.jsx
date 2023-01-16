@@ -1,26 +1,25 @@
 import { useEffect, useContext, useReducer } from "react";
+import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
-import Button from "@mui/material/Button";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import ProductItem from "./components/ProductItem";
-import AuthContext from "../../context/auth-context/AuthContext";
+import { useParams } from "react-router-dom";
+import ProductItem from "./components/product-item/ProductItem";
 import ProductContext from "../../context/product-context/ProductContext";
 import Layout from "../../components/layout/Layout";
-import ProductFilters from "./components/ProductFilters";
+import ProductFilters from "./components/product-filters/ProductFilters";
 import { catalogueActions } from "./reducer/catalogueActions";
 import { catalogueInitialState, CatalogueReducer } from "./reducer/catalogueReducer";
 
 /**
- * This component renders all products by category or filtered the
- * user selection.
+ * Component that shows the products by category.
+ * @returns {JSX.Element} Component Catalogue.
  */
 function Catalogue() {
   const { category } = useParams();
-  const navigate = useNavigate();
+
   const { loader, setLoader, addToCart, loadProducts, products, getWishlist } =
     useContext(ProductContext);
-  const { auth } = useContext(AuthContext);
+
   const [state, dispatch] = useReducer(CatalogueReducer, catalogueInitialState);
 
   useEffect(() => {
@@ -30,7 +29,7 @@ function Catalogue() {
     // Gets the products by their category.
     loadProducts(category);
     getWishlist();
-  }, []);
+  }, [category]);
 
   const handleChange = (e) => {
     dispatch({
@@ -40,7 +39,7 @@ function Catalogue() {
   };
 
   /**
-   * Filters all products according with the user selection.
+   * Filters all products based on the user's selection.
    */
   const filteredProducts = () => {
     const filtered = products.filter((product) => {
@@ -48,8 +47,12 @@ function Catalogue() {
       // Product's object keys do not have the same name as the state's keys.
       const allKeys = Object.keys(product);
       // eslint-disable-next-line no-restricted-syntax
-      for (const item of allKeys) {
-        if (Boolean(product[item]) === state[product[item]]) {
+      for (const prop of allKeys) {
+        if (prop === "min_price") {
+          if (Boolean(product[prop]) === state[product[prop].toString()]) {
+            return true;
+          }
+        } else if (Boolean(product[prop]) === state[product[prop]]) {
           return true;
         }
       }
@@ -74,45 +77,25 @@ function Catalogue() {
         direction="column"
         alignItems="center"
         justifyContent="center"
-        sx={{ pt: 10, pb: 10, width: "80%" }}
+        sx={{ mt: "30px", mb: "30px", width: "70%" }}
       >
-        <Grid item container justifyContent="center">
-          <Grid item>
-            <Button sx={{ mr: 1 }} component={Link} to="/" variant="outlined" color="primary">
-              Regresar
-            </Button>
-          </Grid>
-          <Grid item>
-            {auth ? (
-              <Button
-                sx={{ ml: 1 }}
-                variant="outlined"
-                color="primary"
-                onClick={() => navigate("/cart")}
-              >
-                Ir al carrito
-              </Button>
-            ) : (
-              <Button
-                sx={{ ml: 1 }}
-                variant="outlined"
-                color="primary"
-                onClick={() => navigate("/login")}
-              >
-                Ir al carrito
-              </Button>
-            )}
-          </Grid>
-        </Grid>
         <Grid item container columnSpacing={3}>
-          <Grid item container xs={2} justifyContent="center">
+          <Grid
+            component={Box}
+            item
+            container
+            sm={4}
+            md={3}
+            sx={{ maxHeight: "600px", display: { xs: "none", md: "block", sm: "block" } }}
+            justifyContent="center"
+          >
             <Paper
               elevation={3}
               sx={{ width: "100%", height: "100%", display: "flex", justifyContent: "center" }}
             >
               <Grid container direction="column" sx={{ width: "95%", height: "100%" }}>
                 <Grid item sx={{ m: 0 }}>
-                  <h6>Catalogo</h6>
+                  <span>Catalogo</span>
                 </Grid>
                 <Grid container item direction="column" rowSpacing={3} sx={{ m: 0 }}>
                   <ProductFilters check={state} handleChange={handleChange} />
@@ -120,17 +103,32 @@ function Catalogue() {
               </Grid>
             </Paper>
           </Grid>
-          <Grid item container xs={10} justifyContent="center" sx={{ pr: "16px" }}>
+          <Grid
+            item
+            container
+            xs={12}
+            sm={8}
+            md={9}
+            justifyContent="center"
+            sx={{ minHeight: "700px" }}
+          >
             <Paper
               elevation={3}
-              sx={{ width: "100%", height: "100%", display: "flex", justifyContent: "center" }}
+              sx={{
+                width: "100%",
+                height: "100%",
+                display: "flex",
+                justifyContent: "center",
+                p: 2,
+              }}
             >
               <Grid
                 container
                 alignItems="center"
                 justifyContent="center"
                 sx={{ width: "95%", height: "100%", m: 0 }}
-                spacing={2}
+                rowSpacing={2}
+                columnSpacing={{ xs: 0, md: 2 }}
               >
                 {filteredProducts().map((product, index) => (
                   <ProductItem key={index} product={product} addToCart={addToCart} />

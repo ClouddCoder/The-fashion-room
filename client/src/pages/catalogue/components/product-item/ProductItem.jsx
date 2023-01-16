@@ -4,8 +4,11 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import { CardActionArea } from "@mui/material";
 import Grid from "@mui/material/Grid";
-import { getProductImage } from "../../../assets";
-import CustomWishlistButton from "./CustomWishlistButton";
+import { getProductImage } from "../../../../assets";
+import CustomWishlistButton from "../CustomWishlistButton";
+import { getMUIprops } from "../../../../utils/MUIMediaQuery";
+import { phoneStyle, tabletStyle, desktopStyle, largeDevicesStyle } from "./ProductItemMUIStyle";
+import "./ProductItem.css";
 
 /**
  * Componente que muestra el producto en el catalogo
@@ -13,29 +16,34 @@ import CustomWishlistButton from "./CustomWishlistButton";
 function ProductItem({ product }) {
   const navigate = useNavigate();
 
+  let cardProps = {};
+
+  cardProps = getMUIprops(phoneStyle, tabletStyle, desktopStyle, largeDevicesStyle);
+
   return (
     <Grid
       item
-      xs={6}
-      md={3}
+      xs={12}
+      md={5}
+      lg={3}
       sx={{
-        height: "260px",
-        maxHeight: "260px",
         position: "relative",
       }}
     >
       <Card
         sx={{
-          "width": "100%",
-          "height": "100%",
+          "width": "auto",
+          "height": "auto",
           "cursor": "pointer",
           "transform": "scale(1,1)",
           "transition": "transform 0.5s ease",
           "&:hover": { transform: "scale(1.1,1.1)" },
+          "display": "flex",
+          "justifyContent": "center",
         }}
       >
         <CardActionArea
-          sx={{ height: "100%" }}
+          sx={cardProps}
           onClick={() => navigate(`/product/${product.product_id}-${product.variant_id}`)}
         >
           <CardMedia
@@ -45,8 +53,8 @@ function ProductItem({ product }) {
             alt={product.variant_name}
           />
           <CardContent sx={{ p: "10px" }}>
-            <h5>{product.product_name}</h5>
-            <span>{product.min_price}</span>
+            <span id="card__product-name">{product.product_name}</span>
+            <span id="card__product-price">{`$${product.min_price}`}</span>
           </CardContent>
         </CardActionArea>
         <CustomWishlistButton product={product} />
