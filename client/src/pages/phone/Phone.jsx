@@ -19,16 +19,23 @@ import useLoader from "../../utils/hooks/useLoader";
  */
 function Phone() {
   const { input, setUserInput } = useUserInput();
+
   const { error, setInputError } = useError();
+  const requestData = useError(); // Shows the error message when there are no phones.
+
   const [openModal, setOpenModal] = useState(false);
-  const [isPhoneDeleted, setIsPhoneDeleted] = useState(false);
-  const { token } = useContext(AuthContext);
   const [listPhone, setListPhone] = useState([]);
+  const [isPhoneDeleted, setIsPhoneDeleted] = useState(false);
+
+  const { token } = useContext(AuthContext);
+
   const { loader, setLoaderComponent } = useLoader();
 
   useEffect(() => {
     // Displays the loader every time the component is re-render.
     setLoaderComponent(true);
+
+    setInputError({ ...error, constraint: "", message: "" });
   }, []);
 
   const getPhoneList = async () => {
@@ -37,7 +44,10 @@ function Phone() {
       setListPhone(response.data);
     } catch (err) {
       setListPhone([]);
-      console.log(err);
+      const { response } = err;
+      const { data } = response;
+      const { message, constraint } = data;
+      requestData.setInputError({ ...error, constraint, message });
     }
 
     setLoaderComponent(false);
@@ -45,6 +55,8 @@ function Phone() {
 
   useEffect(() => {
     getPhoneList();
+    requestData.setInputError({ ...error, constraint: "", message: "" });
+    setUserInput("");
   }, [openModal, isPhoneDeleted]);
 
   const handleChange = (e) => {
@@ -83,6 +95,9 @@ function Phone() {
           <span>Selecciona o agrega un número celular</span>
         </Grid>
         <Grid item container direction="column">
+          {requestData.error.constraint === "empty" && (
+            <span id="error-message">{requestData.error.message}</span>
+          )}
           {listPhone.map((phone, index) => (
             <Grid
               item

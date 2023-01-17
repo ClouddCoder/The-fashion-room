@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 /**
- * Custom hook to display the error on the input.
+ * Custom hook to get the error message.
  * @returns {object} {error, setInputError}
  */
 const useError = () => {

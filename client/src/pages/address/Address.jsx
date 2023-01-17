@@ -9,6 +9,7 @@ import Grid from "@mui/material/Grid";
 import Layout from "../../components/layout/Layout";
 import AuthContext from "../../context/auth-context/AuthContext";
 import useLoader from "../../utils/hooks/useLoader";
+import useError from "../../utils/hooks/useError";
 import { getAddress } from "../../services/user";
 
 /**
@@ -17,22 +18,31 @@ import { getAddress } from "../../services/user";
  */
 function Address() {
   const { token } = useContext(AuthContext);
+
   const [addressList, setAddressList] = useState([]);
+
   const { loader, setLoaderComponent } = useLoader();
+
+  const { error, setInputError } = useError();
+
   const navigate = useNavigate();
 
   const getAddressList = async () => {
     try {
       const res = await getAddress(token);
       setAddressList(res.data);
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      const { response } = err;
+      const { data } = response;
+      const { message, constraint } = data;
+      setInputError({ ...error, constraint, message });
     }
     setLoaderComponent(false);
   };
 
   useEffect(() => {
     getAddressList();
+    setInputError({ ...error, constraint: "", message: "" });
   }, []);
 
   return (
@@ -54,6 +64,7 @@ function Address() {
           <Card>
             <CardContent>
               <Grid container>
+                {error.constraint === "empty" && <span id="error-message">{error.message}</span>}
                 {addressList.map((address, index) => (
                   <Grid
                     item

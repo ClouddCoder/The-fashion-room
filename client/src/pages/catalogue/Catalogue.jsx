@@ -83,16 +83,12 @@ function Catalogue() {
           <Grid
             component={Box}
             item
-            container
             sm={4}
             md={3}
-            sx={{ maxHeight: "600px", display: { xs: "none", md: "block", sm: "block" } }}
+            sx={{ display: { xs: "none", md: "block", sm: "block" } }}
             justifyContent="center"
           >
-            <Paper
-              elevation={3}
-              sx={{ width: "100%", height: "100%", display: "flex", justifyContent: "center" }}
-            >
+            <Paper elevation={3} sx={{ p: 2, display: "flex", justifyContent: "center" }}>
               <Grid container direction="column" sx={{ width: "95%", height: "100%" }}>
                 <Grid item sx={{ m: 0 }}>
                   <span>Catalogo</span>

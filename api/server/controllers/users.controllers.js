@@ -299,7 +299,7 @@ const getPhone = async (req, res, next) => {
     const result = await pool.query(query, [decodeToken.userId]);
 
     if (result.rows.length === 0) {
-      return res.status(404).json({ message: "No se encontraron teléfonos" });
+      return res.status(404).json({ constraint: "empty", message: "No se encontraron teléfonos" });
     }
     return res.json(result.rows);
   } catch (error) {
@@ -381,7 +381,9 @@ const getAddress = async (req, res, next) => {
     const result = await pool.query(query, [decodeToken.userId]);
 
     if (result.rows.length === 0) {
-      return res.status(404).json({ message: "No se encontraron direcciones" });
+      return res
+        .status(404)
+        .json({ constraint: "empty", message: "No se encontraron direcciones" });
     }
     return res.json(result.rows);
   } catch (error) {
@@ -390,7 +392,7 @@ const getAddress = async (req, res, next) => {
 };
 
 /**
- * Returns a single address of the user.
+ * Returns a single address of the user based on the id.
  */
 const getSingleAddress = async (req, res, next) => {
   const { addressId } = req.query;

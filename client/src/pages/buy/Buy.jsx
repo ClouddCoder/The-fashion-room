@@ -59,7 +59,7 @@ function Buy() {
   return (
     <Layout>
       <Grid container sx={{ width: "80%", m: "auto 0" }} spacing={2}>
-        <Grid item={true} xs={8} container direction="column" spacing={2}>
+        <Grid item container xs={8} direction="column" spacing={2}>
           <Grid item>
             <Card>
               <CardContent>
@@ -78,9 +78,8 @@ function Buy() {
             <Card>
               <CardContent>
                 <h3>Metodo de pago</h3>
-                <span>Tarjeta de credito</span>
+                <span>Tarjeta de crédito/débito</span>
               </CardContent>
-              span
             </Card>
           </Grid>
           <Grid item container direction="column" spacing={2}>
@@ -89,17 +88,13 @@ function Buy() {
             ))}
           </Grid>
         </Grid>
-        <Grid item={true} xs={4}>
+        <Grid item xs={4}>
           <Card>
             <CardContent>
               <h3>Detalles</h3>
               <div className="purchase-details">
                 <span>Coste total de los productos</span>
                 <span>{`$${totalPrice}`}</span>
-              </div>
-              <div className="purchase-details">
-                <span>Código del cupon</span>
-                <span>4A5S12</span>
               </div>
               <div className="purchase-details">
                 <span>Total de envío</span>
