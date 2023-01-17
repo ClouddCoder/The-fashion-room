@@ -1,6 +1,8 @@
 import { useState, useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Grid from "@mui/material/Grid";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import AuthContext from "../../context/auth-context/AuthContext";
@@ -117,122 +119,128 @@ function EditAddress() {
 
   return (
     <Layout>
-      <Grid container direction="column" sx={{ width: "70%" }}>
-        <Grid item>
+      <Grid container direction="column" sx={{ width: "90%", maxWidth: "750px" }}>
+        <Grid item sx={{ mb: 2 }}>
           <h3>Editar domicilio</h3>
         </Grid>
-        <Grid item sx={{ background: "grey", borderRadius: "10px", p: "20px" }}>
-          <form onSubmit={handleSubmit}>
-            <Grid container spacing={2}>
-              <Grid
-                item
-                container
-                xs={12}
-                sx={{ display: "flex", justifyContent: "space-around" }}
-                spacing={2}
-              >
-                <Grid item xs={6}>
-                  <span>Departamento</span>
-                  <TextField
-                    inputProps={{ "aria-label": "deparment" }}
-                    name="department"
-                    hiddenLabel
-                    fullWidth
-                    onChange={handleChange}
-                    value={department}
-                    variant="outlined"
-                    size="small"
-                  />
+        <Grid item sx={{ borderRadius: "10px" }}>
+          <Card>
+            <CardContent>
+              <form onSubmit={handleSubmit}>
+                <Grid container spacing={2}>
+                  <Grid
+                    item
+                    container
+                    xs={12}
+                    sx={{ display: "flex", justifyContent: "space-around" }}
+                    spacing={2}
+                  >
+                    <Grid item xs={12} sm={6}>
+                      <span>Departamento</span>
+                      <TextField
+                        inputProps={{ "aria-label": "deparment" }}
+                        name="department"
+                        hiddenLabel
+                        fullWidth
+                        onChange={handleChange}
+                        value={department}
+                        variant="outlined"
+                        size="small"
+                      />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <span>Municipio o ciudad capital</span>
+                      <TextField
+                        inputProps={{ "aria-label": "city" }}
+                        name="city"
+                        hiddenLabel
+                        fullWidth
+                        onChange={handleChange}
+                        value={city}
+                        variant="outlined"
+                        size="small"
+                      />
+                    </Grid>
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <span>Barrio</span>
+                    <TextField
+                      inputProps={{ "aria-label": "neighborhood" }}
+                      name="neighborhood"
+                      hiddenLabel
+                      fullWidth
+                      onChange={handleChange}
+                      value={neighborhood}
+                      variant="outlined"
+                      size="small"
+                    />
+                  </Grid>
+                  <Grid
+                    item
+                    container
+                    xs={12}
+                    sx={{ display: "flex", justifyContent: "space-around" }}
+                    spacing={2}
+                  >
+                    <Grid item xs={12} sm={4}>
+                      <span>Tipo de calle</span>
+                      <TextField
+                        inputProps={{ "aria-label": "street-type" }}
+                        name="streetName"
+                        hiddenLabel
+                        fullWidth
+                        onChange={handleChange}
+                        value={streetType}
+                        variant="outlined"
+                        size="small"
+                      />
+                    </Grid>
+                    <Grid item xs={12} sm={4}>
+                      <span>Carrera</span>
+                      <TextField
+                        inputProps={{ "aria-label": "street" }}
+                        name="street"
+                        hiddenLabel
+                        fullWidth
+                        onChange={handleChange}
+                        value={street}
+                        variant="outlined"
+                        size="small"
+                      />
+                    </Grid>
+                    <Grid item xs={12} sm={4}>
+                      <span>Número</span>
+                      <TextField
+                        inputProps={{ "aria-label": "number" }}
+                        name="number"
+                        hiddenLabel
+                        fullWidth
+                        onChange={handleChange}
+                        value={streetNumber}
+                        variant="outlined"
+                        size="small"
+                      />
+                    </Grid>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <textarea
+                      className="address-references"
+                      name="references"
+                      placeholder="Descripción de la fachada, puntos de referencia para encontrarla, indicaciones de seguridad, etc."
+                      maxLength="100"
+                      onChange={handleChange}
+                      value={references}
+                    />
+                  </Grid>
+                  <Grid item container direction="row-reverse">
+                    <Button variant="contained" color="secondary" type="submit">
+                      {addressId === "new" ? "Agregar" : "Actualizar"}
+                    </Button>
+                  </Grid>
                 </Grid>
-                <Grid item xs={6}>
-                  <span>Municipio o ciudad capital</span>
-                  <TextField
-                    inputProps={{ "aria-label": "city" }}
-                    name="city"
-                    hiddenLabel
-                    fullWidth
-                    onChange={handleChange}
-                    value={city}
-                    variant="outlined"
-                    size="small"
-                  />
-                </Grid>
-              </Grid>
-              <Grid item xs={6}>
-                <span>Barrio</span>
-                <TextField
-                  inputProps={{ "aria-label": "neighborhood" }}
-                  name="neighborhood"
-                  hiddenLabel
-                  fullWidth
-                  onChange={handleChange}
-                  value={neighborhood}
-                  variant="outlined"
-                  size="small"
-                />
-              </Grid>
-              <Grid
-                item
-                container
-                xs={12}
-                sx={{ display: "flex", justifyContent: "space-around" }}
-                spacing={2}
-              >
-                <Grid item xs={4}>
-                  <span>Tipo de calle</span>
-                  <TextField
-                    inputProps={{ "aria-label": "street-type" }}
-                    name="streetName"
-                    hiddenLabel
-                    fullWidth
-                    onChange={handleChange}
-                    value={streetType}
-                    variant="outlined"
-                    size="small"
-                  />
-                </Grid>
-                <Grid item xs={4}>
-                  <span>Carrera</span>
-                  <TextField
-                    inputProps={{ "aria-label": "street" }}
-                    name="street"
-                    hiddenLabel
-                    fullWidth
-                    onChange={handleChange}
-                    value={street}
-                    variant="outlined"
-                    size="small"
-                  />
-                </Grid>
-                <Grid item xs={4}>
-                  <span>Número</span>
-                  <TextField
-                    inputProps={{ "aria-label": "number" }}
-                    name="number"
-                    hiddenLabel
-                    fullWidth
-                    onChange={handleChange}
-                    value={streetNumber}
-                    variant="outlined"
-                    size="small"
-                  />
-                </Grid>
-              </Grid>
-              <Grid item xs={12}>
-                <textarea
-                  name="references"
-                  placeholder="Ingresa las referencias"
-                  onChange={handleChange}
-                  value={references}
-                />
-              </Grid>
-              <Grid item>
-                <Button variant="contained" color="secondary" type="submit" fullWidth>
-                  {addressId === "new" ? "Agregar" : "Actualizar"}
-                </Button>
-              </Grid>
-            </Grid>
-          </form>
+              </form>
+            </CardContent>
+          </Card>
         </Grid>
       </Grid>
     </Layout>
