@@ -11,6 +11,8 @@ import AuthContext from "../../context/auth-context/AuthContext";
 import Layout from "../../components/layout/Layout";
 import ProductToBuy from "./components/ProductToBuy";
 import { makeThePurchase } from "../../services/product";
+import { getMUIprops } from "../../utils/MUIMediaQuery";
+import { phoneStyle, tabletStyle, desktopStyle, largeDevicesStyle } from "./BuyMUIStyles";
 import "./Buy.css";
 
 /**
@@ -18,7 +20,11 @@ import "./Buy.css";
  * @returns {JSX.Element} - Buy component.
  */
 function Buy() {
+  let gridProps = {};
+  gridProps = getMUIprops(phoneStyle, tabletStyle, desktopStyle, largeDevicesStyle);
+
   const navigate = useNavigate();
+
   const {
     productsToBuy,
     createInvoice,
@@ -57,13 +63,13 @@ function Buy() {
   }, []);
 
   return (
-    <Layout>
-      <Grid container sx={{ width: "80%", m: "auto 0" }} spacing={2}>
-        <Grid item container xs={8} direction="column" spacing={2}>
+    <Layout componentName="buy">
+      <Grid container sx={gridProps} spacing={2}>
+        <Grid item container xs={12} sm={7} md={8} direction="column" spacing={2}>
           <Grid item>
             <Card>
               <CardContent>
-                <h3>Direccion de entrega</h3>
+                <span className="buy-subtitle">Direccion de entrega</span>
                 <TextField
                   hiddenLabel
                   fullWidth
@@ -77,7 +83,7 @@ function Buy() {
           <Grid item>
             <Card>
               <CardContent>
-                <h3>Metodo de pago</h3>
+                <span className="buy-subtitle">Metodo de pago</span>
                 <span>Tarjeta de crédito/débito</span>
               </CardContent>
             </Card>
@@ -88,10 +94,10 @@ function Buy() {
             ))}
           </Grid>
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={12} sm={5} md={4}>
           <Card>
             <CardContent>
-              <h3>Detalles</h3>
+              <span className="buy-subtitle">Detalles</span>
               <div className="purchase-details">
                 <span>Coste total de los productos</span>
                 <span>{`$${totalPrice}`}</span>

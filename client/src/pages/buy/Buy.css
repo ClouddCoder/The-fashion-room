@@ -1,5 +1,12 @@
+/* For mobile phones*/
 .purchase-details {
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
+}
+
+.buy-subtitle {
+  display: block;
+  font-weight: bold;
+  line-height: 1.4375em;
 }
