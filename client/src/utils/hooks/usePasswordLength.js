@@ -3,6 +3,7 @@ import { useState } from "react";
 /**
  * Custom hook to check if the user's password is less than
  * or equal to 4 characters.
+ * @returns {object} {password, checkPasswordLength}
  */
 const usePasswordLength = () => {
   const [password, setPassword] = useState({ shortPassword: false, errorMessage: "" });

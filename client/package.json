@@ -46,11 +46,11 @@
     "@testing-library/jest-dom": "5.16.5",
     "@testing-library/react": "13.4.0",
     "@testing-library/user-event": "14.4.3",
-    "eslint": "8.31.0",
+    "eslint": "8.32.0",
     "eslint-config-airbnb": "19.0.4",
-    "eslint-plugin-import": "2.27.4",
+    "eslint-plugin-import": "2.27.5",
     "eslint-plugin-jsx-a11y": "6.7.1",
-    "eslint-plugin-react": "7.32.0",
+    "eslint-plugin-react": "7.32.1",
     "eslint-plugin-react-hooks": "4.6.0",
     "react-test-renderer": "18.2.0"
   },
@@ -65,7 +65,7 @@
     "whitelist": [
       "NODE_ENV",
       "BASE_URL",
-      "BASE_URL_TEST"
+      "BASE_URL_DEV"
     ]
   }
 }

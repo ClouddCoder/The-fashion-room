@@ -6,6 +6,7 @@ import Grid from "@mui/material/Grid";
 import Form from "../../components/form/Form";
 import AuthContext from "../../context/auth-context/AuthContext";
 import useError from "../../utils/hooks/useError";
+import useLoader from "../../utils/hooks/useLoader";
 import { loginUser } from "../../services/user";
 
 /**
@@ -14,6 +15,7 @@ import { loginUser } from "../../services/user";
  */
 function Login() {
   const { error, setInputError } = useError();
+  const { loader, setLoaderComponent } = useLoader();
   const {
     setAuth,
     setUserId,
@@ -34,6 +36,7 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    setLoaderComponent(true);
     try {
       const res = await loginUser(userEmail, userPassword);
       const data = await res.json();
@@ -58,6 +61,7 @@ function Login() {
     } catch (err) {
       console.log(err);
     }
+    setLoaderComponent(false);
   };
 
   /**
@@ -79,6 +83,12 @@ function Login() {
 
   return (
     <Form title="Iniciar sesión">
+      {loader && (
+        <div className="loader-container">
+          <div className="spinner" />
+        </div>
+      )}
+
       <form onSubmit={handleSubmit}>
         <Grid container spacing={1}>
           <Grid item xs={12}>

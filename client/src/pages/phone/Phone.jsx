@@ -10,6 +10,7 @@ import AuthContext from "../../context/auth-context/AuthContext";
 import { getPhone, setPhone, deletePhone } from "../../services/user";
 import useUserInput from "../../utils/hooks/useUserInput";
 import useError from "../../utils/hooks/useError";
+import useLoader from "../../utils/hooks/useLoader";
 
 /**
  * Component to render user's phones and the fields to
@@ -23,17 +24,23 @@ function Phone() {
   const [isPhoneDeleted, setIsPhoneDeleted] = useState(false);
   const { token } = useContext(AuthContext);
   const [listPhone, setListPhone] = useState([]);
-  const [loader, setLoader] = useState(true);
+  const { loader, setLoaderComponent } = useLoader();
+
+  useEffect(() => {
+    // Displays the loader every time the component is re-render.
+    setLoaderComponent(true);
+  }, []);
 
   const getPhoneList = async () => {
     try {
       const response = await getPhone(token);
       setListPhone(response.data);
-      setLoader(false);
     } catch (err) {
       setListPhone([]);
       console.log(err);
     }
+
+    setLoaderComponent(false);
   };
 
   useEffect(() => {

@@ -7,6 +7,7 @@ import Form from "../../components/form/Form";
 import AuthContext from "../../context/auth-context/AuthContext";
 import useError from "../../utils/hooks/useError";
 import usePasswordLength from "../../utils/hooks/usePasswordLength";
+import useLoader from "../../utils/hooks/useLoader";
 import { registerUser } from "../../services/user";
 
 /**
@@ -33,6 +34,8 @@ function Register() {
   // Checks if the user's name, lastname or email is empty
   const { error, setInputError } = useError();
 
+  const { loader, setLoaderComponent } = useLoader();
+
   // Checks if the user's password is less than or equal to 4 characters
   const { password, checkPasswordLength } = usePasswordLength();
   const navigate = useNavigate();
@@ -42,6 +45,8 @@ function Register() {
    */
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    setLoaderComponent(true);
 
     // If the user submits the form with a password error, it will not be sent
     if (!password.shortPassword) {
@@ -77,6 +82,8 @@ function Register() {
       } catch (err) {
         console.log(err);
       }
+
+      setLoaderComponent(false);
     }
   };
 
@@ -114,6 +121,12 @@ function Register() {
 
   return (
     <Form title="Registrarse">
+      {loader && (
+        <div className="loader-container">
+          <div className="spinner" />
+        </div>
+      )}
+
       <form onSubmit={handleSubmit}>
         <Grid container spacing={1}>
           <Grid item xs={6}>

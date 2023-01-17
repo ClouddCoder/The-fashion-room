@@ -1,7 +1,8 @@
 import { useState } from "react";
 
 /**
- * Custom hook to handle user input
+ * Custom hook to get the user's input.
+ * @returns {object} {input, setUserInput}
  */
 const useUserInput = () => {
   const [input, setInput] = useState("");
