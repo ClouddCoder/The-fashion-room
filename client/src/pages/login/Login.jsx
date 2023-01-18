@@ -90,8 +90,8 @@ function Login() {
       )}
 
       <form onSubmit={handleSubmit}>
-        <Grid container spacing={1}>
-          <Grid item xs={12}>
+        <Grid container direction="column" rowSpacing={2}>
+          <Grid item>
             <TextField
               error={error.constraint === "incorrecto"}
               helperText={error.message}
@@ -103,7 +103,7 @@ function Login() {
               sx={{ margin: ".5rem 0", width: "100%" }}
             />
           </Grid>
-          <Grid item xs={12}>
+          <Grid item>
             <TextField
               error={error.constraint === "incorrecto"}
               helperText={error.message}
@@ -116,7 +116,7 @@ function Login() {
               sx={{ margin: ".5rem 0", width: "100%" }}
             />
           </Grid>
-          <Grid item xs={12}>
+          <Grid item>
             <Button variant="contained" color="secondary" type="submit" fullWidth>
               Login
             </Button>
@@ -124,12 +124,12 @@ function Login() {
           <Grid container item justifyContent="space-between" xs={12}>
             <Grid item>
               <Link to="/edit-password">
-                <span>Forgot password?</span>
+                <span>¿Olvidaste tu contraseña?</span>
               </Link>
             </Grid>
             <Grid item>
               <Link to="/register">
-                <span>Do not have an account? Sign Up</span>
+                <span>¿No tienes una cuenta? Registrate</span>
               </Link>
             </Grid>
           </Grid>

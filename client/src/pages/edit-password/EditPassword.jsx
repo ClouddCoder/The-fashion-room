@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
@@ -9,6 +11,8 @@ import { changeUserPassword, getUserId } from "../../services/user";
 import useUserInput from "../../utils/hooks/useUserInput";
 import usePasswordLength from "../../utils/hooks/usePasswordLength";
 import useError from "../../utils/hooks/useError";
+import { checkScreenSize } from "../../utils/MUIMediaQuery";
+import useLoader from "../../utils/hooks/useLoader";
 import "./EditPassword.css";
 
 /**
@@ -19,16 +23,26 @@ function EditPassword() {
   const [userId, setUserId] = useState("");
   const [success, setSuccess] = useState(false); // If the user's email exists, turns true.
   const [open, setOpen] = useState(false); // Opens the modal.
+
   const { error, setInputError } = useError();
+
   const userEmail = useUserInput();
   const userCurrentPassword = useUserInput();
   const userNewPassword = useUserInput();
+
   const { password, checkPasswordLength } = usePasswordLength();
+
   const navigate = useNavigate();
+
+  const screenSize = checkScreenSize();
+
+  const { loader, setLoaderComponent } = useLoader();
 
   // Sends the user's new password to change the current one using the user's id.
   const handleSubmitPassword = async (e) => {
     e.preventDefault();
+
+    setLoaderComponent(true);
 
     if (!password.shortPassword) {
       try {
@@ -42,12 +56,16 @@ function EditPassword() {
         setInputError({ ...error, constraint, message });
       }
     }
+
+    setLoaderComponent(false);
   };
 
   // Sends the user's email to check if it exists in the database.
   // If it does, the function will return the user's id.
   const handleSubmitEmail = async (e) => {
     e.preventDefault();
+
+    setLoaderComponent(true);
 
     try {
       const res = await getUserId(userEmail.input);
@@ -61,6 +79,8 @@ function EditPassword() {
       const { message } = data;
       setInputError({ ...error, constraint: "email", message });
     }
+
+    setLoaderComponent(false);
   };
 
   const handleChange = (e) => {
@@ -89,40 +109,57 @@ function EditPassword() {
 
   return (
     <Layout>
+      {loader && (
+        <div className="loader-container">
+          <div className="spinner" />
+        </div>
+      )}
+
       {success ? (
         <div className="password-inputs">
           <div className="password-inputs__title">
-            <h1>Cambiar contraseña</h1>
+            <h3>Cambiar contraseña</h3>
           </div>
-          <form onSubmit={handleSubmitPassword}>
-            <TextField
-              error={error.constraint === "currentPassword"}
-              helperText={error.constraint === "currentPassword" && error.message}
-              onChange={handleChange}
-              name="currentPassword"
-              variant="outlined"
-              label="Contraseña actual"
-              type="password"
-              value={userCurrentPassword.input}
-              sx={{ margin: ".5rem 0", width: "100%" }}
-            />
-            <TextField
-              error={password.shortPassword || error.constraint === "newPassword"}
-              helperText={
-                error.constraint === "newPassword" ? error.message : password.errorMessage
-              }
-              onChange={handleChange}
-              name="newPassword"
-              variant="outlined"
-              label="Contraseña nueva"
-              type="password"
-              value={userNewPassword.input}
-              sx={{ margin: ".5rem 0", width: "100%" }}
-            />
-            <Button variant="contained" color="secondary" type="submit" fullWidth>
-              Actualizar
-            </Button>
-          </form>
+          <Card>
+            <CardContent>
+              <form onSubmit={handleSubmitPassword}>
+                <TextField
+                  error={error.constraint === "currentPassword"}
+                  helperText={error.constraint === "currentPassword" && error.message}
+                  onChange={handleChange}
+                  name="currentPassword"
+                  variant="outlined"
+                  label="Contraseña actual"
+                  type="password"
+                  value={userCurrentPassword.input}
+                  sx={{ margin: ".5rem 0", width: "100%" }}
+                />
+                <TextField
+                  error={password.shortPassword || error.constraint === "newPassword"}
+                  helperText={
+                    error.constraint === "newPassword" ? error.message : password.errorMessage
+                  }
+                  onChange={handleChange}
+                  name="newPassword"
+                  variant="outlined"
+                  label="Contraseña nueva"
+                  type="password"
+                  value={userNewPassword.input}
+                  sx={{ margin: ".5rem 0", width: "100%" }}
+                />
+                <div className="form-button">
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    type="submit"
+                    fullWidth={screenSize === "phone"}
+                  >
+                    Actualizar
+                  </Button>
+                </div>
+              </form>
+            </CardContent>
+          </Card>
           <Modal state={open}>
             <Grid
               container
@@ -146,6 +183,7 @@ function EditPassword() {
                     setOpen(false);
                     navigate("/login");
                   }}
+                  fullWidth={screenSize === "phone"}
                 >
                   Aceptar
                 </Button>
@@ -156,23 +194,34 @@ function EditPassword() {
       ) : (
         <div className="email-input">
           <div className="email-input__title">
-            <h1>Escribe tu correo</h1>
+            <h3>Escribe tu correo</h3>
           </div>
-          <form onSubmit={handleSubmitEmail}>
-            <TextField
-              error={error.constraint === "email"}
-              helperText={error.constraint === "email" && error.message}
-              onChange={handleChange}
-              name="email"
-              variant="outlined"
-              label="Email"
-              value={userEmail.input}
-              sx={{ margin: ".5rem 0", width: "100%" }}
-            />
-            <Button variant="contained" color="secondary" type="submit" fullWidth>
-              Continuar
-            </Button>
-          </form>
+          <Card>
+            <CardContent>
+              <form onSubmit={handleSubmitEmail}>
+                <TextField
+                  error={error.constraint === "email"}
+                  helperText={error.constraint === "email" && error.message}
+                  onChange={handleChange}
+                  name="email"
+                  variant="outlined"
+                  label="Email"
+                  value={userEmail.input}
+                  sx={{ margin: ".5rem 0", width: "100%" }}
+                />
+                <div className="form-button">
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    type="submit"
+                    fullWidth={screenSize === "phone"}
+                  >
+                    Continuar
+                  </Button>
+                </div>
+              </form>
+            </CardContent>
+          </Card>
         </div>
       )}
     </Layout>
