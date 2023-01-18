@@ -119,7 +119,7 @@ function EditAddress() {
 
   return (
     <Layout>
-      <Grid container direction="column" sx={{ width: "90%", maxWidth: "750px" }}>
+      <Grid container direction="column" sx={{ width: "90%", maxWidth: "750px", p: 2 }}>
         <Grid item sx={{ mb: 2 }}>
           <h3>Editar domicilio</h3>
         </Grid>

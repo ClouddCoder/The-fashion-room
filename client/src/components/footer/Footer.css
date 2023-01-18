@@ -18,7 +18,6 @@
 }
 
 .footer__link {
-  list-style: none;
   font-size: 0.8125rem;
   margin-top: 10px;
   color: var(--color-primary-white);
@@ -26,7 +25,6 @@
 
 .footer__link a {
   color: var(--color-primary-white);
-  text-decoration: none;
 }
 
 .social-media {

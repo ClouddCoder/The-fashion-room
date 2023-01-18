@@ -1,0 +1,33 @@
+/* For mobile phones */
+.my-data-list .my-data-link__container {
+  padding: 12px;
+}
+
+.my-data-list li a {
+  display: flex;
+  justify-content: space-between;
+}
+
+.my-data-link {
+  display: flex;
+  flex: 20;
+}
+
+.my-data-link__field,
+.my-data-link__icon {
+  flex: 1;
+}
+
+.my-data-link__field {
+  color: black;
+}
+
+.my-data-link__value {
+  color: gray;
+  flex: 2;
+}
+
+.container-horizontal-line {
+  padding: 0;
+  height: 0;
+}

@@ -4,19 +4,16 @@
 }
 
 .header__navbar__links li {
-  list-style: none;
   cursor: pointer;
   margin: 10px;
 }
 
 .header__navbar__links li a {
   color: var(--color-primary-brown);
-  text-decoration: none;
 }
 
 .header__navbar__links li a:hover {
   border-bottom: 1px solid var(--color-primary-brown);
-  text-decoration: none;
 }
 
 /* For tablet and desktop */
