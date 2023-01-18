@@ -2,6 +2,7 @@ import { useContext } from "react";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
+import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import { Link } from "react-router-dom";
 import ProfileButton from "../profile-button/ProfileButton";
 import AuthContext from "../../../../context/auth-context/AuthContext";
@@ -72,6 +73,12 @@ function NavbarProfileLinks({ newSelector }) {
             <Link to="/cart">
               <ShoppingCartOutlinedIcon />
               <span>Mi carrito</span>
+            </Link>
+          </li>
+          <li className="header__navbar__my-orders">
+            <Link to="/orders">
+              <ShoppingBagOutlinedIcon />
+              <span>Mis compras</span>
             </Link>
           </li>
           <li className="header__navbar__profile">

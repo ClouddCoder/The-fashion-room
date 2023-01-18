@@ -83,7 +83,8 @@
     background: var(--color-primary-yellow);
   }
 
-  .header__navbar__profile {
+  .header__navbar__profile,
+  .header__navbar__my-orders {
     display: block;
   }
 
