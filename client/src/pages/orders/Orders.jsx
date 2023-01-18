@@ -33,11 +33,16 @@ function Orders() {
         </div>
       )}
 
-      <Grid container direction="column" sx={{ height: "auto", width: "60%", m: 2 }}>
+      <Grid
+        container
+        direction="column"
+        sx={{ width: "90%", maxWidth: "750px", p: 2 }}
+        rowSpacing={4}
+      >
         <Grid item>
           <h3>Mis ordenes</h3>
         </Grid>
-        <Grid item container direction="column" mt={4}>
+        <Grid item container direction="column" rowSpacing={2}>
           {myOrders?.map((order, i) => (
             <InvoiceDetail product={order} key={i} />
           ))}
