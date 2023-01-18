@@ -31,6 +31,10 @@
   cursor: pointer;
 }
 
+.vertical-line {
+  display: none;
+}
+
 /* For tablet and desktop */
 @media only screen and (min-width: 601px) {
   .header__navbar__profile-links {
@@ -53,6 +57,10 @@
   .header__navbar__wishlist,
   .header__navbar__cart {
     margin: 10px;
+  }
+
+  .header__navbar__my-profile {
+    display: none;
   }
 
   .header__navbar__username span {
@@ -85,5 +93,9 @@
 
   .header__navbar__profile svg {
     color: var(--color-primary-brown);
+  }
+
+  .vertical-line {
+    display: block;
   }
 }

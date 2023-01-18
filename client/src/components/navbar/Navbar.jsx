@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
@@ -39,9 +39,11 @@ function Navbar() {
               ) : (
                 <Overlay newClassName="header__navbar__overlay hidden" setToggle={setToggle} />
               )}
-              <div className="header__navbar__title">
-                <h1>{title}</h1>
-              </div>
+              <Link to="/">
+                <div className="header__navbar__title">
+                  <h1>{title}</h1>
+                </div>
+              </Link>
             </div>
             <IconButton onClick={() => navigate("/cart")}>
               <ShoppingCartOutlinedIcon fontSize="large" />
@@ -49,9 +51,11 @@ function Navbar() {
           </>
         ) : (
           <>
-            <div className="header__navbar__title">
-              <h1>{title}</h1>
-            </div>
+            <Link to="/">
+              <div className="header__navbar__title">
+                <h1>{title}</h1>
+              </div>
+            </Link>
             <NavbarLinks newSelector="header__navbar__links" />
             <NavbarProfileLinks newSelector="header__navbar__profile-links" />
           </>
