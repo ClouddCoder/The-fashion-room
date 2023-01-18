@@ -25,7 +25,12 @@ function MyData() {
   const { username, user } = useContext(AuthContext);
   return (
     <Layout>
-      <Grid container direction="column" sx={{ width: "90%", maxWidth: "700px" }} rowSpacing={4}>
+      <Grid
+        container
+        direction="column"
+        sx={{ width: "90%", maxWidth: "700px", p: 2 }}
+        rowSpacing={4}
+      >
         <Grid item>
           <h3>Mis datos</h3>
         </Grid>

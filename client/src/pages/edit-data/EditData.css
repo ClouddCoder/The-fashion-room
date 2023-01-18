@@ -1,14 +1,23 @@
-.container-input {
-  width: 400px;
+/* For mobile phones */
+.form-container,
+.container-input__field,
+.complete-name__field {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
 }
 
-.complete-name {
+.complete-name__fields {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  column-gap: 16px;
 }
 
-.container-input div {
-  display: grid;
-  grid-template-columns: auto;
+/* For tablet, desktop and large devices */
+@media only screen and (min-width: 601px) {
+  .form-button {
+    display: flex;
+    flex-direction: row-reverse;
+  }
 }

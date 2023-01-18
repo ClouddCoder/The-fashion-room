@@ -1,5 +1,7 @@
 import { useState, useContext } from "react";
 import { useParams } from "react-router-dom";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -7,6 +9,7 @@ import * as services from "../../services/user";
 import AuthContext from "../../context/auth-context/AuthContext";
 import Layout from "../../components/layout/Layout";
 import useUserInput from "../../utils/hooks/useUserInput";
+import { checkScreenSize } from "../../utils/MUIMediaQuery";
 import "./EditData.css";
 
 /**
@@ -15,10 +18,14 @@ import "./EditData.css";
  */
 function EditEmail() {
   const { info } = useParams();
+
   const { input, setUserInput } = useUserInput();
   const inputLastname = useUserInput();
+
   const [success, setSuccess] = useState(false);
   const { token } = useContext(AuthContext);
+
+  const screenSize = checkScreenSize();
 
   // Variables to change the information displayed in the form
   let title = "";
@@ -83,63 +90,74 @@ function EditEmail() {
 
   return (
     <Layout>
-      <Grid container direction="column" sx={{ width: "auto" }}>
+      <Grid
+        container
+        direction="column"
+        sx={{ width: "90%", maxWidth: "400px", p: 2 }}
+        rowSpacing={4}
+      >
         <Grid item>
           <h3>{title}</h3>
         </Grid>
-        <Grid container item direction="column">
-          <Grid>
-            <form onSubmit={handleSubmit}>
-              {/* If the user is going to change their name, must change name and lastname */}
-              {info === "name" ? (
-                <div className="container-input complete-name">
-                  <div>
-                    <span>{inputLabel}</span>
-                    <TextField
-                      inputProps={{ "aria-label": inputAriaLabel }}
-                      name="new-name"
-                      hiddenLabel
-                      fullWidth
-                      onChange={handleChange}
-                      variant="outlined"
-                      size="small"
-                    />
-                  </div>
-                  <div>
-                    <span>{secondInputLabel}</span>
-                    <TextField
-                      inputProps={{ "aria-label": secondInpuAriaLabel }}
-                      name="new-lastname"
-                      hiddenLabel
-                      fullWidth
-                      onChange={handleChange}
-                      variant="outlined"
-                      size="small"
-                    />
+        <Grid item>
+          <Card>
+            <CardContent>
+              <form onSubmit={handleSubmit}>
+                <div className="form-container">
+                  {/* If the user is going to change their name, must change name and lastname */}
+                  {info === "name" ? (
+                    <div className="container-input complete-name__fields">
+                      <section className="complete-name__field">
+                        <span>{inputLabel}</span>
+                        <TextField
+                          inputProps={{ "aria-label": inputAriaLabel }}
+                          name="new-name"
+                          hiddenLabel
+                          onChange={handleChange}
+                          variant="outlined"
+                          size="small"
+                        />
+                      </section>
+                      <section className="complete-name__field">
+                        <span>{secondInputLabel}</span>
+                        <TextField
+                          inputProps={{ "aria-label": secondInpuAriaLabel }}
+                          name="new-lastname"
+                          hiddenLabel
+                          onChange={handleChange}
+                          variant="outlined"
+                          size="small"
+                        />
+                      </section>
+                    </div>
+                  ) : (
+                    <div className="container-input">
+                      <div className="container-input__field">
+                        <span>{inputLabel}</span>
+                        <TextField
+                          inputProps={{ "aria-label": inputAriaLabel }}
+                          hiddenLabel
+                          onChange={handleChange}
+                          variant="outlined"
+                          size="small"
+                        />
+                      </div>
+                    </div>
+                  )}
+                  <div className="form-button">
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      type="submit"
+                      fullWidth={screenSize === "phone"}
+                    >
+                      Cambiar
+                    </Button>
                   </div>
                 </div>
-              ) : (
-                <div className="container-input">
-                  <div>
-                    <span>{inputLabel}</span>
-                    <TextField
-                      inputProps={{ "aria-label": inputAriaLabel }}
-                      hiddenLabel
-                      fullWidth
-                      onChange={handleChange}
-                      variant="outlined"
-                      size="small"
-                    />
-                  </div>
-                </div>
-              )}
-              <div>
-                <Button variant="contained" color="secondary" type="submit">
-                  Cambiar
-                </Button>
-              </div>
-            </form>
-          </Grid>
+              </form>
+            </CardContent>
+          </Card>
         </Grid>
         {success && (
           <Grid item>
