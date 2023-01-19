@@ -13,13 +13,14 @@ function Layout({ componentName, children }) {
 
   // If the screen size is phone, the footer is not rendered.
   if (screenSize === "phone") {
-    return (
-      <div className="layout">
-        <Navbar />
-        <main className="main-content">{children}</main>
-        {componentName !== "buy" && <Footer />}
-      </div>
-    );
+    if (componentName === "buy" || componentName === "cart") {
+      return (
+        <div className="layout">
+          <Navbar />
+          <main className="main-content">{children}</main>
+        </div>
+      );
+    }
   }
 
   return (
