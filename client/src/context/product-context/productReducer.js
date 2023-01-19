@@ -42,9 +42,11 @@ export function ProductReducer(state, action) {
     }
 
     case TYPES.ADD_TO_CART: {
-      const newItem = state.variants.find((item) => item.variant_id === action.payload);
+      const newItem = state.variants.find(
+        (item) => item.variant_id === action.payload.variantId,
+      );
 
-      // If the item is already in the cart, then it will increase the quantity by 1.
+      // If the item is already in the cart, then it will increase the quantity.
       const itemInCart = state.cart.find((item) => item.variant_id === newItem.variant_id);
 
       return itemInCart
@@ -52,31 +54,13 @@ export function ProductReducer(state, action) {
             ...state,
             cart: state.cart.map((item) =>
               item.variant_id === itemInCart.variant_id
-                ? { ...item, quantity_to_purchase: item.quantity_to_purchase + 1 }
+                ? { ...item, quantity_to_purchase: action.payload.quantityToPurchase }
                 : item,
             ),
           }
         : {
             ...state,
             cart: [...state.cart, { ...newItem, quantity_to_purchase: 1 }],
-          };
-    }
-
-    case TYPES.REMOVE_ONE_FROM_CART: {
-      const itemToDelete = state.cart.find((item) => item.variant_id === action.payload);
-
-      return itemToDelete.quantity_to_purchase > 1
-        ? {
-            ...state,
-            cart: state.cart.map((item) =>
-              item.variant_id === itemToDelete.variant_id
-                ? { ...item, quantity_to_purchase: item.quantity_to_purchase - 1 }
-                : item,
-            ),
-          }
-        : {
-            ...state,
-            cart: state.cart.filter((item) => item.variant_id !== action.payload),
           };
     }
 

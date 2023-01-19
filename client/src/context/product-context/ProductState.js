@@ -96,16 +96,19 @@ function ProductState({ children }) {
     dispatch({ type: TYPES.TOTAL_SHIPPING_COST });
   };
 
-  const addProductToCart = (id) => {
-    dispatch({ type: TYPES.ADD_TO_CART, payload: id });
+  /**
+   * Adds a product to the shopping cart.
+   * @param {object} product - The product and the quantity to add to the cart.
+   */
+  const addProductToCart = (product) => {
+    dispatch({ type: TYPES.ADD_TO_CART, payload: product });
+
+    getTotalPrice(true);
   };
 
-  const removeFromCart = (id, all = false) => {
-    if (all) {
-      dispatch({ type: TYPES.REMOVE_ALL_FROM_CART, payload: id });
-    } else {
-      dispatch({ type: TYPES.REMOVE_ONE_FROM_CART, payload: id });
-    }
+  const removeFromCart = (id) => {
+    dispatch({ type: TYPES.REMOVE_ALL_FROM_CART, payload: id });
+
     getTotalProducts();
     getTotalPrice(true);
   };

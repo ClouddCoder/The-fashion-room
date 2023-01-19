@@ -18,7 +18,7 @@ import {
  * @returns {JSX.Element} - ShoppingCart component.
  */
 function ShoppingCart() {
-  const { cart, removeFromCart, clearCart } = useContext(ProductContext);
+  const { cart, addProductToCart, removeFromCart, clearCart } = useContext(ProductContext);
 
   const resumeComponentProps = getMUIprops(
     resumePhoneStyle,
@@ -33,10 +33,14 @@ function ShoppingCart() {
         <Grid item>
           <h3>Carrito</h3>
         </Grid>
-        <Grid container direction="column">
+        <Grid container direction="column" rowSpacing={1}>
           {cart.map((product, index) => (
             <Grid item key={index}>
-              <CartItem product={product} removeFromCart={removeFromCart} />
+              <CartItem
+                product={product}
+                addToCart={addProductToCart}
+                removeFromCart={removeFromCart}
+              />
             </Grid>
           ))}
         </Grid>

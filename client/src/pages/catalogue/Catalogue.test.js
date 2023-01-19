@@ -1,6 +1,7 @@
 import userEvent from "@testing-library/user-event";
 import { screen } from "@testing-library/react";
-import { CatalogueTest, productContextProps } from "../../tests/test.utils";
+import { CatalogueTest } from "../../tests/test.utils";
+import { productContextProps } from "../../tests/mockedData";
 
 jest.mock("axios");
 

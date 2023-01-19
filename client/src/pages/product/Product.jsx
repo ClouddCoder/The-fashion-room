@@ -83,7 +83,9 @@ function Product() {
               {variants?.map((variant, index) => (
                 <li
                   name={variant.variant_id}
-                  className={`product-color${variantId === variant.variant_id ? " selected" : ""}`}
+                  className={`product-color${
+                    variantId === variant.variant_id ? " selected" : ""
+                  }`}
                   key={index}
                 >
                   <span>{variant.color_value}</span>
@@ -101,7 +103,11 @@ function Product() {
               </Button>
               <Button
                 variant="contained"
-                onClick={auth ? () => addProductToCart(variantId) : () => navigate("/login")}
+                onClick={
+                  auth
+                    ? () => addProductToCart({ variantId, quantityToPurchase: 1 })
+                    : () => navigate("/login")
+                }
               >
                 Agregar al carrito
               </Button>
