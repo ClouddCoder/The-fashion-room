@@ -1,7 +1,7 @@
 import { createContext } from "react";
 
 /**
- * Contexto global de autenticacion del usuario
+ * Global context for authentication.
  */
 const AuthContext = createContext();
 

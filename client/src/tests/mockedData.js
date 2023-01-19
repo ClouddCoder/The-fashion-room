@@ -100,7 +100,7 @@ export const mockProductVariants = [
 
 // ProductContext props for testing components.
 export const productContextProps = {
-  addToCart: jest.fn(),
+  addProductToCart: jest.fn(),
   loadProducts: jest.fn(),
   getProductVariants: jest.fn(),
   clearListOfProductsToBuy: jest.fn(),
@@ -121,7 +121,7 @@ export const productProps = {
 
 // ProductContext props for testing Product component.
 export const productProductContextProps = {
-  addToCart: jest.fn(),
+  addProductToCart: jest.fn(),
   loadProducts: jest.fn(),
   getProductVariants: jest.fn(),
   clearListOfProductsToBuy: jest.fn(),

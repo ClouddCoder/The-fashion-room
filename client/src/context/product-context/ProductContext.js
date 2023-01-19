@@ -1,7 +1,7 @@
 import { createContext } from "react";
 
 /**
- * Contexto global de los productos despues de cada compra
+ * Global context for products.
  */
 const ProductContext = createContext();
 

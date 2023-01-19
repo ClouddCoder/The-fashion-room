@@ -1,7 +1,9 @@
 import instance, { baseURL } from "./api";
 
 /**
- * Fetches all products from a given category
+ * Fetches all products given a category.
+ * @param {string} category - The category of the products to fetch.
+ * @returns {Promise} - The products.
  */
 export function getProductsByCategory(category) {
   return instance.get("/catalogue", {
@@ -12,7 +14,9 @@ export function getProductsByCategory(category) {
 }
 
 /**
- * Fetches all variants of a given product's id
+ * Fetches all variants given the product's id.
+ * @param {number} id - The product's id.
+ * @returns {Promise} - The variants.
  */
 export function getVariantsOfTheProduct(id) {
   return instance.get("/product-variants", {
@@ -23,7 +27,9 @@ export function getVariantsOfTheProduct(id) {
 }
 
 /**
- * Fetches the user's wishlist
+ * Fetches the user's wishlist.
+ * @param {string} token - The user's token.
+ * @returns {Promise} - The wishlist.
  */
 export function getUserWishlist(token) {
   return instance.get("/wishlist", {
@@ -34,7 +40,11 @@ export function getUserWishlist(token) {
 }
 
 /**
- * Adds or removes a wish from the user's wishlist
+ * Adds a product to the user's wishlist.
+ * @param {string} token - The user's token.
+ * @param {number} productId - The product's id.
+ * @param {boolean} remove - Whether to remove the product from the wishlist.
+ * @returns {Promise} - Message if succeeded or failed.
  */
 export function handleUserWish(token, productId, remove = false) {
   return instance.post(
@@ -52,7 +62,9 @@ export function handleUserWish(token, productId, remove = false) {
 }
 
 /**
- * Fetches the user's purchases
+ * Fetches the user's purchases.
+ * @param {string} token - The user's token.
+ * @returns {Promise} - The purchases.
  */
 export function getUserPurchases(token) {
   return instance.get("/order-detail", {
@@ -63,21 +75,10 @@ export function getUserPurchases(token) {
 }
 
 /**
- * Removes a purchase made by the user
- */
-export function removeUserPurchase(token, orderDetailId) {
-  return instance.delete("/remove-order", {
-    data: {
-      orderDetailId,
-    },
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-}
-
-/**
- * Buys the products selected by the user
+ * Buys the products selected by the user.
+ * @param {string} token - The user's token.
+ * @param {Array} productsToBuy - The products to buy.
+ * @returns {Promise} - Message if succeeded or failed.
  */
 export function makeThePurchase(token, productsToBuy) {
   return fetch(`${baseURL}/buy`, {
@@ -92,7 +93,10 @@ export function makeThePurchase(token, productsToBuy) {
 }
 
 /**
- * Creates a new invoice after each purchase
+ * Creates a new invoice after each purchase.
+ * @param {string} token - The user's token.
+ * @param {Array} productsToBuy - The products to buy.
+ * @returns {Promise} - Message if succeeded or failed.
  */
 export function createUserInvoice(token, productsToBuy) {
   return fetch(`${baseURL}/invoice`, {

@@ -17,7 +17,7 @@ import { catalogueInitialState, CatalogueReducer } from "./reducer/catalogueRedu
 function Catalogue() {
   const { category } = useParams();
 
-  const { loader, setLoader, addToCart, loadProducts, products, getWishlist } =
+  const { loader, setLoader, addProductToCart, loadProducts, products, getWishlist } =
     useContext(ProductContext);
 
   const [state, dispatch] = useReducer(CatalogueReducer, catalogueInitialState);
@@ -127,7 +127,7 @@ function Catalogue() {
                 columnSpacing={{ xs: 0, md: 2 }}
               >
                 {filteredProducts().map((product, index) => (
-                  <ProductItem key={index} product={product} addToCart={addToCart} />
+                  <ProductItem key={index} product={product} addToCart={addProductToCart} />
                 ))}
               </Grid>
             </Paper>

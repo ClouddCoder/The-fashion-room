@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardContent from "@mui/material/CardContent";
@@ -6,7 +5,7 @@ import Grid from "@mui/material/Grid";
 import { useNavigate, Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import { getProductImage } from "../../../assets";
-import ProductContext from "../../../context/product-context/ProductContext";
+import { checkScreenSize } from "../../../utils/MUIMediaQuery";
 import "./InvoiceDetail.css";
 
 /**
@@ -15,8 +14,9 @@ import "./InvoiceDetail.css";
  * @returns {JSX.Element} - InvoiceDetail component.
  */
 function InvoiceDetail({ product }) {
-  const { removeOrder } = useContext(ProductContext);
   const navigate = useNavigate();
+
+  const screenSize = checkScreenSize();
 
   return (
     <Grid item container justifyContent="center">
@@ -25,9 +25,11 @@ function InvoiceDetail({ product }) {
           titleTypographyProps={{ variant: "span" }}
           title={`Factura #${product.order_detail_id}`}
           action={
-            <Link to={`/product/${product.product_id}-${product.variant_id}`}>
-              <span>Volver a comprar</span>
-            </Link>
+            screenSize === "phone" && (
+              <Link to={`/product/${product.product_id}-${product.variant_id}`}>
+                <span>Volver a comprar</span>
+              </Link>
+            )
           }
           sx={{
             backgroundColor: "var(--color-primary-brown)",
@@ -53,23 +55,22 @@ function InvoiceDetail({ product }) {
                   <span>{`x${product.product_quantity}`}</span>
                 </div>
                 <div className="order-details__total-price">
-                  <span>{`Total compra: $${product.item_total_cost}`}</span>
+                  <span>Total compra:</span>
+                  <span>{`$${product.item_total_cost}`}</span>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="order-user-options">
-            <Button
-              variant="contained"
-              onClick={() => {
-                navigate(`/product/${product.product_id}-${product.variant_id}`);
-              }}
-            >
-              Volver a comprar
-            </Button>
-            <Button variant="contained" color="primary" onClick={() => removeOrder(product)}>
-              Borrar
-            </Button>
+            <div className="order-user-options">
+              <Button
+                variant="contained"
+                onClick={() => {
+                  navigate(`/product/${product.product_id}-${product.variant_id}`);
+                }}
+                sx={{ width: "160px" }}
+              >
+                Volver a comprar
+              </Button>
+            </div>
           </div>
         </CardContent>
       </Card>

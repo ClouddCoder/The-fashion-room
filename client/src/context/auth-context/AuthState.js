@@ -4,7 +4,9 @@ import { authInitialState, authReducer } from "./authReducer";
 import { authActions } from "../../actions/authActions";
 
 /**
- * Estados que se usaran en el contexto global del usuario
+ * States and dispatches for the auth context.
+ * @param {object} {children}
+ * @returns {JSX.Element} - AuthContext.Provider.
  */
 function AuthState({ children }) {
   const [state, dispatch] = useReducer(authReducer, authInitialState);

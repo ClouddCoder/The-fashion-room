@@ -261,27 +261,6 @@ const getOrderDetail = async (req, res, next) => {
   }
 };
 
-/**
- * Deletes an order that user has made.
- */
-const removeOrderDetail = async (req, res, next) => {
-  const { orderDetailId } = req.body;
-  const { authorization } = req.headers;
-  const query = "DELETE FROM order_item WHERE order_item_id = $1;";
-  const decodeToken = getAuthorization(authorization);
-
-  if (decodeToken.code) {
-    return res.status(decodeToken.code).json({ message: decodeToken.message });
-  }
-
-  try {
-    await pool.query(query, [orderDetailId]);
-    return res.json({ message: "success" });
-  } catch (error) {
-    next(error);
-  }
-};
-
 module.exports = {
   getAllProducts,
   getProductVariants,
@@ -293,5 +272,4 @@ module.exports = {
   getStoreAddress,
   getStorePhones,
   getOrderDetail,
-  removeOrderDetail,
 };

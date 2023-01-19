@@ -8,43 +8,45 @@ import {
   getUserWishlist,
   handleUserWish,
   getUserPurchases,
-  removeUserPurchase,
   createUserInvoice,
 } from "../../services/product";
 import { productInitialState, ProductReducer } from "./productReducer";
 import { TYPES } from "../../actions/productActions";
 
 /**
- * Initial state.
+ * States and dispatches for the product context.
+ * @param {object} {children}
+ * @returns {JSX.Element} ProductContext.Provider
  */
 function ProductState({ children }) {
   const [state, dispatch] = useReducer(ProductReducer, productInitialState);
   const { token } = useContext(AuthContext);
 
-  /**
-   * Set to true to display de loader.
-   */
   const setLoader = () => {
     dispatch({ type: TYPES.LOADER, payload: true });
   };
 
   /**
-   * Changes all product names.
+   * Changes all the products' names to capitalize the first letter.
+   * @param {array} products - List of products.
    */
   const getProductNameCapitalized = (products) => {
     products.forEach((product) => {
       const productName = product.product_name.replace("-", " ");
+
       const productNameCapitalized = productName.replace(
         productName[0],
         productName[0].toUpperCase(),
       );
+
       // eslint-disable-next-line no-param-reassign
       product.product_name = productNameCapitalized;
     });
   };
 
   /**
-   * Gets all products from a category.
+   * Gets all the products given a category.
+   * @param {string} category - Category name.
    */
   const loadProducts = async (category) => {
     try {
@@ -52,6 +54,7 @@ function ProductState({ children }) {
 
       const { data } = response;
       getProductNameCapitalized(data);
+
       dispatch({ type: TYPES.LOAD_PRODUCTS, payload: data });
       dispatch({ type: TYPES.LOADER, payload: false });
     } catch (error) {
@@ -60,7 +63,8 @@ function ProductState({ children }) {
   };
 
   /**
-   * Gets one product's variants information.
+   * Gets the variants given a product id.
+   * @param {number} id - Product id.
    */
   const getProductVariants = async (id) => {
     try {
@@ -68,6 +72,7 @@ function ProductState({ children }) {
 
       const { data } = response;
       getProductNameCapitalized(data);
+
       dispatch({ type: TYPES.GET_VARIANTS, payload: data });
     } catch (error) {
       console.log(error);
@@ -75,7 +80,8 @@ function ProductState({ children }) {
   };
 
   /**
-   * Stores the variant id that will come by the default with the product when is fetched.
+   * Stores the variant id that comes by the default with the product when is fetched.
+   * @param {number} variantId  - Variant id.
    */
   const setVariantId = (variantId) => {
     dispatch({ type: TYPES.SET_VARIANT_ID, payload: parseInt(variantId, 10) });
@@ -86,23 +92,14 @@ function ProductState({ children }) {
    */
   const clearProductsList = () => dispatch({ type: TYPES.CLEAR_PRODUCTS_LIST });
 
-  /**
-   * Gets the total shipping cost.
-   */
   const getTotalShippingCost = () => {
     dispatch({ type: TYPES.TOTAL_SHIPPING_COST });
   };
 
-  /**
-   * Adds one product to the shopping cart list.
-   */
-  const addToCart = (id) => {
+  const addProductToCart = (id) => {
     dispatch({ type: TYPES.ADD_TO_CART, payload: id });
   };
 
-  /**
-   * Removes one or all products from the shopping cart list.
-   */
   const removeFromCart = (id, all = false) => {
     if (all) {
       dispatch({ type: TYPES.REMOVE_ALL_FROM_CART, payload: id });
@@ -113,9 +110,6 @@ function ProductState({ children }) {
     getTotalPrice(true);
   };
 
-  /**
-   * Cleans the shopping cart list.
-   */
   const clearCart = () => {
     dispatch({ type: TYPES.CLEAR_CART });
   };
@@ -128,22 +122,21 @@ function ProductState({ children }) {
   };
 
   /**
-   * Gets shopping cart's total price or
-   * the total amount to pay.
+   * Gets shopping cart's total price or the total amount to pay.
+   * @param {boolean} resume - If true, it will get the total amount to pay.
    */
   const getTotalPrice = (resume = false) => {
     if (resume) dispatch({ type: TYPES.GET_RESUME_TOTAL_PRICE });
     else dispatch({ type: TYPES.GET_TOTAL_PRICE });
   };
 
-  /**
-   * Gets user's whislist.
-   */
   const getWishlist = async () => {
     try {
       const response = await getUserWishlist(token);
+
       const { data } = response;
       getProductNameCapitalized(data);
+
       dispatch({ type: TYPES.GET_WISHLIST, payload: data });
       dispatch({ type: TYPES.LOADER, payload: false });
     } catch (error) {
@@ -153,13 +146,15 @@ function ProductState({ children }) {
 
   /**
    * Adds or removes a product from the wishlist.
+   * @param {object} productId - Product Id.
+   * @param {boolean} remove - If true, it will remove the product from the wishlist.
    */
-  const handleWish = async (product, remove = false) => {
+  const handleWish = async (productId, remove = false) => {
     try {
-      await handleUserWish(token, product, remove);
+      await handleUserWish(token, productId, remove);
 
       if (remove) {
-        dispatch({ type: TYPES.REMOVE_FROM_WISHLIST, payload: product });
+        dispatch({ type: TYPES.REMOVE_FROM_WISHLIST, payload: productId });
       }
     } catch (error) {
       console.log(error);
@@ -169,6 +164,8 @@ function ProductState({ children }) {
   /**
    * Inserts a product's variant to be purchased. If argument is the shopping cart,
    * it will be a list.
+   * @param {object | Array} product - Product or products to be purchased.
+   * @param {boolean} fromCart - If true, it will be a list.
    */
   const addProductToBuy = (product, fromCart = false) => {
     if (fromCart) {
@@ -201,25 +198,6 @@ function ProductState({ children }) {
     }
   };
 
-  /**
-   * Removes an order made by the user.
-   */
-  const removeOrder = async (product) => {
-    try {
-      await removeUserPurchase(token, product.order_item_id);
-
-      dispatch({
-        type: TYPES.REMOVE_AN_ORDER,
-        payload: product.order_item_id,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  /**
-   * Sets a new order after each purchase.
-   */
   const createInvoice = async (productsToBuy) => {
     try {
       const res = await createUserInvoice(token, productsToBuy);
@@ -264,7 +242,7 @@ function ProductState({ children }) {
       setVariantId,
       clearProductsList,
       getTotalShippingCost,
-      addToCart,
+      addProductToCart,
       removeFromCart,
       clearCart,
       getTotalProducts,
@@ -274,7 +252,6 @@ function ProductState({ children }) {
       addProductToBuy,
       clearListOfProductsToBuy,
       loadOrderDetail,
-      removeOrder,
       createInvoice,
       resetProductState,
     }),

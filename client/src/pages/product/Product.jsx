@@ -21,7 +21,7 @@ function Product() {
   const {
     variants,
     variantId,
-    addToCart,
+    addProductToCart,
     addProductToBuy,
     clearListOfProductsToBuy,
     getProductVariants,
@@ -101,7 +101,7 @@ function Product() {
               </Button>
               <Button
                 variant="contained"
-                onClick={auth ? () => addToCart(variantId) : () => navigate("/login")}
+                onClick={auth ? () => addProductToCart(variantId) : () => navigate("/login")}
               >
                 Agregar al carrito
               </Button>

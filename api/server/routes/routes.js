@@ -27,7 +27,6 @@ const {
   getStoreAddress,
   getStorePhones,
   getOrderDetail,
-  removeOrderDetail,
 } = require("../controllers/products.controllers");
 
 const router = Router();
@@ -84,7 +83,5 @@ router.get("/store/address", getStoreAddress);
 router.get("/store/phones", getStorePhones);
 
 router.get("/order-detail", getOrderDetail);
-
-router.delete("/remove-order", removeOrderDetail);
 
 module.exports = router;

@@ -6,12 +6,12 @@ const user = JSON.parse(loggedJSON);
 export const authInitialState = {
   auth: user?.isAuth || false,
   userId: user?.userId || "",
-  user: user?.userName || "", // nombre del usuario que se muestra en el navbar
-  username: user?.username || "", // nombre que se mostrara en el perfil del usuario
-  userName: "", // valor de input del nombre del usuario
-  userLastname: "", // valor de input del apellido del usuario
-  userEmail: "", // valor de input del email del usuario
-  userPassword: "", // valor de input del password del usuario
+  user: user?.userName || "", // The user's name that is shown in the profile and navbar.
+  username: user?.username || "", // Username of the user.
+  userName: "", // Input value of the user's name.
+  userLastname: "", // Input value of the user's lastname.
+  userEmail: "", // Input value of the user's email.
+  userPassword: "", // Input value of the user's password.
   token: user?.token || "",
 };
 

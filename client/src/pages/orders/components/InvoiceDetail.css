@@ -1,7 +1,27 @@
 /* For mobile phones */
 .order-details {
   display: flex;
-  justify-content: space-around;
+  gap: 10px;
+  width: 100%;
+}
+
+.order-details img {
+  flex: 0.5;
+}
+
+.order-details__container {
+  flex: 1;
+}
+
+.order-details__product-name {
+  display: flex;
+  justify-content: flex-start;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.order-details__prices {
+  font-size: 0.9rem;
 }
 
 .order-details__container,
@@ -10,7 +30,8 @@
   flex-direction: column;
 }
 
-.order-details__unit-price {
+.order-details__unit-price,
+.order-details__total-price {
   display: flex;
   justify-content: space-between;
 }
@@ -21,9 +42,23 @@
 
 /* For tablet, desktop and large devices */
 @media only screen and (min-width: 601px) {
+  .order-details {
+    justify-content: space-between;
+    gap: 100px;
+  }
+
   .order-user-options {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+  }
+
+  .order-details img,
+  .order-user-options {
+    flex: 1;
+  }
+
+  .order-details__container {
+    flex: 2;
   }
 }

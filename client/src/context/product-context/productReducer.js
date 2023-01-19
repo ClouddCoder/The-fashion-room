@@ -1,23 +1,20 @@
 import { TYPES } from "../../actions/productActions";
 
 export const productInitialState = {
-  loader: true, // Loader to wait for data
+  loader: true, // Loader to wait for data.
   products: [],
   variants: [],
   variantId: 0,
   cart: [],
-  wishlist: [], // Gets all the wishes from database
+  wishlist: [], // Stores the user's wishlist.
   totalProducts: 0,
   totalPrice: 0,
   invoiceId: 0,
-  myOrders: [], // All user's purchases
-  productsToBuy: [], // Products ready to buy
+  myOrders: [], // All user's purchases.
+  productsToBuy: [], // Products ready to buy.
   shippingCost: 0,
 };
 
-/**
- * Funcion reductora que determina las acciones a realizar dependiendo del tipo de accion
- */
 export function ProductReducer(state, action) {
   switch (action.type) {
     case TYPES.LOADER:
@@ -36,14 +33,18 @@ export function ProductReducer(state, action) {
       return { ...state, products: [] };
 
     case TYPES.TOTAL_SHIPPING_COST: {
-      // First we get every product's shipping cost and then sum them.
+      // First gets every product's shipping cost and then adds them.
       const allShippingCosts = state.productsToBuy.map((product) => product.shipping_cost);
-      const total = allShippingCosts.reduce((a, b) => a + b);
-      return { ...state, shippingCost: total };
+
+      const totalShippingCost = allShippingCosts.reduce((a, b) => a + b);
+
+      return { ...state, shippingCost: totalShippingCost };
     }
 
     case TYPES.ADD_TO_CART: {
       const newItem = state.variants.find((item) => item.variant_id === action.payload);
+
+      // If the item is already in the cart, then it will increase the quantity by 1.
       const itemInCart = state.cart.find((item) => item.variant_id === newItem.variant_id);
 
       return itemInCart
@@ -126,6 +127,7 @@ export function ProductReducer(state, action) {
 
     case TYPES.ADD_PRODUCT_TO_BUY: {
       const product = state.variants.find((variant) => variant.variant_id === action.payload);
+
       return {
         ...state,
         productsToBuy: [{ ...product, quantity_to_purchase: 1 }],
