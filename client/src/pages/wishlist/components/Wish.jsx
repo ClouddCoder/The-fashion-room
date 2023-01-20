@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
@@ -19,35 +20,42 @@ function Wish({ product }) {
   const navigate = useNavigate();
   const { handleWish } = useContext(ProductContext);
   return (
-    <Grid item container mt={4}>
-      <Card sx={{ width: "100%", display: "flex", justifyContent: "space-between" }}>
-        <CardContent sx={{ width: "100%", display: "flex" }}>
+    <Grid item>
+      <Card
+        sx={{
+          display: "flex",
+          flexDirection: { xs: "column", sm: "row" },
+          p: 1,
+        }}
+      >
+        <Box sx={{ display: "flex", flex: { sm: 1 }, justifyContent: { sm: "space-between" } }}>
           <CardMedia
             component="img"
-            sx={{ width: 120, height: 120 }}
             image={getProductImage(product.product_name)}
             alt={product.product_name}
           />
-          <div className="wish-description">
-            <h1>{product.product_name}</h1>
-            <div>
-              <p>${product.min_price}</p>
+          <CardContent>
+            <div className="wish-description">
+              <span className="wish__product-name">{product.product_name}</span>
+              <span className="wish__product-price">${product.min_price}</span>
             </div>
-          </div>
-        </CardContent>
-        <CardActions>
-          <div className="wish-user-options">
-            <Button
-              variant="contained"
-              onClick={() => navigate(`/product/${product.product_id}-${product.variant_id}`)}
-            >
-              Comprar
-            </Button>
-            <Button variant="contained" onClick={() => handleWish(product.product_id, true)}>
-              Remove
-            </Button>
-          </div>
-        </CardActions>
+          </CardContent>
+        </Box>
+        <Box
+          component={CardActions}
+          disableSpacing
+          sx={{
+            display: "flex",
+            flexDirection: { sm: "column" },
+            justifyContent: { sm: "space-around" },
+            p: 0,
+          }}
+        >
+          <Button onClick={() => navigate(`/product/${product.product_id}-${product.variant_id}`)}>
+            Comprar
+          </Button>
+          <Button onClick={() => handleWish(product.product_id, true)}>Eliminar</Button>
+        </Box>
       </Card>
     </Grid>
   );

@@ -1,10 +1,10 @@
-.wish-description {
-  margin-left: 20px;
+/* For mobile phones */
+.wish__product-name,
+.wish__product-price {
+  display: block;
 }
 
-.wish-user-options {
-  height: 70%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+.wish__product-price {
+  font-size: 1.5rem;
+  font-weight: bold;
 }

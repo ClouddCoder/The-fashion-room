@@ -1,7 +1,6 @@
 /* For mobile phones */
 export const resumePhoneStyle = {
   position: "sticky",
-  right: 0,
   bottom: 0,
 };
 

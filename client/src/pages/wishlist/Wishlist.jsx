@@ -30,10 +30,20 @@ function Wishlist() {
         </div>
       )}
 
-      <Grid container direction="row" sx={{ width: "60%", mt: 4, mb: 4 }}>
-        {wishlist.map((wish, i) => (
-          <Wish key={i} product={wish} />
-        ))}
+      <Grid
+        container
+        direction="column"
+        sx={{ width: "90%", maxWidth: "600px", p: 2 }}
+        rowSpacing={4}
+      >
+        <Grid item>
+          <h3>Favoritos</h3>
+        </Grid>
+        <Grid item container direction="column" rowSpacing={2}>
+          {wishlist.map((wish, i) => (
+            <Wish key={i} product={wish} />
+          ))}
+        </Grid>
       </Grid>
     </Layout>
   );
