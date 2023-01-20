@@ -13,9 +13,20 @@ function Layout({ componentName, children }) {
 
   // If the screen size is phone, the footer is not rendered.
   if (screenSize === "phone") {
-    if (componentName === "buy" || componentName === "cart") {
+    if (componentName === "buy") {
       return (
         <div className="layout">
+          <Navbar />
+          <main className="main-content">{children}</main>
+        </div>
+      );
+    }
+
+    // In the ShoppingCart component is important to set height to 100%
+    // to stick the footer to the bottom of the page.
+    if (componentName === "cart") {
+      return (
+        <div className="layout hundred-height">
           <Navbar />
           <main className="main-content">{children}</main>
         </div>
