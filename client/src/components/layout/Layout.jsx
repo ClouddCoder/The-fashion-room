@@ -26,7 +26,7 @@ function Layout({ componentName, children }) {
   return (
     <div className="layout">
       <Navbar />
-      <main className="main-content">{children}</main>
+      <main className="main-content no-scroll-main-content">{children}</main>
       <Footer />
     </div>
   );

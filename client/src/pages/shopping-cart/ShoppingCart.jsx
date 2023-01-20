@@ -6,12 +6,7 @@ import OrderResume from "./components/order-resume/OrderResume";
 import CartItem from "./components/cart-item/CartItem";
 import Layout from "../../components/layout/Layout";
 import { getMUIprops } from "../../utils/MUIMediaQuery";
-import {
-  resumePhoneStyle,
-  resumeTabletStyle,
-  resumeDesktopStyle,
-  resumeLargeDevicesStyle,
-} from "./ShoppingCartMUIStyle";
+import * as cartMUIProps from "./ShoppingCartMUIStyle";
 
 /**
  * Component to render the shopping cart of the user.
@@ -20,37 +15,46 @@ import {
 function ShoppingCart() {
   const { cart, addProductToCart, removeFromCart, clearCart } = useContext(ProductContext);
 
+  // Props for the OrderResume component.
   const resumeComponentProps = getMUIprops(
-    resumePhoneStyle,
-    resumeTabletStyle,
-    resumeDesktopStyle,
-    resumeLargeDevicesStyle,
+    cartMUIProps.resumePhoneStyle,
+    cartMUIProps.resumeTabletStyle,
+    cartMUIProps.resumeDesktopStyle,
+    cartMUIProps.resumeLargeDevicesStyle,
   );
 
   return (
     <Layout componentName="cart">
-      <Grid container direction="column" sx={{ width: "90%", maxWidth: "700px" }} rowSpacing={2}>
+      {console.log(cart)}
+      <Grid
+        container
+        direction="column"
+        rowSpacing={4}
+        sx={{ width: "90%", maxWidth: "800px", p: 2 }}
+      >
         <Grid item>
           <h3>Carrito</h3>
         </Grid>
-        <Grid container direction="column" rowSpacing={1}>
-          {cart.map((product, index) => (
-            <Grid item key={index}>
-              <CartItem
-                product={product}
-                addToCart={addProductToCart}
-                removeFromCart={removeFromCart}
-              />
+        <Grid item container direction={{ xs: "column", sm: "row" }} columnSpacing={2}>
+          <Grid item container direction="column" sm={7} rowSpacing={2}>
+            {cart.map((product, index) => (
+              <Grid item key={index}>
+                <CartItem
+                  product={product}
+                  addToCart={addProductToCart}
+                  removeFromCart={removeFromCart}
+                />
+              </Grid>
+            ))}
+            <Grid item>
+              <Button sx={{ width: "200px" }} onClick={() => clearCart()} variant="outlined">
+                Vaciar carrito
+              </Button>
             </Grid>
-          ))}
-        </Grid>
-        <Grid item>
-          <Button sx={{ width: "200px" }} onClick={() => clearCart()} variant="outlined">
-            Vaciar carrito
-          </Button>
-        </Grid>
-        <Grid item justifyContent="center" sx={resumeComponentProps}>
-          <OrderResume />
+          </Grid>
+          <Grid item sm={5} sx={resumeComponentProps}>
+            <OrderResume />
+          </Grid>
         </Grid>
       </Grid>
     </Layout>
