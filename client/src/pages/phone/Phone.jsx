@@ -1,4 +1,6 @@
 import { useState, useEffect, useContext } from "react";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
 import CloseIcon from "@mui/icons-material/Close";
 import IconButton from "@mui/material/IconButton";
 import Grid from "@mui/material/Grid";
@@ -11,6 +13,7 @@ import { getPhone, setPhone, deletePhone } from "../../services/user";
 import useUserInput from "../../utils/hooks/useUserInput";
 import useError from "../../utils/hooks/useError";
 import useLoader from "../../utils/hooks/useLoader";
+import "./Phone.css";
 
 /**
  * Component to render user's phones and the fields to
@@ -87,34 +90,52 @@ function Phone() {
         </div>
       )}
 
-      <Grid container direction="column" sx={{ width: "auto" }}>
+      <Grid
+        container
+        direction="column"
+        sx={{ width: "90%", maxWidth: "500px", p: 2 }}
+        rowSpacing={2}
+      >
         <Grid item>
           <h3>Teléfonos</h3>
         </Grid>
         <Grid item>
           <span>Selecciona o agrega un número celular</span>
         </Grid>
-        <Grid item container direction="column">
-          {requestData.error.constraint === "empty" && (
-            <span id="error-message">{requestData.error.message}</span>
-          )}
-          {listPhone.map((phone, index) => (
-            <Grid
-              item
-              key={index}
-              sx={{ width: "200px", display: "flex", justifyContent: "space-around" }}
-            >
-              <span>{phone.phone_number}</span>
-              <IconButton
-                onClick={() => {
-                  deletePhone(phone.phone_id, token);
-                  setIsPhoneDeleted(!isPhoneDeleted); // It helps to re-render
-                }}
-              >
-                <CloseIcon />
-              </IconButton>
-            </Grid>
-          ))}
+        <Grid item>
+          <Card>
+            <CardContent>
+              <Grid container direction="column" rowSpacing={2}>
+                {requestData.error.constraint === "empty" && (
+                  <span id="error-message">{requestData.error.message}</span>
+                )}
+                {listPhone.map((phone, index) => (
+                  <Grid
+                    item
+                    key={index}
+                    sx={{
+                      width: "100%",
+                    }}
+                  >
+                    <section className="phones-container">
+                      <div className="phone-number-container">
+                        <span className="phone-number-field">{phone.phone_number}</span>
+                      </div>
+                      <IconButton
+                        sx={{ flex: 1 }}
+                        onClick={() => {
+                          deletePhone(phone.phone_id, token);
+                          setIsPhoneDeleted(!isPhoneDeleted); // It helps to re-render
+                        }}
+                      >
+                        <CloseIcon />
+                      </IconButton>
+                    </section>
+                  </Grid>
+                ))}
+              </Grid>
+            </CardContent>
+          </Card>
         </Grid>
         <Grid item>
           <Button

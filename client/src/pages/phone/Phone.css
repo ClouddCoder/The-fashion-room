@@ -1,0 +1,19 @@
+/* For all devices */
+.phones-container {
+  display: flex;
+  justify-content: space-around;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.phone-number-field {
+  flex: 2;
+  text-align: center;
+}
+
+.phone-number-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
