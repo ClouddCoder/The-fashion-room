@@ -53,7 +53,12 @@ function Address() {
         </div>
       )}
 
-      <Grid container direction="column" sx={{ width: "50%" }}>
+      <Grid
+        container
+        direction="column"
+        sx={{ width: "90%", maxWidth: "500px", p: 2 }}
+        rowSpacing={2}
+      >
         <Grid item>
           <h3>Domicilios</h3>
         </Grid>
@@ -66,15 +71,18 @@ function Address() {
               <Grid container>
                 {error.constraint === "empty" && <span id="error-message">{error.message}</span>}
                 {addressList.map((address, index) => (
-                  <Grid
-                    item
-                    key={index}
-                    sx={{ width: "200px", display: "flex", justifyContent: "space-around" }}
-                  >
-                    <span>{`${address.street_type} ${address.street} ${address.street_number}`}</span>
-                    <IconButton onClick={() => navigate(`/edit-address/${address.address_id}`)}>
-                      <ArrowForwardIosIcon />
-                    </IconButton>
+                  <Grid item key={index} sx={{ width: "100%" }}>
+                    <section className="addresses-container">
+                      <div className="address-field-container">
+                        <span className="address-field">{`${address.street_type} ${address.street} ${address.street_number}`}</span>
+                      </div>
+                      <IconButton
+                        sx={{ flex: 1 }}
+                        onClick={() => navigate(`/edit-address/${address.address_id}`)}
+                      >
+                        <ArrowForwardIosIcon />
+                      </IconButton>
+                    </section>
                   </Grid>
                 ))}
               </Grid>

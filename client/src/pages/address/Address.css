@@ -1,0 +1,18 @@
+.addresses-container {
+  display: flex;
+  justify-content: space-around;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.address-field {
+  text-align: center;
+}
+
+.address-field-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  flex: 5;
+}

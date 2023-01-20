@@ -110,13 +110,7 @@ function Phone() {
                   <span id="error-message">{requestData.error.message}</span>
                 )}
                 {listPhone.map((phone, index) => (
-                  <Grid
-                    item
-                    key={index}
-                    sx={{
-                      width: "100%",
-                    }}
-                  >
+                  <Grid item key={index} sx={{ width: "100%" }}>
                     <section className="phones-container">
                       <div className="phone-number-container">
                         <span className="phone-number-field">{phone.phone_number}</span>
