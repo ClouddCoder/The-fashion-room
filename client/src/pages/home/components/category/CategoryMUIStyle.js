@@ -24,9 +24,7 @@ export const desktopStyle = {
 
 /* For large devices */
 export const largeDevicesStyle = {
-  maxWidth: 350,
+  maxWidth: 250,
   minWidth: 200,
-  height: 400,
-  maxHeight: 400,
-  minHeight: 230,
+  height: 250,
 };

@@ -7,7 +7,7 @@ import Grid from "@mui/material/Grid";
 import { getProductImage } from "../../../../assets";
 import CustomWishlistButton from "../CustomWishlistButton";
 import { getMUIprops } from "../../../../utils/MUIMediaQuery";
-import { phoneStyle, tabletStyle, desktopStyle, largeDevicesStyle } from "./ProductItemMUIStyle";
+import { phoneStyle, tabletStyle, desktopStyle } from "./ProductItemMUIStyle";
 import "./ProductItem.css";
 
 /**
@@ -20,7 +20,7 @@ function ProductItem({ product }) {
 
   let cardProps = {};
 
-  cardProps = getMUIprops(phoneStyle, tabletStyle, desktopStyle, largeDevicesStyle);
+  cardProps = getMUIprops(phoneStyle, tabletStyle, desktopStyle, desktopStyle);
 
   return (
     <Grid

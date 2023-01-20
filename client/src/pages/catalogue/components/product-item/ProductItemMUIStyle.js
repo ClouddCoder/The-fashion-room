@@ -12,18 +12,9 @@ export const tabletStyle = {
   height: 230,
 };
 
-/* For desktop */
+/* For desktop and large devices */
 export const desktopStyle = {
   maxWidth: 350,
-  minWidth: 200,
-  height: 230,
-};
-
-/* For large devices */
-export const largeDevicesStyle = {
-  maxWidth: 350,
-  minWidth: 200,
-  height: 400,
-  maxHeight: 400,
-  minHeight: 230,
+  minWidth: 150,
+  height: 250,
 };

@@ -1,6 +1,7 @@
 import { useContext, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import ProductContext from "../../context/product-context/ProductContext";
 import AuthContext from "../../context/auth-context/AuthContext";
@@ -62,21 +63,30 @@ function Product() {
 
   return (
     <Layout>
-      <Grid container sx={{ width: "80%", m: "auto 0" }}>
-        <Grid item xs={6} sx={{ display: "flex", justifyContent: "center" }}>
-          <img
-            src={getProductImage(product.variant_name)}
-            alt={product.variant_name}
-            width="450px"
-            height="450px"
-          />
+      <Grid
+        container
+        direction={{ xs: "column", sm: "row" }}
+        sx={{ width: "90%", maxWidth: "700px", p: 2 }}
+      >
+        <Grid
+          component={Box}
+          item
+          container
+          sm={6}
+          justifyContent="center"
+          sx={{ display: { xs: "none", sm: "block" } }}
+        >
+          <img src={getProductImage(product.variant_name)} alt={product.variant_name} />
         </Grid>
-        <Grid item container xs={6} direction="column" justifyContent="center">
+        <Grid item container sm={6} direction="column" justifyContent="center" rowSpacing={1}>
           <Grid item>
-            <h4>{product.product_name}</h4>
+            <span className="product-name-field">{product.product_name}</span>
           </Grid>
-          <Grid item>
-            <span>{product.variant_price}</span>
+          <Grid item component={Box} sx={{ display: { sm: "none" } }}>
+            <img src={getProductImage(product.variant_name)} alt={product.variant_name} />
+          </Grid>
+          <Grid item className="product-price-field">
+            <span>{`$${product.variant_price}`}</span>
           </Grid>
           <Grid item>
             <span>Color:</span>
@@ -104,14 +114,17 @@ function Product() {
               })}
             </ul>
           </Grid>
-          <Grid item>
-            <div style={{ display: "flex" }}>
+          <Grid item container direction="column" rowSpacing={1}>
+            <Grid item>
               <Button
                 variant="contained"
                 onClick={auth ? handleBuyProduct : () => navigate("/login")}
+                fullWidth
               >
                 Comprar
               </Button>
+            </Grid>
+            <Grid item>
               <Button
                 variant="contained"
                 onClick={
@@ -119,10 +132,11 @@ function Product() {
                     ? () => addProductToCart({ variantId, quantityToPurchase: 1 })
                     : () => navigate("/login")
                 }
+                fullWidth
               >
                 Agregar al carrito
               </Button>
-            </div>
+            </Grid>
           </Grid>
         </Grid>
       </Grid>

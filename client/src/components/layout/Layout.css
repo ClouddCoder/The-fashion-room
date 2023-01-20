@@ -16,7 +16,8 @@
 }
 
 .no-scroll-main-content {
-  flex: none;
+  justify-content: center;
+  flex: 1 0 auto;
   overflow: unset;
 }
 

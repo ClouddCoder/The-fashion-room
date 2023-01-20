@@ -1,7 +1,13 @@
+/* For mobile phones */
 .product-variant-colors {
   display: flex;
   justify-content: space-between;
   width: 150px;
+}
+
+.product-price-field {
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
 .product-variant-colors li {
