@@ -13,11 +13,14 @@ import "./Product.css";
  * @returns {JSX.Element} - Product component.
  */
 function Product() {
+  const { auth } = useContext(AuthContext);
   const navigate = useNavigate();
   const { id } = useParams();
+
   const productInfo = id.split("-");
   const productId = parseInt(productInfo[0], 10);
   const productVariantId = parseInt(productInfo[1], 10);
+
   const {
     variants,
     variantId,
@@ -27,7 +30,7 @@ function Product() {
     getProductVariants,
     setVariantId,
   } = useContext(ProductContext);
-  const { auth } = useContext(AuthContext);
+
   const product = variants.find((item) => item.variant_id === variantId) || [];
 
   /**
@@ -53,6 +56,7 @@ function Product() {
 
     // The variant that is fetched with the product will be the default one.
     setVariantId(productVariantId);
+
     clearListOfProductsToBuy();
   }, []);
 
@@ -80,17 +84,24 @@ function Product() {
           <Grid item>
             {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
             <ul className="product-variant-colors" onClick={changeButtonBorderColor}>
-              {variants?.map((variant, index) => (
-                <li
-                  name={variant.variant_id}
-                  className={`product-color${
-                    variantId === variant.variant_id ? " selected" : ""
-                  }`}
-                  key={index}
-                >
-                  <span>{variant.color_value}</span>
-                </li>
-              ))}
+              {variants?.map((variant, index) => {
+                // Only renders the colors of the current product.
+                if (variant.product_id !== productId) {
+                  return null;
+                }
+
+                return (
+                  <li
+                    name={variant.variant_id}
+                    className={`product-color${
+                      variantId === variant.variant_id ? " selected" : ""
+                    }`}
+                    key={index}
+                  >
+                    <span>{variant.color_value}</span>
+                  </li>
+                );
+              })}
             </ul>
           </Grid>
           <Grid item>

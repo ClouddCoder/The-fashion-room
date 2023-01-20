@@ -23,8 +23,20 @@ export function ProductReducer(state, action) {
     case TYPES.LOAD_PRODUCTS:
       return { ...state, products: [...action.payload] };
 
-    case TYPES.GET_VARIANTS:
-      return { ...state, variants: [...action.payload] };
+    case TYPES.GET_VARIANTS: {
+      const duplicatedVariants = [...state.variants, ...action.payload];
+
+      // Converts the variants to string to be able to use the filter method.
+      const variantsAsString = duplicatedVariants.map((variant) => JSON.stringify(variant));
+
+      const noDuplicateStringVariants = variantsAsString.filter(
+        (variant, index) => variantsAsString.indexOf(variant) === index,
+      );
+
+      const noDuplicateVariants = noDuplicateStringVariants.map((variant) => JSON.parse(variant));
+
+      return { ...state, variants: [...noDuplicateVariants] };
+    }
 
     case TYPES.SET_VARIANT_ID:
       return { ...state, variantId: action.payload };
@@ -42,9 +54,7 @@ export function ProductReducer(state, action) {
     }
 
     case TYPES.ADD_TO_CART: {
-      const newItem = state.variants.find(
-        (item) => item.variant_id === action.payload.variantId,
-      );
+      const newItem = state.variants.find((item) => item.variant_id === action.payload.variantId);
 
       // If the item is already in the cart, then it will increase the quantity.
       const itemInCart = state.cart.find((item) => item.variant_id === newItem.variant_id);

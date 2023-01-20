@@ -25,7 +25,6 @@ function ShoppingCart() {
 
   return (
     <Layout componentName="cart">
-      {console.log(cart)}
       <Grid
         container
         direction="column"
