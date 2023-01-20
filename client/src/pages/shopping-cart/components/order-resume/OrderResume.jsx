@@ -1,11 +1,12 @@
 import { useContext, useEffect } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
+import CardActions from "@mui/material/CardActions";
 import Grid from "@mui/material/Grid";
 import Divider from "@mui/material/Divider";
 import { useNavigate } from "react-router-dom";
 import ProductContext from "../../../../context/product-context/ProductContext";
+import BuyButton from "../BuyButton";
 import "./OrderResume.css";
 
 /**
@@ -26,21 +27,6 @@ function OrderResume() {
     getTotalProducts();
     getTotalPrice(true);
   }, []);
-
-  /**
-   * Checks if there are products in the shopping cart to enable
-   * the Buy button.
-   */
-  const checkCartLength = () => {
-    if (cart.length > 0) {
-      return (
-        <Button variant="contained" color="secondary" onClick={handleBuyCart}>
-          Comprar
-        </Button>
-      );
-    }
-    return <h6>Carrito vacío</h6>;
-  };
 
   return (
     <Card>
@@ -68,11 +54,11 @@ function OrderResume() {
           <Grid item container justifyContent="center">
             <Divider />
           </Grid>
-          <Grid item align="center">
-            {checkCartLength()}
-          </Grid>
         </Grid>
       </CardContent>
+      <CardActions>
+        <BuyButton checkCart={cart} buyCart={handleBuyCart} />
+      </CardActions>
     </Card>
   );
 }

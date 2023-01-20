@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
+import CardActions from "@mui/material/CardActions";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
@@ -26,7 +27,7 @@ function CartItem({ product, addToCart, removeFromCart }) {
   return (
     <Card>
       <CardContent>
-        <Grid container>
+        <Grid container columnSpacing={2}>
           <Grid item xs={4}>
             <img alt="producto" src={getProductImage(product.product_name)} />
           </Grid>
@@ -58,11 +59,11 @@ function CartItem({ product, addToCart, removeFromCart }) {
               </span>
             </Grid>
           </Grid>
-          <Grid item xs={12}>
-            <Button onClick={() => removeFromCart(product.variant_id)}>Eliminar</Button>
-          </Grid>
         </Grid>
       </CardContent>
+      <CardActions>
+        <Button onClick={() => removeFromCart(product.variant_id)}>Eliminar</Button>
+      </CardActions>
     </Card>
   );
 }

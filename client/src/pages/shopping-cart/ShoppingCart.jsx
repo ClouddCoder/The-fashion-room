@@ -29,7 +29,7 @@ function ShoppingCart() {
         container
         direction="column"
         rowSpacing={4}
-        sx={{ height: "100%", width: "90%", maxWidth: "800px", p: 2 }}
+        sx={{ width: "90%", maxWidth: "800px", p: 2 }}
       >
         <Grid item>
           <h3>Carrito</h3>

@@ -36,10 +36,6 @@
   justify-content: space-between;
 }
 
-.order-user-options {
-  display: none;
-}
-
 /* For tablet, desktop and large devices */
 @media only screen and (min-width: 601px) {
   .order-details {
@@ -47,14 +43,7 @@
     gap: 100px;
   }
 
-  .order-user-options {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-  }
-
-  .order-details img,
-  .order-user-options {
+  .order-details img {
     flex: 1;
   }
 
