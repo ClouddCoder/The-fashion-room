@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -8,6 +8,7 @@ import TextField from "@mui/material/TextField";
 import AuthContext from "../../context/auth-context/AuthContext";
 import Layout from "../../components/layout/Layout";
 import { setAddress, updateAddress, getSingleAddress } from "../../services/user";
+import Modal from "../../components/modal/Modal";
 import "./EditAddress.css";
 
 /**
@@ -22,6 +23,10 @@ function EditAddress() {
   const [street, setStreet] = useState("");
   const [streetNumber, setStreetNumber] = useState("");
   const [references, setReferences] = useState("");
+
+  const [openModal, setOpenModal] = useState(false);
+
+  const navigate = useNavigate();
 
   const { token } = useContext(AuthContext);
   const { addressId } = useParams();
@@ -67,6 +72,7 @@ function EditAddress() {
           token,
         );
         console.log(res.data);
+        setOpenModal(true);
       } catch (error) {
         console.log(error);
       }
@@ -84,6 +90,7 @@ function EditAddress() {
           references,
         );
         console.log(res.data);
+        setOpenModal(true);
       } catch (error) {
         console.log(error);
       }
@@ -243,6 +250,34 @@ function EditAddress() {
           </Card>
         </Grid>
       </Grid>
+      <Modal state={openModal}>
+        <Grid
+          container
+          direction="column"
+          justifyContent="center"
+          sx={{ width: "100%", height: "100%", position: "relative", p: "20px" }}
+          rowSpacing={2}
+        >
+          <Grid item>
+            <h3 className="modal-window__title">
+              {addressId === "new" ? "Domicilio agregado" : "Domicilio actualizado"}
+            </h3>
+          </Grid>
+          <Grid item>
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={() => {
+                setOpenModal(false);
+                navigate("/address");
+              }}
+              fullWidth
+            >
+              Regresar
+            </Button>
+          </Grid>
+        </Grid>
+      </Modal>
     </Layout>
   );
 }

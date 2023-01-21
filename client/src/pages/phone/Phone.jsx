@@ -146,6 +146,7 @@ function Phone() {
               direction="column"
               justifyContent="center"
               sx={{ width: "100%", height: "100%", position: "relative", p: "20px" }}
+              rowSpacing={2}
             >
               <IconButton
                 sx={{ position: "absolute", top: "20px", right: "20px", p: 0 }}
@@ -154,7 +155,7 @@ function Phone() {
                 <CloseIcon />
               </IconButton>
               <Grid item>
-                <h1 className="modal-window__title">Agregar un número celular</h1>
+                <h3 className="modal-window__title">Agregar un número celular</h3>
               </Grid>
               <Grid item>
                 <form onSubmit={handleSubmit}>

@@ -55,7 +55,7 @@ function NavbarProfileLinks({ newSelector }) {
       {auth ? (
         <>
           <li className="header__navbar__username">
-            <span>{`Bienvenido ${user}`}</span>
+            <span>{`¡Hola ${user}!`}</span>
           </li>
           <li className="header__navbar__my-profile">
             <Link to="/profile">
@@ -66,13 +66,13 @@ function NavbarProfileLinks({ newSelector }) {
           <li className="header__navbar__wishlist">
             <Link to="/wishlist">
               <FavoriteBorderOutlinedIcon />
-              <span>Wishlist</span>
+              <span className="icon-name">Wishlist</span>
             </Link>
           </li>
           <li className="header__navbar__cart">
             <Link to="/cart">
               <ShoppingCartOutlinedIcon />
-              <span>Mi carrito</span>
+              <span className="icon-name">Mi carrito</span>
             </Link>
           </li>
           <li className="header__navbar__my-orders">

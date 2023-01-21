@@ -25,6 +25,10 @@
   color: var(--color-primary-brown);
 }
 
+.icon-name {
+  display: block;
+}
+
 .header__navbar__login a,
 .header__navbar__register a {
   color: var(--color-primary-brown);
@@ -57,6 +61,10 @@
   .header__navbar__wishlist,
   .header__navbar__cart {
     margin: 10px;
+  }
+
+  .icon-name {
+    display: none;
   }
 
   .header__navbar__my-profile,
@@ -97,6 +105,13 @@
   }
 
   .vertical-line {
+    display: block;
+  }
+}
+
+/* For desktop and large devices */
+@media only screen and (min-width: 992px) {
+  .icon-name {
     display: block;
   }
 }

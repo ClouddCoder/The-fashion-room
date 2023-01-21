@@ -11,6 +11,7 @@ import AuthContext from "../../context/auth-context/AuthContext";
 import useLoader from "../../utils/hooks/useLoader";
 import useError from "../../utils/hooks/useError";
 import { getAddress } from "../../services/user";
+import "./Address.css";
 
 /**
  * Component to render the addresses of the user.
@@ -68,7 +69,7 @@ function Address() {
         <Grid item>
           <Card>
             <CardContent>
-              <Grid container>
+              <Grid container direction="column" rowSpacing={2}>
                 {error.constraint === "empty" && <span id="error-message">{error.message}</span>}
                 {addressList.map((address, index) => (
                   <Grid item key={index} sx={{ width: "100%" }}>

@@ -6,10 +6,13 @@
   position: sticky;
   top: 0;
   z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .header__navbar {
-  width: inherit;
+  width: 90%;
   height: inherit;
   display: flex;
   justify-content: space-between;
@@ -41,6 +44,7 @@
   }
 
   .header__navbar {
+    width: 80%;
     justify-content: space-between;
   }
 }
