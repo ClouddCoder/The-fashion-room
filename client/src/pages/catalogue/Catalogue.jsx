@@ -1,7 +1,8 @@
-import { useEffect, useContext, useReducer } from "react";
+import { useEffect, useContext, useReducer, useState } from "react";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
+import Button from "@mui/material/Button";
 import { useParams } from "react-router-dom";
 import ProductItem from "./components/product-item/ProductItem";
 import ProductContext from "../../context/product-context/ProductContext";
@@ -9,6 +10,8 @@ import Layout from "../../components/layout/Layout";
 import ProductFilters from "./components/product-filters/ProductFilters";
 import { catalogueActions } from "./reducer/catalogueActions";
 import { catalogueInitialState, CatalogueReducer } from "./reducer/catalogueReducer";
+import Modal from "../../components/modal/Modal";
+import "./Catalogue.css";
 
 /**
  * Component that shows the products by category.
@@ -16,6 +19,8 @@ import { catalogueInitialState, CatalogueReducer } from "./reducer/catalogueRedu
  */
 function Catalogue() {
   const { category } = useParams();
+
+  const [openModal, setOpenModal] = useState(false);
 
   const { loader, setLoader, addProductToCart, loadProducts, products, getWishlist } =
     useContext(ProductContext);
@@ -64,6 +69,8 @@ function Catalogue() {
     return products;
   };
 
+  const categoryInUpperCase = category.charAt(0).toUpperCase() + category.slice(1);
+
   return (
     <Layout>
       {loader && (
@@ -74,40 +81,41 @@ function Catalogue() {
 
       <Grid
         container
-        direction="column"
-        alignItems="center"
+        direction={{ xs: "column", sm: "row", md: "row" }}
         justifyContent="center"
-        sx={{ mt: "30px", mb: "30px", width: "70%" }}
+        sx={{ width: "90%", maxWidth: "1000px", p: 2 }}
+        columnSpacing={{ xs: 0, sm: 2 }}
       >
-        <Grid item container columnSpacing={3}>
-          <Grid
-            component={Box}
-            item
-            sm={4}
-            md={3}
-            sx={{ display: { xs: "none", md: "block", sm: "block" } }}
-            justifyContent="center"
-          >
-            <Paper elevation={3} sx={{ p: 2, display: "flex", justifyContent: "center" }}>
-              <Grid container direction="column" sx={{ width: "95%", height: "100%" }}>
-                <Grid item sx={{ m: 0 }}>
-                  <span>Catalogo</span>
-                </Grid>
-                <Grid container item direction="column" rowSpacing={3} sx={{ m: 0 }}>
-                  <ProductFilters check={state} handleChange={handleChange} />
-                </Grid>
+        <Grid
+          component={Box}
+          item
+          sm={4}
+          md={3}
+          sx={{ display: { xs: "none", md: "block", sm: "block" } }}
+        >
+          <Paper elevation={3} sx={{ p: 2, display: "flex", justifyContent: "center" }}>
+            <Grid container direction="column" rowSpacing={2}>
+              <Grid item sx={{ m: 0 }}>
+                <span className="catalogue-title">{categoryInUpperCase}</span>
               </Grid>
-            </Paper>
-          </Grid>
+              <Grid container item direction="column" rowSpacing={3}>
+                <ProductFilters check={state} handleChange={handleChange} />
+              </Grid>
+            </Grid>
+          </Paper>
+        </Grid>
+        <Grid item container sm={8} md={9}>
           <Grid
             item
-            container
-            xs={12}
-            sm={8}
-            md={9}
-            justifyContent="center"
-            sx={{ minHeight: "700px" }}
+            sx={{
+              display: { xs: "flex", sm: "none" },
+              flexDirection: "row-reverse",
+              width: "100%",
+            }}
           >
+            <Button onClick={() => setOpenModal(true)}>Filtrar</Button>
+          </Grid>
+          <Grid item justifyContent="center">
             <Paper
               elevation={3}
               sx={{
@@ -134,6 +142,18 @@ function Catalogue() {
           </Grid>
         </Grid>
       </Grid>
+      <Modal state={openModal}>
+        <Grid container direction="column" rowSpacing={2} sx={{ p: 2 }}>
+          <Grid item container direction="column" rowSpacing={3} sx={{ m: 0 }}>
+            <ProductFilters check={state} handleChange={handleChange} />
+          </Grid>
+          <Grid item>
+            <Button color="secondary" fullWidth onClick={() => setOpenModal(false)}>
+              Cerrar
+            </Button>
+          </Grid>
+        </Grid>
+      </Modal>
     </Layout>
   );
 }
