@@ -63,6 +63,7 @@ function Product() {
 
   return (
     <Layout>
+      {console.log(variants)}
       <Grid
         container
         direction={{ xs: "column", sm: "row" }}

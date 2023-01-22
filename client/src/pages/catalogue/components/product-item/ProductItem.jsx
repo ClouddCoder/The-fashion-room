@@ -51,9 +51,19 @@ function ProductItem({ product }) {
             component="img"
             height="140"
             image={getProductImage("zapatos")}
+            sx={{ width: "90%", height: "65%" }}
             alt={product.variant_name}
           />
-          <CardContent sx={{ p: "10px" }}>
+          <CardContent
+            sx={{
+              p: "10px",
+              width: "90%",
+              heigth: "35%",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
             <span id="card__product-name">{product.product_name}</span>
             <span id="card__product-price">{`$${product.min_price}`}</span>
           </CardContent>

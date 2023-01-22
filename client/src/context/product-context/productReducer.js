@@ -148,7 +148,9 @@ export function ProductReducer(state, action) {
     }
 
     case TYPES.CREATE_INVOICE: {
-      return { ...state, invoiceId: action.payload };
+      // The variants list is cleared to avoid duplicates
+      // because of the update of the variant's quantity on the database.
+      return { ...state, invoiceId: action.payload, variants: [] };
     }
 
     case TYPES.RESET_PRODUCT_STATE:

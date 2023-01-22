@@ -1,12 +1,11 @@
 import { useContext } from "react";
 import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import { styled } from "@mui/material/styles";
 import ArrowForwardIosOutlinedIcon from "@mui/icons-material/ArrowForwardIosOutlined";
 import Grid from "@mui/material/Grid";
 import { Link } from "react-router-dom";
 import AuthContext from "../../context/auth-context/AuthContext";
 import Layout from "../../components/layout/Layout";
+import CardContentNoPadding from "../../utils/CardContentNoPadding";
 import "./MyData.css";
 
 /**
@@ -14,14 +13,6 @@ import "./MyData.css";
  * @returns {JSX.Element} - MyData component.
  */
 function MyData() {
-  // CardContent component without padding.
-  const CardContentNoPadding = styled(CardContent)(`
-  padding: 0;
-  &:last-child {
-    padding-bottom: 0;
-  }
-`);
-
   const { username, user } = useContext(AuthContext);
   return (
     <Layout>

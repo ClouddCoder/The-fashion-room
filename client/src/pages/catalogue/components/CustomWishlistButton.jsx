@@ -13,7 +13,13 @@ import ProductContext from "../../../context/product-context/ProductContext";
 function CustomWishlistButton({ product }) {
   const { auth } = useContext(AuthContext);
   const { wishlist, handleWish } = useContext(ProductContext);
-  const props = { position: "absolute", top: "10px", right: "10px" };
+  const props = {
+    position: "absolute",
+    top: "10px",
+    right: "15px",
+    background: "white",
+    opacity: "0.8",
+  };
 
   // Verifies if product is in wishlist.
   const findWish = wishlist.find((wish) => wish.product_id === product.product_id);
