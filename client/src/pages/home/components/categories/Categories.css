@@ -1,8 +1,19 @@
+/* For mobile phones */
 .categories-container {
   background-color: var(--color-primary-white);
 }
 
 .category__title {
-  font-size: 1.5rem;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  font-size: 1.3rem;
   color: var(--color-primary-black);
+}
+
+/* For tablet, desktop and large devices */
+@media only screen and (min-width: 601px) {
+  .category__title {
+    font-size: 1.5rem;
+  }
 }

@@ -9,7 +9,7 @@ import "./Categories.css";
  */
 function Categories() {
   return (
-    <Grid container direction="column">
+    <Grid container direction="column" rowSpacing={2}>
       <Grid item>
         <h2>Ofertas</h2>
       </Grid>

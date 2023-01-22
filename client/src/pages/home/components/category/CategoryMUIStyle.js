@@ -1,6 +1,9 @@
 /* For mobile phones */
 export const phoneStyle = {
-  maxHeight: 150,
+  height: 220,
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
 };
 
 /* For tablet */
@@ -8,12 +11,18 @@ export const tabletStyle = {
   maxWidth: 250,
   maxHeight: 200,
   height: 200,
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
 };
 
 /* For desktop */
 export const desktopStyle = {
   maxWidth: 350,
   height: 200,
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
 };
 
 /* For large devices */
@@ -21,4 +30,7 @@ export const largeDevicesStyle = {
   maxWidth: 250,
   minWidth: 200,
   height: 250,
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
 };

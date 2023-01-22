@@ -12,9 +12,7 @@ function Home() {
     <Layout>
       <div className="main-content__container">
         <Header />
-        <div className="container">
-          <Categories />
-        </div>
+        <Categories />
       </div>
     </Layout>
   );

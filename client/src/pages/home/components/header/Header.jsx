@@ -8,7 +8,7 @@ import "./Header.css";
 function Header() {
   return (
     <figure className="home-header">
-      <img src={HeaderBackground} alt="The Fashion Room" />
+      <img className="home-header__cover" src={HeaderBackground} alt="The Fashion Room" />
     </figure>
   );
 }
