@@ -104,7 +104,7 @@ function Catalogue() {
             </Grid>
           </Paper>
         </Grid>
-        <Grid item container sm={8} md={9}>
+        <Grid item container sm={8} md={8}>
           <Grid
             item
             sx={{
@@ -115,7 +115,7 @@ function Catalogue() {
           >
             <Button onClick={() => setOpenModal(true)}>Filtrar</Button>
           </Grid>
-          <Grid item justifyContent="center">
+          <Grid item justifyContent="center" sx={{ width: "100%" }}>
             <Paper
               elevation={3}
               sx={{
@@ -130,9 +130,9 @@ function Catalogue() {
                 container
                 alignItems="center"
                 justifyContent="center"
-                sx={{ width: "95%", height: "100%", m: 0 }}
                 rowSpacing={2}
-                columnSpacing={{ xs: 0, md: 2 }}
+                sx={{ width: "100%", height: "100%" }}
+                columnSpacing={{ xs: 0, sm: 2 }}
               >
                 {filteredProducts().map((product, index) => (
                   <ProductItem key={index} product={product} addToCart={addProductToCart} />

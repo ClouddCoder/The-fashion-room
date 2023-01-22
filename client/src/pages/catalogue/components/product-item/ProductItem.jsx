@@ -26,8 +26,7 @@ function ProductItem({ product }) {
     <Grid
       item
       xs={12}
-      md={5}
-      lg={3}
+      sm={6}
       sx={{
         position: "relative",
       }}
