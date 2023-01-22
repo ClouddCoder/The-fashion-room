@@ -23,7 +23,7 @@ function Categories() {
           />
         </Grid>
         <Grid item={true} xs={6} md={3}>
-          <Category alt="camisas" image={getProductImage("camisetas")} title="Camisetas" />
+          <Category alt="camisetas" image={getProductImage("camisetas")} title="Camisetas" />
         </Grid>
         <Grid item={true} xs={6} md={3}>
           <Category

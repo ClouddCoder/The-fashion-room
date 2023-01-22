@@ -108,7 +108,7 @@ function ProductFilters({ check, handleChange }) {
               <Link to="/catalogue/calzado">Calzado</Link>
             </li>
             <li>
-              <Link to="/catalogue/camisas">Camisas y camisetas</Link>
+              <Link to="/catalogue/camisetas">Camisetas</Link>
             </li>
             <li>
               <Link to="/catalogue/deportiva">Ropa deportiva</Link>
