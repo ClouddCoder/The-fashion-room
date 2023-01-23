@@ -28,13 +28,14 @@ function Wish({ product }) {
           p: 1,
         }}
       >
-        <Box sx={{ display: "flex", flex: { sm: 1 }, justifyContent: { sm: "space-between" } }}>
+        <Box sx={{ display: "flex", flex: { sm: 1 } }}>
           <CardMedia
             component="img"
-            image={getProductImage(product.product_name)}
-            alt={product.product_name}
+            image={getProductImage(product.variant_name)}
+            alt={product.variant_name}
+            sx={{ width: "50%", height: "100%" }}
           />
-          <CardContent>
+          <CardContent sx={{ display: "flex", alignItems: "center", width: "100%" }}>
             <div className="wish-description">
               <span className="wish__product-name">{product.product_name}</span>
               <span className="wish__product-price">${product.min_price}</span>

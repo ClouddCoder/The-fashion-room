@@ -50,7 +50,7 @@ function ProductItem({ product }) {
           <CardMedia
             component="img"
             height="140"
-            image={getProductImage("zapatos")}
+            image={getProductImage(product.variant_name)}
             sx={{ width: "90%", height: "65%" }}
             alt={product.variant_name}
           />

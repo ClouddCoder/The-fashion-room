@@ -1,4 +1,4 @@
-import { HeaderBackground } from "../../../../assets";
+import { getProductImage } from "../../../../assets";
 import "./Header.css";
 
 /**
@@ -8,7 +8,11 @@ import "./Header.css";
 function Header() {
   return (
     <figure className="home-header">
-      <img className="home-header__cover" src={HeaderBackground} alt="The Fashion Room" />
+      <img
+        className="home-header__cover"
+        src={getProductImage("header-cover")}
+        alt="The Fashion Room"
+      />
     </figure>
   );
 }

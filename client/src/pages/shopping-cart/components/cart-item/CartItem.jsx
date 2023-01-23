@@ -28,10 +28,14 @@ function CartItem({ product, addToCart, removeFromCart }) {
     <Card>
       <CardContent>
         <Grid container columnSpacing={2}>
-          <Grid item xs={4}>
-            <img alt="producto" src={getProductImage(product.product_name)} />
+          <Grid item xs={6}>
+            <img
+              className="cart_item__image-name"
+              alt="producto"
+              src={getProductImage(product.variant_name)}
+            />
           </Grid>
-          <Grid item container xs={8} direction="column" rowSpacing={1}>
+          <Grid item container xs={6} direction="column" rowSpacing={1}>
             <Grid item>
               <span className="cart-item__product-name">{product.product_name}</span>
             </Grid>

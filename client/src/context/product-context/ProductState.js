@@ -32,7 +32,7 @@ function ProductState({ children }) {
    */
   const getProductNameCapitalized = (products) => {
     products.forEach((product) => {
-      const productName = product.product_name.replace("-", " ");
+      const productName = product.product_name.replaceAll("-", " ");
 
       const productNameCapitalized = productName.replace(
         productName[0],

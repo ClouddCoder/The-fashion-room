@@ -9,7 +9,7 @@ import "./Categories.css";
  */
 function Categories() {
   return (
-    <Grid container direction="column" rowSpacing={2}>
+    <Grid container direction="column" sx={{ width: "85%" }} rowSpacing={2}>
       <Grid item>
         <h2>Ofertas</h2>
       </Grid>

@@ -35,7 +35,7 @@ function ShoppingCart() {
           <h3>Carrito</h3>
         </Grid>
         <Grid item container direction={{ xs: "column", sm: "row" }} columnSpacing={2}>
-          <Grid item container direction="column" sm={7} rowSpacing={2}>
+          <Grid item container direction="column" sm={6} rowSpacing={2}>
             {cart.map((product, index) => (
               <Grid item key={index}>
                 <CartItem
@@ -51,7 +51,7 @@ function ShoppingCart() {
               </Button>
             </Grid>
           </Grid>
-          <Grid item sm={5} sx={resumeComponentProps}>
+          <Grid item sm={6} sx={resumeComponentProps}>
             <OrderResume />
           </Grid>
         </Grid>

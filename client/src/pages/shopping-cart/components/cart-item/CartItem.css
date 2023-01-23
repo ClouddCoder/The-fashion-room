@@ -4,6 +4,11 @@
   display: block;
 }
 
+.cart_item__image-name {
+  width: 120px;
+  height: 120px;
+}
+
 .cart-item__product-name {
   font-weight: 600;
 }

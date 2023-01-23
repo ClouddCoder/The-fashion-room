@@ -63,7 +63,6 @@ function Product() {
 
   return (
     <Layout>
-      {console.log(variants)}
       <Grid
         container
         direction={{ xs: "column", sm: "row" }}
@@ -75,16 +74,33 @@ function Product() {
           container
           sm={6}
           justifyContent="center"
+          alignItems="center"
           sx={{ display: { xs: "none", sm: "block" } }}
         >
-          <img src={getProductImage(product.variant_name)} alt={product.variant_name} />
+          <img
+            className="product-image"
+            src={getProductImage(product.variant_name)}
+            alt={product.variant_name}
+          />
         </Grid>
         <Grid item container sm={6} direction="column" justifyContent="center" rowSpacing={1}>
           <Grid item>
             <span className="product-name-field">{product.product_name}</span>
           </Grid>
-          <Grid item component={Box} sx={{ display: { sm: "none" } }}>
-            <img src={getProductImage(product.variant_name)} alt={product.variant_name} />
+          <Grid
+            item
+            component={Box}
+            sx={{
+              display: { xs: "flex", sm: "none" },
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <img
+              className="product-image"
+              src={getProductImage(product.variant_name)}
+              alt={product.variant_name}
+            />
           </Grid>
           <Grid item className="product-price-field">
             <span>{`$${product.variant_price}`}</span>

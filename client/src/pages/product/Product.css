@@ -5,6 +5,15 @@
   width: 150px;
 }
 
+.product-name-field {
+  font-size: 1.2rem;
+}
+
+.product-image {
+  width: 305px;
+  height: 305px;
+}
+
 .product-price-field {
   font-size: 1.5rem;
   font-weight: bold;
