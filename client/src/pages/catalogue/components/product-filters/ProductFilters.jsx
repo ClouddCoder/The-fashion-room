@@ -84,19 +84,6 @@ function ProductFilters({ check, handleChange }) {
               label={<span>Niñas</span>}
               sx={{ m: 0 }}
             />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={check.bebe}
-                  onChange={handleChange}
-                  name="bebe"
-                  size="small"
-                  sx={{ p: "3px" }}
-                />
-              }
-              label={<span>Bebés</span>}
-              sx={{ m: 0 }}
-            />
           </FormGroup>
         </FormControl>
       </Grid>

@@ -1,4 +1,4 @@
-import HeaderCover from "./header3.jpg";
+import HeaderCover from "./header.jpg";
 import Bolsos from "./offers/bolsos.png";
 import Calzado from "./offers/calzado.png";
 import Camisetas from "./offers/camisetas.png";
