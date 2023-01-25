@@ -1,7 +1,33 @@
-# Lottus
-Small ecommerce to practice PERN stack. This is still in development.
+<div align="center">
+    <h1>Lottus</h1>
+    <div><span>Ecommerce built with PERN stack</span></div>
+</div>
 
-## Build with
+# Introduction
+
+<div align="center">
+
+| Desktop |
+|---------|
+| ![desktop_view](https://user-images.githubusercontent.com/103080410/214464291-dd7db668-6f4c-4c5f-90a6-c219831504d1.png) |
+
+
+
+|Phone             |  Tablet
+|-------------------------|-------------------------|
+| ![phone](https://user-images.githubusercontent.com/103080410/214462884-cf7667a3-5f73-4b82-8018-fb24834b6f13.png) | ![tablet](https://user-images.githubusercontent.com/103080410/214462931-60ff4764-4f23-42f2-aaf0-e0499b85c9d1.png) |
+
+</div>
+
+
+Lottus is an small ecommerce to practice PERN stack with Material UI and other technologies such as Docker and Nginx as a reverse proxy.
+
+For production is using PERN, whereas for development and testing is used Docker, Docker compose and Nginx for a better performance in the localhost.
+
+The user may log in, sign up, make purchases, add products to the wishlist, see the purchases and other stuff like edit the profile.
+
+## Built with
+
 - [![postgres](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org)
 - [![express](https://img.shields.io/badge/Express.js-404D59?style=for-the-badge)](https://expressjs.com)
 - [![react](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
@@ -10,24 +36,30 @@ Small ecommerce to practice PERN stack. This is still in development.
 - [![jwt](https://img.shields.io/badge/json%20web%20tokens-323330?style=for-the-badge&logo=json-web-tokens&logoColor=pink)](https://jwt.io/)
 
 # Getting started
+
 ## Prerequisites
-- Install node.js, preferably using NVM.
+
+- Install node.js.
 - Install Docker and Docker Compose to deploy the project locally.
 
 ## Installation
-1. Clone the repo
+
+1. Clone the repo:
+
 ```
 git clone https://github.com/ClouddCoder/ecommerce-PERN.git
 ```
 
-2. In the project root install NPM packages
+2. In the `api` and `client` directories install npm packages:
+
 ```
 npm install
 ```
 
-3. You must create an **.env** file for the **api** and **client** directories with the following variables:
+3. It is important to create an `.env` file for the `api` and `client` directories with the following variables:
 
-**api** directory
+`api` directory
+
 ```
 PORT = <SERVER_PORT>
 JWT_PASSWORD = <JWT_PASSWORD> # The backend uses JWT to authenticate the user.
@@ -56,24 +88,46 @@ DB_NAME_TEST = <YOUR_DB_NAME_FOR_TESTING>
 DB_PORT_TEST = <YOUR_DB_PORT_FOR_TESTING>
 DB_SSL_TEST = <1_OR_0>
 ```
-**client** directory
+
+`client` directory
+
 ```
 # These variables are used to connect the backend.
 
 # For deployment.
 BASE_URL = <ENTER_YOUR_BACKEND_SERVER_URL>
 
-# For developing using docker-compose.
+# For development using Docker compose.
 BASE_URL_DEV = <ENTER_YOUR_LOCALHOST_URL>
 ```
+
 # Usage
-This project can be deployed locally with Docker compose. In the project root, open a terminal and do
+
+This project can be deployed locally with Docker compose. In the project root, open a terminal and do:
+
 ```
 docker compose up
 ```
+
+Then open a new tab in the browser and type `localhost:3050`.
+
 Currently the ecommerce is deployed using Google Cloud for the frontend and backend, the database is using a different server.
+
+## Demo
+In this domain the ecommerce is deployed:
 ```
 https://lottus-shop.cf
 ```
+
+It can also be accessed through the GCP bucket's index.html:
+```
+https://storage.googleapis.com/lottus-bucket/index.html
+```
+
 # Contributors
+
 - [@ClouddCoder](https://github.com/ClouddCoder)
+
+# License
+
+Lottus is MIT licensed.
