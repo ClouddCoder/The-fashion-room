@@ -242,7 +242,7 @@ const getOrderDetail = async (req, res, next) => {
   const { authorization } = req.headers;
   let query = "SELECT oi.order_detail_id, oi.order_item_id, oi.item_total_cost, ";
   query += "oi.product_quantity, p.product_id, od.purchase_date, p.product_name, v.variant_id, ";
-  query += "v.variant_quantity, v.variant_price FROM order_item oi ";
+  query += "v.variant_name, v.variant_quantity, v.variant_price FROM order_item oi ";
   query += "JOIN order_detail od ON od.order_detail_id = oi.order_detail_id ";
   query += "JOIN variant v ON v.variant_id = oi.variant_id ";
   query += "JOIN product p ON p.product_id = v.product_id ";

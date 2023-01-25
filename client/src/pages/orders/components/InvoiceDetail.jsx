@@ -48,7 +48,7 @@ function InvoiceDetail({ product }) {
             align="center"
           >
             <div className="order-details">
-              <img alt={product.product_name} src={getProductImage(product.product_name)} />
+              <img alt={product.variant_name} src={getProductImage(product.variant_name)} />
               <div className="order-details__container">
                 <div className="order-details__product-name">
                   <span>{product.product_name}</span>
