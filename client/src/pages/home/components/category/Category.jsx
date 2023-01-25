@@ -4,7 +4,7 @@ import CardActionArea from "@mui/material/CardActionArea";
 import CardMedia from "@mui/material/CardMedia";
 import { Link } from "react-router-dom";
 import { getMUIprops } from "../../../../utils/MUIMediaQuery";
-import { phoneStyle, tabletStyle, desktopStyle, largeDevicesStyle } from "./CategoryMUIStyle";
+import { phoneStyle, tabletStyle, desktopStyle } from "./CategoryMUIStyle";
 
 /**
  * Component to render the category.
@@ -14,7 +14,7 @@ import { phoneStyle, tabletStyle, desktopStyle, largeDevicesStyle } from "./Cate
 function Category({ alt, image, title }) {
   let cardProps = {};
 
-  cardProps = getMUIprops(phoneStyle, tabletStyle, desktopStyle, largeDevicesStyle);
+  cardProps = getMUIprops(phoneStyle, tabletStyle, desktopStyle, desktopStyle);
 
   return (
     <Card sx={{ height: "auto", width: "auto", display: "flex", justifyContent: "center" }}>

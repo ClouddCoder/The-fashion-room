@@ -16,19 +16,9 @@ export const tabletStyle = {
   justifyContent: "center",
 };
 
-/* For desktop */
+/* For desktop and large devices */
 export const desktopStyle = {
   maxWidth: 350,
-  height: 200,
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "center",
-};
-
-/* For large devices */
-export const largeDevicesStyle = {
-  maxWidth: 250,
-  minWidth: 200,
   height: 250,
   display: "flex",
   flexDirection: "column",
