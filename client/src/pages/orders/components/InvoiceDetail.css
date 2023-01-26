@@ -29,7 +29,7 @@
 .order-details__prices {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-content: center;
 }
 
 .order-details__unit-price,

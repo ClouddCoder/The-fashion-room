@@ -29,7 +29,12 @@ function Contact() {
 
   return (
     <Layout>
-      <Grid container justifyContent="center" sx={{ height: "auto" }} spacing={2}>
+      <Grid
+        container
+        direction="column"
+        sx={{ width: "90%", maxWidth: "600px", p: 2 }}
+        rowSpacing={2}
+      >
         {stores.map((store, index) => (
           <StoreInfo key={index} storeNit={store.store_nit} storeName={store.store_name} />
         ))}
