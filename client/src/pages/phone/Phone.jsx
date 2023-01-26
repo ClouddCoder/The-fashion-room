@@ -12,7 +12,7 @@ import AuthContext from "../../context/auth-context/AuthContext";
 import { getPhone, setPhone, deletePhone } from "../../services/user";
 import useUserInput from "../../utils/hooks/useUserInput";
 import useError from "../../utils/hooks/useError";
-import useLoader from "../../utils/hooks/useLoader";
+import useOpenComponent from "../../utils/hooks/useOpenComponent";
 import "./Phone.css";
 
 /**
@@ -26,17 +26,17 @@ function Phone() {
   const { error, setInputError } = useError();
   const requestData = useError(); // Shows the error message when there are no phones.
 
-  const [openModal, setOpenModal] = useState(false);
+  const openLoader = useOpenComponent();
+  const openModal = useOpenComponent();
+
   const [listPhone, setListPhone] = useState([]);
   const [isPhoneDeleted, setIsPhoneDeleted] = useState(false);
 
   const { token } = useContext(AuthContext);
 
-  const { loader, setLoaderComponent } = useLoader();
-
   useEffect(() => {
     // Displays the loader every time the component is re-render.
-    setLoaderComponent(true);
+    openLoader.setOpenComponent(true);
 
     setInputError({ ...error, constraint: "", message: "" });
   }, []);
@@ -53,14 +53,14 @@ function Phone() {
       requestData.setInputError({ ...error, constraint, message });
     }
 
-    setLoaderComponent(false);
+    openLoader.setOpenComponent(false);
   };
 
   useEffect(() => {
     getPhoneList();
     requestData.setInputError({ ...error, constraint: "", message: "" });
     setUserInput("");
-  }, [openModal, isPhoneDeleted]);
+  }, [openModal.open, isPhoneDeleted]);
 
   const handleChange = (e) => {
     setUserInput(e.target.value);
@@ -72,7 +72,7 @@ function Phone() {
 
     try {
       const response = await setPhone(input, token);
-      setOpenModal(false);
+      openModal.setOpenComponent(false);
       console.log(response.data.message);
     } catch (err) {
       // eslint-disable-next-line prefer-destructuring
@@ -84,7 +84,7 @@ function Phone() {
 
   return (
     <Layout>
-      {loader && (
+      {openLoader.open && (
         <div className="loader-container">
           <div className="spinner" />
         </div>
@@ -135,12 +135,12 @@ function Phone() {
           <Button
             variant="contained"
             color="secondary"
-            onClick={() => setOpenModal(true)}
+            onClick={() => openModal.setOpenComponent(true)}
             fullWidth
           >
             Agregar un número celular
           </Button>
-          <Modal state={openModal}>
+          <Modal state={openModal.open}>
             <Grid
               container
               direction="column"
@@ -150,7 +150,7 @@ function Phone() {
             >
               <IconButton
                 sx={{ position: "absolute", top: "20px", right: "20px", p: 0 }}
-                onClick={() => setOpenModal(false)}
+                onClick={() => openModal.setOpenComponent(false)}
               >
                 <CloseIcon />
               </IconButton>

@@ -12,7 +12,7 @@ import useUserInput from "../../utils/hooks/useUserInput";
 import usePasswordLength from "../../utils/hooks/usePasswordLength";
 import useError from "../../utils/hooks/useError";
 import { checkScreenSize } from "../../utils/MUIMediaQuery";
-import useLoader from "../../utils/hooks/useLoader";
+import useOpenComponent from "../../utils/hooks/useOpenComponent";
 import "./EditPassword.css";
 
 /**
@@ -22,7 +22,9 @@ import "./EditPassword.css";
 function EditPassword() {
   const [userId, setUserId] = useState("");
   const [success, setSuccess] = useState(false); // If the user's email exists, turns true.
-  const [open, setOpen] = useState(false); // Opens the modal.
+
+  const openLoader = useOpenComponent();
+  const openModal = useOpenComponent();
 
   const { error, setInputError } = useError();
 
@@ -36,19 +38,17 @@ function EditPassword() {
 
   const screenSize = checkScreenSize();
 
-  const { loader, setLoaderComponent } = useLoader();
-
   // Sends the user's new password to change the current one using the user's id.
   const handleSubmitPassword = async (e) => {
     e.preventDefault();
 
-    setLoaderComponent(true);
+    openLoader.setOpenComponent(true);
 
     if (!password.shortPassword) {
       try {
         await changeUserPassword(userId, userCurrentPassword.input, userNewPassword.input);
         console.log("Contraseña actualizada");
-        setOpen(true);
+        openModal.setOpenComponent(true);
       } catch (err) {
         const { response } = err;
         const { data } = response;
@@ -57,7 +57,7 @@ function EditPassword() {
       }
     }
 
-    setLoaderComponent(false);
+    openLoader.setOpenComponent(false);
   };
 
   // Sends the user's email to check if it exists in the database.
@@ -65,7 +65,7 @@ function EditPassword() {
   const handleSubmitEmail = async (e) => {
     e.preventDefault();
 
-    setLoaderComponent(true);
+    openLoader.setOpenComponent(true);
 
     try {
       const res = await getUserId(userEmail.input);
@@ -80,7 +80,7 @@ function EditPassword() {
       setInputError({ ...error, constraint: "email", message });
     }
 
-    setLoaderComponent(false);
+    openLoader.setOpenComponent(false);
   };
 
   const handleChange = (e) => {
@@ -109,7 +109,7 @@ function EditPassword() {
 
   return (
     <Layout>
-      {loader && (
+      {openLoader.open && (
         <div className="loader-container">
           <div className="spinner" />
         </div>
@@ -160,7 +160,7 @@ function EditPassword() {
               </form>
             </CardContent>
           </Card>
-          <Modal state={open}>
+          <Modal state={openModal.open}>
             <Grid
               container
               direction="column"
@@ -180,7 +180,7 @@ function EditPassword() {
                   variant="contained"
                   color="primary"
                   onClick={() => {
-                    setOpen(false);
+                    openModal.open(false);
                     navigate("/login");
                   }}
                   fullWidth={screenSize === "phone"}

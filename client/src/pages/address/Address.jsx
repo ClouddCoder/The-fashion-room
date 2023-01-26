@@ -8,7 +8,7 @@ import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Layout from "../../components/layout/Layout";
 import AuthContext from "../../context/auth-context/AuthContext";
-import useLoader from "../../utils/hooks/useLoader";
+import useOpenComponent from "../../utils/hooks/useOpenComponent";
 import useError from "../../utils/hooks/useError";
 import { getAddress } from "../../services/user";
 import "./Address.css";
@@ -22,7 +22,7 @@ function Address() {
 
   const [addressList, setAddressList] = useState([]);
 
-  const { loader, setLoaderComponent } = useLoader();
+  const { open, setOpenComponent } = useOpenComponent();
 
   const { error, setInputError } = useError();
 
@@ -38,7 +38,7 @@ function Address() {
       const { message, constraint } = data;
       setInputError({ ...error, constraint, message });
     }
-    setLoaderComponent(false);
+    setOpenComponent(false);
   };
 
   useEffect(() => {
@@ -48,7 +48,7 @@ function Address() {
 
   return (
     <Layout>
-      {loader && (
+      {open && (
         <div className="loader-container">
           <div className="spinner" />
         </div>

@@ -1,5 +1,5 @@
-import { useState, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useContext } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid";
@@ -10,6 +10,8 @@ import AuthContext from "../../context/auth-context/AuthContext";
 import Layout from "../../components/layout/Layout";
 import useUserInput from "../../utils/hooks/useUserInput";
 import { checkScreenSize } from "../../utils/MUIMediaQuery";
+import useOpenComponent from "../../utils/hooks/useOpenComponent";
+import Modal from "../../components/modal/Modal";
 import "./EditData.css";
 
 /**
@@ -19,10 +21,13 @@ import "./EditData.css";
 function EditEmail() {
   const { info } = useParams();
 
+  const navigate = useNavigate();
+
   const { input, setUserInput } = useUserInput();
   const inputLastname = useUserInput();
 
-  const [success, setSuccess] = useState(false);
+  const { open, setOpenComponent } = useOpenComponent();
+
   const { token } = useContext(AuthContext);
 
   const screenSize = checkScreenSize();
@@ -40,7 +45,7 @@ function EditEmail() {
   switch (info) {
     case "name":
       title = "Editar nombre";
-      successMessage = "El nombre se ha cambiado correctamente";
+      successMessage = "Nombre actualizado";
       inputLabel = "Nombre escogido";
       secondInputLabel = "Apellido escogido";
       inputAriaLabel = "new-name";
@@ -49,14 +54,14 @@ function EditEmail() {
       break;
     case "email":
       title = "Editar email";
-      successMessage = "El email se ha cambiado correctamente";
+      successMessage = "Email actualizado";
       inputLabel = "Nuevo email";
       inputAriaLabel = "new-email";
       method = services.changeUserEmail;
       break;
     case "username":
       title = "Modificar usuario";
-      successMessage = "El nombre de usuario se ha cambiado correctamente";
+      successMessage = "Usuario actualizado";
       inputLabel = "Nombre de usuario";
       inputAriaLabel = "new-username";
       method = services.changeUsername;
@@ -72,7 +77,7 @@ function EditEmail() {
     inputObject = { ...inputObject, input, secondInput: inputLastname.input };
     try {
       await method(inputObject, token);
-      setSuccess(true);
+      setOpenComponent(true);
     } catch (error) {
       const { response } = error;
       const { data } = response;
@@ -159,11 +164,32 @@ function EditEmail() {
             </CardContent>
           </Card>
         </Grid>
-        {success && (
-          <Grid item>
-            <span>{successMessage}</span>
+        <Modal state={open}>
+          <Grid
+            container
+            direction="column"
+            justifyContent="center"
+            sx={{ width: "100%", height: "100%", position: "relative", p: "20px" }}
+            rowSpacing={2}
+          >
+            <Grid item>
+              <h3 className="modal-window__title">{successMessage}</h3>
+            </Grid>
+            <Grid item>
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={() => {
+                  setOpenComponent(false);
+                  navigate("/my-data");
+                }}
+                fullWidth
+              >
+                Regresar
+              </Button>
+            </Grid>
           </Grid>
-        )}
+        </Modal>
       </Grid>
     </Layout>
   );

@@ -7,7 +7,7 @@ import Form from "../../components/form/Form";
 import AuthContext from "../../context/auth-context/AuthContext";
 import useError from "../../utils/hooks/useError";
 import usePasswordLength from "../../utils/hooks/usePasswordLength";
-import useLoader from "../../utils/hooks/useLoader";
+import useOpenComponent from "../../utils/hooks/useOpenComponent";
 import { registerUser } from "../../services/user";
 
 /**
@@ -34,7 +34,7 @@ function Register() {
   // Checks if the user's name, lastname or email is empty
   const { error, setInputError } = useError();
 
-  const { loader, setLoaderComponent } = useLoader();
+  const { open, setOpenComponent } = useOpenComponent();
 
   // Checks if the user's password is less than or equal to 4 characters
   const { password, checkPasswordLength } = usePasswordLength();
@@ -46,7 +46,7 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    setLoaderComponent(true);
+    setOpenComponent(true);
 
     // If the user submits the form with a password error, it will not be sent
     if (!password.shortPassword) {
@@ -83,7 +83,7 @@ function Register() {
         console.log(err);
       }
 
-      setLoaderComponent(false);
+      setOpenComponent(false);
     }
   };
 
@@ -121,7 +121,7 @@ function Register() {
 
   return (
     <Form title="Registrarse">
-      {loader && (
+      {open && (
         <div className="loader-container">
           <div className="spinner" />
         </div>
@@ -168,7 +168,9 @@ function Register() {
           <Grid item xs={12}>
             <TextField
               error={error.constraint === "password" || password.shortPassword}
-              helperText={error.constraint === "password" ? error.message : password.errorMessage}
+              helperText={
+                error.constraint === "password" ? error.message : password.errorMessage
+              }
               onChange={handleChange}
               name="userPassword"
               variant="outlined"
