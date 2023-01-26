@@ -7,18 +7,15 @@
 
 <div align="center">
 
-| Desktop |
-|---------|
+| Desktop                                                                                                                 |
+| ----------------------------------------------------------------------------------------------------------------------- |
 | ![desktop_view](https://user-images.githubusercontent.com/103080410/214464291-dd7db668-6f4c-4c5f-90a6-c219831504d1.png) |
 
-
-
-|Phone             |  Tablet
-|-------------------------|-------------------------|
+| Phone                                                                                                            | Tablet                                                                                                            |
+| ---------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
 | ![phone](https://user-images.githubusercontent.com/103080410/214462884-cf7667a3-5f73-4b82-8018-fb24834b6f13.png) | ![tablet](https://user-images.githubusercontent.com/103080410/214462931-60ff4764-4f23-42f2-aaf0-e0499b85c9d1.png) |
 
 </div>
-
 
 Lottus is an small ecommerce to practice PERN stack with Material UI and other technologies such as Docker and Nginx as a reverse proxy.
 
@@ -114,12 +111,15 @@ Then open a new tab in the browser and type `localhost:3050`.
 Currently the ecommerce is deployed using Google Cloud for the frontend and backend, the database is using a different server.
 
 ## Demo
+
 In this domain the ecommerce is deployed:
+
 ```
 https://lottus-shop.cf
 ```
 
 It can also be accessed through the GCP bucket's index.html:
+
 ```
 https://storage.googleapis.com/lottus-bucket/index.html
 ```
