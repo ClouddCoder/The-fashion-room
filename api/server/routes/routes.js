@@ -3,7 +3,9 @@ const {
   loginUser,
   registerUser,
   getUserId,
+  getUserFullName,
   updateName,
+  getUsername,
   updateUsername,
   updateEmail,
   updatePassword,
@@ -40,7 +42,11 @@ router.post("/register", registerUser);
 
 router.get("/user-id", getUserId);
 
+router.get("/user-full-name", getUserFullName);
+
 router.put("/edit-name", updateName);
+
+router.get("/username", getUsername);
 
 router.put("/edit-username", updateUsername);
 

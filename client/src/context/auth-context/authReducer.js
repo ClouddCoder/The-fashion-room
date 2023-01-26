@@ -8,6 +8,7 @@ export const authInitialState = {
   userId: user?.userId || "",
   user: user?.userName || "", // The user's name that is shown in the profile and navbar.
   username: user?.username || "", // Username of the user.
+  userFullName: "", // Full name of the user.
   userName: "", // Input value of the user's name.
   userLastname: "", // Input value of the user's lastname.
   userEmail: "", // Input value of the user's email.
@@ -23,9 +24,15 @@ export function authReducer(state, action) {
       return { ...state, userId: action.payload };
     case authActions.SET_USER:
       return { ...state, user: action.payload };
-    case authActions.SET_USER_NAME:
-      return { ...state, username: action.payload };
+    case authActions.SET_USER_FULL_NAME:
+      return {
+        ...state,
+        user: action.payload.userName,
+        userFullName: `${action.payload.userName} ${action.payload.userLastname}`,
+      };
     case authActions.SET_USERNAME:
+      return { ...state, username: action.payload };
+    case authActions.SET_USER_NAME:
       return { ...state, userName: action.payload };
     case authActions.SET_LASTNAME:
       return { ...state, userLastname: action.payload };

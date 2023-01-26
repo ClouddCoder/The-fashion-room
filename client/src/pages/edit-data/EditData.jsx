@@ -9,6 +9,7 @@ import * as services from "../../services/user";
 import AuthContext from "../../context/auth-context/AuthContext";
 import Layout from "../../components/layout/Layout";
 import useUserInput from "../../utils/hooks/useUserInput";
+import useError from "../../utils/hooks/useError";
 import { checkScreenSize } from "../../utils/MUIMediaQuery";
 import useOpenComponent from "../../utils/hooks/useOpenComponent";
 import Modal from "../../components/modal/Modal";
@@ -25,6 +26,8 @@ function EditEmail() {
 
   const { input, setUserInput } = useUserInput();
   const inputLastname = useUserInput();
+
+  const { error, setInputError } = useError();
 
   const { open, setOpenComponent } = useOpenComponent();
 
@@ -78,14 +81,15 @@ function EditEmail() {
     try {
       await method(inputObject, token);
       setOpenComponent(true);
-    } catch (error) {
-      const { response } = error;
+    } catch (err) {
+      const { response } = err;
       const { data } = response;
-      console.log(data.message);
+      setInputError({ ...error, message: data.message });
     }
   };
 
   const handleChange = (e) => {
+    setInputError({ ...error, message: "" });
     if (e.target.name === "new-lastname") {
       inputLastname.setUserInput(e.target.value);
     } else {
@@ -115,6 +119,8 @@ function EditEmail() {
                       <section className="complete-name__field">
                         <span>{inputLabel}</span>
                         <TextField
+                          error={Boolean(error.message)}
+                          helperText={error.message}
                           inputProps={{ "aria-label": inputAriaLabel }}
                           name="new-name"
                           hiddenLabel
@@ -126,6 +132,8 @@ function EditEmail() {
                       <section className="complete-name__field">
                         <span>{secondInputLabel}</span>
                         <TextField
+                          error={Boolean(error.message)}
+                          helperText={error.message}
                           inputProps={{ "aria-label": secondInpuAriaLabel }}
                           name="new-lastname"
                           hiddenLabel
@@ -140,6 +148,8 @@ function EditEmail() {
                       <div className="container-input__field">
                         <span>{inputLabel}</span>
                         <TextField
+                          error={Boolean(error.message)}
+                          helperText={error.message}
                           inputProps={{ "aria-label": inputAriaLabel }}
                           hiddenLabel
                           onChange={handleChange}

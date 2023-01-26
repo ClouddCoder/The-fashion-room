@@ -2,6 +2,7 @@ import { useReducer, useMemo } from "react";
 import AuthContext from "./AuthContext";
 import { authInitialState, authReducer } from "./authReducer";
 import { authActions } from "../../actions/authActions";
+import { getUserFullName, getUsername } from "../../services/user";
 
 /**
  * States and dispatches for the auth context.
@@ -23,12 +24,43 @@ function AuthState({ children }) {
     dispatch({ type: authActions.SET_USER, payload: user });
   };
 
-  const setUsername = (user) => {
-    dispatch({ type: authActions.SET_USER_NAME, payload: user });
+  const setUserFullName = async (token) => {
+    try {
+      const response = await getUserFullName(token);
+
+      const { data } = response;
+
+      dispatch({ type: authActions.SET_USER_FULL_NAME, payload: data });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  /**
+   * When the user logs in or signs up, the token is going to be the username,
+   * otherwise is going to be fetched.
+   * @param {string} token - Token or username.
+   * @param {boolean} isFetch - If the username must be fetched.
+   */
+  const setUsername = async (token, isFetch = false) => {
+    if (isFetch) {
+      try {
+        const response = await getUsername(token);
+
+        const { data } = response;
+
+        dispatch({ type: authActions.SET_USERNAME, payload: data.username });
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      // The token could be the name as well.
+      dispatch({ type: authActions.SET_USERNAME, payload: token });
+    }
   };
 
   const setUserName = (name) => {
-    dispatch({ type: authActions.SET_USERNAME, payload: name });
+    dispatch({ type: authActions.SET_USER_NAME, payload: name });
   };
 
   const setUserLastname = (lastname) => {
@@ -55,6 +87,8 @@ function AuthState({ children }) {
       setUserId,
       user: state.user,
       setUser,
+      userFullName: state.userFullName,
+      setUserFullName,
       username: state.username,
       setUsername,
       userName: state.userName,
@@ -72,6 +106,8 @@ function AuthState({ children }) {
       state.auth,
       state.userId,
       state.user,
+      state.userFullName,
+      state.username,
       state.userName,
       state.userLastname,
       state.userEmail,

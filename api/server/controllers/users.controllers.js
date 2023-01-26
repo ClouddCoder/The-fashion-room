@@ -128,14 +128,44 @@ const getUserId = async (req, res, next) => {
 };
 
 /**
+ * Gets the full name of the user.
+ */
+const getUserFullName = async (req, res, next) => {
+  const { authorization } = req.headers;
+
+  const query = "SELECT customer_name, customer_lastname FROM customer WHERE customer_id = $1;";
+
+  const decodeToken = getAuthorization(authorization);
+
+  if (decodeToken.code) {
+    return res.status(decodeToken.code).json({ message: decodeToken.message });
+  }
+
+  try {
+    const response = await pool.query(query, [decodeToken.userId]);
+
+    return res.json({
+      userName: response.rows[0].customer_name,
+      userLastname: response.rows[0].customer_lastname,
+      username: response.rows[0].customer_username,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+/**
  * Updates the name and lastname of the user.
  */
 const updateName = async (req, res, next) => {
   const { input, secondInput } = req.body;
   const { authorization } = req.headers;
 
-  let query = "UPDATE customer SET customer_name = $1, ";
-  query += "customer_lastname = $2 WHERE customer_id = $3;";
+  let updateNameQuery = "UPDATE customer SET customer_name = $1, ";
+  updateNameQuery += "customer_lastname = $2 WHERE customer_id = $3;";
+
+  // Gets the current name of the user to know if the new name is different.
+  const getUserNameQuery = "SELECT customer_name FROM customer WHERE customer_id = $1;";
 
   const decodeToken = getAuthorization(authorization);
 
@@ -146,13 +176,45 @@ const updateName = async (req, res, next) => {
   const values = [input, secondInput, decodeToken.userId];
 
   try {
-    const response = await pool.query(query, values);
+    const response = await pool.query(getUserNameQuery, [decodeToken.userId]);
+    const userCurrentName = response.rows[0].customer_name;
 
-    if (response.rowCount === 0) {
+    if (userCurrentName === input) {
+      return res.status(406).json({ message: "El nombre debe ser diferente al actual" });
+    }
+
+    const responseUpdate = await pool.query(updateNameQuery, values);
+
+    if (responseUpdate.rowCount === 0) {
       return res.status(404).json({ message: "No se encontró el usuario" });
     }
 
     return res.json({ message: "Nombre actualizado con éxito" });
+  } catch (error) {
+    next(error);
+  }
+};
+
+/**
+ * Gets the username of the user.
+ */
+const getUsername = async (req, res, next) => {
+  const { authorization } = req.headers;
+
+  const query = "SELECT customer_username FROM customer WHERE customer_id = $1;";
+
+  const decodeToken = getAuthorization(authorization);
+
+  if (decodeToken.code) {
+    return res.status(decodeToken.code).json({ message: decodeToken.message });
+  }
+
+  try {
+    const response = await pool.query(query, [decodeToken.userId]);
+
+    return res.json({
+      username: response.rows[0].customer_username,
+    });
   } catch (error) {
     next(error);
   }
@@ -165,7 +227,11 @@ const updateUsername = async (req, res, next) => {
   const { input } = req.body;
   const { authorization } = req.headers;
 
-  const query = "UPDATE customer SET customer_username = $1 WHERE customer_id = $2;";
+  let updateUsernameQuery = "UPDATE customer SET customer_username = $1 ";
+  updateUsernameQuery += "WHERE customer_id = $2;";
+
+  // Gets the current username of the user to know if the new username is different.
+  const getUserNameQuery = "SELECT customer_username FROM customer WHERE customer_id = $1;";
 
   const decodeToken = getAuthorization(authorization);
 
@@ -174,7 +240,16 @@ const updateUsername = async (req, res, next) => {
   }
 
   try {
-    await pool.query(query, [input, decodeToken.userId]);
+    const response = await pool.query(getUserNameQuery, [decodeToken.userId]);
+    const userCurrentUsername = response.rows[0].customer_username;
+
+    if (userCurrentUsername === input) {
+      return res
+        .status(406)
+        .json({ message: "El nombre de usuario debe ser diferente al actual" });
+    }
+
+    await pool.query(updateUsernameQuery, [input, decodeToken.userId]);
     return res.json({ message: "Username actualizado con éxito" });
   } catch (error) {
     next(error);
@@ -299,7 +374,9 @@ const getPhone = async (req, res, next) => {
     const result = await pool.query(query, [decodeToken.userId]);
 
     if (result.rows.length === 0) {
-      return res.status(404).json({ constraint: "empty", message: "No se encontraron teléfonos" });
+      return res
+        .status(404)
+        .json({ constraint: "empty", message: "No se encontraron teléfonos" });
     }
     return res.json(result.rows);
   } catch (error) {
@@ -419,7 +496,8 @@ const getSingleAddress = async (req, res, next) => {
  */
 const setAddress = async (req, res, next) => {
   // eslint-disable-next-line object-curly-newline
-  const { department, city, neighborhood, streetType, street, streetNumber, references } = req.body;
+  const { department, city, neighborhood, streetType, street, streetNumber, references } =
+    req.body;
   const { authorization } = req.headers;
 
   // Query to insert a new address.
@@ -442,7 +520,10 @@ const setAddress = async (req, res, next) => {
 
   try {
     const response = await pool.query(insertAddressQuery, values);
-    await pool.query(joinCustomerAddressQuery, [decodeToken.userId, response.rows[0].address_id]);
+    await pool.query(joinCustomerAddressQuery, [
+      decodeToken.userId,
+      response.rows[0].address_id,
+    ]);
 
     return res.json({ message: "Dirección agregada con éxito" });
   } catch (error) {
@@ -522,7 +603,9 @@ module.exports = {
   loginUser,
   registerUser,
   getUserId,
+  getUserFullName,
   updateName,
+  getUsername,
   updateUsername,
   updateEmail,
   updatePassword,

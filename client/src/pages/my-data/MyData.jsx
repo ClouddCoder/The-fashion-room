@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import Card from "@mui/material/Card";
 import ArrowForwardIosOutlinedIcon from "@mui/icons-material/ArrowForwardIosOutlined";
 import Grid from "@mui/material/Grid";
@@ -13,7 +13,14 @@ import "./MyData.css";
  * @returns {JSX.Element} - MyData component.
  */
 function MyData() {
-  const { username, user } = useContext(AuthContext);
+  const { userFullName, setUserFullName, username, setUsername, token } =
+    useContext(AuthContext);
+
+  useEffect(() => {
+    setUserFullName(token);
+    setUsername(token, true);
+  }, []);
+
   return (
     <Layout>
       <Grid
@@ -54,7 +61,7 @@ function MyData() {
                         <span>Nombre elegido</span>
                       </div>
                       <div className="my-data-link__value">
-                        <span>{username}</span>
+                        <span>{userFullName}</span>
                       </div>
                     </div>
                     <div className="my-data-link__icon">
@@ -72,7 +79,7 @@ function MyData() {
                         <span>Usuario</span>
                       </div>
                       <div className="my-data-link__value">
-                        <span>{user}</span>
+                        <span>{username}</span>
                       </div>
                     </div>
                     <div className="my-data-link__icon">
