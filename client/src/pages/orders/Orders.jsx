@@ -36,7 +36,7 @@ function Orders() {
       <Grid
         container
         direction="column"
-        sx={{ width: "90%", maxWidth: "750px", p: 2 }}
+        sx={{ width: "90%", maxWidth: "600px", p: 2 }}
         rowSpacing={4}
       >
         <Grid item>
