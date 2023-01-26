@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid";
 import Divider from "@mui/material/Divider";
 import { getStoreAddress, getStorePhones } from "../../../services/store";
@@ -42,28 +44,34 @@ function StoreInfo({ storeNit, storeName }) {
   }, []);
 
   return (
-    <Grid item container>
-      <Grid item={true} xs={12}>
-        <h4>{storeName}</h4>
-        <Divider />
-      </Grid>
-      <Grid item container direction="column">
-        <Grid item>
-          <span>
-            {storeAddress.map(
-              (address) =>
-                `Dirección: ${address.street_name} ${address.street} ${address.street_number}`,
-            )}
-          </span>
-        </Grid>
-        {storePhones.map((phone, index) => (
-          <Grid item key={index}>
-            <span>
-              {`Teléfono ${index + 1}`}: {phone.phone_number}
-            </span>
+    <Grid item>
+      <Card>
+        <CardContent>
+          <Grid item container>
+            <Grid item={true} xs={12}>
+              <h4>{storeName}</h4>
+              <Divider />
+            </Grid>
+            <Grid item container direction="column">
+              <Grid item>
+                <span>
+                  {storeAddress.map(
+                    (address) =>
+                      `Dirección: ${address.street_type} ${address.street} ${address.street_number}`,
+                  )}
+                </span>
+              </Grid>
+              {storePhones.map((phone, index) => (
+                <Grid item key={index}>
+                  <span>
+                    {`Teléfono ${index + 1}`}: {phone.phone_number}
+                  </span>
+                </Grid>
+              ))}
+            </Grid>
           </Grid>
-        ))}
-      </Grid>
+        </CardContent>
+      </Card>
     </Grid>
   );
 }

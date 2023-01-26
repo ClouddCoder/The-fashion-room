@@ -123,7 +123,13 @@ function Login() {
               Login
             </Button>
           </Grid>
-          <Grid container item justifyContent="space-between" xs={12}>
+          <Grid
+            container
+            item
+            direction={{ xs: "column", sm: "row" }}
+            justifyContent="space-between"
+            alignItems="center"
+          >
             <Grid item>
               <Link to="/edit-password">
                 <span>¿Olvidaste tu contraseña?</span>
