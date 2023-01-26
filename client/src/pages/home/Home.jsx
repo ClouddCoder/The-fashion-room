@@ -10,8 +10,8 @@ import "./Home.css";
 function Home() {
   return (
     <Layout>
+      <Header />
       <div className="main-content__container">
-        <Header />
         <Categories />
       </div>
     </Layout>

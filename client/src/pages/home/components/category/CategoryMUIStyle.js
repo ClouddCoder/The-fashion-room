@@ -8,9 +8,8 @@ export const phoneStyle = {
 
 /* For tablet */
 export const tabletStyle = {
+  height: 220,
   maxWidth: 250,
-  maxHeight: 200,
-  height: 200,
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
