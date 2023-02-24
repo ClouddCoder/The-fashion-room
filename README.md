@@ -112,6 +112,10 @@ Currently the ecommerce is deployed using Google Cloud for the frontend and back
 
 ## Demo
 
+```
+https://lottus.onrender.com
+```
+
 # Contributors
 
 - [@ClouddCoder](https://github.com/ClouddCoder)
