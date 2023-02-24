@@ -33,7 +33,7 @@ function Wish({ product }) {
             component="img"
             image={getProductImage(product.variant_name)}
             alt={product.variant_name}
-            sx={{ width: "50%", height: "100%" }}
+            sx={{ width: "50%" }}
           />
           <CardContent sx={{ display: "flex", alignItems: "center", width: "100%" }}>
             <div className="wish-description">

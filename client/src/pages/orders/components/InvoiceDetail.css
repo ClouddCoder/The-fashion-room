@@ -1,4 +1,8 @@
 /* For mobile phones */
+#link-field {
+  color: var(--color-primary-white);
+}
+
 .order-details {
   display: flex;
   gap: 10px;
@@ -6,8 +10,7 @@
 }
 
 .order-details img {
-  width: 100%;
-  flex: 0.5;
+  width: 50%;
 }
 
 .order-details__container {
@@ -42,10 +45,6 @@
 @media only screen and (min-width: 601px) {
   .order-details {
     justify-content: space-between;
-  }
-
-  .order-details img {
-    flex: 1;
   }
 
   .order-details__container {

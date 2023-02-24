@@ -29,7 +29,7 @@ function InvoiceDetail({ product }) {
           action={
             screenSize === "phone" && (
               <Link to={`/product/${product.product_id}-${product.variant_id}`}>
-                <span>Volver a comprar</span>
+                <span id="link-field">Volver a comprar</span>
               </Link>
             )
           }
@@ -59,7 +59,7 @@ function InvoiceDetail({ product }) {
                     <span>{`x${product.product_quantity}`}</span>
                   </div>
                   <div className="order-details__total-price">
-                    <span>Total compra:</span>
+                    <span>Total:</span>
                     <span>{`$${product.item_total_cost}`}</span>
                   </div>
                 </div>
