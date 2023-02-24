@@ -92,10 +92,10 @@ DB_SSL_TEST = <1_OR_0>
 # These variables are used to connect the backend.
 
 # For deployment.
-BASE_URL = <ENTER_YOUR_BACKEND_SERVER_URL>
+REACT_APP_BASE_URL = <ENTER_YOUR_BACKEND_SERVER_URL>
 
 # For development using Docker compose.
-BASE_URL_DEV = <ENTER_YOUR_LOCALHOST_URL>
+REACT_APP_BASE_URL_DEV = <ENTER_YOUR_LOCALHOST_URL>
 ```
 
 # Usage
