@@ -79,6 +79,20 @@ function AuthState({ children }) {
     dispatch({ type: authActions.SET_TOKEN, payload: token });
   };
 
+  /**
+   * Resets the session.
+   */
+  const resetSession = () => {
+    dispatch({ type: authActions.RESET_SESSION });
+  };
+
+  /**
+   * Resets the form values in the login and register components.
+   */
+  const resetForm = () => {
+    dispatch({ type: authActions.RESET_FORM });
+  };
+
   const valueProps = useMemo(
     () => ({
       auth: state.auth,
@@ -101,6 +115,8 @@ function AuthState({ children }) {
       setUserPassword,
       token: state.token,
       setToken,
+      resetSession,
+      resetForm,
     }),
     [
       state.auth,

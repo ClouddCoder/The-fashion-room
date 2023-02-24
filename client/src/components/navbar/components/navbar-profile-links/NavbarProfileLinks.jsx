@@ -14,40 +14,7 @@ import "./NavbarProfileLinks.css";
  * @returns {JSX.Element} - NavbarProfileLinks component
  */
 function NavbarProfileLinks({ newSelector }) {
-  const {
-    auth,
-    setAuth,
-    user,
-    setUser,
-    setToken,
-    setUserId,
-    setUserName,
-    setUsername,
-    setUserLastname,
-    setUserEmail,
-    setUserPassword,
-  } = useContext(AuthContext);
-
-  /**
-   * Resets the session.
-   */
-  const resetSession = () => {
-    setAuth(false);
-    setUser("");
-    setUsername("");
-    setToken("");
-    setUserId("");
-  };
-
-  /**
-   * Resets the form values in the login and register components.
-   */
-  const resetForm = () => {
-    setUserName("");
-    setUserLastname("");
-    setUserEmail("");
-    setUserPassword("");
-  };
+  const { auth, user, resetSession, resetForm } = useContext(AuthContext);
 
   return (
     <ul className={newSelector}>
@@ -90,13 +57,13 @@ function NavbarProfileLinks({ newSelector }) {
           {/* If the user is not authenticated */}
           <li className="header__navbar__login">
             <Link to="/login" onClick={resetForm}>
-              Login
+              Ingresar
             </Link>
           </li>
           <div className="vertical-line" />
           <li className="header__navbar__register">
             <Link to="/register" onClick={resetForm}>
-              Register
+              Registrarse
             </Link>
           </li>
         </>

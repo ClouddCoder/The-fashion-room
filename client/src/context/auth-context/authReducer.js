@@ -42,6 +42,23 @@ export function authReducer(state, action) {
       return { ...state, userPassword: action.payload };
     case authActions.SET_TOKEN:
       return { ...state, token: action.payload };
+    case authActions.RESET_SESSION:
+      return {
+        ...state,
+        auth: false,
+        user: "",
+        username: "",
+        token: "",
+        userId: "",
+      };
+    case authActions.RESET_FORM:
+      return {
+        ...state,
+        userName: "",
+        userLastname: "",
+        userEmail: "",
+        userPassword: "",
+      };
     default:
       return state;
   }

@@ -93,7 +93,7 @@ function ProfileButton({ resetSession }) {
               window.localStorage.removeItem("logged");
             }}
           >
-            Logout
+            Salir
           </MenuItem>
         </Menu>
       </div>

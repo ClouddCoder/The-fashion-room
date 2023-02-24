@@ -18,6 +18,17 @@
   z-index: 5;
 }
 
+.sign-out-container {
+  display: flex;
+  width: 90%;
+}
+
+.sign-out-container a {
+  cursor: pointer;
+  color: var(--color-primary-brown);
+  margin: 10px;
+}
+
 /* displays the links in the overlay */
 .overlay-active {
   width: 90%;
