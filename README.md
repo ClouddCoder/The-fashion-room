@@ -112,18 +112,6 @@ Currently the ecommerce is deployed using Google Cloud for the frontend and back
 
 ## Demo
 
-In this domain the ecommerce is deployed:
-
-```
-https://lottus-shop.cf
-```
-
-It can also be accessed through the GCP bucket's index.html:
-
-```
-https://storage.googleapis.com/lottus-bucket/index.html
-```
-
 # Contributors
 
 - [@ClouddCoder](https://github.com/ClouddCoder)

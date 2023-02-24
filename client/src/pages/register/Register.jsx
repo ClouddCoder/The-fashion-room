@@ -46,10 +46,10 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    setOpenComponent(true);
-
     // If the user submits the form with a password error, it will not be sent
     if (!password.shortPassword) {
+      setOpenComponent(true);
+
       checkPasswordLength({ ...password, shortPassword: false, errorMessage: "" });
 
       try {
@@ -82,9 +82,9 @@ function Register() {
       } catch (err) {
         console.log(err);
       }
-
-      setOpenComponent(false);
     }
+
+    setOpenComponent(false);
   };
 
   /**
@@ -168,9 +168,7 @@ function Register() {
           <Grid item xs={12}>
             <TextField
               error={error.constraint === "password" || password.shortPassword}
-              helperText={
-                error.constraint === "password" ? error.message : password.errorMessage
-              }
+              helperText={error.constraint === "password" ? error.message : password.errorMessage}
               onChange={handleChange}
               name="userPassword"
               variant="outlined"
