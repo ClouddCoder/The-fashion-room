@@ -17,9 +17,9 @@
 
 </div>
 
-Lottus is an small ecommerce to practice PERN stack with Material UI and other technologies such as Docker and Nginx as a reverse proxy.
+Lottus is an ecommerce built with the PERN stack and other technologies such as Docker and Nginx as a reverse proxy.
 
-For production is using PERN, whereas for development and testing is used Docker, Docker compose and Nginx for a better performance in the localhost.
+It can be developed and deployed with Docker, Docker compose and Nginx for a better performance.
 
 The user may log in, sign up, make purchases, add products to the wishlist, see the purchases and other stuff like edit the profile.
 
@@ -53,7 +53,7 @@ git clone https://github.com/ClouddCoder/ecommerce-PERN.git
 npm install
 ```
 
-3. It is important to create an `.env` file for the `api` and `client` directories with the following variables:
+3. It is important to create an `.env` file for the `api` and `client` directories with the following environment variables:
 
 `api` directory
 
@@ -108,9 +108,9 @@ docker compose up
 
 Then open a new tab in the browser and type `localhost:3050`.
 
-Currently the ecommerce is deployed using Google Cloud for the frontend and backend, the database is using a different server.
-
 ## Demo
+
+Currently the ecommerce is deployed using Render.com for the front-end and the database and Cloud Run from GCP for the API.
 
 ```
 https://lottus.onrender.com
