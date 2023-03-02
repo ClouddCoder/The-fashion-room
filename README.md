@@ -70,7 +70,7 @@ DB_PORT = <YOUR_DB_PORT>
 DB_SSL = <1_OR_0> # If your database is hosted in a server, probably you need to set SSL.
 
 # Database setup for development using docker-compose.
-DB_USER_DEV = <YOUR_DB_FOR_DEVELOPING>
+DB_USER_DEV = <YOUR_DB_USER_FOR_DEVELOPING>
 DB_PASSWORD_DEV = <YOUR_DB_PASSWORD_FOR_DEVELOPING>
 DB_HOST_DEV = <YOUR_DB_HOST_FOR_DEVELOPING>
 DB_NAME_DEV = <YOUR_DB_NAME_FOR_DEVELOPING>
