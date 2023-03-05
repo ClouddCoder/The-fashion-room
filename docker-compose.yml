@@ -18,12 +18,19 @@ services:
     container_name: client
     build:
       context: ./client
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
     stdin_open: true
     ports:
       - "3000:3000"
+    environment:
+      - WATCHPACK_POLLING=true
+    volumes:
+      - /usr/src/app/node_modules
+      - ./client:/usr/src/app
     networks:
       - pern-network
+    depends_on:
+      - api
 
   api:
     container_name: api
@@ -75,4 +82,5 @@ networks:
 volumes:
   postgres-data:
     name: postgres-data
-    driver: local
+  client-environment:
+    name: client-environment
