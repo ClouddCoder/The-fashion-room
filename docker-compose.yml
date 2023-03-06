@@ -39,6 +39,9 @@ services:
       dockerfile: Dockerfile.dev
     ports:
       - "3001:3001"
+    volumes:
+      - /usr/src/app/node_modules
+      - ./api:/usr/src/app
     networks:
       - pern-network
     depends_on:
