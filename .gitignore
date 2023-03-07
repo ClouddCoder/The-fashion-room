@@ -1,0 +1,15 @@
+# environment variables
+.env
+api/.env
+client/.env
+
+# dependencies
+api/node_modules
+api/.pnp
+api/.pnp.js
+client/node_modules
+client/.pnp
+client/.pnp.js
+
+# production
+client/build
