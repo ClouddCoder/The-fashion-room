@@ -4,7 +4,8 @@ import axios from "axios";
 export let baseURL = "";
 
 switch (process.env.NODE_ENV) {
-  case "dev":
+  case "test":
+  case "development":
     baseURL = process.env.REACT_APP_BASE_URL_DEV;
     break;
   default:

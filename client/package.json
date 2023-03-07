@@ -16,7 +16,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "dev": "NODE_ENV=dev react-scripts start",
+    "dev": "react-scripts start",
     "test": "DEBUG_PRINT_LIMIT=30000 react-scripts test --watchAll --verbose",
     "test:coverage": "react-scripts test --coverage --watchAll --verbose",
     "build": "react-scripts build",
