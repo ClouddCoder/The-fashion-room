@@ -100,7 +100,7 @@ REACT_APP_BASE_URL_DEV = <ENTER_YOUR_LOCALHOST_URL>
 
 # Usage
 
-This project can be deployed locally with Docker compose. In the project root, open a terminal and do:
+This project can be deployed locally with Docker compose. In the project root, run the application:
 
 ```
 docker compose up

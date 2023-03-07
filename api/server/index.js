@@ -16,7 +16,7 @@ app.use(cors());
 app.use(routes);
 
 /**
- * Set the requests, responses and custom error messages
+ * Set the requests, responses and custom error messages.
  */
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
@@ -30,7 +30,7 @@ app.use((err, req, res, next) => {
   // eslint-disable-next-line prefer-destructuring
   const constraint = err.constraint;
 
-  // If the user already exists
+  // If the user already exists.
   if (constraint === "pk_customer" || constraint === "customer_customer_username_key") {
     return res.status(409).json({
       errorMessage: "El usuario ya existe",
@@ -66,7 +66,7 @@ app.use((err, req, res, next) => {
     });
   }
 
-  // If the phone number already exists
+  // If the phone number already exists.
   if (err.constraint === "phone_phone_number_key") {
     return res.status(409).json({
       errorMessage: "El número ya está registrado",
@@ -92,7 +92,7 @@ app.use((err, req, res, next) => {
 });
 
 /**
- * Inicia el servidor en el puerto 3001
+ * Starts the server.
  */
 const PORT = parseInt(process.env.PORT, 10) || 3001;
 const server = app.listen(PORT, "0.0.0.0", () => {
