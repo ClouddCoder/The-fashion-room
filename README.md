@@ -53,7 +53,27 @@ git clone https://github.com/ClouddCoder/ecommerce-PERN.git
 npm install
 ```
 
-3. It is important to create an `.env` file for the `api` and `client` directories with the following environment variables:
+3. Create an `.env` file in the project root for the docker compose config:
+
+```
+# Service ports
+NGINX_PORT = <HOST_PORT_FOR_MAPPING>
+CLIENT_PORT = <HOST_PORT_FOR_MAPPING>
+API_PORT = <HOST_PORT_FOR_MAPPING>
+POSTGRES_PORT = <HOST_PORT_FOR_MAPPING>
+PGADMIN_PORT = <HOST_PORT_FOR_MAPPING>
+
+# Database credentials
+POSTGRES_USER = <YOUR_DB_USER>
+POSTGRES_PASSWORD = <YOUR_DB_PASSWORD>
+POSTGRES_DB = <YOUR_DB_NAME>
+
+# PgAdmin credentials
+PGADMIN_DEFAULT_EMAIL = <YOUR_PGADMIN_EMAIL>
+PGADMIN_DEFAULT_PASSWORD = <YOUR_PGADMIN_PASSWORD>
+```
+
+4. Create an `.env` file for the `api` and `client` directories with the following environment variables:
 
 `api` directory
 
