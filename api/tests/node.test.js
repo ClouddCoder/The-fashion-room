@@ -42,7 +42,9 @@ describe.skip("POST /register", () => {
       .expect("Content-Type", /application\/json/)
       .expect(406);
 
-    expect(response.body.errorMessage).toContain("La contraseña debe tener más de 4 caracteres");
+    expect(response.body.errorMessage).toContain(
+      "La contraseña debe tener más de 4 caracteres",
+    );
   });
 });
 

@@ -28,7 +28,9 @@ function Profile() {
         <Grid item>
           <Card>
             <CardContent sx={{ display: "flex", alignItems: "center" }}>
-              <AccountCircleOutlinedIcon sx={{ width: "64px", height: "64px" }} />
+              <AccountCircleOutlinedIcon
+                sx={{ width: "64px", height: "64px" }}
+              />
               <span id="profile-name-title">{`${username} ${userLastname}`}</span>
             </CardContent>
           </Card>
@@ -40,13 +42,17 @@ function Profile() {
                 <li>
                   <Link to="/my-data">
                     <section className="profile-data-link">
-                      <PermIdentityOutlinedIcon sx={{ width: "56px", height: "56px" }} />
+                      <PermIdentityOutlinedIcon
+                        sx={{ width: "56px", height: "56px" }}
+                      />
                       <div>
                         <span className="my-data-subtitle">Mis datos</span>
                         <span>Valida tus datos</span>
                       </div>
                     </section>
-                    <ArrowForwardIosOutlinedIcon sx={{ width: "24px", height: "24px" }} />
+                    <ArrowForwardIosOutlinedIcon
+                      sx={{ width: "24px", height: "24px" }}
+                    />
                   </Link>
                 </li>
                 <li id="container-horizontal-line">
@@ -55,13 +61,17 @@ function Profile() {
                 <li>
                   <Link to="/address">
                     <section className="profile-data-link">
-                      <LocationOnOutlinedIcon sx={{ width: "56px", height: "56px" }} />
+                      <LocationOnOutlinedIcon
+                        sx={{ width: "56px", height: "56px" }}
+                      />
                       <div>
                         <span className="my-data-subtitle">Direcciones</span>
                         <span>Modifica tus direcciones o agrega una nueva</span>
                       </div>
                     </section>
-                    <ArrowForwardIosOutlinedIcon sx={{ width: "24px", height: "24px" }} />
+                    <ArrowForwardIosOutlinedIcon
+                      sx={{ width: "24px", height: "24px" }}
+                    />
                   </Link>
                 </li>
               </ul>

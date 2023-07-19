@@ -113,7 +113,9 @@ function Phone() {
                   <Grid item key={index} sx={{ width: "100%" }}>
                     <section className="phones-container">
                       <div className="phone-number-container">
-                        <span className="phone-number-field">{phone.phone_number}</span>
+                        <span className="phone-number-field">
+                          {phone.phone_number}
+                        </span>
                       </div>
                       <IconButton
                         sx={{ flex: 1 }}
@@ -145,7 +147,12 @@ function Phone() {
               container
               direction="column"
               justifyContent="center"
-              sx={{ width: "100%", height: "100%", position: "relative", p: "20px" }}
+              sx={{
+                width: "100%",
+                height: "100%",
+                position: "relative",
+                p: "20px",
+              }}
               rowSpacing={2}
             >
               <IconButton
@@ -155,7 +162,9 @@ function Phone() {
                 <CloseIcon />
               </IconButton>
               <Grid item>
-                <h3 className="modal-window__title">Agregar un número celular</h3>
+                <h3 className="modal-window__title">
+                  Agregar un número celular
+                </h3>
               </Grid>
               <Grid item>
                 <form onSubmit={handleSubmit}>
@@ -169,7 +178,12 @@ function Phone() {
                     value={input}
                     sx={{ margin: ".5rem 0", width: "100%" }}
                   />
-                  <Button variant="contained" color="primary" type="submit" fullWidth>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    type="submit"
+                    fullWidth
+                  >
                     Agregar
                   </Button>
                 </form>

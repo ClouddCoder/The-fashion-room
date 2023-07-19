@@ -7,7 +7,11 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import AuthContext from "../../context/auth-context/AuthContext";
 import Layout from "../../components/layout/Layout";
-import { setAddress, updateAddress, getSingleAddress } from "../../services/user";
+import {
+  setAddress,
+  updateAddress,
+  getSingleAddress,
+} from "../../services/user";
 import Modal from "../../components/modal/Modal";
 import "./EditAddress.css";
 
@@ -126,7 +130,11 @@ function EditAddress() {
 
   return (
     <Layout>
-      <Grid container direction="column" sx={{ width: "90%", maxWidth: "750px", p: 2 }}>
+      <Grid
+        container
+        direction="column"
+        sx={{ width: "90%", maxWidth: "750px", p: 2 }}
+      >
         <Grid item sx={{ mb: 2 }}>
           <h3>Editar domicilio</h3>
         </Grid>
@@ -255,12 +263,19 @@ function EditAddress() {
           container
           direction="column"
           justifyContent="center"
-          sx={{ width: "100%", height: "100%", position: "relative", p: "20px" }}
+          sx={{
+            width: "100%",
+            height: "100%",
+            position: "relative",
+            p: "20px",
+          }}
           rowSpacing={2}
         >
           <Grid item>
             <h3 className="modal-window__title">
-              {addressId === "new" ? "Domicilio agregado" : "Domicilio actualizado"}
+              {addressId === "new"
+                ? "Domicilio agregado"
+                : "Domicilio actualizado"}
             </h3>
           </Grid>
           <Grid item>

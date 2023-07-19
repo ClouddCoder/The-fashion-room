@@ -6,7 +6,10 @@ import { useState } from "react";
  * @returns {object} {password, checkPasswordLength}
  */
 const usePasswordLength = () => {
-  const [password, setPassword] = useState({ shortPassword: false, errorMessage: "" });
+  const [password, setPassword] = useState({
+    shortPassword: false,
+    errorMessage: "",
+  });
 
   const checkPasswordLength = (response) => setPassword(response);
 

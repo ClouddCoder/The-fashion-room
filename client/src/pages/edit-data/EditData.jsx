@@ -179,7 +179,12 @@ function EditEmail() {
             container
             direction="column"
             justifyContent="center"
-            sx={{ width: "100%", height: "100%", position: "relative", p: "20px" }}
+            sx={{
+              width: "100%",
+              height: "100%",
+              position: "relative",
+              p: "20px",
+            }}
             rowSpacing={2}
           >
             <Grid item>

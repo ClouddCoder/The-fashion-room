@@ -21,7 +21,10 @@ function CartItem({ product, addToCart, removeFromCart }) {
 
   const handleChange = (e) => {
     setQuantity(e.target.value);
-    addToCart({ variantId: product.variant_id, quantityToPurchase: e.target.value });
+    addToCart({
+      variantId: product.variant_id,
+      quantityToPurchase: e.target.value,
+    });
   };
 
   return (
@@ -37,7 +40,9 @@ function CartItem({ product, addToCart, removeFromCart }) {
           </Grid>
           <Grid item container xs={6} direction="column" rowSpacing={1}>
             <Grid item>
-              <span className="cart-item__product-name">{product.product_name}</span>
+              <span className="cart-item__product-name">
+                {product.product_name}
+              </span>
             </Grid>
             <Grid item>
               <FormControl size="small" sx={{ width: "100px" }}>
@@ -66,7 +71,9 @@ function CartItem({ product, addToCart, removeFromCart }) {
         </Grid>
       </CardContent>
       <CardActions>
-        <Button onClick={() => removeFromCart(product.variant_id)}>Eliminar</Button>
+        <Button onClick={() => removeFromCart(product.variant_id)}>
+          Eliminar
+        </Button>
       </CardActions>
     </Card>
   );
