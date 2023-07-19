@@ -1,5 +1,9 @@
 import { screen } from "@testing-library/react";
-import { StoreInfoTest, mockStores, mockStorePhone } from "../../../tests/test.utils";
+import {
+  StoreInfoTest,
+  mockStores,
+  mockStorePhone,
+} from "../../../tests/test.utils";
 import { getStoreAddress, getStorePhones } from "../../../services/store";
 
 jest.mock("../../../services/store", () => ({

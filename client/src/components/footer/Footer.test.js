@@ -10,8 +10,12 @@ describe.skip("Footer component", () => {
     expect(screen.getByText("Blog")).toBeInTheDocument();
     expect(screen.getByText("Acerca de The Fashion Room")).toBeInTheDocument();
     expect(screen.getByText("Gana dinero con nosotros")).toBeInTheDocument();
-    expect(screen.getByText("Vender productos en The Fashion Room")).toBeInTheDocument();
-    expect(screen.getByText("Vender en The Fashion Room business")).toBeInTheDocument();
+    expect(
+      screen.getByText("Vender productos en The Fashion Room"),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText("Vender en The Fashion Room business"),
+    ).toBeInTheDocument();
     expect(screen.getByText("Programa de afiliados")).toBeInTheDocument();
     expect(screen.getByText("Redes sociales")).toBeInTheDocument();
   });

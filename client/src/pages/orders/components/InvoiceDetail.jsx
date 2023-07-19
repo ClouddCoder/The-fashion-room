@@ -48,7 +48,10 @@ function InvoiceDetail({ product }) {
             align="center"
           >
             <div className="order-details">
-              <img alt={product.variant_name} src={getProductImage(product.variant_name)} />
+              <img
+                alt={product.variant_name}
+                src={getProductImage(product.variant_name)}
+              />
               <div className="order-details__container">
                 <div className="order-details__product-name">
                   <span>{product.product_name}</span>
@@ -68,12 +71,17 @@ function InvoiceDetail({ product }) {
           </CardContent>
           <Box
             component={CardActions}
-            sx={{ display: { xs: "none", sm: "flex" }, flexDirection: { sm: "row-reverse" } }}
+            sx={{
+              display: { xs: "none", sm: "flex" },
+              flexDirection: { sm: "row-reverse" },
+            }}
           >
             <Button
               variant="contained"
               onClick={() => {
-                navigate(`/product/${product.product_id}-${product.variant_id}`);
+                navigate(
+                  `/product/${product.product_id}-${product.variant_id}`,
+                );
               }}
               sx={{ width: "160px" }}
             >

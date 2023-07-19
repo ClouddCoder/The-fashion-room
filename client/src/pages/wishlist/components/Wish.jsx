@@ -35,7 +35,9 @@ function Wish({ product }) {
             alt={product.variant_name}
             sx={{ width: "50%" }}
           />
-          <CardContent sx={{ display: "flex", alignItems: "center", width: "100%" }}>
+          <CardContent
+            sx={{ display: "flex", alignItems: "center", width: "100%" }}
+          >
             <div className="wish-description">
               <span className="wish__product-name">{product.product_name}</span>
               <span className="wish__product-price">${product.min_price}</span>
@@ -52,10 +54,16 @@ function Wish({ product }) {
             p: 0,
           }}
         >
-          <Button onClick={() => navigate(`/product/${product.product_id}-${product.variant_id}`)}>
+          <Button
+            onClick={() =>
+              navigate(`/product/${product.product_id}-${product.variant_id}`)
+            }
+          >
             Comprar
           </Button>
-          <Button onClick={() => handleWish(product.product_id, true)}>Eliminar</Button>
+          <Button onClick={() => handleWish(product.product_id, true)}>
+            Eliminar
+          </Button>
         </Box>
       </Card>
     </Grid>

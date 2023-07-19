@@ -132,7 +132,9 @@ function AuthState({ children }) {
     ],
   );
 
-  return <AuthContext.Provider value={valueProps}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={valueProps}>{children}</AuthContext.Provider>
+  );
 }
 
 export default AuthState;

@@ -13,7 +13,8 @@ import * as cartMUIProps from "./ShoppingCartMUIStyle";
  * @returns {JSX.Element} - ShoppingCart component.
  */
 function ShoppingCart() {
-  const { cart, addProductToCart, removeFromCart, clearCart } = useContext(ProductContext);
+  const { cart, addProductToCart, removeFromCart, clearCart } =
+    useContext(ProductContext);
 
   // Props for the OrderResume component.
   const resumeComponentProps = getMUIprops(
@@ -34,7 +35,12 @@ function ShoppingCart() {
         <Grid item>
           <h3>Carrito</h3>
         </Grid>
-        <Grid item container direction={{ xs: "column", sm: "row" }} columnSpacing={2}>
+        <Grid
+          item
+          container
+          direction={{ xs: "column", sm: "row" }}
+          columnSpacing={2}
+        >
           <Grid item container direction="column" sm={6} rowSpacing={2}>
             {cart.map((product, index) => (
               <Grid item key={index}>
@@ -46,7 +52,11 @@ function ShoppingCart() {
               </Grid>
             ))}
             <Grid item>
-              <Button sx={{ width: "200px" }} onClick={() => clearCart()} variant="outlined">
+              <Button
+                sx={{ width: "200px" }}
+                onClick={() => clearCart()}
+                variant="outlined"
+              >
                 Vaciar carrito
               </Button>
             </Grid>

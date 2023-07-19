@@ -26,8 +26,19 @@ function Invoice() {
         }}
       >
         <CardContentNoPadding>
-          <Grid container direction="column" sx={{ height: "auto", p: "15px" }} rowSpacing={2}>
-            <Grid item container direction="column" justifyContent="center" alignItems="center">
+          <Grid
+            container
+            direction="column"
+            sx={{ height: "auto", p: "15px" }}
+            rowSpacing={2}
+          >
+            <Grid
+              item
+              container
+              direction="column"
+              justifyContent="center"
+              alignItems="center"
+            >
               <Grid item>
                 <h3>Detalles de la compra</h3>
               </Grid>
@@ -50,7 +61,9 @@ function Invoice() {
                     <span>
                       {product.product_name} x{product.quantity_to_purchase}
                     </span>
-                    <span>{`$${product.variant_price * product.quantity_to_purchase}`}</span>
+                    <span>{`$${
+                      product.variant_price * product.quantity_to_purchase
+                    }`}</span>
                   </Grid>
                 ))}
               </Grid>

@@ -31,7 +31,10 @@ export function registerUser(userName, userLastname, userEmail, userPassword) {
       userEmail,
       userPassword,
     }),
-    headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+    },
   });
 }
 
@@ -248,7 +251,15 @@ export function setAddress(
 ) {
   return instance.post(
     "/add-address",
-    { department, city, neighborhood, streetType, street, streetNumber, references },
+    {
+      department,
+      city,
+      neighborhood,
+      streetType,
+      street,
+      streetNumber,
+      references,
+    },
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -283,7 +294,16 @@ export function updateAddress(
 ) {
   return instance.put(
     "/update-address",
-    { addressId, department, city, neighborhood, streetType, street, streetNumber, references },
+    {
+      addressId,
+      department,
+      city,
+      neighborhood,
+      streetType,
+      street,
+      streetNumber,
+      references,
+    },
     {
       headers: {
         Authorization: `Bearer ${token}`,

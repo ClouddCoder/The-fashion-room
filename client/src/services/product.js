@@ -85,7 +85,7 @@ export function makeThePurchase(token, productsToBuy) {
     method: "PUT",
     body: JSON.stringify(productsToBuy),
     headers: new Headers({
-      "Authorization": `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
       "Access-Control-Allow-Origin": "*",
     }),
@@ -103,7 +103,7 @@ export function createUserInvoice(token, productsToBuy) {
     method: "POST",
     body: JSON.stringify(productsToBuy),
     headers: new Headers({
-      "Authorization": `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
       "Access-Control-Allow-Origin": "*",
     }),

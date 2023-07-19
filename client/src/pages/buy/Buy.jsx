@@ -13,7 +13,12 @@ import Layout from "../../components/layout/Layout";
 import ProductToBuy from "./components/ProductToBuy";
 import { makeThePurchase } from "../../services/product";
 import { getMUIprops } from "../../utils/MUIMediaQuery";
-import { phoneStyle, tabletStyle, desktopStyle, largeDevicesStyle } from "./BuyMUIStyles";
+import {
+  phoneStyle,
+  tabletStyle,
+  desktopStyle,
+  largeDevicesStyle,
+} from "./BuyMUIStyles";
 import "./Buy.css";
 
 /**
@@ -22,7 +27,12 @@ import "./Buy.css";
  */
 function Buy() {
   let gridProps = {};
-  gridProps = getMUIprops(phoneStyle, tabletStyle, desktopStyle, largeDevicesStyle);
+  gridProps = getMUIprops(
+    phoneStyle,
+    tabletStyle,
+    desktopStyle,
+    largeDevicesStyle,
+  );
 
   const navigate = useNavigate();
 
@@ -66,7 +76,15 @@ function Buy() {
   return (
     <Layout componentName="buy">
       <Grid container sx={gridProps} spacing={2}>
-        <Grid item container xs={12} sm={7} md={8} direction="column" spacing={2}>
+        <Grid
+          item
+          container
+          xs={12}
+          sm={7}
+          md={8}
+          direction="column"
+          spacing={2}
+        >
           <Grid item>
             <Card>
               <CardContent>

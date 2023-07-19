@@ -33,19 +33,21 @@ function ProductItem({ product }) {
     >
       <Card
         sx={{
-          "width": "auto",
-          "height": "auto",
-          "cursor": "pointer",
-          "transform": "scale(1,1)",
-          "transition": "transform 0.5s ease",
+          width: "auto",
+          height: "auto",
+          cursor: "pointer",
+          transform: "scale(1,1)",
+          transition: "transform 0.5s ease",
           "&:hover": { transform: "scale(1.1,1.1)" },
-          "display": "flex",
-          "justifyContent": "center",
+          display: "flex",
+          justifyContent: "center",
         }}
       >
         <CardActionArea
           sx={cardProps}
-          onClick={() => navigate(`/product/${product.product_id}-${product.variant_id}`)}
+          onClick={() =>
+            navigate(`/product/${product.product_id}-${product.variant_id}`)
+          }
         >
           <CardMedia
             component="img"

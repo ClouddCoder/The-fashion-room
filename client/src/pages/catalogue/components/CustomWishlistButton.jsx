@@ -22,7 +22,9 @@ function CustomWishlistButton({ product }) {
   };
 
   // Verifies if product is in wishlist.
-  const findWish = wishlist.find((wish) => wish.product_id === product.product_id);
+  const findWish = wishlist.find(
+    (wish) => wish.product_id === product.product_id,
+  );
   const productAsWish = Boolean(findWish);
 
   const [addWish, setAddWish] = useState(productAsWish);

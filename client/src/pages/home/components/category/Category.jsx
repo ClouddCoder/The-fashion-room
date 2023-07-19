@@ -17,10 +17,24 @@ function Category({ alt, image, title }) {
   cardProps = getMUIprops(phoneStyle, tabletStyle, desktopStyle, desktopStyle);
 
   return (
-    <Card sx={{ height: "auto", width: "auto", display: "flex", justifyContent: "center" }}>
+    <Card
+      sx={{
+        height: "auto",
+        width: "auto",
+        display: "flex",
+        justifyContent: "center",
+      }}
+    >
       <CardActionArea component={Link} to={`/catalogue/${alt}`} sx={cardProps}>
-        <CardMedia component="img" alt={alt} src={image} sx={{ width: "90%", height: "65%" }} />
-        <CardContent sx={{ display: "flex", justifyContent: "center", height: "35%" }}>
+        <CardMedia
+          component="img"
+          alt={alt}
+          src={image}
+          sx={{ width: "90%", height: "65%" }}
+        />
+        <CardContent
+          sx={{ display: "flex", justifyContent: "center", height: "35%" }}
+        >
           <span className="category__title">{title}</span>
         </CardContent>
       </CardActionArea>

@@ -35,9 +35,15 @@ function Navbar() {
                 <MenuIcon fontSize="large" />
               </IconButton>
               {toggle ? (
-                <Overlay newClassName="header__navbar__overlay" setToggle={setToggle} />
+                <Overlay
+                  newClassName="header__navbar__overlay"
+                  setToggle={setToggle}
+                />
               ) : (
-                <Overlay newClassName="header__navbar__overlay hidden" setToggle={setToggle} />
+                <Overlay
+                  newClassName="header__navbar__overlay hidden"
+                  setToggle={setToggle}
+                />
               )}
               <Link to="/">
                 <div className="header__navbar__title">

@@ -7,8 +7,10 @@ const { getAuthorization } = require("./helpers");
  */
 const getAllProducts = async (req, res, next) => {
   const { category } = req.query;
-  let query = "SELECT DISTINCT ON (p.product_id) p.product_id, p.product_name, ";
-  query += "g.gender_value, v.variant_id, v.variant_name, t.min_price FROM product p ";
+  let query =
+    "SELECT DISTINCT ON (p.product_id) p.product_id, p.product_name, ";
+  query +=
+    "g.gender_value, v.variant_id, v.variant_name, t.min_price FROM product p ";
   query += "JOIN category ca ON ca.category_id = p.category_id ";
   query += "JOIN gender g ON g.gender_id = p.gender_id ";
   query += "JOIN variant v ON v.product_id = p.product_id ";
@@ -65,7 +67,10 @@ const buyProduct = async (req, res, next) => {
     /* eslint-disable no-await-in-loop */
     // eslint-disable-next-line no-restricted-syntax
     for (const item of productsToBuy) {
-      const result = await pool.query(query, [item.quantity_to_purchase, item.variant_id]);
+      const result = await pool.query(query, [
+        item.quantity_to_purchase,
+        item.variant_id,
+      ]);
 
       if (result.rowCount === 0) {
         return res.status(404).json({
@@ -86,8 +91,10 @@ const buyProduct = async (req, res, next) => {
 const setWishlist = async (req, res, next) => {
   const { productId, remove } = req.body;
   const { authorization } = req.headers;
-  const addWishlistQuery = "INSERT INTO wishlist (customer_id, product_id) VALUES ($1, $2);";
-  const removeWishlistQuery = "DELETE FROM wishlist WHERE customer_id = $1 AND product_id = $2;";
+  const addWishlistQuery =
+    "INSERT INTO wishlist (customer_id, product_id) VALUES ($1, $2);";
+  const removeWishlistQuery =
+    "DELETE FROM wishlist WHERE customer_id = $1 AND product_id = $2;";
   const decodeToken = getAuthorization(authorization);
 
   if (decodeToken.code) {
@@ -113,7 +120,8 @@ const setWishlist = async (req, res, next) => {
  */
 const getWishlist = async (req, res, next) => {
   const { authorization } = req.headers;
-  let query = "SELECT DISTINCT ON (w.product_id) w.product_id, p.product_name, v.variant_id, ";
+  let query =
+    "SELECT DISTINCT ON (w.product_id) w.product_id, p.product_name, v.variant_id, ";
   query += "v.variant_name, t.min_price FROM wishlist w ";
   query += "JOIN product p ON p.product_id = w.product_id ";
   query += "JOIN variant v ON v.product_id = p.product_id ";
@@ -240,9 +248,12 @@ const getStorePhones = async (req, res, next) => {
  */
 const getOrderDetail = async (req, res, next) => {
   const { authorization } = req.headers;
-  let query = "SELECT oi.order_detail_id, oi.order_item_id, oi.item_total_cost, ";
-  query += "oi.product_quantity, p.product_id, od.purchase_date, p.product_name, v.variant_id, ";
-  query += "v.variant_name, v.variant_quantity, v.variant_price FROM order_item oi ";
+  let query =
+    "SELECT oi.order_detail_id, oi.order_item_id, oi.item_total_cost, ";
+  query +=
+    "oi.product_quantity, p.product_id, od.purchase_date, p.product_name, v.variant_id, ";
+  query +=
+    "v.variant_name, v.variant_quantity, v.variant_price FROM order_item oi ";
   query += "JOIN order_detail od ON od.order_detail_id = oi.order_detail_id ";
   query += "JOIN variant v ON v.variant_id = oi.variant_id ";
   query += "JOIN product p ON p.product_id = v.product_id ";

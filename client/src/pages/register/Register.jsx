@@ -50,10 +50,19 @@ function Register() {
     if (!password.shortPassword) {
       setOpenComponent(true);
 
-      checkPasswordLength({ ...password, shortPassword: false, errorMessage: "" });
+      checkPasswordLength({
+        ...password,
+        shortPassword: false,
+        errorMessage: "",
+      });
 
       try {
-        const res = await registerUser(userName, userLastname, userEmail, userPassword);
+        const res = await registerUser(
+          userName,
+          userLastname,
+          userEmail,
+          userPassword,
+        );
         const data = await res.json();
 
         // Sets the user's data to login and resets the data from the inputs
@@ -111,7 +120,11 @@ function Register() {
             errorMessage: "Debe tener más de 4 caracteres",
           });
         } else {
-          checkPasswordLength({ ...password, shortPassword: false, errorMessage: "" });
+          checkPasswordLength({
+            ...password,
+            shortPassword: false,
+            errorMessage: "",
+          });
         }
         setUserPassword(e.target.value);
         break;
@@ -168,7 +181,11 @@ function Register() {
           <Grid item xs={12}>
             <TextField
               error={error.constraint === "password" || password.shortPassword}
-              helperText={error.constraint === "password" ? error.message : password.errorMessage}
+              helperText={
+                error.constraint === "password"
+                  ? error.message
+                  : password.errorMessage
+              }
               onChange={handleChange}
               name="userPassword"
               variant="outlined"
@@ -179,7 +196,12 @@ function Register() {
             />
           </Grid>
           <Grid item xs={12}>
-            <Button variant="contained" color="secondary" type="submit" fullWidth>
+            <Button
+              variant="contained"
+              color="secondary"
+              type="submit"
+              fullWidth
+            >
               Registrar
             </Button>
           </Grid>
