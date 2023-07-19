@@ -70,7 +70,9 @@ function Address() {
           <Card>
             <CardContent>
               <Grid container direction="column" rowSpacing={2}>
-                {error.constraint === "empty" && <span id="error-message">{error.message}</span>}
+                {error.constraint === "empty" && (
+                  <span id="error-message">{error.message}</span>
+                )}
                 {addressList.map((address, index) => (
                   <Grid item key={index} sx={{ width: "100%" }}>
                     <section className="addresses-container">
@@ -79,7 +81,9 @@ function Address() {
                       </div>
                       <IconButton
                         sx={{ flex: 1 }}
-                        onClick={() => navigate(`/edit-address/${address.address_id}`)}
+                        onClick={() =>
+                          navigate(`/edit-address/${address.address_id}`)
+                        }
                       >
                         <ArrowForwardIosIcon />
                       </IconButton>

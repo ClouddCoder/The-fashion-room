@@ -10,7 +10,8 @@ import Wish from "./components/Wish";
  * @returns {JSX.Element} - Wishlist component.
  */
 function Wishlist() {
-  const { loader, setLoader, wishlist, getWishlist } = useContext(ProductContext);
+  const { loader, setLoader, wishlist, getWishlist } =
+    useContext(ProductContext);
   const { auth } = useContext(AuthContext);
 
   // Displays the loader every time the component is re-render.

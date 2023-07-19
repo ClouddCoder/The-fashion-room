@@ -9,7 +9,10 @@ import ProductContext from "../../context/product-context/ProductContext";
 import Layout from "../../components/layout/Layout";
 import ProductFilters from "./components/product-filters/ProductFilters";
 import { catalogueActions } from "./reducer/catalogueActions";
-import { catalogueInitialState, CatalogueReducer } from "./reducer/catalogueReducer";
+import {
+  catalogueInitialState,
+  CatalogueReducer,
+} from "./reducer/catalogueReducer";
 import Modal from "../../components/modal/Modal";
 import "./Catalogue.css";
 
@@ -22,8 +25,14 @@ function Catalogue() {
 
   const [openModal, setOpenModal] = useState(false);
 
-  const { loader, setLoader, addProductToCart, loadProducts, products, getWishlist } =
-    useContext(ProductContext);
+  const {
+    loader,
+    setLoader,
+    addProductToCart,
+    loadProducts,
+    products,
+    getWishlist,
+  } = useContext(ProductContext);
 
   const [state, dispatch] = useReducer(CatalogueReducer, catalogueInitialState);
 
@@ -69,7 +78,8 @@ function Catalogue() {
     return products;
   };
 
-  const categoryInUpperCase = category.charAt(0).toUpperCase() + category.slice(1);
+  const categoryInUpperCase =
+    category.charAt(0).toUpperCase() + category.slice(1);
 
   return (
     <Layout>
@@ -93,7 +103,10 @@ function Catalogue() {
           md={3}
           sx={{ display: { xs: "none", md: "block", sm: "block" } }}
         >
-          <Paper elevation={3} sx={{ p: 2, display: "flex", justifyContent: "center" }}>
+          <Paper
+            elevation={3}
+            sx={{ p: 2, display: "flex", justifyContent: "center" }}
+          >
             <Grid container direction="column" rowSpacing={2}>
               <Grid item sx={{ m: 0 }}>
                 <span className="catalogue-title">{categoryInUpperCase}</span>
@@ -135,7 +148,11 @@ function Catalogue() {
                 columnSpacing={{ xs: 0, sm: 2 }}
               >
                 {filteredProducts().map((product, index) => (
-                  <ProductItem key={index} product={product} addToCart={addProductToCart} />
+                  <ProductItem
+                    key={index}
+                    product={product}
+                    addToCart={addProductToCart}
+                  />
                 ))}
               </Grid>
             </Paper>
@@ -148,7 +165,11 @@ function Catalogue() {
             <ProductFilters check={state} handleChange={handleChange} />
           </Grid>
           <Grid item>
-            <Button color="secondary" fullWidth onClick={() => setOpenModal(false)}>
+            <Button
+              color="secondary"
+              fullWidth
+              onClick={() => setOpenModal(false)}
+            >
               Cerrar
             </Button>
           </Grid>

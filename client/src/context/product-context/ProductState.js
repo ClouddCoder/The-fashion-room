@@ -277,7 +277,11 @@ function ProductState({ children }) {
     ],
   );
 
-  return <ProductContext.Provider value={valueProps}>{children}</ProductContext.Provider>;
+  return (
+    <ProductContext.Provider value={valueProps}>
+      {children}
+    </ProductContext.Provider>
+  );
 }
 
 export default ProductState;

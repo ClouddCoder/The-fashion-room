@@ -133,7 +133,8 @@ const getUserId = async (req, res, next) => {
 const getUserFullName = async (req, res, next) => {
   const { authorization } = req.headers;
 
-  const query = "SELECT customer_name, customer_lastname FROM customer WHERE customer_id = $1;";
+  const query =
+    "SELECT customer_name, customer_lastname FROM customer WHERE customer_id = $1;";
 
   const decodeToken = getAuthorization(authorization);
 
@@ -165,7 +166,8 @@ const updateName = async (req, res, next) => {
   updateNameQuery += "customer_lastname = $2 WHERE customer_id = $3;";
 
   // Gets the current name of the user to know if the new name is different.
-  const getUserNameQuery = "SELECT customer_name FROM customer WHERE customer_id = $1;";
+  const getUserNameQuery =
+    "SELECT customer_name FROM customer WHERE customer_id = $1;";
 
   const decodeToken = getAuthorization(authorization);
 
@@ -180,7 +182,9 @@ const updateName = async (req, res, next) => {
     const userCurrentName = response.rows[0].customer_name;
 
     if (userCurrentName === input) {
-      return res.status(406).json({ message: "El nombre debe ser diferente al actual" });
+      return res
+        .status(406)
+        .json({ message: "El nombre debe ser diferente al actual" });
     }
 
     const responseUpdate = await pool.query(updateNameQuery, values);
@@ -201,7 +205,8 @@ const updateName = async (req, res, next) => {
 const getUsername = async (req, res, next) => {
   const { authorization } = req.headers;
 
-  const query = "SELECT customer_username FROM customer WHERE customer_id = $1;";
+  const query =
+    "SELECT customer_username FROM customer WHERE customer_id = $1;";
 
   const decodeToken = getAuthorization(authorization);
 
@@ -231,7 +236,8 @@ const updateUsername = async (req, res, next) => {
   updateUsernameQuery += "WHERE customer_id = $2;";
 
   // Gets the current username of the user to know if the new username is different.
-  const getUserNameQuery = "SELECT customer_username FROM customer WHERE customer_id = $1;";
+  const getUserNameQuery =
+    "SELECT customer_username FROM customer WHERE customer_id = $1;";
 
   const decodeToken = getAuthorization(authorization);
 
@@ -263,10 +269,12 @@ const updateEmail = async (req, res, next) => {
   const { input } = req.body;
   const { authorization } = req.headers;
 
-  const updateEmailQuery = "UPDATE customer SET customer_email = $1 WHERE customer_id = $2;";
+  const updateEmailQuery =
+    "UPDATE customer SET customer_email = $1 WHERE customer_id = $2;";
 
   // Gets the current email of the user to know if the new email is different.
-  const getUserEmailquery = "SELECT customer_email FROM customer WHERE customer_id = $1;";
+  const getUserEmailquery =
+    "SELECT customer_email FROM customer WHERE customer_id = $1;";
 
   const decodeToken = getAuthorization(authorization);
 
@@ -285,7 +293,10 @@ const updateEmail = async (req, res, next) => {
     }
 
     await pool.query(updateEmailQuery, [input, decodeToken.userId]);
-    return res.json({ message: "Email actualizado con éxito", email: userCurrentEmail });
+    return res.json({
+      message: "Email actualizado con éxito",
+      email: userCurrentEmail,
+    });
   } catch (error) {
     next(error);
   }
@@ -318,7 +329,10 @@ const updatePassword = async (req, res, next) => {
     const userPassword = result.rows[0].customer_password;
 
     // Checks if the current password is correct.
-    const checkCurrentPassword = await bcrypt.compare(currentPassword, userPassword);
+    const checkCurrentPassword = await bcrypt.compare(
+      currentPassword,
+      userPassword,
+    );
 
     if (!checkCurrentPassword) {
       return res.status(401).json({
@@ -392,7 +406,8 @@ const setPhone = async (req, res, next) => {
   const { authorization } = req.headers;
 
   // Query to insert a new phone number.
-  const insertPhoneQuery = "INSERT INTO phone (phone_number) VALUES ($1) RETURNING phone_id;";
+  const insertPhoneQuery =
+    "INSERT INTO phone (phone_number) VALUES ($1) RETURNING phone_id;";
 
   // Query to join the new phone number with the user.
   let joinCustomerPhoneQuery = "INSERT INTO customer_phone ";
@@ -406,7 +421,10 @@ const setPhone = async (req, res, next) => {
 
   try {
     const response = await pool.query(insertPhoneQuery, [newPhone]);
-    await pool.query(joinCustomerPhoneQuery, [decodeToken.userId, response.rows[0].phone_id]);
+    await pool.query(joinCustomerPhoneQuery, [
+      decodeToken.userId,
+      response.rows[0].phone_id,
+    ]);
 
     return res.json({ message: "Teléfono agregado con éxito" });
   } catch (error) {
@@ -458,9 +476,10 @@ const getAddress = async (req, res, next) => {
     const result = await pool.query(query, [decodeToken.userId]);
 
     if (result.rows.length === 0) {
-      return res
-        .status(404)
-        .json({ constraint: "empty", message: "No se encontraron direcciones" });
+      return res.status(404).json({
+        constraint: "empty",
+        message: "No se encontraron direcciones",
+      });
     }
     return res.json(result.rows);
   } catch (error) {
@@ -496,15 +515,23 @@ const getSingleAddress = async (req, res, next) => {
  */
 const setAddress = async (req, res, next) => {
   // eslint-disable-next-line object-curly-newline
-  const { department, city, neighborhood, streetType, street, streetNumber, references } =
-    req.body;
+  const {
+    department,
+    city,
+    neighborhood,
+    streetType,
+    street,
+    streetNumber,
+    references,
+  } = req.body;
   const { authorization } = req.headers;
 
   // Query to insert a new address.
   let insertAddressQuery = "INSERT INTO addresses ";
   insertAddressQuery += "(department, city, neighborhood, street_type, ";
   insertAddressQuery += "street, street_number, address_references) ";
-  insertAddressQuery += "VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING address_id;";
+  insertAddressQuery +=
+    "VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING address_id;";
 
   // Query to join the new address with the user.
   let joinCustomerAddressQuery = "INSERT INTO customer_address ";
@@ -516,7 +543,15 @@ const setAddress = async (req, res, next) => {
     return res.status(decodeToken.code).json({ message: decodeToken.message });
   }
 
-  const values = [department, city, neighborhood, streetType, street, streetNumber, references];
+  const values = [
+    department,
+    city,
+    neighborhood,
+    streetType,
+    street,
+    streetNumber,
+    references,
+  ];
 
   try {
     const response = await pool.query(insertAddressQuery, values);
@@ -547,8 +582,10 @@ const updateAddress = async (req, res, next) => {
   } = req.body;
   const { authorization } = req.headers;
 
-  let query = "UPDATE addresses SET department = $1, city = $2, neighborhood = $3, ";
-  query += "street_type = $4, street = $5, street_number = $6, address_references = $7 ";
+  let query =
+    "UPDATE addresses SET department = $1, city = $2, neighborhood = $3, ";
+  query +=
+    "street_type = $4, street = $5, street_number = $6, address_references = $7 ";
   query += "WHERE address_id = $8;";
 
   const decodeToken = getAuthorization(authorization);

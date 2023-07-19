@@ -83,7 +83,14 @@ function Product() {
             alt={product.variant_name}
           />
         </Grid>
-        <Grid item container sm={6} direction="column" justifyContent="center" rowSpacing={1}>
+        <Grid
+          item
+          container
+          sm={6}
+          direction="column"
+          justifyContent="center"
+          rowSpacing={1}
+        >
           <Grid item>
             <span className="product-name-field">{product.product_name}</span>
           </Grid>
@@ -110,7 +117,10 @@ function Product() {
           </Grid>
           <Grid item>
             {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
-            <ul className="product-variant-colors" onClick={changeButtonBorderColor}>
+            <ul
+              className="product-variant-colors"
+              onClick={changeButtonBorderColor}
+            >
               {variants?.map((variant, index) => {
                 // Only renders the colors of the current product.
                 if (variant.product_id !== productId) {
@@ -146,7 +156,8 @@ function Product() {
                 variant="contained"
                 onClick={
                   auth
-                    ? () => addProductToCart({ variantId, quantityToPurchase: 1 })
+                    ? () =>
+                        addProductToCart({ variantId, quantityToPurchase: 1 })
                     : () => navigate("/login")
                 }
                 fullWidth

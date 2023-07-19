@@ -1,5 +1,9 @@
 import { screen } from "@testing-library/react";
-import { StoreContactTest, mockStores, mockStorePhone } from "../../tests/test.utils";
+import {
+  StoreContactTest,
+  mockStores,
+  mockStorePhone,
+} from "../../tests/test.utils";
 import { getStoreInformation, getStorePhones } from "../../services/store";
 
 /**

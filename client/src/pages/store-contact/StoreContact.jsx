@@ -36,7 +36,11 @@ function Contact() {
         rowSpacing={2}
       >
         {stores.map((store, index) => (
-          <StoreInfo key={index} storeNit={store.store_nit} storeName={store.store_name} />
+          <StoreInfo
+            key={index}
+            storeNit={store.store_nit}
+            storeName={store.store_name}
+          />
         ))}
       </Grid>
     </Layout>

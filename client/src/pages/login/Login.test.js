@@ -10,7 +10,9 @@ afterEach(() => {
 describe.skip("Login component", () => {
   it("Should render Login component", () => {
     LoginTest();
-    expect(screen.getByRole("heading", { name: "Iniciar sesión" })).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: "Iniciar sesión" }),
+    ).toBeInTheDocument();
     expect(screen.getByRole("textbox", { name: "Email" })).toBeInTheDocument();
   });
 
@@ -65,7 +67,9 @@ describe.skip("Login component", () => {
       headers: { "Content-Type": "application/json" },
       method: "POST",
     });
-    expect(fetch).toReturnWith(Promise.resolve({ json: () => Promise.resolve(userInfo) }));
+    expect(fetch).toReturnWith(
+      Promise.resolve({ json: () => Promise.resolve(userInfo) }),
+    );
     expect(authContextProps.setAuth).toHaveBeenCalledTimes(1);
     expect(authContextProps.setUserId).toHaveBeenCalledTimes(1);
     expect(authContextProps.setUser).toHaveBeenCalledTimes(1);

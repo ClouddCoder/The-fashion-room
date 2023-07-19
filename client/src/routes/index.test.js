@@ -4,7 +4,14 @@ import { GlobalContext } from "../tests/test.utils";
 import CustomRoutes from "./CustomRoutes";
 
 let router = null;
-const routes = ["/", "/profile", "/my-data", "/edit-data/email", "/edit-address/1", "/phone"];
+const routes = [
+  "/",
+  "/profile",
+  "/my-data",
+  "/edit-data/email",
+  "/edit-address/1",
+  "/phone",
+];
 
 afterEach(() => {
   jest.clearAllMocks();
@@ -98,6 +105,8 @@ describe.skip("CustomRoutes component", () => {
       </GlobalContext>,
     );
 
-    expect(screen.getByText(/Selecciona o agrega un número celular/)).toBeInTheDocument();
+    expect(
+      screen.getByText(/Selecciona o agrega un número celular/),
+    ).toBeInTheDocument();
   });
 });

@@ -33,7 +33,12 @@ export function checkScreenSize() {
  * @param {object} largeDevicesStyle - The MUI props for the large devices.
  * @returns
  */
-export function getMUIprops(phoneStyle, tabletStyle, desktopStyle, largeDevicesStyle) {
+export function getMUIprops(
+  phoneStyle,
+  tabletStyle,
+  desktopStyle,
+  largeDevicesStyle,
+) {
   const screenSize = checkScreenSize();
 
   if (screenSize === "phone") {
