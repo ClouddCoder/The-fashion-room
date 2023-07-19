@@ -20,10 +20,10 @@ export const catalogueInitialState = {
   verde: false,
 
   // Prices
-  "40000": false,
-  "50000": false,
-  "70000": false,
-  "80000": false,
+  40000: false,
+  50000: false,
+  70000: false,
+  80000: false,
 };
 
 export function CatalogueReducer(state, action) {

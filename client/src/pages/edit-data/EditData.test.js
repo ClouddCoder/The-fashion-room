@@ -29,20 +29,28 @@ describe.skip("EditData component", () => {
   });
 
   it("The new message should not render before user's email is updated", async () => {
-    services.changeUserEmail.mockRejectedValue({ response: { data: { message: "error" } } });
+    services.changeUserEmail.mockRejectedValue({
+      response: { data: { message: "error" } },
+    });
     const user = userEvent.setup();
     EditDataTest();
     const button = screen.getByRole("button", { name: "Cambiar" });
     await user.click(button);
-    expect(screen.queryByText("El email se ha cambiado correctamente")).toBeNull();
+    expect(
+      screen.queryByText("El email se ha cambiado correctamente"),
+    ).toBeNull();
   });
 
   it("Should update user's email", async () => {
-    services.changeUserEmail.mockResolvedValue({ data: { message: "success" } });
+    services.changeUserEmail.mockResolvedValue({
+      data: { message: "success" },
+    });
     const user = userEvent.setup();
     EditDataTest();
     const button = screen.getByRole("button", { name: "Cambiar" });
     await user.click(button);
-    expect(screen.getByText("El email se ha cambiado correctamente")).toBeInTheDocument();
+    expect(
+      screen.getByText("El email se ha cambiado correctamente"),
+    ).toBeInTheDocument();
   });
 });

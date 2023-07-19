@@ -46,7 +46,11 @@ function EditPassword() {
 
     if (!password.shortPassword) {
       try {
-        await changeUserPassword(userId, userCurrentPassword.input, userNewPassword.input);
+        await changeUserPassword(
+          userId,
+          userCurrentPassword.input,
+          userNewPassword.input,
+        );
         console.log("Contraseña actualizada");
         openModal.setOpenComponent(true);
       } catch (err) {
@@ -125,7 +129,9 @@ function EditPassword() {
               <form onSubmit={handleSubmitPassword}>
                 <TextField
                   error={error.constraint === "currentPassword"}
-                  helperText={error.constraint === "currentPassword" && error.message}
+                  helperText={
+                    error.constraint === "currentPassword" && error.message
+                  }
                   onChange={handleChange}
                   name="currentPassword"
                   variant="outlined"
@@ -135,9 +141,13 @@ function EditPassword() {
                   sx={{ margin: ".5rem 0", width: "100%" }}
                 />
                 <TextField
-                  error={password.shortPassword || error.constraint === "newPassword"}
+                  error={
+                    password.shortPassword || error.constraint === "newPassword"
+                  }
                   helperText={
-                    error.constraint === "newPassword" ? error.message : password.errorMessage
+                    error.constraint === "newPassword"
+                      ? error.message
+                      : password.errorMessage
                   }
                   onChange={handleChange}
                   name="newPassword"

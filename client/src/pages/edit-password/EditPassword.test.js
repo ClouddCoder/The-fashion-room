@@ -20,8 +20,12 @@ describe.skip("EditPassword component", () => {
 
   it("Should not render the password inputs", () => {
     EditPasswordTest();
-    expect(screen.queryByRole("textbox", { name: "Contraseña actual" })).toBeNull();
-    expect(screen.queryByRole("textbox", { name: "Contraseña nueva" })).toBeNull();
+    expect(
+      screen.queryByRole("textbox", { name: "Contraseña actual" }),
+    ).toBeNull();
+    expect(
+      screen.queryByRole("textbox", { name: "Contraseña nueva" }),
+    ).toBeNull();
   });
 
   it("Should type the email", async () => {

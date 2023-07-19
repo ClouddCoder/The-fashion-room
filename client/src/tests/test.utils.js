@@ -17,7 +17,9 @@ import ProductContext from "../context/product-context/ProductContext";
 export function GlobalContext({ children }) {
   return (
     <AuthContext.Provider value={authContextProps}>
-      <ProductContext.Provider value={productContextProps}>{children}</ProductContext.Provider>
+      <ProductContext.Provider value={productContextProps}>
+        {children}
+      </ProductContext.Provider>
     </AuthContext.Provider>
   );
 }

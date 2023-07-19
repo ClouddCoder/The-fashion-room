@@ -31,35 +31,50 @@ app.use((err, req, res, next) => {
   const constraint = err.constraint;
 
   // If the user already exists.
-  if (constraint === "pk_customer" || constraint === "customer_customer_username_key") {
+  if (
+    constraint === "pk_customer" ||
+    constraint === "customer_customer_username_key"
+  ) {
     return res.status(409).json({
       errorMessage: "El usuario ya existe",
       constraint: "email",
     });
   }
 
-  if (constraint === "check_not_null_username" || constraint === "check_not_empty_username") {
+  if (
+    constraint === "check_not_null_username" ||
+    constraint === "check_not_empty_username"
+  ) {
     return res.status(422).json({
       errorMessage: "Debes ingresar tu nombre de usuario",
       constraint: "username",
     });
   }
 
-  if (constraint === "check_not_null_name" || constraint === "check_not_empty_name") {
+  if (
+    constraint === "check_not_null_name" ||
+    constraint === "check_not_empty_name"
+  ) {
     return res.status(422).json({
       errorMessage: "Debes ingresar tu nombre",
       constraint: "name",
     });
   }
 
-  if (constraint === "check_not_null_email" || constraint === "check_not_empty_email") {
+  if (
+    constraint === "check_not_null_email" ||
+    constraint === "check_not_empty_email"
+  ) {
     return res.status(422).json({
       errorMessage: "Debes ingresar tu email",
       constraint: "email",
     });
   }
 
-  if (constraint === "check_not_null_password" || constraint === "check_not_empty_password") {
+  if (
+    constraint === "check_not_null_password" ||
+    constraint === "check_not_empty_password"
+  ) {
     return res.status(422).json({
       errorMessage: "Debes ingresar tu contraseña",
       constraint: "password",

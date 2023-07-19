@@ -13,7 +13,9 @@ import "./ProductToBuy.css";
 function ProductToBuy({ product }) {
   return (
     <Grid item sx={{ maxHeight: "260px", position: "relative" }}>
-      <Card sx={{ width: "100%", display: "flex", justifyContent: "space-between" }}>
+      <Card
+        sx={{ width: "100%", display: "flex", justifyContent: "space-between" }}
+      >
         <CardMedia
           component="img"
           sx={{ width: 120, height: 120 }}

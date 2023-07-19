@@ -17,13 +17,17 @@ afterEach(() => {
 describe.skip("Address component", () => {
   it("Should render the component", async () => {
     AddressTest();
-    expect(await screen.findByText(/Selecciona o agrega una dirección/)).toBeInTheDocument();
+    expect(
+      await screen.findByText(/Selecciona o agrega una dirección/),
+    ).toBeInTheDocument();
   });
 
   it.skip("Should navigate to the EditAddress component after click the button", async () => {
     const user = userEvent.setup();
     AddressTest();
-    const button = screen.getByRole("button", { name: "Agregar una nueva dirección" });
+    const button = screen.getByRole("button", {
+      name: "Agregar una nueva dirección",
+    });
     await user.click(button);
     expect(screen.getByText(/Editar domicilio/)).toBeInTheDocument();
     screen.getByRole("");

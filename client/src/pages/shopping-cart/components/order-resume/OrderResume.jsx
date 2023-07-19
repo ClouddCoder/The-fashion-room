@@ -14,8 +14,14 @@ import "./OrderResume.css";
  * @returns {JSX.Element} - OrderResume component.
  */
 function OrderResume() {
-  const { cart, totalProducts, totalPrice, addProductToBuy, getTotalProducts, getTotalPrice } =
-    useContext(ProductContext);
+  const {
+    cart,
+    totalProducts,
+    totalPrice,
+    addProductToBuy,
+    getTotalProducts,
+    getTotalPrice,
+  } = useContext(ProductContext);
   const navigate = useNavigate();
 
   const handleBuyCart = () => {

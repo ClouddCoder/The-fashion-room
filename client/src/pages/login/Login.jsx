@@ -57,7 +57,11 @@ function Login() {
         // Saves the token to the local storage.
         window.localStorage.setItem("logged", JSON.stringify(data));
       } else {
-        setInputError({ ...error, constraint: "incorrecto", message: data.message });
+        setInputError({
+          ...error,
+          constraint: "incorrecto",
+          message: data.message,
+        });
         throw new Error(data.message);
       }
     } catch (err) {
@@ -119,7 +123,12 @@ function Login() {
             />
           </Grid>
           <Grid item>
-            <Button variant="contained" color="secondary" type="submit" fullWidth>
+            <Button
+              variant="contained"
+              color="secondary"
+              type="submit"
+              fullWidth
+            >
               Login
             </Button>
           </Grid>

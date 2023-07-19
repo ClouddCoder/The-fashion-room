@@ -27,13 +27,17 @@ export function ProductReducer(state, action) {
       const duplicatedVariants = [...state.variants, ...action.payload];
 
       // Converts the variants to string to be able to use the filter method.
-      const variantsAsString = duplicatedVariants.map((variant) => JSON.stringify(variant));
+      const variantsAsString = duplicatedVariants.map((variant) =>
+        JSON.stringify(variant),
+      );
 
       const noDuplicateStringVariants = variantsAsString.filter(
         (variant, index) => variantsAsString.indexOf(variant) === index,
       );
 
-      const noDuplicateVariants = noDuplicateStringVariants.map((variant) => JSON.parse(variant));
+      const noDuplicateVariants = noDuplicateStringVariants.map((variant) =>
+        JSON.parse(variant),
+      );
 
       return { ...state, variants: [...noDuplicateVariants] };
     }
@@ -46,7 +50,9 @@ export function ProductReducer(state, action) {
 
     case TYPES.TOTAL_SHIPPING_COST: {
       // First gets every product's shipping cost and then adds them.
-      const allShippingCosts = state.productsToBuy.map((product) => product.shipping_cost);
+      const allShippingCosts = state.productsToBuy.map(
+        (product) => product.shipping_cost,
+      );
 
       const totalShippingCost = allShippingCosts.reduce((a, b) => a + b);
 
@@ -54,17 +60,24 @@ export function ProductReducer(state, action) {
     }
 
     case TYPES.ADD_TO_CART: {
-      const newItem = state.variants.find((item) => item.variant_id === action.payload.variantId);
+      const newItem = state.variants.find(
+        (item) => item.variant_id === action.payload.variantId,
+      );
 
       // If the item is already in the cart, then it will increase the quantity.
-      const itemInCart = state.cart.find((item) => item.variant_id === newItem.variant_id);
+      const itemInCart = state.cart.find(
+        (item) => item.variant_id === newItem.variant_id,
+      );
 
       return itemInCart
         ? {
             ...state,
             cart: state.cart.map((item) =>
               item.variant_id === itemInCart.variant_id
-                ? { ...item, quantity_to_purchase: action.payload.quantityToPurchase }
+                ? {
+                    ...item,
+                    quantity_to_purchase: action.payload.quantityToPurchase,
+                  }
                 : item,
             ),
           }
@@ -82,7 +95,13 @@ export function ProductReducer(state, action) {
     }
 
     case TYPES.CLEAR_CART: {
-      return { ...state, products: [], cart: [], totalProducts: 0, totalPrice: 0 };
+      return {
+        ...state,
+        products: [],
+        cart: [],
+        totalProducts: 0,
+        totalPrice: 0,
+      };
     }
 
     case TYPES.GET_TOTAL_PRODUCTS: {
@@ -115,12 +134,16 @@ export function ProductReducer(state, action) {
     case TYPES.REMOVE_FROM_WISHLIST: {
       return {
         ...state,
-        wishlist: state.wishlist.filter((wish) => wish.product_id !== action.payload),
+        wishlist: state.wishlist.filter(
+          (wish) => wish.product_id !== action.payload,
+        ),
       };
     }
 
     case TYPES.ADD_PRODUCT_TO_BUY: {
-      const product = state.variants.find((variant) => variant.variant_id === action.payload);
+      const product = state.variants.find(
+        (variant) => variant.variant_id === action.payload,
+      );
 
       return {
         ...state,
@@ -143,7 +166,9 @@ export function ProductReducer(state, action) {
     case TYPES.REMOVE_AN_ORDER: {
       return {
         ...state,
-        myOrders: state.myOrders.filter((order) => order.order_item_id !== action.payload),
+        myOrders: state.myOrders.filter(
+          (order) => order.order_item_id !== action.payload,
+        ),
       };
     }
 
