@@ -1,4 +1,5 @@
 const { Pool } = require("pg");
+const fs = require("fs");
 const { db } = require("./config");
 
 const pool = new Pool({
@@ -7,7 +8,9 @@ const pool = new Pool({
   host: db.host,
   database: db.database,
   port: db.port,
-  ssl: db.ssl,
+  ssl: {
+    ca: fs.readFileSync(db.ssl),
+  },
 });
 
 module.exports = pool;

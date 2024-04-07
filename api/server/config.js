@@ -46,6 +46,6 @@ module.exports = {
     host,
     database: name,
     port,
-    ssl: Boolean(parseInt(ssl, 10)),
+    ssl,
   },
 };
